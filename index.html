@@ -1,7 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.2rem;
+    }
+
+    p {
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #carousel {
+      width: 80vw;
+      height: 50vh;
+      background: #222;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #carousel img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: none;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #carousel img.active {
+      display: block;
+    }
+
+    input[type="file"] {
+      margin-bottom: 2rem;
+      background: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: auto;
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+  <h1>Your Name</h1>
+  <p>Welcome to my portfolio. I'm an artist, technologist, and sound enthusiast who explores the intersection of entropy, space, and sensation through reactive media. Here's a glimpse into my world.</p>
+
+  <input type="file" id="folderInput" webkitdirectory multiple />
+  <div id="carousel"></div>
+
+  <footer>&copy; 2025 Your Name. All rights reserved.</footer>
+
+  <script>
+    const folderInput = document.getElementById('folderInput');
+    const carousel = document.getElementById('carousel');
+    let images = [];
+    let currentIndex = 0;
+    let interval;
+
+    folderInput.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files).filter(file => file.type.startsWith('image/'));
+
+      if (files.length === 0) return;
+
+      images = files.map(file => URL.createObjectURL(file));
+      currentIndex = 0;
+
+      carousel.innerHTML = '';
+      images.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        if (i === 0) img.classList.add('active');
+        carousel.appendChild(img);
+      });
+
+      if (interval) clearInterval(interval);
+      interval = setInterval(() => {
+        const allImgs = carousel.querySelectorAll('img');
+        allImgs.forEach(img => img.classList.remove('active'));
+        currentIndex = (currentIndex + 1) % images.length;
+        allImgs[currentIndex].classList.add('active');
+      }, 3000);
+    });
+  </script>
+
 </body>
 </html>
