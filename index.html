@@ -3,113 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <title>Atharva Gupta Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0e0e0e;
-      color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.2rem;
-    }
-
-    p {
-      max-width: 600px;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    #carousel {
-      width: 80vw;
-      height: 50vh;
-      background: #222;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #carousel img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: none;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    #carousel img.active {
-      display: block;
-    }
-
-    input[type="file"] {
-      margin-bottom: 2rem;
-      background: #333;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    footer {
-      margin-top: auto;
-      opacity: 0.5;
-      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white">
+  <div class="max-w-5xl mx-auto p-8">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-4xl md:text-6xl font-bold">Atharva Gupta</h1>
+      <p class="mt-2 text-xl md:text-2xl text-gray-400">
+        new media artist, sound designer, educator and visual artist
+      </p>
+      <p class="mt-1 text-md text-gray-500">first year student MADTech FMI</p>
+    </header>
 
-  <h1>Your Name</h1>
-  <p>Welcome to my portfolio. I'm an artist, technologist, and sound enthusiast who explores the intersection of entropy, space, and sensation through reactive media. Here's a glimpse into my world.</p>
+    <!-- Image Uploader -->
+    <div class="mb-8">
+      <label for="folderInput" class="block mb-2 font-medium">Choose images:</label>
+      <input type="file" id="folderInput" webkitdirectory multiple accept="image/*" class="text-white bg-gray-800 border border-gray-600 rounded px-4 py-2">
+    </div>
 
-  <input type="file" id="folderInput" webkitdirectory multiple />
-  <div id="carousel"></div>
+    <!-- Carousel -->
+    <div class="glide mb-8 hidden" id="carouselContainer">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" id="carouselSlides">
+          <!-- Slides get injected here -->
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+      </div>
+    </div>
 
-  <footer>&copy; 2025 Your Name. All rights reserved.</footer>
+    <!-- Gallery -->
+    <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Images also shown here -->
+    </div>
+  </div>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
   <script>
     const folderInput = document.getElementById('folderInput');
-    const carousel = document.getElementById('carousel');
-    let images = [];
-    let currentIndex = 0;
-    let interval;
+    const gallery = document.getElementById('gallery');
+    const carouselContainer = document.getElementById('carouselContainer');
+    const carouselSlides = document.getElementById('carouselSlides');
 
-    folderInput.addEventListener('change', (e) => {
-      const files = Array.from(e.target.files).filter(file => file.type.startsWith('image/'));
+    folderInput.addEventListener('change', (event) => {
+      const files = Array.from(event.target.files);
+      const imageFiles = files.filter(file => file.type.startsWith('image/'));
 
-      if (files.length === 0) return;
+      if (imageFiles.length > 0) {
+        gallery.innerHTML = '';
+        carouselSlides.innerHTML = '';
+        carouselContainer.classList.remove('hidden');
 
-      images = files.map(file => URL.createObjectURL(file));
-      currentIndex = 0;
+        imageFiles.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const imgURL = e.target.result;
 
-      carousel.innerHTML = '';
-      images.forEach((src, i) => {
-        const img = document.createElement('img');
-        img.src = src;
-        if (i === 0) img.classList.add('active');
-        carousel.appendChild(img);
-      });
+            // Add to gallery
+            const imgEl = document.createElement('img');
+            imgEl.src = imgURL;
+            imgEl.className = 'w-full h-64 object-cover rounded shadow';
+            gallery.appendChild(imgEl);
 
-      if (interval) clearInterval(interval);
-      interval = setInterval(() => {
-        const allImgs = carousel.querySelectorAll('img');
-        allImgs.forEach(img => img.classList.remove('active'));
-        currentIndex = (currentIndex + 1) % images.length;
-        allImgs[currentIndex].classList.add('active');
-      }, 3000);
+            // Add to carousel
+            const slide = document.createElement('li');
+            slide.className = 'glide__slide';
+            slide.innerHTML = `<img src="${imgURL}" class="w-full h-[400px] object-contain rounded">`;
+            carouselSlides.appendChild(slide);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Initialize Glide.js after short delay
+        setTimeout(() => {
+          new Glide('.glide', {
+            type: 'carousel',
+            autoplay: 3000,
+            hoverpause: true,
+            perView: 1
+          }).mount();
+        }, 100);
+      }
     });
   </script>
-
 </body>
 </html>
