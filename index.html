@@ -1,172 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atharva Gupta - New Media Artist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Scheherazade', serif;
-            background-color: #f8f9fa;
-            color: #333;
-            scroll-behavior: smooth;
-        }
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-        nav a {
-            text-decoration: none;
-            color: #333;
-            margin: 0 20px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-        nav a:hover {
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        section {
-            padding: 100px 20px;
-            text-align: center;
-        }
-        .hero-section {
-            background-color: #ffffff;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .hero-section h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        .hero-section p {
-            font-size: 1.5em;
-            color: #666;
-        }
-        .about-section {
-            background-color: #e9ecef;
-        }
-        .works-section {
-            background-color: #f8f9fa;
-        }
-        .contact-section {
-            background-color: #e9ecef;
-        }
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .grid-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .grid-item:hover {
-            transform: scale(1.05);
-        }
-        .contact-form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .contact-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .contact-form button:hover {
-            background-color: #666;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atharva Gupta — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Scheherazade&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fefcf6;
+      --accent: #5e6472; /* indigo tone */
+      --highlight: #9cbb7c; /* sage */
+      --hover: rgba(92, 97, 110, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Scheherazade', serif;
+      background: var(--bg);
+      color: var(--accent);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: var(--bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+      z-index: 1000;
+      font-family: 'Inter', sans-serif;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--accent);
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem;
+      text-align: center;
+      background: var(--bg);
+    }
+
+    header h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    header h2 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      font-family: 'Inter', sans-serif;
+      color: var(--highlight);
+    }
+
+    section {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .works-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .work-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .work-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .work-title {
+      padding: 0.5rem;
+      background: var(--bg);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem;
+      border: 1px solid var(--highlight);
+      border-radius: 5px;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+    }
+
+    .contact-form button {
+      background: var(--highlight);
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #7fa355;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header h2 {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#works">Works</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
-    <section id="hero" class="hero-section">
-        <h1>Atharva Gupta</h1>
-        <p>New media artist, sound designer, educator, and visual artist</p>
-        <p>First-year student in MADTech at FMI</p>
-    </section>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#works">Works</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <section id="about" class="about-section">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2>About Me</h2>
-            <p>Atharva Gupta is a new media artist, sound designer, educator, and visual artist. Currently a first-year student in MADTech at FMI, Atharva explores the intersection of technology, abstraction, and physical presence through various platforms like TouchDesigner and interactive media.</p>
-        </div>
-    </section>
+  <header>
+    <h1>Atharva Gupta</h1>
+    <h2>New media artist, sound designer, educator, and visual artist</h2>
+    <p style="margin-top: 1rem; font-family: 'Inter', sans-serif;">First-year student in MADTech at FMI</p>
+  </header>
 
-    <section id="works" class="works-section">
-        <h2>Works</h2>
-        <div class="grid-layout">
-            <div class="grid-item">
-                <img src="https://placekitten.com/600/400" alt="Project 1">
-                <p>Title of Project 1</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placekitten.com/600/400" alt="Project 2">
-                <p>Title of Project 2</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placekitten.com/600/400" alt="Project 3">
-                <p>Title of Project 3</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placekitten.com/600/400" alt="Project 4">
-                <p>Title of Project 4</p>
-            </div>
-        </div>
-    </section>
+  <section id="about" class="about">
+    <h2>About</h2>
+    <p>Atharva explores the ephemeral nature of sound and visuals through interactive, generative systems. Their work navigates the liminal space between digital and physical, with a focus on immersive experiences, performative environments, and experimental interfaces.</p>
+    <p>Key themes include abstraction and entropy, interactive installations, and the interplay of positionality in technological spaces.</p>
+  </section>
 
-    <section id="contact" class="contact-section">
-        <h2>Contact Me</h2>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+  <section id="works">
+    <h2>Works</h2>
+    <div class="works-grid">
+      <div class="work-item">
+        <img src="https://unsplash.it/400/300?random=1" alt="Project 1" />
+        <div class="work-title">Rain Stick Installation</div>
+      </div>
+      <div class="work-item">
+        <img src="https://unsplash.it/400/300?random=2" alt="Project 2" />
+        <div class="work-title">TouchDesigner Visuals</div>
+      </div>
+      <div class="work-item">
+        <img src="https://unsplash.it/400/300?random=3" alt="Project 3" />
+        <div class="work-title">Generative Soundscape</div>
+      </div>
+      <div class="work-item">
+        <img src="https://unsplash.it/400/300?random=4" alt="Project 4" />
+        <div class="work-title">Reactive Media Installation</div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+  <section id="contact">
+    <h2>Contact</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="social-links" style="margin-top: 2rem;">
+      <a href="mailto:atharva152@gmail.com">Email</a>
+      <a href="https://instagram.com/audiodevout" target="_blank">Instagram</a>
+      <a href="https://youtube.com/@audiodevout" target="_blank">YouTube</a>
+      <a href="https://bandcamp.com/asymmetrica" target="_blank">Bandcamp</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Atharva Gupta. All rights reserved.
+  </footer>
 </body>
 </html>
