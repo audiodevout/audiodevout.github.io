@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atharva Gupta — Experimental Sketchbook</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <title>Asymmetrica — Experimental Systems</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --text: #f0f0f0;
-      --grey: #666;
+      --bg: #000000;
+      --text: #ffffff;
+      --accent: hsl(180, 100%, 50%);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      cursor: none;
     }
 
     html, body {
@@ -23,7 +25,7 @@
       height: 100%;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       overflow: hidden;
     }
 
@@ -32,139 +34,213 @@
       top: 0;
       left: 0;
       z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 4rem;
-      height: 100vh;
-      overflow-y: auto;
-    }
-
-    h1, h2, p {
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 600;
-    }
-
-    .bio, .works, .contact {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border: 1px solid var(--grey);
-      border-radius: 10px;
-      transition: transform 0.2s ease;
-    }
-
-    .bio:hover, .works:hover, .contact:hover {
-      transform: scale(1.01);
+      width: 100%;
+      height: 100%;
     }
 
     .custom-cursor {
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--text);
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
-      mix-blend-mode: difference;
       z-index: 10000;
-      transition: transform 0.1s ease-out;
+      transform: translate(-50%, -50%);
     }
 
-    .mute-toggle {
+    .crosshair-x, .crosshair-y {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 10;
-      color: var(--text);
-      background: none;
-      border: 1px solid var(--grey);
-      padding: 0.5rem 1rem;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .crosshair-x {
+      height: 1px;
+      width: 100%;
+    }
+
+    .crosshair-y {
+      width: 1px;
+      height: 100%;
+    }
+
+    .axis-marker {
+      position: fixed;
+      font-size: 10px;
+      color: var(--accent);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .nav {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav button {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      font-family: 'Orbitron', sans-serif;
+      cursor: pointer;
+      animation: blinkGlow 2s infinite alternate;
+    }
+
+    .title {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: var(--accent);
+      animation: blinkGlow 3s infinite alternate;
+      z-index: 1000;
       cursor: pointer;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        padding: 2rem;
-        grid-template-columns: 1fr;
+    .social {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.5rem;
+      z-index: 1000;
+    }
+
+    .social a {
+      color: var(--accent);
+      animation: flickerGlow 2s infinite alternate;
+    }
+
+    .floating-text {
+      position: absolute;
+      color: var(--accent);
+      pointer-events: none;
+      animation: floatMove 15s infinite ease-in-out alternate;
+    }
+
+    @keyframes floatMove {
+      0% { transform: translate(0px, 0px); }
+      100% { transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh)); }
+    }
+
+    @keyframes blinkGlow {
+      from {
+        text-shadow: 0 0 5px #00ffff;
       }
+      to {
+        text-shadow: 0 0 20px #ff00ff;
+      }
+    }
+
+    @keyframes flickerGlow {
+      0% { opacity: 1; text-shadow: 0 0 2px #00ffff; }
+      50% { opacity: 0.5; text-shadow: 0 0 10px #ff00ff; }
+      100% { opacity: 1; text-shadow: 0 0 3px #00ffff; }
     }
   </style>
 </head>
 <body>
   <canvas id="bg"></canvas>
   <div class="custom-cursor" id="cursor"></div>
+  <div class="crosshair-x" id="crosshairX"></div>
+  <div class="crosshair-y" id="crosshairY"></div>
+  <div class="axis-marker" id="axisX"></div>
+  <div class="axis-marker" id="axisY"></div>
 
-  <div class="container">
-    <div class="bio">
-      <h1>Atharva Gupta</h1>
-      <p>New media artist, sound designer, educator. Exploring ephemerality, digital-physical liminality, and experimental sound/visual systems.</p>
-    </div>
-    <div class="works">
-      <h2>Works</h2>
-      <p>Rain Stick Installation — kinetic sculpture + meditative acoustic experience.</p>
-      <p>TouchDesigner Visuals — generative digital environments.</p>
-      <p>Generative Soundscape — glitch ambience, reactivity, abstraction.</p>
-    </div>
-    <div class="contact">
-      <h2>Contact</h2>
-      <p><a href="mailto:atharva152@gmail.com">Email</a></p>
-      <p><a href="https://instagram.com/audiodevout" target="_blank">Instagram</a></p>
-      <p><a href="https://youtube.com/@audiodevout" target="_blank">YouTube</a></p>
-      <p><a href="https://bandcamp.com/asymmetrica" target="_blank">Bandcamp</a></p>
-    </div>
+  <div class="nav">
+    <button>Home</button>
+    <button>Works</button>
+    <button>About</button>
+    <button>Contact</button>
   </div>
 
-  <button class="mute-toggle" onclick="toggleMute()">🔊 Mute</button>
+  <div class="title" id="title">Atharva Gupta</div>
 
-  <audio id="bg-audio" loop>
+  <div class="social">
+    <a href="mailto:atharva152@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://instagram.com/audiodevout" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://youtube.com/@audiodevout" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://asymmetrica.bandcamp.com" target="_blank"><i class="fab fa-bandcamp"></i></a>
+  </div>
+
+  <div class="floating-text" style="top: 10%; left: 5%; --x: 20; --y: 30;">Artist</div>
+  <div class="floating-text" style="top: 80%; left: 90%; --x: -20; --y: -30;">Educator</div>
+  <div class="floating-text" style="top: 30%; left: 80%; --x: -25; --y: 25;">Sound Designer</div>
+  <div class="floating-text" style="top: 70%; left: 10%; --x: 25; --y: -25;">VJ</div>
+
+  <audio id="bg-audio" loop autoplay>
     <source src="glitch-ambient-loop.mp3" type="audio/mp3">
   </audio>
 
   <script>
-    // Custom cursor
     const cursor = document.getElementById('cursor');
+    const crosshairX = document.getElementById('crosshairX');
+    const crosshairY = document.getElementById('crosshairY');
+    const axisX = document.getElementById('axisX');
+    const axisY = document.getElementById('axisY');
+    const title = document.getElementById('title');
+    const titles = ['Atharva Gupta', 'Asymmetrica', 'Audiodevout'];
+
+    let hue = 0;
+    function updateHue() {
+      hue = (hue + 5) % 360;
+      const color = `hsl(${hue}, 100%, 50%)`;
+      document.documentElement.style.setProperty('--accent', color);
+    }
+
     document.addEventListener('mousemove', (e) => {
-      cursor.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+      const x = e.clientX;
+      const y = e.clientY;
+
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+
+      crosshairX.style.top = `${y}px`;
+      crosshairY.style.left = `${x}px`;
+
+      axisX.style.left = `${x + 10}px`;
+      axisX.style.top = `5px`;
+      axisX.textContent = `x: ${x}`;
+
+      axisY.style.left = `5px`;
+      axisY.style.top = `${y + 10}px`;
+      axisY.textContent = `y: ${y}`;
+
+      updateHue();
     });
 
-    // Background sketchy noise
+    setInterval(() => {
+      title.textContent = titles[Math.floor(Math.random() * titles.length)];
+    }, 300);
+
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    function drawNoise() {
+    function glitchNoise() {
       const imageData = ctx.createImageData(canvas.width, canvas.height);
       for (let i = 0; i < imageData.data.length; i += 4) {
-        const shade = Math.random() * 50;
+        const shade = Math.random() * 100;
         imageData.data[i] = shade;
         imageData.data[i + 1] = shade;
         imageData.data[i + 2] = shade;
-        imageData.data[i + 3] = 255;
+        imageData.data[i + 3] = 40;
       }
       ctx.putImageData(imageData, 0, 0);
     }
 
-    setInterval(drawNoise, 50);
+    setInterval(glitchNoise, 60);
 
-    // Audio controls
-    const bgAudio = document.getElementById('bg-audio');
-    bgAudio.volume = 0.3;
-    bgAudio.play();
-
-    function toggleMute() {
-      bgAudio.muted = !bgAudio.muted;
-    }
-
-    // Handle window resize
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
