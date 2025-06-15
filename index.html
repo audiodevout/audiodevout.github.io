@@ -3,236 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atharva Gupta — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Scheherazade&display=swap" rel="stylesheet">
+  <title>Atharva Gupta — Experimental Sketchbook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fefcf6;
-      --accent: #5e6472; /* indigo tone */
-      --highlight: #9cbb7c; /* sage */
-      --hover: rgba(92, 97, 110, 0.1);
+      --bg: #0a0a0a;
+      --text: #f0f0f0;
+      --grey: #666;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Scheherazade', serif;
-      background: var(--bg);
-      color: var(--accent);
-      line-height: 1.6;
-    }
-
-    nav {
-      position: fixed;
+    html, body {
       width: 100%;
-      top: 0;
+      height: 100%;
       background: var(--bg);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: flex-end;
-      gap: 1.5rem;
-      z-index: 1000;
-      font-family: 'Inter', sans-serif;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--accent);
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--highlight);
-    }
-
-    header {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 3rem;
-      text-align: center;
-      background: var(--bg);
-    }
-
-    header h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-
-    header h2 {
-      font-size: 1.5rem;
-      font-weight: normal;
-      font-family: 'Inter', sans-serif;
-      color: var(--highlight);
-    }
-
-    section {
-      padding: 5rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .about p {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .works-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .work-item {
-      position: relative;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
       overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
     }
 
-    .work-item:hover {
-      transform: translateY(-5px);
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
-    .work-item img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 4rem;
+      height: 100vh;
+      overflow-y: auto;
     }
 
-    .work-title {
-      padding: 0.5rem;
-      background: var(--bg);
-      text-align: center;
-      font-family: 'Inter', sans-serif;
+    h1, h2, p {
+      margin-bottom: 1rem;
     }
 
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    h1 {
+      font-size: 3rem;
+      font-weight: 600;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      padding: 1rem;
-      border: 1px solid var(--highlight);
-      border-radius: 5px;
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-    }
-
-    .contact-form button {
-      background: var(--highlight);
-      color: white;
-      padding: 0.8rem 2rem;
-      border: none;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background: #7fa355;
-    }
-
-    footer {
-      text-align: center;
+    .bio, .works, .contact {
+      background: rgba(255, 255, 255, 0.05);
       padding: 2rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--accent);
+      border: 1px solid var(--grey);
+      border-radius: 10px;
+      transition: transform 0.2s ease;
     }
 
-    .social-links a {
-      margin: 0 10px;
-      color: var(--accent);
-      text-decoration: none;
+    .bio:hover, .works:hover, .contact:hover {
+      transform: scale(1.01);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
+    .custom-cursor {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--text);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      mix-blend-mode: difference;
+      z-index: 10000;
+      transition: transform 0.1s ease-out;
+    }
 
-      header h2 {
-        font-size: 1rem;
+    .mute-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--grey);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem;
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
+  <canvas id="bg"></canvas>
+  <div class="custom-cursor" id="cursor"></div>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#works">Works</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <header>
-    <h1>Atharva Gupta</h1>
-    <h2>New media artist, sound designer, educator, and visual artist</h2>
-    <p style="margin-top: 1rem; font-family: 'Inter', sans-serif;">First-year student in MADTech at FMI</p>
-  </header>
-
-  <section id="about" class="about">
-    <h2>About</h2>
-    <p>Atharva explores the ephemeral nature of sound and visuals through interactive, generative systems. Their work navigates the liminal space between digital and physical, with a focus on immersive experiences, performative environments, and experimental interfaces.</p>
-    <p>Key themes include abstraction and entropy, interactive installations, and the interplay of positionality in technological spaces.</p>
-  </section>
-
-  <section id="works">
-    <h2>Works</h2>
-    <div class="works-grid">
-      <div class="work-item">
-        <img src="https://unsplash.it/400/300?random=1" alt="Project 1" />
-        <div class="work-title">Rain Stick Installation</div>
-      </div>
-      <div class="work-item">
-        <img src="https://unsplash.it/400/300?random=2" alt="Project 2" />
-        <div class="work-title">TouchDesigner Visuals</div>
-      </div>
-      <div class="work-item">
-        <img src="https://unsplash.it/400/300?random=3" alt="Project 3" />
-        <div class="work-title">Generative Soundscape</div>
-      </div>
-      <div class="work-item">
-        <img src="https://unsplash.it/400/300?random=4" alt="Project 4" />
-        <div class="work-title">Reactive Media Installation</div>
-      </div>
+  <div class="container">
+    <div class="bio">
+      <h1>Atharva Gupta</h1>
+      <p>New media artist, sound designer, educator. Exploring ephemerality, digital-physical liminality, and experimental sound/visual systems.</p>
     </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="5" placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div class="social-links" style="margin-top: 2rem;">
-      <a href="mailto:atharva152@gmail.com">Email</a>
-      <a href="https://instagram.com/audiodevout" target="_blank">Instagram</a>
-      <a href="https://youtube.com/@audiodevout" target="_blank">YouTube</a>
-      <a href="https://bandcamp.com/asymmetrica" target="_blank">Bandcamp</a>
+    <div class="works">
+      <h2>Works</h2>
+      <p>Rain Stick Installation — kinetic sculpture + meditative acoustic experience.</p>
+      <p>TouchDesigner Visuals — generative digital environments.</p>
+      <p>Generative Soundscape — glitch ambience, reactivity, abstraction.</p>
     </div>
-  </section>
+    <div class="contact">
+      <h2>Contact</h2>
+      <p><a href="mailto:atharva152@gmail.com">Email</a></p>
+      <p><a href="https://instagram.com/audiodevout" target="_blank">Instagram</a></p>
+      <p><a href="https://youtube.com/@audiodevout" target="_blank">YouTube</a></p>
+      <p><a href="https://bandcamp.com/asymmetrica" target="_blank">Bandcamp</a></p>
+    </div>
+  </div>
 
-  <footer>
-    &copy; 2025 Atharva Gupta. All rights reserved.
-  </footer>
+  <button class="mute-toggle" onclick="toggleMute()">🔊 Mute</button>
+
+  <audio id="bg-audio" loop>
+    <source src="glitch-ambient-loop.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    });
+
+    // Background sketchy noise
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function drawNoise() {
+      const imageData = ctx.createImageData(canvas.width, canvas.height);
+      for (let i = 0; i < imageData.data.length; i += 4) {
+        const shade = Math.random() * 50;
+        imageData.data[i] = shade;
+        imageData.data[i + 1] = shade;
+        imageData.data[i + 2] = shade;
+        imageData.data[i + 3] = 255;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    setInterval(drawNoise, 50);
+
+    // Audio controls
+    const bgAudio = document.getElementById('bg-audio');
+    bgAudio.volume = 0.3;
+    bgAudio.play();
+
+    function toggleMute() {
+      bgAudio.muted = !bgAudio.muted;
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
