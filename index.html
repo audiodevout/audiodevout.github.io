@@ -270,31 +270,53 @@
     I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. I study MADTech at the Frank Mohr Institute in Groningen. My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
   </p>
 
-  <script>
+ <script>
 document.addEventListener("DOMContentLoaded", function () {
   const players = document.querySelectorAll(".custom-audio-player");
 
   players.forEach(player => {
     const audio = player.querySelector("audio");
-    const playBtn = player.querySelector(".play-btn i");
+    const playBtnIcon = player.querySelector(".play-btn i");
     const progress = player.querySelector(".progress");
     const time = player.querySelector(".time");
 
-    // Update time display
+    // Display filename
+    const filenameDisplay = document.createElement("div");
+    filenameDisplay.classList.add("filename");
+    filenameDisplay.style.fontSize = "0.9em";
+    filenameDisplay.style.color = "#555";
+    filenameDisplay.style.marginTop = "4px";
+    filenameDisplay.textContent = `File: ${decodeURIComponent(audio.src.split("/").pop())}`;
+    player.appendChild(filenameDisplay);
+
+    // Format time
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Set duration metadata
     audio.addEventListener("loadedmetadata", () => {
       progress.max = Math.floor(audio.duration);
       time.textContent = `0:00 / ${formatTime(audio.duration)}`;
     });
 
+    // Update time and progress bar
     audio.addEventListener("timeupdate", () => {
       progress.value = audio.currentTime;
       time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
     });
 
-    // Play/pause toggle
+    // Scrubbing
+    progress.addEventListener("input", () => {
+      audio.currentTime = progress.value;
+    });
+
+    // Toggle play/pause
     player.querySelector(".play-btn").addEventListener("click", () => {
       if (audio.paused) {
-        // Pause all other audio elements
+        // Pause all other players
         players.forEach(p => {
           const otherAudio = p.querySelector("audio");
           const otherIcon = p.querySelector(".play-btn i");
@@ -306,122 +328,111 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         audio.play();
-        playBtn.classList.remove("fa-play");
-        playBtn.classList.add("fa-pause");
+        playBtnIcon.classList.remove("fa-play");
+        playBtnIcon.classList.add("fa-pause");
       } else {
         audio.pause();
-        playBtn.classList.remove("fa-pause");
-        playBtn.classList.add("fa-play");
+        playBtnIcon.classList.remove("fa-pause");
+        playBtnIcon.classList.add("fa-play");
       }
     });
 
-    // Scrubbing
-    progress.addEventListener("input", () => {
-      audio.currentTime = progress.value;
+    // Reset icon when audio ends
+    audio.addEventListener("ended", () => {
+      playBtnIcon.classList.remove("fa-pause");
+      playBtnIcon.classList.add("fa-play");
+      progress.value = 0;
     });
-
-    function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${mins}:${secs.toString().padStart(2, '0')}`;
-    }
   });
 });
 </script>
 
-<div class="text-block" id="block3">
-  <h2>Audio Works</h2>
-
-  <div class="custom-audio-player">
-    <p>Stranded Deep Fast</p>
-    <audio preload="metadata" src="audio/stranded deep fast.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>STRETCHING</p>
-    <audio preload="metadata" src="audio/STRETCHING.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>supersounds</p>
-    <audio preload="metadata" src="audio/supersounds.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>The Machine</p>
-    <audio preload="metadata" src="audio/themachine.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Understandable Have a Nice Day</p>
-    <audio preload="metadata" src="audio/understandable have a nice day.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Acute Symphony</p>
-    <audio preload="metadata" src="audio/acutesymphony.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Entropic</p>
-    <audio preload="metadata" src="audio/entropic.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Never Together</p>
-    <audio preload="metadata" src="audio/Never Together.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Pinball Resting</p>
-    <audio preload="metadata" src="audio/pinball resting.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Stranded Deep</p>
-    <audio preload="metadata" src="audio/stranded deep.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Not As I Remember It</p>
-    <audio preload="metadata" src="audio/not as i remember it.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
+<div class="custom-audio-player">
+  <p>Stranded Deep Fast</p>
+  <audio src="audio/stranded deep fast.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
 </div>
 
+<div class="custom-audio-player">
+  <p>STRETCHING</p>
+  <audio src="audio/STRETCHING.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
 
+<div class="custom-audio-player">
+  <p>supersounds</p>
+  <audio src="audio/supersounds.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>The Machine</p>
+  <audio src="audio/themachine.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Understandable Have a Nice Day</p>
+  <audio src="audio/understandable have a nice day.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Acute Symphony</p>
+  <audio src="audio/acutesymphony.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Entropic</p>
+  <audio src="audio/entropic.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Never Together</p>
+  <audio src="audio/Never Together.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Pinball Resting</p>
+  <audio src="audio/pinball resting.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Stranded Deep</p>
+  <audio src="audio/stranded deep.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
+</div>
+
+<div class="custom-audio-player">
+  <p>Not As I Remember It</p>
+  <audio src="audio/not as i remember it.mp3" preload="metadata"></audio>
+  <button class="play-btn"><i class="fas fa-play"></i></button>
+  <input type="range" class="progress" value="0" min="0" step="1">
+  <span class="time">0:00 / 0:00</span>
 </div>
 
 
