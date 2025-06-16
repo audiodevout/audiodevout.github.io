@@ -18,6 +18,7 @@
 --accent: hsl(180, 100%, 50%);
       --font-main: 'Share Tech Mono', monospace;
       --font-alt: 'Orbitron', sans-serif;
+      transition: --accent 0.3s ease, --text 0.3s ease, --bg 0.3s ease;
 }
 
 * {
@@ -383,14 +384,20 @@ font-variant-numeric: tabular-nums;
 <div class="text-block" id="block1">
 <h2>Artist Statement</h2>
 <p>
-I make experimental systems that combine sound, light, code, and kinetic structures. My work explores the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place. I’m interested in tinnitus, entropy, machine rhythms, and the emotional textures of noise and silence. I often build my own instruments, use generative processes, and work with open-source tools like TouchDesigner to build immersive or reactive experiences. Each piece is a system with its own quirks, sometimes meditative, sometimes glitchy and unstable—always slightly off-centre.
+I make experimental systems that combine sound, light, code, and kinetic structures. 
+My work explores the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place. 
+I’m interested in tinnitus, entropy, machine rhythms, and the emotional textures of noise and silence. 
+I often build my own instruments, use generative processes, and work with tools like TouchDesigner to create immersive and reactive experiences. 
+Each piece is a system with its own quirks, sometimes meditative, sometimes glitchy and unstable—always slightly off-centre.
 </p>
 </div>
 
 <div class="text-block" id="block2">
 <h2>About & Contact</h2>
 <p><strong>About</strong><br>
-I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. I study MADTech at the Frank Mohr Institute in Groningen. My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
+I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. 
+I study MADTech at the Frank Mohr Institute in Groningen. 
+My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
 </p>
 
 <div class="custom-audio-player">
@@ -425,6 +432,18 @@ const titles = ['Atharva Gupta', 'Asymmetrica', 'AudioDevout'];
 document.addEventListener('mousemove', (e) => {
 const x = e.clientX;
 const y = e.clientY;
+
+const hue = Math.floor((x + y) * 180/512); // 0–360
+const sat = 100;
+const light = 50;
+
+  // Generate HSL color
+  const newAccent = `hsl(${hue}, ${sat}%, ${light}%)`;
+  const newText = `hsl(${(hue + 180) % 360}, ${sat}%, 70%)`; // complementary for contrast
+
+  // Apply to root CSS variables
+  document.documentElement.style.setProperty('--accent', newAccent);
+  document.documentElement.style.setProperty('--text', newText);
 
 cursor.style.left = `${x}px`;
 cursor.style.top = `${y}px`;
@@ -516,7 +535,9 @@ const descriptors = [
   'Thinker', 'Student', 'Maker', 'Observer', 'Reader', 'Listener', 'Cook', 'Friend', 'Human', 'Son',
   'Philosopher', 'Sociologist', 'Scientist', 'Generalist', 'Anti-Specialist', 'AIUser', 'Critic', 'Researcher', 'Smoker', 'Overanalyser',
   'Dreamer', 'Technologist', 'Wanderer', 'Glitcher', 'Cyborg', 'Outsider', 'Alien', 'Futurist', 'Tinkerer', 'Assembler',
-  'Mutator', 'Decoder', 'Dissident', 'Collector', 'Noiser', 'Deconstructor', 'Drifter', 'Skeptic', 'Witness', 'Seeker'
+  'Mutator', 'Decoder', 'Dissident', 'Collector', 'Noiser', 'Deconstructor', 'Drifter', 'Skeptic', 'Witness', 'Seeker',
+  'Sketcher', 'Painter', 'Sculptor', 'Explorer', 'Experiencer', 'Feeler', 'Imaginer', 'Reflector', 'Intuiter', 'Responder',
+  'Navigator', 'Mapper', 'Composer', 'Harmonizer', 'Synthesizer', 'Amplifier', 'Filterer', 'Modulator', 'Echoer', 'Translator'
 ];
 
 const floats = [];
@@ -576,6 +597,42 @@ function repelText() {
 
 repelText();
 
+  const floatingTexts = [];
+const container = document.body; // or a specific container if you want
+
+// Create floating text elements
+descriptors.forEach((text, index) => {
+  const span = document.createElement('span');
+  span.className = 'floating-text';
+  span.textContent = text;
+  container.appendChild(span);
+
+  // Initialize position and movement direction
+  floatingTexts.push({
+    el: span,
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    dx: (Math.random() - 0.5) * 0.3, // horizontal speed
+    dy: (Math.random() - 0.5) * 0.3  // vertical speed
+  });
+});
+
+// Animate floating texts
+function animateFloatingTexts() {
+  floatingTexts.forEach(obj => {
+    obj.x += obj.dx;
+    obj.y += obj.dy;
+
+    // Bounce off edges
+    if (obj.x < 0 || obj.x > window.innerWidth - obj.el.offsetWidth) obj.dx *= -1;
+    if (obj.y < 0 || obj.y > window.innerHeight - obj.el.offsetHeight) obj.dy *= -1;
+
+    obj.el.style.transform = `translate(${obj.x}px, ${obj.y}px)`;
+  });
+  requestAnimationFrame(animateFloatingTexts);
+}
+
+animateFloatingTexts();
 
 
 window.addEventListener('resize', () => {
@@ -583,6 +640,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 });
 </script>
+
+  
 <script>
 // Your custom audio player JS here
 document.querySelectorAll('.custom-audio-player').forEach(player => {
