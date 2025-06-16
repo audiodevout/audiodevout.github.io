@@ -1,24 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE html>More actions
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asymmetrica — Experimental Systems</title>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     :root {
+      --bg: #000000;
+      --text: #ffffff;
       --bg: #000;
       --text: #fff;
       --accent: hsl(180, 100%, 50%);
       --font: 'Red Hat Mono', monospace;
     }
 
+    * {
     *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      cursor: none;
     }
 
     html, body {
@@ -26,6 +31,9 @@
       height: 100%;
       background: var(--bg);
       color: var(--text);
+      font-family: 'Red Hat Mono', monospace;
+      overflow-y: auto;
+      scroll-behavior: smooth;
       font-family: var(--font);
       overflow-x: hidden;
     }
@@ -39,6 +47,7 @@
       height: 100%;
     }
 
+    .trail {
     .custom-cursor, .crosshair-x, .crosshair-y, .axis-marker, .trail {
       pointer-events: none;
       position: fixed;
@@ -50,9 +59,18 @@
       height: 10px;
       border-radius: 50%;
       background: var(--accent);
+      pointer-events: none;
+      z-index: 9998;
       opacity: 0.7;
       transform: translate(-50%, -50%);
       animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+      }
     }
 
     .custom-cursor {
@@ -60,7 +78,17 @@
       height: 20px;
       background: var(--accent);
       border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
       transform: translate(-50%, -50%);
+    }
+
+    .crosshair-x, .crosshair-y {
+      position: fixed;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 9999;
     }
 
     .crosshair-x {
@@ -82,17 +110,23 @@
 
     .title {
       position: fixed;
+      font-size: 10px;
       top: 1rem;
       left: 50%;
       transform: translateX(-50%);
       font-size: 1.5rem;
       color: var(--accent);
+      z-index: 9999;
+      pointer-events: none;
       animation: blinkGlow 3s infinite alternate;
       z-index: 1000;
     }
 
     .nav {
       position: fixed;
+      top: 60px;
+      left: 20px;
+      z-index: 1000;
       top: 4rem;
       left: 1rem;
       display: flex;
@@ -105,17 +139,36 @@
       background: transparent;
       border: 1px solid var(--accent);
       color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      font-family: 'Red Hat Mono', monospace;
+      font-style: italic;
       padding: 0.4rem 0.8rem;
       font-family: var(--font);
       cursor: pointer;
       animation: blinkGlow 2s infinite alternate;
     }
 
+    .title {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: var(--accent);
+      animation: blinkGlow 3s infinite alternate;
+      z-index: 1000;
+      cursor: pointer;
+      text-align: center;
+    }
+
     .social {
       position: fixed;
+      top: 60px;
+      right: 20px;
       top: 4rem;
       right: 1rem;
       display: flex;
+      flex-direction: column;
       gap: 1rem;
       font-size: 1.5rem;
       z-index: 1000;
@@ -126,27 +179,76 @@
       animation: flickerGlow 2s infinite alternate;
     }
 
+    .floating-text {
+      position: absolute;
+      color: var(--accent);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 1;
+      animation: floatMove 20s infinite ease-in-out alternate;
+      font-style: italic;
+    }
+
+    @keyframes floatMove {
+      from { transform: translate(0, 0); }
+      to {
+        transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
+      }
+    }
+
     .text-block {
       position: relative;
       background: rgba(0, 0, 0, 0.7);
       margin: 6rem auto 2rem;
       padding: 2rem;
+      max-width: 600px;
+      margin: 100px auto;
       max-width: 90%;
       width: 600px;
       z-index: 5;
+      font-style: italic;
+    }
+
+    .works-gallery {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .works-gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    @keyframes blinkGlow {
+      from { text-shadow: 0 0 10px #00ffff; }
+      to { text-shadow: 0 0 30px #ff00ff; }
+    }
+
+    @keyframes flickerGlow {
+      0% { opacity: 1; text-shadow: 0 0 4px #00ffff; }
+      50% { opacity: 0.5; text-shadow: 0 0 20px #ff00ff; }
+      100% { opacity: 1; text-shadow: 0 0 6px #00ffff; }
     }
 
     .custom-audio-player {
+      margin-top: 1rem;
       background: rgba(0, 0, 0, 0.6);
       padding: 1rem;
       border: 1px solid var(--accent);
       box-shadow: 0 0 10px var(--accent);
       color: var(--accent);
+      max-width: 500px;
+      font-style: italic;
       margin-top: 1rem;
     }
 
     .custom-audio-player p {
       margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      text-shadow: 0 0 6px var(--accent);
     }
 
     .custom-audio-player button.play-btn {
@@ -154,15 +256,42 @@
       border: 1px solid var(--accent);
       color: var(--accent);
       cursor: pointer;
+      font-size: 1.2rem;
       padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      box-shadow: 0 0 8px var(--accent);
+      transition: background 0.3s ease;
+      margin-right: 0.6rem;
+    }
+
+    .custom-audio-player button.play-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 20px var(--accent);
     }
 
     .custom-audio-player input.progress {
+      vertical-align: middle;
       width: 60%;
+      cursor: pointer;
+      -webkit-appearance: none;
       background: rgba(0, 255, 255, 0.2);
       border-radius: 4px;
       height: 8px;
+      box-shadow: 0 0 8px var(--accent);
       outline: none;
+      margin-right: 0.6rem;
+    }
+
+    .custom-audio-player input.progress::-webkit-slider-thumb,
+    .custom-audio-player input.progress::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      border: none;
     }
 
     .custom-audio-player span.time {
@@ -172,6 +301,12 @@
     .floating-text {
       position: absolute;
       color: var(--accent);
+      text-shadow: 0 0 6px var(--accent);
+      vertical-align: middle;
+      min-width: 80px;
+      display: inline-block;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
       pointer-events: none;
       white-space: nowrap;
       z-index: 1;
@@ -230,7 +365,7 @@
   </style>
 </head>
 <body>
-  
+
   <canvas id="bg"></canvas>
 
   <div class="custom-cursor" id="cursor"></div>
@@ -270,158 +405,9 @@
     I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. I study MADTech at the Frank Mohr Institute in Groningen. My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
   </p>
 
- <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const players = document.querySelectorAll(".custom-audio-player");
-
-  players.forEach(player => {
-    const audio = player.querySelector("audio");
-    const playBtnIcon = player.querySelector(".play-btn i");
-    const progress = player.querySelector(".progress");
-    const time = player.querySelector(".time");
-
-    // Display filename
-    const filenameDisplay = document.createElement("div");
-    filenameDisplay.classList.add("filename");
-    filenameDisplay.style.fontSize = "0.9em";
-    filenameDisplay.style.color = "#555";
-    filenameDisplay.style.marginTop = "4px";
-    filenameDisplay.textContent = File: ${decodeURIComponent(audio.src.split("/").pop())};
-    player.appendChild(filenameDisplay);
-
-    // Format time
-    function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return ${mins}:${secs.toString().padStart(2, '0')};
-    }
-
-    // Set duration metadata
-    audio.addEventListener("loadedmetadata", () => {
-      progress.max = Math.floor(audio.duration);
-      time.textContent = 0:00 / ${formatTime(audio.duration)};
-    });
-
-    // Update time and progress bar
-    audio.addEventListener("timeupdate", () => {
-      progress.value = audio.currentTime;
-      time.textContent = ${formatTime(audio.currentTime)} / ${formatTime(audio.duration)};
-    });
-
-    // Scrubbing
-    progress.addEventListener("input", () => {
-      audio.currentTime = progress.value;
-    });
-
-    // Toggle play/pause
-    player.querySelector(".play-btn").addEventListener("click", () => {
-      if (audio.paused) {
-        // Pause all other players
-        players.forEach(p => {
-          const otherAudio = p.querySelector("audio");
-          const otherIcon = p.querySelector(".play-btn i");
-          if (otherAudio !== audio) {
-            otherAudio.pause();
-            otherIcon.classList.remove("fa-pause");
-            otherIcon.classList.add("fa-play");
-          }
-        });
-
-        audio.play();
-        playBtnIcon.classList.remove("fa-play");
-        playBtnIcon.classList.add("fa-pause");
-      } else {
-        audio.pause();
-        playBtnIcon.classList.remove("fa-pause");
-        playBtnIcon.classList.add("fa-play");
-      }
-    });
-
-    // Reset icon when audio ends
-    audio.addEventListener("ended", () => {
-      playBtnIcon.classList.remove("fa-pause");
-      playBtnIcon.classList.add("fa-play");
-      progress.value = 0;
-    });
-  });
-});
-</script>
-
-<div class="custom-audio-player">
-  <p>Stranded Deep Fast</p>
-  <audio src="audio/stranded deep fast.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>STRETCHING</p>
-  <audio src="audio/STRETCHING.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>supersounds</p>
-  <audio src="audio/supersounds.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>The Machine</p>
-  <audio src="audio/themachine.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>Understandable Have a Nice Day</p>
-  <audio src="audio/understandable have a nice day.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>Acute Symphony</p>
-  <audio src="audio/acutesymphony.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>Entropic</p>
-  <audio src="audio/entropic.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>Never Together</p>
-  <audio src="audio/Never Together.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
-<div class="custom-audio-player">
-  <p>Pinball Resting</p>
-  <audio src="audio/pinball resting.mp3" preload="metadata"></audio>
-  <button class="play-btn"><i class="fas fa-play"></i></button>
-  <input type="range" class="progress" value="0" min="0" step="1">
-  <span class="time">0:00 / 0:00</span>
-</div>
-
 <div class="custom-audio-player">
   <p>Stranded Deep</p>
-  <audio src="audio/stranded deep.mp3" preload="metadata"></audio>
+  <audio preload="metadata" src="audio/stranded deep.mp3"></audio>
   <button class="play-btn"><i class="fas fa-play"></i></button>
   <input type="range" class="progress" value="0" min="0" step="1">
   <span class="time">0:00 / 0:00</span>
@@ -429,10 +415,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <div class="custom-audio-player">
   <p>Not As I Remember It</p>
-  <audio src="audio/not as i remember it.mp3" preload="metadata"></audio>
+  <audio preload="metadata" src="audio/not as i remember it.mp3"></audio>
   <button class="play-btn"><i class="fas fa-play"></i></button>
   <input type="range" class="progress" value="0" min="0" step="1">
   <span class="time">0:00 / 0:00</span>
+</div>
+
+
 </div>
 
 
@@ -449,24 +438,24 @@ document.addEventListener("DOMContentLoaded", function () {
       const x = e.clientX;
       const y = e.clientY;
 
-      cursor.style.left = ${x}px;
-      cursor.style.top = ${y}px;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
 
-      crosshairX.style.top = ${y}px;
-      crosshairY.style.left = ${x}px;
+      crosshairX.style.top = `${y}px`;
+      crosshairY.style.left = `${x}px`;
 
-      axisX.style.left = ${x + 10}px;
-      axisX.style.top = 5px;
-      axisX.textContent = x: ${x};
+      axisX.style.left = `${x + 10}px`;
+      axisX.style.top = `5px`;
+      axisX.textContent = `x: ${x}`;
 
-      axisY.style.left = 5px;
-      axisY.style.top = ${y + 10}px;
-      axisY.textContent = y: ${y};
+      axisY.style.left = `5px`;
+      axisY.style.top = `${y + 10}px`;
+      axisY.textContent = `y: ${y}`;
 
       const trail = document.createElement('div');
       trail.className = 'trail';
-      trail.style.left = ${x}px;
-      trail.style.top = ${y}px;
+      trail.style.left = `${x}px`;
+      trail.style.top = `${y}px`;
       document.body.appendChild(trail);
       setTimeout(() => trail.remove(), 2000);
     });
@@ -546,8 +535,8 @@ document.addEventListener("DOMContentLoaded", function () {
 for (let i = 0; i < descriptors.length; i++) {
   const float = document.createElement('div');
   float.className = 'floating-text';
-  float.style.top = ${Math.random() * 100}%;
-  float.style.left = ${Math.random() * 100}%;
+  float.style.top = `${Math.random() * 100}%`;
+  float.style.left = `${Math.random() * 100}%`;
   float.style.setProperty('--x', (Math.random() * 40 - 20).toFixed(1));
   float.style.setProperty('--y', (Math.random() * 40 - 20).toFixed(1));
   float.textContent = descriptors[i];
@@ -571,17 +560,17 @@ for (let i = 0; i < descriptors.length; i++) {
     const formatTime = seconds => {
       const m = Math.floor(seconds / 60);
       const s = Math.floor(seconds % 60);
-      return ${m}:${s.toString().padStart(2, '0')};
+      return `${m}:${s.toString().padStart(2, '0')}`;
     };
 
     audio.addEventListener('loadedmetadata', () => {
       progress.max = Math.floor(audio.duration);
-      time.textContent = 0:00 / ${formatTime(audio.duration)};
+      time.textContent = `0:00 / ${formatTime(audio.duration)}`;
     });
 
     audio.addEventListener('timeupdate', () => {
       progress.value = Math.floor(audio.currentTime);
-      time.textContent = ${formatTime(audio.currentTime)} / ${formatTime(audio.duration)};
+      time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
     });
 
     playBtn.addEventListener('click', () => {
@@ -601,7 +590,7 @@ for (let i = 0; i < descriptors.length; i++) {
     audio.addEventListener('ended', () => {
       playBtn.innerHTML = '<i class="fas fa-play"></i>';
       progress.value = 0;
-      time.textContent = 0:00 / ${formatTime(audio.duration)};
+      time.textContent = `0:00 / ${formatTime(audio.duration)}`;
     });
   });
 </script>
