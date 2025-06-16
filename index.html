@@ -4,20 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asymmetrica — Experimental Systems</title>
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root {
-      --bg: #000000;
-      --text: #ffffff;
+      --bg: #000;
+      --text: #fff;
       --accent: hsl(180, 100%, 50%);
+      --font: 'Red Hat Mono', monospace;
     }
 
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      cursor: none;
     }
 
     html, body {
@@ -25,9 +26,8 @@
       height: 100%;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Red Hat Mono', monospace;
-      overflow-y: auto;
-      scroll-behavior: smooth;
+      font-family: var(--font);
+      overflow-x: hidden;
     }
 
     canvas {
@@ -39,24 +39,20 @@
       height: 100%;
     }
 
-    .trail {
+    .custom-cursor, .crosshair-x, .crosshair-y, .axis-marker, .trail {
+      pointer-events: none;
       position: fixed;
+      z-index: 9999;
+    }
+
+    .trail {
       width: 10px;
       height: 10px;
       border-radius: 50%;
       background: var(--accent);
-      pointer-events: none;
-      z-index: 9998;
       opacity: 0.7;
       transform: translate(-50%, -50%);
       animation: fadeOut 2s forwards;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2);
-      }
     }
 
     .custom-cursor {
@@ -64,77 +60,62 @@
       height: 20px;
       background: var(--accent);
       border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 10000;
       transform: translate(-50%, -50%);
-    }
-
-    .crosshair-x, .crosshair-y {
-      position: fixed;
-      background: var(--accent);
-      pointer-events: none;
-      z-index: 9999;
     }
 
     .crosshair-x {
       height: 1px;
       width: 100%;
+      background: var(--accent);
     }
 
     .crosshair-y {
       width: 1px;
       height: 100%;
+      background: var(--accent);
     }
 
     .axis-marker {
-      position: fixed;
-      font-size: 10px;
+      font-size: 0.7rem;
       color: var(--accent);
-      z-index: 9999;
-      pointer-events: none;
+    }
+
+    .title {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: var(--accent);
+      animation: blinkGlow 3s infinite alternate;
+      z-index: 1000;
     }
 
     .nav {
       position: fixed;
-      top: 60px;
-      left: 20px;
-      z-index: 1000;
+      top: 4rem;
+      left: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      z-index: 1000;
     }
 
     .nav button {
       background: transparent;
       border: 1px solid var(--accent);
       color: var(--accent);
-      padding: 0.3rem 0.8rem;
-      font-family: 'Red Hat Mono', monospace;
-      font-style: italic;
+      padding: 0.4rem 0.8rem;
+      font-family: var(--font);
       cursor: pointer;
       animation: blinkGlow 2s infinite alternate;
     }
 
-    .title {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2rem;
-      color: var(--accent);
-      animation: blinkGlow 3s infinite alternate;
-      z-index: 1000;
-      cursor: pointer;
-      text-align: center;
-    }
-
     .social {
       position: fixed;
-      top: 60px;
-      right: 20px;
+      top: 4rem;
+      right: 1rem;
       display: flex;
-      flex-direction: column;
       gap: 1rem;
       font-size: 1.5rem;
       z-index: 1000;
@@ -145,6 +126,49 @@
       animation: flickerGlow 2s infinite alternate;
     }
 
+    .text-block {
+      position: relative;
+      background: rgba(0, 0, 0, 0.7);
+      margin: 6rem auto 2rem;
+      padding: 2rem;
+      max-width: 90%;
+      width: 600px;
+      z-index: 5;
+    }
+
+    .custom-audio-player {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    .custom-audio-player p {
+      margin-bottom: 0.5rem;
+    }
+
+    .custom-audio-player button.play-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+    }
+
+    .custom-audio-player input.progress {
+      width: 60%;
+      background: rgba(0, 255, 255, 0.2);
+      border-radius: 4px;
+      height: 8px;
+      outline: none;
+    }
+
+    .custom-audio-player span.time {
+      font-size: 0.9rem;
+    }
+
     .floating-text {
       position: absolute;
       color: var(--accent);
@@ -152,37 +176,13 @@
       white-space: nowrap;
       z-index: 1;
       animation: floatMove 20s infinite ease-in-out alternate;
-      font-style: italic;
     }
 
-    @keyframes floatMove {
-      from { transform: translate(0, 0); }
+    @keyframes fadeOut {
       to {
-        transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
       }
-    }
-
-    .text-block {
-      position: relative;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2rem;
-      max-width: 600px;
-      margin: 100px auto;
-      z-index: 5;
-      font-style: italic;
-    }
-
-    .works-gallery {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    .works-gallery img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
     }
 
     @keyframes blinkGlow {
@@ -196,75 +196,36 @@
       100% { opacity: 1; text-shadow: 0 0 6px #00ffff; }
     }
 
-    .custom-audio-player {
-      margin-top: 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-      color: var(--accent);
-      max-width: 500px;
-      font-style: italic;
+    @keyframes floatMove {
+      from { transform: translate(0, 0); }
+      to {
+        transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
+      }
     }
 
-    .custom-audio-player p {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-      text-shadow: 0 0 6px var(--accent);
-    }
-
-    .custom-audio-player button.play-btn {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      box-shadow: 0 0 8px var(--accent);
-      transition: background 0.3s ease;
-      margin-right: 0.6rem;
-    }
-
-    .custom-audio-player button.play-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 0 20px var(--accent);
-    }
-
-    .custom-audio-player input.progress {
-      vertical-align: middle;
-      width: 60%;
-      cursor: pointer;
-      -webkit-appearance: none;
-      background: rgba(0, 255, 255, 0.2);
-      border-radius: 4px;
-      height: 8px;
-      box-shadow: 0 0 8px var(--accent);
-      outline: none;
-      margin-right: 0.6rem;
-    }
-
-    .custom-audio-player input.progress::-webkit-slider-thumb,
-    .custom-audio-player input.progress::-moz-range-thumb {
-      width: 16px;
-      height: 16px;
-      background: var(--accent);
-      cursor: pointer;
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent);
-      border: none;
-    }
-
-    .custom-audio-player span.time {
-      font-size: 0.9rem;
-      color: var(--accent);
-      text-shadow: 0 0 6px var(--accent);
-      vertical-align: middle;
-      min-width: 80px;
-      display: inline-block;
-      text-align: right;
-      font-variant-numeric: tabular-nums;
+    @media screen and (max-width: 600px) {
+      .text-block {
+        padding: 1rem;
+      }
+      .nav {
+        top: auto;
+        bottom: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .nav button {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+      }
+      .social {
+        top: auto;
+        bottom: 4rem;
+        right: 1rem;
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
