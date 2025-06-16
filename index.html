@@ -38,6 +38,26 @@
       height: 100%;
     }
 
+    .trail {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.7;
+      transform: translate(-50%, -50%);
+      animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+      }
+    }
+
     .custom-cursor {
       width: 20px;
       height: 20px;
@@ -76,7 +96,7 @@
 
     .nav {
       position: fixed;
-      top: 10px;
+      top: 60px;
       left: 20px;
       z-index: 1000;
       display: flex;
@@ -107,7 +127,7 @@
 
     .social {
       position: fixed;
-      top: 10px;
+      top: 60px;
       right: 20px;
       display: flex;
       gap: 1.2rem;
@@ -124,32 +144,64 @@
       position: absolute;
       color: var(--accent);
       pointer-events: none;
-      animation: floatMove 15s infinite ease-in-out alternate;
+      white-space: nowrap;
+      z-index: 1;
+      animation: floatMove 20s infinite ease-in-out alternate;
     }
 
     @keyframes floatMove {
-      0% { transform: translate(0px, 0px); }
-      100% { transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh)); }
+      from { transform: translate(0, 0); }
+      to {
+        transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
+      }
+    }
+
+    .text-block {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      max-width: 500px;
+      text-align: left;
+      z-index: 5;
+      left: 10%;
+    }
+
+    #block1 {
+      top: 180px;
+    }
+
+    #block2 {
+      top: 480px;
+    }
+
+    .works-gallery {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .works-gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
     }
 
     @keyframes blinkGlow {
-      from {
-        text-shadow: 0 0 5px #00ffff;
-      }
-      to {
-        text-shadow: 0 0 20px #ff00ff;
-      }
+      from { text-shadow: 0 0 10px #00ffff; }
+      to { text-shadow: 0 0 30px #ff00ff; }
     }
 
     @keyframes flickerGlow {
-      0% { opacity: 1; text-shadow: 0 0 2px #00ffff; }
-      50% { opacity: 0.5; text-shadow: 0 0 10px #ff00ff; }
-      100% { opacity: 1; text-shadow: 0 0 3px #00ffff; }
+      0% { opacity: 1; text-shadow: 0 0 4px #00ffff; }
+      50% { opacity: 0.5; text-shadow: 0 0 20px #ff00ff; }
+      100% { opacity: 1; text-shadow: 0 0 6px #00ffff; }
     }
   </style>
 </head>
 <body>
   <canvas id="bg"></canvas>
+
   <div class="custom-cursor" id="cursor"></div>
   <div class="crosshair-x" id="crosshairX"></div>
   <div class="crosshair-y" id="crosshairY"></div>
@@ -157,10 +209,9 @@
   <div class="axis-marker" id="axisY"></div>
 
   <div class="nav">
-    <button>Home</button>
-    <button>Works</button>
-    <button>About</button>
-    <button>Contact</button>
+    <button onclick="scrollToTop()">Home</button>
+    <button onclick="document.getElementById('block1').scrollIntoView({behavior: 'smooth'})">Works</button>
+    <button onclick="document.getElementById('block2').scrollIntoView({behavior: 'smooth'})">About & Contact</button>
   </div>
 
   <div class="title" id="title">Atharva Gupta</div>
@@ -172,14 +223,20 @@
     <a href="https://asymmetrica.bandcamp.com" target="_blank"><i class="fab fa-bandcamp"></i></a>
   </div>
 
-  <div class="floating-text" style="top: 10%; left: 5%; --x: 20; --y: 30;">Artist</div>
-  <div class="floating-text" style="top: 80%; left: 90%; --x: -20; --y: -30;">Educator</div>
-  <div class="floating-text" style="top: 30%; left: 80%; --x: -25; --y: 25;">Sound Designer</div>
-  <div class="floating-text" style="top: 70%; left: 10%; --x: 25; --y: -25;">VJ</div>
+  <div class="text-block" id="block1">
+    <h2>Works</h2>
+    <p>Some sample text describing the artist's work. This can be replaced.</p>
+    <div class="works-gallery">
+      <img src="https://via.placeholder.com/100" alt="work">
+      <img src="https://via.placeholder.com/100" alt="work">
+      <img src="https://via.placeholder.com/100" alt="work">
+    </div>
+  </div>
 
-  <audio id="bg-audio" loop autoplay>
-    <source src="glitch-ambient-loop.mp3" type="audio/mp3">
-  </audio>
+  <div class="text-block" id="block2">
+    <h2>About & Contact</h2>
+    <p>This is a placeholder about section. Replace with actual contact and bio information.</p>
+  </div>
 
   <script>
     const cursor = document.getElementById('cursor');
@@ -189,13 +246,6 @@
     const axisY = document.getElementById('axisY');
     const title = document.getElementById('title');
     const titles = ['Atharva Gupta', 'Asymmetrica', 'Audiodevout'];
-
-    let hue = 0;
-    function updateHue() {
-      hue = (hue + 5) % 360;
-      const color = `hsl(${hue}, 100%, 50%)`;
-      document.documentElement.style.setProperty('--accent', color);
-    }
 
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX;
@@ -215,31 +265,89 @@
       axisY.style.top = `${y + 10}px`;
       axisY.textContent = `y: ${y}`;
 
-      updateHue();
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = `${x}px`;
+      trail.style.top = `${y}px`;
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 2000);
     });
 
     setInterval(() => {
       title.textContent = titles[Math.floor(Math.random() * titles.length)];
     }, 300);
 
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    function glitchNoise() {
-      const imageData = ctx.createImageData(canvas.width, canvas.height);
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        const shade = Math.random() * 100;
-        imageData.data[i] = shade;
-        imageData.data[i + 1] = shade;
-        imageData.data[i + 2] = shade;
-        imageData.data[i + 3] = 40;
+    const particles = Array.from({ length: 100 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(0, 255, 255, 0.15)';
+      ctx.lineWidth = 0.5;
+
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
       }
-      ctx.putImageData(imageData, 0, 0);
+
+      for (let y = 0; y < canvas.height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      particles.forEach(p => {
+        let dx = p.x - cursor.offsetLeft;
+        let dy = p.y - cursor.offsetTop;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 100) {
+          p.vx += dx / dist * 0.05;
+          p.vy += dy / dist * 0.05;
+        }
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 0, 255, 0.8)';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
     }
 
-    setInterval(glitchNoise, 60);
+    animate();
+
+    for (let i = 0; i < 20; i++) {
+      const float = document.createElement('div');
+      float.className = 'floating-text';
+      float.style.top = `${Math.random() * 100}%`;
+      float.style.left = `${Math.random() * 100}%`;
+      float.style.setProperty('--x', (Math.random() * 40 - 20).toFixed(1));
+      float.style.setProperty('--y', (Math.random() * 40 - 20).toFixed(1));
+      float.textContent = ['Thinker','Student','Maker','Sculptor','Son','Friend','Human','Cook','Observer','Reader','Designer','Listener','Philosopher','Sociologist','Scientist','Generalist','Anti-Specialist','AI User','Meme Lover','Critic'][i % 20];
+      document.body.appendChild(float);
+    }
 
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
