@@ -531,6 +531,9 @@ requestAnimationFrame(animate);
 }
 
 animate();
+</script>
+  
+<script>
 const descriptors = [
   'Thinker', 'Student', 'Maker', 'Observer', 'Reader', 'Listener', 'Cook', 'Friend', 'Human', 'Son',
   'Philosopher', 'Sociologist', 'Scientist', 'Generalist', 'Anti-Specialist', 'AIUser', 'Critic', 'Researcher', 'Smoker', 'Overanalyser',
@@ -540,99 +543,77 @@ const descriptors = [
   'Navigator', 'Mapper', 'Composer', 'Harmonizer', 'Synthesizer', 'Amplifier', 'Filterer', 'Modulator', 'Echoer', 'Translator'
 ];
 
-const floats = [];
-
-for (let i = 0; i < descriptors.length; i++) {
-  const float = document.createElement('div');
-  float.className = 'floating-text';
-  float.style.position = 'absolute';
-  float.style.top = `${Math.random() * 100}vh`;
-  float.style.left = `${Math.random() * 100}vw`;
-  float.textContent = descriptors[i];
-  document.body.appendChild(float);
-  floats.push({ el: float, vx: 0, vy: 0 }); // store velocity
-}
-
-let mouse = { x: 0, y: 0 };
-
-document.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-function repelText() {
-  floats.forEach(obj => {
-    const rect = obj.el.getBoundingClientRect();
-    const dx = rect.left + rect.width / 2 - mouse.x;
-    const dy = rect.top + rect.height / 2 - mouse.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const minDist = 100;
-
-    if (distance < minDist) {
-      const force = (1 - distance / minDist) * 5;
-      obj.vx += (dx / distance) * force;
-      obj.vy += (dy / distance) * force;
-    }
-
-    // Apply velocity
-    let left = parseFloat(obj.el.style.left);
-    let top = parseFloat(obj.el.style.top);
-
-    obj.vx *= 0.9; // damping
-    obj.vy *= 0.9;
-
-    left += obj.vx;
-    top += obj.vy;
-
-    // Keep within viewport
-    left = Math.min(100, Math.max(0, left));
-    top = Math.min(100, Math.max(0, top));
-
-    obj.el.style.left = `${left}vw`;
-    obj.el.style.top = `${top}vh`;
-  });
-
-  requestAnimationFrame(repelText);
-}
-
-repelText();
-
+window.addEventListener('load', () => {
   const floatingTexts = [];
-const container = document.body; // or a specific container if you want
+  const container = document.body;
 
-// Create floating text elements
-descriptors.forEach((text, index) => {
-  const span = document.createElement('span');
-  span.className = 'floating-text';
-  span.textContent = text;
-  container.appendChild(span);
+  descriptors.forEach(text => {
+    const span = document.createElement('span');
+    span.className = 'floating-text';
+    span.textContent = text;
+    container.appendChild(span);
 
-  // Initialize position and movement direction
-  floatingTexts.push({
-    el: span,
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    dx: (Math.random() - 0.5) * 0.3, // horizontal speed
-    dy: (Math.random() - 0.5) * 0.3  // vertical speed
+    floatingTexts.push({
+      el: span,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5,
+    });
   });
+
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+  document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function animate() {
+    floatingTexts.forEach(obj => {
+      const dx = obj.x + obj.el.offsetWidth / 2 - mouse.x;
+      const dy = obj.y + obj.el.offsetHeight / 2 - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const minDist = 150;
+
+      if (dist < minDist && dist > 0) {
+        const force = (minDist - dist) / minDist * 2;
+        obj.vx += (dx / dist) * force;
+        obj.vy += (dy / dist) * force;
+      }
+
+      obj.vx *= 0.9;
+      obj.vy *= 0.9;
+
+      obj.x += obj.vx;
+      obj.y += obj.vy;
+
+      if (obj.x < 0) {
+        obj.x = 0;
+        obj.vx *= -1;
+      } else if (obj.x > window.innerWidth - obj.el.offsetWidth) {
+        obj.x = window.innerWidth - obj.el.offsetWidth;
+        obj.vx *= -1;
+      }
+
+      if (obj.y < 0) {
+        obj.y = 0;
+        obj.vy *= -1;
+      } else if (obj.y > window.innerHeight - obj.el.offsetHeight) {
+        obj.y = window.innerHeight - obj.el.offsetHeight;
+        obj.vy *= -1;
+      }
+
+      obj.el.style.left = `${obj.x}px`;
+      obj.el.style.top = `${obj.y}px`;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 });
 
-// Animate floating texts
-function animateFloatingTexts() {
-  floatingTexts.forEach(obj => {
-    obj.x += obj.dx;
-    obj.y += obj.dy;
-
-    // Bounce off edges
-    if (obj.x < 0 || obj.x > window.innerWidth - obj.el.offsetWidth) obj.dx *= -1;
-    if (obj.y < 0 || obj.y > window.innerHeight - obj.el.offsetHeight) obj.dy *= -1;
-
-    obj.el.style.transform = `translate(${obj.x}px, ${obj.y}px)`;
-  });
-  requestAnimationFrame(animateFloatingTexts);
-}
-
-animateFloatingTexts();
 
 
 window.addEventListener('resize', () => {
