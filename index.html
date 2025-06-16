@@ -6,7 +6,7 @@
 <title>Asymmetrica — Experimental Systems</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -157,7 +157,7 @@ color: var(--accent);
       font-size: 0.9rem;
       padding: 0.3rem 0.8rem;
       font-family: 'Red Hat Mono', monospace;
-      font-style: italic;
+      font-style: normal;
 cursor: pointer;
 animation: blinkGlow 2s infinite alternate;
 }
@@ -213,12 +213,13 @@ animation: flickerGlow 2s infinite alternate;
 
 .floating-text {
 position: absolute;
+transition: transform 0.1s ease-out;
 color: var(--accent);
 pointer-events: none;
 white-space: nowrap;
 z-index: 1;
 animation: floatMove 20s infinite ease-in-out alternate;
-      font-style: italic;
+      font-style: normal;
 }
 
 @keyframes floatMove {
@@ -235,7 +236,7 @@ transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
       max-width: 600px;
       margin: 100px auto;
       z-index: 5;
-      font-style: italic;
+      font-style: normal;
     }
 
     .works-gallery {
@@ -273,7 +274,7 @@ box-shadow: 0 0 10px var(--accent);
 color: var(--accent);
       user-select: none;
       max-width: 500px;
-      font-style: italic;
+      font-style: normal;
 }
 
 .custom-audio-player p {
@@ -460,7 +461,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const particles = Array.from({ length: 100 }, () => ({
+const particles = Array.from({ length: 1024 }, () => ({
 x: Math.random() * canvas.width,
 y: Math.random() * canvas.height,
 vx: (Math.random() - 0.5) * 0.5,
@@ -511,24 +512,70 @@ requestAnimationFrame(animate);
 }
 
 animate();
-
 const descriptors = [
-'Thinker', 'Student', 'Maker', 'Observer', 'Reader', 'Listener', 'Cook', 'Friend', 'Human', 'Son',
-'Philosopher', 'Sociologist', 'Scientist', 'Generalist', 'Anti-Specialist', 'AIUser', 'Critic', 'Researcher', 'Smoker', 'Overanalyser',
-'Dreamer', 'Technologist', 'Wanderer', 'Glitcher', 'Cyborg', 'Outsider', 'Alien', 'Futurist', 'Tinkerer', 'Assembler',
-'Mutator', 'Decoder', 'Dissident', 'Collector', 'Noiser', 'Deconstructor', 'Drifter', 'Skeptic', 'Witness', 'Seeker'
+  'Thinker', 'Student', 'Maker', 'Observer', 'Reader', 'Listener', 'Cook', 'Friend', 'Human', 'Son',
+  'Philosopher', 'Sociologist', 'Scientist', 'Generalist', 'Anti-Specialist', 'AIUser', 'Critic', 'Researcher', 'Smoker', 'Overanalyser',
+  'Dreamer', 'Technologist', 'Wanderer', 'Glitcher', 'Cyborg', 'Outsider', 'Alien', 'Futurist', 'Tinkerer', 'Assembler',
+  'Mutator', 'Decoder', 'Dissident', 'Collector', 'Noiser', 'Deconstructor', 'Drifter', 'Skeptic', 'Witness', 'Seeker'
 ];
 
+const floats = [];
+
 for (let i = 0; i < descriptors.length; i++) {
-const float = document.createElement('div');
-float.className = 'floating-text';
-float.style.top = `${Math.random() * 100}%`;
-float.style.left = `${Math.random() * 100}%`;
-float.style.setProperty('--x', (Math.random() * 40 - 20).toFixed(1));
-float.style.setProperty('--y', (Math.random() * 40 - 20).toFixed(1));
-float.textContent = descriptors[i];
-document.body.appendChild(float);
+  const float = document.createElement('div');
+  float.className = 'floating-text';
+  float.style.position = 'absolute';
+  float.style.top = `${Math.random() * 100}vh`;
+  float.style.left = `${Math.random() * 100}vw`;
+  float.textContent = descriptors[i];
+  document.body.appendChild(float);
+  floats.push({ el: float, vx: 0, vy: 0 }); // store velocity
 }
+
+let mouse = { x: 0, y: 0 };
+
+document.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+function repelText() {
+  floats.forEach(obj => {
+    const rect = obj.el.getBoundingClientRect();
+    const dx = rect.left + rect.width / 2 - mouse.x;
+    const dy = rect.top + rect.height / 2 - mouse.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const minDist = 100;
+
+    if (distance < minDist) {
+      const force = (1 - distance / minDist) * 5;
+      obj.vx += (dx / distance) * force;
+      obj.vy += (dy / distance) * force;
+    }
+
+    // Apply velocity
+    let left = parseFloat(obj.el.style.left);
+    let top = parseFloat(obj.el.style.top);
+
+    obj.vx *= 0.9; // damping
+    obj.vy *= 0.9;
+
+    left += obj.vx;
+    top += obj.vy;
+
+    // Keep within viewport
+    left = Math.min(100, Math.max(0, left));
+    top = Math.min(100, Math.max(0, top));
+
+    obj.el.style.left = `${left}vw`;
+    obj.el.style.top = `${top}vh`;
+  });
+
+  requestAnimationFrame(repelText);
+}
+
+repelText();
+
 
 
 window.addEventListener('resize', () => {
@@ -581,6 +628,7 @@ time.textContent = `0:00 / ${formatTime(audio.duration)}`;
 });
 });
 </script>
+
 
 </div>
 </body>
