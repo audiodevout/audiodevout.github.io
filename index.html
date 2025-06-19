@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Asymmetrica — Experimental Systems</title>
+<title>Experimental Systems by Atharva Gupta</title>
   <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -338,6 +338,33 @@ text-align: right;
 font-variant-numeric: tabular-nums;
 }
 
+
+.glitch-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.glitch-transition.active {
+  opacity: 1;
+  animation: glitchOut 0.6s steps(2, end);
+}
+
+@keyframes glitchOut {
+  0% { clip-path: inset(20% 0 70% 0); }
+  25% { clip-path: inset(10% 0 50% 0); }
+  50% { clip-path: inset(40% 0 20% 0); }
+  75% { clip-path: inset(30% 0 10% 0); }
+  100% { clip-path: inset(0% 0 0% 0); }
+}
+
     @keyframes blinkGlow {
       from { text-shadow: 0 0 10px #00ffff; }
       to { text-shadow: 0 0 30px #ff00ff; }
@@ -362,9 +389,8 @@ font-variant-numeric: tabular-nums;
 
 <div class="nav">
 <button onclick="scrollToTop()">Home</button>
-<button onclick="document.getElementById('block1').scrollIntoView({behavior: 'smooth'})">Artist Statement</button>
-<button onclick="document.getElementById('block2').scrollIntoView({behavior: 'smooth'})">About & Contact</button>
-<button onclick="document.getElementById('block3').scrollIntoView({behavior: 'smooth'})">Audio</button> 
+<button onclick="glitchNavigate('about/about.html')">About</button>
+
 </div>
 
 
@@ -377,8 +403,8 @@ font-variant-numeric: tabular-nums;
 <a href="https://asymmetrica.bandcamp.com" target="_blank"><i class="fab fa-bandcamp"></i></a>
 <a href="https://www.linkedin.com/in/atharva--gupta/" target="_blank"><i class="fab fa-linkedin"></i></a>
 </div>
-
-<div class="text-block" id="block1">
+<!-- all this is in the about section now -->
+<!-- <div class="text-block" id="block1">
 <h2>Artist Statement</h2>
 <p>
 I make experimental systems that combine sound, light, code, and kinetic structures. 
@@ -396,7 +422,7 @@ I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India,
 I study MADTech at the Frank Mohr Institute in Groningen. 
 My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
 </p>
-
+ -->
 <div class="custom-audio-player">
 <p>Stranded Deep</p>
 <audio preload="metadata" src="audio/stranded deep.mp3"></audio>
@@ -665,8 +691,20 @@ time.textContent = `0:00 / ${formatTime(audio.duration)}`;
 });
 });
 </script>
+<script>
+function glitchNavigate(url) {
+  const glitch = document.getElementById('glitchTransition');
+  glitch.classList.add('active');
+  setTimeout(() => {
+    window.location.href = url;
+  }, 500); // adjust timing to match the animation
+}
+</script>
 
 
 </div>
+
+ <div class="glitch-transition" id="glitchTransition"></div>
+
 </body>
 </html>
