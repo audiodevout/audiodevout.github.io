@@ -641,12 +641,11 @@ window.addEventListener('load', () => {
 });
 
 document.getElementById('homeBtn').addEventListener('click', () => {
-  // Add glitch class to body
   document.body.classList.add('glitch-effect');
 
-  // After 0.5 seconds, navigate to index.html
   setTimeout(() => {
-    window.location.href = 'index.html';
+    window.location.href = '../index.html'; // go up one folder to root index.html
+    // or use: window.location.href = '/index.html'; // absolute path
   }, 500);
 });
 
