@@ -337,6 +337,15 @@ display: inline-block;
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
+.audio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 2rem;
+  z-index: 5;
+  position: relative;
+}
 
 
 .glitch-transition {
@@ -423,20 +432,22 @@ I study MADTech at the Frank Mohr Institute in Groningen.
 My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
 </p>
  -->
-<div class="custom-audio-player">
-<p>Stranded Deep</p>
-<audio preload="metadata" src="audio/stranded deep.mp3"></audio>
-<button class="play-btn"><i class="fas fa-play"></i></button>
-<input type="range" class="progress" value="0" min="0" step="1">
-<span class="time">0:00 / 0:00</span>
-</div>
+<div class="audio-container">
+  <div class="custom-audio-player">
+    <p>Stranded Deep</p>
+    <audio preload="metadata" src="audio/stranded deep.mp3"></audio>
+    <button class="play-btn"><i class="fas fa-play"></i></button>
+    <input type="range" class="progress" value="0" min="0" step="1">
+    <span class="time">0:00 / 0:00</span>
+  </div>
 
-<div class="custom-audio-player">
-<p>Not As I Remember It</p>
-<audio preload="metadata" src="audio/not as i remember it.mp3"></audio>
-<button class="play-btn"><i class="fas fa-play"></i></button>
-<input type="range" class="progress" value="0" min="0" step="1">
-<span class="time">0:00 / 0:00</span>
+  <div class="custom-audio-player">
+    <p>Not As I Remember It</p>
+    <audio preload="metadata" src="audio/not as i remember it.mp3"></audio>
+    <button class="play-btn"><i class="fas fa-play"></i></button>
+    <input type="range" class="progress" value="0" min="0" step="1">
+    <span class="time">0:00 / 0:00</span>
+  </div>
 </div>
 
 
