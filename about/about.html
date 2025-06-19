@@ -249,7 +249,31 @@ transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
       height: 100px;
       object-fit: cover;
     }
+   @keyframes glitch {
+  0% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: none;
+  }
+  20% {
+    clip: rect(10px, 9999px, 50px, 0);
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    clip: rect(85px, 9999px, 140px, 0);
+    transform: translate(2px, 2px);
+  }
+  60%, 100% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: none;
+  }
+}
 
+/* Class to trigger glitch */
+.glitch-effect {
+  animation: glitch 0.5s ease;
+}
+
+  
     @keyframes blinkGlow {
       from { text-shadow: 0 0 10px #00ffff; }
       to { text-shadow: 0 0 30px #ff00ff; }
@@ -361,11 +385,10 @@ font-variant-numeric: tabular-nums;
 <div class="axis-marker" id="axisY"></div>
 
 <div class="nav">
-<button onclick="scrollToTop()">Home</button>
-<button onclick="document.getElementById('block1').scrollIntoView({behavior: 'smooth'})">Artist Statement</button>
-<button onclick="document.getElementById('block2').scrollIntoView({behavior: 'smooth'})">About & Contact</button>
-<button onclick="document.getElementById('block3').scrollIntoView({behavior: 'smooth'})">Audio</button> 
+  <button id="homeBtn">Home</button>
+  <button onclick="location.reload()">About</button>
 </div>
+
 
 
 <div class="title" id="title">Atharva Gupta</div>
@@ -395,6 +418,12 @@ Each piece is a system with its own quirks, sometimes meditative, sometimes glit
 I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. 
 I study MADTech at the Frank Mohr Institute in Groningen. 
 My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
+</p>
+
+<div class="text-block" id="block3">
+<h2>Get in touch with me!</h2>
+<p><strong>About</strong><br>
+I share my work and music on YouTube, Bandcamp, Patreon and Instagram. The buttons on the right will take you where you want to go!
 </p>
 
 <!-- <div class="custom-audio-player">
@@ -611,6 +640,15 @@ window.addEventListener('load', () => {
   animate();
 });
 
+document.getElementById('homeBtn').addEventListener('click', () => {
+  // Add glitch class to body
+  document.body.classList.add('glitch-effect');
+
+  // After 0.5 seconds, navigate to index.html
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 500);
+});
 
 
 window.addEventListener('resize', () => {
