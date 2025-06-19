@@ -644,7 +644,8 @@ document.getElementById('homeBtn').addEventListener('click', () => {
   document.body.classList.add('glitch-effect');
 
   setTimeout(() => {
-    window.location.href = '../index.html'; // go up one folder to root index.html
+   window.location.href = '/index.html'; // absolute path from root
+ // go up one folder to root index.html
     // or use: window.location.href = '/index.html'; // absolute path
   }, 500);
 });
