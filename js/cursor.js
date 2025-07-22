@@ -57,7 +57,7 @@ const CursorSystem = {
         }
 
         // Hide cursor initially
-        this.cursor.style.opacity = '0.5';
+        this.cursor.style.opacity = '0.8';
     },
 
     createCoordinatesDisplay() {
@@ -305,7 +305,7 @@ const CursorSystem = {
     hide() {
         if (!this.cursor) return;
         
-        this.cursor.style.opacity = '0';
+        this.cursor.style.opacity = '0.7';
         this.cursor.classList.add('hidden');
     },
 
