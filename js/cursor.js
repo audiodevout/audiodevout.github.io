@@ -57,7 +57,7 @@ const CursorSystem = {
         }
 
         // Hide cursor initially
-        this.cursor.style.opacity = '0';
+        this.cursor.style.opacity = '0.5';
     },
 
     createCoordinatesDisplay() {
@@ -146,6 +146,7 @@ const CursorSystem = {
     },
 
     handleMouseMove(e) {
+        this.show();
         this.targetPos.x = e.clientX;
         this.targetPos.y = e.clientY;
         
