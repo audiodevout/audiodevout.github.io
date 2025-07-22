@@ -8,7 +8,7 @@ const portfolioData = {
         title: "Atharva Gupta",
         subtitle: "Experimental Systems",
         description: "I make experimental systems that combine sound, light, code, and kinetic structures. My work explores the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place.",
-        email: "contact@atharva.in",
+        email: "atharva152@gmail.com",
         social: {
             instagram: "https://instagram.com/asymmetrica_",
             youtube: "https://youtube.com/@audiodevout",
