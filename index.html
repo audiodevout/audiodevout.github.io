@@ -1,721 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Experimental Systems by Atharva Gupta</title>
-<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-:root {
-      --bg: #000;
-      --text: #fff;
-      --bg: #000000;
-      --text: #ffffff;
---accent: hsl(180, 100%, 50%);
-      --font-main: 'Doto', sans-serif;
-      --font-alt: 'Doto', sans-serif;
-      transition: --accent 0.3s ease, --text 0.3s ease, --bg 0.3s ease;
-}
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-cursor: none;
-}
-
-html, body {
-width: 100%;
-height: 100%;
-background: var(--bg);
-color: var(--text);
-      font-family: var(--font-main);
-      overflow-y: auto;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
-}
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* Optional: allows clicks to pass through */
-}
-
-    .trail, .custom-cursor, .crosshair-x, .crosshair-y, .axis-marker {
-      pointer-events: none;
-      position: fixed;
-      z-index: 9999;
-    }
-
-.trail {
-      position: fixed;
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background: var(--accent);
-      pointer-events: none;
-      z-index: 9998;
-opacity: 0.7;
-transform: translate(-50%, -50%);
-animation: fadeOut 2s forwards;
-}
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2);
-      }
-    }
-
-.custom-cursor {
-width: 20px;
-height: 20px;
-background: var(--accent);
-border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 10000;
-transform: translate(-50%, -50%);
-}
-
-    .crosshair-x, .crosshair-y {
-      position: fixed;
-      background: var(--accent);
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-.crosshair-x {
-height: 1px;
-width: 100%;
-      background: var(--accent);
-}
-
-.crosshair-y {
-width: 1px;
-height: 100%;
-      background: var(--accent);
-}
-
-.axis-marker {
-      font-size: 10px;
-      color: var(--accent);
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2);
-      }
-    }
-
-    .title {
-position: fixed;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2rem;
-      font-family: var(--font-alt);
-      font-size: 10px;
-color: var(--accent);
-      animation: blinkGlow 3s infinite alternate;
-      z-index: 1000;
-      cursor: pointer;
-      z-index: 9999;
-      pointer-events: none;
-}
-
-.nav {
-position: fixed;
-      top: 4rem;
-      left: 1rem;
-      top: 60px;
-      left: 20px;
-      z-index: 1000;
-display: flex;
-flex-direction: column;
-gap: 0.5rem;
-      z-index: 1000;
-}
-
-.nav button {
-background: transparent;
-border: 1px solid var(--accent);
-color: var(--accent);
-      padding: 0.5rem 1rem;
-      font-family: var(--font-alt);
-      font-size: 0.9rem;
-      padding: 0.3rem 0.8rem;
-      font-family: var(--font-alt);
-      font-style: normal;
-cursor: pointer;
-animation: blinkGlow 2s infinite alternate;
-}
-
-    .title {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2rem;
-      color: var(--accent);
-      animation: blinkGlow 3s infinite alternate;
-      z-index: 1000;
-      cursor: pointer;
-      text-align: center;
-    }
-
-.social {
-position: fixed;
-      top: 4rem;
-      right: 1rem;
-      top: 60px;
-      right: 20px;
-display: flex;
-flex-direction: column;
-      gap: 0.8rem;
-      font-size: 1.3rem;
-      gap: 1rem;
-      font-size: 1.5rem;
-z-index: 1000;
-}
-
-.social a {
-color: var(--accent);
-animation: flickerGlow 2s infinite alternate;
-}
-
-    .text-block {
-      position: relative;
-      margin: 3rem auto;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2rem;
-      max-width: 700px;
-      border-left: 3px solid var(--accent);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    }
-
-    .text-block h2 {
-      font-family: var(--font-alt);
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-.floating-text {
-position: absolute;
-transition: transform 0.1s ease-out;
-color: var(--accent);
-pointer-events: none;
-white-space: nowrap;
-z-index: 1;
-animation: floatMove 20s infinite ease-in-out alternate;
-      font-style: normal;
-}
-
-@keyframes floatMove {
-from { transform: translate(0, 0); }
-to {
-transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
-}
-}
-
-    .text-block {
-      position: relative;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2rem;
-      max-width: 600px;
-      margin: 100px auto;
-      z-index: 5;
-      font-style: normal;
-    }
-
-    .works-gallery {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    .works-gallery img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-    }
-
-    @keyframes blinkGlow {
-      from { text-shadow: 0 0 10px #00ffff; }
-      to { text-shadow: 0 0 30px #ff00ff; }
-    }
-
-    @keyframes flickerGlow {
-      0% { opacity: 1; text-shadow: 0 0 4px #00ffff; }
-      50% { opacity: 0.5; text-shadow: 0 0 20px #ff00ff; }
-      100% { opacity: 1; text-shadow: 0 0 6px #00ffff; }
-    }
-
-.custom-audio-player {
-      margin-top: 2rem;
-      margin-top: 1rem;
-background: rgba(0, 0, 0, 0.6);
-padding: 1rem;
-border: 1px solid var(--accent);
-box-shadow: 0 0 10px var(--accent);
-      font-family: var(--font-alt);
-color: var(--accent);
-      user-select: none;
-      max-width: 500px;
-      font-style: normal;
-}
-
-.custom-audio-player p {
-margin-bottom: 0.5rem;
-      font-weight: bold;
-font-size: 1.1rem;
-text-shadow: 0 0 6px var(--accent);
-}
-
-.custom-audio-player button.play-btn {
-background: transparent;
-border: 1px solid var(--accent);
-color: var(--accent);
-      cursor: pointer;
-font-size: 1.2rem;
-padding: 0.3rem 0.6rem;
-border-radius: 4px;
-box-shadow: 0 0 8px var(--accent);
-      transition: background 0.3s ease;
-margin-right: 0.6rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-}
-
-.custom-audio-player button.play-btn:hover {
-background: var(--accent);
-color: var(--bg);
-      box-shadow: 0 0 20px var(--accent);
-}
-
-.custom-audio-player input.progress {
-      vertical-align: middle;
-width: 60%;
-cursor: pointer;
-      -webkit-appearance: none;
-background: rgba(0, 255, 255, 0.2);
-border-radius: 4px;
-height: 8px;
-box-shadow: 0 0 8px var(--accent);
-outline: none;
-margin-right: 0.6rem;
-}
-
-.custom-audio-player input.progress::-webkit-slider-thumb,
-.custom-audio-player input.progress::-moz-range-thumb {
-width: 16px;
-height: 16px;
-background: var(--accent);
-      cursor: pointer;
-border-radius: 50%;
-box-shadow: 0 0 10px var(--accent);
-border: none;
-}
-
-.custom-audio-player span.time {
-font-size: 0.9rem;
-      color: var(--accent);
-text-shadow: 0 0 6px var(--accent);
-      vertical-align: middle;
-min-width: 80px;
-display: inline-block;
-text-align: right;
-font-variant-numeric: tabular-nums;
-}
-.audio-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3rem;
-  gap: 2rem;
-  z-index: 5;
-  position: relative;
-}
-
-
-.glitch-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000;
-  z-index: 99999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.1s ease-in-out;
-}
-
-.glitch-transition.active {
-  opacity: 1;
-  animation: glitchOut 0.6s steps(2, end);
-}
-
-@keyframes glitchOut {
-  0% { clip-path: inset(20% 0 70% 0); }
-  25% { clip-path: inset(10% 0 50% 0); }
-  50% { clip-path: inset(40% 0 20% 0); }
-  75% { clip-path: inset(30% 0 10% 0); }
-  100% { clip-path: inset(0% 0 0% 0); }
-}
-
-    @keyframes blinkGlow {
-      from { text-shadow: 0 0 10px #00ffff; }
-      to { text-shadow: 0 0 30px #ff00ff; }
-    }
-
-    @keyframes flickerGlow {
-      0% { opacity: 1; text-shadow: 0 0 4px #00ffff; }
-      50% { opacity: 0.5; text-shadow: 0 0 20px #ff00ff; }
-      100% { opacity: 1; text-shadow: 0 0 6px #00ffff; }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Atharva Gupta - Experimental Systems. Digital artist exploring surveillance, kinetic sound, and generative media through critical making practices.">
+    <meta name="keywords" content="experimental art, surveillance art, kinetic sound, generative music, media art, digital art, cyberpunk">
+    <meta name="author" content="Atharva Gupta">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Atharva Gupta - Experimental Systems">
+    <meta property="og:description" content="Digital artist exploring surveillance, kinetic sound, and generative media through critical making practices.">
+    <meta property="og:url" content="https://atharva.in">
+    <meta property="og:site_name" content="Atharva Gupta Portfolio">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Atharva Gupta - Experimental Systems">
+    <meta name="twitter:description" content="Digital artist exploring surveillance, kinetic sound, and generative media through critical making practices.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/glitch.css">
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/audio-player.css">
+    
+    <title>Atharva Gupta - Experimental Systems</title>
 </head>
 <body>
-
-<canvas id="bg"></canvas>
-
-<div class="custom-cursor" id="cursor"></div>
-<div class="crosshair-x" id="crosshairX"></div>
-<div class="crosshair-y" id="crosshairY"></div>
-<div class="axis-marker" id="axisX"></div>
-<div class="axis-marker" id="axisY"></div>
-
-<div class="nav">
-<button onclick="scrollToTop()">Home</button>
-<button onclick="glitchNavigate('about/about.html')">About</button>
-
-</div>
-
-
-<div class="title" id="title">Atharva Gupta</div>
-
-<div class="social">
-<a href="mailto:atharva152@gmail.com"><i class="fas fa-envelope"></i></a>
-<a href="https://instagram.com/audiodevout" target="_blank"><i class="fab fa-instagram"></i></a>
-<a href="https://youtube.com/@audiodevout" target="_blank"><i class="fab fa-youtube"></i></a>
-<a href="https://asymmetrica.bandcamp.com" target="_blank"><i class="fab fa-bandcamp"></i></a>
-<a href="https://www.linkedin.com/in/atharva--gupta/" target="_blank"><i class="fab fa-linkedin"></i></a>
-</div>
-<!-- all this is in the about section now -->
-<!-- <div class="text-block" id="block1">
-<h2>Artist Statement</h2>
-<p>
-I make experimental systems that combine sound, light, code, and kinetic structures. 
-My work explores the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place. 
-I’m interested in tinnitus, entropy, machine rhythms, and the emotional textures of noise and silence. 
-I often build my own instruments, use generative processes, and work with tools like TouchDesigner to create immersive and reactive experiences. 
-Each piece is a system with its own quirks, sometimes meditative, sometimes glitchy and unstable—always slightly off-centre.
-</p>
-</div>
-
-<div class="text-block" id="block2">
-<h2>About & Contact</h2>
-<p><strong>About</strong><br>
-I’m Atharva Gupta (aka <em>asymmetrica</em>), an artist from Ajmer, India, currently based in the Netherlands. 
-I study MADTech at the Frank Mohr Institute in Groningen. 
-My work includes audiovisual installations, kinetic sound objects, and generative media, often investigating the politics and poetics of sensing through machines.
-</p>
- -->
-<div class="audio-container">
-  <div class="custom-audio-player">
-    <p>Stranded Deep</p>
-    <audio preload="metadata" src="audio/stranded deep.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-
-  <div class="custom-audio-player">
-    <p>Not As I Remember It</p>
-    <audio preload="metadata" src="audio/not as i remember it.mp3"></audio>
-    <button class="play-btn"><i class="fas fa-play"></i></button>
-    <input type="range" class="progress" value="0" min="0" step="1">
-    <span class="time">0:00 / 0:00</span>
-  </div>
-</div>
-
-
-</div>
-
-
-<script>
-const cursor = document.getElementById('cursor');
-const crosshairX = document.getElementById('crosshairX');
-const crosshairY = document.getElementById('crosshairY');
-const axisX = document.getElementById('axisX');
-const axisY = document.getElementById('axisY');
-const title = document.getElementById('title');
-const titles = ['Atharva Gupta', 'Asymmetrica', 'AudioDevout'];
-
-document.addEventListener('mousemove', (e) => {
-const x = e.clientX;
-const y = e.clientY;
-
-const hue = Math.floor((x + y) * 180/512); // 0–360
-const sat = 100;
-const light = 50;
-
-  // Generate HSL color
-  const newAccent = `hsl(${hue}, ${sat}%, ${light}%)`;
-  const newText = `hsl(${(hue + 180) % 360}, ${sat}%, 70%)`; // complementary for contrast
-
-  // Apply to root CSS variables
-  document.documentElement.style.setProperty('--accent', newAccent);
-  document.documentElement.style.setProperty('--text', newText);
-
-cursor.style.left = `${x}px`;
-cursor.style.top = `${y}px`;
-
-crosshairX.style.top = `${y}px`;
-crosshairY.style.left = `${x}px`;
-
-axisX.style.left = `${x + 10}px`;
-axisX.style.top = `5px`;
-axisX.textContent = `x: ${x}`;
-
-axisY.style.left = `5px`;
-axisY.style.top = `${y + 10}px`;
-axisY.textContent = `y: ${y}`;
-
-const trail = document.createElement('div');
-trail.className = 'trail';
-trail.style.left = `${x}px`;
-trail.style.top = `${y}px`;
-document.body.appendChild(trail);
-setTimeout(() => trail.remove(), 2000);
-});
-
-setInterval(() => {
-title.textContent = titles[Math.floor(Math.random() * titles.length)];
-}, 300);
-
-function scrollToTop() {
-window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-const canvas = document.getElementById('bg');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = Array.from({ length: 1024 }, () => ({
-x: Math.random() * canvas.width,
-y: Math.random() * canvas.height,
-vx: (Math.random() - 0.5) * 0.5,
-vy: (Math.random() - 0.5) * 0.5
-}));
-
-function animate() {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-ctx.strokeStyle = 'rgba(0, 255, 255, 0.15)';
-ctx.lineWidth = 0.5;
-
-for (let x = 0; x < canvas.width; x += 40) {
-ctx.beginPath();
-ctx.moveTo(x, 0);
-ctx.lineTo(x, canvas.height);
-ctx.stroke();
-}
-
-for (let y = 0; y < canvas.height; y += 40) {
-ctx.beginPath();
-ctx.moveTo(0, y);
-ctx.lineTo(canvas.width, y);
-ctx.stroke();
-}
-
-particles.forEach(p => {
-let dx = p.x - cursor.offsetLeft;
-let dy = p.y - cursor.offsetTop;
-let dist = Math.sqrt(dx*dx + dy*dy);
-if (dist < 100) {
-p.vx += dx / dist * 0.05;
-p.vy += dy / dist * 0.05;
-}
-p.x += p.vx;
-p.y += p.vy;
-
-if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-ctx.beginPath();
-ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-ctx.fillStyle = 'rgba(255, 0, 255, 0.8)';
-ctx.fill();
-});
-
-requestAnimationFrame(animate);
-}
-
-animate();
-</script>
-  
-<script>
-const descriptors = [
-  'Thinker', 'Student', 'Maker', 'Observer', 'Reader', 'Listener', 'Cook', 'Friend', 'Human', 'Son',
-  'Philosopher', 'Sociologist', 'Scientist', 'Generalist', 'Anti-Specialist', 'AIUser', 'Critic', 'Researcher', 'Smoker', 'Overanalyser',
-  'Dreamer', 'Technologist', 'Wanderer', 'Glitcher', 'Cyborg', 'Outsider', 'Alien', 'Futurist', 'Tinkerer', 'Assembler',
-  'Mutator', 'Decoder', 'Dissident', 'Collector', 'Noiser', 'Deconstructor', 'Drifter', 'Skeptic', 'Witness', 'Seeker',
-  'Sketcher', 'Painter', 'Sculptor', 'Explorer', 'Experiencer', 'Feeler', 'Imaginer', 'Reflector', 'Intuiter', 'Responder',
-  'Navigator', 'Mapper', 'Composer', 'Harmonizer', 'Synthesizer', 'Amplifier', 'Filterer', 'Modulator', 'Echoer', 'Translator'
-];
-
-window.addEventListener('load', () => {
-  const floatingTexts = [];
-  const container = document.body;
-
-  descriptors.forEach(text => {
-    const span = document.createElement('span');
-    span.className = 'floating-text';
-    span.textContent = text;
-    container.appendChild(span);
-
-    floatingTexts.push({
-      el: span,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 1.5,
-      vy: (Math.random() - 0.5) * 1.5,
-    });
-  });
-
-  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-  document.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-
-  function animate() {
-    floatingTexts.forEach(obj => {
-      const dx = obj.x + obj.el.offsetWidth / 2 - mouse.x;
-      const dy = obj.y + obj.el.offsetHeight / 2 - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const minDist = 150;
-
-      if (dist < minDist && dist > 0) {
-        const force = (minDist - dist) / minDist * 2;
-        obj.vx += (dx / dist) * force;
-        obj.vy += (dy / dist) * force;
-      }
-
-      obj.vx *= 0.9;
-      obj.vy *= 0.9;
-
-      obj.x += obj.vx;
-      obj.y += obj.vy;
-
-      if (obj.x < 0) {
-        obj.x = 0;
-        obj.vx *= -1;
-      } else if (obj.x > window.innerWidth - obj.el.offsetWidth) {
-        obj.x = window.innerWidth - obj.el.offsetWidth;
-        obj.vx *= -1;
-      }
-
-      if (obj.y < 0) {
-        obj.y = 0;
-        obj.vy *= -1;
-      } else if (obj.y > window.innerHeight - obj.el.offsetHeight) {
-        obj.y = window.innerHeight - obj.el.offsetHeight;
-        obj.vy *= -1;
-      }
-
-      obj.el.style.left = `${obj.x}px`;
-      obj.el.style.top = `${obj.y}px`;
-    });
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-});
-
-
-
-window.addEventListener('resize', () => {
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-});
-</script>
-
-  
-<script>
-// Your custom audio player JS here
-document.querySelectorAll('.custom-audio-player').forEach(player => {
-const audio = player.querySelector('audio');
-const playBtn = player.querySelector('.play-btn');
-const progress = player.querySelector('.progress');
-const time = player.querySelector('.time');
-
-const formatTime = seconds => {
-const m = Math.floor(seconds / 60);
-const s = Math.floor(seconds % 60);
-return `${m}:${s.toString().padStart(2, '0')}`;
-};
-
-audio.addEventListener('loadedmetadata', () => {
-progress.max = Math.floor(audio.duration);
-time.textContent = `0:00 / ${formatTime(audio.duration)}`;
-});
-
-audio.addEventListener('timeupdate', () => {
-progress.value = Math.floor(audio.currentTime);
-time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-});
-
-playBtn.addEventListener('click', () => {
-if (audio.paused) {
-audio.play();
-playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-} else {
-audio.pause();
-playBtn.innerHTML = '<i class="fas fa-play"></i>';
-}
-});
-
-progress.addEventListener('input', () => {
-audio.currentTime = progress.value;
-});
-
-audio.addEventListener('ended', () => {
-playBtn.innerHTML = '<i class="fas fa-play"></i>';
-progress.value = 0;
-time.textContent = `0:00 / ${formatTime(audio.duration)}`;
-});
-});
-</script>
-<script>
-function glitchNavigate(url) {
-  const glitch = document.getElementById('glitchTransition');
-  glitch.classList.add('active');
-  setTimeout(() => {
-    window.location.href = url;
-  }, 500); // adjust timing to match the animation
-}
-</script>
-
-
-</div>
-
- <div class="glitch-transition" id="glitchTransition"></div>
-
+    <!-- Skip Links for Accessibility -->
+    <div class="skip-links">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <a href="#navigation" class="skip-link">Skip to navigation</a>
+    </div>
+    
+    <!-- Live Region for Screen Readers -->
+    <div id="live-region-polite" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div id="live-region-assertive" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+    
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-state">
+        <div class="loading-spinner"></div>
+        <div class="glitch-text" data-text="LOADING">LOADING</div>
+    </div>
+    
+    <!-- Custom Cursor (Desktop Only) -->
+    <div id="custom-cursor" class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-crosshair-h"></div>
+        <div class="cursor-crosshair-v"></div>
+        <div class="cursor-axis-x"></div>
+        <div class="cursor-axis-y"></div>
+    </div>
+    
+    <!-- Background Canvas -->
+    <canvas id="background-canvas" class="background-canvas"></canvas>
+    
+    <!-- Floating Descriptors -->
+    <div id="floating-descriptors" class="floating-descriptors"></div>
+    
+    <!-- Fixed Navigation -->
+    <nav id="navigation" class="fixed-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home" class="logo-link" aria-label="Home - Atharva Gupta">
+                    <span class="glitch-text" data-text="ATHARVA GUPTA">ATHARVA GUPTA</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu" role="menubar">
+                <li role="none">
+                    <a href="#home" class="nav-link" role="menuitem" aria-label="Home">HOME</a>
+                </li>
+                <li role="none">
+                    <a href="#audio" class="nav-link" role="menuitem" aria-label="Audio Works">AUDIO</a>
+                </li>
+                <li role="none">
+                    <a href="#images" class="nav-link" role="menuitem" aria-label="Visual Works">IMAGES</a>
+                </li>
+                <li role="none">
+                    <a href="#videos" class="nav-link" role="menuitem" aria-label="Video Works">VIDEOS</a>
+                </li>
+                <li role="none">
+                    <a href="#texts" class="nav-link" role="menuitem" aria-label="Texts and Writing">TEXTS</a>
+                </li>
+                <li role="none">
+                    <a href="#about" class="nav-link" role="menuitem" aria-label="About">ABOUT</a>
+                </li>
+                <li role="none">
+                    <a href="#contact" class="nav-link" role="menuitem" aria-label="Contact">CONTACT</a>
+                </li>
+                <li role="none">
+                    <a href="#thesis" class="nav-link" role="menuitem" aria-label="Academic Thesis">THESIS</a>
+                </li>
+            </ul>
+            
+            <!-- Search Button -->
+            <button id="search-toggle" class="search-toggle" aria-label="Toggle search" title="Search portfolio">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section active" aria-label="Home page">
+            <div class="container">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <h1 class="hero-title">
+                        <span class="glitch-text" data-text="EXPERIMENTAL SYSTEMS">EXPERIMENTAL SYSTEMS</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        I make experimental systems that combine sound, light, code, and kinetic structures. 
+                        My work explores the edges between control and collapse—between what is designed 
+                        and what breaks, flickers, loops, or hums out of place.
+                    </p>
+                </div>
+                
+                <!-- Featured Content Grid -->
+                <div class="featured-grid">
+                    <div class="featured-item">
+                        <h3><i class="fas fa-volume-up" aria-hidden="true"></i> Featured Audio</h3>
+                        <div id="featured-audio" class="featured-content">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <a href="#audio" class="button" aria-label="View all audio works">Explore Audio Works</a>
+                    </div>
+                    
+                    <div class="featured-item">
+                        <h3><i class="fas fa-images" aria-hidden="true"></i> Featured Images</h3>
+                        <div id="featured-images" class="featured-content">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <a href="#images" class="button" aria-label="View all visual works">Explore Visual Works</a>
+                    </div>
+                    
+                    <div class="featured-item">
+                        <h3><i class="fas fa-file-text" aria-hidden="true"></i> Featured Texts</h3>
+                        <div id="featured-texts" class="featured-content">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <a href="#texts" class="button" aria-label="View all texts and writing">Explore Texts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AUDIO PAGE -->
+        <section id="audio" class="page-section" aria-label="Audio works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="AUDIO WORKS">AUDIO WORKS</span>
+                    </h2>
+                    <p class="section-description">
+                        Experimental sound compositions exploring kinetic systems, surveillance sonification, 
+                        and generative processes. All works are for streaming only.
+                    </p>
+                </div>
+                
+                <div id="audio-players" class="audio-players">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- IMAGES PAGE -->
+        <section id="images" class="page-section" aria-label="Visual works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="VISUAL WORKS">VISUAL WORKS</span>
+                    </h2>
+                    <p class="section-description">
+                        Documentation of installations, process imagery, and experimental visual research.
+                    </p>
+                </div>
+                
+                <div id="image-galleries" class="image-galleries">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- VIDEOS PAGE -->
+        <section id="videos" class="page-section" aria-label="Video works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="VIDEO WORKS">VIDEO WORKS</span>
+                    </h2>
+                    <p class="section-description">
+                        Performance documentation, installation views, and process videos.
+                    </p>
+                </div>
+                
+                <div id="video-gallery" class="video-gallery">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- TEXTS PAGE -->
+        <section id="texts" class="page-section" aria-label="Texts and writing">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="TEXTS & WRITING">TEXTS & WRITING</span>
+                    </h2>
+                    <p class="section-description">
+                        Artist statements, critical essays, and research documentation exploring 
+                        experimental media and surveillance aesthetics.
+                    </p>
+                </div>
+                
+                <div id="texts-list" class="texts-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- ABOUT PAGE -->
+        <section id="about" class="page-section" aria-label="About the artist">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="ABOUT">ABOUT</span>
+                    </h2>
+                </div>
+                
+                <div id="about-content" class="about-content">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page-section" aria-label="Contact information">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="CONTACT">CONTACT</span>
+                    </h2>
+                    <p class="section-description">
+                        Available for collaborations, exhibitions, and academic projects.
+                    </p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p>I'm always interested in discussing experimental media projects, 
+                        research collaborations, and exhibition opportunities.</p>
+                        
+                        <div class="contact-links">
+                            <a href="mailto:contact@atharva.in" class="contact-link" aria-label="Send email">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                contact@atharva.in
+                            </a>
+                            <a href="https://instagram.com/asymmetrica_" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                                @asymmetrica_
+                            </a>
+                            <a href="https://youtube.com/@audiodevout" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel">
+                                <i class="fab fa-youtube" aria-hidden="true"></i>
+                                @audiodevout
+                            </a>
+                            <a href="https://asymmetrica.bandcamp.com" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp profile">
+                                <i class="fab fa-bandcamp" aria-hidden="true"></i>
+                                asymmetrica.bandcamp.com
+                            </a>
+                            <a href="https://linkedin.com/in/atharva-gupta" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                LinkedIn Profile
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <form id="contact-form" class="contact-form" aria-label="Contact form">
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" name="name" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="email" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" name="subject">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="6" required aria-required="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <!-- THESIS PAGE -->
+        <section id="thesis" class="page-section" aria-label="Academic thesis">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="glitch-text" data-text="THESIS">THESIS</span>
+                    </h2>
+                </div>
+                
+                <div id="thesis-content" class="thesis-content">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-title" hidden>
+        <div class="search-container">
+            <div class="search-header">
+                <h2 id="search-title" class="search-title">Search Portfolio</h2>
+                <button id="search-close" class="search-close" aria-label="Close search">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <div class="search-input-container">
+                <input type="search" id="search-input" class="search-input" placeholder="Search works, texts, or descriptions..." aria-label="Search portfolio">
+                <button id="search-submit" class="search-submit" aria-label="Submit search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <div id="search-results" class="search-results" role="region" aria-label="Search results">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts - Load in order -->
+    <script src="data/portfolio-data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/canvas-background.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Disable right-click context menu and keyboard shortcuts for download prevention -->
+    <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable common keyboard shortcuts for saving/downloading
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+S (Save)
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+S (Save As)
+            if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+                e.preventDefault();
+            }
+            // Disable F12 (Developer Tools) in production
+            if (e.key === 'F12' && window.location.hostname !== 'localhost') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I (Developer Tools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+        
+        // Additional protection for images
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+        
+        // Disable text selection on images
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+        
+        // Console warning message
+        console.warn('%cSTOP!', 'color: red; font-size: 50px; font-weight: bold;');
+        console.warn('%cThis is a browser feature intended for developers. Content on this site is protected by copyright.', 'color: red; font-size: 16px;');
+    </script>
+    
 </body>
 </html>
