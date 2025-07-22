@@ -47,20 +47,21 @@ class BackgroundCanvas {
     }
     
     createParticles() {
-        const particleCount = this.isDesktop ? 150 : 75; // Fewer particles on mobile
-        this.particles = [];
-        
-        for (let i = 0; i < particleCount; i++) {
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 0.5,
-                opacity: Math.random() * 0.5 + 0.2
-            });
-        }
-    }
+       const rect = this.canvas.getBoundingClientRect();
+const width = rect.width;
+const height = rect.height;
+
+for (let i = 0; i < particleCount; i++) {
+    this.particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 0.5,
+        opacity: Math.random() * 0.5 + 0.2
+    });
+}
+
     
     bindEvents() {
         window.addEventListener('resize', debounce(() => {
@@ -92,61 +93,61 @@ class BackgroundCanvas {
     }
     
     drawGrid() {
-        const gridSize = 40;
-        const canvasWidth = this.canvas.width;
-        const canvasHeight = this.canvas.height;
-        
-        // Get current accent color from CSS
-        const accent = getComputedStyle(document.documentElement)
-            .getPropertyValue('--accent-primary').trim();
-        
-        this.ctx.strokeStyle = this.hexToRgba(accent, 0.1);
-        this.ctx.lineWidth = 0.5;
-        
-        // Vertical lines
-        for (let x = 0; x < canvasWidth; x += gridSize) {
-            this.ctx.beginPath();
-            this.ctx.moveTo(x, 0);
-            this.ctx.lineTo(x, canvasHeight);
-            this.ctx.stroke();
-        }
-        
-        // Horizontal lines
-        for (let y = 0; y < canvasHeight; y += gridSize) {
-            this.ctx.beginPath();
-            this.ctx.moveTo(0, y);
-            this.ctx.lineTo(canvasWidth, y);
-            this.ctx.stroke();
-        }
+    const gridSize = 40;
+    const rect = this.canvas.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    const accent = getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent-primary').trim();
+
+    this.ctx.strokeStyle = this.hexToRgba(accent, 0.1);
+    this.ctx.lineWidth = 0.5;
+
+    for (let x = 0; x < width; x += gridSize) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(x, 0);
+        this.ctx.lineTo(x, height);
+        this.ctx.stroke();
     }
+
+    for (let y = 0; y < height; y += gridSize) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, y);
+        this.ctx.lineTo(width, y);
+        this.ctx.stroke();
+    }
+}
+
     
     updateParticles() {
-        this.particles.forEach(particle => {
-            // Update position
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            
-            // Bounce off edges
-            if (particle.x <= 0 || particle.x >= this.canvas.width) {
-                particle.vx *= -1;
-                particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
-            }
-            
-            if (particle.y <= 0 || particle.y >= this.canvas.height) {
-                particle.vy *= -1;
-                particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
-            }
-            
-            // Add slight randomness to movement
-            particle.vx += (Math.random() - 0.5) * 0.01;
-            particle.vy += (Math.random() - 0.5) * 0.01;
-            
-            // Limit velocity
-            const maxVel = 1;
-            particle.vx = Math.max(-maxVel, Math.min(maxVel, particle.vx));
-            particle.vy = Math.max(-maxVel, Math.min(maxVel, particle.vy));
-        });
-    }
+    const rect = this.canvas.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    this.particles.forEach(particle => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x <= 0 || particle.x >= width) {
+            particle.vx *= -1;
+            particle.x = Math.max(0, Math.min(width, particle.x));
+        }
+
+        if (particle.y <= 0 || particle.y >= height) {
+            particle.vy *= -1;
+            particle.y = Math.max(0, Math.min(height, particle.y));
+        }
+
+        particle.vx += (Math.random() - 0.5) * 0.01;
+        particle.vy += (Math.random() - 0.5) * 0.01;
+
+        const maxVel = 1;
+        particle.vx = Math.max(-maxVel, Math.min(maxVel, particle.vx));
+        particle.vy = Math.max(-maxVel, Math.min(maxVel, particle.vy));
+    });
+}
+
     
     drawParticles() {
         // Get current accent color
