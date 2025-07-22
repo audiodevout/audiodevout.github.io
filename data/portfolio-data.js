@@ -275,15 +275,15 @@ const portfolioData = {
 
     // Contact information
     contact: {
-        email: "contact@atharva.in",
+        email: "atharva152@gmail.com",
         location: "Groningen, Netherlands",
         institution: "Frank Mohr Institute - MADTech Program",
         availability: "Available for collaborations and exhibitions",
         interests: [
             "Experimental sound and kinetic installations",
-            "Critical investigations of surveillance technology",
-            "Generative and algorithmic composition",
-            "Academic research in media arts",
+            "Critical investigations of technology",
+            "Generative and algorithmic creation",
+            "Media arts",
             "Collaborative interdisciplinary projects"
         ]
     }
