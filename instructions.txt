@@ -1,6 +1,0 @@
-# Portfolio Website Instructions
-
-## Overview
-This portfolio website is designed with a modular architecture where all content is managed through JavaScript data objects and organized file structure. Follow these instructions to customize your portfolio.
-
-## File Structure
