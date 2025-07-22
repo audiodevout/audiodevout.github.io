@@ -12,8 +12,8 @@ const portfolioData = {
     siteConfig: {
         title: "Atharva Gupta - Experimental Systems",
         subtitle: "Digital artist exploring the edges between control and collapse",
-        email: "contact@atharva.in", // Replace with actual email
-        description: "I make experimental systems that combine sound, light, code, and kinetic structures. My work explores the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place.",
+        email: "atharva152@gmail.com",
+        description: "I make experimental systems that combine sound, light, code, and kinetic structures. My work explores the edges between control and 	collapse—between what is designed and what breaks, flickers, loops, or hums out of place.",
         
         social: {
             instagram: "https://instagram.com/asymmetrica_",
