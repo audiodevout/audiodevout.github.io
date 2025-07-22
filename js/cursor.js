@@ -403,3 +403,7 @@ const CursorSystem = {
 
 // Make CursorSystem available globally
 window.CursorSystem = CursorSystem;
+
+window.addEventListener('DOMContentLoaded', () => {
+    CursorSystem.init();
+});
