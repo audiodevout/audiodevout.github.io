@@ -1,0 +1,158 @@
+Project: Static portfolio site on GitHub Pages (HTML/CSS/JS)
+Goal: Match current aesthetic with clean, scalable, easily maintainable codebase.
+
+Visual & Style Guidelines
+Theme: Pure dark mode — black background #000, white text #fff, neon accent in dynamic HSL (e.g., hsl(180, 100%, 50%))
+
+Fonts: Use Doto (Google Fonts)
+
+Effects:
+
+Animated cursor + crosshair + axis markers
+
+Animated glitch effects and flickering neon text
+
+Floating descriptive text with smooth kinetic (slow, natural) movement
+
+Custom CSS audio player with glowing neon effects
+
+Hover animations: blinking/glowing accent color
+
+Design Style: Minimalist, Bauhaus-inspired, clean lines, simple typography, experimental, technological, cybernetic but elegant
+
+Site Structure & Content
+Page	Purpose
+Home	Welcome message, clear navigation links
+Audio	Custom-styled audio players for music (no downloads)
+Images	Gallery with thumbnails; each image links to its own detail page
+Videos	Embedded videos (YouTube-like), each with separate description page
+Texts	List of texts; each text links to a dedicated page
+Downloads	List of downloadable files; each leads to a download page
+About	Artist bio and practice overview
+Contact	Static contact form (using Formspree or similar service)
+Thesis	Dedicated page for master’s thesis with PDF, abstract, context
+
+Navigation & UX
+Fixed navigation bar on every page
+
+Smooth glitch-style page transitions on navigation
+
+Keyboard accessible navigation
+
+Proper alt text for images, aria-labels on interactive elements
+
+Soft download protection: disable right-click on images/audio with JS/CSS
+
+Responsive and mobile-friendly
+
+Dark mode only — no light mode toggle
+
+Backend Simulation (Static Site)
+Single source of truth: Store all media metadata (paths, titles, descriptions, pages) in a single JSON or JS data file (e.g., data/projects.js)
+
+Auto-generate galleries, audio lists, downloads, and text lists from this data
+
+Well-commented code showing how to add new content easily
+
+Use lightweight JS to dynamically render content on pages
+
+Optional Enhancements (If time permits)
+Markdown support for text pages (render MD to HTML)
+
+Lazy loading of images for performance
+
+Smooth minimal page transitions using CSS or JS
+
+Full Suggested Folder Structure for the Project
+graphql
+Copy
+Edit
+/ (root)
+│
+├── index.html                  # Home page
+├── audio.html                  # Audio page with custom players
+├── images.html                 # Gallery overview page
+├── videos.html                 # Videos overview page
+├── texts.html                  # List of texts
+├── downloads.html              # Downloads list
+├── about.html                  # About page
+├── contact.html                # Contact form page
+├── thesis.html                 # Thesis page
+│
+├── assets/                     # All static assets
+│   ├── css/
+│   │   ├── styles.css          # Main stylesheet with dark theme + effects
+│   │   ├── audio-player.css    # Custom audio player styles
+│   │   └── glitch-effects.css  # Glitch & neon effects styles
+│   │
+│   ├── js/
+│   │   ├── main.js             # Site-wide JS (navigation, cursor, effects)
+│   │   ├── data.js             # JSON-like JS file with media metadata
+│   │   ├── gallery.js          # Logic for rendering galleries, images
+│   │   ├── audio.js            # Audio player logic & UI
+│   │   ├── videos.js           # Video embedding and pages
+│   │   ├── texts.js            # Text pages rendering (optional MD support)
+│   │   └── downloads.js        # Logic to list downloads and pages
+│   │
+│   ├── fonts/
+│   │   └── [Doto font files or Google Fonts link]
+│   │
+│   ├── images/
+│   │   ├── thumbnails/         # Small versions for gallery
+│   │   ├── fullsize/           # Full images for detail pages
+│   │   └── misc/               # UI decorations, background, etc.
+│   │
+│   ├── audio/
+│   │   └── music-files/        # All music files (mp3, ogg, etc.)
+│   │
+│   ├── videos/
+│   │   └── thumbnails/         # Preview images if needed
+│   │
+│   ├── downloads/
+│   │   └── files/              # PDFs, ZIPs, other downloadable files
+│
+├── partials/                   # Optional: reusable HTML snippets
+│   ├── header.html             # Navigation bar
+│   ├── footer.html             # Footer
+│   └── audio-player.html       # Audio player snippet
+│
+├── README.md                   # Project documentation & how to add content
+└── LICENSE                     # If open source or personal license
+Example data.js (Media Metadata)
+js
+Copy
+Edit
+// assets/js/data.js
+
+const images = [
+  {
+    title: "Rainstick",
+    thumbnail: "/assets/images/thumbnails/rainstick-thumb.jpg",
+    full: "/assets/images/fullsize/rainstick.jpg",
+    description: "Kinetic rainstick sculpture",
+    page: "rainstick.html"
+  },
+  // Add more image objects here
+];
+
+const audio = [
+  {
+    title: "Stranded Deep",
+    path: "/assets/audio/music-files/stranded_deep.mp3",
+    description: "Experimental ambient track"
+  },
+  // Add more audio objects here
+];
+
+// Similarly for videos, texts, downloads...
+How This Helps You
+Clear separation of concerns: assets, scripts, styles, and content metadata are all in their own places
+
+Scalability: Adding a new image or audio track means adding one object in data.js and the UI renders it automatically
+
+Maintainability: CSS and JS are modular and focused; easier to tweak visual effects or interaction in one place
+
+Extensibility: You can add markdown support or lazy-loading by expanding your JS without breaking core structure
+
+Professional: Clean folder tree looks legit for GitHub repos, easier for collaborators or future employers to navigate
+
