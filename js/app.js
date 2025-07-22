@@ -198,41 +198,28 @@ const PortfolioApp = {
         
         // Simple about content based on portfolio data
         aboutContainer.innerHTML = `
-  <div class="about-text">
-    <p>${portfolioData.siteConfig.description}</p>
-    
-    <h3>Current Work</h3>
-    <p>
-      Currently pursuing advanced studies in experimental media at the Frank Mohr Institute, 
-      where I investigate the aesthetic and political dimensions of surveillance, 
-      experimental sound, and kinetic sculpture through practice-based research. 
-      My projects span immersive installations, performance, and interactive systems 
-      that blend physical and digital technologies.
-    </p>
-    
-    <h3>Approach</h3>
-    <p>
-      My practice centers on creating experimental systems that reveal the hidden 
-      infrastructures of digital culture. Through kinetic installations, sound compositions, 
-      interactive audiovisual works, and generative media built with TouchDesigner and Ableton, 
-      I explore how technology shapes perception, embodiment, and social relations.
-    </p>
-    
-    <h3>Workshops & Community</h3>
-    <p>
-      I also lead workshops and share knowledge on creative coding, interactive media, and 
-      sound design, fostering communities around experimental digital arts and new media tools.
-    </p>
-    
-    <h3>Interests</h3>
-    <ul>
-      ${portfolioData.contact.interests.map(interest => 
-          `<li>${Utils.sanitizeHTML(interest)}</li>`
-      ).join('')}
-    </ul>
-  </div>
-`;
-
+            <div class="about-text">
+                <p>${portfolioData.siteConfig.description}</p>
+                
+                <h3>Current Work</h3>
+                <p>Currently pursuing advanced studies in experimental media at Frank Mohr Institute, 
+                where I investigate the aesthetic and political dimensions of surveillance technologies 
+                through practice-based research.</p>
+                
+                <h3>Approach</h3>
+                <p>My practice centers on creating experimental systems that reveal the hidden 
+                infrastructures of digital culture. Through kinetic installations, sound compositions, 
+                and interactive works, I explore how technology shapes perception and social relations.</p>
+                
+                <h3>Interests</h3>
+                <ul>
+                    ${portfolioData.contact.interests.map(interest => 
+                        `<li>${Utils.sanitizeHTML(interest)}</li>`
+                    ).join('')}
+                </ul>
+            </div>
+        `;
+    },
 
     bindGlobalEvents() {
         // Custom event listeners for content loading

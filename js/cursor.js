@@ -57,7 +57,7 @@ const CursorSystem = {
         }
 
         // Hide cursor initially
-        this.cursor.style.opacity = '0.8';
+        this.cursor.style.opacity = '0';
     },
 
     createCoordinatesDisplay() {
@@ -146,7 +146,6 @@ const CursorSystem = {
     },
 
     handleMouseMove(e) {
-        this.show();
         this.targetPos.x = e.clientX;
         this.targetPos.y = e.clientY;
         
@@ -305,7 +304,7 @@ const CursorSystem = {
     hide() {
         if (!this.cursor) return;
         
-        this.cursor.style.opacity = '0.7';
+        this.cursor.style.opacity = '0';
         this.cursor.classList.add('hidden');
     },
 
@@ -404,7 +403,3 @@ const CursorSystem = {
 
 // Make CursorSystem available globally
 window.CursorSystem = CursorSystem;
-
-window.addEventListener('DOMContentLoaded', () => {
-    CursorSystem.init();
-});

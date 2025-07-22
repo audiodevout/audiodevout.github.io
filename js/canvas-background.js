@@ -51,18 +51,17 @@ const BackgroundCanvas = {
     },
     
     createParticles() {
-    for (let i = 0; i < this.maxParticles; i++) {
-        this.particles.push({
-            x: Math.random() * this.canvas.width,
-            y: Math.random() * this.canvas.height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            life: 0.5 + Math.random() * 0.5,  // start with 50%-100% life
-            decay: 0.001 + Math.random() * 0.002
-        });
-    }
-},
-
+        for (let i = 0; i < this.maxParticles; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                life: Math.random(),
+                decay: 0.001 + Math.random() * 0.002
+            });
+        }
+    },
     
     startAnimation() {
         if (Utils.prefersReducedMotion()) return;
@@ -139,26 +138,22 @@ const BackgroundCanvas = {
     },
     
     drawParticles() {
-    this.particles.forEach(particle => {
-        const alpha = Math.min(1, particle.life * 1.2); // cap alpha at 1
-        const size = 1 + particle.life * 2;
-
-        // Brighter, slightly whitish cyan
-        this.ctx.fillStyle = `rgba(150, 255, 255, ${alpha})`;
-
-        this.ctx.shadowColor = `rgba(150, 255, 255, ${alpha})`;
-        this.ctx.shadowBlur = 20;  // increase blur for stronger glow
-
-        this.ctx.beginPath();
-        this.ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
-        this.ctx.fill();
-
-        // Reset shadowBlur so it doesn't affect other drawings
-        this.ctx.shadowBlur = 0;
-        this.ctx.shadowColor = 'transparent';
-    });
-},
-
+        this.particles.forEach(particle => {
+            const alpha = particle.life * 0.6;
+            const size = 1 + particle.life * 2;
+            
+            this.ctx.fillStyle = `rgba(0, 255, 255, ${alpha})`;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
+            this.ctx.fill();
+            
+            // Add glow effect
+            this.ctx.shadowColor = 'rgba(0, 255, 255, 0.5)';
+            this.ctx.shadowBlur = 10;
+            this.ctx.fill();
+            this.ctx.shadowBlur = 0;
+        });
+    },
     
     drawMouseInfluence() {
         const { x, y } = this.mousePos;
