@@ -16,13 +16,13 @@
     --color-gray-dark: #111111;
     --color-gray-medium: #333333;
     --color-gray-light: #666666;
-    
+
     /* Typography */
     --font-primary: 'Doto', monospace;
     --font-weight-light: 200;
     --font-weight-normal: 400;
     --font-weight-bold: 700;
-    
+
     /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
@@ -30,12 +30,12 @@
     --space-lg: 2rem;
     --space-xl: 3rem;
     --space-xxl: 4rem;
-    
+
     /* Layout */
     --container-max-width: 1200px;
     --nav-height: 80px;
     --border-radius: 4px;
-    
+
     /* Z-index layers */
     --z-background: -1;
     --z-content: 1;
@@ -43,12 +43,12 @@
     --z-nav: 100;
     --z-cursor: 900;
     --z-modal: 1000;
-    
+
     /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.6s ease;
-    
+
     /* Effects */
     --neon-shadow: 0 0 10px var(--color-neon), 0 0 20px var(--color-neon), 0 0 30px var(--color-neon);
     --text-shadow-neon: 0 0 5px var(--color-neon), 0 0 10px var(--color-neon);
@@ -649,42 +649,42 @@ button:focus,
         --space-xxl: 2.5rem;
         --nav-height: 60px;
     }
-    
+
     .nav-container {
         padding: 0 var(--space-sm);
     }
-    
+
     .nav-menu {
         gap: var(--space-sm);
     }
-    
+
     .nav-link {
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.8rem;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .featured-grid {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
     }
-    
+
     .contact-content {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
     }
-    
+
     .search-toggle {
         width: 35px;
         height: 35px;
@@ -695,20 +695,20 @@ button:focus,
     .container {
         padding: 0 var(--space-sm);
     }
-    
+
     .nav-menu {
         gap: var(--space-xs);
     }
-    
+
     .nav-link {
         font-size: 0.7rem;
         padding: var(--space-xs);
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .section-title {
         font-size: 1.5rem;
     }
@@ -725,17 +725,17 @@ button:focus,
     .custom-cursor {
         display: none;
     }
-    
+
     .main-content {
         margin-top: 0;
     }
-    
+
     .page-section {
         display: block;
         opacity: 1;
         page-break-before: always;
     }
-    
+
     .page-section:first-child {
         page-break-before: auto;
     }
