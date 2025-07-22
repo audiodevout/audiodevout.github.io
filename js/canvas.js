@@ -189,6 +189,7 @@ for (let i = 0; i < particleCount; i++) {
 // ===================================================================
 // TITLE ANIMATION
 // ===================================================================
+
 class TitleAnimation {
     constructor() {
         this.titleElement = document.getElementById('site-title');
@@ -209,9 +210,6 @@ class TitleAnimation {
     }
     
     startCycling() {
-        // Prevent multiple intervals running simultaneously
-        if (this.intervalId) return;
-        
         this.intervalId = setInterval(() => {
             this.cycleTitle();
         }, 4000);
@@ -221,36 +219,31 @@ class TitleAnimation {
         const titles = [this.originalTitle, ...this.aliases];
         this.currentIndex = (this.currentIndex + 1) % titles.length;
         
-        // Trigger glitch animation restart if defined in CSS
+        // Add glitch effect
         this.titleText.style.animation = 'none';
-        // Force reflow to restart animation
-        void this.titleText.offsetHeight;
-        this.titleText.style.animation = '';
+        this.titleText.offsetHeight; // Trigger reflow
+        this.titleText.style.animation = null;
         
-        // Update the text content
         this.titleText.textContent = titles[this.currentIndex];
     }
     
     bindEvents() {
-        // Pause cycling on mouse enter
+        // Pause animation when user hovers over title
         this.titleElement.addEventListener('mouseenter', () => {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
-                this.intervalId = null;
             }
         });
         
-        // Resume cycling on mouse leave
         this.titleElement.addEventListener('mouseleave', () => {
             this.startCycling();
         });
         
-        // Pause/resume cycling based on page visibility
+        // Handle visibility change
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 if (this.intervalId) {
                     clearInterval(this.intervalId);
-                    this.intervalId = null;
                 }
             } else {
                 this.startCycling();
@@ -261,11 +254,9 @@ class TitleAnimation {
     destroy() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
-            this.intervalId = null;
         }
     }
 }
-
 
 // ===================================================================
 // PERFORMANCE MONITOR
