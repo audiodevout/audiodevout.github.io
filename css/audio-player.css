@@ -1,4 +1,517 @@
 /* ===================================================================
+   MINIMAL AUDIO PLAYER STYLES
+   Clean, modern aesthetic for audio content
+   =================================================================== */
+
+/* ===================================================================
+   MINIMAL PAGE HEADERS
+   =================================================================== */
+.minimal-page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem 0;
+}
+
+.minimal-page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-neon);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px var(--color-neon);
+}
+
+.minimal-page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-gray-light);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ===================================================================
+   MINIMAL AUDIO GRID
+   =================================================================== */
+.minimal-audio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.minimal-audio-card {
+    background: rgba(17, 17, 17, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.minimal-audio-card:hover {
+    border-color: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+.minimal-audio-embed {
+    position: relative;
+    background: var(--color-gray-dark);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.minimal-audio-embed iframe {
+    width: 100%;
+    height: 352px;
+    border: none;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.minimal-audio-embed:hover iframe {
+    opacity: 0.95;
+}
+
+.minimal-audio-info {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.minimal-audio-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.minimal-audio-card:hover .minimal-audio-title {
+    color: var(--color-neon);
+}
+
+.minimal-audio-description {
+    font-size: 0.9rem;
+    color: var(--color-gray-light);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.minimal-audio-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.audio-year {
+    font-size: 0.8rem;
+    color: var(--color-neon);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.minimal-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.minimal-tag {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: var(--color-neon);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.minimal-tag:hover {
+    background: rgba(0, 255, 255, 0.2);
+    border-color: var(--color-neon);
+}
+
+/* ===================================================================
+   VIDEO LIST LAYOUT
+   =================================================================== */
+.video-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.video-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    background: rgba(17, 17, 17, 0.6);
+    border: 1px solid rgba(255, 0, 102, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.video-item:hover {
+    border-color: rgba(255, 0, 102, 0.4);
+    box-shadow: 0 8px 32px rgba(255, 0, 102, 0.1);
+    transform: translateY(-2px);
+}
+
+.video-embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: var(--color-black);
+}
+
+.video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: opacity 0.3s ease;
+}
+
+.video-embed-container:hover iframe {
+    opacity: 0.95;
+}
+
+.video-details {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.video-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.video-item:hover .video-title {
+    color: #ff0066;
+}
+
+.video-description {
+    font-size: 1rem;
+    color: var(--color-gray-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.video-year {
+    font-size: 0.9rem;
+    color: #ff0066;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.video-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.video-tag {
+    background: rgba(255, 0, 102, 0.1);
+    border: 1px solid rgba(255, 0, 102, 0.2);
+    color: #ff0066;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.video-tag:hover {
+    background: rgba(255, 0, 102, 0.2);
+    border-color: #ff0066;
+}
+
+/* ===================================================================
+   MINIMAL VIDEO GRID (Legacy - keeping for featured sections)
+   =================================================================== */
+.minimal-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.minimal-video-card {
+    background: rgba(17, 17, 17, 0.6);
+    border: 1px solid rgba(255, 0, 102, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.minimal-video-card:hover {
+    border-color: rgba(255, 0, 102, 0.4);
+    box-shadow: 0 8px 32px rgba(255, 0, 102, 0.1);
+    transform: translateY(-4px);
+}
+
+.minimal-video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: var(--color-black);
+}
+
+.minimal-video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: opacity 0.3s ease;
+}
+
+.minimal-video-embed:hover iframe {
+    opacity: 0.95;
+}
+
+.minimal-video-info {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.minimal-video-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.minimal-video-card:hover .minimal-video-title {
+    color: #ff0066;
+}
+
+.minimal-video-description {
+    font-size: 0.9rem;
+    color: var(--color-gray-light);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.minimal-video-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.video-year {
+    font-size: 0.8rem;
+    color: #ff0066;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ===================================================================
+   LOADING STATES
+   =================================================================== */
+.minimal-audio-card.loading,
+.minimal-video-card.loading {
+    pointer-events: none;
+}
+
+.minimal-audio-card.loading .minimal-audio-embed::after,
+.minimal-video-card.loading .minimal-video-embed::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 255, 255, 0.1) 0%,
+        rgba(0, 255, 255, 0.3) 50%,
+        rgba(0, 255, 255, 0.1) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   =================================================================== */
+@media (max-width: 768px) {
+    .minimal-page-title {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .minimal-audio-grid,
+    .minimal-video-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 0.5rem;
+    }
+
+    .video-list {
+        gap: 2rem;
+        padding: 0 0.5rem;
+    }
+
+    .video-item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .video-details {
+        padding: 1.5rem;
+    }
+
+    .video-title {
+        font-size: 1.2rem;
+    }
+
+    .video-description {
+        font-size: 0.9rem;
+    }
+
+    .minimal-audio-card,
+    .minimal-video-card {
+        margin: 0;
+    }
+
+    .minimal-audio-info,
+    .minimal-video-info {
+        padding: 1rem;
+    }
+
+    .minimal-audio-meta,
+    .minimal-video-meta,
+    .video-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .minimal-page-header {
+        margin-bottom: 2rem;
+        padding: 1rem 0;
+    }
+
+    .minimal-page-title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .minimal-page-subtitle {
+        font-size: 1rem;
+    }
+
+    .minimal-audio-grid,
+    .minimal-video-grid {
+        gap: 1.5rem;
+    }
+
+    .minimal-audio-embed iframe {
+        height: 300px;
+    }
+}
+
+/* ===================================================================
+   PERFORMANCE OPTIMIZATIONS
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .minimal-audio-card,
+    .minimal-video-card {
+        transition: none;
+    }
+
+    .minimal-audio-card:hover,
+    .minimal-video-card:hover {
+        transform: none;
+    }
+
+    .shimmer {
+        animation: none;
+    }
+}
+
+/* ===================================================================
+   FOCUS STATES
+   =================================================================== */
+.minimal-audio-card:focus-within,
+.minimal-video-card:focus-within {
+    border-color: var(--color-neon);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.minimal-audio-embed iframe:focus,
+.minimal-video-embed iframe:focus {
+    outline: 2px solid var(--color-neon);
+    outline-offset: 2px;
+}
+
+/* ===================================================================
    CUSTOM NEON AUDIO PLAYER
    Cyberpunk-themed with No Download Option
    =================================================================== */
@@ -9,8 +522,224 @@
 .audio-players {
     display: grid;
     gap: var(--space-xl);
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.audio-player-card {
+    background: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-medium);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.audio-player-card:hover {
+    border-color: var(--color-neon);
+    box-shadow: 0 0 20px var(--color-neon-glow);
+    transform: scale(1.02);
+}
+
+.audio-embed-container {
+    position: relative;
+    padding: var(--space-lg);
+    background: var(--color-gray-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.bandcamp-logo {
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--color-neon);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--color-neon);
+    flex-shrink: 0;
+}
+
+.audio-embed-wrapper {
+    width: 100%;
+    flex: 1;
+}
+
+.audio-embed-wrapper iframe {
+    width: 100%;
+    height: 152px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--color-black);
+}
+
+.audio-info {
+    padding: var(--space-md);
+}
+
+.audio-title {
+    color: var(--color-white);
+    font-size: 1rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-xs);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.audio-artist {
+    color: var(--color-gray-light);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-sm);
+}
+
+.audio-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--color-gray-light);
+}
+
+.audio-year {
+    color: var(--color-neon);
+}
+
+.audio-tags {
+    font-style: italic;
+}
+
+/* ===================================================================
+   VIDEO LIST LAYOUT
+   =================================================================== */
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xxl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.video-item {
+    background: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-medium);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0;
+    align-items: start;
+    min-height: 280px;
+}
+
+.video-item:hover {
+    border-color: var(--color-neon);
+    box-shadow: 0 0 20px var(--color-neon-glow);
+    transform: scale(1.02);
+}
+
+.video-embed-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background: var(--color-black);
+}
+
+.video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-details {
+    padding: var(--space-lg);
+    background: var(--color-gray-dark);
+}
+
+.video-title {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.video-description {
+    color: var(--color-gray-light);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: var(--space-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.video-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: 0.75rem;
+    color: var(--color-gray-light);
+}
+
+.video-meta span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.video-meta i {
+    color: var(--color-neon);
+    font-size: 0.7rem;
+}
+
+/* ===================================================================
+   VIDEO RESPONSIVE DESIGN
+   =================================================================== */
+@media (max-width: 768px) {
+    .video-item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .video-details {
+        padding: var(--space-md);
+    }
+
+    .video-title {
+        font-size: 1rem;
+    }
+
+    .video-description {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-list {
+        gap: var(--space-xl);
+    }
+
+    .audio-player-card,
+    .video-item {
+        margin: 0 var(--space-sm);
+    }
 }
 
 /* ===================================================================
@@ -458,6 +1187,130 @@
 }
 
 /* ===================================================================
+   BANDCAMP PLAYER STYLES
+   =================================================================== */
+.bandcamp-player {
+    background: var(--color-gray-dark);
+    border: 1px solid var(--color-neon);
+    border-radius: var(--border-radius);
+    padding: 0;
+    transition: all var(--transition-normal);
+    margin-bottom: var(--space-xl);
+    overflow: hidden;
+}
+
+.bandcamp-player:hover {
+    box-shadow: 0 0 30px var(--color-neon-glow);
+}
+
+.audio-description-text {
+    margin: var(--space-lg) 0;
+    padding: var(--space-md);
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    color: var(--color-gray-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.bandcamp-embed {
+    position: relative;
+    background: var(--color-gray-medium);
+    overflow: hidden;
+}
+
+.bandcamp-embed iframe {
+    background: #333333;
+    width: 100%;
+    height: 450px;
+    display: block;
+    border: none;
+}
+
+.bandcamp-logo {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--color-neon);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-neon);
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.audio-actions {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-gray-medium);
+    text-align: center;
+}
+
+.bandcamp-link {
+    color: var(--color-neon);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    background: transparent;
+    border: 1px solid var(--color-neon);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-normal);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: var(--font-weight-bold);
+}
+
+.bandcamp-link:hover,
+.bandcamp-link:focus {
+    background: var(--color-neon);
+    color: var(--color-black);
+    box-shadow: 0 0 20px var(--color-neon);
+    transform: translateY(-2px);
+}
+
+.bandcamp-link i {
+    font-size: 1rem;
+}
+
+.bandcamp-player .audio-tags {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
+}
+
+.bandcamp-player .tag {
+    background: transparent;
+    border: 1px solid var(--color-gray-medium);
+    color: var(--color-gray-light);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all var(--transition-normal);
+}
+
+.bandcamp-player .tag:hover {
+    border-color: var(--color-neon);
+    color: var(--color-neon);
+    box-shadow: 0 0 5px var(--color-neon-glow);
+}
+
+/* ===================================================================
    MOBILE RESPONSIVE
    =================================================================== */
 @media (max-width: 768px) {
@@ -513,6 +1366,16 @@
 
     .volume-control {
         display: none; /* Hide volume control on very small screens */
+    }
+    
+    .bandcamp-embed iframe {
+        height: 350px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bandcamp-embed iframe {
+        height: 300px;
     }
 }
 
@@ -580,31 +1443,4 @@
     }
 
     .audio-controls,
-    .audio-progress-container,
-    .volume-control {
-        display: none;
-    }
-
-    .audio-title {
-        color: black;
-    }
-}
-
-/* Audio element styling */
-.audio-element {
-    display: none; /* Hide the default audio element */
-}
-
-/* Additional protection for audio elements */
-audio {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none; /* Disable direct interaction with audio element */
-}
-
-/* Ensure no download attribute on audio elements */
-audio[controls] {
-    controlslist: "nodownload nofullscreen noremoteplaybook";
-}
+    .audio

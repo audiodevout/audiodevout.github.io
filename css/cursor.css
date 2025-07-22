@@ -49,11 +49,11 @@
     position: absolute;
     width: 4px;
     height: 4px;
-    background: var(--color-neon);
+    background: var(--color-pink);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    box-shadow: 0 0 10px var(--color-neon);
+    box-shadow: 0 0 8px var(--color-pink-glow);
     will-change: transform, width, height;
     transition: width 0.1s ease, height 0.1s ease, background 0.1s ease;
 }
@@ -62,16 +62,16 @@
 .custom-cursor.hover .cursor-dot {
     width: 8px;
     height: 8px;
-    background: var(--color-white);
-    box-shadow: 0 0 15px var(--color-neon);
+    background: var(--color-blue);
+    box-shadow: 0 0 12px var(--color-blue-glow);
 }
 
 /* Click state */
 .custom-cursor.click .cursor-dot {
     width: 12px;
     height: 12px;
-    background: var(--color-neon);
-    box-shadow: 0 0 25px var(--color-neon);
+    background: var(--color-mint);
+    box-shadow: 0 0 16px var(--color-mint-glow);
 }
 
 /* ===================================================================
@@ -81,10 +81,10 @@
     position: absolute;
     width: 40px;
     height: 1px;
-    background: var(--color-neon);
+    background: var(--color-pink);
     transform: translate(-50%, -50%);
-    opacity: 0.6;
-    box-shadow: 0 0 5px var(--color-neon);
+    opacity: 0.5;
+    box-shadow: 0 0 3px var(--color-pink-glow);
     will-change: transform, width, height;
     transition: width 0.1s ease, height 0.1s ease, opacity 0.1s ease;
 }
@@ -93,10 +93,10 @@
     position: absolute;
     width: 1px;
     height: 40px;
-    background: var(--color-neon);
+    background: var(--color-pink);
     transform: translate(-50%, -50%);
-    opacity: 0.6;
-    box-shadow: 0 0 5px var(--color-neon);
+    opacity: 0.5;
+    box-shadow: 0 0 3px var(--color-pink-glow);
     will-change: transform, width, height;
     transition: width 0.1s ease, height 0.1s ease, opacity 0.1s ease;
 }
@@ -104,27 +104,31 @@
 /* Hover state for crosshairs */
 .custom-cursor.hover .cursor-crosshair-h {
     width: 60px;
-    opacity: 1;
-    box-shadow: 0 0 10px var(--color-neon);
+    opacity: 0.8;
+    background: var(--color-blue);
+    box-shadow: 0 0 6px var(--color-blue-glow);
 }
 
 .custom-cursor.hover .cursor-crosshair-v {
     height: 60px;
-    opacity: 1;
-    box-shadow: 0 0 10px var(--color-neon);
+    opacity: 0.8;
+    background: var(--color-blue);
+    box-shadow: 0 0 6px var(--color-blue-glow);
 }
 
 /* Click state for crosshairs */
 .custom-cursor.click .cursor-crosshair-h {
     width: 80px;
     opacity: 1;
-    box-shadow: 0 0 20px var(--color-neon);
+    background: var(--color-mint);
+    box-shadow: 0 0 10px var(--color-mint-glow);
 }
 
 .custom-cursor.click .cursor-crosshair-v {
     height: 80px;
     opacity: 1;
-    box-shadow: 0 0 20px var(--color-neon);
+    background: var(--color-mint);
+    box-shadow: 0 0 10px var(--color-mint-glow);
 }
 
 /* ===================================================================
@@ -138,13 +142,13 @@
         90deg,
         transparent 0%,
         transparent 40%,
-        var(--color-neon) 45%,
-        var(--color-neon) 55%,
+        var(--color-mauve) 45%,
+        var(--color-mauve) 55%,
         transparent 60%,
         transparent 100%
     );
     transform: translateY(-50%);
-    opacity: 0.2;
+    opacity: 0.15;
     transition: opacity var(--transition-fast);
     pointer-events: none;
 }
@@ -157,13 +161,13 @@
         180deg,
         transparent 0%,
         transparent 40%,
-        var(--color-neon) 45%,
-        var(--color-neon) 55%,
+        var(--color-mauve) 45%,
+        var(--color-mauve) 55%,
         transparent 60%,
         transparent 100%
     );
     transform: translateX(-50%);
-    opacity: 0.2;
+    opacity: 0.15;
     transition: opacity var(--transition-fast);
     pointer-events: none;
 }
@@ -171,13 +175,13 @@
 /* Show axis markers on hover */
 .custom-cursor.hover .cursor-axis-x,
 .custom-cursor.hover .cursor-axis-y {
-    opacity: 0.4;
+    opacity: 0.25;
 }
 
 /* Enhanced axis markers on click */
 .custom-cursor.click .cursor-axis-x,
 .custom-cursor.click .cursor-axis-y {
-    opacity: 0.6;
+    opacity: 0.4;
 }
 
 /* ===================================================================
@@ -185,22 +189,22 @@
    =================================================================== */
 .cursor-coordinates {
     position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: var(--color-neon);
+    background: var(--color-background);
+    color: var(--color-text-secondary);
     padding: 4px 8px;
-    border: 1px solid var(--color-neon);
-    border-radius: 2px;
+    border: 1px solid var(--color-pink);
+    border-radius: 3px;
     font-family: var(--font-primary);
     font-size: 0.7rem;
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.5px;
     transform: translate(15px, -25px);
     opacity: 0;
     transition: opacity var(--transition-fast);
     pointer-events: none;
     white-space: nowrap;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 8px var(--color-pink-glow);
 }
 
 .custom-cursor.show-coordinates .cursor-coordinates {
@@ -214,10 +218,10 @@
     position: absolute;
     width: 2px;
     height: 2px;
-    background: var(--color-neon);
+    background: var(--color-pink);
     border-radius: 50%;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.4;
     transition: opacity 0.3s ease-out;
     animation: cursor-trail-fade 0.5s ease-out forwards;
 }

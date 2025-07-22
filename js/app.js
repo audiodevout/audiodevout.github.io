@@ -19,9 +19,6 @@ const PortfolioApp = {
         try {
             console.log('🚀 Initializing Atharva Gupta Portfolio...');
 
-            // Show glitch transition overlay on initial load
-            this.showInitialTransition();
-
             // Show loading state
             this.showLoading('Initializing systems...');
 
@@ -63,16 +60,10 @@ const PortfolioApp = {
         // Initialize systems that don't depend on DOM content
         const systemPromises = [];
 
-        // Background systems (parallel initialization)
-        if (typeof BackgroundCanvas !== 'undefined') {
-            systemPromises.push(Promise.resolve(BackgroundCanvas.init()));
-            this.systems.canvas = BackgroundCanvas;
-        }
-
-        if (typeof FloatingText !== 'undefined') {
-            systemPromises.push(Promise.resolve(FloatingText.init()));
-            this.systems.floatingText = FloatingText;
-        }
+        // Background systems disabled for clean sakura theme
+        console.log('✓ Clean sakura theme - canvas and floating text disabled');
+        
+        // Only keep essential background systems
 
         if (typeof CursorSystem !== 'undefined') {
             systemPromises.push(Promise.resolve(CursorSystem.init()));
@@ -257,6 +248,13 @@ const PortfolioApp = {
     loadInitialPage() {
         const hash = Utils.url.getHash();
         this.currentPage = hash || 'home';
+        
+        // Ensure home page is visible immediately
+        const homePage = Utils.$('#home');
+        if (homePage && this.currentPage === 'home') {
+            homePage.classList.add('active');
+        }
+        
         this.showPage(this.currentPage);
     },
 
@@ -299,8 +297,8 @@ const PortfolioApp = {
             pageEl.classList.remove('active');
         });
 
-        // Show requested page
-        const targetPage = Utils.$(`#${page}-page`) || Utils.$('#home-page');
+        // Show requested page - match actual HTML structure
+        const targetPage = Utils.$(`#${page}`) || Utils.$('#home');
         if (targetPage) {
             targetPage.classList.add('active');
 
@@ -401,19 +399,13 @@ const PortfolioApp = {
         navLinks.forEach(link => {
             const linkPage = link.getAttribute('href')?.replace('#', '') || 'home';
             link.classList.toggle('active', linkPage === activePage);
+            link.setAttribute('aria-current', linkPage === activePage ? 'page' : 'false');
         });
     },
 
     showInitialTransition() {
-        const transition = Utils.$('#glitch-transition');
-        if (transition) {
-            transition.classList.add('active');
-
-            // Hide after initialization is complete (longer duration for initial load)
-            setTimeout(() => {
-                this.hidePageTransition();
-            }, 2000);
-        }
+        // Skip initial transition to reduce loading time
+        return;
     },
 
     showPageTransition() {

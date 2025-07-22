@@ -24,62 +24,61 @@ const portfolioData = {
         'Navigator', 'Mapper', 'Composer', 'Harmonizer', 'Synthesizer', 'Amplifier', 'Filterer', 'Modulator', 'Echoer', 'Translator'
     ],
 
-    // Audio works
     audio: [
         {
-            id: "surveil_structures_01",
-            title: "Surveillance Structures 01",
-            description: "Generative composition exploring the sonic dimensions of surveillance technology. Field recordings from CCTV systems processed through machine listening algorithms.",
-            file: "./audio/surveil_structures_01.mp3",
-            artwork: "./images/audio/surveil_structures_01.jpg",
-            duration: "7:42",
-            year: "2024",
-            featured: true,
-            tags: ["surveillance", "generative", "field recording", "machine learning"]
+            id: 'stranded-deep-fast',
+            title: 'stranded deep but fast',
+            description: 'by asymmetrica',
+            type: 'bandcamp',
+            embedUrl: 'https://bandcamp.com/EmbeddedPlayer/track=2743015108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/',
+            bandcampUrl: 'https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast',
+            year: '2024',
+            tags: ['asymmetrica', 'electronic'],
+            featured: true
         },
         {
-            id: "kinetic_drift",
-            title: "Kinetic Drift",
-            description: "Interactive sound installation responding to movement patterns. Accelerometer data from kinetic sculptures drives real-time audio synthesis.",
-            file: "./audio/kinetic_drift.mp3", 
-            artwork: "./images/audio/kinetic_drift.jpg",
-            duration: "12:15",
-            year: "2024",
-            featured: true,
-            tags: ["kinetic", "interactive", "sensors", "real-time"]
+            id: 'stranded-deep',
+            title: 'stranded deep',
+            description: 'by asymmetrica',
+            type: 'bandcamp',
+            embedUrl: 'https://bandcamp.com/EmbeddedPlayer/track=2338898025/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/',
+            bandcampUrl: 'https://asymmetrica.bandcamp.com/track/stranded-deep',
+            year: '2024',
+            tags: ['asymmetrica', 'electronic'],
+            featured: true
         },
         {
-            id: "error_resonance",
-            title: "Error Resonance",
-            description: "Algorithmic composition using glitch aesthetics. System errors and digital artifacts become musical material through custom TouchDesigner instruments.",
-            file: "./audio/error_resonance.mp3",
-            artwork: "./images/audio/error_resonance.jpg", 
-            duration: "9:33",
-            year: "2023",
-            featured: false,
-            tags: ["glitch", "algorithmic", "TouchDesigner", "digital artifacts"]
+            id: 'tiptoe',
+            title: 'tiptoe',
+            description: 'by asymmetrica',
+            type: 'bandcamp',
+            embedUrl: 'https://bandcamp.com/EmbeddedPlayer/track=1726285270/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/',
+            bandcampUrl: 'https://asymmetrica.bandcamp.com/track/tiptoe',
+            year: '2024',
+            tags: ['asymmetrica', 'electronic'],
+            featured: true
         },
         {
-            id: "listening_machines",
-            title: "Listening Machines",
-            description: "Exploration of machine listening and AI audio processing. Human speech processed through various ML models to reveal algorithmic biases.",
-            file: "./audio/listening_machines.mp3",
-            artwork: "./images/audio/listening_machines.jpg",
-            duration: "6:18", 
-            year: "2023",
-            featured: false,
-            tags: ["AI", "speech processing", "bias", "machine learning"]
+            id: 'not-as-i-remember',
+            title: 'not as i remember it',
+            description: 'by asymmetrica',
+            type: 'bandcamp',
+            embedUrl: 'https://bandcamp.com/EmbeddedPlayer/track=750668778/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/',
+            bandcampUrl: 'https://asymmetrica.bandcamp.com/track/not-as-i-remember-it',
+            year: '2024',
+            tags: ['asymmetrica', 'electronic'],
+            featured: false
         },
         {
-            id: "temporal_feedback",
-            title: "Temporal Feedback Loops",
-            description: "Time-based audio work using delay networks and recursive processing. Explores concepts of memory and temporal perception in digital systems.",
-            file: "./audio/temporal_feedback.mp3",
-            artwork: "./images/audio/temporal_feedback.jpg",
-            duration: "11:07",
-            year: "2023",
-            featured: true,
-            tags: ["delay", "feedback", "temporal", "memory"]
+            id: 'stretching',
+            title: 'stretching',
+            description: 'by asymmetrica',
+            type: 'bandcamp',
+            embedUrl: 'https://bandcamp.com/EmbeddedPlayer/track=2000021307/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/',
+            bandcampUrl: 'https://asymmetrica.bandcamp.com/track/stretching',
+            year: '2024',
+            tags: ['asymmetrica', 'electronic'],
+            featured: false
         }
     ],
 
@@ -147,37 +146,71 @@ const portfolioData = {
         }
     ],
 
-    // Video works
     videos: [
         {
-            id: "surveillance_performance",
-            title: "Surveillance Performance Documentation", 
-            description: "Live performance using surveillance cameras as instruments. Real-time video processing creates audiovisual feedback systems.",
-            embedId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-            duration: "15:32",
-            year: "2024",
-            venue: "Groningen Museum",
-            tags: ["performance", "surveillance", "live", "audiovisual"]
+            id: 'video-1',
+            title: 'Noise Sculpting in TouchDesigner - Part 3 (Tutorial)',
+            description: 'Advanced noise sculpting techniques in TouchDesigner',
+            type: 'youtube',
+            embedId: 'Mu1TpRVujuY',
+            videoId: 'Mu1TpRVujuY',
+            embedUrl: 'https://www.youtube.com/embed/Mu1TpRVujuY',
+            year: '2024',
+            duration: '15:30',
+            tags: ['tutorial', 'touchdesigner', 'noise'],
+            featured: true
         },
         {
-            id: "kinetic_process",
-            title: "Kinetic Sculpture Process",
-            description: "Time-lapse documentation of kinetic sculpture construction and calibration. Shows integration of motors, sensors, and audio systems.",
-            embedId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-            duration: "8:45", 
-            year: "2024",
-            venue: "Studio Documentation",
-            tags: ["process", "kinetic", "sculpture", "documentation"]
+            id: 'video-2',
+            title: 'Noise Sculpting in TouchDesigner with ParticlesGPU - Part 5 (Tutorial)',
+            description: 'GPU particle systems for noise sculpting',
+            type: 'youtube',
+            embedId: 'kcZH2zcHANc',
+            videoId: 'kcZH2zcHANc',
+            embedUrl: 'https://www.youtube.com/embed/kcZH2zcHANc',
+            year: '2024',
+            duration: '18:45',
+            tags: ['tutorial', 'touchdesigner', 'particles'],
+            featured: true
         },
         {
-            id: "touchdesigner_workshop",
-            title: "TouchDesigner Workshop: Machine Listening",
-            description: "Educational workshop on implementing machine listening algorithms in TouchDesigner for artistic applications.",
-            embedId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-            duration: "32:17",
-            year: "2023",
-            venue: "University of Groningen",
-            tags: ["workshop", "education", "TouchDesigner", "machine learning"]
+            id: 'video-3',
+            title: 'Basic UV Mapping and Noise Sculpting in Touchdesigner (Tutorial)',
+            description: 'Fundamentals of UV mapping with noise techniques',
+            type: 'youtube',
+            embedId: '4rm5dcoQHBc',
+            videoId: '4rm5dcoQHBc',
+            embedUrl: 'https://www.youtube.com/embed/4rm5dcoQHBc',
+            year: '2024',
+            duration: '12:20',
+            tags: ['tutorial', 'touchdesigner', 'uv mapping'],
+            featured: true
+        },
+        {
+            id: 'video-4',
+            title: 'Noise Sculpting in TouchDesigner - Part 2 (Tutorial)',
+            description: 'Intermediate noise sculpting techniques',
+            type: 'youtube',
+            embedId: 'p9TwiixKvXQ',
+            videoId: 'p9TwiixKvXQ',
+            embedUrl: 'https://www.youtube.com/embed/p9TwiixKvXQ',
+            year: '2024',
+            duration: '14:15',
+            tags: ['tutorial', 'touchdesigner', 'noise'],
+            featured: false
+        },
+        {
+            id: 'video-5',
+            title: 'Interactive Instrument - Instancing to MIDI in TouchDesigner (Tutorial)',
+            description: 'Building interactive MIDI instruments with TouchDesigner',
+            type: 'youtube',
+            embedId: 's8ea30HlTHE',
+            videoId: 's8ea30HlTHE',
+            embedUrl: 'https://www.youtube.com/embed/s8ea30HlTHE',
+            year: '2023',
+            duration: '16:30',
+            tags: ['tutorial', 'touchdesigner', 'midi'],
+            featured: false
         }
     ],
 
@@ -269,71 +302,14 @@ const portfolioData = {
         }
     ],
 
-    // Downloads
-    downloads: [
-        {
-            id: "cv_academic",
-            title: "Academic CV",
-            description: "Current academic curriculum vitae including education, exhibitions, performances, and publications.",
-            file: "./downloads/atharva_gupta_cv_academic.pdf",
-            filename: "Atharva_Gupta_CV_Academic.pdf",
-            type: "PDF",
-            size: "245 KB",
-            category: "CV & Bio",
-            lastUpdated: "January 2025"
-        },
-        {
-            id: "artist_statement",
-            title: "Artist Statement",
-            description: "Current artist statement describing research interests, methodologies, and creative practice.",
-            file: "./downloads/atharva_gupta_artist_statement.pdf", 
-            filename: "Atharva_Gupta_Artist_Statement.pdf",
-            type: "PDF",
-            size: "156 KB",
-            category: "CV & Bio",
-            lastUpdated: "January 2025"
-        },
-        {
-            id: "technical_portfolio",
-            title: "Technical Portfolio",
-            description: "Documentation of technical projects including code samples, system diagrams, and implementation details.",
-            file: "./downloads/atharva_gupta_technical_portfolio.pdf",
-            filename: "Atharva_Gupta_Technical_Portfolio.pdf", 
-            type: "PDF",
-            size: "2.1 MB",
-            category: "Technical",
-            lastUpdated: "December 2024"
-        },
-        {
-            id: "press_kit",
-            title: "Press Kit",
-            description: "High-resolution images, biographical text, and press materials for exhibitions and performances.",
-            file: "./downloads/atharva_gupta_press_kit.zip",
-            filename: "Atharva_Gupta_Press_Kit.zip",
-            type: "ZIP", 
-            size: "12.3 MB",
-            category: "Press",
-            lastUpdated: "November 2024"
-        },
-        {
-            id: "touchdesigner_tools",
-            title: "TouchDesigner Tools Collection",
-            description: "Custom TouchDesigner components and tools for audio analysis, kinetic control, and surveillance data processing.",
-            file: "./downloads/touchdesigner_tools_collection.zip",
-            filename: "TouchDesigner_Tools_Collection.zip",
-            type: "ZIP",
-            size: "5.7 MB", 
-            category: "Technical",
-            lastUpdated: "January 2025"
-        }
-    ],
+    
 
     // About information
     about: {
         bio: "Atharva Gupta is a digital artist and researcher based in Groningen, Netherlands, working at the intersections of sound, movement, technology, and critical media practice. Their work explores surveillance technologies, kinetic systems, and machine listening through critical making methodologies. Currently pursuing research at the University of Groningen, they investigate how experimental sound art can reveal and resist the pervasive nature of contemporary surveillance infrastructure.",
-        
+
         statement: "My practice centers on experimental systems that combine sound, light, code, and kinetic structures. I'm interested in the edges between control and collapse—between what is designed and what breaks, flickers, loops, or hums out of place. Through critical making approaches, I investigate surveillance technologies not as fixed systems but as material for artistic inquiry. My work asks: How can we listen to the infrastructure of control? How do machines listen to us? What forms of resistance emerge when we turn surveillance systems against themselves?",
-        
+
         education: [
             {
                 degree: "MA Media Arts",
@@ -350,7 +326,7 @@ const portfolioData = {
                 status: "Completed"
             }
         ],
-        
+
         exhibitions: [
             {
                 title: "Surveillance Structures",
@@ -374,7 +350,7 @@ const portfolioData = {
                 year: "2023"
             }
         ],
-        
+
         tools: [
             "TouchDesigner",
             "Max/MSP",
@@ -398,33 +374,39 @@ const portfolioData = {
         socials: [
             {
                 platform: "Instagram",
-                label: "Instagram",
-                handle: "@asymmetrica_sound",
-                url: "https://instagram.com/asymmetrica_sound"
+                label: "Instagram (Asymmetrica)",
+                handle: "@asymmetrica_",
+                url: "https://www.instagram.com/asymmetrica_/"
             },
             {
-                platform: "SoundCloud", 
-                label: "SoundCloud",
-                handle: "asymmetrica",
-                url: "https://soundcloud.com/asymmetrica"
+                platform: "Instagram",
+                label: "Instagram (AudioDevout)",
+                handle: "@audiodevout",
+                url: "https://www.instagram.com/audiodevout/"
+            },
+            {
+                platform: "YouTube",
+                label: "YouTube",
+                handle: "@audiodevout",
+                url: "https://www.youtube.com/@audiodevout"
             },
             {
                 platform: "Bandcamp",
                 label: "Bandcamp", 
                 handle: "asymmetrica",
-                url: "https://asymmetrica.bandcamp.com"
+                url: "https://asymmetrica.bandcamp.com/"
             },
             {
-                platform: "GitHub",
-                label: "GitHub",
-                handle: "atharva-gupta",
-                url: "https://github.com/atharva-gupta"
+                platform: "Patreon",
+                label: "Patreon",
+                handle: "audiodevout",
+                url: "https://www.patreon.com/audiodevout"
             },
             {
-                platform: "Academia",
-                label: "Academia.edu",
+                platform: "LinkedIn",
+                label: "LinkedIn",
                 handle: "Atharva Gupta",
-                url: "https://university.academia.edu/AtharvaGupta"
+                url: "https://www.linkedin.com/in/atharva--gupta/"
             }
         ]
     },
@@ -445,23 +427,23 @@ const portfolioData = {
     getAudioById: function(id) {
         return this.audio.find(item => item.id === id);
     },
-    
+
     getImageById: function(id) {
         return this.images.find(item => item.id === id);
     },
-    
+
     getVideoById: function(id) {
         return this.videos.find(item => item.id === id);
     },
-    
+
     getTextById: function(id) {
         return this.texts.find(item => item.id === id);
     },
-    
+
     getDownloadById: function(id) {
         return this.downloads.find(item => item.id === id);
     },
-    
+
     getFeaturedContent: function() {
         return {
             audio: this.audio.filter(item => item.featured),
@@ -469,11 +451,11 @@ const portfolioData = {
             texts: this.texts.filter(item => item.featured)
         };
     },
-    
+
     searchContent: function(query) {
         const results = [];
         const searchTerms = query.toLowerCase().split(' ');
-        
+
         // Search audio
         this.audio.forEach(item => {
             const searchText = `${item.title} ${item.description} ${item.tags?.join(' ') || ''}`.toLowerCase();
@@ -481,7 +463,7 @@ const portfolioData = {
                 results.push({ type: 'audio', item });
             }
         });
-        
+
         // Search images
         this.images.forEach(item => {
             const searchText = `${item.title} ${item.description} ${item.tags?.join(' ') || ''}`.toLowerCase();
@@ -489,7 +471,7 @@ const portfolioData = {
                 results.push({ type: 'image', item });
             }
         });
-        
+
         // Search texts
         this.texts.forEach(item => {
             const searchText = `${item.title} ${item.description} ${item.content} ${item.tags?.join(' ') || ''}`.toLowerCase();
@@ -497,7 +479,7 @@ const portfolioData = {
                 results.push({ type: 'text', item });
             }
         });
-        
+
         return results;
     }
 };

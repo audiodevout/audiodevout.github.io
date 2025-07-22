@@ -143,14 +143,14 @@ const Navigation = {
             page.setAttribute('aria-hidden', 'true');
         });
         
-        // Show target page
+        // Show target page - match the actual HTML structure
         const targetPageElement = Utils.$(`#${activePage}`);
         if (targetPageElement) {
             targetPageElement.classList.add('active');
             targetPageElement.setAttribute('aria-hidden', 'false');
             
             // Focus management for accessibility
-            const heading = targetPageElement.querySelector('h1');
+            const heading = targetPageElement.querySelector('h1, .page-title');
             if (heading) {
                 heading.focus();
             }

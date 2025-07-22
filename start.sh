@@ -1,4 +1,3 @@
 #!/bin/bash
-echo "Starting Atharva Gupta Portfolio Website..."
-echo "Server will be available at http://localhost:8000"
+echo "Starting Atharva Gupta Portfolio Server..."
 node server.js

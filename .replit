@@ -5,3 +5,19 @@ localPort = 8000
 externalPort = 80
 
 [nix]
+channel = "stable-24_05"
+
+[deployment]
+run = "python3 -m http.server 8000"
+
+[workflows]
+runButton = "Static Server"
+
+[[workflows.workflow]]
+name = "Static Server"
+author = 45369650
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 -m http.server 8080"

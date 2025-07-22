@@ -8,6 +8,36 @@ This is a static portfolio website for artist and researcher Atharva Gupta, buil
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (January 2025)
+
+### Major Design Overhaul - Modern Pastel Glitch Aesthetic
+- **Typography**: Migrated from Doto monospace to Inria Serif for editorial elegance
+- **Color Scheme**: Replaced cyberpunk neon with soft pastel glitch palette (mint #A8FFDA, pink #FFB7CE, blue #A7E4FF, lavender #D5BFFF)
+- **Font Scaling**: Reduced global font size from 16px to 14px for improved content density
+- **Navigation**: Redesigned as slim 60px fixed header with clean minimal styling
+
+### Layout Improvements
+- **Featured Sections**: Removed from all pages except home page for cleaner presentation
+- **Video Layout**: Redesigned as vertical list with larger 16:9 responsive YouTube embeds
+- **Audio Player**: Centered smaller Bandcamp logo (60px) with bigger, more prominent embeds
+- **Typography Hierarchy**: Implemented editorial spacing with improved line-height (1.5) for serif readability
+
+### Technical Updates
+- **CSS Architecture**: Added modern-design.css with comprehensive design system
+- **Server Configuration**: Updated to simple Node.js HTTP server for reliable static file serving
+- **Responsive Design**: Enhanced mobile-first approach with improved touch device support
+
+### January 2025 - Sakura Theme Implementation
+- **Typography**: Updated to Doto font (weights 400, 500, 700) for crisp monospace aesthetic
+- **Color Palette**: Implemented calm sakura-inspired pastels with dark slate background (#101010)
+  - Body text: soft white (#f4f4f4)
+  - Secondary text: muted gray (#c0c0c0)
+  - Accent colors: pink (#ffcad4), light blue (#cde8f6), mauve (#d8bfd8), mint (#d1f7e1)
+- **Animation Cleanup**: Removed all floating text and canvas animations for stable, clean UI
+- **Fixed Featured Pane**: Added 240px vertical sidebar with recent works, scrollable content, pastel hover effects
+- **Vertical Headings**: Implemented CSS writing-mode headings along page edges with minimal styling
+- **Sakura Background**: Subtle animated cherry blossom petals with faint branch graphics at low opacity
+
 ## Running the Project
 
 To start the portfolio website:

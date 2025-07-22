@@ -154,7 +154,8 @@ const CursorSystem = {
     handleKeyDown(e) {
         // Toggle coordinates display with 'C' key
         if (e.key === 'c' || e.key === 'C') {
-            if (e.ctrlKey) return; // Don't interfere with copy
+            if (e.ctrlKey || e.metaKey) return; // Don't interfere with copy
+            e.preventDefault();
             this.toggleCoordinates();
         }
     },
