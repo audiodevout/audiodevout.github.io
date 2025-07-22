@@ -1,0 +1,329 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 10%);
+  --muted-foreground: hsl(0, 0%, 60%);
+  --popover: hsl(0, 0%, 5%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 5%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(180, 100%, 50%);
+  --input: hsl(0, 0%, 10%);
+  --primary: hsl(180, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 0%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(180, 100%, 50%);
+  --accent-foreground: hsl(0, 0%, 0%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(180, 100%, 50%);
+  --radius: 0.5rem;
+  
+  /* Custom properties for dynamic colors */
+  --accent-color: hsl(180, 100%, 50%);
+  --text-color: hsl(0, 0%, 100%);
+  --bg-color: hsl(0, 0%, 0%);
+  --font-main: 'Doto', sans-serif;
+  --font-alt: 'Doto', sans-serif;
+}
+
+.dark {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 10%);
+  --muted-foreground: hsl(0, 0%, 60%);
+  --popover: hsl(0, 0%, 5%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 5%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(180, 100%, 50%);
+  --input: hsl(0, 0%, 10%);
+  --primary: hsl(180, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 0%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(180, 100%, 50%);
+  --accent-foreground: hsl(0, 0%, 0%);
+  --destructive: hsl(0, 84.2%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(180, 100%, 50%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  /* Desktop cursor effects */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none;
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    * {
+      cursor: auto;
+    }
+  }
+}
+
+/* Cursor and interaction styles */
+.cursor-element {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.crosshair-x {
+  height: 1px;
+  width: 100%;
+  background: var(--accent-color);
+  opacity: 0.7;
+}
+
+.crosshair-y {
+  width: 1px;
+  height: 100%;
+  background: var(--accent-color);
+  opacity: 0.7;
+}
+
+.axis-marker {
+  font-size: 10px;
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.trail {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  animation: fadeTrail 2s forwards;
+}
+
+/* Background canvas */
+.bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Floating text */
+.floating-text {
+  position: absolute;
+  color: var(--accent-color);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1;
+  font-style: normal;
+  transition: transform 0.1s ease-out;
+  animation: floatMove 20s infinite ease-in-out alternate;
+}
+
+/* Audio player styles */
+.audio-player {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--accent-color);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.audio-progress {
+  background: rgba(0, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.audio-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-color);
+  cursor: pointer;
+}
+
+.audio-progress::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-color);
+  border: none;
+  cursor: pointer;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeTrail {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+@keyframes floatMove {
+  from { 
+    transform: translate(0, 0); 
+  }
+  to {
+    transform: translate(calc(var(--x) * 1vw), calc(var(--y) * 1vh));
+  }
+}
+
+@keyframes blinkGlow {
+  from { 
+    text-shadow: 0 0 10px hsl(180, 100%, 50%); 
+  }
+  to { 
+    text-shadow: 0 0 30px hsl(300, 100%, 50%); 
+  }
+}
+
+@keyframes flickerGlow {
+  0% { 
+    opacity: 1; 
+    text-shadow: 0 0 4px hsl(180, 100%, 50%); 
+  }
+  50% { 
+    opacity: 0.5; 
+    text-shadow: 0 0 20px hsl(300, 100%, 50%); 
+  }
+  100% { 
+    opacity: 1; 
+    text-shadow: 0 0 6px hsl(180, 100%, 50%); 
+  }
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+@keyframes glitchOut {
+  0% { clip-path: inset(20% 0 70% 0); }
+  25% { clip-path: inset(10% 0 50% 0); }
+  50% { clip-path: inset(40% 0 20% 0); }
+  75% { clip-path: inset(30% 0 10% 0); }
+  100% { clip-path: inset(0% 0 0% 0); }
+}
+
+/* Utility classes */
+.glow-text {
+  animation: blinkGlow 3s infinite alternate;
+}
+
+.flicker-text {
+  animation: flickerGlow 2s infinite alternate;
+}
+
+.glitch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: hsl(0, 0%, 0%);
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.glitch-overlay.active {
+  opacity: 1;
+  animation: glitchOut 0.6s steps(2, end);
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .cursor-element {
+    display: none;
+  }
+}

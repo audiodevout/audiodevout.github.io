@@ -1,0 +1,21 @@
+I’m building a static portfolio website on GitHub Pages using HTML, CSS, and JavaScript that reflects a sophisticated, minimalist aesthetic: deep black background (#000) with crisp white text (#fff) and tasteful, subtle neon-inspired accents in refined hues (dynamic HSL around hsl(180, 60%, 70%)) that provide elegant highlights without overwhelming the design. The typography uses the clean, modern Doto font from Google Fonts to support a Bauhaus-inspired style—simple lines, balanced whitespace, and understated elegance.
+
+The site features refined, smooth glitch-inspired effects—gentle flickering text highlights and tasteful digital distortions applied sparingly to enhance the atmosphere without clutter. The cursor is customized as a minimalist crosshair with a subtle, graceful trailing effect, accompanied by discreet axis markers to evoke a precise, thoughtful interface.
+
+All content—text blocks, navigation links, and media references for images, videos, and audio—is managed through a single centralized file named portfolio_data.js. This file acts as the authoritative source of all galleries, audio players, video embeds, text content, and descriptions.
+
+Critically, all media URLs (images, videos, audio) in portfolio_data.js are clearly marked placeholder strings like "__REPLACE_WITH_YOUR_IMAGE_URL__" to allow easy identification and replacement with my actual asset URLs hosted in GitHub. No sample or dummy media are included.
+
+Styling is fully separated into CSS files, focusing on clarity, subtlety, and consistency. The site’s main page title cycles gently every few seconds among “Atharva Gupta,” “asymmetrica,” and “audiodevout,” providing a refined dynamic touch.
+
+A subtle animated particle background gently shifts colors within the neon accent palette, adding depth and movement with quiet sophistication.
+
+The site includes the following pages: Home (welcome and navigation), Audio (stream-only custom audio players with soft glowing effects, no downloads), Images (thumbnail gallery leading to detail pages, right-click disabled, no downloads), Videos (embedded YouTube-like players with descriptions, no downloads), Texts (markdown-rendered pages), Downloads (listing files with dedicated pages but no direct media downloads), About (bio, education, exhibitions, artist statement), Contact (static contact form with Formspree plus obfuscated email), and Thesis (view-only PDF with abstract and context).
+
+Navigation is fixed, keyboard accessible, and enhanced with smooth, tasteful glitch-style page transitions. Accessibility is prioritized with alt text, aria-labels, fully responsive and mobile-friendly layouts, and soft media protections such as right-click disabling and no direct download links.
+
+Floating descriptive text moves gently with smooth, slow kinetic animation. Hover interactions trigger subtle blinking or glowing accent effects aligned with the site’s refined aesthetic. The audio player glows softly and flickers in harmony with the overall atmosphere. Optional enhancements include markdown support, lazy loading for images, and seamless page transitions using CSS or JS.
+
+Contact info and social links (Instagram, YouTube/Vimeo, SoundCloud/Bandcamp, GitHub, LinkedIn, Are.na, etc.) are presented clearly and elegantly, with optional downloadable CV or press kit and newsletter signup. The site includes SEO meta tags, a favicon, and a small footer noting the last update.
+
+Overall, this portfolio is a refined, minimalist, and elegant online presence, combining subtle glitch-inspired accents and soft neon highlights to create a timeless, professional showcase that’s easy to maintain through a single portfolio_data.js file—with all media URLs clearly highlighted for effortless updates.
