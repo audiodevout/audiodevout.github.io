@@ -230,23 +230,23 @@ const CursorSystem = {
     },
 
     updateColorVariables(x, y) {
-        const rect = document.documentElement.getBoundingClientRect();
-        const normalizedX = x / window.innerWidth;
-        const normalizedY = y / window.innerHeight;
-        
-        // Update CSS custom properties for dynamic colors
-        const hue = Math.round(normalizedX * 60 + 160); // Range from 160 to 220 (cyan to blue)
-        const saturation = Math.round(80 + normalizedY * 20); // Range from 80% to 100%
-        const lightness = Math.round(40 + normalizedX * 20); // Range from 40% to 60%
-        
-        document.documentElement.style.setProperty('--cursor-hue', hue);
-        document.documentElement.style.setProperty('--cursor-saturation', saturation + '%');
-        document.documentElement.style.setProperty('--cursor-lightness', lightness + '%');
-        
-        // Update neon color based on position
-        const dynamicNeon = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-        document.documentElement.style.setProperty('--color-neon-dynamic', dynamicNeon);
-    },
+    const normalizedX = x / window.innerWidth;
+    const normalizedY = y / window.innerHeight;
+
+    // Stronger, brighter color range
+    const hue = Math.round(normalizedX * 60 + 160); // Still cyan-blue range
+    const saturation = 100; // Full saturation
+    const lightness = 70; // Bright enough to pop even on dark bg
+
+    document.documentElement.style.setProperty('--cursor-hue', hue);
+    document.documentElement.style.setProperty('--cursor-saturation', `${saturation}%`);
+    document.documentElement.style.setProperty('--cursor-lightness', `${lightness}%`);
+
+    // Brighter dynamic neon color
+    const dynamicNeon = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    document.documentElement.style.setProperty('--color-neon-dynamic', dynamicNeon);
+}
+
 
     startAnimation() {
         if (!this.isActive || !this.cursor) return;
