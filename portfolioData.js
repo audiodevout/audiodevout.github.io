@@ -232,7 +232,7 @@ const portfolioData = {
         color: 'cerulean'
       }
     ],
-    description: 'Explore experimental systems through sound, computation, and cultural synthesis. Connect for collaborations, commissions, or critical discourse on new media aesthetics.'
+    description: 'Connect for collaborations, commissions, or critical discourse.'
   }
 };
 

@@ -53,36 +53,41 @@ class CursorTrail {
       }
     };
 
-    this.elementEnterHandler = (e) => {
-      if (e.target.matches('a, button, .project-card, .nav-link')) {
-        this.crosshair.style.opacity = '0.3';
-        this.trail.style.transform = 'translate(-50%, -50%) scale(1.2)';
-      }
-    };
-
-    this.elementLeaveHandler = (e) => {
-      if (e.target.matches('a, button, .project-card, .nav-link')) {
-        this.crosshair.style.opacity = '1';
-        this.trail.style.transform = 'translate(-50%, -50%) scale(1)';
+    // Fixed event delegation for interactive elements
+    this.elementInteractionHandler = (e) => {
+      const interactiveElement = e.target.closest('a, button, .project-card, .nav-link');
+      
+      if (interactiveElement) {
+        if (e.type === 'mouseenter') {
+          this.crosshair.style.opacity = '0.3';
+          this.trail.style.transform = 'translate(-50%, -50%) scale(1.2)';
+        } else if (e.type === 'mouseleave') {
+          this.crosshair.style.opacity = '1';
+          this.trail.style.transform = 'translate(-50%, -50%) scale(1)';
+        }
       }
     };
 
     document.addEventListener('mousemove', this.mouseMoveHandler, { passive: true });
     document.addEventListener('mouseleave', this.mouseLeaveHandler);
     document.addEventListener('mouseenter', this.mouseEnterHandler);
-    document.addEventListener('mouseenter', this.elementEnterHandler, true);
-    document.addEventListener('mouseleave', this.elementLeaveHandler, true);
+    
+    // Use event delegation instead of capturing all mouseenter/leave events
+    document.addEventListener('mouseenter', this.elementInteractionHandler, true);
+    document.addEventListener('mouseleave', this.elementInteractionHandler, true);
   }
 
   updateCrosshair() {
-    // Update crosshair position immediately
-    this.crosshair.style.left = (this.mouse.x - 10) + 'px';
-    this.crosshair.style.top = (this.mouse.y - 10) + 'px';
+    // Update crosshair position with proper centering
+    this.crosshair.style.left = `${this.mouse.x}px`;
+    this.crosshair.style.top = `${this.mouse.y}px`;
+    this.crosshair.style.transform = 'translate(-50%, -50%)';
 
-    // Update trail position with slight delay
-    setTimeout(() => {
-      this.trail.style.left = (this.mouse.x - 20) + 'px';
-      this.trail.style.top = (this.mouse.y - 20) + 'px';
+    // Update trail position with slight delay and proper centering
+    clearTimeout(this.trailTimeout);
+    this.trailTimeout = setTimeout(() => {
+      this.trail.style.left = `${this.mouse.x}px`;
+      this.trail.style.top = `${this.mouse.y}px`;
     }, 50);
   }
 
@@ -101,11 +106,14 @@ class CursorTrail {
     if (this.mouseEnterHandler) {
       document.removeEventListener('mouseenter', this.mouseEnterHandler);
     }
-    if (this.elementEnterHandler) {
-      document.removeEventListener('mouseenter', this.elementEnterHandler, true);
+    if (this.elementInteractionHandler) {
+      document.removeEventListener('mouseenter', this.elementInteractionHandler, true);
+      document.removeEventListener('mouseleave', this.elementInteractionHandler, true);
     }
-    if (this.elementLeaveHandler) {
-      document.removeEventListener('mouseleave', this.elementLeaveHandler, true);
+    
+    // Clear any pending timeouts
+    if (this.trailTimeout) {
+      clearTimeout(this.trailTimeout);
     }
   }
 }
