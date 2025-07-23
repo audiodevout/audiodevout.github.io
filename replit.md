@@ -1,148 +1,126 @@
-# Atharva Gupta Portfolio Site
+# Portfolio Website - Experimental Systems by Atharva Gupta
 
 ## Overview
 
-This is a static portfolio website for artist and researcher Atharva Gupta, built for deployment on GitHub Pages. The site showcases experimental art projects including kinetic sound sculptures, audiovisual installations, and research work at the intersections of sound, movement, technology, and critical media practice. The site features a cyberpunk aesthetic with dark themes, neon accents, and animated elements.
+This is a fully static Indo-Futurist portfolio website built as a vanilla JavaScript single-page application with a clean, minimal folder structure. All content is rendered client-side from portfolioData.js as the single source of truth. The site showcases experimental systems, sound installations, and new media art with procedural mandala generation, transparent glass UI materials, and particle effects. All data—including media URLs, text, and metadata—is loaded once at runtime and dynamically injected into the DOM, ensuring maximum performance, offline capability, and straightforward deployment on GitHub Pages.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (January 2025)
-
-### Major Design Overhaul - Modern Pastel Glitch Aesthetic
-- **Typography**: Migrated from Doto monospace to Inria Serif for editorial elegance
-- **Color Scheme**: Replaced cyberpunk neon with soft pastel glitch palette (mint #A8FFDA, pink #FFB7CE, blue #A7E4FF, lavender #D5BFFF)
-- **Font Scaling**: Reduced global font size from 16px to 14px for improved content density
-- **Navigation**: Redesigned as slim 60px fixed header with clean minimal styling
-
-### Layout Improvements
-- **Featured Sections**: Removed from all pages except home page for cleaner presentation
-- **Video Layout**: Redesigned as vertical list with larger 16:9 responsive YouTube embeds
-- **Audio Player**: Centered smaller Bandcamp logo (60px) with bigger, more prominent embeds
-- **Typography Hierarchy**: Implemented editorial spacing with improved line-height (1.5) for serif readability
-
-### Technical Updates
-- **CSS Architecture**: Added modern-design.css with comprehensive design system
-- **Server Configuration**: Updated to simple Node.js HTTP server for reliable static file serving
-- **Responsive Design**: Enhanced mobile-first approach with improved touch device support
-
-### January 2025 - Sakura Theme Implementation
-- **Typography**: Updated to Doto font (weights 400, 500, 700) for crisp monospace aesthetic
-- **Color Palette**: Implemented calm sakura-inspired pastels with dark slate background (#101010)
-  - Body text: soft white (#f4f4f4)
-  - Secondary text: muted gray (#c0c0c0)
-  - Accent colors: pink (#ffcad4), light blue (#cde8f6), mauve (#d8bfd8), mint (#d1f7e1)
-- **Animation Cleanup**: Removed all floating text and canvas animations for stable, clean UI
-- **Fixed Featured Pane**: Added 240px vertical sidebar with recent works, scrollable content, pastel hover effects
-- **Vertical Headings**: Implemented CSS writing-mode headings along page edges with minimal styling
-- **Sakura Background**: Subtle animated cherry blossom petals with faint branch graphics at low opacity
-
-## Running the Project
-
-To start the portfolio website:
-```bash
-node server.js
-```
-or
-```bash
-./start.sh
-```
-
-The server will run on port 8000 and serve the complete portfolio website with all interactive features.
-
 ## System Architecture
 
-### Frontend Architecture
-- **Static Site Architecture**: Pure HTML/CSS/JavaScript with no server-side dependencies
-- **Single Page Application (SPA)**: Client-side routing and dynamic content loading
-- **Component-Based Design**: Modular JavaScript classes for different UI components
-- **Responsive Design**: Mobile-first approach with touch device detection
+### Static Site Architecture
+- **Framework**: Vanilla JavaScript ES6+ (no build tools required)
+- **Routing**: Hash-based client-side routing with History API
+- **Content Management**: portfolioData.js as single source of truth
+- **Styling**: Pure CSS with custom properties and modular structure
+- **Visual Effects**: Canvas 2D API for mandala and particle rendering
+- **Deployment**: Static hosting ready (GitHub Pages, Netlify, etc.)
 
-### Data Management
-- **Centralized Data Source**: All content loaded from `portfolio_data.js` file
-- **Dynamic Content Loading**: Text, navigation, media paths, and metadata all sourced dynamically
-- **Client-Side Rendering**: Content generated and rendered in the browser
-- **Caching Strategy**: Page content cached in memory for performance
-
-### Styling Architecture
-- **CSS-Only Styling**: Complete separation of presentation from JavaScript logic
-- **CSS Custom Properties**: Extensive use of CSS variables for theming
-- **Component-Specific Stylesheets**: Modular CSS files for different components
-- **Animation System**: CSS-based animations with JavaScript coordination
+### Design System
+- **Typography**: Funnel Display (primary) and IBM Plex Mono (monospace) fonts
+- **Color Palette**: High-contrast scheme with deep black base (#0A0A0A) and bright off-white text (#F3F3F3) with vivid accent colors (saffron, cerulean, neon-magenta, electric-lime)
+- **Aesthetic**: Indo-Futurist glitch with geometric patterns, scroll-responsive mandalas, and enhanced particle effects with blur and glow
+- **Responsive**: Mobile-first design with fixed navigation
 
 ## Key Components
 
-### Core Systems
-1. **Application Controller** (`app.js`): Main initialization and system coordination
-2. **Router System** (`router.js`): Client-side navigation and URL handling
-3. **Page Generator** (`page-generator.js`): Dynamic content rendering
-4. **Navigation System** (`navigation.js`): Menu handling and page transitions
+### Core Application Structure
+- **App.tsx**: Main application wrapper with routing and providers
+- **Navigation.tsx**: Fixed top navigation with responsive mobile menu
+- **ParticleCanvas.tsx**: Animated background particle system
+- **MandalaGenerator.tsx**: Huge, fixed-position mandala generation serving as central visual anchors on each page, perfectly centered and immersive
 
-### Media Components
-1. **Audio Player** (`audio-player.js`): Custom neon-themed audio streaming (no downloads)
-2. **Lightbox Gallery** (`lightbox.js`): Image gallery with zoom functionality
-3. **Video Embeds**: YouTube-style embeds with custom descriptions
+### Page Components
+- **Home.tsx**: Landing page with tri-phase title animation
+- **SoundInstallations.tsx**: Gallery for kinetic sound sculptures and installations
+- **Performance.tsx**: Live audiovisual performance documentation
+- **GenerativeAV.tsx**: Generative art and TouchDesigner projects
+- **Interactive.tsx**: Interactive installations and gesture recognition systems
+- **Drawings.tsx**: Digital sketches and visual explorations
+- **Writing.tsx**: Theory and critical writing on new media
+- **Contact.tsx**: Social links with glowing icon animations
 
-### Interactive Elements
-1. **Custom Cursor** (`cursor.js`): Cyberpunk crosshair cursor for desktop
-2. **Background Canvas** (`canvas-background.js`): Animated particle effects
-3. **Glitch Effects** (`glitch.css`): Text animations and transitions
-4. **Dynamic Title**: Rotating site titles between "Atharva Gupta", "asymmetrica", "audiodevout"
-
-### Utility Systems
-1. **Utils Library** (`utils.js`): Common helper functions and DOM utilities
-2. **Markdown Parser** (`markdown.js`): Simple markdown to HTML conversion
-3. **Performance Monitoring**: Built-in performance tracking
-4. **Error Handling**: Centralized error logging and user feedback
+### File Structure
+```
+/ (root)
+├── index.html                  # Main static HTML entry point
+├── portfolioData.js            # Single source of truth for all content
+├── css/
+│   └── main.css               # Complete styling with detailed parameter comments
+├── js/
+│   ├── main.js                # Core logic with setup, rendering, and event sections
+│   ├── mandalaGenerator.js    # Full-screen generative mandala with formula-based complexity
+│   ├── particles.js           # Lightweight particle system with sine-wave motion
+│   └── cursorTrail.js         # Custom crosshair + trailing circle cursor
+├── assets/
+│   ├── fonts/                 # Directory for self-hosted fonts (currently using CDN)
+│   └── icons/                 # Minimal SVG icons for navigation
+└── README.md                  # Documentation and deployment instructions
+```
 
 ## Data Flow
 
-### Content Loading Process
-1. **Initial Load**: App loads `portfolio_data.js` containing all site content
-2. **Route Handling**: Router determines current page from URL
-3. **Page Generation**: PageGenerator creates HTML from data templates
-4. **Component Initialization**: Individual components (audio players, galleries) initialize
-5. **Animation Start**: Background effects and interactive elements activate
-
-### Navigation Flow
-1. **User Interaction**: Click on navigation link or browser back/forward
-2. **Route Processing**: Router matches URL pattern to handler
-3. **Transition Effect**: Glitch overlay shows during page change
-4. **Content Update**: New page content rendered dynamically
-5. **Component Cleanup**: Previous page components cleaned up
-6. **State Update**: Navigation state and browser history updated
+1. **Content Loading**: All project data flows from `portfolioData.js` into vanilla JavaScript DOM manipulation
+2. **Navigation**: Hash-based routing with History API for clean URLs and browser back/forward support
+3. **Scroll Interactions**: Native scroll event listeners drive dynamic visual effects and mandala evolution
+4. **Fixed Visual Anchors**: Huge mandalas (68-85vmin) remain perfectly centered and fixed during scroll, creating meditative focal points layered beneath content
+5. **Canvas Rendering**: Procedural mandala generation and particle systems using Canvas 2D API
+6. **Modal System**: Project details displayed in overlay modals with escape-key handling
+7. **Responsive Design**: CSS media queries and flexible grid layouts ensure mobile compatibility
 
 ## External Dependencies
 
-### CDN Resources
-- **Google Fonts**: Doto monospace font family
-- **Font Awesome**: Icon library for UI elements
-- **No Framework Dependencies**: Vanilla JavaScript implementation
+### Fonts Only
+- Google Fonts (Funnel Display, IBM Plex Mono)
 
-### Media Content
-- **Audio Streaming**: Direct file serving (no download options)
-- **Image Assets**: Local image files served statically
-- **Video Content**: YouTube embeds for video content
+### Zero Build Dependencies
+- Pure vanilla JavaScript ES6+
+- Native CSS custom properties and modern features
+- Canvas 2D API for visual effects
+- No bundlers, compilers, or framework dependencies
+
+### Browser APIs Used
+- Canvas 2D API for mandala and particle rendering
+- History API for clean routing
+- Intersection Observer for scroll tracking
+- RequestAnimationFrame for smooth animations
 
 ## Deployment Strategy
 
-### GitHub Pages Optimization
-- **Static File Structure**: All content served as static files
-- **Relative Paths**: All links relative to repository root
-- **404 Handling**: Custom 404.html for broken routes
-- **Asset Management**: All media assets accessible via static paths
-- **No Server Dependencies**: Complete client-side functionality
+### Development Environment
+- Any local HTTP server (Python, Node.js, PHP built-in servers)
+- No build process required - direct file serving
+- Live editing with immediate browser refresh
 
-### Performance Considerations
-- **Lazy Loading**: Content loaded on demand
-- **Caching**: Browser caching for static assets
-- **Mobile Optimization**: Reduced particle counts and simplified animations
-- **Accessibility**: Screen reader support and keyboard navigation
-- **Touch Device Support**: Adaptive behavior for touch interfaces
+### Production Deployment
+1. **Upload files** to any static hosting service
+2. **No build step** required - files work as-is
+3. **Instant deployment** on GitHub Pages, Netlify, Vercel
+4. **Content updates** via simple portfolioData.js edits
 
-### Security Measures
-- **Content Protection**: Right-click disabled on images
-- **No Download Options**: Audio/video streaming only
-- **XSS Prevention**: Input sanitization for dynamic content
-- **HTTPS Enforcement**: Secure delivery via GitHub Pages
+### Hosting Options
+- **GitHub Pages**: Upload to repository, enable Pages
+- **Netlify**: Drag-and-drop folder deployment
+- **Vercel**: Static site deployment
+- **Any CDN**: Direct file upload
+
+### Performance Optimizations
+- No framework overhead - pure vanilla JavaScript
+- RequestAnimationFrame for smooth Canvas animations
+- CSS-based transitions with reduced-motion respect
+- Efficient DOM manipulation with minimal reflows
+- Lightweight particle system (150 particles max)
+- Single-file content loading eliminates network requests
+
+### Recent Major Changes (January 2025)
+- **Complete Architecture Restructure**: Converted from React SPA to vanilla JavaScript static site
+- **Minimal Directory Structure**: Reorganized to exact specification with css/, js/, assets/ folders
+- **Enhanced Documentation**: All files include detailed parameter comments and editable settings
+- **Code Optimization**: Eliminated redundancies, added memory management, optimized performance
+- **Single CSS File**: Consolidated all styling into css/main.css with clear parameter sections
+- **Formula-Based Mandalas**: Implemented mathematical complexity formulas as specified
+- **Developer Experience**: Clear file headers with purpose, parameters, and structure documentation
+
+The portfolio now follows the exact clean structure guidelines with optimal developer experience, zero build dependencies, and immediate deployment capability.
