@@ -425,6 +425,11 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 1s;
 }
 
+.title-line:nth-child(4) {
+  color: var(--off-white);
+  animation-delay: 1.4s;
+}
+
 /* Social Links */
 .social-grid {
   display: grid;
@@ -561,42 +566,42 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   z-index: var(--z-mandala);
   pointer-events: none;
-  opacity: 0.15;
+  opacity: 0.6;
   transition: all 0.5s ease;
   will-change: opacity;
 }
 
 /* Page-specific mandala opacity only (size is now consistent) */
 .mandala-canvas.home {
-  opacity: 0.2;
+  opacity: 0.6;
 }
 
 .mandala-canvas.sound-installations {
-  opacity: 0.15;
+  opacity: 0.6;
 }
 
 .mandala-canvas.performance {
-  opacity: 0.14;
+  opacity: 0.6;
 }
 
 .mandala-canvas.generative-av {
-  opacity: 0.16;
+  opacity: 0.6;
 }
 
 .mandala-canvas.interactive {
-  opacity: 0.18;
+  opacity: 0.6;
 }
 
 .mandala-canvas.drawings {
-  opacity: 0.13;
+  opacity: 0.6;
 }
 
 .mandala-canvas.writing {
-  opacity: 0.14;
+  opacity: 0.6;
 }
 
 .mandala-canvas.contact {
-  opacity: 0.12;
+  opacity: 0.6;
 }
 
 /* Cursor Effects */

@@ -283,6 +283,7 @@ class PortfolioApp {
           <h1 class="tri-phase-title">
             <span class="title-line">EXPERIMENTAL</span>
             <span class="title-line">SYSTEMS</span>
+            <span class="title-line">BY</span>
             <span class="title-line">ATHARVA GUPTA</span>
           </h1>
         </div>

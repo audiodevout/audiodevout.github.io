@@ -8,9 +8,9 @@
  */
 
 // TIME-BASED MORPHING SETTINGS
-const MORPH_CYCLE_MINUTES = 16;        // Total cycle time in minutes (16 = full cycle)
+const MORPH_CYCLE_MINUTES = 30;        // Total cycle time in minutes (16 = full cycle)
 const SMOOTH_TRANSITIONS = true;       // Enable smooth morphing between types
-const TRANSITION_OVERLAP = 0.3;        // How much types overlap during transition (0.0 to 0.5)
+const TRANSITION_OVERLAP = 0.1;        // How much types overlap during transition (0.0 to 0.5)
 
 // MANDALA TYPES - These will cycle automatically based on time
 const MANDALA_TYPES = [
@@ -26,13 +26,13 @@ const MANDALA_TYPES = [
 
 // SIZE AND SCALING
 const MANDALA_SIZE = 0.45;           // Overall size (0.1 to 0.8)
-const LAYER_SPACING = 0.15;          // Distance between layers (0.1 to 0.3)
+const LAYER_SPACING = 0.3;          // Distance between layers (0.1 to 0.3)
 const CENTER_SIZE = 8;               // Center circle size (4 to 20)
 
 // COMPLEXITY - These will also morph over time
-const BASE_SEGMENTS = 2;             // Base number of segments (4 to 16)
-const MAX_LAYERS = 6;                // Maximum layers (3 to 12)
-const DETAIL_LEVEL = 1.0;            // Detail complexity (0.5 to 2.0)
+const BASE_SEGMENTS = 16;             // Base number of segments (4 to 16)
+const MAX_LAYERS = 3;                // Maximum layers (3 to 12)
+const DETAIL_LEVEL = 0.50;            // Detail complexity (0.5 to 2.0)
 
 // ANIMATION
 const ROTATION_SPEED = 0.0008;       // Rotation speed (0.0001 to 0.003)

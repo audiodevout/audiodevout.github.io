@@ -85,7 +85,7 @@ class ParticleSystem {
       vy: (Math.random() - 0.5) * 0.5,
       size: Math.random() * 2 + 0.5,
       color: this.colors[Math.floor(Math.random() * this.colors.length)],
-      opacity: Math.random() * 0.5 + 0.1,
+      opacity: Math.random() * 0.9 + 0.5,
       life: Math.random() * 1200 + 800,
       pulse: Math.random() * Math.PI * 2
     };
@@ -109,7 +109,7 @@ class ParticleSystem {
     p.vy *= 0.99;
 
     p.pulse += 0.05;
-    p.opacity = Math.sin(p.pulse) * 0.3 + 0.3;
+    p.opacity = Math.sin(p.pulse) * 0.3 + 0.7;
 
     // boundary wrapping
     if (p.x < 0) p.x = this.canvas.width;

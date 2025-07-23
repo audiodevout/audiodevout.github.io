@@ -196,31 +196,31 @@ const portfolioData = {
   contact: {
     social: [
       {
-        name: 'YouTube AudioDevout',
+        name: 'YouTube',
         url: 'https://www.youtube.com/@audiodevout',
         icon: 'youtube',
         color: 'cerulean'
       },
       {
-        name: 'Instagram Asymmetrica',
+        name: 'Instagram (Personal)',
         url: 'https://www.instagram.com/asymmetrica_/',
         icon: 'instagram',
         color: 'neon-magenta'
       },
       {
-        name: 'Instagram AudioDevout',
+        name: 'Instagram (Art)',
         url: 'https://www.instagram.com/audiodevout/',
         icon: 'instagram',
         color: 'electric-lime'
       },
       {
-        name: 'Bandcamp Asymmetrica',
+        name: 'Bandcamp',
         url: 'https://asymmetrica.bandcamp.com/',
         icon: 'bandcamp',
         color: 'saffron'
       },
       {
-        name: 'Patreon AudioDevout',
+        name: 'Patreon',
         url: 'https://www.patreon.com/audiodevout',
         icon: 'patreon',
         color: 'electric-lime'
