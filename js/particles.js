@@ -38,16 +38,16 @@ const PERFORMANCE_PROFILES = {
 
 // VISUAL SETTINGS
 const PARTICLE_COLORS = [
-  "rgba(255, 149, 71, 0.6)", // saffron
-  "rgba(0, 149, 255, 0.6)", // cerulean
-  "rgba(255, 71, 172, 0.6)", // neon-magenta
-  "rgba(173, 255, 71, 0.6)", // electric-lime
+  "rgba(255, 149, 71, 1)", // saffron
+  "rgba(0, 149, 255, 1)", // cerulean
+  "rgba(255, 71, 172, 1)", // neon-magenta
+  "rgba(173, 255, 71, 1)", // electric-lime
 ]
 
 const CONNECTION_COLOR = "rgba(255,255,255,1)"
 const PARTICLE_SIZE_RANGE = { min: 2.1, max: 3.5 }
 const PARTICLE_SPEED_RANGE = { min: 0.2, max: 1.2 }
-const PARTICLE_LIFE_RANGE = { min: 1200, max: 2000 }
+const PARTICLE_LIFE_RANGE = { min: 10000, max: 20000 }
 
 // PHYSICS SETTINGS
 const VELOCITY_DAMPING = 0.99 // Particle velocity decay

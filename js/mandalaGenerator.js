@@ -11,25 +11,25 @@
 // PERFORMANCE PROFILES - Device-specific settings
 const MANDALA_PERFORMANCE_PROFILES = {
   mobile: {
-    maxLayers: 2, // Reduced layers for mobile
-    baseSegments: 8, // Fewer segments
+    maxLayers: 1, // Reduced layers for mobile
+    baseSegments: 2, // Fewer segments
     detailLevel: 0.3, // Lower detail
     bloomEnabled: false, // Disable bloom on mobile
     updateFrequency: 20, // 20fps for mobile
     renderQuality: "low", // Low quality rendering
   },
   tablet: {
-    maxLayers: 3,
-    baseSegments: 12,
+    maxLayers: 1,
+    baseSegments: 4,
     detailLevel: 0.4,
     bloomEnabled: true,
     updateFrequency: 30,
     renderQuality: "medium",
   },
   desktop: {
-    maxLayers: 4,
-    baseSegments: 16,
-    detailLevel: 1,
+    maxLayers: 1,
+    baseSegments: 8,
+    detailLevel: 1.5,
     bloomEnabled: true,
     updateFrequency: 60,
     renderQuality: "high",
@@ -54,9 +54,9 @@ const MANDALA_TYPES = [
 ]
 
 // SIZE AND SCALING - Mobile optimized
-const MANDALA_SIZE = 0.35 // Smaller overall size for mobile
+const MANDALA_SIZE = 2 // Smaller overall size for mobile
 const LAYER_SPACING = 0.25 // Tighter spacing
-const CENTER_SIZE = 6 // Smaller center circle
+const CENTER_SIZE = 25 // Smaller center circle
 
 // ANIMATION - Reduced for mobile performance
 const ROTATION_SPEED = 0.0005 // Slower rotation
