@@ -115,8 +115,8 @@ try {
           videos: [],
         },
         {
-          id: "ritual-computing",
-          title: "Ritual Computing Sessions",
+          id: "coding-computing-as-a-ritual",
+          title: "Ritual Computing and Coding Sessions",
           description:
             "Collaborative experiences where audience and performer co-create digital mantras through shared interfaces and collective sound-making.",
           fullDescription:
@@ -162,19 +162,20 @@ try {
         },
         {
           id: "audiodevout-channel",
-          title: "AudioDevout Channel",
+          title: "audiodevout – TouchDesigner + Sound Art Tutorials",
           description:
-            "A curated collection of experimental music and sound art showcasing both original compositions and collaborative works.",
+            "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
           fullDescription:
-            "The channel serves as a platform for sharing experimental approaches to sound design, generative music, and collaborative audio-visual projects.",
-          medium: "Digital music curation, experimental audio",
-          category: "MUSIC CURATION",
+            "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic. The videos range from real-time generative visualizers and particle simulations to noise-based sculpting techniques and musical automation. Alongside YouTube, I run a Patreon where I release exclusive .tox files, project breakdowns, and custom components for TouchDesigner enthusiasts. This channel is both a learning resource and a digital sketchbook where I explore themes of signal, noise, entropy, and digital poetics.",
+          medium: "TouchDesigner, real-time generative visuals, sound-reactive systems",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           color: "cerulean",
           urls: {
             youtube: "https://www.youtube.com/@audiodevout",
-            bandcamp: "https://audiodevout.bandcamp.com",
-          },
-        },
+            patreon: "https://www.patreon.com/audiodevout"
+          }
+        }
+
       ],
 
       interactive: [
