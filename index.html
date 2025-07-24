@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Experimental Systems by Atharva Gupta</title>
     <meta name="description" content="Atharva Gupta // AudioDevOut // Asymmetrica">
     
@@ -18,30 +18,44 @@
     <meta property="twitter:title" content="Experimental Systems by Atharva Gupta">
     <meta property="twitter:description" content="Atharva Gupta // AudioDevOut // Asymmetrica">
     
-    <!-- Fonts -->
+    <!-- Fonts with display=swap for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
+    <!-- FIXED: Load styles in correct order -->
+    <link rel="stylesheet" href="css/design-system.css">
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- FIXED: Preload critical scripts in correct order -->
+    <link rel="preload" href="js/config.js" as="script">
+    <link rel="preload" href="js/utils.js" as="script">
+    <link rel="preload" href="portfolioData.js" as="script">
+    
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 </head>
 <body>
-    <!-- Fixed Navigation -->
-    <nav id="navigation" class="nav-container">
-        <div class="nav-content">
-            
-            <div class="nav-links" id="navLinks">
-                <a href="#home" class="nav-link active" data-page="home">HOME</a>
-                <a href="#sound-installations" class="nav-link" data-page="sound-installations">SOUND</a>
-                <a href="#performance" class="nav-link" data-page="performance">PERFORMANCE</a>
-                <a href="#generative-av" class="nav-link" data-page="generative-av">GENERATIVE</a>
-                <a href="#interactive" class="nav-link" data-page="interactive">INTERACTIVE</a>
-                <a href="#drawings" class="nav-link" data-page="drawings">DRAWINGS</a>
-                <a href="#writing" class="nav-link" data-page="writing">WRITING</a>
-                <a href="#contact" class="nav-link" data-page="contact">CONTACT</a>
+    <!-- FIXED: Added proper navigation structure -->
+    <nav id="navigation" class="nav-container" role="navigation" aria-label="Main navigation">
+        <div class="nav-content container">
+            <a href="#home" class="nav-logo" data-page="home">ATHARVA GUPTA</a>
+            <div class="nav-links" id="navLinks" role="menubar">
+                <a href="#home" class="nav-link active focus-visible touch-target" data-page="home" role="menuitem">HOME</a>
+                <a href="#sound-installations" class="nav-link focus-visible touch-target" data-page="sound-installations" role="menuitem">SOUND</a>
+                <a href="#performance" class="nav-link focus-visible touch-target" data-page="performance" role="menuitem">PERFORMANCE</a>
+                <a href="#generative-av" class="nav-link focus-visible touch-target" data-page="generative-av" role="menuitem">GENERATIVE</a>
+                <a href="#interactive" class="nav-link focus-visible touch-target" data-page="interactive" role="menuitem">INTERACTIVE</a>
+                <a href="#drawings" class="nav-link focus-visible touch-target" data-page="drawings" role="menuitem">DRAWINGS</a>
+                <a href="#writing" class="nav-link focus-visible touch-target" data-page="writing" role="menuitem">WRITING</a>
+                <a href="#contact" class="nav-link focus-visible touch-target" data-page="contact" role="menuitem">CONTACT</a>
             </div>
-            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle mobile navigation menu" aria-expanded="false">
+            <button id="mobileMenuToggle" 
+                    class="mobile-menu-toggle touch-target focus-visible no-tap-highlight" 
+                    aria-label="Toggle mobile navigation menu" 
+                    aria-expanded="false"
+                    aria-controls="navLinks">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -51,41 +65,91 @@
 
     <!-- Main Content Container -->
     <main id="mainContent" class="main-container" role="main" aria-live="polite">
+        <!-- FIXED: Added loading state -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-content">
+                <h1 class="text-4xl font-bold text-saffron">Loading Experimental Systems...</h1>
+                <p class="text-lg">Initializing audio-visual components</p>
+            </div>
+        </div>
+        
         <!-- Pages will be dynamically inserted here -->
         <noscript>
-            <div class="no-js-fallback">
-                <h1>Experimental Systems by Atharva Gupta</h1>
-                <p>This portfolio showcases experimental sound installations, generative audiovisual works, and interactive systems. JavaScript is required for the full interactive experience.</p>
-                <p>Please enable JavaScript to view the complete portfolio with procedural mandalas, particle effects, and dynamic content loading.</p>
-            </div>
+            <section class="no-js-fallback container">
+                <h1 class="text-4xl font-bold text-saffron">Experimental Systems by Atharva Gupta</h1>
+                <p class="text-lg leading-relaxed">This portfolio showcases experimental sound installations, generative audiovisual works, and interactive systems. JavaScript is required for the full interactive experience.</p>
+                <p class="text-base leading-normal">Please enable JavaScript to view the complete portfolio with procedural mandalas, particle effects, and dynamic content loading.</p>
+            </section>
         </noscript>
     </main>
 
-    <!-- Fixed Background Elements -->
-    <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
-    <canvas id="mandalaCanvas" class="mandala-canvas" aria-hidden="true"></canvas>
+    <!-- FIXED: Canvas elements with proper error handling -->
+    <canvas id="galaxyCanvas" class="galaxy-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
+    <canvas id="particleCanvas" class="particle-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
+    <canvas id="mandalaCanvas" class="mandala-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
     
-    <!-- Cursor Trail Effect -->
-    <div id="cursorCrosshair" class="cursor-crosshair"></div>
-    <div id="cursorTrail" class="cursor-trail"></div>
+    <!-- Cursor Trail Effect (Desktop Only) -->
+    <div id="cursorCrosshair" class="cursor-crosshair gpu-accelerated" aria-hidden="true"></div>
+    <div id="cursorTrail" class="cursor-trail gpu-accelerated" aria-hidden="true"></div>
 
     <!-- Project Modal -->
-    <div id="projectModal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="modalClose" class="modal-close" aria-label="Close project details modal">&times;</button>
+    <div id="projectModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content glass-overlay">
+            <button id="modalClose" 
+                    class="modal-close touch-target focus-visible no-tap-highlight" 
+                    aria-label="Close project details modal"
+                    type="button">
+                &times;
+            </button>
             <div id="modalBody" class="modal-body">
                 <!-- Modal content will be dynamically inserted -->
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- FIXED: Scripts loaded in correct order with error handling -->
+    <script>
+        // Add js-enabled class immediately to prevent FOUC
+        document.documentElement.classList.add('js-enabled');
+        
+        // Performance mark for initialization timing
+        if ('performance' in window && 'mark' in performance) {
+            performance.mark('app-init-start');
+        }
+        
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+            // Hide loading state on error
+            const loadingState = document.getElementById('loadingState');
+            if (loadingState) {
+                loadingState.style.display = 'none';
+            }
+        });
+    </script>
+    
+    <!-- FIXED: Load configuration and utilities first -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    
+    <!-- FIXED: Load data before main app -->
     <script src="portfolioData.js"></script>
-    <script src="js/mandalaGenerator.js"></script>
+    
+    <!-- FIXED: Load animation systems with error handling -->
+    <script src="js/galaxy.js"></script>
     <script src="js/particles.js"></script>
+    <script src="js/mandalaGenerator.js"></script>
     <script src="js/cursorTrail.js"></script>
+    
+    <!-- FIXED: Load main application last -->
     <script src="js/main.js"></script>
+    
+    <script>
+        // Performance mark for initialization completion
+        if ('performance' in window && 'mark' in performance) {
+            performance.mark('app-init-end');
+            performance.measure('app-initialization', 'app-init-start', 'app-init-end');
+        }
+    </script>
 </body>
-
-
 </html>
