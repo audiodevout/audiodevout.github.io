@@ -29,60 +29,72 @@ try {
         },
         {
           id: "asymmetrica-audio-collection",
-          title: "Asymmetrica Audio Collection",
+          title: "Asymmetrica – Experimental Audio Works",
           description:
-            "A curated selection of experimental electronic compositions exploring themes of digital anxiety, temporal displacement, and mechanical meditation.",
+            "A personal archive of sonic experiments exploring digital anxiety, temporal displacement, and meditative machinery.",
           fullDescription:
-            "This collection represents ongoing sonic research into the intersection of organic and synthetic textures, featuring compositions that range from ambient explorations to rhythmic investigations of digital processing and temporal manipulation.",
+            "Asymmetrica is my ongoing solo project rooted in experimental audio, where I explore the unstable edge between organic resonance and synthetic control. These compositions are part of my sonic research practice—an evolving collection of sketches, studies, and resolved pieces. Using a mix of field recordings, generative synthesis, and digital manipulation, I craft sounds that navigate disorientation, tension, and glitch-as-texture. Some tracks are slow-burning and ambient, others are rhythm-driven or noise-laced. They're all part of a larger investigation into how machines dream, how systems crack, and how perception gets restructured through sound.",
           medium: "Digital audio, experimental electronics, sound design",
           category: "AUDIO COLLECTION",
           color: "electric-lime",
-          themes: "Digital processing, temporal manipulation, organic-synthetic synthesis",
-          technology: "Digital audio workstation, experimental synthesis, field recording",
-          // FIXED: Proper Bandcamp track structure
+          themes: [
+            "Digital processing",
+            "Temporal manipulation",
+            "Organic-synthetic synthesis",
+            "Machine improvisation",
+            "Glitch and failure as aesthetic"
+          ],
+          technology: [
+            "Digital Audio Workstation",
+            "Granular and modular synthesis",
+            "Field recording",
+            "Max/MSP",
+            "TouchDesigner (audio-reactive systems)"
+          ],
           bandcampTracks: [
             {
               title: "stranded deep but fast",
               trackId: "2743015108",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast"
             },
             {
               title: "stranded deep",
               trackId: "2338898025",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep"
             },
             {
               title: "tiptoe",
               trackId: "1726285270",
-              url: "https://asymmetrica.bandcamp.com/track/tiptoe",
+              url: "https://asymmetrica.bandcamp.com/track/tiptoe"
             },
             {
               title: "supersounds",
               trackId: "960218379",
-              url: "https://asymmetrica.bandcamp.com/track/supersounds",
+              url: "https://asymmetrica.bandcamp.com/track/supersounds"
             },
             {
               title: "stretching",
               trackId: "2000021307",
-              url: "https://asymmetrica.bandcamp.com/track/stretching",
+              url: "https://asymmetrica.bandcamp.com/track/stretching"
             },
             {
               title: "the machine",
               trackId: "73420518",
-              url: "https://asymmetrica.bandcamp.com/track/the-machine",
+              url: "https://asymmetrica.bandcamp.com/track/the-machine"
             },
             {
               title: "not as i remember it",
               trackId: "750668778",
-              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
+              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it"
             },
             {
               title: "automaton",
               trackId: "3985467816",
-              url: "https://asymmetrica.bandcamp.com/track/automaton",
-            },
-          ],
-        },
+              url: "https://asymmetrica.bandcamp.com/track/automaton"
+            }
+          ]
+        }
+
       ],
 
       performance: [
