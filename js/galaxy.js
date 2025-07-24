@@ -48,12 +48,12 @@ const GALAXY_VISUAL_CONFIG = {
   starSizeRange: { min: 0.5, max: 3.0 },
   starOpacityRange: { min: 0.3, max: 1.0 },
   starTwinkleSpeed: 0.02,
-  starDriftSpeed: { min: 0.1, max: 0.5 },
+  starDriftSpeed: { min: 0.01, max: 0.05 },
 
   // Nebula settings
   nebulaSize: { min: 80, max: 200 },
   nebulaOpacity: { min: 0.1, max: 0.3 },
-  nebulaPulseSpeed: 0.005,
+  nebulaPulseSpeed: 0.0005,
   nebulaColors: [
     "rgba(138, 43, 226, 0.2)", // Deep purple
     "rgba(72, 61, 139, 0.2)", // Dark slate blue
@@ -65,7 +65,7 @@ const GALAXY_VISUAL_CONFIG = {
   // Dust particle settings
   dustSize: { min: 0.2, max: 1.0 },
   dustOpacity: { min: 0.1, max: 0.4 },
-  dustDriftSpeed: { min: 0.05, max: 0.2 },
+  dustDriftSpeed: { min: 0.05, max: 0.02 },
 
   // Parallax layers (depth simulation)
   parallaxLayers: [
@@ -96,7 +96,7 @@ const GALAXY_VISUAL_CONFIG = {
 // ANIMATION SETTINGS
 const GALAXY_ANIMATION_CONFIG = {
   globalRotationSpeed: 0.0001, // Very slow galaxy rotation
-  orbitVariation: 0.3, // Randomness in orbital motion
+  orbitVariation: 0.03, // Randomness in orbital motion
   pulsationIntensity: 0.2, // Intensity of pulsing effects
   driftRandomness: 0.1, // Random drift variation
 }

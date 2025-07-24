@@ -11,7 +11,7 @@
     mobile: {
       particleCount: 30,
       mandalaLayers: 2,
-      galaxyEnabled: true,
+      galaxyEnabled: false,
       animationQuality: "low",
       enableBloom: false,
       enableCursor: false,
@@ -21,7 +21,7 @@
     tablet: {
       particleCount: 80,
       mandalaLayers: 3,
-      galaxyEnabled: true,
+      galaxyEnabled: false,
       animationQuality: "medium",
       enableBloom: true,
       enableCursor: true,
@@ -31,7 +31,7 @@
     desktop: {
       particleCount: 120,
       mandalaLayers: 4,
-      galaxyEnabled: true,
+      galaxyEnabled: false,
       animationQuality: "high",
       enableBloom: true,
       enableCursor: true,
