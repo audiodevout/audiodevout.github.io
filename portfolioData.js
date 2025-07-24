@@ -28,35 +28,6 @@ try {
           images: [],
         },
         {
-          id: "fever-dream",
-          title: "Fever Dream",
-          description:
-            "An audio-reactive poetic installation that externalizes fears and subconscious anxieties, blending glitch electronics with spoken word fragments.",
-          fullDescription:
-            "It interrogates the abstraction of problem-solving and emotional complexity through sound and text, creating an immersive environment for digital anxiety exploration.",
-          medium: "Sound art, interactive audio installation, poetry, glitch electronics",
-          category: "INTERACTIVE AUDIO",
-          color: "neon-magenta",
-          themes: "Subconscious processing, emotional complexity, digital anxiety, glitch aesthetics",
-          technology: "Real-time audio processing, responsive text generation, ambient computing",
-          audioFile: null,
-          images: [],
-        },
-        {
-          id: "untitled-rain-stick",
-          title: "Untitled Rain Stick Installation",
-          description:
-            "An experimental sound sculpture featuring motorized kinetic elements and organic-industrial aesthetics.",
-          fullDescription:
-            "Engaging themes of meditative sound, environmental texture, and physical presence through ongoing experimentation with kinetic sound.",
-          medium: "Physical installation, motorized sculpture, sound art",
-          category: "ONGOING PROJECT",
-          color: "cerulean",
-          status: "In development",
-          audioFile: null,
-          images: [],
-        },
-        {
           id: "asymmetrica-audio-collection",
           title: "Asymmetrica Audio Collection",
           description:
@@ -115,6 +86,21 @@ try {
       ],
 
       performance: [
+        {
+          id: "fever-dream",
+          title: "Fever Dream",
+          description:
+            "An audio-reactive poetic installation that externalizes fears and subconscious anxieties, blending glitch electronics with spoken word fragments.",
+          fullDescription:
+            "It interrogates the abstraction of problem-solving and emotional complexity through sound and text, creating an immersive environment for digital anxiety exploration.",
+          medium: "Sound art, interactive audio installation, poetry, glitch electronics",
+          category: "INTERACTIVE AUDIO",
+          color: "neon-magenta",
+          themes: "Subconscious processing, emotional complexity, digital anxiety, glitch aesthetics",
+          technology: "Real-time audio processing, responsive text generation, ambient computing",
+          audioFile: null,
+          images: [],
+        },
         {
           id: "live-av-performances",
           title: "Live AudioVisual Performances",
