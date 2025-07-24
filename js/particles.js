@@ -45,13 +45,13 @@ const PARTICLE_COLORS = [
 ]
 
 const CONNECTION_COLOR = "rgba(255,255,255,1)"
-const PARTICLE_SIZE_RANGE = { min: 0.5, max: 2.5 }
+const PARTICLE_SIZE_RANGE = { min: 2.1, max: 3.5 }
 const PARTICLE_SPEED_RANGE = { min: 0.2, max: 1.2 }
 const PARTICLE_LIFE_RANGE = { min: 1200, max: 2000 }
 
 // PHYSICS SETTINGS
 const VELOCITY_DAMPING = 0.99 // Particle velocity decay
-const MOUSE_FORCE_STRENGTH = 0.01 // Mouse interaction force
+const MOUSE_FORCE_STRENGTH = 0.2 // Mouse interaction force
 const BOUNDARY_BEHAVIOR = "wrap" // 'wrap' or 'bounce'
 
 /* ============================================================================
