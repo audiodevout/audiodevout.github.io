@@ -37,7 +37,7 @@ const MANDALA_PERFORMANCE_PROFILES = {
 }
 
 // TIME-BASED MORPHING SETTINGS
-const MORPH_CYCLE_MINUTES = 30 // Total cycle time in minutes
+const MORPH_CYCLE_MINUTES = 5 // Total cycle time in minutes
 const SMOOTH_TRANSITIONS = true // Enable smooth morphing between types
 const TRANSITION_OVERLAP = 0.1 // How much types overlap during transition
 

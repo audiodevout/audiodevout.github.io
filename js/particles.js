@@ -12,16 +12,16 @@
 const PERFORMANCE_PROFILES = {
   mobile: {
     maxParticles: 50, // Reduced for mobile performance
-    connectionDistance: 150, // Shorter connections
-    mouseInfluence: 80, // Smaller influence radius
+    connectionDistance: 400, // Shorter connections
+    mouseInfluence: 100, // Smaller influence radius
     enableConnections: false, // Disable connections on mobile
     animationQuality: "low", // Reduced animation quality
     updateFrequency: 30, // 30fps instead of 60fps
   },
   tablet: {
     maxParticles: 100,
-    connectionDistance: 180,
-    mouseInfluence: 90,
+    connectionDistance: 400,
+    mouseInfluence: 100,
     enableConnections: true,
     animationQuality: "medium",
     updateFrequency: 45,
@@ -45,9 +45,9 @@ const PARTICLE_COLORS = [
 ]
 
 const CONNECTION_COLOR = "rgba(255,255,255,1)"
-const PARTICLE_SIZE_RANGE = { min: 2.1, max: 3.5 }
-const PARTICLE_SPEED_RANGE = { min: 0.2, max: 1.2 }
-const PARTICLE_LIFE_RANGE = { min: 10000, max: 20000 }
+const PARTICLE_SIZE_RANGE = { min: 3.0, max: 3.5 }
+const PARTICLE_SPEED_RANGE = { min: 0.07, max: 0.2 }
+const PARTICLE_LIFE_RANGE = { min: 100000000, max: 200000000 }
 
 // PHYSICS SETTINGS
 const VELOCITY_DAMPING = 0.99 // Particle velocity decay
@@ -307,7 +307,7 @@ class ParticleSystem {
     if (!this.config.enableConnections) return
 
     this.ctx.save()
-    this.ctx.lineWidth = 0.5
+    this.ctx.lineWidth = 1.2
     this.ctx.strokeStyle = this.connectionColor
 
     // Optimize connection drawing for performance
