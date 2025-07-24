@@ -144,19 +144,18 @@ try {
       generativeAV: [
         {
           id: "symmetrical-fictions",
-          title: "Symmetrical Fictions",
+          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
           description:
-            "An audiovisual project capturing gameplay footage from Cities: Skylines, focusing on the journey of a garbage truck through urban infrastructure.",
+            "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
           fullDescription:
-            "The visual data drives generative music and sound design, exploring themes of urban entropy, flow, and data as narrative.",
-          medium: "Generative music, data sonification, video game aesthetics",
-          category: "DATA SONIFICATION",
-          color: "neon-magenta",
-          urls: {
-            soundcloud: null,
-            video: null,
-          },
+            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and ction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These “symmetrical ctions” form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality. This project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order. By blurring the lines between ction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet. The project also addresses the mystication of digital systems by reclaiming visual data to present speculative environments that shift our understanding of place. By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reection on the human desire for coherence in a fragmented world. Ultimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric ction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation oers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
+          medium: "Video installation, satellite imagery recomposition, speculative cartography",
+          category: "INSTALLATION & RESEARCH",
+          color: "cerulean",
+          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          publications: [],
         },
+
         {
           id: "galaxy-simulation",
           title: "Galaxy Simulation",
@@ -231,39 +230,31 @@ try {
           category: "VISUAL RESEARCH",
           color: "saffron",
           themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
-          tools: "Procreate, TouchDesigner, generative algorithms",
-          images: [],
+          tools: "TouchDesigner, generative algorithms",
+          images: [
+            "/assets/image/sketch1.jpg",
+            "/assets/image/sketch2.png",
+            "/assets/image/sketch3.png"
+          ],
         },
       ],
 
       writing: [
         {
-          id: "new-media-aesthetics",
-          title: "New Media Aesthetics & Digital Culture",
+          id: "symmetrical-fictions",
+          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
           description:
-            "Critical writing on the intersection of technology, culture, and artistic practice in contemporary new media art.",
+            "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
           fullDescription:
-            "Exploring themes of digital culture, technological mediation, and the aesthetic implications of computational systems on contemporary art practice.",
-          medium: "Critical theory, cultural analysis, new media criticism",
-          category: "CRITICAL THEORY",
+            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and ction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These “symmetrical ctions” form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality. This project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order. By blurring the lines between ction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet. The project also addresses the mystication of digital systems by reclaiming visual data to present speculative environments that shift our understanding of place. By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reection on the human desire for coherence in a fragmented world. Ultimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric ction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation oers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
+          medium: "Video installation, satellite imagery recomposition, speculative cartography",
+          category: "INSTALLATION & RESEARCH",
           color: "cerulean",
-          themes: "Digital culture, technological aesthetics, computational art theory",
+          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
           publications: [],
         },
-        {
-          id: "indo-futurism",
-          title: "Indo-Futurist Aesthetics",
-          description:
-            "Theoretical exploration of how traditional South Asian cultural elements can inform and enhance contemporary digital art practices.",
-          fullDescription:
-            "Investigating the potential for creating new aesthetic languages that bridge traditional cultural knowledge systems with emerging technological capabilities.",
-          medium: "Cultural theory, aesthetic philosophy, speculative design",
-          category: "SPECULATIVE THEORY",
-          color: "neon-magenta",
-          themes: "Cultural futurism, aesthetic synthesis, technological decolonization",
-          publications: [],
-        },
-      ],
+
+        ],
     },
 
     contact: {
