@@ -222,6 +222,7 @@ h6 {
   min-height: var(--touch-target);
 }
 
+/* Logo */
 .nav-logo {
   font-family: var(--font-display);
   font-weight: 700;
@@ -232,6 +233,8 @@ h6 {
   z-index: var(--z-navigation);
   position: relative;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-logo:hover,
@@ -240,9 +243,30 @@ h6 {
   outline: none;
 }
 
-/* Mobile-first navigation links */
+/* Responsive logo sizes */
+@media (max-width: 768px) {
+  .nav-logo {
+    font-size: var(--text-base);
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-logo {
+    font-size: var(--text-sm);
+    letter-spacing: 0.02em;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-logo {
+    font-size: var(--text-xs);
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Mobile-first nav links (collapsed menu) */
 .nav-links {
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -254,18 +278,47 @@ h6 {
   padding: var(--spacing-lg);
   border-top: 1px solid var(--glass-border);
   gap: var(--spacing-sm);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
   box-shadow: 0 8px 32px var(--shadow-neutral);
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
 
+/* Toggle active */
 .nav-links.active {
-  display: flex;
+  max-height: 500px; /* Arbitrary large enough value */
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
+/* Desktop nav */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    border-top: none;
+    gap: 2rem;
+    max-height: none;
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .nav-links.active {
+    transform: none;
+  }
+}
+
+/* Individual nav links */
 .nav-link {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
@@ -276,7 +329,6 @@ h6 {
   border-radius: 0.5rem;
   transition: all 0.3s ease;
   letter-spacing: 0.05em;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -298,6 +350,7 @@ h6 {
   background: var(--glass-accent);
   box-shadow: 0 4px 16px var(--shadow-saffron);
 }
+
 
 /* Mobile menu toggle */
 .mobile-menu-toggle {
