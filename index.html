@@ -23,21 +23,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FIXED: Load styles in correct order -->
-    <link rel="stylesheet" href="css/design-system.css">
-    <link rel="stylesheet" href="css/main.css">
+    <!-- Load styles in correct order -->
+    <link rel="stylesheet" href="./css/design-system.css">
+    <link rel="stylesheet" href="./css/main.css">
     
-    <!-- FIXED: Preload critical scripts in correct order -->
-    <link rel="preload" href="js/config.js" as="script">
-    <link rel="preload" href="js/utils.js" as="script">
-    <link rel="preload" href="portfolioData.js" as="script">
+    <!-- Preload critical scripts in correct order -->
+    <link rel="preload" href="./js/config.js" as="script">
+    <link rel="preload" href="./js/utils.js" as="script">
+    <link rel="preload" href="./portfolioData.js" as="script">
     
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <!-- FIXED: Add base path configuration for GitHub Pages -->
+    <script>
+        // Configure base path for GitHub Pages deployment
+        window.PORTFOLIO_CONFIG = {
+            basePath: window.location.pathname.includes('/audiodevout.github.io') ? '/audiodevout.github.io' : '',
+            assetsPath: './assets',
+            isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        };
+        
+        // Helper function to resolve asset paths
+        window.resolveAssetPath = function(path) {
+            if (!path) return '';
+            
+            // If it's already a full URL, return as-is
+            if (path.startsWith('http://') || path.startsWith('https://')) {
+                return path;
+            }
+            
+            // Remove leading slash if present
+            const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+            
+            // For GitHub Pages, use relative paths
+            if (cleanPath.startsWith('assets/')) {
+                return './' + cleanPath;
+            }
+            
+            // Default to relative path
+            return cleanPath.startsWith('./') ? cleanPath : './' + cleanPath;
+        };
+    </script>
 </head>
 <body>
-    <!-- FIXED: Added proper navigation structure -->
+    <!-- Navigation structure -->
     <nav id="navigation" class="nav-container" role="navigation" aria-label="Main navigation">
         <div class="nav-content container">
             <a href="#home" class="nav-logo" data-page="home">ATHARVA GUPTA</a>
@@ -49,7 +80,7 @@
                 <a href="#interactive" class="nav-link focus-visible touch-target" data-page="interactive" role="menuitem">INTERACTIVE</a>
                 <a href="#drawings" class="nav-link focus-visible touch-target" data-page="drawings" role="menuitem">DRAWINGS</a>
                 <a href="#writing" class="nav-link focus-visible touch-target" data-page="writing" role="menuitem">WRITING</a>
-                <a href="#contact" class="nav-link focus-visible touch-target" data-page="contact" role="menuitem">CONTACT</a>
+                <a href="#about-contact" class="nav-link focus-visible touch-target" data-page="about-contact" role="menuitem">ABOUT/CONTACT</a>
             </div>
             <button id="mobileMenuToggle" 
                     class="mobile-menu-toggle touch-target focus-visible no-tap-highlight" 
@@ -65,7 +96,7 @@
 
     <!-- Main Content Container -->
     <main id="mainContent" class="main-container" role="main" aria-live="polite">
-        <!-- FIXED: Added loading state -->
+        <!-- Loading state -->
         <div id="loadingState" class="loading-state">
             <div class="loading-content">
                 <h1 class="text-4xl font-bold text-saffron">Loading Experimental Systems...</h1>
@@ -83,7 +114,7 @@
         </noscript>
     </main>
 
-    <!-- FIXED: Canvas elements with proper error handling -->
+    <!-- Canvas elements with proper error handling -->
     <canvas id="galaxyCanvas" class="galaxy-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
     <canvas id="particleCanvas" class="particle-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
     <canvas id="mandalaCanvas" class="mandala-canvas gpu-accelerated" aria-hidden="true" width="1" height="1"></canvas>
@@ -107,7 +138,7 @@
         </div>
     </div>
 
-    <!-- FIXED: Scripts loaded in correct order with error handling -->
+    <!-- Scripts loaded in correct order with error handling -->
     <script>
         // Add js-enabled class immediately to prevent FOUC
         document.documentElement.classList.add('js-enabled');
@@ -128,21 +159,21 @@
         });
     </script>
     
-    <!-- FIXED: Load configuration and utilities first -->
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
+    <!-- Load configuration and utilities first -->
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
     
-    <!-- FIXED: Load data before main app -->
-    <script src="portfolioData.js"></script>
+    <!-- Load data before main app -->
+    <script src="./portfolioData.js"></script>
     
-    <!-- FIXED: Load animation systems with error handling -->
-    <script src="js/galaxy.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/mandalaGenerator.js"></script>
-    <script src="js/cursorTrail.js"></script>
+    <!-- Load animation systems with error handling -->
+    <script src="./js/galaxy.js"></script>
+    <script src="./js/particles.js"></script>
+    <script src="./js/mandalaGenerator.js"></script>
+    <script src="./js/cursorTrail.js"></script>
     
-    <!-- FIXED: Load main application last -->
-    <script src="js/main.js"></script>
+    <!-- Load main application last -->
+    <script src="./js/main.js"></script>
     
     <script>
         // Performance mark for initialization completion

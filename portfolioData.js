@@ -2,7 +2,7 @@
  * portfolioData.js - Portfolio Content Data (FIXED)
  *
  * PURPOSE: Centralized data structure for all portfolio content
- * FIXES: Added proper media file support, consistent data structure, error handling
+ * FIXES: Fixed media paths for GitHub Pages compatibility, added fallback handling
  */
 
 // FIXED: Wrapped in try-catch for error handling
@@ -24,8 +24,9 @@ try {
           dimensions: "1.8m (height) × 0.5m (diameter)",
           technical: "Motorized rotation system, custom electronics, organic acoustic elements",
           themes: "Meditative sound, industrial aesthetics, tinnitus awareness",
-          audioFile: "/assets/audio/rain-reminders-sample.mp3",
-          images: ["/assets/image/rain-reminders-1.png", "/assets/image/rain-reminders-2.png"],
+          // FIXED: Use relative paths that work with GitHub Pages
+          audioFile: "./assets/audio/rain-reminders-sample.mp3",
+          images: ["./assets/images/rain-reminders-1.png", "./assets/images/rain-reminders-2.png"],
         },
         {
           id: "asymmetrica-audio-collection",
@@ -99,6 +100,9 @@ try {
           color: "neon-magenta",
           themes: "Subconscious processing, emotional complexity, digital anxiety, glitch aesthetics",
           technology: "Real-time audio processing, responsive text generation, ambient computing",
+          // FIXED: Add placeholder media with proper paths
+          videos: ["./assets/videos/fever-dream-performance.mp4"],
+          images: ["./assets/images/fever-dream-setup.jpg"],
         },
         {
           id: "live-av-performances",
@@ -111,6 +115,7 @@ try {
           category: "TOUCHDESIGNER • GESTURE CONTROL",
           color: "cerulean",
           documentation: "Video archives and recordings coming soon",
+          videos: ["./assets/videos/live-av-performance-1.mp4", "./assets/videos/live-av-performance-2.mp4"],
         },
         {
           id: "coding-computing-as-a-ritual",
@@ -123,6 +128,7 @@ try {
           category: "PARTICIPATORY • EXPERIMENTAL",
           color: "electric-lime",
           documentation: "Live performance documentation",
+          images: ["./assets/images/ritual-computing-1.jpg", "./assets/images/ritual-computing-2.jpg"],
         },
       ],
 
@@ -138,6 +144,8 @@ try {
           category: "INSTALLATION & RESEARCH",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          videos: ["./assets/videos/symmetrical-fictions-excerpt.mp4"],
+          images: ["./assets/images/symmetrical-fictions-1.jpg", "./assets/images/symmetrical-fictions-2.jpg"],
         },
         {
           id: "galaxy-simulation",
@@ -149,6 +157,8 @@ try {
           medium: "Algorithmic composition, procedural generation, space simulation",
           category: "ALGORITHMIC COMPOSITION",
           color: "electric-lime",
+          videos: ["./assets/videos/galaxy-simulation.mp4"],
+          audioFile: "./assets/audio/galaxy-soundscape.mp3",
         },
         {
           id: "audiodevout-channel",
@@ -164,6 +174,7 @@ try {
             youtube: "https://www.youtube.com/@audiodevout",
             patreon: "https://www.patreon.com/audiodevout",
           },
+          images: ["./assets/images/audiodevout-thumbnail-1.jpg", "./assets/images/audiodevout-thumbnail-2.jpg"],
         },
       ],
 
@@ -179,6 +190,8 @@ try {
           category: "INTERFACE DESIGN",
           color: "electric-lime",
           technical: "MediaPipe, real-time audio synthesis, Python, Max/MSP integration",
+          videos: ["./assets/videos/gesture-detection-demo.mp4"],
+          images: ["./assets/images/gesture-interface-setup.jpg"],
         },
         {
           id: "ambient-computing",
@@ -191,6 +204,8 @@ try {
           category: "ENVIRONMENTAL COMPUTING",
           color: "saffron",
           technical: "Arduino, environmental sensors, ambient sound processing",
+          audioFile: "./assets/audio/ambient-computing-sample.mp3",
+          images: ["./assets/images/ambient-computing-1.jpg", "./assets/images/ambient-computing-2.jpg"],
         },
       ],
 
@@ -207,7 +222,12 @@ try {
           color: "saffron",
           themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
           tools: "TouchDesigner, generative algorithms",
-          images: ["/assets/image/sketch1.jpg", "/assets/image/sketch2.png", "/assets/image/sketch3.png"],
+          // FIXED: Updated image paths
+          images: [
+            "./assets/images/sketch1.jpg",
+            "./assets/images/sketch2.png",
+            "./assets/images/sketch3.png"
+          ],
         },
       ],
 
@@ -222,11 +242,30 @@ try {
           category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          urls: {
+            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+            academia: "https://academia.edu/example",
+          },
         },
       ],
     },
 
-    contact: {
+     contact: {
+      about: {
+        title: "About",
+        description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. My practice explores how computational systems can become vehicles for meditative experience, cultural memory, and speculative futures.
+
+Through installations, performances, and research, I investigate the unstable boundaries between organic and synthetic, rational and intuitive, individual and collective. My work often incorporates elements of South Asian aesthetic traditions, reimagined through contemporary digital tools and post-colonial perspectives.
+
+Currently based between experimental sound communities and academic research contexts, I develop projects that challenge techno-positivist narratives while creating space for contemplative engagement with technology.`,
+        image: "./assets/images/atharva.jpeg",
+        credentials: [
+          "Experimental Sound Artist",
+          "AudioVisual Researcher",
+          "TouchDesigner Educator",
+          "Asymmetrica (Solo Project)"
+        ]
+      },
       social: [
         {
           name: "YouTube",
@@ -267,6 +306,7 @@ try {
       ],
       description: "Connect for collaborations, commissions, or critical discourse.",
     },
+
 
     pageContent: {
       home: {

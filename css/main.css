@@ -687,6 +687,70 @@ h6 {
   color: var(--off-white);
 }
 
+/* ADD THIS to css/main.css - About Section Styles */
+
+/* About Section Layout */
+.about-content {
+  display: grid;
+  gap: var(--spacing-xl);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .about-text {
+    order: 2;
+  }
+  
+  .about-image,
+  .about-image-placeholder {
+    order: 1;
+    max-width: 300px !important;
+  }
+}
+
+/* Tablet: Side by side */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr 300px;
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Desktop: Optimal side by side */
+@media (min-width: 1024px) {
+  .about-content {
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xxl);
+  }
+}
+
+/* Portrait Image Enhancements */
+.portrait-container {
+  transition: all 0.3s ease;
+}
+
+.portrait-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow-neutral), 0 4px 12px var(--shadow-saffron);
+}
+
+/* Credentials Tags */
+.credentials span {
+  transition: all 0.3s ease;
+}
+
+.credentials span:hover {
+  background: var(--glass-border);
+  transform: translateY(-1px);
+}
+
 /* Modal - Mobile Optimized */
 .modal-overlay {
   position: fixed;

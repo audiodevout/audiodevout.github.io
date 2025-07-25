@@ -49,7 +49,7 @@
     interactive: 8,
     drawings: 7,
     writing: 9,
-    contact: 16,
+    "about-contact": 16,
   }
 
   class PortfolioApp {
@@ -577,7 +577,7 @@
           case "writing":
             html = this.renderWritingPage()
             break
-          case "contact":
+          case "about-contact":
             html = this.renderContactPage()
             break
           default:
@@ -718,29 +718,137 @@
       `
     }
 
-    renderContactPage() {
-      const contact = this.data.contact || { social: [], description: "Contact information loading..." }
+    // REPLACE the renderContactPage() function in js/main.js with this:
+renderContactPage() {
+  const contact = this.data.contact || { 
+    about: { 
+      title: "About", 
+      description: "Loading...", 
+      image: null,
+      credentials: []
+    }, 
+    social: [], 
+    description: "Contact information loading..." 
+  }
 
-      return `
-        <section class="page-section active">
-          <div class="page-content">
-            <div class="page-header">
-              <h2 class="page-title" style="color: var(--electric-lime);">CONTACT / SOCIAL</h2>
+  return `
+    <section class="page-section active">
+      <div class="page-content">
+        <div class="page-header">
+          <h2 class="page-title" style="color: var(--electric-lime);">ABOUT & CONTACT</h2>
+        </div>
+        
+        <!-- About Section -->
+        <div class="about-section" style="margin-bottom: var(--spacing-xxl);">
+          <div class="about-content" style="display: grid; gap: var(--spacing-xl); grid-template-columns: 1fr; align-items: start;">
+            
+            <!-- About Text -->
+            <div class="about-text glass-panel" style="padding: var(--spacing-xl);">
+              <h3 style="color: var(--saffron); font-size: var(--text-2xl); margin-bottom: var(--spacing-lg); font-weight: 600;">
+                ${contact.about?.title || "About"}
+              </h3>
+              
+              <div style="font-size: var(--text-lg); line-height: 1.8; opacity: 0.9; margin-bottom: var(--spacing-lg);">
+                ${contact.about?.description?.split('\n\n').map(paragraph => 
+                  `<p style="margin-bottom: var(--spacing-md);">${paragraph}</p>`
+                ).join('') || "Loading about content..."}
+              </div>
+              
+              ${contact.about?.credentials && contact.about.credentials.length > 0 ? `
+                <div class="credentials" style="margin-top: var(--spacing-lg);">
+                  <h4 style="color: var(--cerulean); font-size: var(--text-lg); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: 0.05em;">
+                    PRACTICE AREAS
+                  </h4>
+                  <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
+                    ${contact.about.credentials.map(credential => `
+                      <span style="
+                        background: var(--glass-accent); 
+                        border: 1px solid var(--glass-border); 
+                        padding: var(--spacing-xs) var(--spacing-sm); 
+                        border-radius: var(--spacing-lg); 
+                        font-family: var(--font-mono); 
+                        font-size: var(--text-sm); 
+                        color: var(--off-white);
+                        opacity: 0.9;
+                      ">
+                        ${credential}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
             </div>
             
-            <div class="social-grid">
-              ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
-            </div>
-            
-            <div class="glass-panel" style="margin-top: 3rem; padding: 3rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
-              <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
-                ${contact.description}
-              </p>
-            </div>
+            <!-- Portrait Image -->
+            ${contact.about?.image ? `
+              <div class="about-image glass-panel-light" style="padding: var(--spacing-md); text-align: center;">
+                <div class="portrait-container" style="
+                  position: relative; 
+                  max-width: 400px; 
+                  margin: 0 auto;
+                  aspect-ratio: 4/5;
+                  overflow: hidden;
+                  border-radius: var(--spacing-lg);
+                  background: var(--glass-panel-light);
+                ">
+                  <img 
+                    src="${contact.about.image}" 
+                    alt="Atharva Gupta"
+                    style="
+                      width: 100%; 
+                      height: 100%; 
+                      object-fit: cover; 
+                      transition: transform 0.3s ease;
+                      filter: grayscale(20%) contrast(1.1);
+                    "
+                    loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div class=\\'media-error\\'>Portrait image not available<br><small>${contact.about.image}</small></div>'"
+                    onmouseover="this.style.transform = 'scale(1.02)'"
+                    onmouseout="this.style.transform = 'scale(1)'"
+                  />
+                </div>
+              </div>
+            ` : `
+              <div class="about-image-placeholder glass-panel-light" style="
+                padding: var(--spacing-xl); 
+                text-align: center;
+                aspect-ratio: 4/5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-width: 400px;
+                margin: 0 auto;
+                border-radius: var(--spacing-lg);
+                border: 2px dashed var(--glass-border);
+              ">
+                <div style="color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+                  📷<br>Portrait Image<br>Coming Soon
+                </div>
+              </div>
+            `}
           </div>
-        </section>
-      `
-    }
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="contact-section">
+          <h3 style="color: var(--cerulean); font-size: var(--text-2xl); margin-bottom: var(--spacing-xl); text-align: center; font-weight: 600;">
+            CONNECT & COLLABORATE
+          </h3>
+          
+          <div class="social-grid">
+            ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
+          </div>
+          
+          <div class="glass-panel" style="margin-top: var(--spacing-xl); padding: var(--spacing-xl); text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: var(--text-lg); line-height: 1.8; opacity: 0.9;">
+              ${contact.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  `
+}
 
     renderErrorPage() {
       return `
@@ -831,7 +939,7 @@
       `
     }
 
-    // FIXED: New method to render project images with better path handling
+    // FIXED: New method to render project images
     renderProjectImages(images, isPreview = false) {
       if (!images || !Array.isArray(images) || images.length === 0) return ""
 
@@ -852,7 +960,7 @@
                   alt="Project image ${index + 1}"
                   style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
                   loading="lazy"
-                  onerror="this.parentElement.innerHTML='<div class=\\'media-error\\'>Image not available<br><small>${imagePath}</small></div>'"
+                  onerror="this.parentElement.innerHTML='<div style=\\'display: flex; align-items: center; justify-content: center; height: 100%; color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-xs);\\'>Image not found</div>'"
                   onmouseover="this.style.transform = 'scale(1.05)'"
                   onmouseout="this.style.transform = 'scale(1)'"
                 />
@@ -1376,3 +1484,4 @@
     }
   })
 })()
+s
