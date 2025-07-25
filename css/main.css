@@ -2,7 +2,7 @@
  * main.css - Indo-Futurist Portfolio Styles (FIXED)
  *
  * PURPOSE: Complete styling for the Indo-Futurist portfolio static site
- * FIXES: Responsive design, Bandcamp integration, performance optimization
+ * FIXES: Added media support, responsive design, Bandcamp integration, performance optimization
  */
 
 /* MOBILE BREAKPOINTS */
@@ -485,6 +485,102 @@ h6 {
   margin-bottom: var(--spacing-md);
 }
 
+/* FIXED: Media Section Styles */
+.project-media-section {
+  border-top: 1px solid var(--glass-border);
+  padding-top: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.project-media-section h4 {
+  color: var(--off-white);
+  font-size: var(--text-sm);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* FIXED: Image Styles */
+.project-images {
+  display: grid;
+  gap: var(--spacing-sm);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.project-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  aspect-ratio: 4 / 3;
+  background: var(--glass-panel-light);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.project-image-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-neutral), 0 2px 8px var(--shadow-cerulean);
+}
+
+.project-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* FIXED: Video Styles */
+.project-videos {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.project-video-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--glass-panel-light);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.project-video-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-neutral), 0 2px 8px var(--shadow-cerulean);
+}
+
+.project-video-container video {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  background: var(--deep-black);
+}
+
+/* FIXED: Audio Styles */
+.project-audio {
+  background: var(--glass-panel-light);
+  border-radius: 1rem;
+  padding: var(--spacing-md);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.project-audio:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--shadow-neutral), 0 1px 4px var(--shadow-cerulean);
+}
+
+.project-audio audio {
+  width: 100%;
+  height: 40px;
+  border-radius: 0.5rem;
+}
+
 /* Page Headers */
 .page-header {
   text-align: center;
@@ -676,7 +772,7 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: var(--z-mandala);     /* ← SWAP THESE */
+  z-index: var(--z-mandala);
   pointer-events: none;
 }
 
@@ -686,7 +782,7 @@ h6 {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: var(--z-background);  /* ← SWAP THESE */
+  z-index: var(--z-background);
   pointer-events: none;
   opacity: 0.4;
   transition: all 0.5s ease;
@@ -1029,7 +1125,11 @@ h6 {
     opacity: 0.6;
   }
 
-  /* FIXED: Bandcamp responsive adjustments */
+  /* FIXED: Media responsive adjustments */
+  .project-images {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
   .bandcamp-embeds {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-xl);
@@ -1087,7 +1187,11 @@ h6 {
     max-width: 800px;
   }
 
-  /* FIXED: Desktop Bandcamp improvements */
+  /* FIXED: Desktop media improvements */
+  .project-images {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
   .bandcamp-modal-tracks {
     max-height: 400px;
   }
@@ -1147,16 +1251,25 @@ h6 {
   }
 }
 
-/* FIXED: Loading states for iframes */
+/* FIXED: Loading states for media */
 .bandcamp-track iframe,
 .bandcamp-track-modal iframe {
   background: var(--glass-panel-light);
   min-height: 42px;
 }
 
-/* FIXED: Ensure iframes are accessible */
+.project-image-container img,
+.project-video-container video,
+.project-audio audio {
+  background: var(--glass-panel-light);
+}
+
+/* FIXED: Ensure media elements are accessible */
 .bandcamp-track iframe:focus,
-.bandcamp-track-modal iframe:focus {
+.bandcamp-track-modal iframe:focus,
+.project-image-container img:focus,
+.project-video-container video:focus,
+.project-audio audio:focus {
   outline: 2px solid var(--saffron);
   outline-offset: 2px;
 }
@@ -1188,4 +1301,17 @@ h6 {
 .touch-target {
   min-width: var(--touch-target);
   min-height: var(--touch-target);
+}
+
+/* FIXED: Media error states */
+.media-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--pale-gray);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-align: center;
+  padding: var(--spacing-md);
 }

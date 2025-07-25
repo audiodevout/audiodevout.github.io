@@ -2,7 +2,7 @@
  * portfolioData.js - Portfolio Content Data (FIXED)
  *
  * PURPOSE: Centralized data structure for all portfolio content
- * FIXES: Proper JavaScript syntax, consistent data structure, error handling
+ * FIXES: Added proper media file support, consistent data structure, error handling
  */
 
 // FIXED: Wrapped in try-catch for error handling
@@ -24,8 +24,8 @@ try {
           dimensions: "1.8m (height) × 0.5m (diameter)",
           technical: "Motorized rotation system, custom electronics, organic acoustic elements",
           themes: "Meditative sound, industrial aesthetics, tinnitus awareness",
-          audioFile: null,
-          images: [],
+          audioFile: "/assets/audio/rain-reminders-sample.mp3",
+          images: ["/assets/image/rain-reminders-1.png", "/assets/image/rain-reminders-2.png"],
         },
         {
           id: "asymmetrica-audio-collection",
@@ -33,68 +33,57 @@ try {
           description:
             "A personal archive of sonic experiments exploring digital anxiety, temporal displacement, and meditative machinery.",
           fullDescription:
-            "Asymmetrica is my ongoing solo project rooted in experimental audio, where I explore the unstable edge between organic resonance and synthetic control. These compositions are part of my sonic research practice—an evolving collection of sketches, studies, and resolved pieces. Using a mix of field recordings, generative synthesis, and digital manipulation, I craft sounds that navigate disorientation, tension, and glitch-as-texture. Some tracks are slow-burning and ambient, others are rhythm-driven or noise-laced. They're all part of a larger investigation into how machines dream, how systems crack, and how perception gets restructured through sound.",
+            "Asymmetrica is my ongoing solo project rooted in experimental audio, where I explore the unstable edge between organic resonance and synthetic control. These compositions are part of my sonic research practice—an evolving collection of sketches, studies, and resolved pieces. Using a mix of field recordings, generative synthesis, and digital manipulation, I craft sounds that navigate disorientation, tension, and glitch-as-texture.",
           medium: "Digital audio, experimental electronics, sound design",
           category: "AUDIO COLLECTION",
           color: "electric-lime",
-          themes: [
-            "Digital processing",
-            "Temporal manipulation",
-            "Organic-synthetic synthesis",
-            "Machine improvisation",
-            "Glitch and failure as aesthetic"
-          ],
-          technology: [
-            "Digital Audio Workstation",
-            "Granular and modular synthesis",
-            "Field recording",
-            "Max/MSP",
-            "TouchDesigner (audio-reactive systems)"
-          ],
+          themes:
+            "Digital processing, temporal manipulation, organic-synthetic synthesis, machine improvisation, glitch and failure as aesthetic",
+          technology:
+            "Digital Audio Workstation, granular and modular synthesis, field recording, Max/MSP, TouchDesigner",
           bandcampTracks: [
             {
               title: "stranded deep but fast",
               trackId: "2743015108",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast"
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
             },
             {
               title: "stranded deep",
               trackId: "2338898025",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep"
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
             },
             {
               title: "tiptoe",
               trackId: "1726285270",
-              url: "https://asymmetrica.bandcamp.com/track/tiptoe"
+              url: "https://asymmetrica.bandcamp.com/track/tiptoe",
             },
             {
               title: "supersounds",
               trackId: "960218379",
-              url: "https://asymmetrica.bandcamp.com/track/supersounds"
+              url: "https://asymmetrica.bandcamp.com/track/supersounds",
             },
             {
               title: "stretching",
               trackId: "2000021307",
-              url: "https://asymmetrica.bandcamp.com/track/stretching"
+              url: "https://asymmetrica.bandcamp.com/track/stretching",
             },
             {
               title: "the machine",
               trackId: "73420518",
-              url: "https://asymmetrica.bandcamp.com/track/the-machine"
+              url: "https://asymmetrica.bandcamp.com/track/the-machine",
             },
             {
               title: "not as i remember it",
               trackId: "750668778",
-              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it"
+              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
             },
             {
               title: "automaton",
               trackId: "3985467816",
-              url: "https://asymmetrica.bandcamp.com/track/automaton"
-            }
-          ]
-        }
-
+              url: "https://asymmetrica.bandcamp.com/track/automaton",
+            },
+          ],
+        },
       ],
 
       performance: [
@@ -110,8 +99,6 @@ try {
           color: "neon-magenta",
           themes: "Subconscious processing, emotional complexity, digital anxiety, glitch aesthetics",
           technology: "Real-time audio processing, responsive text generation, ambient computing",
-          audioFile: null,
-          images: [],
         },
         {
           id: "live-av-performances",
@@ -124,7 +111,6 @@ try {
           category: "TOUCHDESIGNER • GESTURE CONTROL",
           color: "cerulean",
           documentation: "Video archives and recordings coming soon",
-          videos: [],
         },
         {
           id: "coding-computing-as-a-ritual",
@@ -137,7 +123,6 @@ try {
           category: "PARTICIPATORY • EXPERIMENTAL",
           color: "electric-lime",
           documentation: "Live performance documentation",
-          videos: [],
         },
       ],
 
@@ -148,14 +133,12 @@ try {
           description:
             "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
           fullDescription:
-            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and ction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These “symmetrical ctions” form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality. This project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order. By blurring the lines between ction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet. The project also addresses the mystication of digital systems by reclaiming visual data to present speculative environments that shift our understanding of place. By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reection on the human desire for coherence in a fragmented world. Ultimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric ction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation oers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
+            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
           medium: "Video installation, satellite imagery recomposition, speculative cartography",
           category: "INSTALLATION & RESEARCH",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          publications: [],
         },
-
         {
           id: "galaxy-simulation",
           title: "Galaxy Simulation",
@@ -166,10 +149,6 @@ try {
           medium: "Algorithmic composition, procedural generation, space simulation",
           category: "ALGORITHMIC COMPOSITION",
           color: "electric-lime",
-          urls: {
-            demo: null,
-            github: null,
-          },
         },
         {
           id: "audiodevout-channel",
@@ -177,16 +156,15 @@ try {
           description:
             "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
           fullDescription:
-            "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic. The videos range from real-time generative visualizers and particle simulations to noise-based sculpting techniques and musical automation. Alongside YouTube, I run a Patreon where I release exclusive .tox files, project breakdowns, and custom components for TouchDesigner enthusiasts. This channel is both a learning resource and a digital sketchbook where I explore themes of signal, noise, entropy, and digital poetics.",
+            "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic.",
           medium: "TouchDesigner, real-time generative visuals, sound-reactive systems",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           color: "cerulean",
           urls: {
             youtube: "https://www.youtube.com/@audiodevout",
-            patreon: "https://www.patreon.com/audiodevout"
-          }
-        }
-
+            patreon: "https://www.patreon.com/audiodevout",
+          },
+        },
       ],
 
       interactive: [
@@ -201,7 +179,6 @@ try {
           category: "INTERFACE DESIGN",
           color: "electric-lime",
           technical: "MediaPipe, real-time audio synthesis, Python, Max/MSP integration",
-          images: [],
         },
         {
           id: "ambient-computing",
@@ -214,7 +191,6 @@ try {
           category: "ENVIRONMENTAL COMPUTING",
           color: "saffron",
           technical: "Arduino, environmental sensors, ambient sound processing",
-          images: [],
         },
       ],
 
@@ -231,30 +207,23 @@ try {
           color: "saffron",
           themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
           tools: "TouchDesigner, generative algorithms",
-          images: [
-            "/assets/image/sketch1.jpg",
-            "/assets/image/sketch2.png",
-            "/assets/image/sketch3.png"
-          ],
+          images: ["/assets/image/sketch1.jpg", "/assets/image/sketch2.png", "/assets/image/sketch3.png"],
         },
       ],
 
       writing: [
         {
-          id: "symmetrical-fictions",
+          id: "symmetrical-fictions-paper",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-          description:
-            "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
+          description: "A research paper exploring the theoretical framework behind the video installation project.",
           fullDescription:
-            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and ction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These “symmetrical ctions” form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality. This project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order. By blurring the lines between ction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet. The project also addresses the mystication of digital systems by reclaiming visual data to present speculative environments that shift our understanding of place. By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reection on the human desire for coherence in a fragmented world. Ultimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric ction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation oers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
-          medium: "Video installation, satellite imagery recomposition, speculative cartography",
-          category: "INSTALLATION & RESEARCH",
+            "This paper examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
+          medium: "Academic paper, theoretical research",
+          category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          publications: [],
         },
-
-        ],
+      ],
     },
 
     contact: {
@@ -299,7 +268,6 @@ try {
       description: "Connect for collaborations, commissions, or critical discourse.",
     },
 
-    // FIXED: Added page content structure
     pageContent: {
       home: {
         title: "Experimental Systems",

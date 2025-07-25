@@ -1,7 +1,7 @@
 /* main.js - Core Portfolio Application Logic (FIXED)
  *
  * PURPOSE: Parses portfolioData.js and dynamically renders all page content
- * FIXES: Error handling, performance optimization, proper event management
+ * FIXES: Added support for images, videos, audio files, and better media handling
  */
 
 // FIXED: Wrapped entire application in error handling
@@ -760,12 +760,16 @@
       `
     }
 
-    // FIXED: Improved project card rendering with better Bandcamp integration
+    // FIXED: Enhanced project card rendering with full media support
     renderProjectCard(project) {
       if (!project) return ""
 
       const hasBandcampTracks =
         project.bandcampTracks && Array.isArray(project.bandcampTracks) && project.bandcampTracks.length > 0
+
+      const hasImages = project.images && Array.isArray(project.images) && project.images.length > 0
+      const hasVideos = project.videos && Array.isArray(project.videos) && project.videos.length > 0
+      const hasAudioFile = project.audioFile && typeof project.audioFile === "string"
 
       return `
         <div class="project-card ${project.color || "saffron"}" 
@@ -779,6 +783,10 @@
           </div>
           <p class="project-description">${project.description || "No description available."}</p>
           ${project.medium ? `<div class="mono" style="font-size: 0.8rem; opacity: 0.7; margin-top: 1rem;">${project.medium}</div>` : ""}
+          
+          ${hasImages ? this.renderProjectImages(project.images, true) : ""}
+          ${hasVideos ? this.renderProjectVideos(project.videos, true) : ""}
+          ${hasAudioFile ? this.renderProjectAudio(project.audioFile, project.title) : ""}
           
           ${
             hasBandcampTracks
@@ -819,6 +827,127 @@
           `
               : ""
           }
+        </div>
+      `
+    }
+
+    // FIXED: New method to render project images with better path handling
+    renderProjectImages(images, isPreview = false) {
+      if (!images || !Array.isArray(images) || images.length === 0) return ""
+
+      const imagesToShow = isPreview ? images.slice(0, 2) : images
+
+      return `
+        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
+          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
+            ${isPreview ? "PREVIEW IMAGES" : "IMAGES"}
+          </h4>
+          <div class="project-images" style="display: grid; gap: var(--spacing-sm); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            ${imagesToShow
+              .map(
+                (imagePath, index) => `
+              <div class="project-image-container" style="position: relative; overflow: hidden; border-radius: 1rem; aspect-ratio: 4/3; background: var(--glass-panel-light);">
+                <img 
+                  src="${imagePath}" 
+                  alt="Project image ${index + 1}"
+                  style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
+                  loading="lazy"
+                  onerror="this.parentElement.innerHTML='<div class=\\'media-error\\'>Image not available<br><small>${imagePath}</small></div>'"
+                  onmouseover="this.style.transform = 'scale(1.05)'"
+                  onmouseout="this.style.transform = 'scale(1)'"
+                />
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+          ${
+            isPreview && images.length > 2
+              ? `
+            <div style="text-align: center; margin-top: var(--spacing-sm);">
+              <span style="font-size: var(--text-xs); opacity: 0.7; font-family: var(--font-mono);">
+                +${images.length - 2} more images in details
+              </span>
+            </div>
+          `
+              : ""
+          }
+        </div>
+      `
+    }
+
+    // FIXED: New method to render project videos
+    renderProjectVideos(videos, isPreview = false) {
+      if (!videos || !Array.isArray(videos) || videos.length === 0) return ""
+
+      const videosToShow = isPreview ? videos.slice(0, 1) : videos
+
+      return `
+        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
+          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
+            ${isPreview ? "PREVIEW VIDEO" : "VIDEOS"}
+          </h4>
+          <div class="project-videos" style="display: grid; gap: var(--spacing-sm);">
+            ${videosToShow
+              .map(
+                (videoPath, index) => `
+              <div class="project-video-container" style="position: relative; overflow: hidden; border-radius: 1rem; background: var(--glass-panel-light);">
+                <video 
+                  controls 
+                  preload="metadata"
+                  style="width: 100%; height: auto; border-radius: 1rem;"
+                  poster="${videoPath.replace(/\.[^/.]+$/, "")}_poster.jpg"
+                >
+                  <source src="${videoPath}" type="video/mp4">
+                  <p style="padding: var(--spacing-md); color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+                    Your browser doesn't support video playback. 
+                    <a href="${videoPath}" target="_blank" style="color: var(--saffron);">Download video</a>
+                  </p>
+                </video>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+          ${
+            isPreview && videos.length > 1
+              ? `
+            <div style="text-align: center; margin-top: var(--spacing-sm);">
+              <span style="font-size: var(--text-xs); opacity: 0.7; font-family: var(--font-mono);">
+                +${videos.length - 1} more videos in details
+              </span>
+            </div>
+          `
+              : ""
+          }
+        </div>
+      `
+    }
+
+    // FIXED: New method to render project audio
+    renderProjectAudio(audioFile, title = "Audio") {
+      if (!audioFile || typeof audioFile !== "string") return ""
+
+      return `
+        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
+          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
+            AUDIO
+          </h4>
+          <div class="project-audio" style="background: var(--glass-panel-light); border-radius: 1rem; padding: var(--spacing-md);">
+            <audio 
+              controls 
+              preload="metadata"
+              style="width: 100%; height: 40px;"
+            >
+              <source src="${audioFile}" type="audio/mpeg">
+              <source src="${audioFile}" type="audio/wav">
+              <source src="${audioFile}" type="audio/ogg">
+              <p style="color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+                Your browser doesn't support audio playback. 
+                <a href="${audioFile}" target="_blank" style="color: var(--saffron);">Download audio</a>
+              </p>
+            </audio>
+          </div>
         </div>
       `
     }
@@ -868,8 +997,17 @@
 
         projectCards.forEach((card) => {
           const clickHandler = (e) => {
-            // Don't trigger modal if clicking on iframe
-            if (e.target.tagName === "IFRAME" || e.target.closest("iframe")) {
+            // Don't trigger modal if clicking on media elements
+            if (
+              e.target.tagName === "IFRAME" ||
+              e.target.tagName === "VIDEO" ||
+              e.target.tagName === "AUDIO" ||
+              e.target.tagName === "IMG" ||
+              e.target.closest("iframe") ||
+              e.target.closest("video") ||
+              e.target.closest("audio") ||
+              e.target.closest("img")
+            ) {
               return
             }
 
@@ -932,10 +1070,14 @@
       }
     }
 
-    // FIXED: Improved modal content rendering
+    // FIXED: Enhanced modal content rendering with full media support
     renderModalContent(project) {
       const hasBandcampTracks =
         project.bandcampTracks && Array.isArray(project.bandcampTracks) && project.bandcampTracks.length > 0
+
+      const hasImages = project.images && Array.isArray(project.images) && project.images.length > 0
+      const hasVideos = project.videos && Array.isArray(project.videos) && project.videos.length > 0
+      const hasAudioFile = project.audioFile && typeof project.audioFile === "string"
 
       return `
         <h2 style="color: var(--${project.color || "saffron"}); margin-bottom: 1rem; font-size: 2rem;">
@@ -954,6 +1096,10 @@
         `
             : ""
         }
+        
+        ${hasImages ? this.renderProjectImages(project.images, false) : ""}
+        ${hasVideos ? this.renderProjectVideos(project.videos, false) : ""}
+        ${hasAudioFile ? this.renderProjectAudio(project.audioFile, project.title) : ""}
         
         ${
           hasBandcampTracks
