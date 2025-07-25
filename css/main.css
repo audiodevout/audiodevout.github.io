@@ -982,7 +982,7 @@ h6 {
     pointer-events: none;
     z-index: calc(var(--z-cursor) + 1);
     mix-blend-mode: difference;
-    opacity: 0;
+    opacity: 0.7;
     transition: opacity 0.3s ease;
     transform: translate(-50%, -50%);
   }
@@ -996,7 +996,7 @@ h6 {
     pointer-events: none;
     z-index: var(--z-cursor);
     opacity: 0.5;
-    transition: all 0.1s ease;
+    transition: all 0.05s ease;
     transform: translate(-50%, -50%);
   }
 
