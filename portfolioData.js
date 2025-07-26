@@ -123,8 +123,11 @@ try {
           tags: ["generative", "video", "research"], // ADD TAGS
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          videos: ["./assets/videos/symmetrical-fictions-excerpt.mp4"],
-          images: ["./assets/images/symmetrical-fictions-1.jpg", "./assets/images/symmetrical-fictions-2.jpg"],
+          // videos: ["./assets/videos/symmetrical-fictions-excerpt.mp4"],
+          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          urls: {
+            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+          },
         },
         {
           id: "ritual-computing-solo-sessions",
