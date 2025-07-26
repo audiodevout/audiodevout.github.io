@@ -18,10 +18,10 @@ class DeviceDetector {
 
   getDeviceInfo() {
     return {
-      isMobile: this.isMobile,
-      isTablet: this.isTablet,
+      // isMobile: this.isMobile,
+      // isTablet: this.isTablet,
       isDesktop: this.isDesktop,
-      isiOS: this.isiOS,
+      // isiOS: this.isiOS,
       isTouchDevice: this.isTouchDevice,
       userAgent: navigator.userAgent,
     }
