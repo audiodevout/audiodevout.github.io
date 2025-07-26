@@ -85,6 +85,20 @@ try {
             },
           ],
         },
+        {
+          id: "ambient-sound-production",
+          title: "Ambient Sound Production Experiments",
+          description: "Explorations in generative sound design shaped by presence, data, and environment.",
+          fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
+          medium: "Generative audio, environmental data, custom-built software/hardware systems",
+          category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
+          tags: ["generative", "responsive", "sensor-based", "atmospheric"],
+          color: "saffron",
+          technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines",
+          // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
+          // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
+        }
+
       ],
 
       performance: [
@@ -147,21 +161,7 @@ try {
             patreon: "https://www.patreon.com/audiodevout",
           },
           images: ["./assets/images/audiodevout-thumbnail-1.jpg", "./assets/images/audiodevout-thumbnail-2.jpg"],
-        },
-        {
-          id: "ambient-sound-production",
-          title: "Ambient Sound Production Experiments",
-          description: "Explorations in generative sound design shaped by presence, data, and environment.",
-          fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
-          medium: "Generative audio, environmental data, custom-built software/hardware systems",
-          category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
-          tags: ["generative", "responsive", "sensor-based", "atmospheric"],
-          color: "saffron",
-          technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines",
-          // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
-          // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
         }
-
       ],
 
       drawings: [
