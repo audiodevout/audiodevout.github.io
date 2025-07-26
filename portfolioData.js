@@ -134,18 +134,6 @@ try {
           },
         },
         {
-          id: "ritual-computing-solo-sessions",
-          title: "Ritual Computing and Coding Sessions",
-          description: "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
-          fullDescription: "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
-          medium: "Code sketching, procedural visuals, AI collaboration",
-          category: "SOLO • RESEARCH-BASED",
-          tags: ["generative", "code", "research"], // ADD TAGS
-          color: "electric-lime",
-          documentation: "In-progress sketches and logs",
-          images: ["./assets/images/ritual-computing-1.png", "./assets/images/ritual-computing-2.png", "./assets/images/ritual-computing-3.jpg"],
-        },
-        {
           id: "audiodevout-channel",
           title: "audiodevout – TouchDesigner + Sound Art Tutorials",
           description: "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
@@ -177,6 +165,18 @@ try {
       ],
 
       drawings: [
+        {
+          id: "ritual-computing-solo-sessions",
+          title: "Ritual Computing and Coding Sessions",
+          description: "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
+          fullDescription: "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
+          medium: "Code sketching, procedural visuals, AI collaboration",
+          category: "SOLO • RESEARCH-BASED",
+          tags: ["generative", "code", "research"], // ADD TAGS
+          color: "electric-lime",
+          documentation: "In-progress sketches and logs",
+          images: ["./assets/images/ritual-computing-1.png", "./assets/images/ritual-computing-2.png", "./assets/images/ritual-computing-3.jpg"],
+        },
         {
           id: "digital-sketches",
           title: "Digital Sketches + Visual Explorations",
