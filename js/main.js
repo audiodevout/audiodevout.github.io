@@ -108,41 +108,46 @@
       }
     }
 
-    // FIXED: Improved device detection
     detectDeviceProfile() {
-      try {
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent)
-
-        // Check for reduced motion preference
-        const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        if (prefersReducedMotion) {
-          return "mobile"
-        }
-
-        // Check device capabilities
-        const deviceMemory = navigator.deviceMemory || 4
-        const hardwareConcurrency = navigator.hardwareConcurrency || 4
-        const connectionSpeed = navigator.connection?.effectiveType || "4g"
-
-        if (
-          isMobile ||
-          deviceMemory < 4 ||
-          hardwareConcurrency < 4 ||
-          connectionSpeed === "slow-2g" ||
-          connectionSpeed === "2g"
-        ) {
-          return "mobile"
-        } else if (isTablet || deviceMemory < 8 || connectionSpeed === "3g") {
-          return "tablet"
-        } else {
-          return "desktop"
-        }
-      } catch (error) {
-        console.warn("Device detection error, defaulting to mobile:", error)
-        return "mobile"
-      }
+      // Force desktop profile for debugging
+      return "desktop"
+     
     }
+    // FIXED: Improved device detection
+    // detectDeviceProfile() {
+    //   try {
+    //     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    //     const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent)
+
+    //     // Check for reduced motion preference
+    //     const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    //     if (prefersReducedMotion) {
+    //       return "mobile"
+    //     }
+
+    //     // Check device capabilities
+    //     const deviceMemory = navigator.deviceMemory || 4
+    //     const hardwareConcurrency = navigator.hardwareConcurrency || 4
+    //     const connectionSpeed = navigator.connection?.effectiveType || "4g"
+
+    //     if (
+    //       isMobile ||
+    //       deviceMemory < 4 ||
+    //       hardwareConcurrency < 4 ||
+    //       connectionSpeed === "slow-2g" ||
+    //       connectionSpeed === "2g"
+    //     ) {
+    //       return "mobile"
+    //     } else if (isTablet || deviceMemory < 8 || connectionSpeed === "3g") {
+    //       return "tablet"
+    //     } else {
+    //       return "desktop"
+    //     }
+    //   } catch (error) {
+    //     console.warn("Device detection error, defaulting to mobile:", error)
+    //     return "mobile"
+    //   }
+    // }
 
     // FIXED: Data validation with fallbacks
     validatePortfolioData() {
