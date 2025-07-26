@@ -19,10 +19,10 @@ try {
             "The piece explores the contrast between organic acoustic textures and industrial mechanical aesthetics, meditative distraction, and tinnitus awareness. It incorporates motorized rotation, subtle sound generation, and a tactile physical presence.",
           medium:
             "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, electronics (motors)",
-          category: "PHYSICAL SCULPTURE",
+          category: "KINETIC SCULPTURE • NOISE • ARDUINO",
           color: "saffron",
-          dimensions: "1.8m (height) × 0.5m (diameter)",
-          technical: "Motorized rotation system, custom electronics, organic acoustic elements",
+          dimensions: "1.6m (height)",
+          technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
           themes: "Meditative sound, industrial aesthetics, tinnitus awareness",
           // FIXED: Use relative paths that work with GitHub Pages
           audioFile: "./assets/audio/rain-reminders-sample.mp3",
@@ -89,86 +89,63 @@ try {
 
       performance: [
         {
-          id: "fever-dream",
-          title: "Fever Dream",
+          id: "gesture-performance-system",
+          title: "Gesture-Controlled Performance System",
           description:
-            "An audio-reactive poetic installation that externalizes fears and subconscious anxieties, blending glitch electronics with spoken word fragments.",
+            "A real-time audiovisual performance system that uses body gestures to generate sound, visuals, and stage presence simultaneously. Debuted at the Fever Dream event.",
           fullDescription:
-            "It interrogates the abstraction of problem-solving and emotional complexity through sound and text, creating an immersive environment for digital anxiety exploration.",
-          medium: "Sound art, interactive audio installation, poetry, glitch electronics",
-          category: "INTERACTIVE AUDIO",
-          color: "neon-magenta",
-          themes: "Subconscious processing, emotional complexity, digital anxiety, glitch aesthetics",
-          technology: "Real-time audio processing, responsive text generation, ambient computing",
-          // FIXED: Add placeholder media with proper paths
-          videos: ["./assets/videos/fever-dream-performance.mp4"],
-          images: ["./assets/images/fever-dream-setup.jpg"],
-        },
-        {
-          id: "live-av-performances",
-          title: "Live AudioVisual Performances",
-          description:
-            "Real-time manipulation of sound and visuals through gestural interfaces, exploring the liminal space between performer and machine.",
-          fullDescription:
-            "These performances investigate the relationship between human gesture and computational response, using custom interfaces to create immersive audiovisual experiences that blur the boundaries between performer and audience.",
-          medium: "TouchDesigner, gesture control, live electronics",
-          category: "TOUCHDESIGNER • GESTURE CONTROL",
+            "This is an ongoing system developed using MediaPipe and TouchDesigner to enable live performance through gesture alone. The body becomes the instrument—controlling generative sound, reactive visuals, and performative movement in synchrony. The system first debuted at the *Fever Dream* event, a poetic installation exploring digital anxiety through glitch electronics and spoken word. Since then, it has evolved into a modular tool for expressive live A/V performances, blurring boundaries between code, movement, and emotion. It is equal parts tool, artwork, and ritual.",
+          medium: "Gesture interfaces, TouchDesigner, live sound and visual generation, poetic systems",
+          category: "GESTURE CONTROL • LIVE A/V • SYSTEM DESIGN",
           color: "cerulean",
-          documentation: "Video archives and recordings coming soon",
-          videos: ["./assets/videos/live-av-performance-1.mp4", "./assets/videos/live-av-performance-2.mp4"],
+          themes: "Human-computer interaction, glitch aesthetics, subconscious processing, embodied computation",
+          technology: "MediaPipe, TouchDesigner, real-time audio and visual synthesis",
+          videos: [
+            
+            "./assets/videos/live-av-performance-1.mp4",
+            "./assets/videos/live-av-performance-2.mp4"
+          ],
+          images: ["./assets/images/fever-dream-performance.jpg","./assets/images/fever-dream-poster.jpg"]
         },
-        {
-          id: "coding-computing-as-a-ritual",
-          title: "Ritual Computing and Coding Sessions",
-          description:
-            "Collaborative experiences where audience and performer co-create digital mantras through shared interfaces and collective sound-making.",
-          fullDescription:
-            "These sessions explore the potential for technology to facilitate collective ritual experiences, using shared interfaces and responsive systems to create communal digital ceremonies.",
-          medium: "Participatory performance, experimental interfaces",
-          category: "PARTICIPATORY • EXPERIMENTAL",
-          color: "electric-lime",
-          documentation: "Live performance documentation",
-          images: ["./assets/images/ritual-computing-1.jpg", "./assets/images/ritual-computing-2.jpg"],
-        },
+        
       ],
 
-      generativeAV: [
+      // REPLACE the existing generativeAV and interactive arrays with:
+      installations: [
+        // Move all projects from generativeAV array here and add tags
         {
           id: "symmetrical-fictions",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-          description:
-            "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
-          fullDescription:
-            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
+          description: "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
+          fullDescription: "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
           medium: "Video installation, satellite imagery recomposition, speculative cartography",
           category: "INSTALLATION & RESEARCH",
+          tags: ["generative", "video", "research"], // ADD TAGS
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
           videos: ["./assets/videos/symmetrical-fictions-excerpt.mp4"],
           images: ["./assets/images/symmetrical-fictions-1.jpg", "./assets/images/symmetrical-fictions-2.jpg"],
         },
         {
-          id: "galaxy-simulation",
-          title: "Galaxy Simulation",
-          description:
-            "Procedural generation of cosmic structures translated into immersive soundscapes and visual environments.",
-          fullDescription:
-            "Using algorithmic approaches to simulate galactic formation while creating corresponding audio-visual experiences that mirror the complexity and beauty of cosmic evolution.",
-          medium: "Algorithmic composition, procedural generation, space simulation",
-          category: "ALGORITHMIC COMPOSITION",
+          id: "ritual-computing-solo-sessions",
+          title: "Ritual Computing and Coding Sessions",
+          description: "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
+          fullDescription: "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
+          medium: "Code sketching, procedural visuals, AI collaboration",
+          category: "SOLO • RESEARCH-BASED",
+          tags: ["generative", "code", "research"], // ADD TAGS
           color: "electric-lime",
-          videos: ["./assets/videos/galaxy-simulation.mp4"],
-          audioFile: "./assets/audio/galaxy-soundscape.mp3",
+          documentation: "In-progress sketches and logs",
+          images: ["./assets/images/ritual-computing-1.png", "./assets/images/ritual-computing-2.png", "./assets/images/ritual-computing-3.jpg"],
         },
         {
           id: "audiodevout-channel",
           title: "audiodevout – TouchDesigner + Sound Art Tutorials",
-          description:
-            "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
-          fullDescription:
-            "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic.",
+          description: "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
+          fullDescription: "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic.",
           medium: "TouchDesigner, real-time generative visuals, sound-reactive systems",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["generative", "tutorial", "sound"], // ADD TAGS
           color: "cerulean",
           urls: {
             youtube: "https://www.youtube.com/@audiodevout",
@@ -176,18 +153,15 @@ try {
           },
           images: ["./assets/images/audiodevout-thumbnail-1.jpg", "./assets/images/audiodevout-thumbnail-2.jpg"],
         },
-      ],
-
-      interactive: [
+        // Move all projects from interactive array here and add tags
         {
           id: "gesture-detection",
           title: "Gesture Detection Interface",
-          description:
-            "Real-time hand tracking system for controlling digital audio and visual parameters through physical movement.",
-          fullDescription:
-            "Using computer vision and machine learning to create intuitive gestural interfaces that bridge physical expression with digital sound manipulation.",
+          description: "Real-time hand tracking system for controlling digital audio and visual parameters through physical movement.",
+          fullDescription: "Using computer vision and machine learning to create intuitive gestural interfaces that bridge physical expression with digital sound manipulation.",
           medium: "Computer vision, real-time audio processing, gesture recognition",
           category: "INTERFACE DESIGN",
+          tags: ["interactive", "gesture", "interface"], // ADD TAGS
           color: "electric-lime",
           technical: "MediaPipe, real-time audio synthesis, Python, Max/MSP integration",
           videos: ["./assets/videos/gesture-detection-demo.mp4"],
@@ -196,12 +170,11 @@ try {
         {
           id: "ambient-computing",
           title: "Ambient Computing Experiments",
-          description:
-            "Exploring subtle, pervasive computing environments that respond to presence and environmental conditions.",
-          fullDescription:
-            "Developing systems that exist at the periphery of attention, creating ambient soundscapes and visual responses based on environmental data and human presence.",
+          description: "Exploring subtle, pervasive computing environments that respond to presence and environmental conditions.",
+          fullDescription: "Developing systems that exist at the periphery of attention, creating ambient soundscapes and visual responses based on environmental data and human presence.",
           medium: "Environmental sensors, ambient audio, responsive computing",
           category: "ENVIRONMENTAL COMPUTING",
+          tags: ["interactive", "ambient", "sensors"], // ADD TAGS
           color: "saffron",
           technical: "Arduino, environmental sensors, ambient sound processing",
           audioFile: "./assets/audio/ambient-computing-sample.mp3",
@@ -237,14 +210,13 @@ try {
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
           description: "A research paper exploring the theoretical framework behind the video installation project.",
           fullDescription:
-            "This paper examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
+            "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
           medium: "Academic paper, theoretical research",
           category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
           urls: {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-            academia: "https://academia.edu/example",
           },
         },
       ],
@@ -253,17 +225,18 @@ try {
      contact: {
       about: {
         title: "About",
-        description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. My practice explores how computational systems can become vehicles for meditative experience, cultural memory, and speculative futures.
-
-Through installations, performances, and research, I investigate the unstable boundaries between organic and synthetic, rational and intuitive, individual and collective. My work often incorporates elements of South Asian aesthetic traditions, reimagined through contemporary digital tools and post-colonial perspectives.
-
-Currently based between experimental sound communities and academic research contexts, I develop projects that challenge techno-positivist narratives while creating space for contemplative engagement with technology.`,
+        description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. 
+        My practice explores how computational systems can become vehicles for meditative experience, cultural memory, and speculative futures.
+        Through installations, performances, and research, I investigate the unstable boundaries between organic and synthetic, 
+        rational and intuitive, individual and collective. My work often incorporates elements relating to entropy and noise, (a)symmetry, and healing through technology, reimagined through contemporary digital tools.
+        Currently based between experimental sound activities, creative codingn and academic research contexts, I develop projects that challenge techno-positivist 
+        narratives while creating space for contemplative engagement with technology.`,
         image: "./assets/images/atharva.jpeg",
         credentials: [
-          "Experimental Sound Artist",
-          "AudioVisual Researcher",
-          "TouchDesigner Educator",
-          "Asymmetrica (Solo Project)"
+          "Experimental Sound Artist (Asymmetrica)",
+          "Kinetic Sculptures",
+          "AudioVisual Performances",
+          "TouchDesigner Tutorials (AudioDevOut)"
         ]
       },
       social: [

@@ -1,7 +1,7 @@
-/* main.js - Core Portfolio Application Logic (FIXED)
+/* main.js - Core Portfolio Application Logic (RESTRUCTURED)
  *
  * PURPOSE: Parses portfolioData.js and dynamically renders all page content
- * FIXES: Added support for images, videos, audio files, and better media handling
+ * UPDATED: Added installations page with tag filtering functionality
  */
 
 // FIXED: Wrapped entire application in error handling
@@ -40,13 +40,12 @@
     },
   }
 
-  // FIXED: Page segments mapping
+  // UPDATED: Page segments mapping with new installations page
   const PAGE_SEGMENTS = {
     home: 8,
     "sound-installations": 6,
     performance: 10,
-    "generative-av": 12,
-    interactive: 8,
+    installations: 12, // Combined generative + interactive
     drawings: 7,
     writing: 9,
     "about-contact": 16,
@@ -64,6 +63,7 @@
         this.scrollProgress = 0
         this.isInitialized = false
         this.isDestroyed = false
+        this.activeFilters = new Set() // For tag filtering
 
         // System components
         this.mandalaGenerator = null
@@ -133,17 +133,29 @@
       try {
         const data = window.portfolioData
         if (!data || typeof data !== "object") {
+          console.error("Portfolio data not found or invalid")
           throw new Error("Portfolio data not found or invalid")
         }
 
         // Validate required structure
         if (!data.projects || typeof data.projects !== "object") {
+          console.error("Projects data missing or invalid")
           throw new Error("Projects data missing or invalid")
         }
 
         if (!data.contact || typeof data.contact !== "object") {
+          console.error("Contact data missing or invalid")
           throw new Error("Contact data missing or invalid")
         }
+
+        // Log the data structure for debugging
+        console.log("Portfolio data validated successfully:", {
+          soundInstallations: data.projects.soundInstallations?.length || 0,
+          performance: data.projects.performance?.length || 0,
+          installations: data.projects.installations?.length || 0,
+          drawings: data.projects.drawings?.length || 0,
+          writing: data.projects.writing?.length || 0,
+        })
 
         return data
       } catch (error) {
@@ -158,8 +170,7 @@
         projects: {
           soundInstallations: [],
           performance: [],
-          generativeAV: [],
-          interactive: [],
+          installations: [], // Updated from generativeAV and interactive
           drawings: [],
           writing: [],
         },
@@ -189,7 +200,12 @@
         await this.setupBackgroundSystems()
         this.setupNavigation()
         this.setupScrollTracking()
+        this.setupImageOverlay()
+
         this.setupModal()
+
+        // Setup URL redirects for old routes
+        this.setupRouteRedirects()
 
         // Render initial page
         this.renderCurrentPage()
@@ -203,6 +219,16 @@
       } catch (error) {
         console.error("Failed to initialize PortfolioApp:", error)
         this.showErrorFallback()
+      }
+    }
+
+    // NEW: Setup route redirects for old URLs
+    setupRouteRedirects() {
+      const currentHash = window.location.hash.substring(1)
+      if (currentHash === "generative-av" || currentHash === "interactive") {
+        // Redirect old routes to new installations page
+        window.location.hash = "installations"
+        this.currentPage = "installations"
       }
     }
 
@@ -546,7 +572,7 @@
       }
     }
 
-    // FIXED: Improved page rendering
+    // UPDATED: Improved page rendering with new installations page
     renderCurrentPage() {
       if (!this.elements.mainContent || this.isDestroyed) return
 
@@ -557,28 +583,60 @@
 
         switch (this.currentPage) {
           case "home":
-            html = this.renderHomePage()
+            try {
+              html = this.renderHomePage()
+            } catch (error) {
+              console.error("Error rendering home page:", error)
+              html = this.renderErrorPage()
+            }
             break
           case "sound-installations":
-            html = this.renderSoundInstallationsPage()
+            try {
+              html = this.renderSoundInstallationsPage()
+            } catch (error) {
+              console.error("Error rendering sound installations page:", error)
+              html = this.renderErrorPage()
+            }
             break
           case "performance":
-            html = this.renderPerformancePage()
+            try {
+              html = this.renderPerformancePage()
+            } catch (error) {
+              console.error("Error rendering performance page:", error)
+              html = this.renderErrorPage()
+            }
             break
-          case "generative-av":
-            html = this.renderGenerativeAVPage()
-            break
-          case "interactive":
-            html = this.renderInteractivePage()
+          case "installations":
+            try {
+              html = this.renderInstallationsPage()
+            } catch (error) {
+              console.error("Error rendering installations page:", error)
+              html = this.renderErrorPage()
+            }
             break
           case "drawings":
-            html = this.renderDrawingsPage()
+            try {
+              html = this.renderDrawingsPage()
+            } catch (error) {
+              console.error("Error rendering drawings page:", error)
+              html = this.renderErrorPage()
+            }
             break
           case "writing":
-            html = this.renderWritingPage()
+            try {
+              html = this.renderWritingPage()
+            } catch (error) {
+              console.error("Error rendering writing page:", error)
+              html = this.renderErrorPage()
+            }
             break
           case "about-contact":
-            html = this.renderContactPage()
+            try {
+              html = this.renderContactPage()
+            } catch (error) {
+              console.error("Error rendering contact page:", error)
+              html = this.renderErrorPage()
+            }
             break
           default:
             html = this.renderHomePage()
@@ -593,6 +651,37 @@
         mainContent.innerHTML = this.renderErrorPage()
       }
     }
+setupImageOverlay() {
+  try {
+    // Click any image inside .project-images
+    document.body.addEventListener("click", (e) => {
+      const img = e.target.closest(".project-images img")
+      if (img) {
+        const overlay = document.getElementById("imageOverlay")
+        const overlayImg = document.getElementById("overlayImage")
+        overlayImg.src = img.src
+        overlay.style.display = "flex"
+        document.body.style.overflow = "hidden" // disable background scroll
+      }
+    })
+
+    // Close button
+    document.getElementById("closeOverlay")?.addEventListener("click", () => {
+      document.getElementById("imageOverlay").style.display = "none"
+      document.body.style.overflow = ""
+    })
+
+    // Escape key to close
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        document.getElementById("imageOverlay").style.display = "none"
+        document.body.style.overflow = ""
+      }
+    })
+  } catch (error) {
+    console.error("Error setting up image overlay:", error)
+  }
+}
 
     renderHomePage() {
       return `
@@ -645,40 +734,37 @@
       `
     }
 
-    renderGenerativeAVPage() {
-      const projects = this.data.projects.generativeAV || []
+    // NEW: Render installations page with tag filtering
+    renderInstallationsPage() {
+      const projects = this.data.projects.installations || []
 
       return `
-        <section class="page-section active">
-          <div class="page-content">
-            <div class="page-header">
-              <h2 class="page-title" style="color: var(--neon-magenta);">GENERATIVE AUDIOVISUAL</h2>
-            </div>
-            
-            <div class="project-grid">
-              ${projects.map((project) => this.renderProjectCard(project)).join("")}
-            </div>
-          </div>
-        </section>
-      `
-    }
-
-    renderInteractivePage() {
-      const projects = this.data.projects.interactive || []
-
-      return `
-        <section class="page-section active">
-          <div class="page-content">
-            <div class="page-header">
-              <h2 class="page-title" style="color: var(--electric-lime);">INTERACTIVE INSTALLATIONS</h2>
-            </div>
-            
-            <div class="project-grid">
-              ${projects.map((project) => this.renderProjectCard(project)).join("")}
-            </div>
-          </div>
-        </section>
-      `
+    <section class="page-section active">
+      <div class="page-content">
+        <div class="page-header">
+          <h2 class="page-title" style="color: var(--neon-magenta);">INSTALLATIONS</h2>
+          <p style="color: var(--pale-gray); opacity: 0.8; margin-top: var(--space-sm); font-size: var(--text-lg);">
+            Generative and interactive works exploring computational creativity
+          </p>
+        </div>
+        
+        <!-- Projects Grid -->
+        <div class="project-grid">
+          ${
+            projects.length > 0
+              ? projects.map((project) => this.renderProjectCard(project)).join("")
+              : `
+              <div class="glass-panel" style="padding: var(--spacing-xl); text-align: center; grid-column: 1 / -1;">
+                <p style="color: var(--pale-gray); font-size: var(--text-lg);">
+                  No installation projects available at the moment.
+                </p>
+              </div>
+            `
+          }
+        </div>
+      </div>
+    </section>
+  `
     }
 
     renderDrawingsPage() {
@@ -719,19 +805,19 @@
     }
 
     // REPLACE the renderContactPage() function in js/main.js with this:
-renderContactPage() {
-  const contact = this.data.contact || { 
-    about: { 
-      title: "About", 
-      description: "Loading...", 
-      image: null,
-      credentials: []
-    }, 
-    social: [], 
-    description: "Contact information loading..." 
-  }
+    renderContactPage() {
+      const contact = this.data.contact || {
+        about: {
+          title: "About",
+          description: "Loading...",
+          image: null,
+          credentials: [],
+        },
+        social: [],
+        description: "Contact information loading...",
+      }
 
-  return `
+      return `
     <section class="page-section active">
       <div class="page-content">
         <div class="page-header">
@@ -749,18 +835,25 @@ renderContactPage() {
               </h3>
               
               <div style="font-size: var(--text-lg); line-height: 1.8; opacity: 0.9; margin-bottom: var(--spacing-lg);">
-                ${contact.about?.description?.split('\n\n').map(paragraph => 
-                  `<p style="margin-bottom: var(--spacing-md);">${paragraph}</p>`
-                ).join('') || "Loading about content..."}
+                ${
+                  contact.about?.description
+                    ?.split("\n\n")
+                    .map((paragraph) => `<p style="margin-bottom: var(--spacing-md);">${paragraph}</p>`)
+                    .join("") || "Loading about content..."
+                }
               </div>
               
-              ${contact.about?.credentials && contact.about.credentials.length > 0 ? `
+              ${
+                contact.about?.credentials && contact.about.credentials.length > 0
+                  ? `
                 <div class="credentials" style="margin-top: var(--spacing-lg);">
                   <h4 style="color: var(--cerulean); font-size: var(--text-lg); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: 0.05em;">
                     PRACTICE AREAS
                   </h4>
                   <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
-                    ${contact.about.credentials.map(credential => `
+                    ${contact.about.credentials
+                      .map(
+                        (credential) => `
                       <span style="
                         background: var(--glass-accent); 
                         border: 1px solid var(--glass-border); 
@@ -773,14 +866,20 @@ renderContactPage() {
                       ">
                         ${credential}
                       </span>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                   </div>
                 </div>
-              ` : ''}
+              `
+                  : ""
+              }
             </div>
             
             <!-- Portrait Image -->
-            ${contact.about?.image ? `
+            ${
+              contact.about?.image
+                ? `
               <div class="about-image glass-panel-light" style="padding: var(--spacing-md); text-align: center;">
                 <div class="portrait-container" style="
                   position: relative; 
@@ -808,7 +907,8 @@ renderContactPage() {
                   />
                 </div>
               </div>
-            ` : `
+            `
+                : `
               <div class="about-image-placeholder glass-panel-light" style="
                 padding: var(--spacing-xl); 
                 text-align: center;
@@ -825,7 +925,8 @@ renderContactPage() {
                   📷<br>Portrait Image<br>Coming Soon
                 </div>
               </div>
-            `}
+            `
+            }
           </div>
         </div>
         
@@ -848,7 +949,7 @@ renderContactPage() {
       </div>
     </section>
   `
-}
+    }
 
     renderErrorPage() {
       return `
@@ -868,7 +969,7 @@ renderContactPage() {
       `
     }
 
-    // FIXED: Enhanced project card rendering with full media support
+    // UPDATED: Enhanced project card rendering with tags display
     renderProjectCard(project) {
       if (!project) return ""
 
@@ -889,6 +990,36 @@ renderContactPage() {
           <div class="project-category mono" style="color: var(--${project.color || "saffron"});">
             ${project.category || "Uncategorized"}
           </div>
+          
+          ${
+            project.tags && Array.isArray(project.tags) && project.tags.length > 0
+              ? `
+            <div class="project-tags" style="margin: var(--space-sm) 0; display: flex; flex-wrap: wrap; gap: var(--space-xs);">
+              ${project.tags
+                .map(
+                  (tag) => `
+                <span style="
+                  background: var(--glass-accent); 
+                  border: 1px solid var(--glass-border); 
+                  padding: 2px var(--space-xs); 
+                  border-radius: var(--radius-sm); 
+                  font-family: var(--font-mono); 
+                  font-size: 0.7rem; 
+                  color: var(--${project.color || "saffron"});
+                  opacity: 0.8;
+                  text-transform: uppercase;
+                  letter-spacing: 0.05em;
+                ">
+                  ${tag}
+                </span>
+              `,
+                )
+                .join("")}
+            </div>
+          `
+              : ""
+          }
+          
           <p class="project-description">${project.description || "No description available."}</p>
           ${project.medium ? `<div class="mono" style="font-size: 0.8rem; opacity: 0.7; margin-top: 1rem;">${project.medium}</div>` : ""}
           
@@ -1196,6 +1327,35 @@ renderContactPage() {
         </div>
         
         ${
+          project.tags && Array.isArray(project.tags) && project.tags.length > 0
+            ? `
+          <div class="project-tags" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: var(--space-xs);">
+            ${project.tags
+              .map(
+                (tag) => `
+              <span style="
+                background: var(--glass-accent); 
+                border: 1px solid var(--glass-border); 
+                padding: var(--space-xs) var(--space-sm); 
+                border-radius: var(--radius-sm); 
+                font-family: var(--font-mono); 
+                font-size: var(--text-xs); 
+                color: var(--${project.color || "saffron"});
+                opacity: 0.8;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+              ">
+                ${tag}
+              </span>
+            `,
+              )
+              .join("")}
+          </div>
+        `
+            : ""
+        }
+        
+        ${
           project.fullDescription
             ? `
           <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; opacity: 0.9;">
@@ -1484,4 +1644,3 @@ renderContactPage() {
     }
   })
 })()
-s

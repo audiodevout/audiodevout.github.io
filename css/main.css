@@ -458,15 +458,52 @@ h6 {
   border-radius: 1rem;
 }
 
+.image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.image-overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.image-overlay .close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
 /* Project Cards - Mobile First Grid */
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* always one column */
   gap: var(--spacing-md);
   margin-top: var(--spacing-xl);
+  max-width: 900px;  /* optional, constrain width */
+  margin-left: auto; /* center container */
+  margin-right: auto;
+  padding: 0 var(--spacing-md);
 }
 
 .project-card {
+  width: 100%; /* fill grid column */
   background: var(--glass-panel-light);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -483,6 +520,7 @@ h6 {
   touch-action: manipulation;
 }
 
+/* hover/focus and color variants unchanged */
 .project-card:hover,
 .project-card:focus {
   transform: translateY(-2px) translateZ(0);
