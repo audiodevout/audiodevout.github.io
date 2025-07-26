@@ -171,18 +171,19 @@ try {
           images: ["./assets/images/gesture-interface-setup.jpg"],
         },
         {
-          id: "ambient-computing",
-          title: "Ambient Computing Experiments",
-          description: "Exploring subtle, pervasive computing environments that respond to presence and environmental conditions.",
-          fullDescription: "Developing systems that exist at the periphery of attention, creating ambient soundscapes and visual responses based on environmental data and human presence.",
-          medium: "Environmental sensors, ambient audio, responsive computing",
-          category: "ENVIRONMENTAL COMPUTING",
-          tags: ["interactive", "ambient", "sensors"], // ADD TAGS
+          id: "ambient-sound-production",
+          title: "Ambient Sound Production Experiments",
+          description: "Explorations in generative sound design shaped by presence, data, and environment.",
+          fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
+          medium: "Generative audio, environmental data, custom-built software/hardware systems",
+          category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
+          tags: ["generative", "responsive", "sensor-based", "atmospheric"],
           color: "saffron",
-          technical: "Arduino, environmental sensors, ambient sound processing",
-          audioFile: "./assets/audio/ambient-computing-sample.mp3",
-          images: ["./assets/images/ambient-computing-1.jpg", "./assets/images/ambient-computing-2.jpg"],
-        },
+          technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines",
+          // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
+          // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
+        }
+
       ],
 
       drawings: [
@@ -218,6 +219,7 @@ try {
           category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
           urls: {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
           },
