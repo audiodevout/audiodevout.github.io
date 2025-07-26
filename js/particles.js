@@ -11,20 +11,32 @@
 // PERFORMANCE SETTINGS - Automatically scaled based on device capabilities
 const PERFORMANCE_PROFILES = {
   mobile: {
-    maxParticles: 50, // Reduced for mobile performance
-    connectionDistance: 400, // Shorter connections
-    mouseInfluence: 100, // Smaller influence radius
-    enableConnections: false, // Disable connections on mobile
-    animationQuality: "low", // Reduced animation quality
-    updateFrequency: 30, // 30fps instead of 60fps
-  },
-  tablet: {
-    maxParticles: 100,
+    // maxParticles: 50, // Reduced for mobile performance
+    // connectionDistance: 400, // Shorter connections
+    // mouseInfluence: 100, // Smaller influence radius
+    // enableConnections: false, // Disable connections on mobile
+    // animationQuality: "low", // Reduced animation quality
+    // updateFrequency: 30, // 30fps instead of 60fps
+    maxParticles: 250,
     connectionDistance: 400,
     mouseInfluence: 100,
     enableConnections: true,
-    animationQuality: "medium",
-    updateFrequency: 45,
+    animationQuality: "high",
+    updateFrequency: 60,
+  },
+  tablet: {
+    // maxParticles: 100,
+    // connectionDistance: 400,
+    // mouseInfluence: 100,
+    // enableConnections: true,
+    // animationQuality: "medium",
+    // updateFrequency: 45,
+    maxParticles: 250,
+    connectionDistance: 400,
+    mouseInfluence: 100,
+    enableConnections: true,
+    animationQuality: "high",
+    updateFrequency: 60,
   },
   desktop: {
     maxParticles: 250,

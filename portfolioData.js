@@ -23,7 +23,7 @@ try {
           color: "saffron",
           dimensions: "1.6m (height)",
           technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
-          themes: "Meditative sound, industrial aesthetics, tinnitus awareness",
+          themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
           // FIXED: Use relative paths that work with GitHub Pages
           audioFile: "./assets/audio/rain-reminders-sample.mp3",
           images: ["./assets/images/rain-reminders-1.png", "./assets/images/rain-reminders-2.png"],
