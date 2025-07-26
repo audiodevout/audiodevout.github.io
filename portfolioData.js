@@ -92,21 +92,25 @@ try {
           id: "gesture-performance-system",
           title: "Gesture-Controlled Performance System",
           description:
-            "A real-time audiovisual performance system that uses body gestures to generate sound, visuals, and stage presence simultaneously. Debuted at the Fever Dream event.",
+            "A modular gesture-driven audiovisual system where the body becomes the instrument—generating sound, visuals, and presence in real time.",
           fullDescription:
-            "This is an ongoing system developed using MediaPipe and TouchDesigner to enable live performance through gesture alone. The body becomes the instrument—controlling generative sound, reactive visuals, and performative movement in synchrony. The system first debuted at the *Fever Dream* event, a poetic installation exploring digital anxiety through glitch electronics and spoken word. Since then, it has evolved into a modular tool for expressive live A/V performances, blurring boundaries between code, movement, and emotion. It is equal parts tool, artwork, and ritual.",
-          medium: "Gesture interfaces, TouchDesigner, live sound and visual generation, poetic systems",
-          category: "GESTURE CONTROL • LIVE A/V • SYSTEM DESIGN",
+            "This ongoing system merges gesture detection, real-time sound design, and generative visuals into a single performance toolkit. Built with MediaPipe and TouchDesigner, it uses body movement to manipulate soundscapes and visuals simultaneously—blurring the lines between code, choreography, and live ritual. First presented at *Fever Dream*—a glitch-poetic installation exploring digital anxiety through spoken word and ambient sound production—the system has evolved into a modular, expressive platform for live A/V performance. The gestures control everything from glitchy textures and drone tones to cinematic pulses and dynamic projections, all shaped by an ambient, meditative coding process rooted in presence and flow. It is not just a tool, but a responsive ecosystem—sensorial, poetic, and embodied.",
+          medium: "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
+          category: "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
+          themes: "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
+          tags: ["interactive", "gesture", "audiovisual", "sensorial", "real-time"],
           color: "cerulean",
-          themes: "Human-computer interaction, glitch aesthetics, subconscious processing, embodied computation",
-          technology: "MediaPipe, TouchDesigner, real-time audio and visual synthesis",
+          technical: "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
           videos: [
-            
             "./assets/videos/live-av-performance-1.mp4",
             "./assets/videos/live-av-performance-2.mp4"
           ],
-          images: ["./assets/images/fever-dream-performance.jpg","./assets/images/fever-dream-poster.jpg"]
-        },
+          images: [
+            "./assets/images/fever-dream-performance.jpg",
+            "./assets/images/fever-dream-poster.jpg"
+          ]
+        }
+
         
       ],
 
@@ -155,20 +159,6 @@ try {
             patreon: "https://www.patreon.com/audiodevout",
           },
           images: ["./assets/images/audiodevout-thumbnail-1.jpg", "./assets/images/audiodevout-thumbnail-2.jpg"],
-        },
-        // Move all projects from interactive array here and add tags
-        {
-          id: "gesture-detection",
-          title: "Gesture Detection Interface",
-          description: "Real-time hand tracking system for controlling digital audio and visual parameters through physical movement.",
-          fullDescription: "Using computer vision and machine learning to create intuitive gestural interfaces that bridge physical expression with digital sound manipulation.",
-          medium: "Computer vision, real-time audio processing, gesture recognition",
-          category: "INTERFACE DESIGN",
-          tags: ["interactive", "gesture", "interface"], // ADD TAGS
-          color: "electric-lime",
-          technical: "MediaPipe, real-time audio synthesis, Python, Max/MSP integration",
-          videos: ["./assets/videos/gesture-detection-demo.mp4"],
-          images: ["./assets/images/gesture-interface-setup.jpg"],
         },
         {
           id: "ambient-sound-production",
