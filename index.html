@@ -187,5 +187,31 @@
   <img id="overlayImage" src="" alt="Full Image" />
 </div>
 
+<div id="video-section"></div>
+
+<script type="module">
+  import { portfolioData } from './portfolioData.js';
+
+  const videoSection = document.getElementById('video-section');
+  const project = portfolioData.projects.find(p => p.id === 'audiodevout-channel');
+
+  project.videoIds.forEach(id => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('video-wrapper');
+    wrapper.innerHTML = `
+      <iframe 
+        src="https://www.youtube.com/embed/${id}" 
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+    `;
+    videoSection.appendChild(wrapper);
+  });
+</script>
+
+
 </body>
 </html>

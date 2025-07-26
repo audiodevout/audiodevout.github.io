@@ -24,9 +24,11 @@ try {
           dimensions: "1.6m (height)",
           technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
           themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
-          // FIXED: Use relative paths that work with GitHub Pages
-          audioFile: "./assets/audio/rain-reminders-sample.mp3",
-          images: ["./assets/images/rain-reminders-1.png", "./assets/images/rain-reminders-2.png"],
+          videos: [
+            "./assets/videos/rain-stick-video.mp4"
+          ],
+          // audioFile: "./assets/audio/rain-reminders-sample.mp3",
+          images: ["./assets/images/rain-reminders-1.jpg"],
         },
         {
           id: "asymmetrica-audio-collection",
@@ -115,12 +117,13 @@ try {
           tags: ["interactive", "gesture", "audiovisual", "sensorial", "real-time"],
           color: "cerulean",
           technical: "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
-          videos: [
-            "./assets/videos/live-av-performance-1.mp4",
-            "./assets/videos/live-av-performance-2.mp4"
-          ],
+          // videos: [
+          //   "./assets/videos/live-av-performance-1.mp4",
+          //   "./assets/videos/live-av-performance-2.mp4"
+          // ],
           images: [
             "./assets/images/fever-dream-performance.jpg",
+            "./assets/images/fever-dream-performance-1.jpg",
             "./assets/images/fever-dream-poster.jpg"
           ]
         }
@@ -147,21 +150,34 @@ try {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
           },
         },
-        {
-          id: "audiodevout-channel",
-          title: "audiodevout – TouchDesigner + Sound Art Tutorials",
-          description: "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
-          fullDescription: "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic.",
-          medium: "TouchDesigner, real-time generative visuals, sound-reactive systems",
-          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-          tags: ["generative", "tutorial", "sound"], // ADD TAGS
-          color: "cerulean",
-          urls: {
-            youtube: "https://www.youtube.com/@audiodevout",
-            patreon: "https://www.patreon.com/audiodevout",
-          },
-          images: ["./assets/images/audiodevout-thumbnail-1.jpg", "./assets/images/audiodevout-thumbnail-2.jpg"],
-        }
+       {
+         id: "audiodevout-channel",
+         title: "audiodevout – TouchDesigner + Sound Art Tutorials",
+         description: "My experimental channel for audiovisual art, TouchDesigner tutorials, and generative sound installations.",
+         fullDescription: "audiodevout is where I document and share my creative explorations at the intersection of code, visuals, and sound. I use this channel to break down complex TouchDesigner workflows into accessible tutorials, often with a glitchy, meditative, or rhythmically reactive aesthetic.",
+         medium: "TouchDesigner, real-time generative visuals, sound-reactive systems",
+         category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+         tags: ["generative", "tutorial", "sound"],
+         color: "cerulean",
+         urls: {
+           youtube: "https://www.youtube.com/@audiodevout",
+           patreon: "https://www.patreon.com/audiodevout"
+         },
+         images: [
+           "./assets/images/audiodevout-thumbnail-1.jpg",
+           "./assets/images/audiodevout-thumbnail-2.jpg"
+         ],
+         videoIds: [
+           "Mu1TpRVujuY",
+           "kcZH2zcHANc",
+           "4rm5dcoQHBc",
+           "p9TwiixKvXQ",
+           "s8ea30HlTHE",
+           "Qrtwn5XjDzk"
+         ]
+
+       }
+
       ],
 
       drawings: [
