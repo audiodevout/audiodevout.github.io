@@ -1236,63 +1236,63 @@
         `
             : ""
         }
-        
         ${
           project.medium
             ? `
-          <div style="margin-bottom: var(--space-4);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Medium</h4>
-            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.medium}</p>
-          </div>
-        `
+            <div style="margin-bottom: var(--space-4);">
+              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Medium</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.medium}</p>
+            </div>
+          `
             : ""
         }
-        
+
         ${
           project.technical
             ? `
-          <div style="margin-bottom: var(--space-4);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Technical Details</h4>
-            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.technical}</p>
-          </div>
-        `
+            <div style="margin-bottom: var(--space-4);">
+              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Technical Details</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.technical}</p>
+            </div>
+          `
             : ""
         }
-        
+
         ${
           project.themes
             ? `
-          <div style="margin-bottom: var(--space-4);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Themes</h4>
-            <p style="font-size: var(--text-sm); color: var(--light-gray);">${project.themes}</p>
-          </div>
-        `
+            <div style="margin-bottom: var(--space-4);">
+              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Themes</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.themes}</p>
+            </div>
+          `
             : ""
         }
-        
+
         ${
           project.dimensions
             ? `
-          <div style="margin-bottom: var(--space-4);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Dimensions</h4>
-            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.dimensions}</p>
-          </div>
-        `
+            <div style="margin-bottom: var(--space-4);">
+              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Dimensions</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.dimensions}</p>
+            </div>
+          `
             : ""
         }
-        
+
         ${
           project.status
             ? `
-          <div style="margin-bottom: var(--space-4);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Status</h4>
-            <p style="font-size: var(--text-sm); color: var(--${project.color || "electric-lime"});">${project.status}</p>
-          </div>
-        `
+            <div style="margin-bottom: var(--space-4);">
+              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Status</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--${project.color || "electric-lime"});">${project.status}</p>
+            </div>
+          `
             : ""
         }
-        
+
         ${project.urls ? this.renderProjectLinks(project) : ""}
+
       `
     }
 
