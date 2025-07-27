@@ -279,9 +279,6 @@ try {
             "./assets/images/sketch3.png"
           ],
         },
-      ],
-
-      writing: [
         {
           id: "audiodevout-noise-sculpting-part3",
           title: "Noise Sculpting in TouchDesigner – Part 3",
@@ -330,7 +327,177 @@ try {
           videos: ["https://www.youtube.com/watch?v=Qrtwn5XjDzk"]
         },
 
+        // The rest in the same style:
 
+        {
+          id: "audiodevout-prime-spiral-visualizer",
+          title: "Prime Spiral Visualizer – TouchDesigner .tox Component",
+          description: "Real-time TouchDesigner visualizer inspired by prime exponential sums and Veritasium’s Goldbach video.",
+          fullDescription: "A complex exponential sum visualization over primes, inspired by Hardy, Littlewood, Ramanujan, and Veritasium’s $1,000,000 Goldbach Conjecture video. Includes controls for prime count, modulation angle, animation toggle, and more.",
+          medium: "TouchDesigner, generative visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "visualizer", "primes", "generative", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=a6lC3tAVilo"]
+        },
+        {
+          id: "audiodevout-quick-emboss-filter",
+          title: "Quick Emboss Filter for TouchDesigner (FREE COMPONENT FILE)",
+          description: "A quick emboss filter tutorial with free component download for TouchDesigner users.",
+          fullDescription: "Demonstrates how to create a quick emboss filter effect in TouchDesigner with project files and tox component freely available on Patreon.",
+          medium: "TouchDesigner, visual effects",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "emboss filter", "free component", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=CelbrPlWM_k"]
+        },
+        {
+          id: "audiodevout-kaleidoscopic-fractals-particlesgpu",
+          title: "Kaleidoscopic Fractals with ParticlesGPU in TouchDesigner - Tutorial",
+          description: "Create fractal patterns using ParticlesGPU with tiling, mirroring, and feedback loops.",
+          fullDescription: "Explore fractal generation techniques in TouchDesigner combining ParticlesGPU, tiling and mirroring operators, and feedback loops to create stunning kaleidoscopic visuals.",
+          medium: "TouchDesigner, particle systems, generative art",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "ParticlesGPU", "fractals", "generative art", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=TUOnPUHWpIU"]
+        },
+        {
+          id: "audiodevout-audioreactive-text-showcase",
+          title: "Audioreactive Text in TouchDesigner - Project Showcase",
+          description: "A snippet of an audioreactive text project used in a recent VJ performance.",
+          fullDescription: "Showcasing an audioreactive text visualization built in TouchDesigner, demonstrating dynamic text effects synced to audio input. Project files are available on Patreon.",
+          medium: "TouchDesigner, audioreactive visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "audioreactive", "text", "VJ", "performance"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=GlMgtr-ejzs"]
+        },
+        {
+          id: "audiodevout-noise-sculpting-part6-radial-lighting",
+          title: "Noise Sculpting Part 6 - Radial Lighting",
+          description: "Abstract structure using geo instancing with circular lighting and shadows.",
+          fullDescription: "Techniques for building abstract 3D structures using geometry instancing and introducing radial lighting effects with circular ramps and compositing modes in TouchDesigner.",
+          medium: "TouchDesigner, 3D geometry, lighting",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "noise sculpting", "instancing", "lighting", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=mkVa8D8_FIw"]
+        },
+        {
+          id: "audiodevout-controlled-feedback-cache-tops",
+          title: "Controlled Feedback with Cache TOPs in TouchDesigner",
+          description: "Tutorial on controlling feedback trails using the Cache TOP in TouchDesigner.",
+          fullDescription: "Learn how to manage and control feedback effects in TouchDesigner using Cache TOPs for more precise visual trails and effects. Project files available on Patreon.",
+          medium: "TouchDesigner, visual effects, feedback control",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "feedback", "Cache TOP", "tutorial", "visual effects"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=TXbIgtYaNqQ"]
+        },
+        {
+          id: "audiodevout-replicator-limit-feedback",
+          title: "Replicator-Limit-Feedback (Project Overview)",
+          description: "Short overview of a replicator feedback project with Patreon support request.",
+          fullDescription: "An introduction and brief overview of the Replicator-Limit-Feedback project with links to Patreon support and future tutorial plans involving Ableton and TouchDesigner.",
+          medium: "TouchDesigner, generative visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "feedback", "replicator", "project overview"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=IR0T0t49gnw"]
+        },
+        {
+          id: "audiodevout-particle-structures-mesh-generator",
+          title: "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
+          description: "Using Mesh Generator and operator techniques to create spiral particle structures.",
+          fullDescription: "This project uses the Mesh Generator tool combined with operator tricks in TouchDesigner to produce cool spiral particle structures. Files available for Patreon members.",
+          medium: "TouchDesigner, mesh generation, particle systems",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "Mesh Generator", "particles", "spiral", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=XHGeICkx9lU"]
+        },
+        {
+          id: "audiodevout-simple-grid-patterns",
+          title: "Simple Grid Patterns with Touchdesigner (Tutorial)",
+          description: "Creating simple grid-based visual patterns in TouchDesigner.",
+          fullDescription: "A straightforward tutorial for building simple grid patterns in TouchDesigner to help beginners understand basic layout and pattern creation.",
+          medium: "TouchDesigner, pattern design",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "grid patterns", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=TbRtV-ix8RE"]
+        },
+        {
+          id: "audiodevout-geometric-iterations-behind-network",
+          title: "Geometric Iterations - Behind the Network",
+          description: "Simple geometric patterns for a music video project.",
+          fullDescription: "Demonstrates noise sculpting and geometric iteration techniques used in a music video project, inspired by tutorials and shared on Patreon.",
+          medium: "TouchDesigner, generative visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "noise sculpting", "geometric patterns", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=QG-Kluyuveg"]
+        },
+        {
+          id: "audiodevout-noise-sculpting-part2",
+          title: "Noise Sculpting in TouchDesigner - Part 2",
+          description: "3D geometry creation with Noise TOP and instancing.",
+          fullDescription: "Fresh take on noise sculpting using Noise TOP and instancing to craft diverse 3D patterns in TouchDesigner. Project files on Patreon.",
+          medium: "TouchDesigner, procedural geometry",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["noise sculpting", "Noise TOP", "TouchDesigner", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=p9TwiixKvXQ"]
+        },
+        {
+          id: "audiodevout-audioreactive-doodle-geometry-instancing",
+          title: "Audioreactive Doodle with Geometry Instancing in TouchDesigner - Behind The Network",
+          description: "Overview of an audioreactive geometry instancing project without formal tutorial.",
+          fullDescription: "Sharing the network structure and techniques behind an audioreactive geometry instancing project in TouchDesigner, showcasing layering and switching tricks.",
+          medium: "TouchDesigner, audioreactive visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "audioreactive", "geometry instancing"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=Hk0uF7s-DjU"]
+        },
+        {
+          id: "audiodevout-moving-crystal-effect",
+          title: "Moving Crystal Effect in TouchDesigner (Tutorial)",
+          description: "Tutorial to create a twisting, wavy glass-like effect.",
+          fullDescription: "Learn to recreate the visual effect of twisting and warping images as seen through glass using TouchDesigner techniques.",
+          medium: "TouchDesigner, image effects",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "image distortion", "glass effect", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=pc34xAXCRlg"]
+        },
+        {
+          id: "audiodevout-basic-uv-mapping-noise-sculpting",
+          title: "Basic UV Mapping and Noise Sculpting in TouchDesigner (Tutorial)",
+          description: "Intro to UV mapping combined with noise sculpting for 3D geometry.",
+          fullDescription: "A beginner-friendly tutorial combining UV mapping and noise sculpting techniques to build 3D geometry instancing effects in TouchDesigner.",
+          medium: "TouchDesigner, UV mapping, noise sculpting",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "UV mapping", "noise sculpting", "tutorial"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=4rm5dcoQHBc"]
+        },
+        {
+          id: "audiodevout-audioreactive-visuals-003",
+          title: "AudioReactive Visuals With TouchDesigner 003",
+          description: "Quick audioreactive visual snippet with personal note.",
+          fullDescription: "A short video showing reactive visuals with TouchDesigner, including a personal note about wisdom teeth removal and a track ID.",
+          medium: "TouchDesigner, audioreactive visuals",
+          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+          tags: ["TouchDesigner", "audioreactive", "visuals"],
+          color: "cerulean",
+          videos: ["https://www.youtube.com/watch?v=J-fppN9-v-o"]
+        }
+      ],
+
+      writing: [
+        
         {
           id: "symmetrical-fictions-paper",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",

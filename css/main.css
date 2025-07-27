@@ -492,41 +492,36 @@ h6 {
 
 /* Project Cards - Mobile First Grid */
 .project-grid {
-  display: grid;
-  grid-template-columns: 1fr; /* always one column */
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-xl);
-  max-width: 900px;  /* optional, constrain width */
-  margin-left: auto; /* center container */
-  margin-right: auto;
+  margin: var(--spacing-xl) auto 0;
   padding: 0 var(--spacing-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; /* smaller gap for testing */
+  max-width: none; /* remove max width for testing */
 }
+
 
 .project-card {
-  width: 100%; /* fill grid column */
   background: var(--glass-panel-light);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--glass-border);
   border-radius: 1rem;
-  padding: var(--spacing-lg);
+  padding: calc(var(--spacing-md) / 2);
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  transform: translateZ(0);
   min-height: var(--touch-target);
-  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* hover/focus and color variants unchanged */
 .project-card:hover,
 .project-card:focus {
-  transform: translateY(-2px) translateZ(0);
+  transform: translateY(-2px);
   outline: none;
 }
 
+/* Color variants simplified, only changing border & shadow */
 .project-card.saffron:hover,
 .project-card.saffron:focus {
   box-shadow: 0 8px 24px var(--shadow-neutral), 0 4px 12px var(--shadow-saffron);
@@ -576,7 +571,6 @@ h6 {
   margin-bottom: var(--spacing-md);
 }
 
-/* FIXED: Media Section Styles */
 .project-media-section {
   border-top: 1px solid var(--glass-border);
   padding-top: var(--spacing-lg);
@@ -592,24 +586,26 @@ h6 {
   text-transform: uppercase;
 }
 
-/* FIXED: Image Styles */
-.project-images {
+/* Image and Video containers share most styles now */
+.project-images,
+.project-videos {
   display: grid;
   gap: var(--spacing-sm);
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.project-image-container {
+.project-image-container,
+.project-video-container {
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
-  aspect-ratio: 4 / 3;
   background: var(--glass-panel-light);
   border: 1px solid var(--glass-border);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-image-container:hover {
+.project-image-container:hover,
+.project-video-container:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px var(--shadow-neutral), 0 2px 8px var(--shadow-cerulean);
 }
@@ -619,30 +615,11 @@ h6 {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block;
 }
 
 .project-image-container:hover img {
   transform: scale(1.05);
-}
-
-/* FIXED: Video Styles */
-.project-videos {
-  display: grid;
-  gap: var(--spacing-sm);
-}
-
-.project-video-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  background: var(--glass-panel-light);
-  border: 1px solid var(--glass-border);
-  transition: all 0.3s ease;
-}
-
-.project-video-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px var(--shadow-neutral), 0 2px 8px var(--shadow-cerulean);
 }
 
 .project-video-container video {
@@ -650,12 +627,15 @@ h6 {
   height: auto;
   border-radius: 1rem;
   background: var(--deep-black);
+  display: block;
 }
+
 .video-embed {
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
 }
+
 
 .video-embed iframe {
   max-width: 100%;
@@ -842,13 +822,18 @@ h6 {
   }
 }
 
-/* Desktop: Optimal side by side */
-@media (min-width: 1024px) {
-  .about-content {
-    grid-template-columns: 2fr 1fr;
-    gap: var(--spacing-xxl);
+@media (min-width: 1200px) {
+  .project-grid {
+    grid-template-columns: repeat(6, 1fr); /* 6 cards at 1200px+ */
+    gap: var(--space-2);
   }
 }
+
+@media (min-width: 1600px) {
+  .project-grid {
+    grid-template-columns: repeat(6, 1fr); /* 6 columns on ultra-wide screens */
+    gap: var(--space-2); /* Smaller gap to fit more cards */
+  }
 
 /* Portrait Image Enhancements */
 .portrait-container {
