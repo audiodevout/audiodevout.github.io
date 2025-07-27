@@ -31,62 +31,156 @@ try {
           images: ["./assets/images/rain-reminders-1.jpg"],
         },
         {
-          id: "asymmetrica-audio-collection",
-          title: "Asymmetrica – Experimental Audio Works",
-          description:
-            "A personal archive of sonic experiments exploring digital anxiety, temporal displacement, and meditative machinery.",
-          fullDescription:
-            "Asymmetrica is my ongoing solo project rooted in experimental audio, where I explore the unstable edge between organic resonance and synthetic control. These compositions are part of my sonic research practice—an evolving collection of sketches, studies, and resolved pieces. Using a mix of field recordings, generative synthesis, and digital manipulation, I craft sounds that navigate disorientation, tension, and glitch-as-texture.",
-          medium: "Digital audio, experimental electronics, sound design",
-          category: "AUDIO COLLECTION",
-          color: "electric-lime",
-          themes:
-            "Digital processing, temporal manipulation, organic-synthetic synthesis, machine improvisation, glitch and failure as aesthetic",
-          technology:
-            "Digital Audio Workstation, granular and modular synthesis, field recording, Max/MSP, TouchDesigner",
-          bandcampTracks: [
-            {
-              title: "stranded deep but fast",
-              trackId: "2743015108",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
-            },
-            {
-              title: "stranded deep",
-              trackId: "2338898025",
-              url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
-            },
-            {
-              title: "tiptoe",
-              trackId: "1726285270",
-              url: "https://asymmetrica.bandcamp.com/track/tiptoe",
-            },
-            {
-              title: "supersounds",
-              trackId: "960218379",
-              url: "https://asymmetrica.bandcamp.com/track/supersounds",
-            },
-            {
-              title: "stretching",
-              trackId: "2000021307",
-              url: "https://asymmetrica.bandcamp.com/track/stretching",
-            },
-            {
-              title: "the machine",
-              trackId: "73420518",
-              url: "https://asymmetrica.bandcamp.com/track/the-machine",
-            },
-            {
-              title: "not as i remember it",
-              trackId: "750668778",
-              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
-            },
-            {
-              title: "automaton",
-              trackId: "3985467816",
-              url: "https://asymmetrica.bandcamp.com/track/automaton",
-            },
-          ],
-        },
+            id: "asymmetrica-stranded-deep",
+            title: "Stranded Deep Series",
+            description:
+              "A paired exploration of displacement and rapid flux through digital soundscapes, merging organic resonance and synthetic textures.",
+            fullDescription:
+              "This pair—'stranded deep' and 'stranded deep but fast'—represents a sonic dive into temporal distortion and emotional flux. These compositions juxtapose slow meditative pulses with accelerated glitch rhythms, reflecting themes of isolation and rapid change.",
+            medium: "Digital audio, generative synthesis",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "neon-magenta",
+            themes: "Temporal manipulation, glitch aesthetics, organic-synthetic synthesis",
+            technology: "DAW, granular synthesis, digital manipulation",
+            bandcampTracks: [
+              {
+                title: "stranded deep but fast",
+                trackId: "2743015108",
+                url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
+              },
+              {
+                title: "stranded deep",
+                trackId: "2338898025",
+                url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-tiptoe",
+            title: "Tiptoe",
+            description:
+              "A delicate balance of tension and subtle sonic shifts, tiptoeing between ambient textures and rhythmic pulses.",
+            fullDescription:
+              "Tiptoe navigates quiet spaces filled with fragile sound detail, exploring the interface between near silence and low-frequency movements. It’s an experiment in minimalism and patience.",
+            medium: "Digital audio, ambient synthesis",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "cerulean",
+            themes: "Minimalism, ambient textures, tension and release",
+            technology: "DAW, modular synth, field recording",
+            bandcampTracks: [
+              {
+                title: "tiptoe",
+                trackId: "1726285270",
+                url: "https://asymmetrica.bandcamp.com/track/tiptoe",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-supersounds",
+            title: "Supersounds",
+            description:
+              "An experimental dive into layered synthetic timbres and expansive sound fields.",
+            fullDescription:
+              "Supersounds layers evolving textures and synthetic drones to create a complex soundscape that challenges perception and embraces machine improvisation.",
+            medium: "Digital audio, experimental electronics",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "electric-lime",
+            themes: "Synthetic layering, machine improvisation, drone textures",
+            technology: "DAW, Max/MSP, modular synth",
+            bandcampTracks: [
+              {
+                title: "supersounds",
+                trackId: "960218379",
+                url: "https://asymmetrica.bandcamp.com/track/supersounds",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-stretching",
+            title: "Stretching",
+            description:
+              "A sonic exploration of elasticity and temporal extension within digital sound design.",
+            fullDescription:
+              "Stretching plays with time, slowing and elongating motifs to blur boundaries between moment and duration, creating a meditative auditory space.",
+            medium: "Digital audio, time-stretching techniques",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "saffron",
+            themes: "Temporal extension, meditative soundscapes",
+            technology: "DAW, granular synthesis, field recordings",
+            bandcampTracks: [
+              {
+                title: "stretching",
+                trackId: "2000021307",
+                url: "https://asymmetrica.bandcamp.com/track/stretching",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-the-machine",
+            title: "The Machine",
+            description:
+              "An exploration of mechanized rhythms and synthetic textures embodying the essence of automated sound production.",
+            fullDescription:
+              "The Machine evokes industrial soundscapes with tight rhythmic patterns and digital noise, interrogating the relationship between human and machine in sound creation.",
+            medium: "Digital audio, rhythm synthesis",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "cerulean",
+            themes: "Industrial aesthetics, mechanized rhythm, synthetic textures",
+            technology: "DAW, Max/MSP, modular synthesis",
+            bandcampTracks: [
+              {
+                title: "the machine",
+                trackId: "73420518",
+                url: "https://asymmetrica.bandcamp.com/track/the-machine",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-not-as-i-remember-it",
+            title: "Not As I Remember It",
+            description:
+              "A reflective piece examining memory through fragmented sound and abstract textures.",
+            fullDescription:
+              "Not As I Remember It distorts familiar motifs into abstract forms, questioning the reliability of recollection and the fluidity of sonic memory.",
+            medium: "Digital audio, sound manipulation",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "electric-lime",
+            themes: "Memory, abstraction, sonic fragmentation",
+            technology: "DAW, field recording, granular synthesis",
+            bandcampTracks: [
+              {
+                title: "not as i remember it",
+                trackId: "750668778",
+                url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
+              },
+            ],
+          },
+
+          {
+            id: "asymmetrica-automaton",
+            title: "Automaton",
+            description:
+              "An exploration of mechanical repetition and evolving digital patterns.",
+            fullDescription:
+              "Automaton features repetitive motifs and incremental variations that evoke mechanized processes and evolving synthetic life.",
+            medium: "Digital audio, generative patterns",
+            category: "ASYMMETRICA AUDIO COLLECTION",
+            color: "neon-magenta",
+            themes: "Repetition, mechanization, generative synthesis",
+            technology: "DAW, modular synthesis, Max/MSP",
+            bandcampTracks: [
+              {
+                title: "automaton",
+                trackId: "3985467816",
+                url: "https://asymmetrica.bandcamp.com/track/automaton",
+              },
+            ],
+          },
         {
           id: "ambient-sound-production",
           title: "Ambient Sound Production Experiments",

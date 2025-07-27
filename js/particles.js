@@ -41,7 +41,7 @@ const PERFORMANCE_PROFILES = {
   desktop: {
     maxParticles: 250,
     connectionDistance: 400,
-    mouseInfluence: 100,
+    mouseInfluence: 150,
     enableConnections: true,
     animationQuality: "high",
     updateFrequency: 60,
@@ -49,11 +49,8 @@ const PERFORMANCE_PROFILES = {
 }
 
 // VISUAL SETTINGS
-const PARTICLE_COLORS = [
-  "rgba(255, 149, 71, 1)", // saffron
-  "rgba(0, 149, 255, 1)", // cerulean
-  "rgba(255, 71, 172, 1)", // neon-magenta
-  "rgba(173, 255, 71, 1)", // electric-lime
+const PARTICLE_COLORS = [  
+  "rgba(0, 149, 255, 1)" // electric-lime
 ]
 
 const CONNECTION_COLOR = "rgba(255,255,255,1)"

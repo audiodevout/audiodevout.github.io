@@ -186,9 +186,9 @@ const PERFORMANCE_CONFIG = {
   profiles: {
     mobile: {
       maxParticles: 50,
-      maxStars: 200,
-      maxNebulas: 3,
-      maxDustParticles: 50,
+      maxStars: 0,
+      maxNebulas: 0,
+      maxDustParticles: 0,
       mandalaLayers: 2,
       updateFrequency: 30,
       renderQuality: "low",
@@ -199,9 +199,9 @@ const PERFORMANCE_CONFIG = {
     },
     tablet: {
       maxParticles: 100,
-      maxStars: 400,
-      maxNebulas: 5,
-      maxDustParticles: 100,
+      maxStars: 0,
+      maxNebulas: 0,
+      maxDustParticles: 0,
       mandalaLayers: 3,
       updateFrequency: 45,
       renderQuality: "medium",
@@ -212,9 +212,9 @@ const PERFORMANCE_CONFIG = {
     },
     desktop: {
       maxParticles: 150,
-      maxStars: 800,
-      maxNebulas: 8,
-      maxDustParticles: 200,
+      maxStars: 0,
+      maxNebulas: 0,
+      maxDustParticles: 0,
       mandalaLayers: 4,
       updateFrequency: 60,
       renderQuality: "high",
