@@ -261,13 +261,13 @@ try {
            "./assets/images/audiodevout-thumbnail-1.jpg",
            "./assets/images/audiodevout-thumbnail-2.jpg"
          ],
-         videoIds: [
-           "Mu1TpRVujuY",
-           "kcZH2zcHANc",
-           "4rm5dcoQHBc",
-           "p9TwiixKvXQ",
-           "s8ea30HlTHE",
-           "Qrtwn5XjDzk"
+         videos: [
+           "https://www.youtube.com/watch?v=Mu1TpRVujuY",
+           "https://www.youtube.com/watch?v=kcZH2zcHANc",
+           "https://www.youtube.com/watch?v=4rm5dcoQHBc", 
+           "https://www.youtube.com/watch?v=p9TwiixKvXQ",
+           "https://www.youtube.com/watch?v=s8ea30HlTHE",
+           "https://www.youtube.com/watch?v=Qrtwn5XjDzk"
          ]
 
        }

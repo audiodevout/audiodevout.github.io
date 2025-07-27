@@ -1,53 +1,38 @@
-/* main.js - Core Portfolio Application Logic (RESTRUCTURED)
+/**
+ * main.js - Cyberpunk Portfolio Application (Redesigned)
  *
- * PURPOSE: Parses portfolioData.js and dynamically renders all page content
- * UPDATED: Added installations page with tag filtering functionality
+ * ARCHITECTURE:
+ * - Monolithic app class with modular systems
+ * - Grid-based layout management
+ * - Enhanced video embedding support
+ * - Performance-optimized rendering
+ * - Minimalist interaction patterns
  */
 
-// FIXED: Wrapped entire application in error handling
 ;(() => {
-  // FIXED: Performance settings with better device detection
+  // Performance configuration based on device capabilities
   const APP_CONFIG = {
     mobile: {
-      // particleCount: 30,
-      // mandalaLayers: 2,
-      // galaxyEnabled: false,
-      // animationQuality: "low",
-      // enableBloom: false,
-      // enableCursor: false,
-      // debounceDelay: 300,
-      // lazyLoadThreshold: 100,
-      particleCount: 120,
-      mandalaLayers: 4,
-      galaxyEnabled: false,
-      animationQuality: "high",
-      enableBloom: true,
-      enableCursor: true,
-      debounceDelay: 100,
-      lazyLoadThreshold: 300,
+      particleCount: 60,
+      mandalaLayers: 2,
+      animationQuality: "medium",
+      enableBloom: false,
+      enableCursor: false,
+      debounceDelay: 200,
+      lazyLoadThreshold: 100,
     },
     tablet: {
-      // particleCount: 80,
-      // mandalaLayers: 3,
-      // galaxyEnabled: false,
-      // animationQuality: "medium",
-      // enableBloom: true,
-      // enableCursor: true,
-      // debounceDelay: 200,
-      // lazyLoadThreshold: 200,
-      particleCount: 120,
-      mandalaLayers: 4,
-      galaxyEnabled: false,
+      particleCount: 100,
+      mandalaLayers: 3,
       animationQuality: "high",
       enableBloom: true,
       enableCursor: true,
-      debounceDelay: 100,
-      lazyLoadThreshold: 300,
+      debounceDelay: 150,
+      lazyLoadThreshold: 200,
     },
     desktop: {
-      particleCount: 120,
+      particleCount: 150,
       mandalaLayers: 4,
-      galaxyEnabled: false,
       animationQuality: "high",
       enableBloom: true,
       enableCursor: true,
@@ -56,128 +41,95 @@
     },
   }
 
-  // UPDATED: Page segments mapping with new installations page
+  // Page-specific mandala segments for visual variety
   const PAGE_SEGMENTS = {
     home: 8,
     "sound-installations": 6,
     performance: 10,
-    installations: 12, // Combined generative + interactive
+    installations: 12,
     drawings: 7,
     writing: 9,
     "about-contact": 16,
   }
 
-  class PortfolioApp {
+  class CyberpunkPortfolioApp {
     constructor() {
       try {
-        // FIXED: Better device detection
+        // Initialize core properties
         this.deviceProfile = this.detectDeviceProfile()
         this.config = APP_CONFIG[this.deviceProfile]
-
-        // Application state
         this.currentPage = "home"
-        this.scrollProgress = 0
         this.isInitialized = false
         this.isDestroyed = false
-        this.activeFilters = new Set() // For tag filtering
 
         // System components
         this.mandalaGenerator = null
         this.particleSystem = null
         this.cursorTrail = null
-        this.galaxyBackground = null
 
-        // FIXED: Data validation
+        // Data and DOM management
         this.data = this.validatePortfolioData()
         this.elements = {}
         this.eventListeners = []
 
-        // Performance monitoring
+        // Performance tracking
         this.performanceStats = {
           initTime: Date.now(),
           renderCount: 0,
           lastRenderTime: 0,
         }
 
-        console.log(`PortfolioApp initializing with ${this.deviceProfile} profile:`, this.config)
-
+        console.log(`CyberpunkPortfolioApp initializing with ${this.deviceProfile} profile`)
         this.init()
       } catch (error) {
-        console.error("PortfolioApp constructor error:", error)
+        console.error("CyberpunkPortfolioApp constructor error:", error)
         this.showErrorFallback()
       }
     }
 
     detectDeviceProfile() {
-      // Force desktop profile for debugging
-      return "desktop"
-     
+      try {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent)
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        if (prefersReducedMotion) return "mobile"
+
+        // Device capability detection
+        const deviceMemory = navigator.deviceMemory || 4
+        const hardwareConcurrency = navigator.hardwareConcurrency || 4
+        const connectionSpeed = navigator.connection?.effectiveType || "4g"
+
+        if (isMobile || deviceMemory < 4 || hardwareConcurrency < 4 || ["slow-2g", "2g"].includes(connectionSpeed)) {
+          return "mobile"
+        } else if (isTablet || deviceMemory < 8 || connectionSpeed === "3g") {
+          return "tablet"
+        } else {
+          return "desktop"
+        }
+      } catch (error) {
+        console.warn("Device detection error, defaulting to mobile:", error)
+        return "mobile"
+      }
     }
-    // FIXED: Improved device detection
-    // detectDeviceProfile() {
-    //   try {
-    //     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    //     const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent)
 
-    //     // Check for reduced motion preference
-    //     const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    //     if (prefersReducedMotion) {
-    //       return "mobile"
-    //     }
-
-    //     // Check device capabilities
-    //     const deviceMemory = navigator.deviceMemory || 4
-    //     const hardwareConcurrency = navigator.hardwareConcurrency || 4
-    //     const connectionSpeed = navigator.connection?.effectiveType || "4g"
-
-    //     if (
-    //       isMobile ||
-    //       deviceMemory < 4 ||
-    //       hardwareConcurrency < 4 ||
-    //       connectionSpeed === "slow-2g" ||
-    //       connectionSpeed === "2g"
-    //     ) {
-    //       return "mobile"
-    //     } else if (isTablet || deviceMemory < 8 || connectionSpeed === "3g") {
-    //       return "tablet"
-    //     } else {
-    //       return "desktop"
-    //     }
-    //   } catch (error) {
-    //     console.warn("Device detection error, defaulting to mobile:", error)
-    //     return "mobile"
-    //   }
-    // }
-
-    // FIXED: Data validation with fallbacks
     validatePortfolioData() {
       try {
         const data = window.portfolioData
         if (!data || typeof data !== "object") {
-          console.error("Portfolio data not found or invalid")
           throw new Error("Portfolio data not found or invalid")
         }
 
-        // Validate required structure
         if (!data.projects || typeof data.projects !== "object") {
-          console.error("Projects data missing or invalid")
           throw new Error("Projects data missing or invalid")
         }
 
         if (!data.contact || typeof data.contact !== "object") {
-          console.error("Contact data missing or invalid")
           throw new Error("Contact data missing or invalid")
         }
 
-        // Log the data structure for debugging
-        console.log("Portfolio data validated successfully:", {
-          soundInstallations: data.projects.soundInstallations?.length || 0,
-          performance: data.projects.performance?.length || 0,
-          installations: data.projects.installations?.length || 0,
-          drawings: data.projects.drawings?.length || 0,
-          writing: data.projects.writing?.length || 0,
-        })
-
+        console.log("Portfolio data validated successfully")
         return data
       } catch (error) {
         console.error("Portfolio data validation failed:", error)
@@ -185,13 +137,12 @@
       }
     }
 
-    // FIXED: Comprehensive fallback data
     getDefaultData() {
       return {
         projects: {
           soundInstallations: [],
           performance: [],
-          installations: [], // Updated from generativeAV and interactive
+          installations: [],
           drawings: [],
           writing: [],
         },
@@ -211,22 +162,21 @@
 
     async init() {
       try {
-        // Cache DOM elements first
+        // Cache DOM elements
         this.cacheElements()
 
         // Hide loading state
         this.hideLoadingState()
 
-        // Setup systems in order of importance
+        // Setup core systems
         await this.setupBackgroundSystems()
         this.setupNavigation()
-        this.setupScrollTracking()
         this.setupImageOverlay()
-
         this.setupModal()
+        this.setupScrollTracking()
 
-        // Setup URL redirects for old routes
-        this.setupRouteRedirects()
+        // Handle URL routing
+        this.setupRouteHandling()
 
         // Render initial page
         this.renderCurrentPage()
@@ -234,44 +184,31 @@
         // Mark as initialized
         this.isInitialized = true
 
-        // Log performance stats
         const initTime = Date.now() - this.performanceStats.initTime
-        console.log(`PortfolioApp initialized in ${initTime}ms`)
+        console.log(`CyberpunkPortfolioApp initialized in ${initTime}ms`)
       } catch (error) {
-        console.error("Failed to initialize PortfolioApp:", error)
+        console.error("Failed to initialize CyberpunkPortfolioApp:", error)
         this.showErrorFallback()
       }
     }
 
-    // NEW: Setup route redirects for old URLs
-    setupRouteRedirects() {
-      const currentHash = window.location.hash.substring(1)
-      if (currentHash === "generative-av" || currentHash === "interactive") {
-        // Redirect old routes to new installations page
-        window.location.hash = "installations"
-        this.currentPage = "installations"
-      }
-    }
-
-    // FIXED: Better element caching with validation
     cacheElements() {
       const elementIds = [
         "mainContent",
         "mandalaCanvas",
         "particleCanvas",
-        "galaxyCanvas",
         "projectModal",
         "modalBody",
         "modalClose",
         "navLinks",
         "mobileMenuToggle",
-        "cursorCrosshair",
-        "cursorTrail",
         "loadingState",
+        "imageOverlay",
+        "overlayImage",
+        "closeOverlay",
       ]
 
       this.elements = {}
-
       elementIds.forEach((id) => {
         const element = document.getElementById(id)
         if (element) {
@@ -281,8 +218,8 @@
         }
       })
 
-      // Validate critical elements exist
-      const criticalElements = ["mainContent", "mandalaCanvas", "particleCanvas", "galaxyCanvas"]
+      // Validate critical elements
+      const criticalElements = ["mainContent"]
       for (const elementKey of criticalElements) {
         if (!this.elements[elementKey]) {
           throw new Error(`Required DOM element #${elementKey} not found`)
@@ -290,35 +227,16 @@
       }
     }
 
-    // FIXED: Hide loading state
     hideLoadingState() {
       if (this.elements.loadingState) {
         this.elements.loadingState.style.display = "none"
       }
     }
 
-    // FIXED: Improved background systems setup with error handling
     async setupBackgroundSystems() {
       const setupPromises = []
 
       try {
-        // Initialize galaxy background (first, as deepest layer)
-        if (this.config.galaxyEnabled && this.elements.galaxyCanvas && window.GalaxyBackground) {
-          setupPromises.push(
-            new Promise((resolve) => {
-              try {
-                this.galaxyBackground = new window.GalaxyBackground(this.elements.galaxyCanvas)
-                this.galaxyBackground.start()
-                console.log("Galaxy background initialized")
-                resolve()
-              } catch (error) {
-                console.warn("Galaxy background failed to initialize:", error)
-                resolve()
-              }
-            }),
-          )
-        }
-
         // Initialize particle system
         if (this.elements.particleCanvas && window.ParticleSystem) {
           setupPromises.push(
@@ -358,12 +276,7 @@
         }
 
         // Initialize cursor trail (desktop only)
-        if (
-          this.config.enableCursor &&
-          this.elements.cursorCrosshair &&
-          this.elements.cursorTrail &&
-          window.CursorTrail
-        ) {
+        if (this.config.enableCursor && window.CursorTrail) {
           setupPromises.push(
             new Promise((resolve) => {
               try {
@@ -378,21 +291,14 @@
           )
         }
 
-        // Wait for all systems to initialize
         await Promise.all(setupPromises)
-
-        // Setup resize handler with debouncing
         this.setupResizeHandler()
-
-        // Setup visibility change handler for performance
         this.setupVisibilityHandler()
       } catch (error) {
         console.error("Error initializing background systems:", error)
-        // Continue without background effects if they fail
       }
     }
 
-    // FIXED: Improved resize handler
     setupResizeHandler() {
       let resizeTimeout
       const resizeHandler = () => {
@@ -400,7 +306,6 @@
         resizeTimeout = setTimeout(() => {
           if (this.isInitialized && !this.isDestroyed) {
             try {
-              this.galaxyBackground?.updateSize()
               this.mandalaGenerator?.updateSize()
               this.particleSystem?.updateSize()
               this.renderCurrentPage()
@@ -415,19 +320,14 @@
       this.eventListeners.push({ element: window, event: "resize", handler: resizeHandler })
     }
 
-    // FIXED: Improved visibility handler
     setupVisibilityHandler() {
       const visibilityHandler = () => {
         try {
           if (document.hidden) {
-            // Pause animations when page is hidden
-            this.galaxyBackground?.stop()
             this.mandalaGenerator?.stopAnimation()
             this.particleSystem?.stop()
           } else {
-            // Resume animations when page is visible
             if (this.isInitialized && !this.isDestroyed) {
-              this.galaxyBackground?.start()
               this.mandalaGenerator?.startAnimation()
               this.particleSystem?.start()
             }
@@ -441,7 +341,6 @@
       this.eventListeners.push({ element: document, event: "visibilitychange", handler: visibilityHandler })
     }
 
-    // FIXED: Improved navigation setup
     setupNavigation() {
       try {
         const navLinks = document.querySelectorAll(".nav-link")
@@ -455,14 +354,8 @@
               this.navigateToPage(page)
             }
 
-            // Close mobile menu if open
-            this.elements.navLinks?.classList.remove("active")
-
-            // Update mobile toggle state
-            if (this.elements.mobileToggle) {
-              this.elements.mobileToggle.classList.remove("active")
-              this.elements.mobileToggle.setAttribute("aria-expanded", "false")
-            }
+            // Close mobile menu
+            this.closeMobileMenu()
           }
 
           const keydownHandler = (e) => {
@@ -480,22 +373,24 @@
         })
 
         // Mobile menu toggle
-        if (this.elements.mobileToggle) {
+        const mobileToggle = document.getElementById("mobileMenuToggle")
+        if (mobileToggle) {
           const toggleHandler = () => {
-            const isActive = this.elements.navLinks.classList.contains("active")
+            const navLinks = this.elements.navLinks
+            const isActive = navLinks.classList.contains("active")
 
-            this.elements.navLinks.classList.toggle("active")
-            this.elements.mobileToggle.classList.toggle("active")
-            this.elements.mobileToggle.setAttribute("aria-expanded", !isActive)
+            navLinks.classList.toggle("active")
+            mobileToggle.classList.toggle("active")
+            mobileToggle.setAttribute("aria-expanded", !isActive)
           }
 
-          this.elements.mobileToggle.addEventListener("click", toggleHandler)
-          this.eventListeners.push({ element: this.elements.mobileToggle, event: "click", handler: toggleHandler })
+          mobileToggle.addEventListener("click", toggleHandler)
+          this.eventListeners.push({ element: mobileToggle, event: "click", handler: toggleHandler })
         }
 
-        // Handle browser back/forward
+        // Handle browser navigation
         const popstateHandler = (e) => {
-          const page = e.state?.page || "home"
+          const page = e.state?.page || this.getPageFromHash()
           this.navigateToPage(page, false)
         }
 
@@ -506,7 +401,45 @@
       }
     }
 
-    // FIXED: Improved scroll tracking
+    closeMobileMenu() {
+      const navLinks = this.elements.navLinks
+      const mobileToggle = document.getElementById("mobileMenuToggle")
+
+      if (navLinks) navLinks.classList.remove("active")
+      if (mobileToggle) {
+        mobileToggle.classList.remove("active")
+        mobileToggle.setAttribute("aria-expanded", "false")
+      }
+    }
+
+    setupRouteHandling() {
+      // Handle initial page load
+      const initialPage = this.getPageFromHash()
+      if (initialPage !== "home") {
+        this.navigateToPage(initialPage, false)
+      }
+    }
+
+    getPageFromHash() {
+      const hash = window.location.hash.substring(1)
+      const validPages = [
+        "home",
+        "sound-installations",
+        "performance",
+        "installations",
+        "drawings",
+        "writing",
+        "about-contact",
+      ]
+
+      // Handle legacy routes
+      if (hash === "generative-av" || hash === "interactive") {
+        return "installations"
+      }
+
+      return validPages.includes(hash) ? hash : "home"
+    }
+
     setupScrollTracking() {
       let scrollTimeout
       let isScrolling = false
@@ -534,18 +467,56 @@
       try {
         const scrollTop = window.pageYOffset
         const docHeight = document.documentElement.scrollHeight - window.innerHeight
-        this.scrollProgress = Math.min(scrollTop / Math.max(docHeight, 1), 1)
+        const scrollProgress = Math.min(scrollTop / Math.max(docHeight, 1), 1)
 
-        // Update mandala based on scroll
         if (this.mandalaGenerator) {
-          this.mandalaGenerator.setScrollProgress(this.scrollProgress)
+          this.mandalaGenerator.setScrollProgress(scrollProgress)
         }
       } catch (error) {
         console.warn("Scroll progress update error:", error)
       }
     }
 
-    // FIXED: Improved navigation
+    setupImageOverlay() {
+      try {
+        // Click any image inside .project-images
+        document.body.addEventListener("click", (e) => {
+          const img = e.target.closest(".project-images img")
+          if (img && this.elements.imageOverlay && this.elements.overlayImage) {
+            this.elements.overlayImage.src = img.src
+            this.elements.imageOverlay.style.display = "flex"
+            document.body.style.overflow = "hidden"
+          }
+        })
+
+        // Close button
+        if (this.elements.closeOverlay) {
+          const closeHandler = () => {
+            if (this.elements.imageOverlay) {
+              this.elements.imageOverlay.style.display = "none"
+              document.body.style.overflow = ""
+            }
+          }
+
+          this.elements.closeOverlay.addEventListener("click", closeHandler)
+          this.eventListeners.push({ element: this.elements.closeOverlay, event: "click", handler: closeHandler })
+        }
+
+        // Escape key to close
+        const keydownHandler = (e) => {
+          if (e.key === "Escape" && this.elements.imageOverlay && this.elements.imageOverlay.style.display === "flex") {
+            this.elements.imageOverlay.style.display = "none"
+            document.body.style.overflow = ""
+          }
+        }
+
+        document.addEventListener("keydown", keydownHandler)
+        this.eventListeners.push({ element: document, event: "keydown", handler: keydownHandler })
+      } catch (error) {
+        console.error("Error setting up image overlay:", error)
+      }
+    }
+
     navigateToPage(page, updateHistory = true) {
       if (page === this.currentPage || !this.isInitialized || this.isDestroyed) return
 
@@ -561,12 +532,12 @@
         this.currentPage = page
         this.renderCurrentPage()
 
-        // Update mandala canvas class for page-specific styling
+        // Update mandala canvas class
         if (this.elements.mandalaCanvas) {
           this.elements.mandalaCanvas.className = `mandala-canvas ${page}`
         }
 
-        // Update mandala segments based on page
+        // Update mandala segments
         if (this.mandalaGenerator) {
           const pageSegments = PAGE_SEGMENTS[page] || 8
           this.mandalaGenerator.setSegments(pageSegments)
@@ -580,7 +551,7 @@
         // Smooth scroll to top
         window.scrollTo({ top: 0, behavior: "smooth" })
 
-        // Log performance
+        // Performance tracking
         const renderTime = Date.now() - startTime
         this.performanceStats.renderCount++
         this.performanceStats.lastRenderTime = renderTime
@@ -593,116 +564,45 @@
       }
     }
 
-    // UPDATED: Improved page rendering with new installations page
     renderCurrentPage() {
       if (!this.elements.mainContent || this.isDestroyed) return
-
-      const mainContent = this.elements.mainContent
 
       try {
         let html = ""
 
         switch (this.currentPage) {
           case "home":
-            try {
-              html = this.renderHomePage()
-            } catch (error) {
-              console.error("Error rendering home page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderHomePage()
             break
           case "sound-installations":
-            try {
-              html = this.renderSoundInstallationsPage()
-            } catch (error) {
-              console.error("Error rendering sound installations page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderSoundInstallationsPage()
             break
           case "performance":
-            try {
-              html = this.renderPerformancePage()
-            } catch (error) {
-              console.error("Error rendering performance page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderPerformancePage()
             break
           case "installations":
-            try {
-              html = this.renderInstallationsPage()
-            } catch (error) {
-              console.error("Error rendering installations page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderInstallationsPage()
             break
           case "drawings":
-            try {
-              html = this.renderDrawingsPage()
-            } catch (error) {
-              console.error("Error rendering drawings page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderDrawingsPage()
             break
           case "writing":
-            try {
-              html = this.renderWritingPage()
-            } catch (error) {
-              console.error("Error rendering writing page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderWritingPage()
             break
           case "about-contact":
-            try {
-              html = this.renderContactPage()
-            } catch (error) {
-              console.error("Error rendering contact page:", error)
-              html = this.renderErrorPage()
-            }
+            html = this.renderContactPage()
             break
           default:
             html = this.renderHomePage()
         }
 
-        mainContent.innerHTML = html
-
-        // Bind project card events after rendering
+        this.elements.mainContent.innerHTML = html
         this.bindProjectCardEvents()
       } catch (error) {
         console.error("Error rendering page:", error)
-        mainContent.innerHTML = this.renderErrorPage()
+        this.elements.mainContent.innerHTML = this.renderErrorPage()
       }
     }
-setupImageOverlay() {
-  try {
-    // Click any image inside .project-images
-    document.body.addEventListener("click", (e) => {
-      const img = e.target.closest(".project-images img")
-      if (img) {
-        const overlay = document.getElementById("imageOverlay")
-        const overlayImg = document.getElementById("overlayImage")
-        overlayImg.src = img.src
-        overlay.style.display = "flex"
-        document.body.style.overflow = "hidden" // disable background scroll
-      }
-    })
-
-    // Close button
-    document.getElementById("closeOverlay")?.addEventListener("click", () => {
-      document.getElementById("imageOverlay").style.display = "none"
-      document.body.style.overflow = ""
-    })
-
-    // Escape key to close
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        document.getElementById("imageOverlay").style.display = "none"
-        document.body.style.overflow = ""
-      }
-    })
-  } catch (error) {
-    console.error("Error setting up image overlay:", error)
-  }
-}
 
     renderHomePage() {
       return `
@@ -726,7 +626,7 @@ setupImageOverlay() {
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--saffron);">SOUND INSTALLATIONS</h2>
+              <h2 class="page-title" style="color: var(--electric-lime);">SOUND INSTALLATIONS</h2>
             </div>
             
             <div class="project-grid">
@@ -744,7 +644,7 @@ setupImageOverlay() {
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--cerulean);">PERFORMANCE</h2>
+              <h2 class="page-title" style="color: var(--cyber-blue);">PERFORMANCE</h2>
             </div>
             
             <div class="project-grid">
@@ -755,52 +655,55 @@ setupImageOverlay() {
       `
     }
 
-    // NEW: Render installations page with tag filtering
     renderInstallationsPage() {
       const projects = this.data.projects.installations || []
-
-      return `
-    <section class="page-section active">
-      <div class="page-content">
-        <div class="page-header">
-          <h2 class="page-title" style="color: var(--neon-magenta);">INSTALLATIONS</h2>
-          <p style="color: var(--pale-gray); opacity: 0.8; margin-top: var(--space-sm); font-size: var(--text-lg);">
-            Generative and interactive works exploring computational creativity
-          </p>
-        </div>
-        
-        <!-- Projects Grid -->
-        <div class="project-grid">
-          ${
-            projects.length > 0
-              ? projects.map((project) => this.renderProjectCard(project)).join("")
-              : `
-              <div class="glass-panel" style="padding: var(--spacing-xl); text-align: center; grid-column: 1 / -1;">
-                <p style="color: var(--pale-gray); font-size: var(--text-lg);">
-                  No installation projects available at the moment.
-                </p>
-              </div>
-            `
-          }
-        </div>
-      </div>
-    </section>
-  `
-    }
-
-    renderDrawingsPage() {
-      const projects = this.data.projects.drawings || []
-      const project = projects[0]
 
       return `
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--saffron);">DRAWINGS / SKETCH</h2>
+              <h2 class="page-title" style="color: var(--neon-magenta);">INSTALLATIONS</h2>
+              <p style="color: var(--light-gray); margin-top: var(--space-4); font-size: var(--text-md);">
+                Generative and interactive works exploring computational creativity
+              </p>
             </div>
             
             <div class="project-grid">
-              ${project ? this.renderProjectCard(project) : "<p>No drawings available.</p>"}
+              ${
+                projects.length > 0
+                  ? projects.map((project) => this.renderProjectCard(project)).join("")
+                  : `
+                  <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-8); background: var(--charcoal); border: var(--border-thin);">
+                    <p style="color: var(--light-gray); font-size: var(--text-md);">
+                      No installation projects available at the moment.
+                    </p>
+                  </div>
+                `
+              }
+            </div>
+          </div>
+        </section>
+      `
+    }
+
+    renderDrawingsPage() {
+      const projects = this.data.projects.drawings || []
+
+      return `
+        <section class="page-section active">
+          <div class="page-content">
+            <div class="page-header">
+              <h2 class="page-title" style="color: var(--warning-orange);">DRAWINGS / SKETCH</h2>
+            </div>
+            
+            <div class="project-grid">
+              ${
+                projects.length > 0
+                  ? projects.map((project) => this.renderProjectCard(project)).join("")
+                  : `<div style="grid-column: 1 / -1; text-align: center; padding: var(--space-8); background: var(--charcoal); border: var(--border-thin);">
+                  <p style="color: var(--light-gray);">No drawings available.</p>
+                </div>`
+              }
             </div>
           </div>
         </section>
@@ -814,7 +717,7 @@ setupImageOverlay() {
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--cerulean);">WRITING / THEORY</h2>
+              <h2 class="page-title" style="color: var(--cyber-blue);">WRITING / THEORY</h2>
             </div>
             
             <div class="project-grid">
@@ -825,7 +728,6 @@ setupImageOverlay() {
       `
     }
 
-    // REPLACE the renderContactPage() function in js/main.js with this:
     renderContactPage() {
       const contact = this.data.contact || {
         about: {
@@ -839,137 +741,93 @@ setupImageOverlay() {
       }
 
       return `
-    <section class="page-section active">
-      <div class="page-content">
-        <div class="page-header">
-          <h2 class="page-title" style="color: var(--electric-lime);">ABOUT & CONTACT</h2>
-        </div>
-        
-        <!-- About Section -->
-        <div class="about-section" style="margin-bottom: var(--spacing-xxl);">
-          <div class="about-content" style="display: grid; gap: var(--spacing-xl); grid-template-columns: 1fr; align-items: start;">
-            
-            <!-- About Text -->
-            <div class="about-text glass-panel" style="padding: var(--spacing-xl);">
-              <h3 style="color: var(--saffron); font-size: var(--text-2xl); margin-bottom: var(--spacing-lg); font-weight: 600;">
-                ${contact.about?.title || "About"}
-              </h3>
-              
-              <div style="font-size: var(--text-lg); line-height: 1.8; opacity: 0.9; margin-bottom: var(--spacing-lg);">
-                ${
-                  contact.about?.description
-                    ?.split("\n\n")
-                    .map((paragraph) => `<p style="margin-bottom: var(--spacing-md);">${paragraph}</p>`)
-                    .join("") || "Loading about content..."
-                }
-              </div>
-              
-              ${
-                contact.about?.credentials && contact.about.credentials.length > 0
-                  ? `
-                <div class="credentials" style="margin-top: var(--spacing-lg);">
-                  <h4 style="color: var(--cerulean); font-size: var(--text-lg); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: 0.05em;">
-                    PRACTICE AREAS
-                  </h4>
-                  <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
-                    ${contact.about.credentials
-                      .map(
-                        (credential) => `
-                      <span style="
-                        background: var(--glass-accent); 
-                        border: 1px solid var(--glass-border); 
-                        padding: var(--spacing-xs) var(--spacing-sm); 
-                        border-radius: var(--spacing-lg); 
-                        font-family: var(--font-mono); 
-                        font-size: var(--text-sm); 
-                        color: var(--off-white);
-                        opacity: 0.9;
-                      ">
-                        ${credential}
-                      </span>
-                    `,
-                      )
-                      .join("")}
-                  </div>
-                </div>
-              `
-                  : ""
-              }
+        <section class="page-section active">
+          <div class="page-content">
+            <div class="page-header">
+              <h2 class="page-title" style="color: var(--electric-lime);">ABOUT & CONTACT</h2>
             </div>
             
-            <!-- Portrait Image -->
-            ${
-              contact.about?.image
-                ? `
-              <div class="about-image glass-panel-light" style="padding: var(--spacing-md); text-align: center;">
-                <div class="portrait-container" style="
-                  position: relative; 
-                  max-width: 400px; 
-                  margin: 0 auto;
-                  aspect-ratio: 4/5;
-                  overflow: hidden;
-                  border-radius: var(--spacing-lg);
-                  background: var(--glass-panel-light);
-                ">
-                  <img 
-                    src="${contact.about.image}" 
-                    alt="Atharva Gupta"
-                    style="
-                      width: 100%; 
-                      height: 100%; 
-                      object-fit: cover; 
-                      transition: transform 0.3s ease;
-                      filter: grayscale(20%) contrast(1.1);
-                    "
-                    loading="lazy"
-                    onerror="this.parentElement.innerHTML='<div class=\\'media-error\\'>Portrait image not available<br><small>${contact.about.image}</small></div>'"
-                    onmouseover="this.style.transform = 'scale(1.02)'"
-                    onmouseout="this.style.transform = 'scale(1)'"
-                  />
+            <!-- About Section -->
+            <div class="about-section" style="margin-bottom: var(--space-12);">
+              <div class="about-content">
+                
+                <!-- About Text -->
+                <div class="about-text">
+                  <h3>${contact.about?.title || "About"}</h3>
+                  
+                  <div>
+                    ${
+                      contact.about?.description
+                        ?.split("\n\n")
+                        .map((paragraph) => `<p>${paragraph}</p>`)
+                        .join("") || "Loading about content..."
+                    }
+                  </div>
+                  
+                  ${
+                    contact.about?.credentials && contact.about.credentials.length > 0
+                      ? `
+                    <div class="credentials">
+                      <h4>PRACTICE AREAS</h4>
+                      <div>
+                        ${contact.about.credentials.map((credential) => `<span>${credential}</span>`).join("")}
+                      </div>
+                    </div>
+                  `
+                      : ""
+                  }
                 </div>
+                
+                <!-- Portrait Image -->
+                ${
+                  contact.about?.image
+                    ? `
+                  <div class="portrait-container">
+                    <img 
+                      src="${contact.about.image}" 
+                      alt="Atharva Gupta"
+                      loading="lazy"
+                      onerror="this.parentElement.innerHTML='<div style=\\'padding: var(--space-6); text-align: center; color: var(--light-gray);\\'>Portrait image not available</div>'"
+                    />
+                  </div>
+                `
+                    : `
+                  <div class="portrait-container" style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 300px;
+                    color: var(--light-gray);
+                    font-family: var(--font-mono);
+                    font-size: var(--text-sm);
+                    text-align: center;
+                  ">
+                    📷<br>Portrait Image<br>Coming Soon
+                  </div>
+                `
+                }
               </div>
-            `
-                : `
-              <div class="about-image-placeholder glass-panel-light" style="
-                padding: var(--spacing-xl); 
-                text-align: center;
-                aspect-ratio: 4/5;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                max-width: 400px;
-                margin: 0 auto;
-                border-radius: var(--spacing-lg);
-                border: 2px dashed var(--glass-border);
-              ">
-                <div style="color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
-                  📷<br>Portrait Image<br>Coming Soon
-                </div>
+            </div>
+            
+            <!-- Contact Section -->
+            <div class="contact-section">
+              <h3 style="color: var(--cyber-blue); font-size: var(--text-xl); margin-bottom: var(--space-8); text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
+                CONNECT & COLLABORATE
+              </h3>
+              
+              <div class="social-grid">
+                ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
               </div>
-            `
-            }
+              
+              <div style="margin-top: var(--space-8); padding: var(--space-6); text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; background: var(--charcoal); border: var(--border-thin);">
+                <p style="font-size: var(--text-md); line-height: 1.6; color: var(--pale-gray);">
+                  ${contact.description}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <!-- Contact Section -->
-        <div class="contact-section">
-          <h3 style="color: var(--cerulean); font-size: var(--text-2xl); margin-bottom: var(--spacing-xl); text-align: center; font-weight: 600;">
-            CONNECT & COLLABORATE
-          </h3>
-          
-          <div class="social-grid">
-            ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
-          </div>
-          
-          <div class="glass-panel" style="margin-top: var(--spacing-xl); padding: var(--spacing-xl); text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
-            <p style="font-size: var(--text-lg); line-height: 1.8; opacity: 0.9;">
-              ${contact.description}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  `
+        </section>
+      `
     }
 
     renderErrorPage() {
@@ -977,11 +835,11 @@ setupImageOverlay() {
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--saffron);">ERROR</h2>
+              <h2 class="page-title" style="color: var(--warning-orange);">ERROR</h2>
             </div>
             
-            <div class="glass-panel" style="padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto;">
-              <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+            <div style="padding: var(--space-8); text-align: center; max-width: 600px; margin: 0 auto; background: var(--charcoal); border: var(--border-thin);">
+              <p style="font-size: var(--text-md); line-height: 1.6; color: var(--pale-gray);">
                 Sorry, there was an error loading this page. Please try refreshing the browser.
               </p>
             </div>
@@ -990,59 +848,38 @@ setupImageOverlay() {
       `
     }
 
-    // UPDATED: Enhanced project card rendering with tags display
     renderProjectCard(project) {
       if (!project) return ""
 
       const hasBandcampTracks =
         project.bandcampTracks && Array.isArray(project.bandcampTracks) && project.bandcampTracks.length > 0
-
       const hasImages = project.images && Array.isArray(project.images) && project.images.length > 0
       const hasVideos = project.videos && Array.isArray(project.videos) && project.videos.length > 0
       const hasAudioFile = project.audioFile && typeof project.audioFile === "string"
 
       return `
-        <div class="project-card ${project.color || "saffron"}" 
+        <div class="project-card ${project.color || "electric-lime"} fragment" 
              data-project-id="${project.id || ""}"
              role="button"
              tabindex="0"
              aria-label="View details for ${project.title || "Untitled Project"}">
+          
           <h3 class="project-title">${project.title || "Untitled Project"}</h3>
-          <div class="project-category mono" style="color: var(--${project.color || "saffron"});">
-            ${project.category || "Uncategorized"}
-          </div>
+          <div class="project-category">${project.category || "Uncategorized"}</div>
           
           ${
             project.tags && Array.isArray(project.tags) && project.tags.length > 0
               ? `
-            <div class="project-tags" style="margin: var(--space-sm) 0; display: flex; flex-wrap: wrap; gap: var(--space-xs);">
-              ${project.tags
-                .map(
-                  (tag) => `
-                <span style="
-                  background: var(--glass-accent); 
-                  border: 1px solid var(--glass-border); 
-                  padding: 2px var(--space-xs); 
-                  border-radius: var(--radius-sm); 
-                  font-family: var(--font-mono); 
-                  font-size: 0.7rem; 
-                  color: var(--${project.color || "saffron"});
-                  opacity: 0.8;
-                  text-transform: uppercase;
-                  letter-spacing: 0.05em;
-                ">
-                  ${tag}
-                </span>
-              `,
-                )
-                .join("")}
+            <div class="project-tags">
+              ${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}
             </div>
           `
               : ""
           }
           
           <p class="project-description">${project.description || "No description available."}</p>
-          ${project.medium ? `<div class="mono" style="font-size: 0.8rem; opacity: 0.7; margin-top: 1rem;">${project.medium}</div>` : ""}
+          
+          ${project.medium ? `<div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--mid-gray); margin-top: var(--space-3);">${project.medium}</div>` : ""}
           
           ${hasImages ? this.renderProjectImages(project.images, true) : ""}
           ${hasVideos ? this.renderProjectVideos(project.videos, true) : ""}
@@ -1051,17 +888,17 @@ setupImageOverlay() {
           ${
             hasBandcampTracks
               ? `
-            <div class="bandcamp-embeds" style="margin-top: var(--spacing-lg);">
-              <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">AUDIO TRACKS</h4>
-              <div class="bandcamp-tracks">
+            <div class="project-media-section">
+              <h4>AUDIO TRACKS</h4>
+              <div style="display: grid; gap: var(--space-2);">
                 ${project.bandcampTracks
-                  .slice(0, 3)
+                  .slice(0, 2)
                   .map(
                     (track) => `
-                  <div class="bandcamp-track" style="margin-bottom: var(--spacing-sm);">
+                  <div style="background: var(--deep-black); border: var(--border-thin); overflow: hidden;">
                     <iframe 
-                      style="border: 0; width: 100%; height: 42px; border-radius: var(--radius-base); overflow: hidden;" 
-                      src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=333333/linkcol=ffffff/transparent=true/" 
+                      style="border: 0; width: 100%; height: 42px;" 
+                      src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=000000/linkcol=ffffff/transparent=true/" 
                       seamless
                       loading="lazy"
                       title="Play ${track.title} by asymmetrica">
@@ -1072,11 +909,11 @@ setupImageOverlay() {
                   )
                   .join("")}
                 ${
-                  project.bandcampTracks.length > 3
+                  project.bandcampTracks.length > 2
                     ? `
-                  <div style="text-align: center; margin-top: var(--spacing-sm);">
-                    <span style="font-size: var(--text-xs); opacity: 0.7; font-family: var(--font-mono);">
-                      +${project.bandcampTracks.length - 3} more tracks in details
+                  <div style="text-align: center; margin-top: var(--space-2);">
+                    <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
+                      +${project.bandcampTracks.length - 2} more tracks in details
                     </span>
                   </div>
                 `
@@ -1087,34 +924,30 @@ setupImageOverlay() {
           `
               : ""
           }
+          
+          <div class="fragment-diagonal"></div>
         </div>
       `
     }
 
-    // FIXED: New method to render project images
     renderProjectImages(images, isPreview = false) {
       if (!images || !Array.isArray(images) || images.length === 0) return ""
 
       const imagesToShow = isPreview ? images.slice(0, 2) : images
 
       return `
-        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
-          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
-            ${isPreview ? "PREVIEW IMAGES" : "IMAGES"}
-          </h4>
-          <div class="project-images" style="display: grid; gap: var(--spacing-sm); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        <div class="project-media-section">
+          <h4>${isPreview ? "PREVIEW IMAGES" : "IMAGES"}</h4>
+          <div class="project-images">
             ${imagesToShow
               .map(
                 (imagePath, index) => `
-              <div class="project-image-container" style="position: relative; overflow: hidden; border-radius: 1rem; aspect-ratio: 4/3; background: var(--glass-panel-light);">
+              <div class="project-image-container">
                 <img 
                   src="${imagePath}" 
                   alt="Project image ${index + 1}"
-                  style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
                   loading="lazy"
-                  onerror="this.parentElement.innerHTML='<div style=\\'display: flex; align-items: center; justify-content: center; height: 100%; color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-xs);\\'>Image not found</div>'"
-                  onmouseover="this.style.transform = 'scale(1.05)'"
-                  onmouseout="this.style.transform = 'scale(1)'"
+                  onerror="this.parentElement.innerHTML='<div style=\\'display: flex; align-items: center; justify-content: center; height: 100%; color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-xs);\\'>Image not found</div>'"
                 />
               </div>
             `,
@@ -1124,8 +957,8 @@ setupImageOverlay() {
           ${
             isPreview && images.length > 2
               ? `
-            <div style="text-align: center; margin-top: var(--spacing-sm);">
-              <span style="font-size: var(--text-xs); opacity: 0.7; font-family: var(--font-mono);">
+            <div style="text-align: center; margin-top: var(--space-2);">
+              <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
                 +${images.length - 2} more images in details
               </span>
             </div>
@@ -1136,44 +969,60 @@ setupImageOverlay() {
       `
     }
 
-    // FIXED: New method to render project videos
     renderProjectVideos(videos, isPreview = false) {
       if (!videos || !Array.isArray(videos) || videos.length === 0) return ""
 
       const videosToShow = isPreview ? videos.slice(0, 1) : videos
 
       return `
-        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
-          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
-            ${isPreview ? "PREVIEW VIDEO" : "VIDEOS"}
-          </h4>
-          <div class="project-videos" style="display: grid; gap: var(--spacing-sm);">
+        <div class="project-media-section">
+          <h4>${isPreview ? "PREVIEW VIDEO" : "VIDEOS"}</h4>
+          <div class="project-videos">
             ${videosToShow
-              .map(
-                (videoPath, index) => `
-              <div class="project-video-container" style="position: relative; overflow: hidden; border-radius: 1rem; background: var(--glass-panel-light);">
-                <video 
-                  controls 
-                  preload="metadata"
-                  style="width: 100%; height: auto; border-radius: 1rem;"
-                  poster="${videoPath.replace(/\.[^/.]+$/, "")}_poster.jpg"
-                >
-                  <source src="${videoPath}" type="video/mp4">
-                  <p style="padding: var(--spacing-md); color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
-                    Your browser doesn't support video playback. 
-                    <a href="${videoPath}" target="_blank" style="color: var(--saffron);">Download video</a>
-                  </p>
-                </video>
-              </div>
-            `,
-              )
+              .map((videoPath, index) => {
+                // Check if it's a YouTube URL
+                const youtubeMatch = videoPath.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)
+
+                if (youtubeMatch) {
+                  const videoId = youtubeMatch[1]
+                  return `
+                      <div class="video-wrapper">
+                        <iframe 
+                          src="https://www.youtube.com/embed/${videoId}" 
+                          title="YouTube video player"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen
+                          referrerpolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                      </div>
+                    `
+                } else {
+                  // Regular video file
+                  return `
+                      <div class="project-video-container">
+                        <video 
+                          controls 
+                          preload="metadata"
+                          poster="${videoPath.replace(/\.[^/.]+$/, "")}_poster.jpg"
+                        >
+                          <source src="${videoPath}" type="video/mp4">
+                          <p style="padding: var(--space-3); color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+                            Your browser doesn't support video playback. 
+                            <a href="${videoPath}" target="_blank" style="color: var(--electric-lime);">Download video</a>
+                          </p>
+                        </video>
+                      </div>
+                    `
+                }
+              })
               .join("")}
           </div>
           ${
             isPreview && videos.length > 1
               ? `
-            <div style="text-align: center; margin-top: var(--spacing-sm);">
-              <span style="font-size: var(--text-xs); opacity: 0.7; font-family: var(--font-mono);">
+            <div style="text-align: center; margin-top: var(--space-2);">
+              <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
                 +${videos.length - 1} more videos in details
               </span>
             </div>
@@ -1184,27 +1033,23 @@ setupImageOverlay() {
       `
     }
 
-    // FIXED: New method to render project audio
     renderProjectAudio(audioFile, title = "Audio") {
       if (!audioFile || typeof audioFile !== "string") return ""
 
       return `
-        <div class="project-media-section" style="margin-top: var(--spacing-lg);">
-          <h4 style="color: var(--off-white); font-size: var(--text-sm); margin-bottom: var(--spacing-md); font-family: var(--font-mono); letter-spacing: var(--tracking-wide);">
-            AUDIO
-          </h4>
-          <div class="project-audio" style="background: var(--glass-panel-light); border-radius: 1rem; padding: var(--spacing-md);">
+        <div class="project-media-section">
+          <h4>AUDIO</h4>
+          <div class="project-audio">
             <audio 
               controls 
               preload="metadata"
-              style="width: 100%; height: 40px;"
             >
               <source src="${audioFile}" type="audio/mpeg">
               <source src="${audioFile}" type="audio/wav">
               <source src="${audioFile}" type="audio/ogg">
-              <p style="color: var(--pale-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+              <p style="color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
                 Your browser doesn't support audio playback. 
-                <a href="${audioFile}" target="_blank" style="color: var(--saffron);">Download audio</a>
+                <a href="${audioFile}" target="_blank" style="color: var(--electric-lime);">Download audio</a>
               </p>
             </audio>
           </div>
@@ -1212,7 +1057,6 @@ setupImageOverlay() {
       `
     }
 
-    // FIXED: Improved social link rendering
     renderSocialLink(platform) {
       if (!platform) return ""
 
@@ -1222,7 +1066,7 @@ setupImageOverlay() {
            rel="noopener noreferrer" 
            class="social-link"
            aria-label="Visit ${platform.name || "Social Platform"}">
-          <div class="social-icon" style="color: var(--${platform.color || "cerulean"});">
+          <div class="social-icon">
             ${this.getSocialIcon(platform.icon)}
           </div>
           <div class="social-name">${(platform.name || "SOCIAL").toUpperCase()}</div>
@@ -1230,7 +1074,6 @@ setupImageOverlay() {
       `
     }
 
-    // FIXED: Complete social icon set
     getSocialIcon(type) {
       const icons = {
         youtube:
@@ -1245,12 +1088,10 @@ setupImageOverlay() {
           '<svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
       }
       return (
-        icons[type] ||
-        '<div style="width: 100%; height: 100%; background: currentColor; border-radius: 4px;" aria-hidden="true"></div>'
+        icons[type] || '<div style="width: 100%; height: 100%; background: currentColor;" aria-hidden="true"></div>'
       )
     }
 
-    // FIXED: Improved event binding
     bindProjectCardEvents() {
       try {
         const projectCards = document.querySelectorAll(".project-card")
@@ -1295,7 +1136,6 @@ setupImageOverlay() {
       }
     }
 
-    // FIXED: Improved modal functionality
     openProjectModal(projectId) {
       if (!projectId || !this.elements.projectModal || !this.elements.modalBody) return
 
@@ -1320,7 +1160,7 @@ setupImageOverlay() {
         // Show modal
         this.elements.projectModal.classList.add("active")
 
-        // Focus management for accessibility
+        // Focus management
         this.elements.modalClose?.focus()
 
         // Prevent body scroll
@@ -1330,47 +1170,26 @@ setupImageOverlay() {
       }
     }
 
-    // FIXED: Enhanced modal content rendering with full media support
     renderModalContent(project) {
       const hasBandcampTracks =
         project.bandcampTracks && Array.isArray(project.bandcampTracks) && project.bandcampTracks.length > 0
-
       const hasImages = project.images && Array.isArray(project.images) && project.images.length > 0
       const hasVideos = project.videos && Array.isArray(project.videos) && project.videos.length > 0
       const hasAudioFile = project.audioFile && typeof project.audioFile === "string"
 
       return `
-        <h2 style="color: var(--${project.color || "saffron"}); margin-bottom: 1rem; font-size: 2rem;">
+        <h2 style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--space-4); font-size: var(--text-2xl); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em;">
           ${project.title || "Untitled Project"}
         </h2>
-        <div class="mono" style="color: var(--${project.color || "saffron"}); margin-bottom: 2rem; font-size: 0.9rem; letter-spacing: 0.1em;">
+        <div style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--space-6); font-size: var(--text-sm); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">
           ${project.category || "Uncategorized"}
         </div>
         
         ${
           project.tags && Array.isArray(project.tags) && project.tags.length > 0
             ? `
-          <div class="project-tags" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: var(--space-xs);">
-            ${project.tags
-              .map(
-                (tag) => `
-              <span style="
-                background: var(--glass-accent); 
-                border: 1px solid var(--glass-border); 
-                padding: var(--space-xs) var(--space-sm); 
-                border-radius: var(--radius-sm); 
-                font-family: var(--font-mono); 
-                font-size: var(--text-xs); 
-                color: var(--${project.color || "saffron"});
-                opacity: 0.8;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-              ">
-                ${tag}
-              </span>
-            `,
-              )
-              .join("")}
+          <div class="project-tags" style="margin-bottom: var(--space-6);">
+            ${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}
           </div>
         `
             : ""
@@ -1379,7 +1198,7 @@ setupImageOverlay() {
         ${
           project.fullDescription
             ? `
-          <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; opacity: 0.9;">
+          <p style="font-size: var(--text-md); line-height: 1.6; margin-bottom: var(--space-6); color: var(--pale-gray);">
             ${project.fullDescription}
           </p>
         `
@@ -1393,16 +1212,16 @@ setupImageOverlay() {
         ${
           hasBandcampTracks
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 1rem;">Audio Tracks</h4>
-            <div class="bandcamp-modal-tracks" style="display: grid; gap: var(--spacing-sm); max-height: 300px; overflow-y: auto; padding: var(--spacing-sm); background: var(--glass-panel-light); border-radius: 1rem; border: 1px solid var(--glass-border);">
+          <div style="margin-bottom: var(--space-6);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.1em;">Audio Tracks</h4>
+            <div style="display: grid; gap: var(--space-2); max-height: 300px; overflow-y: auto; padding: var(--space-3); background: var(--deep-black); border: var(--border-thin);">
               ${project.bandcampTracks
                 .map(
                   (track) => `
-                <div class="bandcamp-track-modal">
+                <div style="background: var(--charcoal); border: var(--border-thin); overflow: hidden;">
                   <iframe 
-                    style="border: 0; width: 100%; height: 42px; border-radius: var(--radius-base); margin-bottom: var(--spacing-xs);" 
-                    src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=333333/linkcol=ffffff/transparent=true/" 
+                    style="border: 0; width: 100%; height: 42px;" 
+                    src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=000000/linkcol=ffffff/transparent=true/" 
                     seamless
                     loading="lazy"
                     title="Play ${track.title} by asymmetrica">
@@ -1421,9 +1240,9 @@ setupImageOverlay() {
         ${
           project.medium
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 0.5rem;">Medium</h4>
-            <p class="mono" style="font-size: 0.9rem; opacity: 0.8;">${project.medium}</p>
+          <div style="margin-bottom: var(--space-4);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Medium</h4>
+            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.medium}</p>
           </div>
         `
             : ""
@@ -1432,9 +1251,9 @@ setupImageOverlay() {
         ${
           project.technical
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 0.5rem;">Technical Details</h4>
-            <p class="mono" style="font-size: 0.9rem; opacity: 0.8;">${project.technical}</p>
+          <div style="margin-bottom: var(--space-4);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Technical Details</h4>
+            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.technical}</p>
           </div>
         `
             : ""
@@ -1443,9 +1262,9 @@ setupImageOverlay() {
         ${
           project.themes
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 0.5rem;">Themes</h4>
-            <p style="font-size: 0.95rem; opacity: 0.8;">${project.themes}</p>
+          <div style="margin-bottom: var(--space-4);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Themes</h4>
+            <p style="font-size: var(--text-sm); color: var(--light-gray);">${project.themes}</p>
           </div>
         `
             : ""
@@ -1454,9 +1273,9 @@ setupImageOverlay() {
         ${
           project.dimensions
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 0.5rem;">Dimensions</h4>
-            <p class="mono" style="font-size: 0.9rem; opacity: 0.8;">${project.dimensions}</p>
+          <div style="margin-bottom: var(--space-4);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Dimensions</h4>
+            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.dimensions}</p>
           </div>
         `
             : ""
@@ -1465,9 +1284,9 @@ setupImageOverlay() {
         ${
           project.status
             ? `
-          <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 0.5rem;">Status</h4>
-            <p style="font-size: 0.95rem; opacity: 0.8; color: var(--${project.color || "saffron"});">${project.status}</p>
+          <div style="margin-bottom: var(--space-4);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Status</h4>
+            <p style="font-size: var(--text-sm); color: var(--${project.color || "electric-lime"});">${project.status}</p>
           </div>
         `
             : ""
@@ -1477,35 +1296,37 @@ setupImageOverlay() {
       `
     }
 
-    // FIXED: Improved project links rendering
     renderProjectLinks(project) {
       try {
         const validUrls = Object.entries(project.urls).filter(([key, url]) => url)
-
         if (validUrls.length === 0) return ""
 
         return `
-          <div style="margin-top: 2rem;">
-            <h4 style="color: var(--off-white); margin-bottom: 1rem;">Links</h4>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div style="margin-top: var(--space-6);">
+            <h4 style="color: var(--off-white); margin-bottom: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Links</h4>
+            <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
               ${validUrls
                 .map(
                   ([key, url]) => `
                 <a href="${url}" 
                    target="_blank" 
                    rel="noopener noreferrer" 
-                   class="project-link"
-                   style="color: var(--${project.color || "saffron"}); 
+                   style="color: var(--${project.color || "electric-lime"}); 
                           text-decoration: none; 
-                          padding: 0.5rem 1rem; 
-                          border: 1px solid var(--${project.color || "saffron"}); 
-                          border-radius: 0.5rem; 
-                          transition: all 0.3s ease;
-                          display: inline-block;"
-                   onmouseover="this.style.background = 'var(--${project.color || "saffron"})'; this.style.color = 'var(--deep-black)';"
-                   onmouseout="this.style.background = 'transparent'; this.style.color = 'var(--${project.color || "saffron"})';"
-                   onfocus="this.style.background = 'var(--${project.color || "saffron"})'; this.style.color = 'var(--deep-black)';"
-                   onblur="this.style.background = 'transparent'; this.style.color = 'var(--${project.color || "saffron"})';">
+                          padding: var(--space-2) var(--space-3); 
+                          border: var(--border-thin); 
+                          border-color: var(--${project.color || "electric-lime"}); 
+                          background: var(--deep-black);
+                          transition: var(--transition-snap);
+                          display: inline-block;
+                          font-family: var(--font-mono);
+                          font-size: var(--text-xs);
+                          text-transform: uppercase;
+                          letter-spacing: 0.05em;"
+                   onmouseover="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--pure-black)';"
+                   onmouseout="this.style.background = 'var(--deep-black)'; this.style.color = 'var(--${project.color || "electric-lime"})';"
+                   onfocus="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--pure-black)';"
+                   onblur="this.style.background = 'var(--deep-black)'; this.style.color = 'var(--${project.color || "electric-lime"})';">
                   ${key.toUpperCase()}
                 </a>
               `,
@@ -1520,14 +1341,13 @@ setupImageOverlay() {
       }
     }
 
-    // FIXED: Improved modal setup
     setupModal() {
       if (!this.elements.projectModal || !this.elements.modalClose) return
 
       try {
         const closeModal = () => {
           this.elements.projectModal.classList.remove("active")
-          document.body.style.overflow = "" // Restore body scroll
+          document.body.style.overflow = ""
         }
 
         // Close button handler
@@ -1557,17 +1377,13 @@ setupImageOverlay() {
       }
     }
 
-    // FIXED: Error fallback
     showErrorFallback() {
       if (this.elements.mainContent) {
         this.elements.mainContent.innerHTML = this.renderErrorPage()
       }
-
-      // Hide loading state
       this.hideLoadingState()
     }
 
-    // FIXED: Performance stats
     getPerformanceStats() {
       return {
         ...this.performanceStats,
@@ -1576,7 +1392,6 @@ setupImageOverlay() {
         currentPage: this.currentPage,
         isInitialized: this.isInitialized,
         systemStats: {
-          galaxy: this.galaxyBackground?.getPerformanceStats?.() || null,
           mandala: this.mandalaGenerator?.getPerformanceStats?.() || null,
           particles: this.particleSystem?.getPerformanceStats?.() || null,
           cursor: this.cursorTrail?.getState?.() || null,
@@ -1584,9 +1399,8 @@ setupImageOverlay() {
       }
     }
 
-    // FIXED: Proper cleanup
     destroy() {
-      console.log("Destroying PortfolioApp...")
+      console.log("Destroying CyberpunkPortfolioApp...")
 
       this.isDestroyed = true
 
@@ -1602,7 +1416,6 @@ setupImageOverlay() {
 
       // Stop animations and destroy systems
       try {
-        this.galaxyBackground?.destroy()
         this.mandalaGenerator?.stopAnimation()
         this.mandalaGenerator?.destroy()
         this.particleSystem?.destroy()
@@ -1615,7 +1428,6 @@ setupImageOverlay() {
       document.body.style.overflow = ""
 
       // Clear references
-      this.galaxyBackground = null
       this.mandalaGenerator = null
       this.particleSystem = null
       this.cursorTrail = null
@@ -1623,16 +1435,16 @@ setupImageOverlay() {
       this.data = null
       this.isInitialized = false
 
-      console.log("PortfolioApp destroyed")
+      console.log("CyberpunkPortfolioApp destroyed")
     }
   }
 
-  // FIXED: Initialize app when DOM is loaded with proper error handling
+  // Initialize app when DOM is loaded
   document.addEventListener("DOMContentLoaded", () => {
     try {
-      window.portfolioApp = new PortfolioApp()
+      window.portfolioApp = new CyberpunkPortfolioApp()
     } catch (error) {
-      console.error("Failed to initialize portfolio app:", error)
+      console.error("Failed to initialize cyberpunk portfolio app:", error)
 
       // Show basic fallback
       const mainContent = document.getElementById("mainContent")
@@ -1644,12 +1456,12 @@ setupImageOverlay() {
 
       if (mainContent) {
         mainContent.innerHTML = `
-          <div style="padding: 4rem 2rem; text-align: center; max-width: 800px; margin: 0 auto;">
-            <h1 style="color: var(--saffron); margin-bottom: 2rem;">Portfolio Unavailable</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9;">
+          <div style="padding: var(--space-12) var(--space-4); text-align: center; max-width: 800px; margin: 0 auto;">
+            <h1 style="color: var(--electric-lime); margin-bottom: var(--space-6); font-family: var(--font-display); text-transform: uppercase;">Portfolio Unavailable</h1>
+            <p style="font-size: var(--text-md); color: var(--pale-gray); margin-bottom: var(--space-4);">
               Sorry, there was an error loading the portfolio. Please refresh the page or try again later.
             </p>
-            <p style="font-size: 1rem; opacity: 0.7; margin-top: 1rem;">
+            <p style="font-size: var(--text-sm); color: var(--mid-gray); font-family: var(--font-mono);">
               Error: ${error.message}
             </p>
           </div>
