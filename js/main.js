@@ -1,12 +1,8 @@
 /**
- * main.js - Cyberpunk Portfolio Application (Redesigned)
+ * main.js - Cyberpunk Portfolio Application (FIXED)
  *
- * ARCHITECTURE:
- * - Monolithic app class with modular systems
- * - Grid-based layout management
- * - Enhanced video embedding support
- * - Performance-optimized rendering
- * - Minimalist interaction patterns
+ * UPDATES: Hash routing, media control, intersection observer, event cleanup,
+ * click-outside handlers, lazy loading, performance improvements
  */
 
 ;(() => {
@@ -58,9 +54,10 @@
         // Initialize core properties
         this.deviceProfile = this.detectDeviceProfile()
         this.config = APP_CONFIG[this.deviceProfile]
-        this.currentPage = "home"
+        this.currentPage = this.getPageFromHash() || "home"
         this.isInitialized = false
         this.isDestroyed = false
+        this.debug = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
 
         // System components
         this.mandalaGenerator = null
@@ -72,6 +69,9 @@
         this.elements = {}
         this.eventListeners = []
 
+        // Intersection Observer for lazy loading
+        this.intersectionObserver = null
+
         // Performance tracking
         this.performanceStats = {
           initTime: Date.now(),
@@ -79,7 +79,7 @@
           lastRenderTime: 0,
         }
 
-        console.log(`CyberpunkPortfolioApp initializing with ${this.deviceProfile} profile`)
+        if (this.debug) console.log(`CyberpunkPortfolioApp initializing with ${this.deviceProfile} profile`)
         this.init()
       } catch (error) {
         console.error("CyberpunkPortfolioApp constructor error:", error)
@@ -129,7 +129,7 @@
           throw new Error("Contact data missing or invalid")
         }
 
-        console.log("Portfolio data validated successfully")
+        if (this.debug) console.log("Portfolio data validated successfully")
         return data
       } catch (error) {
         console.error("Portfolio data validation failed:", error)
@@ -175,6 +175,9 @@
         this.setupModal()
         this.setupScrollTracking()
 
+        // Setup Intersection Observer for lazy loading
+        this.setupIntersectionObserver()
+
         // Handle URL routing
         this.setupRouteHandling()
 
@@ -185,7 +188,7 @@
         this.isInitialized = true
 
         const initTime = Date.now() - this.performanceStats.initTime
-        console.log(`CyberpunkPortfolioApp initialized in ${initTime}ms`)
+        if (this.debug) console.log(`CyberpunkPortfolioApp initialized in ${initTime}ms`)
       } catch (error) {
         console.error("Failed to initialize CyberpunkPortfolioApp:", error)
         this.showErrorFallback()
@@ -248,7 +251,7 @@
                   animationQuality: this.config.animationQuality,
                 })
                 this.particleSystem.start()
-                console.log("Particle system initialized")
+                if (this.debug) console.log("Particle system initialized")
                 resolve()
               } catch (error) {
                 console.warn("Particle system failed to initialize:", error)
@@ -265,7 +268,7 @@
               try {
                 this.mandalaGenerator = new window.MandalaGenerator(this.elements.mandalaCanvas)
                 this.mandalaGenerator.startAnimation()
-                console.log("Mandala generator initialized")
+                if (this.debug) console.log("Mandala generator initialized")
                 resolve()
               } catch (error) {
                 console.warn("Mandala generator failed to initialize:", error)
@@ -281,7 +284,7 @@
             new Promise((resolve) => {
               try {
                 this.cursorTrail = new window.CursorTrail()
-                console.log("Cursor trail initialized")
+                if (this.debug) console.log("Cursor trail initialized")
                 resolve()
               } catch (error) {
                 console.warn("Cursor trail failed to initialize:", error)
@@ -341,6 +344,37 @@
       this.eventListeners.push({ element: document, event: "visibilitychange", handler: visibilityHandler })
     }
 
+    setupIntersectionObserver() {
+      if (!window.IntersectionObserver) return
+
+      this.intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target
+
+              // Handle mandala canvas
+              if (target.classList.contains("mandala-canvas")) {
+                this.mandalaGenerator?.startAnimation()
+              }
+
+              // Handle particle canvas
+              if (target.classList.contains("particle-canvas")) {
+                this.particleSystem?.start()
+              }
+
+              // Handle lazy loading images
+              if (target.tagName === "IMG" && target.dataset.src) {
+                target.src = target.dataset.src
+                target.removeAttribute("data-src")
+              }
+            }
+          })
+        },
+        { threshold: 0.1 },
+      )
+    }
+
     setupNavigation() {
       try {
         const navLinks = document.querySelectorAll(".nav-link")
@@ -372,7 +406,7 @@
           this.eventListeners.push({ element: link, event: "keydown", handler: keydownHandler })
         })
 
-        // Mobile menu toggle
+        // Mobile menu toggle with aria-expanded
         const mobileToggle = document.getElementById("mobileMenuToggle")
         if (mobileToggle) {
           const toggleHandler = () => {
@@ -382,6 +416,12 @@
             navLinks.classList.toggle("active")
             mobileToggle.classList.toggle("active")
             mobileToggle.setAttribute("aria-expanded", !isActive)
+
+            // Focus trap
+            if (!isActive) {
+              const firstLink = navLinks.querySelector(".nav-link")
+              if (firstLink) firstLink.focus()
+            }
           }
 
           mobileToggle.addEventListener("click", toggleHandler)
@@ -413,7 +453,7 @@
     }
 
     setupRouteHandling() {
-      // Handle initial page load
+      // Handle initial page load with hash
       const initialPage = this.getPageFromHash()
       if (initialPage !== "home") {
         this.navigateToPage(initialPage, false)
@@ -489,6 +529,22 @@
           }
         })
 
+        // Click outside to close overlay
+        if (this.elements.imageOverlay) {
+          const overlayClickHandler = (e) => {
+            if (e.target === this.elements.imageOverlay) {
+              this.elements.imageOverlay.style.display = "none"
+              document.body.style.overflow = ""
+            }
+          }
+          this.elements.imageOverlay.addEventListener("click", overlayClickHandler)
+          this.eventListeners.push({
+            element: this.elements.imageOverlay,
+            event: "click",
+            handler: overlayClickHandler,
+          })
+        }
+
         // Close button
         if (this.elements.closeOverlay) {
           const closeHandler = () => {
@@ -523,6 +579,10 @@
       try {
         const startTime = Date.now()
 
+        // Stop all media before navigation
+        document.querySelectorAll("iframe[src*='youtube.com']").forEach((el) => el.remove())
+        document.querySelectorAll("video, audio").forEach((el) => el.pause())
+
         // Update navigation state
         document.querySelectorAll(".nav-link").forEach((link) => {
           link.classList.toggle("active", link.dataset.page === page)
@@ -556,7 +616,7 @@
         this.performanceStats.renderCount++
         this.performanceStats.lastRenderTime = renderTime
 
-        if (renderTime > 100) {
+        if (renderTime > 100 && this.debug) {
           console.warn(`Slow page render: ${page} took ${renderTime}ms`)
         }
       } catch (error) {
@@ -598,15 +658,41 @@
 
         this.elements.mainContent.innerHTML = html
         this.bindProjectCardEvents()
+        this.observeLazyElements()
       } catch (error) {
         console.error("Error rendering page:", error)
         this.elements.mainContent.innerHTML = this.renderErrorPage()
       }
     }
 
+    observeLazyElements() {
+      if (!this.intersectionObserver) return
+
+      // Observe mandala and particle canvases
+      const canvases = document.querySelectorAll(".mandala-canvas, .particle-canvas")
+      canvases.forEach((canvas) => this.intersectionObserver.observe(canvas))
+
+      // Observe images for lazy loading
+      const images = document.querySelectorAll(".project-images img")
+      images.forEach((img) => {
+        img.setAttribute("loading", "lazy")
+        this.intersectionObserver.observe(img)
+      })
+
+      // Observe videos and audio
+      const media = document.querySelectorAll("video, audio, iframe")
+      media.forEach((el) => {
+        el.setAttribute("loading", "lazy")
+        if (el.tagName === "VIDEO" || el.tagName === "AUDIO") {
+          el.setAttribute("preload", "none")
+        }
+      })
+    }
+
     renderHomePage() {
       return `
-        <section class="page-section active">
+        <a href="#mainContent" class="skip-to-content">Skip to content</a>
+        <section class="page-section active" id="mainContent">
           <div class="home-container">
             <h1 class="tri-phase-title">
               <span class="title-line">EXPERIMENTAL</span>
@@ -626,7 +712,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--electric-lime);">SOUND INSTALLATIONS</h2>
+              <h2 class="page-title">SOUND INSTALLATIONS</h2>
             </div>
             
             <div class="project-grid">
@@ -644,7 +730,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--cyber-blue);">PERFORMANCE</h2>
+              <h2 class="page-title">PERFORMANCE</h2>
             </div>
             
             <div class="project-grid">
@@ -662,8 +748,8 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--neon-magenta);">INSTALLATIONS</h2>
-              <p style="color: var(--light-gray); margin-top: var(--space-4); font-size: var(--text-md);">
+              <h2 class="page-title">INSTALLATIONS</h2>
+              <p style="margin-top: var(--spacing-md); font-size: var(--text-md);">
                 Generative and interactive works exploring computational creativity
               </p>
             </div>
@@ -673,8 +759,8 @@
                 projects.length > 0
                   ? projects.map((project) => this.renderProjectCard(project)).join("")
                   : `
-                  <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-8); background: var(--charcoal); border: var(--border-thin);">
-                    <p style="color: var(--light-gray); font-size: var(--text-md);">
+                  <div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); background: var(--glass-panel); border: 1px solid var(--glass-border); border-radius: 1rem;">
+                    <p style="font-size: var(--text-md);">
                       No installation projects available at the moment.
                     </p>
                   </div>
@@ -693,15 +779,15 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--warning-orange);">DRAWINGS / SKETCH</h2>
+              <h2 class="page-title">DRAWINGS / SKETCH</h2>
             </div>
             
             <div class="project-grid">
               ${
                 projects.length > 0
                   ? projects.map((project) => this.renderProjectCard(project)).join("")
-                  : `<div style="grid-column: 1 / -1; text-align: center; padding: var(--space-8); background: var(--charcoal); border: var(--border-thin);">
-                  <p style="color: var(--light-gray);">No drawings available.</p>
+                  : `<div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); background: var(--glass-panel); border: 1px solid var(--glass-border); border-radius: 1rem;">
+                  <p>No drawings available.</p>
                 </div>`
               }
             </div>
@@ -717,7 +803,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--cyber-blue);">WRITING / THEORY</h2>
+              <h2 class="page-title">WRITING / THEORY</h2>
             </div>
             
             <div class="project-grid">
@@ -744,11 +830,11 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--electric-lime);">ABOUT & CONTACT</h2>
+              <h2 class="page-title">WHO AM I?</h2>
             </div>
             
             <!-- About Section -->
-            <div class="about-section" style="margin-bottom: var(--space-12);">
+            <div class="about-section" style="margin-bottom: var(--spacing-xxl);">
               <div class="about-content">
                 
                 <!-- About Text -->
@@ -787,7 +873,7 @@
                       src="${contact.about.image}" 
                       alt="Atharva Gupta"
                       loading="lazy"
-                      onerror="this.parentElement.innerHTML='<div style=\\'padding: var(--space-6); text-align: center; color: var(--light-gray);\\'>Portrait image not available</div>'"
+                      onerror="this.parentElement.innerHTML='<div style=\\'padding: var(--spacing-lg); text-align: center;\\'>Portrait image not available</div>'"
                     />
                   </div>
                 `
@@ -797,7 +883,6 @@
                     align-items: center;
                     justify-content: center;
                     min-height: 300px;
-                    color: var(--light-gray);
                     font-family: var(--font-mono);
                     font-size: var(--text-sm);
                     text-align: center;
@@ -811,19 +896,18 @@
             
             <!-- Contact Section -->
             <div class="contact-section">
-              <h3 style="color: var(--cyber-blue); font-size: var(--text-xl); margin-bottom: var(--space-8); text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
+              <h3 class="contact-heading">
                 CONNECT & COLLABORATE
               </h3>
-              
+
               <div class="social-grid">
-                ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
+                ${contact.social.map(platform => this.renderSocialLink(platform)).join('')}
               </div>
-              
-              <div style="margin-top: var(--space-8); padding: var(--space-6); text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; background: var(--charcoal); border: var(--border-thin);">
-                <p style="font-size: var(--text-md); line-height: 1.6; color: var(--pale-gray);">
-                  ${contact.description}
-                </p>
+
+              <div class="contact-description">
+                <p>${contact.description}</p>
               </div>
+            </div>
             </div>
           </div>
         </section>
@@ -835,11 +919,11 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title" style="color: var(--warning-orange);">ERROR</h2>
+              <h2 class="page-title">ERROR</h2>
             </div>
             
-            <div style="padding: var(--space-8); text-align: center; max-width: 600px; margin: 0 auto; background: var(--charcoal); border: var(--border-thin);">
-              <p style="font-size: var(--text-md); line-height: 1.6; color: var(--pale-gray);">
+            <div style="padding: var(--spacing-xl); text-align: center; max-width: 600px; margin: 0 auto; background: var(--glass-panel); border: 1px solid var(--glass-border); border-radius: 1rem;">
+              <p style="font-size: var(--text-md); line-height: 1.6;">
                 Sorry, there was an error loading this page. Please try refreshing the browser.
               </p>
             </div>
@@ -879,7 +963,7 @@
           
           <p class="project-description">${project.description || "No description available."}</p>
           
-          ${project.medium ? `<div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--mid-gray); margin-top: var(--space-3);">${project.medium}</div>` : ""}
+          ${project.medium ? `<div style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: var(--spacing-xs);">${project.medium}</div>` : ""}
           
           ${hasImages ? this.renderProjectImages(project.images, true) : ""}
           ${hasVideos ? this.renderProjectVideos(project.videos, true) : ""}
@@ -890,12 +974,12 @@
               ? `
             <div class="project-media-section">
               <h4>AUDIO TRACKS</h4>
-              <div style="display: grid; gap: var(--space-2);">
+              <div style="display: grid; gap: var(--spacing-sm);">
                 ${project.bandcampTracks
                   .slice(0, 2)
                   .map(
                     (track) => `
-                  <div style="background: var(--deep-black); border: var(--border-thin); overflow: hidden;">
+                  <div style="background: var(--deep-black); border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden;">
                     <iframe 
                       style="border: 0; width: 100%; height: 42px;" 
                       src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=000000/linkcol=ffffff/transparent=true/" 
@@ -911,8 +995,8 @@
                 ${
                   project.bandcampTracks.length > 2
                     ? `
-                  <div style="text-align: center; margin-top: var(--space-2);">
-                    <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
+                  <div style="text-align: center; margin-top: var(--spacing-sm);">
+                    <span style="font-size: var(--text-xs); font-family: var(--font-mono);">
                       +${project.bandcampTracks.length - 2} more tracks in details
                     </span>
                   </div>
@@ -947,7 +1031,7 @@
                   src="${imagePath}" 
                   alt="Project image ${index + 1}"
                   loading="lazy"
-                  onerror="this.parentElement.innerHTML='<div style=\\'display: flex; align-items: center; justify-content: center; height: 100%; color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-xs);\\'>Image not found</div>'"
+                  onerror="this.parentElement.innerHTML='<div class=\\'media-error\\'>Image not found</div>'"
                 />
               </div>
             `,
@@ -957,8 +1041,8 @@
           ${
             isPreview && images.length > 2
               ? `
-            <div style="text-align: center; margin-top: var(--space-2);">
-              <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
+            <div style="text-align: center; margin-top: var(--spacing-sm);">
+              <span style="font-size: var(--text-xs); font-family: var(--font-mono);">
                 +${images.length - 2} more images in details
               </span>
             </div>
@@ -993,6 +1077,7 @@
                           frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowfullscreen
+                          loading="lazy"
                           referrerpolicy="strict-origin-when-cross-origin">
                         </iframe>
                       </div>
@@ -1003,13 +1088,14 @@
                       <div class="project-video-container">
                         <video 
                           controls 
-                          preload="metadata"
+                          preload="none"
+                          loading="lazy"
                           poster="${videoPath.replace(/\.[^/.]+$/, "")}_poster.jpg"
                         >
                           <source src="${videoPath}" type="video/mp4">
-                          <p style="padding: var(--space-3); color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+                          <p class="media-error">
                             Your browser doesn't support video playback. 
-                            <a href="${videoPath}" target="_blank" style="color: var(--electric-lime);">Download video</a>
+                            <a href="${videoPath}" target="_blank">Download video</a>
                           </p>
                         </video>
                       </div>
@@ -1021,8 +1107,8 @@
           ${
             isPreview && videos.length > 1
               ? `
-            <div style="text-align: center; margin-top: var(--space-2);">
-              <span style="font-size: var(--text-xs); color: var(--mid-gray); font-family: var(--font-mono);">
+            <div style="text-align: center; margin-top: var(--spacing-sm);">
+              <span style="font-size: var(--text-xs); font-family: var(--font-mono);">
                 +${videos.length - 1} more videos in details
               </span>
             </div>
@@ -1042,14 +1128,15 @@
           <div class="project-audio">
             <audio 
               controls 
-              preload="metadata"
+              preload="none"
+              loading="lazy"
             >
               <source src="${audioFile}" type="audio/mpeg">
               <source src="${audioFile}" type="audio/wav">
               <source src="${audioFile}" type="audio/ogg">
-              <p style="color: var(--mid-gray); font-family: var(--font-mono); font-size: var(--text-sm);">
+              <p class="media-error">
                 Your browser doesn't support audio playback. 
-                <a href="${audioFile}" target="_blank" style="color: var(--electric-lime);">Download audio</a>
+                <a href="${audioFile}" target="_blank">Download audio</a>
               </p>
             </audio>
           </div>
@@ -1178,17 +1265,17 @@
       const hasAudioFile = project.audioFile && typeof project.audioFile === "string"
 
       return `
-        <h2 style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--space-4); font-size: var(--text-2xl); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em;">
+        <h2 style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--spacing-md); font-size: var(--text-2xl); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em;">
           ${project.title || "Untitled Project"}
         </h2>
-        <div style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--space-6); font-size: var(--text-sm); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">
+        <div style="color: var(--${project.color || "electric-lime"}); margin-bottom: var(--spacing-lg); font-size: var(--text-sm); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">
           ${project.category || "Uncategorized"}
         </div>
         
         ${
           project.tags && Array.isArray(project.tags) && project.tags.length > 0
             ? `
-          <div class="project-tags" style="margin-bottom: var(--space-6);">
+          <div class="project-tags" style="margin-bottom: var(--spacing-lg);">
             ${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}
           </div>
         `
@@ -1198,7 +1285,7 @@
         ${
           project.fullDescription
             ? `
-          <p style="font-size: var(--text-md); line-height: 1.6; margin-bottom: var(--space-6); color: var(--pale-gray);">
+          <p style="font-size: var(--text-md); line-height: 1.6; margin-bottom: var(--spacing-lg);">
             ${project.fullDescription}
           </p>
         `
@@ -1212,13 +1299,13 @@
         ${
           hasBandcampTracks
             ? `
-          <div style="margin-bottom: var(--space-6);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.1em;">Audio Tracks</h4>
-            <div style="display: grid; gap: var(--space-2); max-height: 300px; overflow-y: auto; padding: var(--space-3); background: var(--deep-black); border: var(--border-thin);">
+          <div style="margin-bottom: var(--spacing-lg);">
+            <h4 style="margin-bottom: var(--spacing-md); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.1em;">Audio Tracks</h4>
+            <div style="display: grid; gap: var(--spacing-sm); max-height: 300px; overflow-y: auto; padding: var(--spacing-sm); background: var(--deep-black); border: 1px solid var(--glass-border); border-radius: 1rem;">
               ${project.bandcampTracks
                 .map(
                   (track) => `
-                <div style="background: var(--charcoal); border: var(--border-thin); overflow: hidden;">
+                <div style="background: var(--glass-panel); border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden;">
                   <iframe 
                     style="border: 0; width: 100%; height: 42px;" 
                     src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=small/bgcol=000000/linkcol=ffffff/transparent=true/" 
@@ -1239,9 +1326,9 @@
         ${
           project.medium
             ? `
-            <div style="margin-bottom: var(--space-4);">
-              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Medium</h4>
-              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.medium}</p>
+            <div style="margin-bottom: var(--spacing-md);">
+              <h4 style="margin-bottom: var(--spacing-sm); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Medium</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm);">${project.medium}</p>
             </div>
           `
             : ""
@@ -1250,9 +1337,9 @@
         ${
           project.technical
             ? `
-            <div style="margin-bottom: var(--space-4);">
-              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Technical Details</h4>
-              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.technical}</p>
+            <div style="margin-bottom: var(--spacing-md);">
+              <h4 style="margin-bottom: var(--spacing-sm); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Technical Details</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm);">${project.technical}</p>
             </div>
           `
             : ""
@@ -1261,9 +1348,9 @@
         ${
           project.themes
             ? `
-            <div style="margin-bottom: var(--space-4);">
-              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Themes</h4>
-              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.themes}</p>
+            <div style="margin-bottom: var(--spacing-md);">
+              <h4 style="margin-bottom: var(--spacing-sm); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Themes</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm);">${project.themes}</p>
             </div>
           `
             : ""
@@ -1272,9 +1359,9 @@
         ${
           project.dimensions
             ? `
-            <div style="margin-bottom: var(--space-4);">
-              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Dimensions</h4>
-              <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--light-gray);">${project.dimensions}</p>
+            <div style="margin-bottom: var(--spacing-md);">
+              <h4 style="margin-bottom: var(--spacing-sm); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Dimensions</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--text-sm);">${project.dimensions}</p>
             </div>
           `
             : ""
@@ -1283,8 +1370,8 @@
         ${
           project.status
             ? `
-            <div style="margin-bottom: var(--space-4);">
-              <h4 style="color: var(--off-white); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Status</h4>
+            <div style="margin-bottom: var(--spacing-md);">
+              <h4 style="margin-bottom: var(--spacing-sm); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Status</h4>
               <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--${project.color || "electric-lime"});">${project.status}</p>
             </div>
           `
@@ -1302,9 +1389,9 @@
         if (validUrls.length === 0) return ""
 
         return `
-          <div style="margin-top: var(--space-6);">
-            <h4 style="color: var(--off-white); margin-bottom: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Links</h4>
-            <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <div style="margin-top: var(--spacing-lg);">
+            <h4 style="margin-bottom: var(--spacing-md); font-family: var(--font-mono); font-size: var(--text-sm); text-transform: uppercase;">Links</h4>
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
               ${validUrls
                 .map(
                   ([key, url]) => `
@@ -1313,19 +1400,19 @@
                    rel="noopener noreferrer" 
                    style="color: var(--${project.color || "electric-lime"}); 
                           text-decoration: none; 
-                          padding: var(--space-2) var(--space-3); 
-                          border: var(--border-thin); 
-                          border-color: var(--${project.color || "electric-lime"}); 
+                          padding: var(--spacing-sm) var(--spacing-md); 
+                          border: 1px solid var(--${project.color || "electric-lime"}); 
                           background: var(--deep-black);
-                          transition: var(--transition-snap);
+                          transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
                           display: inline-block;
                           font-family: var(--font-mono);
                           font-size: var(--text-xs);
                           text-transform: uppercase;
-                          letter-spacing: 0.05em;"
-                   onmouseover="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--pure-black)';"
+                          letter-spacing: 0.05em;
+                          border-radius: 0.5rem;"
+                   onmouseover="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--deep-black)';"
                    onmouseout="this.style.background = 'var(--deep-black)'; this.style.color = 'var(--${project.color || "electric-lime"})';"
-                   onfocus="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--pure-black)';"
+                   onfocus="this.style.background = 'var(--${project.color || "electric-lime"})'; this.style.color = 'var(--deep-black)';"
                    onblur="this.style.background = 'var(--deep-black)'; this.style.color = 'var(--${project.color || "electric-lime"})';">
                   ${key.toUpperCase()}
                 </a>
@@ -1400,7 +1487,7 @@
     }
 
     destroy() {
-      console.log("Destroying CyberpunkPortfolioApp...")
+      if (this.debug) console.log("Destroying CyberpunkPortfolioApp...")
 
       this.isDestroyed = true
 
@@ -1413,6 +1500,12 @@
         }
       })
       this.eventListeners = []
+
+      // Clean up intersection observer
+      if (this.intersectionObserver) {
+        this.intersectionObserver.disconnect()
+        this.intersectionObserver = null
+      }
 
       // Stop animations and destroy systems
       try {
@@ -1435,7 +1528,7 @@
       this.data = null
       this.isInitialized = false
 
-      console.log("CyberpunkPortfolioApp destroyed")
+      if (this.debug) console.log("CyberpunkPortfolioApp destroyed")
     }
   }
 
@@ -1456,12 +1549,12 @@
 
       if (mainContent) {
         mainContent.innerHTML = `
-          <div style="padding: var(--space-12) var(--space-4); text-align: center; max-width: 800px; margin: 0 auto;">
-            <h1 style="color: var(--electric-lime); margin-bottom: var(--space-6); font-family: var(--font-display); text-transform: uppercase;">Portfolio Unavailable</h1>
-            <p style="font-size: var(--text-md); color: var(--pale-gray); margin-bottom: var(--space-4);">
+          <div style="padding: var(--spacing-xxl) var(--spacing-md); text-align: center; max-width: 800px; margin: 0 auto;">
+            <h1 style="margin-bottom: var(--spacing-lg); font-family: var(--font-display); text-transform: uppercase;">Portfolio Unavailable</h1>
+            <p style="font-size: var(--text-md); margin-bottom: var(--spacing-md);">
               Sorry, there was an error loading the portfolio. Please refresh the page or try again later.
             </p>
-            <p style="font-size: var(--text-sm); color: var(--mid-gray); font-family: var(--font-mono);">
+            <p style="font-size: var(--text-sm); font-family: var(--font-mono);">
               Error: ${error.message}
             </p>
           </div>
