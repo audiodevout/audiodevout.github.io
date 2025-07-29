@@ -46,15 +46,16 @@ try {
           category: "ASYMMETRICA AUDIO COLLECTION",
           color: "cerulean",
           themes: "Weather, systems, sonic translation, speculative environments",
-          technology: "TouchDesigner, environmental data and APIs, audio synthesis",
+          technology: "TouchDesigner, environmental APIs, audio synthesis",
           bandcampTracks: [
             {
               title: "symmetrical fictions",
-              trackId: "1748866928",
+              trackId: "520992353",
               url: "https://asymmetrica.bandcamp.com/track/symmetrical-fictions",
             },
           ],
         },
+
 
 
         {
