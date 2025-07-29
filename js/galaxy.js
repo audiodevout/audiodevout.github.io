@@ -45,15 +45,15 @@ const GALAXY_PERFORMANCE_PROFILES = {
 // VISUAL SETTINGS - Galaxy appearance configuration
 const GALAXY_VISUAL_CONFIG = {
   // Star settings
-  starSizeRange: { min: 0.5, max: 3.0 },
-  starOpacityRange: { min: 0.3, max: 1.0 },
-  starTwinkleSpeed: 0.02,
-  starDriftSpeed: { min: 0.01, max: 0.05 },
+  starSizeRange: { min: 0.0, max: 0.0 },
+  starOpacityRange: { min: 0.0, max: 0.0 },
+  starTwinkleSpeed: 0.0,
+  starDriftSpeed: { min: 0.00, max: 0.00 },
 
   // Nebula settings
-  nebulaSize: { min: 80, max: 200 },
-  nebulaOpacity: { min: 0.1, max: 0.3 },
-  nebulaPulseSpeed: 0.0005,
+  nebulaSize: { min: 0, max: 0 },
+  nebulaOpacity: { min: 0.0, max: 0.0 },
+  nebulaPulseSpeed: 0.0,
   nebulaColors: [
     "rgba(138, 43, 226, 0.2)", // Deep purple
     "rgba(72, 61, 139, 0.2)", // Dark slate blue
