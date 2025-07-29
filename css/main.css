@@ -504,13 +504,15 @@ h6 {
 
 /* Masonry-style Project Grid */
 .project-grid {
-  margin: var(--spacing-xl) auto 0;
-  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
   width: 100%;
   max-width: 1600px;
-  column-count: 3;
-  column-gap: var(--spacing-lg);
+  margin: var(--spacing-xl) auto 0;
+  padding: 0;
 }
+
 
 @media (max-width: 1200px) {
   .project-grid {

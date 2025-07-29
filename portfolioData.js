@@ -333,11 +333,11 @@ try {
         {
           id: "old-drawings-sketchbook-series",
           title: "Old Digital+Analog Drawings",
-          description: "Early explorations in digital sketching and coloring using Autodesk SketchBook - nostalgic studies of form, color, and imagination.",
+          description: "Early explorations in digital sketching and coloring using Autodesk SketchBook - studies of form, color, and imagination.",
           fullDescription: "These six drawings mark a formative period of digital creativity, made during an early engagement with Autodesk SketchBook. They reflect a phase of intuitive experimentation, where sketching and digital coloring were driven by curiosity, play, and a desire to shape inner visions. Though rough and spontaneous, these pieces represent personal milestones in visual expression and digital practice.",
           medium: "Analog sketching and digital coloring",
           category: "ARCHIVE • PERSONAL WORK",
-          tags: ["digital", "sketchbook", "early-work", "coloring", "nostalgia"],
+          tags: ["digital", "sketches"],
           color: "cerulean",
           documentation: "Archived drawings from early digital sessions",
           images: [
