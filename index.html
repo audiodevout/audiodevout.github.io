@@ -212,6 +212,27 @@
   });
 </script>
 
+<script>
+  const links = document.querySelectorAll("nav a");
+
+  function updateActiveLink() {
+    const currentHash = window.location.hash || "#home"; // Default to home if no hash
+    links.forEach(link => {
+      if (link.getAttribute("href") === currentHash) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  // Run on page load
+  updateActiveLink();
+
+  // Also run when hash changes (user clicks a nav link)
+  window.addEventListener("hashchange", updateActiveLink);
+</script>
+
 
 </body>
 </html>
