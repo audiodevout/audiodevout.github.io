@@ -34,6 +34,29 @@ try {
             "./assets/images/rain-stick-3.JPG"
           ],
         },
+
+        {
+          id: "asymmetrica-symmetrical-fictions",
+          title: "Symmetrical Fictions",
+          description:
+            "A generative composition shaped by real-time weather data, translating environmental conditions into shifting sonic structures.",
+          fullDescription:
+            "Symmetrical Fictions is a generative sound work sculpted from temperature, humidity, and precipitation data. These inputs are mapped to frequency modulations, pitch deviations, and rhythmic bursts. The track extends the core of the Symmetrical Fictions project—an exploration of urban landscapes and unseen forces as performative systems. The result is ambient yet unstable, synthetic in texture but grounded in natural rhythms. A sonic architecture built on shifting skies and algorithmic interpretation.",
+          medium: "Generative audio, environmental data mapping",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cyan-blue",
+          themes: "Weather, systems, sonic translation, speculative environments",
+          technology: "TouchDesigner, environmental data and APIs, audio synthesis",
+          bandcampTracks: [
+            {
+              title: "symmetrical fictions",
+              trackId: "1748866928",
+              url: "https://asymmetrica.bandcamp.com/track/symmetrical-fictions",
+            },
+          ],
+        },
+
+
         {
             id: "asymmetrica-stranded-deep",
             title: "Stranded Deep Series",
