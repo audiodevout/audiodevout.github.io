@@ -24,11 +24,15 @@ try {
           dimensions: "1.6m (height)",
           technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
           themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
-          videos: [
-            "./assets/videos/rain-stick-video.mp4"
-          ],
+          // videos: [
+          //   "./assets/videos/rain-stick-video.mp4"
+          // ],
           // audioFile: "./assets/audio/rain-reminders-sample.mp3",
-          images: ["./assets/images/rain-reminders-1.jpg"],
+          images: [
+            "./assets/images/rain-stick-1.JPG",
+            "./assets/images/rain-stick-2.JPG",
+            "./assets/images/rain-stick-3.JPG"
+          ],
         },
         {
             id: "asymmetrica-stranded-deep",
@@ -227,10 +231,33 @@ try {
 
       // REPLACE the existing generativeAV and interactive arrays with:
       installations: [
-        // Move all projects from generativeAV array here and add tags
+        {
+          id: "rain-reminders",
+          title: "Rain Reminders",
+          description:
+            "A kinetic sound installation featuring a 1.8-meter-tall rotating rain stick mounted on a vertical wooden and steel structure.",
+          fullDescription:
+            "The piece explores the contrast between organic acoustic textures and industrial mechanical aesthetics, meditative distraction, and tinnitus awareness. It incorporates motorized rotation, subtle sound generation, and a tactile physical presence.",
+          medium:
+            "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, electronics (motors)",
+          category: "KINETIC SCULPTURE • NOISE • ARDUINO",
+          color: "saffron",
+          dimensions: "1.6m (height)",
+          technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
+          themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
+          // videos: [
+          //   "./assets/videos/rain-stick-video.mp4"
+          // ],
+          // audioFile: "./assets/audio/rain-reminders-sample.mp3",
+          images: [
+            "./assets/images/rain-stick-1.JPG",
+            "./assets/images/rain-stick-2.JPG",
+            "./assets/images/rain-stick-3.JPG"
+          ],
+        },
         {
           id: "symmetrical-fictions",
-          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
+          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1",
           description: "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
           fullDescription: "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
           medium: "Video installation, satellite imagery recomposition, speculative cartography",
