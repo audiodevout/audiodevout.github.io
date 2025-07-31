@@ -53,7 +53,7 @@ const PARTICLE_COLORS = [
   "rgba(0, 149, 255, 1)" // electric-lime
 ]
 
-const CONNECTION_COLOR = "rgba(255,255,255,1)"
+const CONNECTION_COLOR = "rgba(0,255,255,1.5)"
 const PARTICLE_SIZE_RANGE = { min: 3.0, max: 3.5 }
 const PARTICLE_SPEED_RANGE = { min: 0.07, max: 0.2 }
 const PARTICLE_LIFE_RANGE = { min: 100000000, max: 200000000 }

@@ -70,42 +70,43 @@ const BLOOM_OPACITY = 1 // Reduced bloom opacity
 // TIME-BASED COLOR MORPHING - Optimized color schemes
 const COLOR_SCHEMES = {
   dawn: [
-    "hsl(25, 100%, 65%)", // Warm orange
-    "hsl(45, 100%, 70%)", // Golden yellow
-    "hsl(15, 90%, 60%)", // Soft red
-    "hsl(35, 95%, 65%)", // Amber
+    "hsl(210, 100%, 65%)",
+    "hsl(220, 100%, 70%)",
+    "hsl(230, 90%, 60%)",
+    "hsl(240, 95%, 65%)",
   ],
   morning: [
-    "hsl(200, 80%, 60%)", // Sky blue
-    "hsl(180, 70%, 55%)", // Cyan
-    "hsl(220, 85%, 65%)", // Light blue
-    "hsl(160, 75%, 50%)", // Teal
+    "hsl(200, 80%, 60%)",
+    "hsl(210, 70%, 55%)",
+    "hsl(220, 85%, 65%)",
+    "hsl(205, 75%, 50%)",
   ],
   midday: [
-    "hsl(18, 100%, 62%)", // Saffron
-    "hsl(205, 100%, 52%)", // Cerulean
-    "hsl(325, 100%, 59%)", // Neon Magenta
-    "hsl(83, 100%, 62%)", // Electric Lime
+    "hsl(215, 100%, 62%)",
+    "hsl(205, 100%, 52%)",
+    "hsl(225, 100%, 59%)",
+    "hsl(230, 100%, 62%)",
   ],
   afternoon: [
-    "hsl(280, 80%, 60%)", // Purple
-    "hsl(300, 85%, 65%)", // Magenta
-    "hsl(260, 75%, 55%)", // Violet
-    "hsl(320, 90%, 60%)", // Pink
+    "hsl(210, 80%, 60%)",
+    "hsl(220, 85%, 65%)",
+    "hsl(230, 75%, 55%)",
+    "hsl(240, 90%, 60%)",
   ],
   evening: [
-    "hsl(14, 100%, 65%)", // Orange
-    "hsl(340, 100%, 70%)", // Pink
-    "hsl(45, 100%, 60%)", // Gold
-    "hsl(280, 100%, 65%)", // Purple
+    "hsl(200, 100%, 65%)",
+    "hsl(210, 100%, 70%)",
+    "hsl(220, 100%, 60%)",
+    "hsl(230, 100%, 65%)",
   ],
   night: [
-    "hsl(240, 60%, 40%)", // Deep blue
-    "hsl(260, 70%, 45%)", // Dark purple
-    "hsl(220, 55%, 35%)", // Navy
-    "hsl(280, 65%, 40%)", // Dark violet
+    "hsl(240, 60%, 40%)",
+    "hsl(230, 70%, 45%)",
+    "hsl(220, 55%, 35%)",
+    "hsl(210, 65%, 40%)",
   ],
 }
+
 
 // SHAPE COMPLEXITY LEVELS - Mobile optimized
 const SHAPE_COMPLEXITY = {

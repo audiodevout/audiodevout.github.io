@@ -56,6 +56,28 @@ try {
           ],
         },
 
+        {
+          id: "asymmetrica-a-reasonable-crashout",
+          title: "A Reasonable Crashout",
+          description:
+            "A chaotic yet rhythmic experiment in modular-style sequencing inside Ableton Live.",
+          fullDescription:
+            "A Reasonable Crashout is a deliberately unstable composition—a digital homage to modular synthesis built entirely in Ableton. The track oscillates between glitchy randomness and hypnotic repetition, filled with jittery pattern jumps, unpredictable modulation, and a constantly morphing yet grounded melodic pulse. It's a study in fractured coherence: non-linear, algorithmically warped, but held together by an insistent sense of drive.",
+          medium: "Digital audio, algorithmic sequencing",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "acid-orange",
+          themes: "Modularity, chaos, rhythm, generative structure",
+          technology: "Ableton Live, randomized MIDI effects, automation envelopes",
+          bandcampTracks: [
+            {
+              title: "a reasonable crashout",
+              trackId: "4106544270",
+              url: "https://asymmetrica.bandcamp.com/track/a-reasonable-crashout",
+            },
+          ],
+        },
+
+
 
 
         {
