@@ -53,7 +53,7 @@ const PARTICLE_COLORS = [
   "rgba(0, 149, 255, 1)" // electric-lime
 ]
 
-const CONNECTION_COLOR = "rgba(0,255,255,1.5)"
+const CONNECTION_COLOR = "rgba(0,255,255,1)"
 const PARTICLE_SIZE_RANGE = { min: 3.0, max: 3.5 }
 const PARTICLE_SPEED_RANGE = { min: 0.07, max: 0.2 }
 const PARTICLE_LIFE_RANGE = { min: 100000000, max: 200000000 }
@@ -395,7 +395,7 @@ class ParticleSystem {
     const targetFPS = this.config.updateFrequency
     const performanceRatio = this.currentFPS / targetFPS
 
-    if (performanceRatio < 0.8 && this.config.maxParticles > 20) {
+    if (performanceRatio < 0.5 && this.config.maxParticles > 20) {
       // Reduce particle count if performance is poor
       this.config.maxParticles = Math.max(20, Math.floor(this.config.maxParticles * 0.9))
       this.particles = this.particles.slice(0, this.config.maxParticles)

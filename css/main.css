@@ -538,7 +538,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 1.5rem;
   right: 2rem;
   font-size: 2rem;
-  color: var(--warm-white);
+  color: var(--clay-orange);
   cursor: pointer;
   font-weight: 300;
   transition: all 0.3s ease;
@@ -579,7 +579,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Project Cards - Enhanced Centering and Padding */
 .project-card {
-  background: var(--warm-white);
+  background: var(--soft-gray);
   border: 1px solid var(--glass-border);
   border-radius: 1.5rem;
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg); /* Consistent padding */
@@ -947,7 +947,7 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
   box-sizing: border-box;
   height: 100px;          /* smaller height (was 140px) */
-  background: var(--glass-panel-light);
+  background: var(--soft-gray);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);

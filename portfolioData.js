@@ -29,9 +29,9 @@ try {
           // ],
           // audioFile: "./assets/audio/rain-reminders-sample.mp3",
           images: [
-            "./assets/images/rain-stick-1.JPG",
+            "./assets/images/rain-stick-3.JPG",
             "./assets/images/rain-stick-2.JPG",
-            "./assets/images/rain-stick-3.JPG"
+            "./assets/images/rain-stick-1.JPG"            
           ],
         },
 
@@ -296,9 +296,9 @@ try {
           // ],
           // audioFile: "./assets/audio/rain-reminders-sample.mp3",
           images: [
-            "./assets/images/rain-stick-1.JPG",
+            "./assets/images/rain-stick-3.JPG",
             "./assets/images/rain-stick-2.JPG",
-            "./assets/images/rain-stick-3.JPG"
+            "./assets/images/rain-stick-1.JPG"
           ],
         },
         {
