@@ -612,186 +612,214 @@ try {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
           },
         },
+
         {
-            id: "prime-spiral-visualizer-tox",
-            title: "Prime Spiral Visualizer (.tox download)",
-            description: "TouchDesigner project file featuring a prime spiral visualizer, downloadable as a .tox file.",
-            fullDescription: "Detailed TouchDesigner project file showcasing a prime spiral visualizer, available for experimentation and learning.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - All members",
-            color: "electric-lime",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/131907000"
-            },            
-          },
-          {
-            id: "quick-emboss-filter-tox",
-            title: "FREE! Quick Emboss Filter - Project File and TOX",
-            description: "Free downloadable TouchDesigner project file featuring a quick emboss filter effect.",
-            fullDescription: "Beginner-friendly TouchDesigner project file demonstrating a quick emboss filter effect. Free download.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - All members",
-            color: "cerulean",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/131295324"
-            },
-          },
-          {
-            id: "simple-police-lights-bloom",
-            title: "(Free!) Simple police lights with switches and bloom",
-            description: "TouchDesigner project files showing simple police lights with switches and bloom effects.",
-            fullDescription: "Includes files demonstrating police lights simulation with switches and bloom effects. Free for all members.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - All members",
-            color: "electric-lime",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/126001531"
-            },
-          },
-          {
-            id: "psychedelic-fractals-particlesgpu",
-            title: "PROJECT FILES - Psychedelic Fractals with ParticlesGPU in TouchDesigner",
-            description: "Paid project files demonstrating psychedelic fractals using ParticlesGPU in TouchDesigner.",
-            fullDescription: "Advanced fractal generation techniques with ParticlesGPU inside TouchDesigner for immersive visuals.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/125860099"
-            },
-          },
-          {
-            id: "project-files-audioreactive-text",
-            title: "Project Files - Audioreactive Text",
-            description: "Paid project files for audioreactive text visualization in TouchDesigner.",
-            fullDescription: "TouchDesigner files enabling generative audioreactive text visuals with customizable parameters.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/121479952"
-            },
-          },
-          {
-            id: "noise-sculpting-structural-variation",
-            title: "Noise Sculpting - Structural Variation (Patreon Exclusive)",
-            description: "Paid project files exploring structural variation in noise sculpting techniques.",
-            fullDescription: "A deeper dive into noise sculpting with advanced structural variation techniques inside TouchDesigner.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/120456027"
-            },
-          },
-          {
-            id: "moving-lights-effect-tops",
-            title: "Moving Lights Effect with TOPs (Project File)",
-            description: "Paid project files for creating moving light effects with TouchDesigner TOPs.",
-            fullDescription: "Files demonstrating dynamic moving lights using TOP operators in TouchDesigner for generative visuals.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/115405003"
-            },
-          },
-          {
-            id: "controlled-feedback-cache-tops",
-            title: "Project Files - Controlled Feedback with Cache TOPs",
-            description: "Paid project files illustrating controlled feedback loops with Cache TOPs in TouchDesigner.",
-            fullDescription: "Detailed TouchDesigner projects focusing on feedback control using Cache TOPs for complex visual effects.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/113051861"
-            },
-          },
-          {
-            id: "replicator-limit-feedback",
-            title: "(Project Files) Replicator-Limit-Feedback - Members Exclusive!!",
-            description: "Paid TouchDesigner project files for replicator limit feedback techniques.",
-            fullDescription: "Exclusive project files exploring replicator limit feedback methods for generative visuals.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/111659656"
-            },
-          },
-          {
-            id: "noise-sculpting-part-6-mesh-generator",
-            title: "Project Files - Noise Sculpting Part 6 (Mesh Generator)",
-            description: "Free project files for Noise Sculpting Part 6 featuring mesh generation.",
-            fullDescription: "TouchDesigner files for mesh generation techniques as part of the Noise Sculpting series, free for all members.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - All members",
-            color: "cerulean",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/108481444"
-            },
-          },
-          {
-            id: "noise-sculpting-touchdesigner-particlesgpu-part5",
-            title: "PROJECT FILES - Noise Sculpting in TouchDesigner with ParticleGPU - Part 5",
-            description: "Paid project files for Noise Sculpting Part 5 using ParticleGPU TOP.",
-            fullDescription: "Advanced TouchDesigner files demonstrating noise sculpting techniques combined with ParticleGPU processing.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/107686431"
-            },
-          },
-          {
-            id: "simple-grid-patterns-touchdesigner",
-            title: "Simple Grid Patterns with Touchdesigner",
-            description: "Paid project files showing simple grid patterns in TouchDesigner.",
-            fullDescription: "Files demonstrating basic grid pattern creation and manipulation in TouchDesigner.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/106357613"
-            },
-          },
-          {
-            id: "particle-instancing-default-project",
-            title: "Particle Instancing - Default Project (FREE!)",
-            description: "Free default TouchDesigner project files for particle instancing.",
-            fullDescription: "Basic TouchDesigner project illustrating particle instancing techniques, available for free.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Public",
-            color: "electric-lime",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/105476204"
-            },
-          },
-          {
-            id: "noise-sculpting-part-5-tutorial",
-            title: "Noise Sculpting in TouchDesigner - Part 5 (Tutorial)",
-            description: "Paid project files and tutorial for Noise Sculpting Part 5.",
-            fullDescription: "Tutorial and project files focused on noise sculpting techniques in TouchDesigner Part 5.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/104148759"
-            },
-          },
-          {
-            id: "noise-sculpting-geometric-iterations",
-            title: "Noise Sculpting Geometric Iterations - Project File",
-            description: "Paid project files for geometric iteration techniques in noise sculpting.",
-            fullDescription: "TouchDesigner files demonstrating iterative geometry manipulations in noise sculpting projects.",
-            medium: "TouchDesigner project file",
-            category: "PROJECT FILE - Paid only",
-            color: "neon-magenta",
-            urls: {
-              Patreon: "https://www.patreon.com/posts/103982664"
-            },
-          }
+          id: "nervous-systems-kel30",
+          title: "Nervous Systems",
+          description: "A group exhibition by first-year MADTech students at KEL-30.",
+          fullDescription:
+            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
+          medium: "Installation, performance, new media",
+          category: "EXHIBITION",
+          color: "electric-blue",
+          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
+          images: ["./assets/images/nervous-system-1.jpg"],
+          urls: {}
+        },
+        {
+          id: "fever-dream-minerva",
+          title: "Fever Dream",
+          description: "A collaborative performance at Minerva Academy.",
+          fullDescription:
+            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
+          medium: "Performance, audiovisual installation, sound art",
+          category: "EXHIBITION",
+          color: "crimson",
+          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
+          images: [
+            "./assets/images/fever-dream-poster.jpg"
+                  ],          
+        }
+        // {
+        //     id: "prime-spiral-visualizer-tox",
+        //     title: "Prime Spiral Visualizer (.tox download)",
+        //     description: "TouchDesigner project file featuring a prime spiral visualizer, downloadable as a .tox file.",
+        //     fullDescription: "Detailed TouchDesigner project file showcasing a prime spiral visualizer, available for experimentation and learning.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - All members",
+        //     color: "electric-lime",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/131907000"
+        //     },            
+        //   },
+        //   {
+        //     id: "quick-emboss-filter-tox",
+        //     title: "FREE! Quick Emboss Filter - Project File and TOX",
+        //     description: "Free downloadable TouchDesigner project file featuring a quick emboss filter effect.",
+        //     fullDescription: "Beginner-friendly TouchDesigner project file demonstrating a quick emboss filter effect. Free download.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - All members",
+        //     color: "cerulean",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/131295324"
+        //     },
+        //   },
+        //   {
+        //     id: "simple-police-lights-bloom",
+        //     title: "(Free!) Simple police lights with switches and bloom",
+        //     description: "TouchDesigner project files showing simple police lights with switches and bloom effects.",
+        //     fullDescription: "Includes files demonstrating police lights simulation with switches and bloom effects. Free for all members.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - All members",
+        //     color: "electric-lime",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/126001531"
+        //     },
+        //   },
+        //   {
+        //     id: "psychedelic-fractals-particlesgpu",
+        //     title: "PROJECT FILES - Psychedelic Fractals with ParticlesGPU in TouchDesigner",
+        //     description: "Paid project files demonstrating psychedelic fractals using ParticlesGPU in TouchDesigner.",
+        //     fullDescription: "Advanced fractal generation techniques with ParticlesGPU inside TouchDesigner for immersive visuals.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/125860099"
+        //     },
+        //   },
+        //   {
+        //     id: "project-files-audioreactive-text",
+        //     title: "Project Files - Audioreactive Text",
+        //     description: "Paid project files for audioreactive text visualization in TouchDesigner.",
+        //     fullDescription: "TouchDesigner files enabling generative audioreactive text visuals with customizable parameters.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/121479952"
+        //     },
+        //   },
+        //   {
+        //     id: "noise-sculpting-structural-variation",
+        //     title: "Noise Sculpting - Structural Variation (Patreon Exclusive)",
+        //     description: "Paid project files exploring structural variation in noise sculpting techniques.",
+        //     fullDescription: "A deeper dive into noise sculpting with advanced structural variation techniques inside TouchDesigner.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/120456027"
+        //     },
+        //   },
+        //   {
+        //     id: "moving-lights-effect-tops",
+        //     title: "Moving Lights Effect with TOPs (Project File)",
+        //     description: "Paid project files for creating moving light effects with TouchDesigner TOPs.",
+        //     fullDescription: "Files demonstrating dynamic moving lights using TOP operators in TouchDesigner for generative visuals.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/115405003"
+        //     },
+        //   },
+        //   {
+        //     id: "controlled-feedback-cache-tops",
+        //     title: "Project Files - Controlled Feedback with Cache TOPs",
+        //     description: "Paid project files illustrating controlled feedback loops with Cache TOPs in TouchDesigner.",
+        //     fullDescription: "Detailed TouchDesigner projects focusing on feedback control using Cache TOPs for complex visual effects.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/113051861"
+        //     },
+        //   },
+        //   {
+        //     id: "replicator-limit-feedback",
+        //     title: "(Project Files) Replicator-Limit-Feedback - Members Exclusive!!",
+        //     description: "Paid TouchDesigner project files for replicator limit feedback techniques.",
+        //     fullDescription: "Exclusive project files exploring replicator limit feedback methods for generative visuals.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/111659656"
+        //     },
+        //   },
+        //   {
+        //     id: "noise-sculpting-part-6-mesh-generator",
+        //     title: "Project Files - Noise Sculpting Part 6 (Mesh Generator)",
+        //     description: "Free project files for Noise Sculpting Part 6 featuring mesh generation.",
+        //     fullDescription: "TouchDesigner files for mesh generation techniques as part of the Noise Sculpting series, free for all members.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - All members",
+        //     color: "cerulean",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/108481444"
+        //     },
+        //   },
+        //   {
+        //     id: "noise-sculpting-touchdesigner-particlesgpu-part5",
+        //     title: "PROJECT FILES - Noise Sculpting in TouchDesigner with ParticleGPU - Part 5",
+        //     description: "Paid project files for Noise Sculpting Part 5 using ParticleGPU TOP.",
+        //     fullDescription: "Advanced TouchDesigner files demonstrating noise sculpting techniques combined with ParticleGPU processing.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/107686431"
+        //     },
+        //   },
+        //   {
+        //     id: "simple-grid-patterns-touchdesigner",
+        //     title: "Simple Grid Patterns with Touchdesigner",
+        //     description: "Paid project files showing simple grid patterns in TouchDesigner.",
+        //     fullDescription: "Files demonstrating basic grid pattern creation and manipulation in TouchDesigner.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/106357613"
+        //     },
+        //   },
+        //   {
+        //     id: "particle-instancing-default-project",
+        //     title: "Particle Instancing - Default Project (FREE!)",
+        //     description: "Free default TouchDesigner project files for particle instancing.",
+        //     fullDescription: "Basic TouchDesigner project illustrating particle instancing techniques, available for free.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Public",
+        //     color: "electric-lime",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/105476204"
+        //     },
+        //   },
+        //   {
+        //     id: "noise-sculpting-part-5-tutorial",
+        //     title: "Noise Sculpting in TouchDesigner - Part 5 (Tutorial)",
+        //     description: "Paid project files and tutorial for Noise Sculpting Part 5.",
+        //     fullDescription: "Tutorial and project files focused on noise sculpting techniques in TouchDesigner Part 5.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/104148759"
+        //     },
+        //   },
+        //   {
+        //     id: "noise-sculpting-geometric-iterations",
+        //     title: "Noise Sculpting Geometric Iterations - Project File",
+        //     description: "Paid project files for geometric iteration techniques in noise sculpting.",
+        //     fullDescription: "TouchDesigner files demonstrating iterative geometry manipulations in noise sculpting projects.",
+        //     medium: "TouchDesigner project file",
+        //     category: "PROJECT FILE - Paid only",
+        //     color: "neon-magenta",
+        //     urls: {
+        //       Patreon: "https://www.patreon.com/posts/103982664"
+        //     },
+        //   }
       ],
     },
 
