@@ -1060,7 +1060,7 @@
 
       return `
         <div class="project-media-section">
-          <h4>${isPreview ? "PREVIEW VIDEO" : "VIDEOS"}</h4>
+          <h4>${isPreview ? "" : "VIDEOS"}</h4>
           <div class="project-videos">
             ${videosToShow
               .map((videoPath, index) => {
