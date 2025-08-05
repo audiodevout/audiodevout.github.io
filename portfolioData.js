@@ -14,26 +14,27 @@ try {
           id: "rain-reminders",
           title: "Rain Reminders",
           description:
-            "A kinetic sound installation featuring a 1.8-meter-tall rotating rain stick mounted on a vertical wooden and steel structure.",
+            "A kinetic sound sculpture featuring a horizontally-mounted 80 cm rain stick rotating atop a 1.6-meter wooden and steel structure.",
           fullDescription:
-            "The piece explores the contrast between organic acoustic textures and industrial mechanical aesthetics, meditative distraction, and tinnitus awareness. It incorporates motorized rotation, subtle sound generation, and a tactile physical presence.",
+            "Originally built as a personal tool to manage tinnitus, *Rain Reminders* transforms a folk instrument into an autonomous, durational sound object. The sculpture uses raw wood, steel, grey duct tape, and visible wiring to emphasize a raw, dadaist aesthetic. As the motor rotates the rain stick, grains inside fall and strike internal pins, producing soft acoustic textures that mask silence with continuity. The work explores themes of sensory healing, anti-polish materiality, and the aesthetics of mechanical ritual.",
           medium:
-            "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, electronics (motors)",
-          category: "KINETIC SCULPTURE • NOISE • ARDUINO",
+            "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, exposed electronics",
+          category: "KINETIC SCULPTURE • SOUND • DIY TECH",
           color: "saffron",
-          dimensions: "1.6m (height)",
-          technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
-          themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
+          dimensions: "1.6m (height), 0.8m (rain stick length)",
+          technical: "Low-RPM motor, custom mount system, grain-filled acoustic tube, steel base frame, direct wiring, jute floor mat",
+          themes: "Tinnitus Masking, Meditative Noise, Raw Materiality, Dadaism, Personal Machines",
           // videos: [
-          //   "./assets/videos/rain-stick-video.mp4"
+          //   "./assets/videos/rain-reminders-video.mp4"
           // ],
           // audioFile: "./assets/audio/rain-reminders-sample.mp3",
           images: [
             "./assets/images/rain-stick-3.JPG",
             "./assets/images/rain-stick-2.JPG",
-            "./assets/images/rain-stick-1.JPG"            
+            "./assets/images/rain-stick-1.JPG"
           ],
         },
+
 
         {
           id: "asymmetrica-symmetrical-fictions",
@@ -277,22 +278,21 @@ try {
 
       // REPLACE the existing generativeAV and interactive arrays with:
       installations: [
-        {
-          id: "rain-reminders",
+        id: "rain-reminders",
           title: "Rain Reminders",
           description:
-            "A kinetic sound installation featuring a 1.8-meter-tall rotating rain stick mounted on a vertical wooden and steel structure.",
+            "A kinetic sound sculpture featuring a horizontally-mounted 80 cm rain stick rotating atop a 1.6-meter wooden and steel structure.",
           fullDescription:
-            "The piece explores the contrast between organic acoustic textures and industrial mechanical aesthetics, meditative distraction, and tinnitus awareness. It incorporates motorized rotation, subtle sound generation, and a tactile physical presence.",
+            "Originally built as a personal tool to manage tinnitus, *Rain Reminders* transforms a folk instrument into an autonomous, durational sound object. The sculpture uses raw wood, steel, grey duct tape, and visible wiring to emphasize a raw, dadaist aesthetic. As the motor rotates the rain stick, grains inside fall and strike internal pins, producing soft acoustic textures that mask silence with continuity. The work explores themes of sensory healing, anti-polish materiality, and the aesthetics of mechanical ritual.",
           medium:
-            "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, electronics (motors)",
-          category: "KINETIC SCULPTURE • NOISE • ARDUINO",
+            "Physical sound sculpture, motorized kinetic installation, acoustic rain stick, wood and steel, exposed electronics",
+          category: "KINETIC SCULPTURE • SOUND • DIY TECH",
           color: "saffron",
-          dimensions: "1.6m (height)",
-          technical: "Motorized rotation system, custom electronics, grains as acoustic elements",
-          themes: "Meditative Sound, Industrial Aesthetics and Dadaism, Tinnitus Awareness",
+          dimensions: "1.6m (height), 0.8m (rain stick length)",
+          technical: "Low-RPM motor, custom mount system, grain-filled acoustic tube, steel base frame, direct wiring, jute floor mat",
+          themes: "Tinnitus Masking, Meditative Noise, Raw Materiality, Dadaism, Personal Machines",
           // videos: [
-          //   "./assets/videos/rain-stick-video.mp4"
+          //   "./assets/videos/rain-reminders-video.mp4"
           // ],
           // audioFile: "./assets/audio/rain-reminders-sample.mp3",
           images: [
