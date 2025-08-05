@@ -278,6 +278,7 @@ try {
 
       // REPLACE the existing generativeAV and interactive arrays with:
       installations: [
+        {
         id: "rain-reminders",
           title: "Rain Reminders",
           description:
