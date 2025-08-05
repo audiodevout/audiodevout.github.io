@@ -636,6 +636,7 @@ try {
           category: "EXHIBITION",
           color: "crimson",
           themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
+          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
           images: [
             "./assets/images/fever-dream-poster.jpg"
                   ],          

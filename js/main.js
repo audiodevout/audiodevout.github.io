@@ -1021,7 +1021,7 @@
 
       return `
         <div class="project-media-section">
-          <h4>${isPreview ? "PREVIEW IMAGES" : "IMAGES"}</h4>
+          <h4>${isPreview ? "" : "IMAGES"}</h4>
           <div class="project-images">
             ${imagesToShow
               .map(
