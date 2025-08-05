@@ -22,15 +22,15 @@ const MANDALA_PERFORMANCE_PROFILES = {
   },
   tablet: {
     maxLayers: 1,
-    baseSegments: 12,
+    baseSegments: 8,
     detailLevel: 1.2,
     bloomEnabled: true,
     updateFrequency: 45, // Target 45 FPS
     renderQuality: "medium",
   },
   desktop: {
-    maxLayers: 3, // Even more layers for richer visuals
-    baseSegments: 24, // High base segments for intricate patterns
+    maxLayers: 1, // Even more layers for richer visuals
+    baseSegments: 16, // High base segments for intricate patterns
     detailLevel: 1.5, // High detail for dense sphere patterns
     bloomEnabled: true, // Enable bloom for striking glow effects
     updateFrequency: 60, // Target 60 FPS for smooth animation
@@ -48,13 +48,13 @@ const TRANSITION_OVERLAP = 0.15 // Percentage of cycle where two types overlap d
 const MANDALA_TYPES = ["circles", "octagons"]
 
 // 4. SIZE AND SCALING
-const MANDALA_BASE_SCALE = 2 // Overall scale of the mandala relative to canvas size
+const MANDALA_BASE_SCALE = 1.5 // Overall scale of the mandala relative to canvas size
 const LAYER_SPACING_FACTOR = 0.2 // Controls the radial distance between layers
-const CENTER_PULSE_RADIUS = 25 // Base radius of the central pulsing circle
-const SPHERE_RADIUS_FACTOR = 0.01 // Relative size of spheres to layer radius
+const CENTER_PULSE_RADIUS = 300 // Base radius of the central pulsing circle
+const SPHERE_RADIUS_FACTOR = 0.02 // Relative size of spheres to layer radius
 
 // 5. ANIMATION SPEEDS
-const ROTATION_SPEED = 0.0015 // Speed of the overall mandala rotation
+const ROTATION_SPEED = 0.001 // Speed of the overall mandala rotation
 const PULSE_SPEED = 0.001 // Speed of the breathing/pulsing effect
 const BREATHING_INTENSITY = 0.03 // Amplitude of the breathing effect (0 to 1)
 
