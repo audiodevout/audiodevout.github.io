@@ -13,7 +13,7 @@
 // These settings balance visual quality with performance based on detected device capabilities.
 const MANDALA_PERFORMANCE_PROFILES = {
   mobile: {
-    maxLayers: 1, // Increased layers for mobile as shapes are simpler
+    maxLayers: 0, // Increased layers for mobile as shapes are simpler
     baseSegments: 8, // More segments for smoother circles/octagons
     detailLevel: 0.7, // Moderate detail for sphere density
     bloomEnabled: false, // Disable bloom for performance
@@ -21,7 +21,7 @@ const MANDALA_PERFORMANCE_PROFILES = {
     renderQuality: "low", // Low image smoothing quality
   },
   tablet: {
-    maxLayers: 1,
+    maxLayers: 0,
     baseSegments: 8,
     detailLevel: 1.2,
     bloomEnabled: true,
@@ -29,7 +29,7 @@ const MANDALA_PERFORMANCE_PROFILES = {
     renderQuality: "medium",
   },
   desktop: {
-    maxLayers: 1, // Even more layers for richer visuals
+    maxLayers: 0, // Even more layers for richer visuals
     baseSegments: 16, // High base segments for intricate patterns
     detailLevel: 1.5, // High detail for dense sphere patterns
     bloomEnabled: true, // Enable bloom for striking glow effects
@@ -354,8 +354,8 @@ class MandalaGenerator {
     const displayHeight = this.canvas.clientHeight || this.canvas.height / (window.devicePixelRatio || 1)
 
     // Calculate center coordinates based on display size
-    const centerX = displayWidth / 2
-    const centerY = displayHeight / 2
+    const centerX = displayWidth / 2 +400
+    const centerY = displayHeight / 2 + 50
 
     // Calculate base radius, influenced by overall scale and breathing effect
     this.rotationOffset += ROTATION_SPEED // Continuous rotation
@@ -462,13 +462,13 @@ class MandalaGenerator {
    */
   _setupLayerStyle(ctx, layer, numLayers, { currentColors, scrollProgress }) {
     // Opacity decreases with layer depth and scroll progress for a fading effect
-    const opacity = Math.max(0.1, 1.2 - layer * 0.15 - scrollProgress * 0.2)
+    const opacity = Math.max(0.1, 1.2 - layer * 0.15 - scrollProgress * 0.5)
     // Line width decreases with layer depth for a sense of perspective
-    const strokeWidth = Math.max(0.5, 3 - layer * 0.3)
+    const strokeWidth = Math.max(0.1, 2 - layer * 0.1)
 
     ctx.strokeStyle = currentColors[layer % currentColors.length]
     ctx.fillStyle = currentColors[layer % currentColors.length]
-    ctx.lineWidth = strokeWidth
+    ctx.lineWidth = strokeWidth * 0.5
     ctx.globalAlpha = opacity
   }
 

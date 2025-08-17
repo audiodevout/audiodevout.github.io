@@ -142,13 +142,13 @@ body {
   bottom: 0;
   background: var(--warm-white);
   display: flex;
-  align-items: center;
+  align-items: eft;
   justify-content: center;
   z-index: 9999;
 }
 
 .loading-content {
-  text-align: center;
+  text-align: left;
   padding: var(--spacing-xl);
 }
 
@@ -188,7 +188,7 @@ body {
 .no-js-fallback {
   display: block;
   padding: var(--spacing-xxl) var(--spacing-lg);
-  text-align: center;
+  text-align: left;
   max-width: 800px;
   margin: 0 auto;
   z-index: var(--z-content);
@@ -850,7 +850,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Page Headers */
 .page-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--spacing-xxl);
 }
 
@@ -866,10 +866,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Home Page Specific */
 .home-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   min-height: calc(100vh - var(--touch-target) - var(--spacing-lg));
-  text-align: center;
+  text-align: left;
   padding: var(--spacing-lg) var(--spacing-md);
 }
 
@@ -1237,7 +1237,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 70%;
   transition: all 0.3s ease;
   z-index: 1;
   -webkit-tap-highlight-color: transparent;
