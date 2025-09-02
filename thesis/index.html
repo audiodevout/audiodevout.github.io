@@ -22,7 +22,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading digital gallery...</p>
+        </div>
+    </div>
 
     <!-- Particle canvas for kinetic effects -->
     <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
@@ -32,7 +41,7 @@
         <div class="header-content">
             <h1 class="brand-title">
                 <span class="brand-name">ATHARVA GUPTA</span>
-                <span class="brand-subtitle">Digital Gallery Portfolio</span>
+                <span class="brand-subtitle">thesis of a widely curious generalist</span>
             </h1>
             
             <nav class="main-nav" role="navigation" aria-label="Main navigation">
@@ -45,24 +54,18 @@
             </nav>
 
             <div class="controls" role="group" aria-label="Display controls">
-                <button id="theme-toggle" class="control-btn" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-                    <i data-feather="moon"></i>
-                </button>
-                <button id="kinetic-toggle" class="control-btn" aria-label="Toggle kinetic effects" title="Toggle kinetic effects">
+                <button id="kinetic-toggle" class="control-btn active" aria-label="Toggle kinetic effects" title="Toggle kinetic effects">
                     <i data-feather="zap"></i>
                 </button>
                 <button id="glitch-toggle" class="control-btn" aria-label="Toggle glitch effects" title="Toggle glitch effects">
                     <i data-feather="radio"></i>
-                </button>
-                <button id="sound-toggle" class="control-btn" aria-label="Toggle ambient sound" title="Toggle ambient sound">
-                    <i data-feather="volume-x"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main content -->
-    <main class="main-content" role="main">
+    <main id="main-content" class="main-content" role="main">
         <div class="container">
             <!-- Breadcrumb navigation -->
             <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -70,51 +73,41 @@
             </nav>
 
             <!-- Section content containers -->
-            <section id="entropy-section" class="content-section active" aria-labelledby="entropy-title">
+            <section id="entropy" class="content-section active" aria-labelledby="entropy-title">
                 <header class="section-header">
                     <h2 id="entropy-title" class="section-title">Entropy</h2>
                     <p class="section-description">Kinetic sculptures, system processes, and ambient recordings exploring chaos and order.</p>
                 </header>
-                <div class="thesis-content">
-                    <div class="thesis-text" id="entropy-thesis"></div>
-                </div>
-                <div class="gallery-grid" id="entropy-grid" role="grid" aria-label="Entropy projects gallery"></div>
+                <div class="blocks-container" id="entropy-blocks" role="grid" aria-label="Entropy projects gallery"></div>
             </section>
 
-            <section id="noise-section" class="content-section" aria-labelledby="noise-title">
+            <section id="noise" class="content-section" aria-labelledby="noise-title">
                 <header class="section-header">
                     <h2 id="noise-title" class="section-title">Noise</h2>
                     <p class="section-description">Sound experiments, glitch audio, and noise theory reflections.</p>
                 </header>
-                <div class="thesis-content">
-                    <div class="thesis-text" id="noise-thesis"></div>
-                </div>
-                <div class="gallery-grid" id="noise-grid" role="grid" aria-label="Noise projects gallery"></div>
+                <div class="blocks-container" id="noise-blocks" role="grid" aria-label="Noise projects gallery"></div>
             </section>
 
-            <section id="occupation-section" class="content-section" aria-labelledby="occupation-title">
+            <section id="occupation" class="content-section" aria-labelledby="occupation-title">
                 <header class="section-header">
                     <h2 id="occupation-title" class="section-title">Occupation</h2>
                     <p class="section-description">Performance documentation, educational works, and pedagogy reflections.</p>
                 </header>
-                <div class="thesis-content">
-                    <div class="thesis-text" id="occupation-thesis"></div>
-                </div>
-                <div class="gallery-grid" id="occupation-grid" role="grid" aria-label="Occupation projects gallery"></div>
+                <div class="blocks-container" id="occupation-blocks" role="grid" aria-label="Occupation projects gallery"></div>
             </section>
 
-            <section id="extras-section" class="content-section" aria-labelledby="extras-title">
+            <section id="extras" class="content-section" aria-labelledby="extras-title">
                 <header class="section-header">
                     <h2 id="extras-title" class="section-title">Extras</h2>
                     <p class="section-description">Bibliography, archives, downloadable thesis, and hidden nodes.</p>
                 </header>
-                <div class="thesis-content">
-                    <div class="thesis-text" id="extras-thesis"></div>
-                </div>
-                <div class="gallery-grid" id="extras-grid" role="grid" aria-label="Extras projects gallery"></div>
+                <div class="blocks-container" id="extras-blocks" role="grid" aria-label="Extras projects gallery"></div>
             </section>
         </div>
     </main>
+
+    
 
     <!-- Modal for expanded content -->
     <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
@@ -132,14 +125,7 @@
         </div>
     </div>
 
-    <!-- Audio elements for ambient sounds -->
-    <audio id="ambient-audio" loop preload="none">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-        <!-- Fallback ambient sound -->
-    </audio>
-
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
 
     <!-- Scripts -->
     <script src="data.js"></script>
@@ -147,7 +133,9 @@
     
     <!-- Initialize Feather icons -->
     <script>
-        feather.replace();
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+        });
     </script>
 </body>
 </html>
