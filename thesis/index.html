@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATHARVA GUPTA - Digital Gallery Portfolio</title>
+    <meta name="description" content="Interactive digital portfolio and thesis gallery by Atharva Gupta featuring kinetic sculptures, sound experiments, and performance documentation.">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="data.js" as="script">
+    
+    <!-- External fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading digital gallery...</p>
+        </div>
+    </div>
+
+    <!-- Particle canvas for kinetic effects -->
+    <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Header with navigation and toggles -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <h1 class="brand-title">
+                <span class="brand-name">ATHARVA GUPTA</span>
+                <span class="brand-subtitle">Digital Gallery Portfolio</span>
+            </h1>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><button class="nav-btn active" data-section="entropy" aria-label="View Entropy section">Entropy</button></li>
+                    <li><button class="nav-btn" data-section="noise" aria-label="View Noise section">Noise</button></li>
+                    <li><button class="nav-btn" data-section="occupation" aria-label="View Occupation section">Occupation</button></li>
+                    <li><button class="nav-btn" data-section="extras" aria-label="View Extras section">Extras</button></li>
+                </ul>
+            </nav>
+
+            <div class="controls" role="group" aria-label="Display controls">
+                <button id="theme-toggle" class="control-btn" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                    <i data-feather="moon"></i>
+                </button>
+                <button id="kinetic-toggle" class="control-btn" aria-label="Toggle kinetic effects" title="Toggle kinetic effects">
+                    <i data-feather="zap"></i>
+                </button>
+                <button id="glitch-toggle" class="control-btn" aria-label="Toggle glitch effects" title="Toggle glitch effects">
+                    <i data-feather="radio"></i>
+                </button>
+                <button id="sound-toggle" class="control-btn" aria-label="Toggle ambient sound" title="Toggle ambient sound">
+                    <i data-feather="volume-x"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Breadcrumb navigation -->
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <span class="breadcrumb-current" id="current-section">Entropy</span>
+            </nav>
+
+            <!-- Section content containers -->
+            <section id="entropy-section" class="content-section active" aria-labelledby="entropy-title">
+                <header class="section-header">
+                    <h2 id="entropy-title" class="section-title">Entropy</h2>
+                    <p class="section-description">Kinetic sculptures, system processes, and ambient recordings exploring chaos and order.</p>
+                </header>
+                <div class="thesis-content">
+                    <div class="thesis-text" id="entropy-thesis"></div>
+                </div>
+                <div class="gallery-grid" id="entropy-grid" role="grid" aria-label="Entropy projects gallery"></div>
+            </section>
+
+            <section id="noise-section" class="content-section" aria-labelledby="noise-title">
+                <header class="section-header">
+                    <h2 id="noise-title" class="section-title">Noise</h2>
+                    <p class="section-description">Sound experiments, glitch audio, and noise theory reflections.</p>
+                </header>
+                <div class="thesis-content">
+                    <div class="thesis-text" id="noise-thesis"></div>
+                </div>
+                <div class="gallery-grid" id="noise-grid" role="grid" aria-label="Noise projects gallery"></div>
+            </section>
+
+            <section id="occupation-section" class="content-section" aria-labelledby="occupation-title">
+                <header class="section-header">
+                    <h2 id="occupation-title" class="section-title">Occupation</h2>
+                    <p class="section-description">Performance documentation, educational works, and pedagogy reflections.</p>
+                </header>
+                <div class="thesis-content">
+                    <div class="thesis-text" id="occupation-thesis"></div>
+                </div>
+                <div class="gallery-grid" id="occupation-grid" role="grid" aria-label="Occupation projects gallery"></div>
+            </section>
+
+            <section id="extras-section" class="content-section" aria-labelledby="extras-title">
+                <header class="section-header">
+                    <h2 id="extras-title" class="section-title">Extras</h2>
+                    <p class="section-description">Bibliography, archives, downloadable thesis, and hidden nodes.</p>
+                </header>
+                <div class="thesis-content">
+                    <div class="thesis-text" id="extras-thesis"></div>
+                </div>
+                <div class="gallery-grid" id="extras-grid" role="grid" aria-label="Extras projects gallery"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal for expanded content -->
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content" role="document">
+            <header class="modal-header">
+                <h3 id="modal-title" class="modal-title"></h3>
+                <button id="modal-close" class="modal-close-btn" aria-label="Close modal">
+                    <i data-feather="x"></i>
+                </button>
+            </header>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements for ambient sounds -->
+    <audio id="ambient-audio" loop preload="none">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <!-- Fallback ambient sound -->
+    </audio>
+
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Initialize Feather icons -->
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
