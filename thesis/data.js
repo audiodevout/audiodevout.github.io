@@ -54,7 +54,7 @@ window.portfolioData = {
       sizeHint: "large",
       levelAffinities: { entropy: 90, noise: 30, occupation: 20 },
       tags: ["theory", "entropy", "kinetic", "digital systems"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -85,7 +85,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 80, noise: 20, occupation: 30 },
       tags: ["projects", "kinetic", "data visualization", "interactive"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -119,7 +119,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 70, noise: 20, occupation: 60 },
       tags: ["bibliography", "theory", "sources"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -161,7 +161,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 60, noise: 10, occupation: 15 },
       tags: ["gallery", "documentation", "images"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -195,7 +195,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 70, noise: 60, occupation: 20 },
       tags: ["sound", "ambient", "generative", "field recording"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -209,18 +209,18 @@ window.portfolioData = {
       summary: "Development journal and technical notes from entropy installations.",
       content: `
         <div class="process-entries">
-          <div class="process-entry" data-date="2024-03-15">
-            <h4>March 15, 2024</h4>
+          <div class="process-entry" data-date="2025-03-15">
+            <h4>March 15, 2025</h4>
             <p><strong>Initial servo motor tests</strong></p>
             <p>Testing different servo motors for pendulum responsiveness. High-torque servos provide better control but create more noise. Need to balance precision with acoustic considerations.</p>
           </div>
-          <div class="process-entry" data-date="2024-03-20">
-            <h4>March 20, 2024</h4>
+          <div class="process-entry" data-date="2025-03-20">
+            <h4>March 20, 2025</h4>
             <p><strong>Network API integration</strong></p>
             <p>Successfully integrated real-time network traffic data. Packet flow visualization working but needs smoothing algorithms to prevent erratic movements.</p>
           </div>
-          <div class="process-entry" data-date="2024-04-01">
-            <h4>April 1, 2024</h4>
+          <div class="process-entry" data-date="2025-04-01">
+            <h4>April 1, 2025</h4>
             <p><strong>Gallery installation challenges</strong></p>
             <p>Power distribution issues in gallery space. Redesigned power system with distributed controllers. Installation now more modular and resilient.</p>
           </div>
@@ -229,7 +229,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 90, noise: 30, occupation: 60 },
       tags: ["process", "development", "iteration", "documentation"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -263,7 +263,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 85, noise: 40, occupation: 70 },
       tags: ["technical", "code", "schematics", "arduino"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -292,7 +292,7 @@ window.portfolioData = {
       sizeHint: "large",
       levelAffinities: { entropy: 40, noise: 95, occupation: 30 },
       tags: ["theory", "noise", "signal processing", "glitch"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -323,7 +323,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 60, noise: 85, occupation: 40 },
       tags: ["projects", "sound art", "electronics", "experimental"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -357,7 +357,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 30, noise: 80, occupation: 50 },
       tags: ["bibliography", "theory", "sound art"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -391,7 +391,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 40, noise: 70, occupation: 25 },
       tags: ["documentation", "circuit bending", "photography"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -425,7 +425,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 50, noise: 95, occupation: 25 },
       tags: ["glitch", "digital corruption", "experimental"],
-      date: "2024", 
+      date: "2025", 
       credits: "",
       download: false
     },
@@ -439,18 +439,18 @@ window.portfolioData = {
       summary: "Development notes and failed experiments in sound corruption.",
       content: `
         <div class="process-entries">
-          <div class="process-entry" data-date="2024-02-10">
-            <h4>February 10, 2024</h4>
+          <div class="process-entry" data-date="2025-02-10">
+            <h4>February 10, 2025</h4>
             <p><strong>First circuit bending attempts</strong></p>
             <p>Started with cheap Casio keyboard. Initial modifications too aggressive - completely destroyed sound output. Need more surgical approach to component bridging.</p>
           </div>
-          <div class="process-entry" data-date="2024-02-25">
-            <h4>February 25, 2024</h4>
+          <div class="process-entry" data-date="2025-02-25">
+            <h4>February 25, 2025</h4>
             <p><strong>Digital corruption breakthrough</strong></p>
             <p>Discovered effective bit-crushing algorithm that preserves musical content while adding textural complexity. Sweet spot around 8-bit depth with strategic sample rate reduction.</p>
           </div>
-          <div class="process-entry" data-date="2024-03-15">
-            <h4>March 15, 2024</h4>
+          <div class="process-entry" data-date="2025-03-15">
+            <h4>March 15, 2025</h4>
             <p><strong>Feedback system refinement</strong></p>
             <p>Built variable delay feedback loop with manual control. Creates sustained tones that evolve unpredictably. Documenting optimal mic/speaker distances for different acoustic spaces.</p>
           </div>
@@ -459,7 +459,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 70, noise: 90, occupation: 40 },
       tags: ["process", "experimentation", "sound"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -493,7 +493,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 60, noise: 85, occupation: 60 },
       tags: ["max/msp", "pure data", "dsp", "tools"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -522,7 +522,7 @@ window.portfolioData = {
       sizeHint: "large",
       levelAffinities: { entropy: 30, noise: 40, occupation: 90 },
       tags: ["pedagogy", "performance", "institutional critique", "education"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -553,7 +553,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 40, noise: 35, occupation: 90 },
       tags: ["projects", "pedagogy", "performance", "workshops"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -587,7 +587,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 20, noise: 30, occupation: 85 },
       tags: ["bibliography", "critical pedagogy", "institutional critique"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -614,7 +614,7 @@ window.portfolioData = {
           url: "https://picsum.photos/800/600?random=7",
           thumbnail: "https://picsum.photos/300/200?random=7",
           alt: "Performance in classroom setting",
-          caption: "Institutional critique performance, 2024",
+          caption: "Institutional critique performance, 2025",
           credits: "Photo: Performance Documentation"
         },
         {
@@ -629,7 +629,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 25, noise: 20, occupation: 80 },
       tags: ["documentation", "performance", "photography", "workshops"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -663,7 +663,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 30, noise: 40, occupation: 75 },
       tags: ["performance", "audio", "workshops", "documentation"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -677,18 +677,18 @@ window.portfolioData = {
       summary: "Notes and observations from experimental teaching practices.",
       content: `
         <div class="process-entries">
-          <div class="process-entry" data-date="2024-02-10">
-            <h4>February 10, 2024</h4>
+          <div class="process-entry" data-date="2025-02-10">
+            <h4>February 10, 2025</h4>
             <p><strong>First collaborative session</strong></p>
             <p>Participants initially resistant to non-hierarchical structure. Traditional student/teacher roles deeply ingrained. Need to develop more gradual transition methods that don't immediately destabilize learning environment.</p>
           </div>
-          <div class="process-entry" data-date="2024-02-25">
-            <h4>February 25, 2024</h4>
+          <div class="process-entry" data-date="2025-02-25">
+            <h4>February 25, 2025</h4>
             <p><strong>Power dynamics observation</strong></p>
             <p>Interesting emergence of natural leadership patterns when formal authority removed. Some participants thrive, others retreat. How to support all learning styles while maintaining democratic principles?</p>
           </div>
-          <div class="process-entry" data-date="2024-03-15">
-            <h4>March 15, 2024</h4>
+          <div class="process-entry" data-date="2025-03-15">
+            <h4>March 15, 2025</h4>
             <p><strong>Institutional resistance</strong></p>
             <p>Administration concerned about "unstructured" approach. Need to better communicate pedagogical theory behind methods. Frame as research rather than criticism to reduce defensive responses.</p>
           </div>
@@ -697,7 +697,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 45, noise: 30, occupation: 95 },
       tags: ["reflection", "pedagogy", "research", "notes"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -731,7 +731,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 50, noise: 45, occupation: 85 },
       tags: ["performance", "education", "intervention", "participation"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -765,7 +765,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 40, noise: 30, occupation: 80 },
       tags: ["educational technology", "collaboration", "tools"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -799,7 +799,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 30, noise: 25, occupation: 90 },
       tags: ["downloads", "curriculum", "methodology", "reproduction"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: true,
       downloadUrl: "#",
@@ -838,7 +838,7 @@ window.portfolioData = {
       sizeHint: "medium",
       levelAffinities: { entropy: 80, noise: 80, occupation: 80 },
       tags: ["interface", "controls", "interactive", "system"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -872,7 +872,7 @@ window.portfolioData = {
       sizeHint: "small",
       levelAffinities: { entropy: 60, noise: 70, occupation: 50 },
       tags: ["interactive", "easter eggs", "playful", "archive"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: false
     },
@@ -893,13 +893,13 @@ window.portfolioData = {
           <p><strong>Format:</strong> PDF</p>
           <p><strong>Size:</strong> 15.2 MB</p>
           <p><strong>Pages:</strong> 120</p>
-          <p><strong>Last Updated:</strong> May 2024</p>
+          <p><strong>Last Updated:</strong> May 2025</p>
         </div>
       `,
       sizeHint: "medium",
       levelAffinities: { entropy: 60, noise: 60, occupation: 60 },
       tags: ["thesis", "download", "academic", "documentation"],
-      date: "2024",
+      date: "2025",
       credits: "",
       download: true,
       downloadUrl: "#",
