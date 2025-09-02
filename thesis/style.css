@@ -291,8 +291,8 @@ p {
   border-radius: 8px;
   cursor: pointer;
   font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 400;
+  color: var(--text-muted);
   transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
