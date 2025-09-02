@@ -26,7 +26,6 @@ class BlockBasedGallery {
     this.modal = document.getElementById('modal');
     this.modalTitle = document.getElementById('modal-title');
     this.modalBody = document.getElementById('modal-body');
-    this.loadingOverlay = document.getElementById('loading-overlay');
     this.ambientAudio = document.getElementById('ambient-audio');
     
     this.init();
@@ -39,7 +38,6 @@ class BlockBasedGallery {
     this.renderBlocks();
     this.createLevelControls();
     this.startParticleSystem();
-    this.hideLoading();
     
     // Initialize with first section
     this.showSection(this.currentSection);
@@ -1139,13 +1137,7 @@ class BlockBasedGallery {
     }
   }
 
-  hideLoading() {
-    setTimeout(() => {
-      if (this.loadingOverlay) {
-        this.loadingOverlay.classList.add('hidden');
-      }
-    }, 1500);
-  }
+  
 }
 
 // Initialize when DOM is loaded
