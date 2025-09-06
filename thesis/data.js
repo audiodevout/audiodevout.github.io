@@ -1,4 +1,3 @@
-
 /**
  * Portfolio Data Structure
  * Clean, minimal data for white cube gallery presentation
@@ -58,9 +57,9 @@ function transformPortfolioData() {
           category: "INSTALLATION & RESEARCH",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          images: ["assets/images/39.jpg", "assets/images/72.jpg", "assets/images/73.jpg", "assets/images/6.jpg"],
           urls: {
-            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+            pdf: "assets/documents/symmetrical-fictions-paper.pdf",
           },
         }
       ],
@@ -126,9 +125,9 @@ function transformPortfolioData() {
           category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          images: ["assets/images/39.jpg", "assets/images/72.jpg", "assets/images/73.jpg", "assets/images/6.jpg"],
           urls: {
-            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+            pdf: "assets/documents/symmetrical-fictions-paper.pdf",
           },
         },
         {
@@ -236,7 +235,7 @@ function transformPortfolioData() {
 // Convert projects structure to works format for the existing rendering system
 function createWorksFromProjects(projects) {
   const works = [];
-  
+
   // Combine all project categories into a single works array
   Object.values(projects).forEach(category => {
     if (Array.isArray(category)) {
@@ -269,7 +268,7 @@ function createWorksFromProjects(projects) {
       });
     }
   });
-  
+
   return works;
 }
 
@@ -299,9 +298,9 @@ window.portfolioData = {
         title: "Introduction",
         content: `
           <p>The relationship between digital technology and physical materiality has become increasingly complex in contemporary art practice. This research investigates how artists working at the intersection of technology and materiality create new forms of embodied experience and meaning-making.</p>
-          
+
           <p>Through a practice-based methodology, this thesis examines three key areas of investigation: entropy and system processes, noise and signal disruption, and spatial occupation and pedagogy. Each area represents a different approach to understanding how digital systems can be made tangible and experiential.</p>
-          
+
           <p>The research question driving this investigation is: How can practice-based research in digital art reveal new understandings of materiality, presence, and embodiment in technological systems?</p>
         `
       },
@@ -427,9 +426,9 @@ window.portfolioData = {
   } : {
     bio: `
       <p>Atharva Gupta is an experimental artist and researcher working at the intersection of sound, technology, and space. Their practice explores how computational systems can become vehicles for meditative experience, cultural memory, and speculative futures.</p>
-      
+
       <p>Working at the boundaries between art, technology, and pedagogy, Gupta creates installations and performances that invite audiences to consider the material conditions of digital systems and their impact on human experience.</p>
-      
+
       <p>Their current research focuses on entropy, noise, and spatial occupation as frameworks for understanding the relationship between digital and physical realms in contemporary art practice.</p>
     `,
     education: [
