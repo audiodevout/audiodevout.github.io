@@ -134,6 +134,10 @@ class PortfolioApp {
         this.renderAbout();
         document.getElementById('about').style.display = 'block';
         break;
+      case 'cv':
+        this.renderCV();
+        document.getElementById('cv').style.display = 'block';
+        break;
     }
 
     // Update page title
@@ -159,6 +163,11 @@ class PortfolioApp {
       const workElement = this.createWorkCard(work);
       container.appendChild(workElement);
     });
+
+    // Setup lazy loading for newly created images
+    setTimeout(() => {
+      this.setupLazyLoading();
+    }, 100);
   }
 
   createWorkCard(work) {
@@ -174,10 +183,9 @@ class PortfolioApp {
         <div class="work-media">
           ${primaryImage ? `
             <img 
-              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+PC9zdmc+"
-              data-src="${primaryImage}"
+              src="${primaryImage}"
               alt="${work.title}"
-              class="work-image lazy-load"
+              class="work-image"
               loading="lazy"
             >
           ` : ''}
@@ -369,8 +377,16 @@ class PortfolioApp {
     const social = this.data.contact.social;
 
     container.innerHTML = `
-      <div class="about-text">
-        ${this.formatTextContent(about.description)}
+      <div class="about-profile">
+        <div class="profile-image">
+          <img src="${about.image}" alt="${about.name}" class="about-image">
+        </div>
+        <div class="profile-info">
+          <h2>${about.name}</h2>
+          <div class="about-text">
+            ${this.formatTextContent(about.description)}
+          </div>
+        </div>
       </div>
 
       <div class="about-credentials">
@@ -379,6 +395,15 @@ class PortfolioApp {
           ${about.credentials.map(cred => `<li>${cred}</li>`).join('')}
         </ul>
       </div>
+
+      ${about.currentFocus ? `
+        <div class="about-focus">
+          <h3>Current Research Focus</h3>
+          <ul>
+            ${about.currentFocus.map(focus => `<li>${focus}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
 
       <div class="about-contact">
         <h3>Connect</h3>
@@ -390,6 +415,154 @@ class PortfolioApp {
               ${link.name}
             </a>
           `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  renderCV() {
+    const container = document.querySelector('.cv-content');
+    const cv = this.data.cv;
+
+    container.innerHTML = `
+      <div class="cv-header">
+        <div class="cv-basic-info">
+          <h2>${cv.name}</h2>
+          <p class="cv-tagline">${cv.tagline}</p>
+          <p class="cv-location">${cv.location}</p>
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Education</h3>
+        <div class="cv-items">
+          ${cv.education.map(edu => `
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <h4>${edu.degree}</h4>
+                <span class="cv-period">${edu.period}</span>
+              </div>
+              <div class="cv-item-meta">
+                <strong>${edu.institution}</strong> • ${edu.location}
+              </div>
+              <p class="cv-item-description">${edu.description}</p>
+              ${edu.coursework ? `
+                <div class="cv-coursework">
+                  <strong>Key Coursework:</strong> ${edu.coursework.join(', ')}
+                </div>
+              ` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Experience</h3>
+        <div class="cv-items">
+          ${cv.experience.map(exp => `
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <h4>${exp.title}</h4>
+                <span class="cv-period">${exp.period}</span>
+              </div>
+              <div class="cv-item-meta">
+                <strong>${exp.organization}</strong>
+              </div>
+              <p class="cv-item-description">${exp.description}</p>
+              ${exp.achievements ? `
+                <ul class="cv-achievements">
+                  ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                </ul>
+              ` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Exhibitions & Performances</h3>
+        <div class="cv-items">
+          ${cv.exhibitions.map(exh => `
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <h4>${exh.title}</h4>
+                <span class="cv-period">${exh.date}</span>
+              </div>
+              <div class="cv-item-meta">
+                <strong>${exh.venue}</strong> • ${exh.location} • ${exh.type}
+              </div>
+              <p class="cv-item-description">${exh.description}</p>
+              <div class="cv-role"><strong>Role:</strong> ${exh.role}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Publications</h3>
+        <div class="cv-items">
+          ${cv.publications.map(pub => `
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <h4>${pub.title}</h4>
+                <span class="cv-period">${pub.date}</span>
+              </div>
+              <div class="cv-item-meta">
+                <strong>${pub.venue}</strong> • ${pub.type}
+              </div>
+              <p class="cv-item-description">${pub.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="cv-skills-section">
+        <h3>Skills & Expertise</h3>
+        <div class="cv-skills-grid">
+          ${Object.entries(cv.skills).map(([category, skills]) => `
+            <div class="cv-skill-category">
+              <h4>${category}</h4>
+              <ul class="cv-skill-list">
+                ${skills.map(skill => `<li>${skill}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      ${cv.awards && cv.awards.length > 0 ? `
+        <div class="cv-section">
+          <h3>Awards & Recognition</h3>
+          <div class="cv-items">
+            ${cv.awards.map(award => `
+              <div class="cv-item">
+                <div class="cv-item-header">
+                  <h4>${award.title}</h4>
+                  <span class="cv-period">${award.year}</span>
+                </div>
+                <div class="cv-item-meta">
+                  <strong>${award.organization}</strong>
+                </div>
+                <p class="cv-item-description">${award.description}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="cv-section">
+        <h3>Languages</h3>
+        <div class="cv-languages">
+          ${cv.languages.map(lang => `
+            <span class="cv-language">${lang.language} (${lang.proficiency})</span>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Research Interests</h3>
+        <div class="cv-interests">
+          ${cv.interests.map(interest => `<span class="cv-interest">${interest}</span>`).join('')}
         </div>
       </div>
     `;
@@ -440,11 +613,23 @@ class PortfolioApp {
           }
         }
       });
+    }, {
+      rootMargin: '50px'
     });
 
     document.querySelectorAll('.lazy-load').forEach(img => {
       if (!this.observedImages.has(img)) {
         imageObserver.observe(img);
+        // Also immediately load if image is already in viewport
+        const rect = img.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy-load');
+            this.observedImages.add(img);
+            imageObserver.unobserve(img);
+          }
+        }
       }
     });
   }
