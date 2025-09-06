@@ -3,139 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATHARVA GUPTA - Thesis</title>
-    <meta name="description" content="Interactive digital portfolio and thesis gallery by Atharva Gupta featuring kinetic sculptures, sound experiments, and performance documentation.">
+    <title>Atharva Gupta</title>
+    <meta name="description" content="Portfolio of Atharva Gupta - New media artist, sculptor, and sound designer">
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    <link rel="preload" href="data.js" as="script">
-    
-    <!-- External fonts -->
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- Loading overlay -->
-    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p>Loading digital gallery...</p>
-        </div>
-    </div>
-
-    <!-- Particle canvas for kinetic effects -->
-    <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
-
-    <!-- Header with navigation and toggles -->
-    <header class="header" role="banner">
-        <div class="header-content">
-            <h1 class="brand-title">
-                <!-- <span class="brand-name">ATHARVA GUPTA</span> -->
-                <span class="brand-subtitle">thesis of a widely curious generalist</span>
-            </h1>
-            
-            <nav class="main-nav" role="navigation" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><button class="nav-btn active" data-section="entropy" aria-label="View Entropy section">Entropy</button></li>
-                    <li><button class="nav-btn" data-section="noise" aria-label="View Noise section">Noise</button></li>
-                    <li><button class="nav-btn" data-section="occupation" aria-label="View Occupation section">Occupation</button></li>
-                    <li><button class="nav-btn" data-section="extras" aria-label="View Extras section">Extras</button></li>
-                </ul>
-            </nav>
-
-            <div class="controls" role="group" aria-label="Display controls">
-                <button id="kinetic-toggle" class="control-btn active" aria-label="Toggle kinetic effects" title="Toggle kinetic effects">
-                    <i data-feather="zap"></i>
-                </button>
-                <button id="glitch-toggle" class="control-btn" aria-label="Toggle glitch effects" title="Toggle glitch effects">
-                    <i data-feather="radio"></i>
-                </button>
-            </div>
-        </div>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="site-title">Atharva Gupta</h1>
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <button class="nav-button active" data-section="works" aria-label="View works">Works</button>
+            <button class="nav-button" data-section="thesis" aria-label="View thesis">Thesis</button>
+            <button class="nav-button" data-section="about" aria-label="View about">About</button>
+        </nav>
     </header>
 
     <!-- Main content -->
-    <main id="main-content" class="main-content" role="main">
-        <div class="container">
-            <!-- Breadcrumb navigation -->
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <span class="breadcrumb-current" id="current-section">Entropy</span>
-            </nav>
+    <main id="main" class="main">
+        <!-- Works section -->
+        <section id="works" class="section active" aria-labelledby="works-title">
+            <div class="container">
+                <h2 id="works-title" class="section-title">Works</h2>
+                <div class="grid" id="works-grid">
+                    <!-- Works will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
 
-            <!-- Section content containers -->
-            <section id="entropy" class="content-section active" aria-labelledby="entropy-title">
-                <header class="section-header">
-                    <h2 id="entropy-title" class="section-title">Entropy</h2>
-                    <p class="section-description">Kinetic sculptures, system processes, and ambient recordings exploring chaos and order.</p>
-                </header>
-                <div class="blocks-container" id="entropy-blocks" role="grid" aria-label="Entropy projects gallery"></div>
-            </section>
+        <!-- Thesis section -->
+        <section id="thesis" class="section" aria-labelledby="thesis-title">
+            <div class="container">
+                <h2 id="thesis-title" class="section-title">Thesis</h2>
+                <div class="thesis-content" id="thesis-content">
+                    <!-- Thesis content will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
 
-            <section id="noise" class="content-section" aria-labelledby="noise-title">
-                <header class="section-header">
-                    <h2 id="noise-title" class="section-title">Noise</h2>
-                    <p class="section-description">Sound experiments, glitch audio, and noise theory reflections.</p>
-                </header>
-                <div class="blocks-container" id="noise-blocks" role="grid" aria-label="Noise projects gallery"></div>
-            </section>
-
-            <section id="occupation" class="content-section" aria-labelledby="occupation-title">
-                <header class="section-header">
-                    <h2 id="occupation-title" class="section-title">Occupation</h2>
-                    <p class="section-description">Performance documentation, educational works, and pedagogy reflections.</p>
-                </header>
-                <div class="blocks-container" id="occupation-blocks" role="grid" aria-label="Occupation projects gallery"></div>
-            </section>
-
-            <section id="extras" class="content-section" aria-labelledby="extras-title">
-                <header class="section-header">
-                    <h2 id="extras-title" class="section-title">Extras</h2>
-                    <p class="section-description">Bibliography, archives, downloadable thesis, and hidden nodes.</p>
-                </header>
-                <div class="blocks-container" id="extras-blocks" role="grid" aria-label="Extras projects gallery"></div>
-            </section>
-        </div>
+        <!-- About section -->
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <h2 id="about-title" class="section-title">About</h2>
+                <div class="about-content" id="about-content">
+                    <!-- About content will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
     </main>
 
-    
-
     <!-- Modal for expanded content -->
-    <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-backdrop" aria-hidden="true"></div>
-        <div class="modal-content" role="document">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
             <header class="modal-header">
-                <h3 id="modal-title" class="modal-title"></h3>
-                <button id="modal-close" class="modal-close-btn" aria-label="Close modal">
-                    <i data-feather="x"></i>
-                </button>
+                <button class="modal-close" aria-label="Close modal">×</button>
             </header>
             <div class="modal-body" id="modal-body">
-                <!-- Dynamic content will be inserted here -->
+                <!-- Dynamic content -->
             </div>
         </div>
     </div>
-
-    
 
     <!-- Scripts -->
     <script src="data.js"></script>
     <script src="script.js"></script>
-    
-    <!-- Initialize Feather icons -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            feather.replace();
-        });
-    </script>
 </body>
 </html>
