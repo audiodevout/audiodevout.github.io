@@ -3,76 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atharva Gupta</title>
-    <meta name="description" content="Portfolio of Atharva Gupta - New media artist, sculptor, and sound designer">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="Thesis Portfolio - Sound installations, digital works, and research">
+    <title>Thesis Portfolio</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Main stylesheet -->
+    <!-- Styles -->
     <link rel="stylesheet" href="main.css">
+    
 </head>
 <body>
-    <!-- Skip navigation for accessibility -->
-    <a href="#main" class="skip-link">Skip to main content</a>
-
-    <!-- Header -->
-    <header class="header">
-        <h1 class="site-title">Atharva Gupta</h1>
-        <nav class="nav" role="navigation" aria-label="Main navigation">
-            <button class="nav-button active" data-section="works" aria-label="View works">Works</button>
-            <button class="nav-button" data-section="thesis" aria-label="View thesis">Thesis</button>
-            <button class="nav-button" data-section="about" aria-label="View about">About</button>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header with minimal navigation -->
+    <header class="site-header" role="banner">
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+                <span class="nav-toggle-text">Index</span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menu">
+                <li role="menuitem"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li role="menuitem"><a href="#thesis" class="nav-link">Thesis</a></li>
+                <li role="menuitem"><a href="#about" class="nav-link">About</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- Main content -->
-    <main id="main" class="main">
-        <!-- Works section -->
-        <section id="works" class="section active" aria-labelledby="works-title">
-            <div class="container">
-                <h2 id="works-title" class="section-title">Works</h2>
-                <div class="grid" id="works-grid">
-                    <!-- Works will be populated by JavaScript -->
-                </div>
+    <!-- Main content area -->
+    <main id="main-content" class="main-content" role="main">
+        <!-- Loading indicator -->
+        <div class="loading" aria-live="polite" aria-label="Loading content">
+            <span class="loading-text">Loading...</span>
+        </div>
+
+        <!-- Portfolio section -->
+        <section id="portfolio" class="portfolio-section" aria-labelledby="portfolio-heading">
+            <h1 id="portfolio-heading" class="section-heading">Portfolio</h1>
+            <div class="works-grid" role="region" aria-label="Portfolio works">
+                <!-- Dynamic content will be rendered here -->
             </div>
+        </section>
+
+        <!-- Individual work view -->
+        <section id="work-detail" class="work-detail" aria-labelledby="work-title" style="display: none;">
+            <button class="back-button" aria-label="Back to portfolio">←</button>
+            <article class="work-content">
+                <!-- Individual work content will be rendered here -->
+            </article>
         </section>
 
         <!-- Thesis section -->
-        <section id="thesis" class="section" aria-labelledby="thesis-title">
-            <div class="container">
-                <h2 id="thesis-title" class="section-title">Thesis</h2>
-                <div class="thesis-content" id="thesis-content">
-                    <!-- Thesis content will be populated by JavaScript -->
-                </div>
-            </div>
+        <section id="thesis" class="thesis-section" aria-labelledby="thesis-heading" style="display: none;">
+            <h1 id="thesis-heading" class="section-heading">Thesis</h1>
+            <article class="thesis-content">
+                <!-- Thesis content will be rendered here -->
+            </article>
         </section>
 
         <!-- About section -->
-        <section id="about" class="section" aria-labelledby="about-title">
-            <div class="container">
-                <h2 id="about-title" class="section-title">About</h2>
-                <div class="about-content" id="about-content">
-                    <!-- About content will be populated by JavaScript -->
-                </div>
+        <section id="about" class="about-section" aria-labelledby="about-heading" style="display: none;">
+            <h1 id="about-heading" class="section-heading">About</h1>
+            <div class="about-content">
+                <!-- About content will be rendered here -->
             </div>
         </section>
     </main>
 
-    <!-- Modal for expanded content -->
-    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
-            <header class="modal-header">
-                <button class="modal-close" aria-label="Close modal">×</button>
-            </header>
-            <div class="modal-body" id="modal-body">
-                <!-- Dynamic content -->
+    <!-- Custom audio player (hidden by default) -->
+    <div class="audio-player" role="region" aria-label="Audio player" style="display: none;">
+        <audio class="audio-element" preload="none" aria-label="Audio track">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="audio-controls">
+            <button class="play-pause-btn" aria-label="Play/Pause">▶</button>
+            <div class="progress-container">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress-fill"></div>
+                </div>
             </div>
+            <span class="time-display" aria-live="polite">0:00 / 0:00</span>
+            <button class="close-player" aria-label="Close audio player">×</button>
         </div>
     </div>
 
