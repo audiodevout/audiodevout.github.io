@@ -1,6 +1,6 @@
 /**
  * script.js - Dynamic content rendering and navigation
- * Handles portfolio navigation, content rendering, and media playback
+ * Pure vanilla JavaScript with lazy loading, accessibility, and Bandcamp integration
  */
 
 class PortfolioApp {
@@ -9,7 +9,7 @@ class PortfolioApp {
     this.currentView = 'portfolio';
     this.currentWork = null;
     this.audioPlayer = null;
-    this.observedImages = new Set();
+    this.intersectionObserver = null;
     
     this.init();
   }
@@ -21,16 +21,18 @@ class PortfolioApp {
       
       // Initialize components
       this.setupNavigation();
-      this.setupAudioPlayer();
-      this.setupLazyLoading();
+      this.setupIntersectionObserver();
       this.setupKeyboardNavigation();
+      this.setupAccessibility();
+      
+      // Handle initial URL
+      this.handleInitialRoute();
       
       // Render initial view
       this.renderPortfolio();
       this.showPortfolio();
       this.hideLoading();
       
-      console.log('Portfolio app initialized successfully');
     } catch (error) {
       console.error('Failed to initialize portfolio app:', error);
       this.showError('Failed to load portfolio. Please refresh the page.');
@@ -72,6 +74,14 @@ class PortfolioApp {
       navMenu.classList.toggle('nav-menu--open');
     });
 
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('nav-menu--open');
+      }
+    });
+
     // Navigation links
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -96,18 +106,114 @@ class PortfolioApp {
     window.addEventListener('popstate', (e) => {
       if (e.state) {
         this.navigateTo(e.state.view, e.state.work, false);
+      } else {
+        this.handleInitialRoute();
       }
     });
   }
 
+  setupIntersectionObserver() {
+    // Lazy loading for images
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy-loading');
+              img.classList.add('lazy-loaded');
+              img.removeAttribute('data-src');
+              this.intersectionObserver.unobserve(img);
+            }
+          }
+        });
+      },
+      { 
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      }
+    );
+  }
+
+  setupKeyboardNavigation() {
+    // Enhanced keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      // Escape key closes menu or goes back
+      if (e.key === 'Escape') {
+        const navMenu = document.querySelector('.nav-menu');
+        const navToggle = document.querySelector('.nav-toggle');
+        
+        if (navMenu.classList.contains('nav-menu--open')) {
+          navToggle.setAttribute('aria-expanded', 'false');
+          navMenu.classList.remove('nav-menu--open');
+          navToggle.focus();
+        } else if (this.currentView === 'work-detail') {
+          this.navigateTo('portfolio');
+        }
+      }
+      
+      // Arrow keys for menu navigation
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu.classList.contains('nav-menu--open')) {
+          e.preventDefault();
+          const links = navMenu.querySelectorAll('.nav-link');
+          const currentIndex = Array.from(links).findIndex(link => link === document.activeElement);
+          
+          let nextIndex;
+          if (e.key === 'ArrowDown') {
+            nextIndex = currentIndex < links.length - 1 ? currentIndex + 1 : 0;
+          } else {
+            nextIndex = currentIndex > 0 ? currentIndex - 1 : links.length - 1;
+          }
+          
+          links[nextIndex].focus();
+        }
+      }
+    });
+  }
+
+  setupAccessibility() {
+    // Announce page changes to screen readers
+    this.announcer = document.createElement('div');
+    this.announcer.setAttribute('aria-live', 'polite');
+    this.announcer.setAttribute('aria-atomic', 'true');
+    this.announcer.className = 'sr-only';
+    document.body.appendChild(this.announcer);
+  }
+
+  announcePageChange(message) {
+    this.announcer.textContent = message;
+  }
+
+  handleInitialRoute() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const parts = hash.split('/');
+      if (parts.length === 2 && parts[0] === 'work') {
+        this.navigateTo('portfolio', parts[1], false);
+      } else {
+        this.navigateTo(parts[0] || 'portfolio', null, false);
+      }
+    } else {
+      this.navigateTo('portfolio', null, false);
+    }
+  }
+
   navigateTo(view, work = null, pushState = true) {
-    this.currentView = view;
+    this.currentView = view === 'work-detail' || work ? 'work-detail' : view;
     this.currentWork = work;
 
     // Update URL
     if (pushState) {
-      const url = work ? `#${view}/${work}` : `#${view}`;
-      history.pushState({ view, work }, '', url);
+      const url = work ? `#work/${work}` : `#${view}`;
+      const title = work 
+        ? `${this.getWorkTitle(work)} - Atharva Gupta Portfolio`
+        : `${view.charAt(0).toUpperCase() + view.slice(1)} - Atharva Gupta Portfolio`;
+      
+      history.pushState({ view, work }, title, url);
+      document.title = title;
     }
 
     // Hide all sections
@@ -121,10 +227,16 @@ class PortfolioApp {
         if (work) {
           this.renderWorkDetail(work);
           document.getElementById('work-detail').style.display = 'block';
+          this.announcePageChange(`Viewing work: ${this.getWorkTitle(work)}`);
         } else {
           this.renderPortfolio();
           document.getElementById('portfolio').style.display = 'block';
         }
+        break;
+      case 'work-detail':
+        this.renderWorkDetail(work);
+        document.getElementById('work-detail').style.display = 'block';
+        this.announcePageChange(`Viewing work: ${this.getWorkTitle(work)}`);
         break;
       case 'thesis':
         this.renderThesis();
@@ -140,68 +252,90 @@ class PortfolioApp {
         break;
     }
 
-    // Update page title
-    document.title = work 
-      ? `${this.getWorkTitle(work)} - Thesis Portfolio`
-      : `${view.charAt(0).toUpperCase() + view.slice(1)} - Thesis Portfolio`;
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   renderPortfolio() {
     const container = document.querySelector('.works-grid');
     container.innerHTML = '';
 
-    // Combine all project types
-    const allWorks = [
-      ...this.data.projects.soundInstallations || [],
-      ...this.data.projects.performance || [],
-      ...this.data.projects.installations || [],
-      ...this.data.projects.drawings || [],
-      ...this.data.projects.writing || []
+    // Create category sections
+    const categories = [
+      { key: 'soundInstallations', title: 'Sound Installations', works: this.data.projects.soundInstallations || [] },
+      { key: 'performance', title: 'Performance', works: this.data.projects.performance || [] },
+      { key: 'installations', title: 'Installations', works: this.data.projects.installations || [] },
+      { key: 'drawings', title: 'Drawings & Visual Work', works: this.data.projects.drawings || [] },
+      { key: 'writing', title: 'Writing & Documentation', works: this.data.projects.writing || [] }
     ];
 
-    allWorks.forEach(work => {
-      const workElement = this.createWorkCard(work);
-      container.appendChild(workElement);
+    categories.forEach(category => {
+      if (category.works.length > 0) {
+        // Create category header
+        const categoryHeader = document.createElement('div');
+        categoryHeader.className = 'category-header';
+        categoryHeader.innerHTML = `
+          <h2 class="category-title" data-testid="category-${category.key}">${category.title}</h2>
+          <div class="category-count">${category.works.length} ${category.works.length === 1 ? 'work' : 'works'}</div>
+        `;
+        container.appendChild(categoryHeader);
+
+        // Create category grid
+        const categoryGrid = document.createElement('div');
+        categoryGrid.className = 'category-grid';
+        categoryGrid.setAttribute('data-category', category.key);
+        
+        category.works.forEach(work => {
+          const workElement = this.createWorkCard(work);
+          categoryGrid.appendChild(workElement);
+        });
+        
+        container.appendChild(categoryGrid);
+      }
     });
 
     // Setup lazy loading for newly created images
-    setTimeout(() => {
-      this.setupLazyLoading();
-    }, 100);
+    this.setupLazyImages();
   }
 
   createWorkCard(work) {
     const card = document.createElement('article');
     card.className = 'work-card';
     card.setAttribute('data-color', work.color || 'default');
+    card.setAttribute('data-testid', `work-card-${work.id}`);
     
     const hasMedia = work.images?.length > 0 || work.videos?.length > 0;
     const primaryImage = work.images?.[0];
+    const coverArt = work.bandcampTracks?.[0]?.coverArt;
+    const displayImage = primaryImage || coverArt;
     
     card.innerHTML = `
-      ${hasMedia ? `
-        <div class="work-media">
-          ${primaryImage ? `
+      ${hasMedia || coverArt ? `
+        <div class="work-media" data-testid="work-media-${work.id}">
+          ${displayImage ? `
             <img 
-              src="${primaryImage}"
+              data-src="${displayImage}"
               alt="${work.title}"
-              class="work-image"
+              class="work-image lazy-loading"
               loading="lazy"
+              data-testid="work-image-${work.id}"
             >
           ` : ''}
         </div>
       ` : ''}
       
       <div class="work-info">
-        <h3 class="work-title">${work.title}</h3>
-        <p class="work-category">${work.category || work.medium}</p>
-        <p class="work-description">${work.description}</p>
+        <h3 class="work-title" data-testid="work-title-${work.id}">${work.title}</h3>
+        <p class="work-category" data-testid="work-category-${work.id}">${work.category || work.medium}</p>
+        <p class="work-description" data-testid="work-description-${work.id}">${work.description}</p>
         
         ${work.bandcampTracks?.length > 0 ? `
-          <div class="work-actions">
-            <button class="play-bandcamp-btn" data-url="${work.bandcampTracks[0].url}" aria-label="Listen on Bandcamp">
-              ▶ Listen
-            </button>
+          <div class="work-actions" data-testid="work-actions-${work.id}">
+            ${work.bandcampTracks.map((track, index) => `
+              <button class="play-bandcamp-btn" data-url="${track.url}" data-embed-id="${track.trackId}" data-testid="play-btn-${track.trackId || index}" aria-label="Listen to ${track.title}">
+                ▶ ${track.title}
+              </button>
+            `).join('')}
           </div>
         ` : ''}
       </div>
@@ -215,14 +349,14 @@ class PortfolioApp {
       }
     });
 
-    // Handle Bandcamp links
-    const bandcampBtn = card.querySelector('.play-bandcamp-btn');
-    if (bandcampBtn) {
-      bandcampBtn.addEventListener('click', (e) => {
+    // Handle Bandcamp buttons
+    const bandcampBtns = card.querySelectorAll('.play-bandcamp-btn');
+    bandcampBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        window.open(bandcampBtn.dataset.url, '_blank');
+        window.open(btn.dataset.url, '_blank', 'noopener,noreferrer');
       });
-    }
+    });
 
     return card;
   }
@@ -241,23 +375,23 @@ class PortfolioApp {
 
     container.innerHTML = `
       <header class="work-header">
-        <h1 id="work-title" class="work-detail-title">${work.title}</h1>
-        <div class="work-meta">
+        <h1 id="work-title" class="work-detail-title" data-testid="work-detail-title">${work.title}</h1>
+        <div class="work-meta" data-testid="work-meta">
           <span class="work-category">${work.category || work.medium}</span>
           ${work.dimensions ? `<span class="work-dimensions">${work.dimensions}</span>` : ''}
         </div>
       </header>
 
       ${hasImages ? `
-        <div class="work-gallery" role="region" aria-label="Work images">
+        <div class="work-gallery" role="region" aria-label="Work images" data-testid="work-gallery">
           ${work.images.map((image, index) => `
             <figure class="gallery-item">
               <img 
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+PC9zdmc+"
                 data-src="${image}"
                 alt="${work.title} - Image ${index + 1}"
-                class="gallery-image lazy-load"
+                class="gallery-image lazy-loading"
                 loading="lazy"
+                data-testid="gallery-image-${index}"
               >
             </figure>
           `).join('')}
@@ -265,8 +399,8 @@ class PortfolioApp {
       ` : ''}
 
       ${hasVideos ? `
-        <div class="work-videos" role="region" aria-label="Work videos">
-          ${work.videos.map(video => `
+        <div class="work-videos" role="region" aria-label="Work videos" data-testid="work-videos">
+          ${work.videos.map((video, index) => `
             <div class="video-container">
               ${video.includes('youtube.com') || video.includes('youtu.be') ? `
                 <iframe 
@@ -274,9 +408,10 @@ class PortfolioApp {
                   frameborder="0"
                   allowfullscreen
                   aria-label="Video: ${work.title}"
+                  data-testid="video-${index}"
                 ></iframe>
               ` : `
-                <video controls preload="metadata" aria-label="Video: ${work.title}">
+                <video controls preload="metadata" aria-label="Video: ${work.title}" data-testid="video-${index}">
                   <source src="${video}" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -286,27 +421,27 @@ class PortfolioApp {
         </div>
       ` : ''}
 
-      <div class="work-text">
+      <div class="work-text" data-testid="work-text">
         <div class="work-description-full">
           ${this.formatTextContent(work.fullDescription || work.description)}
         </div>
 
         ${work.themes ? `
-          <div class="work-themes">
+          <div class="work-themes" data-testid="work-themes">
             <h3>Themes</h3>
             <p>${work.themes}</p>
           </div>
         ` : ''}
 
         ${work.technical ? `
-          <div class="work-technical">
+          <div class="work-technical" data-testid="work-technical">
             <h3>Technical</h3>
             <p>${work.technical}</p>
           </div>
         ` : ''}
 
         ${work.technology ? `
-          <div class="work-technology">
+          <div class="work-technology" data-testid="work-technology">
             <h3>Technology</h3>
             <p>${work.technology}</p>
           </div>
@@ -314,23 +449,36 @@ class PortfolioApp {
       </div>
 
       ${hasBandcamp ? `
-        <div class="work-audio">
+        <div class="work-audio" data-testid="work-audio">
           <h3>Audio</h3>
           <div class="bandcamp-tracks">
-            ${work.bandcampTracks.map(track => `
-              <a href="${track.url}" target="_blank" class="bandcamp-link">
-                ▶ ${track.title} (Bandcamp)
-              </a>
+            ${work.bandcampTracks.map((track, index) => `
+              <div class="bandcamp-embed" data-testid="bandcamp-embed-${track.trackId || index}">
+                <iframe
+                  style="border: 0; width: 100%; height: 120px;"
+                  src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=small/transparent=true/"
+                  seamless
+                  title="${track.title} by Asymmetrica"
+                  data-testid="bandcamp-iframe-${track.trackId || index}"
+                >
+                  <a href="${track.url}" target="_blank" rel="noopener noreferrer">
+                    ${track.title} by Asymmetrica
+                  </a>
+                </iframe>
+                <a href="${track.url}" target="_blank" rel="noopener noreferrer" class="bandcamp-link" data-testid="bandcamp-link-${track.trackId || index}">
+                  ▶ ${track.title} (Bandcamp)
+                </a>
+              </div>
             `).join('')}
           </div>
         </div>
       ` : ''}
 
       ${work.urls ? `
-        <div class="work-links">
+        <div class="work-links" data-testid="work-links">
           <h3>Links</h3>
           ${Object.entries(work.urls).map(([type, url]) => `
-            <a href="${url}" target="_blank" class="external-link">
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="external-link" data-testid="external-link-${type}">
               ${type.toUpperCase()}
             </a>
           `).join('')}
@@ -339,30 +487,34 @@ class PortfolioApp {
     `;
 
     // Setup lazy loading for new images
-    this.setupLazyLoading();
+    this.setupLazyImages();
   }
 
   renderThesis() {
     const container = document.querySelector('.thesis-content');
-    const thesis = this.data.thesis;
+    const thesis = this.data.thesis || {
+      title: "Research in Progress",
+      abstract: "Thesis content will be updated as research develops.",
+      sections: []
+    };
 
     container.innerHTML = `
       <header class="thesis-header">
-        <h1>${thesis.title}</h1>
+        <h1 data-testid="thesis-subtitle">${thesis.title}</h1>
       </header>
 
       <section class="thesis-abstract">
-        <h2>Abstract</h2>
-        <div class="thesis-text">
+        <h2 data-testid="abstract-heading">Abstract</h2>
+        <div class="thesis-text" data-testid="thesis-abstract-content">
           ${this.formatTextContent(thesis.abstract)}
         </div>
       </section>
 
-      <div class="thesis-sections">
-        ${thesis.sections.map(section => `
+      <div class="thesis-sections" data-testid="thesis-sections">
+        ${thesis.sections.map((section, index) => `
           <section class="thesis-section">
-            <h2>${section.title}</h2>
-            <div class="thesis-text">
+            <h2 data-testid="section-heading-${index}">${section.title}</h2>
+            <div class="thesis-text" data-testid="section-content-${index}">
               ${this.formatTextContent(section.content)}
             </div>
           </section>
@@ -377,41 +529,39 @@ class PortfolioApp {
     const social = this.data.contact.social;
 
     container.innerHTML = `
-      <div class="about-profile">
+      <div class="about-profile" data-testid="about-profile">
         <div class="profile-image">
-          <img src="${about.image}" alt="${about.name}" class="about-image">
+          <img src="${about.image}" alt="Atharva Gupta" class="about-image" data-testid="about-image">
         </div>
         <div class="profile-info">
-          <h2>${about.name}</h2>
-          <div class="about-text">
+          <h2 data-testid="about-name">Atharva Gupta</h2>
+          <div class="about-text" data-testid="about-description">
             ${this.formatTextContent(about.description)}
           </div>
         </div>
       </div>
 
-      <div class="about-credentials">
+      <div class="about-credentials" data-testid="about-credentials">
         <h3>Practice Areas</h3>
         <ul>
-          ${about.credentials.map(cred => `<li>${cred}</li>`).join('')}
+          ${about.credentials.map((cred, index) => `<li data-testid="credential-${index}">${cred}</li>`).join('')}
         </ul>
       </div>
 
-      ${about.currentFocus ? `
-        <div class="about-focus">
-          <h3>Current Research Focus</h3>
-          <ul>
-            ${about.currentFocus.map(focus => `<li>${focus}</li>`).join('')}
-          </ul>
-        </div>
-      ` : ''}
-
-      <div class="about-contact">
+      <div class="about-contact" data-testid="about-contact">
         <h3>Connect</h3>
-        <p>${this.data.contact.description}</p>
+        <p data-testid="contact-description">${this.data.contact.description}</p>
         
-        <div class="social-links">
-          ${social.map(link => `
-            <a href="${link.url}" target="_blank" class="social-link" data-color="${link.color}">
+        <div class="social-links" data-testid="social-links">
+          ${social.map((link, index) => `
+            <a 
+              href="${link.url}" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="social-link" 
+              data-color="${link.color || 'default'}"
+              data-testid="social-link-${link.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}"
+            >
               ${link.name}
             </a>
           `).join('')}
@@ -425,53 +575,40 @@ class PortfolioApp {
     const cv = this.data.cv;
 
     container.innerHTML = `
-      <div class="cv-header">
+      <div class="cv-header" data-testid="cv-header">
         <div class="cv-basic-info">
-          <h2>${cv.name}</h2>
-          <p class="cv-tagline">${cv.tagline}</p>
-          <p class="cv-location">${cv.location}</p>
+          <h2 data-testid="cv-name">${cv.name}</h2>
+          <p class="cv-tagline" data-testid="cv-tagline">${cv.tagline}</p>
+          <div class="cv-contact" data-testid="cv-contact">
+            <p>${cv.email}</p>
+            <p>${cv.phone}</p>
+            <p>${cv.location}</p>
+          </div>
         </div>
       </div>
 
-      <div class="cv-section">
-        <h3>Education</h3>
+      <div class="cv-section-block" data-testid="cv-experience">
+        <h3 class="cv-section-title">Work Experience</h3>
         <div class="cv-items">
-          ${cv.education.map(edu => `
-            <div class="cv-item">
+          ${cv.experience.map((exp, index) => `
+            <div class="cv-item" data-testid="cv-experience-${index}">
               <div class="cv-item-header">
-                <h4>${edu.degree}</h4>
-                <span class="cv-period">${edu.period}</span>
+                <h4 class="cv-item-title" data-testid="cv-exp-title-${index}">${exp.title}</h4>
+                <span class="cv-item-period" data-testid="cv-exp-period-${index}">${exp.period}</span>
               </div>
-              <div class="cv-item-meta">
-                <strong>${edu.institution}</strong> • ${edu.location}
-              </div>
-              <p class="cv-item-description">${edu.description}</p>
-              ${edu.coursework ? `
-                <div class="cv-coursework">
-                  <strong>Key Coursework:</strong> ${edu.coursework.join(', ')}
-                </div>
-              ` : ''}
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="cv-section">
-        <h3>Experience</h3>
-        <div class="cv-items">
-          ${cv.experience.map(exp => `
-            <div class="cv-item">
-              <div class="cv-item-header">
-                <h4>${exp.title}</h4>
-                <span class="cv-period">${exp.period}</span>
-              </div>
-              <div class="cv-item-meta">
-                <strong>${exp.organization}</strong>
-              </div>
-              <p class="cv-item-description">${exp.description}</p>
+              <p class="cv-item-org" data-testid="cv-exp-org-${index}">
+                ${exp.organization} • ${exp.location}
+              </p>
+              <p class="cv-item-desc" data-testid="cv-exp-desc-${index}">
+                ${exp.description}
+              </p>
               ${exp.achievements ? `
-                <ul class="cv-achievements">
-                  ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                <ul class="cv-achievements" data-testid="cv-exp-achievements-${index}">
+                  ${exp.achievements.map((achievement, achIndex) => `
+                    <li data-testid="cv-exp-achievement-${index}-${achIndex}">
+                      ${achievement}
+                    </li>
+                  `).join('')}
                 </ul>
               ` : ''}
             </div>
@@ -479,96 +616,82 @@ class PortfolioApp {
         </div>
       </div>
 
-      <div class="cv-section">
-        <h3>Exhibitions & Performances</h3>
+      <div class="cv-section-block" data-testid="cv-education">
+        <h3 class="cv-section-title">Education</h3>
         <div class="cv-items">
-          ${cv.exhibitions.map(exh => `
-            <div class="cv-item">
+          ${cv.education.map((edu, index) => `
+            <div class="cv-item" data-testid="cv-education-${index}">
               <div class="cv-item-header">
-                <h4>${exh.title}</h4>
-                <span class="cv-period">${exh.date}</span>
+                <h4 class="cv-item-title" data-testid="cv-edu-degree-${index}">${edu.degree}</h4>
+                <span class="cv-item-period" data-testid="cv-edu-period-${index}">${edu.period}</span>
               </div>
-              <div class="cv-item-meta">
-                <strong>${exh.venue}</strong> • ${exh.location} • ${exh.type}
-              </div>
-              <p class="cv-item-description">${exh.description}</p>
-              <div class="cv-role"><strong>Role:</strong> ${exh.role}</div>
+              <p class="cv-item-desc" data-testid="cv-edu-desc-${index}">${edu.description}</p>
+              <p class="cv-item-org" data-testid="cv-edu-inst-${index}">
+                ${edu.institution} • ${edu.location}
+              </p>
             </div>
           `).join('')}
         </div>
       </div>
 
-      <div class="cv-section">
-        <h3>Publications</h3>
-        <div class="cv-items">
-          ${cv.publications.map(pub => `
-            <div class="cv-item">
-              <div class="cv-item-header">
-                <h4>${pub.title}</h4>
-                <span class="cv-period">${pub.date}</span>
-              </div>
-              <div class="cv-item-meta">
-                <strong>${pub.venue}</strong> • ${pub.type}
-              </div>
-              <p class="cv-item-description">${pub.description}</p>
+      <div class="cv-section-block" data-testid="cv-skills">
+        <h3 class="cv-section-title">Skills & Technologies</h3>
+        <div class="cv-skills">
+          ${Object.entries(cv.skills).map(([category, skills], index) => `
+            <div class="cv-skill-category" data-testid="cv-skill-category-${index}">
+              <h4 data-testid="cv-skill-category-title-${index}">${category}</h4>
+              <p class="cv-skill-list" data-testid="cv-skill-category-content-${index}">
+                ${skills.join(', ')}
+              </p>
             </div>
           `).join('')}
         </div>
       </div>
 
-      <div class="cv-skills-section">
-        <h3>Skills & Expertise</h3>
-        <div class="cv-skills-grid">
-          ${Object.entries(cv.skills).map(([category, skills]) => `
-            <div class="cv-skill-category">
-              <h4>${category}</h4>
-              <ul class="cv-skill-list">
-                ${skills.map(skill => `<li>${skill}</li>`).join('')}
-              </ul>
-            </div>
+      <div class="cv-section-block cv-languages" data-testid="cv-languages">
+        <h3 class="cv-section-title">Languages</h3>
+        <p>
+          ${cv.languages.map((lang, index) => `
+            <span data-testid="cv-language-${index}">
+              ${lang.language} (${lang.proficiency})${index < cv.languages.length - 1 ? ', ' : ''}
+            </span>
           `).join('')}
-        </div>
+        </p>
       </div>
 
-      ${cv.awards && cv.awards.length > 0 ? `
-        <div class="cv-section">
-          <h3>Awards & Recognition</h3>
-          <div class="cv-items">
-            ${cv.awards.map(award => `
-              <div class="cv-item">
-                <div class="cv-item-header">
-                  <h4>${award.title}</h4>
-                  <span class="cv-period">${award.year}</span>
-                </div>
-                <div class="cv-item-meta">
-                  <strong>${award.organization}</strong>
-                </div>
-                <p class="cv-item-description">${award.description}</p>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      ` : ''}
-
-      <div class="cv-section">
-        <h3>Languages</h3>
-        <div class="cv-languages">
-          ${cv.languages.map(lang => `
-            <span class="cv-language">${lang.language} (${lang.proficiency})</span>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="cv-section">
-        <h3>Research Interests</h3>
-        <div class="cv-interests">
-          ${cv.interests.map(interest => `<span class="cv-interest">${interest}</span>`).join('')}
-        </div>
+      <div class="cv-section-block cv-interests" data-testid="cv-interests">
+        <h3 class="cv-section-title">Interests</h3>
+        <p>${cv.interests.join(', ')}</p>
       </div>
     `;
   }
 
-  // Helper methods
+  setupLazyImages() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    lazyImages.forEach(img => {
+      this.intersectionObserver.observe(img);
+    });
+  }
+
+  formatTextContent(text) {
+    if (!text) return '';
+    
+    return text.split('\n').map(paragraph => 
+      paragraph.trim() ? `<p>${paragraph.trim()}</p>` : ''
+    ).filter(p => p).join('');
+  }
+
+  getYouTubeEmbedUrl(url) {
+    const videoId = this.extractYouTubeVideoId(url);
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+  }
+
+  extractYouTubeVideoId(url) {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[7].length === 11) ? match[7] : false;
+  }
+
   findWork(workId) {
     const allWorks = [
       ...this.data.projects.soundInstallations || [],
@@ -583,154 +706,11 @@ class PortfolioApp {
 
   getWorkTitle(workId) {
     const work = this.findWork(workId);
-    return work ? work.title : 'Work';
-  }
-
-  formatTextContent(text) {
-    if (!text) return '';
-    
-    return text
-      .split('\n\n')
-      .map(paragraph => `<p>${paragraph.trim()}</p>`)
-      .join('');
-  }
-
-  getYouTubeEmbedUrl(url) {
-    const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-  }
-
-  setupLazyLoading() {
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src && !this.observedImages.has(img)) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy-load');
-            this.observedImages.add(img);
-            imageObserver.unobserve(img);
-          }
-        }
-      });
-    }, {
-      rootMargin: '50px'
-    });
-
-    document.querySelectorAll('.lazy-load').forEach(img => {
-      if (!this.observedImages.has(img)) {
-        imageObserver.observe(img);
-        // Also immediately load if image is already in viewport
-        const rect = img.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy-load');
-            this.observedImages.add(img);
-            imageObserver.unobserve(img);
-          }
-        }
-      }
-    });
-  }
-
-  setupAudioPlayer() {
-    const audioPlayer = document.querySelector('.audio-player');
-    const audioElement = audioPlayer.querySelector('.audio-element');
-    const playPauseBtn = audioPlayer.querySelector('.play-pause-btn');
-    const progressBar = audioPlayer.querySelector('.progress-bar');
-    const progressFill = audioPlayer.querySelector('.progress-fill');
-    const timeDisplay = audioPlayer.querySelector('.time-display');
-    const closeBtn = audioPlayer.querySelector('.close-player');
-
-    this.audioPlayer = {
-      element: audioElement,
-      container: audioPlayer,
-      playPauseBtn,
-      progressBar,
-      progressFill,
-      timeDisplay,
-      closeBtn
-    };
-
-    // Audio controls
-    playPauseBtn.addEventListener('click', () => {
-      if (audioElement.paused) {
-        audioElement.play();
-        playPauseBtn.textContent = '⏸';
-        playPauseBtn.setAttribute('aria-label', 'Pause');
-      } else {
-        audioElement.pause();
-        playPauseBtn.textContent = '▶';
-        playPauseBtn.setAttribute('aria-label', 'Play');
-      }
-    });
-
-    closeBtn.addEventListener('click', () => {
-      audioElement.pause();
-      audioPlayer.style.display = 'none';
-    });
-
-    // Progress bar
-    progressBar.addEventListener('click', (e) => {
-      const rect = progressBar.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      audioElement.currentTime = percent * audioElement.duration;
-    });
-
-    // Update progress and time
-    audioElement.addEventListener('timeupdate', () => {
-      if (audioElement.duration) {
-        const percent = (audioElement.currentTime / audioElement.duration) * 100;
-        progressFill.style.width = `${percent}%`;
-        progressBar.setAttribute('aria-valuenow', percent);
-        
-        const current = this.formatTime(audioElement.currentTime);
-        const total = this.formatTime(audioElement.duration);
-        timeDisplay.textContent = `${current} / ${total}`;
-      }
-    });
-
-    audioElement.addEventListener('ended', () => {
-      playPauseBtn.textContent = '▶';
-      playPauseBtn.setAttribute('aria-label', 'Play');
-      progressFill.style.width = '0%';
-    });
-  }
-
-  formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  }
-
-  setupKeyboardNavigation() {
-    document.addEventListener('keydown', (e) => {
-      switch (e.key) {
-        case 'Escape':
-          if (this.currentView === 'portfolio' && this.currentWork) {
-            this.navigateTo('portfolio');
-          }
-          break;
-        case 'ArrowLeft':
-          if (e.altKey && this.currentView === 'portfolio' && this.currentWork) {
-            this.navigateTo('portfolio');
-          }
-          break;
-      }
-    });
+    return work ? work.title : 'Unknown Work';
   }
 
   showPortfolio() {
-    // Hide all sections first
-    document.querySelectorAll('main > section').forEach(section => {
-      section.style.display = 'none';
-    });
-    // Show portfolio section
-    const portfolioSection = document.getElementById('portfolio');
-    if (portfolioSection) {
-      portfolioSection.style.display = 'block';
-    }
+    document.getElementById('portfolio').style.display = 'block';
   }
 
   hideLoading() {
@@ -748,14 +728,7 @@ class PortfolioApp {
   }
 }
 
-// Initialize the app when DOM is ready
+// Initialize the portfolio app when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new PortfolioApp();
 });
-
-// Handle cache control for GitHub Pages
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {
-    // Service worker registration failed, continue without it
-  });
-}
