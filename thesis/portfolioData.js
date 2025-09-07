@@ -1,14 +1,15 @@
 /**
  * portfolioData.js - Portfolio Content Data (MERGED)
- *
+ * 
  * PURPOSE: Centralized data structure for all portfolio content
- * FEATURES: Relative file paths for GitHub Pages, complete CV data from original data.js
+ * FEATURES: Merged data from both files, GitHub Pages compatible, comprehensive content
  */
 
 // Wrapped in try-catch for error handling
 try {
   const portfolioData = {
     projects: {
+      // SOUND INSTALLATIONS - includes both original and expanded content
       soundInstallations: [
         {
           id: "rain-reminders",
@@ -32,7 +33,6 @@ try {
             "./assets/images/rain-stick-1.JPG"
           ]
         },
-
         {
           id: "asymmetrica-symmetrical-fictions",
           title: "Symmetrical Fictions",
@@ -55,7 +55,6 @@ try {
             }
           ]
         },
-
         {
           id: "asymmetrica-a-reasonable-crashout",
           title: "A Reasonable Crashout",
@@ -78,7 +77,6 @@ try {
             }
           ]
         },
-
         {
           id: "asymmetrica-stranded-deep",
           title: "Stranded Deep Series",
@@ -107,9 +105,140 @@ try {
               coverArt: "https://f4.bcbits.com/img/a0936658150_3.jpg"
             }
           ]
+        },
+        {
+          id: "asymmetrica-tiptoe",
+          title: "Tiptoe",
+          description:
+            "A delicate balance of tension and subtle sonic shifts, tiptoeing between ambient textures and rhythmic pulses.",
+          fullDescription:
+            "Tiptoe navigates quiet spaces filled with fragile sound detail, exploring the interface between near silence and low-frequency movements. It's an experiment in minimalism and patience.",
+          medium: "Digital audio, ambient synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Minimalism, ambient textures, tension and release",
+          technology: "DAW, modular synth, field recording",
+          bandcampTracks: [
+            {
+              title: "tiptoe",
+              trackId: "1726285270",
+              url: "https://asymmetrica.bandcamp.com/track/tiptoe"
+            }
+          ]
+        },
+        {
+          id: "asymmetrica-supersounds",
+          title: "Supersounds",
+          description:
+            "An experimental dive into layered synthetic timbres and expansive sound fields.",
+          fullDescription:
+            "Supersounds layers evolving textures and synthetic drones to create a complex soundscape that challenges perception and embraces machine improvisation.",
+          medium: "Digital audio, experimental electronics",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "electric-lime",
+          themes: "Synthetic layering, machine improvisation, drone textures",
+          technology: "DAW, Max/MSP, modular synth",
+          bandcampTracks: [
+            {
+              title: "supersounds",
+              trackId: "960218379",
+              url: "https://asymmetrica.bandcamp.com/track/supersounds"
+            }
+          ]
+        },
+        {
+          id: "asymmetrica-stretching",
+          title: "Stretching",
+          description:
+            "A sonic exploration of elasticity and temporal extension within digital sound design.",
+          fullDescription:
+            "Stretching plays with time, slowing and elongating motifs to blur boundaries between moment and duration, creating a meditative auditory space.",
+          medium: "Digital audio, time-stretching techniques",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "saffron",
+          themes: "Temporal extension, meditative soundscapes",
+          technology: "DAW, granular synthesis, field recordings",
+          bandcampTracks: [
+            {
+              title: "stretching",
+              trackId: "2000021307",
+              url: "https://asymmetrica.bandcamp.com/track/stretching"
+            }
+          ]
+        },
+        {
+          id: "asymmetrica-the-machine",
+          title: "The Machine",
+          description:
+            "An exploration of mechanized rhythms and synthetic textures embodying the essence of automated sound production.",
+          fullDescription:
+            "The Machine evokes industrial soundscapes with tight rhythmic patterns and digital noise, interrogating the relationship between human and machine in sound creation.",
+          medium: "Digital audio, rhythm synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Industrial aesthetics, mechanized rhythm, synthetic textures",
+          technology: "DAW, Max/MSP, modular synthesis",
+          bandcampTracks: [
+            {
+              title: "the machine",
+              trackId: "73420518",
+              url: "https://asymmetrica.bandcamp.com/track/the-machine"
+            }
+          ]
+        },
+        {
+          id: "asymmetrica-not-as-i-remember-it",
+          title: "Not As I Remember It",
+          description:
+            "A reflective piece examining memory through fragmented sound and abstract textures.",
+          fullDescription:
+            "Not As I Remember It distorts familiar motifs into abstract forms, questioning the reliability of recollection and the fluidity of sonic memory.",
+          medium: "Digital audio, sound manipulation",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "electric-lime",
+          themes: "Memory, abstraction, sonic fragmentation",
+          technology: "DAW, field recording, granular synthesis",
+          bandcampTracks: [
+            {
+              title: "not as i remember it",
+              trackId: "750668778",
+              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it"
+            }
+          ]
+        },
+        {
+          id: "asymmetrica-automaton",
+          title: "Automaton",
+          description:
+            "An exploration of mechanical repetition and evolving digital patterns.",
+          fullDescription:
+            "Automaton features repetitive motifs and incremental variations that evoke mechanized processes and evolving synthetic life.",
+          medium: "Digital audio, generative patterns",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "neon-magenta",
+          themes: "Repetition, mechanization, generative synthesis",
+          technology: "DAW, modular synthesis, Max/MSP",
+          bandcampTracks: [
+            {
+              title: "automaton",
+              trackId: "3985467816",
+              url: "https://asymmetrica.bandcamp.com/track/automaton"
+            }
+          ]
+        },
+        {
+          id: "ambient-sound-production",
+          title: "Ambient Sound Production Experiments",
+          description: "Explorations in generative sound design shaped by presence, data, and environment.",
+          fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
+          medium: "Generative audio, environmental data, custom-built software/hardware systems",
+          category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
+          color: "saffron",
+          technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines"
         }
       ],
 
+      // PERFORMANCE
       performance: [
         {
           id: "gesture-performance-system",
@@ -129,7 +258,80 @@ try {
             "./assets/images/fever-dream-poster.jpg"
           ]
         }
+      ],
+
+      // INSTALLATIONS
+      installations: [
+        {
+          id: "symmetrical-fictions",
+          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1 - Abstract",
+          description: "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
+          fullDescription: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation\n\nAbstract:\nSymmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These “symmetrical fictions” form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality.\n\nThis project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order.\n\nBy blurring the lines between fiction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reflecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet.\n\nThe project also addresses the mystification of digital systems by reclaiming visual data to present speculative environments that shift our understanding of \"place.\" By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reflection on the human desire for coherence in a fragmented world.\n\nUltimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric fiction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation offers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
+          medium: "Video installation, satellite imagery recomposition, speculative cartography",
+          category: "INSTALLATION & RESEARCH",
+          color: "cerulean",
+          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          urls: {
+            pdf: "./assets/documents/symmetrical-fictions-paper.pdf"
+          }
+        }
+
+      ],
+
+      // OTHERS (drawings, writing, etc)
+      others: [
+        {
+          id: "ritual-computing-solo-sessions",
+          title: "Ritual Computing and Coding Sessions",
+          description: "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
+          fullDescription: "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator.",
+          medium: "Code sketching, procedural visuals, AI collaboration",
+          category: "SOLO • RESEARCH-BASED",
+          color: "electric-lime",
+          documentation: "In-progress sketches and logs",
+          images: ["./assets/images/ritual-computing-1.png", "./assets/images/ritual-computing-2.png", "./assets/images/ritual-computing-3.jpg"]
+        },
+        {
+          id: "digital-sketches",
+          title: "Digital Sketches + Visual Explorations",
+          description:
+            "A collection of digital drawings exploring geometric patterns, urban textures, and algorithmic aesthetics.",
+          fullDescription:
+            "These sketches serve as visual research for larger projects, exploring the intersection of traditional South Asian geometric patterns with contemporary digital aesthetics. They range from quick gestural studies to more developed compositions that inform installation and performance work.",
+          medium: "Digital drawing, algorithmic pattern generation, mixed media",
+          category: "VISUAL RESEARCH",
+          color: "saffron",
+          themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
+          tools: "TouchDesigner, generative algorithms",
+          images: [
+            "./assets/images/sketch1.jpg",
+            "./assets/images/sketch2.png",
+            "./assets/images/sketch3.png"
+          ]
+        }
       ]
+    },
+
+    // Get all Bandcamp tracks for the sidebar
+    getAllBandcampTracks: function() {
+      const tracks = [];
+      
+      // Collect all bandcamp tracks from sound installations
+      this.projects.soundInstallations.forEach(project => {
+        if (project.bandcampTracks) {
+          project.bandcampTracks.forEach(track => {
+            tracks.push({
+              ...track,
+              projectTitle: project.title,
+              projectId: project.id,
+              projectColor: project.color
+            });
+          });
+        }
+      });
+      
+      return tracks;
     },
 
     thesis: {
@@ -252,21 +454,39 @@ try {
             "Contributed to the creation and presentation of 4 different projects related to XR technologies and sound design at festivals like Noorderzon Performing Arts Festival and Expeditie Next",
             "Handled day-to-day research, logistics and maintenance of equipment related to the projects"
           ]
-        },
-        {
-          title: "Research Assistant",
-          organization: "University of Groningen",
-          location: "Groningen, NL",
-          period: "Oct. 2022 – Aug. 2023",
-          description: "Urban soundscape research project management",
-          achievements: [
-            "Research assistant for the project 'Listen Here Now' - A study into the urban soundscapes of Groningen by Rudolf Agricola School of Sustainable Development",
-            "Oversaw core project responsibilities, participant communication, logistics, and marketing. Also including audio-visual logistics, procurement, and maintenance of equipment"
-          ]
         }
       ],
       
-      exhibitions: [],
+      exhibitions: [
+        {
+          id: "nervous-systems-kel30",
+          title: "Nervous Systems",
+          description: "A group exhibition by first-year MADTech students at KEL-30.",
+          fullDescription:
+            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
+          medium: "Installation, performance, new media",
+          category: "EXHIBITION",
+          color: "electric-lime",
+          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
+          images: ["./assets/images/nervous-system-1.jpg"],
+          urls: {}
+        },
+        {
+          id: "fever-dream-minerva",
+          title: "Fever Dream",
+          description: "A collaborative performance at Minerva Academy.",
+          fullDescription:
+            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
+          medium: "Performance, audiovisual installation, sound art",
+          category: "EXHIBITION",
+          color: "crimson",
+          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
+          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
+          images: [
+            "./assets/images/fever-dream-poster.jpg"
+          ]
+        }
+      ],
       publications: [],
       awards: [],
       

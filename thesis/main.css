@@ -17,7 +17,7 @@ html {
 }
 
 body {
-  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-family: "JetBrains Mono", "SF Mono", "Monaco", "Consolas", monospace;
   font-weight: 300;
   line-height: 1.8;
   color: #2a2a2a;
@@ -60,15 +60,18 @@ body {
     color: #000000;
     background-color: #ffffff;
   }
-  
-  .nav-link, .work-title {
+
+  .nav-link,
+  .work-title {
     border: 1px solid;
   }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -90,7 +93,12 @@ body {
 }
 
 /* === TYPOGRAPHY === */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -229,8 +237,13 @@ p {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 /* === SECTION HEADERS === */
@@ -298,11 +311,11 @@ p {
   margin-bottom: 3rem;
 }
 
-/* Four column layout for main categories */
+/* Three column layout for main categories */
 .works-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 3rem 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem 2rem;
   margin-top: 2rem;
 }
 
@@ -318,23 +331,16 @@ p {
   margin-bottom: 2rem;
 }
 
-@media (max-width: 1200px) {
-  .works-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem 1.5rem;
-  }
-}
-
 @media (max-width: 1024px) {
   .works-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2rem 1.5rem;
   }
-  
+
   .portfolio-section {
     flex-direction: column;
   }
-  
+
   .works-grid {
     max-width: 100%;
   }
@@ -345,7 +351,7 @@ p {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .works-column .category-grid {
     gap: 1rem;
   }
@@ -356,7 +362,7 @@ p {
     grid-template-columns: 1fr;
     gap: 2rem 0;
   }
-  
+
   .category-header {
     flex-direction: column;
     align-items: flex-start;
@@ -374,7 +380,7 @@ p {
 }
 
 .work-media {
-  aspect-ratio: 4/3;
+  aspect-ratio: 4 / 3;
   margin-bottom: 0.75rem;
   background: #fafafa;
   overflow: hidden;
@@ -499,14 +505,8 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   opacity: 0.5;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   z-index: 300;
-}
-
-.bandcamp-toggle.hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
 }
 
 .bandcamp-toggle:hover,
@@ -638,7 +638,6 @@ body.sidebar-open .portfolio-section {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 400;
-  z-index: 250;
 }
 
 .back-button:hover,
@@ -697,7 +696,7 @@ body.sidebar-open .portfolio-section {
 .video-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
   margin-bottom: 4rem;
   background: #fafafa;
 }
@@ -785,14 +784,33 @@ body.sidebar-open .portfolio-section {
   margin-bottom: 6rem;
 }
 
-.thesis-text {
-  font-size: 1rem;
-  line-height: 1.8;
+.thesis-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.thesis-text p {
-  margin-bottom: 2rem;
-  max-width: none;
+.thesis-text {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.thesis-text strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.thesis-text em {
+  font-style: italic;
+  color: #555;
+}
+
+.thesis-text blockquote {
+  margin: 2rem 0;
+  padding-left: 2rem;
+  border-left: 2px solid #ddd;
+  font-style: italic;
+  color: #666;
 }
 
 /* === ABOUT === */
@@ -813,13 +831,6 @@ body.sidebar-open .portfolio-section {
   align-items: flex-start;
 }
 
-@media (max-width: 768px) {
-  .about-profile {
-    flex-direction: column;
-    gap: 2rem;
-  }
-}
-
 .profile-image {
   width: 300px;
   height: 300px;
@@ -829,8 +840,13 @@ body.sidebar-open .portfolio-section {
 }
 
 .about-image {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
+
+.about-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 }
 
@@ -984,21 +1000,6 @@ body.sidebar-open .portfolio-section {
   opacity: 0.8;
 }
 
-.cv-item-medium {
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.7;
-  font-style: italic;
-}
-
-.cv-item-category {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-  font-weight: 400;
-}
-
 .cv-achievements {
   font-size: 0.875rem;
   opacity: 0.8;
@@ -1039,11 +1040,13 @@ body.sidebar-open .portfolio-section {
   opacity: 0.8;
 }
 
-.cv-languages, .cv-interests {
+.cv-languages,
+.cv-interests {
   margin-bottom: 2rem;
 }
 
-.cv-languages p, .cv-interests p {
+.cv-languages p,
+.cv-interests p {
   font-size: 0.875rem;
   line-height: 1.6;
   opacity: 0.8;
@@ -1125,72 +1128,66 @@ body.sidebar-open .portfolio-section {
 }
 
 /* === PROJECT COLOR THEMES === */
-.project-saffron { --accent-color: #f4b942; }
-.project-cerulean { --accent-color: #7bc3d4; }
-.project-neon-magenta { --accent-color: #ff59b0; }
-.project-electric-lime { --accent-color: #ccff00; }
-.project-acid-orange { --accent-color: #ff8800; }
+.project-saffron {
+  --accent-color: #f4b942;
+}
+.project-cerulean {
+  --accent-color: #7bc3d4;
+}
+.project-neon-magenta {
+  --accent-color: #ff59b0;
+}
+.project-electric-lime {
+  --accent-color: #ccff00;
+}
+.project-acid-orange {
+  --accent-color: #ff8800;
+}
 
 /* === RESPONSIVE DESIGN === */
 @media (max-width: 768px) {
   .main-nav {
     padding: 1rem;
   }
-  
+
   .nav-menu {
     right: 1rem;
   }
-  
+
   .section-heading {
     padding: 0 1rem;
     margin: 4rem auto 3rem;
   }
-  
+
   .portfolio-section,
   .thesis-section,
   .about-section,
   .cv-section {
     padding: 0 1rem 4rem;
   }
-  
+
   .work-detail {
     padding: 4rem 1rem;
   }
-  
+
   .back-button {
     top: 1rem;
     left: 1rem;
-    z-index: 400;
   }
-  
-  .bandcamp-toggle {
-    top: 1rem;
-    left: 1rem;
-    z-index: 350;
-  }
-  
-  .main-nav {
-    padding: 1rem;
-  }
-  
-  .nav-menu {
-    right: 1rem;
-    top: 3rem;
-  }
-  
+
   .work-meta {
     gap: 1.5rem;
   }
-  
+
   .cv-item-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .cv-skills {
     grid-template-columns: 1fr;
   }
-  
+
   .audio-player {
     bottom: 1rem;
     right: 1rem;
@@ -1203,19 +1200,54 @@ body.sidebar-open .portfolio-section {
   html {
     font-size: 16px;
   }
-  
+
   .works-grid {
     grid-template-columns: 1fr;
     gap: 4rem 0;
   }
-  
+
   .about-profile {
     flex-direction: column;
   }
-  
+
   .profile-image {
     width: 200px;
     height: 200px;
     align-self: center;
   }
+}
+
+/* === MODAL LAYOUT === */
+.modal-content {
+  display: flex;
+  background-color: #fefefe;
+  margin: 2% auto;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 85vh;
+  overflow: hidden;
+}
+
+.modal-info {
+  flex: 0 0 40%;
+  padding: 2rem;
+  overflow-y: auto;
+  border-right: 1px solid #eee;
+}
+
+.modal-media {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+.modal-media img,
+.modal-media video {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
 }
