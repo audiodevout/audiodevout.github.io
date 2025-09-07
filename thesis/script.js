@@ -102,16 +102,20 @@ class PortfolioApp {
     if (backButton) {
       backButton.addEventListener("click", (e) => {
         e.preventDefault()
-        this.navigateTo("portfolio", null)
+        this.navigateTo("portfolio", null) // Always go back to main portfolio
       })
     }
 
+    // Handle browser back/forward
     window.addEventListener("popstate", (e) => {
       if (e.state && e.state.view && e.state.work) {
+        // Navigate to work detail
         this.navigateTo("portfolio", e.state.work, false)
       } else if (e.state && e.state.view) {
+        // Navigate to section
         this.navigateTo(e.state.view, null, false)
       } else {
+        // Fallback to portfolio
         this.navigateTo("portfolio", null, false)
       }
     })
@@ -162,10 +166,12 @@ class PortfolioApp {
     if (!backButton || !musicButton) return
 
     if (this.currentView === "work-detail") {
+      // Inside a work detail - show back, hide music
       musicButton.style.display = "none"
-      backButton.style.display = "block"
+      backButton.style.display = "inline-block"
     } else {
-      musicButton.style.display = "block"
+      // On main pages - show music, hide back
+      musicButton.style.display = "inline-block"
       backButton.style.display = "none"
     }
   }
@@ -307,6 +313,7 @@ class PortfolioApp {
   }
 
   navigateTo(view, work = null, pushState = true) {
+    // Determine the actual view to display
     if (work) {
       this.currentView = "work-detail"
       this.currentWork = work
@@ -333,10 +340,12 @@ class PortfolioApp {
 
     // Show target section and render content
     if (work) {
+      // Show work detail
       this.renderWorkDetail(work)
       document.getElementById("work-detail").style.display = "block"
       this.announcePageChange(`Viewing work: ${this.getWorkTitle(work)}`)
     } else {
+      // Show requested section
       switch (view) {
         case "portfolio":
           this.renderPortfolio()
@@ -366,7 +375,6 @@ class PortfolioApp {
     const container = document.querySelector(".works-grid")
     container.innerHTML = ""
 
-    // Create three-column layout: installations, performances, others
     const columns = [
       {
         title: "Installations",
@@ -375,6 +383,10 @@ class PortfolioApp {
       {
         title: "Performances",
         works: this.data.projects.performance || [],
+      },
+      {
+        title: "Exhibitions",
+        works: this.data.cv.exhibitions || [],
       },
       {
         title: "Others",
@@ -457,24 +469,6 @@ class PortfolioApp {
         <h3 class="work-title" data-testid="work-title-${work.id}">${work.title}</h3>
         <p class="work-category" data-testid="work-category-${work.id}">${work.category || work.medium}</p>
         <p class="work-description" data-testid="work-description-${work.id}">${work.description}</p>
-        
-        ${
-          work.bandcampTracks?.length > 0
-            ? `
-          <div class="work-actions" data-testid="work-actions-${work.id}">
-            ${work.bandcampTracks
-              .map(
-                (track, index) => `
-              <button class="play-bandcamp-btn" data-url="${track.url}" data-embed-id="${track.trackId}" data-testid="play-btn-${track.trackId || index}" aria-label="Listen to ${track.title}">
-                ▶ ${track.title}
-              </button>
-            `,
-              )
-              .join("")}
-          </div>
-        `
-            : ""
-        }
       </div>
     `
 
@@ -484,15 +478,6 @@ class PortfolioApp {
       if (!e.target.closest(".work-actions")) {
         this.navigateTo("portfolio", work.id)
       }
-    })
-
-    // Handle Bandcamp buttons
-    const bandcampBtns = card.querySelectorAll(".play-bandcamp-btn")
-    bandcampBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation()
-        window.open(btn.dataset.url, "_blank", "noopener,noreferrer")
-      })
     })
 
     return card
@@ -530,9 +515,12 @@ class PortfolioApp {
               <img 
                 data-src="${image}"
                 alt="${work.title} - Image ${index + 1}"
-                class="gallery-image lazy-loading"
+                class="gallery-image lazy-loading clickable-image"
                 loading="lazy"
                 data-testid="gallery-image-${index}"
+                data-modal-title="${work.title}"
+                data-modal-description="${work.description}"
+                data-modal-category="${work.category || work.medium}"
               >
             </figure>
           `,
@@ -673,6 +661,89 @@ class PortfolioApp {
 
     // Setup lazy loading for new images
     this.setupLazyImages()
+    this.setupImageModals()
+  }
+
+  setupImageModals() {
+    // Create modal if it doesn't exist
+    if (!document.querySelector(".modal")) {
+      const modal = document.createElement("div")
+      modal.className = "modal"
+      modal.innerHTML = `
+        <button class="modal-close" aria-label="Close modal">×</button>
+        <div class="modal-content">
+          <div class="modal-info">
+            <h2 class="modal-title"></h2>
+            <div class="modal-meta"></div>
+            <div class="modal-description"></div>
+            <div class="modal-tags"></div>
+          </div>
+          <div class="modal-image-container">
+            <img class="modal-image" alt="">
+          </div>
+        </div>
+      `
+      document.body.appendChild(modal)
+
+      // Close modal functionality
+      const closeBtn = modal.querySelector(".modal-close")
+      closeBtn.addEventListener("click", () => this.closeModal())
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) this.closeModal()
+      })
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") this.closeModal()
+      })
+    }
+
+    // Add click listeners to images
+    document.querySelectorAll(".clickable-image").forEach((img) => {
+      img.addEventListener("click", (e) => {
+        this.openModal(
+          img.src || img.dataset.src,
+          img.dataset.modalTitle,
+          img.dataset.modalDescription,
+          img.dataset.modalCategory,
+        )
+      })
+    })
+  }
+
+  openModal(imageSrc, title, description, category) {
+    const modal = document.querySelector(".modal")
+    const modalImage = modal.querySelector(".modal-image")
+    const modalTitle = modal.querySelector(".modal-title")
+    const modalMeta = modal.querySelector(".modal-meta")
+    const modalDescription = modal.querySelector(".modal-description")
+
+    modalImage.src = imageSrc
+    modalTitle.textContent = title
+    modalMeta.textContent = category
+    modalDescription.textContent = description
+
+    modal.classList.add("open")
+    document.body.style.overflow = "hidden"
+  }
+
+  closeModal() {
+    const modal = document.querySelector(".modal")
+    modal.classList.remove("open")
+    document.body.style.overflow = ""
+  }
+
+  findWork(workId) {
+    const allWorks = [
+      ...(this.data.projects.soundInstallations || []),
+      ...(this.data.projects.performance || []),
+      ...(this.data.projects.installations || []),
+      ...(this.data.projects.drawings || []),
+      ...(this.data.projects.writing || []),
+      ...(this.data.cv.exhibitions || []),
+    ]
+
+    return allWorks.find((work) => work.id === workId)
   }
 
   renderThesis() {
@@ -909,18 +980,6 @@ class PortfolioApp {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
     const match = url.match(regExp)
     return match && match[7].length === 11 ? match[7] : false
-  }
-
-  findWork(workId) {
-    const allWorks = [
-      ...(this.data.projects.soundInstallations || []),
-      ...(this.data.projects.performance || []),
-      ...(this.data.projects.installations || []),
-      ...(this.data.projects.drawings || []),
-      ...(this.data.projects.writing || []),
-    ]
-
-    return allWorks.find((work) => work.id === workId)
   }
 
   getWorkTitle(workId) {
