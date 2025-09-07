@@ -36,6 +36,19 @@
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link" data-testid="skip-link">Skip to main content</a>
     
+    <!-- Bandcamp toggle button -->
+    <button class="bandcamp-toggle" aria-expanded="false" aria-controls="bandcamp-sidebar" aria-label="Toggle music player" data-testid="bandcamp-toggle">
+        Music
+    </button>
+    
+    <!-- Bandcamp sidebar -->
+    <aside id="bandcamp-sidebar" class="bandcamp-sidebar" role="complementary" aria-label="Music player" data-testid="bandcamp-sidebar">
+        <h3>Asymmetrica Tracks</h3>
+        <div class="bandcamp-tracks" data-testid="bandcamp-tracks">
+            <!-- Tracks will be dynamically loaded -->
+        </div>
+    </aside>
+    
     <!-- Header with minimal navigation -->
     <header class="site-header" role="banner">
         <nav class="main-nav" role="navigation" aria-label="Main navigation">

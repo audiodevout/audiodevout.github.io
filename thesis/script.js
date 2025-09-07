@@ -21,6 +21,7 @@ class PortfolioApp {
       
       // Initialize components
       this.setupNavigation();
+      this.setupBandcampSidebar();
       this.setupIntersectionObserver();
       this.setupKeyboardNavigation();
       this.setupAccessibility();
@@ -30,6 +31,7 @@ class PortfolioApp {
       
       // Render initial view
       this.renderPortfolio();
+      this.renderBandcampTracks();
       this.showPortfolio();
       this.hideLoading();
       
@@ -112,6 +114,85 @@ class PortfolioApp {
     });
   }
 
+  setupBandcampSidebar() {
+    const bandcampToggle = document.querySelector('.bandcamp-toggle');
+    const bandcampSidebar = document.querySelector('.bandcamp-sidebar');
+
+    if (!bandcampToggle || !bandcampSidebar) {
+      console.warn('Bandcamp sidebar elements not found');
+      return;
+    }
+
+    // Toggle sidebar
+    bandcampToggle.addEventListener('click', () => {
+      const isOpen = bandcampSidebar.classList.contains('open');
+      const isExpanded = bandcampToggle.getAttribute('aria-expanded') === 'true';
+      
+      bandcampSidebar.classList.toggle('open');
+      bandcampToggle.setAttribute('aria-expanded', !isExpanded);
+      document.body.classList.toggle('sidebar-open');
+      
+      // Update toggle text
+      bandcampToggle.textContent = isOpen ? 'Music' : 'Close';
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!bandcampToggle.contains(e.target) && !bandcampSidebar.contains(e.target)) {
+        bandcampSidebar.classList.remove('open');
+        bandcampToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('sidebar-open');
+        bandcampToggle.textContent = 'Music';
+      }
+    });
+
+    // Prevent sidebar close when clicking inside sidebar
+    bandcampSidebar.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  renderBandcampTracks() {
+    const container = document.querySelector('.bandcamp-tracks');
+    if (!container) {
+      console.warn('Bandcamp tracks container not found');
+      return;
+    }
+
+    // Get all Bandcamp tracks
+    const tracks = this.data.getAllBandcampTracks();
+    
+    if (tracks.length === 0) {
+      container.innerHTML = '<p class="track-project">No tracks available</p>';
+      return;
+    }
+
+    container.innerHTML = tracks.map(track => `
+      <div class="bandcamp-track" data-track-id="${track.trackId}">
+        <div class="track-title">${track.title}</div>
+        <div class="track-project">from ${track.projectTitle}</div>
+        <button class="track-play-btn" 
+                data-url="${track.url}" 
+                data-track-id="${track.trackId}"
+                aria-label="Listen to ${track.title}">
+          ▶ Listen on Bandcamp
+        </button>
+      </div>
+    `).join('');
+
+    // Add event listeners to play buttons
+    container.querySelectorAll('.track-play-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const url = btn.dataset.url;
+        if (url) {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+  }
+
   setupIntersectionObserver() {
     // Lazy loading for images
     this.intersectionObserver = new IntersectionObserver(
@@ -189,14 +270,28 @@ class PortfolioApp {
 
   handleInitialRoute() {
     const hash = window.location.hash.substring(1);
+    
     if (hash) {
       const parts = hash.split('/');
       if (parts.length === 2 && parts[0] === 'work') {
         this.navigateTo('portfolio', parts[1], false);
+      } else if (parts[0] === 'cv' || parts[0] === 'about' || parts[0] === 'thesis') {
+        this.navigateTo(parts[0], null, false);
       } else {
         this.navigateTo(parts[0] || 'portfolio', null, false);
       }
     } else {
+      // Try to restore from localStorage if no hash
+      const storedState = localStorage.getItem('portfolioCurrentView');
+      if (storedState) {
+        try {
+          const { view, work } = JSON.parse(storedState);
+          this.navigateTo(view || 'portfolio', work, false);
+          return;
+        } catch (e) {
+          console.warn('Failed to restore state from localStorage:', e);
+        }
+      }
       this.navigateTo('portfolio', null, false);
     }
   }
@@ -205,7 +300,7 @@ class PortfolioApp {
     this.currentView = view === 'work-detail' || work ? 'work-detail' : view;
     this.currentWork = work;
 
-    // Update URL
+    // Update URL and persist state
     if (pushState) {
       const url = work ? `#work/${work}` : `#${view}`;
       const title = work 
@@ -214,6 +309,28 @@ class PortfolioApp {
       
       history.pushState({ view, work }, title, url);
       document.title = title;
+      
+      // Store current state for page reload persistence
+      localStorage.setItem('portfolioCurrentView', JSON.stringify({ view, work }));
+    }
+
+    // Show/hide music button based on view
+    const musicButton = document.querySelector('.bandcamp-toggle');
+    if (musicButton) {
+      // Show music button only on main portfolio page (not work detail or other sections)
+      if (view === 'portfolio' && !work) {
+        musicButton.classList.remove('hidden');
+      } else {
+        musicButton.classList.add('hidden');
+        // Also close the sidebar if it's open when navigating away
+        const bandcampSidebar = document.querySelector('.bandcamp-sidebar');
+        if (bandcampSidebar && bandcampSidebar.classList.contains('open')) {
+          bandcampSidebar.classList.remove('open');
+          musicButton.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('sidebar-open');
+          musicButton.textContent = 'Music';
+        }
+      }
     }
 
     // Hide all sections
@@ -260,37 +377,59 @@ class PortfolioApp {
     const container = document.querySelector('.works-grid');
     container.innerHTML = '';
 
-    // Create category sections
-    const categories = [
-      { key: 'soundInstallations', title: 'Sound Installations', works: this.data.projects.soundInstallations || [] },
-      { key: 'performance', title: 'Performance', works: this.data.projects.performance || [] },
-      { key: 'installations', title: 'Installations', works: this.data.projects.installations || [] },
-      { key: 'drawings', title: 'Drawings & Visual Work', works: this.data.projects.drawings || [] },
-      { key: 'writing', title: 'Writing & Documentation', works: this.data.projects.writing || [] }
+    // Create four-column layout: installations, performances, exhibitions, others
+    const columns = [
+      {
+        title: 'Installations',
+        works: [
+          ...(this.data.projects.soundInstallations || []),
+          ...(this.data.projects.installations || [])
+        ]
+      },
+      {
+        title: 'Performances',
+        works: this.data.projects.performance || []
+      },
+      {
+        title: 'Exhibitions',
+        works: this.data.cv.exhibitions || []
+      },
+      {
+        title: 'Others',
+        works: [
+          ...(this.data.projects.others || []),
+          ...(this.data.projects.drawings || []),
+          ...(this.data.projects.writing || [])
+        ]
+      }
     ];
 
-    categories.forEach(category => {
-      if (category.works.length > 0) {
-        // Create category header
-        const categoryHeader = document.createElement('div');
-        categoryHeader.className = 'category-header';
-        categoryHeader.innerHTML = `
-          <h2 class="category-title" data-testid="category-${category.key}">${category.title}</h2>
-          <div class="category-count">${category.works.length} ${category.works.length === 1 ? 'work' : 'works'}</div>
-        `;
-        container.appendChild(categoryHeader);
-
-        // Create category grid
-        const categoryGrid = document.createElement('div');
-        categoryGrid.className = 'category-grid';
-        categoryGrid.setAttribute('data-category', category.key);
+    columns.forEach((column, index) => {
+      if (column.works.length > 0) {
+        // Create column container
+        const columnDiv = document.createElement('div');
+        columnDiv.className = 'works-column';
         
-        category.works.forEach(work => {
+        // Create column header
+        const columnHeader = document.createElement('div');
+        columnHeader.className = 'category-header';
+        columnHeader.innerHTML = `
+          <h2 class="category-title">${column.title}</h2>
+          <div class="category-count">(${column.works.length})</div>
+        `;
+        columnDiv.appendChild(columnHeader);
+
+        // Create column grid
+        const columnGrid = document.createElement('div');
+        columnGrid.className = 'category-grid';
+        
+        column.works.forEach(work => {
           const workElement = this.createWorkCard(work);
-          categoryGrid.appendChild(workElement);
+          columnGrid.appendChild(workElement);
         });
         
-        container.appendChild(categoryGrid);
+        columnDiv.appendChild(columnGrid);
+        container.appendChild(columnDiv);
       }
     });
 
@@ -587,6 +726,28 @@ class PortfolioApp {
         </div>
       </div>
 
+      ${cv.exhibitions && cv.exhibitions.length > 0 ? `
+      <div class="cv-section-block" data-testid="cv-exhibitions">
+        <h3 class="cv-section-title">Exhibitions</h3>
+        <div class="cv-items">
+          ${cv.exhibitions.map((exhibition, index) => `
+            <div class="cv-item" data-testid="cv-exhibition-${index}">
+              <div class="cv-item-header">
+                <h4 class="cv-item-title" data-testid="cv-exhibition-title-${index}">${exhibition.title}</h4>
+                <span class="cv-item-category" data-testid="cv-exhibition-category-${index}">${exhibition.category || ''}</span>
+              </div>
+              <p class="cv-item-medium" data-testid="cv-exhibition-medium-${index}">
+                ${exhibition.medium || ''}
+              </p>
+              <p class="cv-item-desc" data-testid="cv-exhibition-desc-${index}">
+                ${exhibition.description}
+              </p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
       <div class="cv-section-block" data-testid="cv-experience">
         <h3 class="cv-section-title">Work Experience</h3>
         <div class="cv-items">
@@ -697,6 +858,8 @@ class PortfolioApp {
       ...this.data.projects.soundInstallations || [],
       ...this.data.projects.performance || [],
       ...this.data.projects.installations || [],
+      ...this.data.cv.exhibitions || [],
+      ...this.data.projects.others || [],
       ...this.data.projects.drawings || [],
       ...this.data.projects.writing || []
     ];

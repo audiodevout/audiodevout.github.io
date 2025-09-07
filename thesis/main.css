@@ -243,14 +243,23 @@ p {
 
 /* === PORTFOLIO GRID === */
 .portfolio-section {
+  display: flex;
   padding: 0 2rem 6rem;
   max-width: 1400px;
   margin: 0 auto;
+  gap: 2rem;
+  position: relative;
 }
 
 .works-grid {
+  flex: 1;
   margin-top: 2rem;
-  max-width: 1200px;
+  max-width: calc(100% - 320px);
+}
+
+/* When bandcamp sidebar is closed */
+.portfolio-section.sidebar-closed .works-grid {
+  max-width: 100%;
 }
 
 /* === CATEGORY ORGANIZATION === */
@@ -284,15 +293,68 @@ p {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem 1rem;
   margin-bottom: 3rem;
+}
+
+/* Four column layout for main categories */
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 3rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.works-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.works-column .category-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .works-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .works-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
+  }
+  
+  .portfolio-section {
+    flex-direction: column;
+  }
+  
+  .works-grid {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .works-column .category-grid {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .category-grid {
     grid-template-columns: 1fr;
-    gap: 4rem 0;
+    gap: 2rem 0;
   }
   
   .category-header {
@@ -312,8 +374,8 @@ p {
 }
 
 .work-media {
-  aspect-ratio: 3/2;
-  margin-bottom: 1rem;
+  aspect-ratio: 4/3;
+  margin-bottom: 0.75rem;
   background: #fafafa;
   overflow: hidden;
   position: relative;
@@ -348,9 +410,9 @@ p {
 }
 
 .work-title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
@@ -365,10 +427,14 @@ p {
 }
 
 .work-description {
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.5;
   opacity: 0.8;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .work-actions {
@@ -396,6 +462,122 @@ p {
 .play-bandcamp-btn:focus {
   background: #2a2a2a;
   color: #ffffff;
+}
+
+/* === BANDCAMP SIDEBAR === */
+.bandcamp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid rgba(42, 42, 42, 0.1);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 200;
+  overflow-y: auto;
+  padding: 6rem 2rem 2rem;
+}
+
+.bandcamp-sidebar.open {
+  left: 0;
+}
+
+.bandcamp-toggle {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #2a2a2a;
+  cursor: pointer;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  z-index: 300;
+}
+
+.bandcamp-toggle.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.bandcamp-toggle:hover,
+.bandcamp-toggle:focus {
+  opacity: 1;
+}
+
+.bandcamp-sidebar.open + .bandcamp-toggle {
+  left: 322px;
+}
+
+.bandcamp-sidebar h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.bandcamp-track {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.1);
+}
+
+.bandcamp-track:last-child {
+  border-bottom: none;
+}
+
+.track-title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.track-project {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.track-play-btn {
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #2a2a2a;
+  padding: 6px 12px;
+  font-size: 0.625rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.track-play-btn:hover,
+.track-play-btn:focus {
+  background: #2a2a2a;
+  color: #ffffff;
+}
+
+/* Adjust main content when sidebar is open */
+body.sidebar-open .portfolio-section {
+  margin-left: 320px;
+  transition: margin-left 0.3s ease;
 }
 
 /* === BANDCAMP EMBEDS === */
@@ -456,6 +638,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 400;
+  z-index: 250;
 }
 
 .back-button:hover,
@@ -801,6 +984,21 @@ p {
   opacity: 0.8;
 }
 
+.cv-item-medium {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.cv-item-category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
 .cv-achievements {
   font-size: 0.875rem;
   opacity: 0.8;
@@ -962,6 +1160,22 @@ p {
   .back-button {
     top: 1rem;
     left: 1rem;
+    z-index: 400;
+  }
+  
+  .bandcamp-toggle {
+    top: 1rem;
+    left: 1rem;
+    z-index: 350;
+  }
+  
+  .main-nav {
+    padding: 1rem;
+  }
+  
+  .nav-menu {
+    right: 1rem;
+    top: 3rem;
   }
   
   .work-meta {
