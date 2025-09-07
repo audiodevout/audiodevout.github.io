@@ -258,9 +258,9 @@ p {
 .portfolio-section {
   display: flex;
   padding: 0 2rem 6rem;
-  max-width: 1400px;
+  max-width: 1600px; /* Increased from 1400px for better screen space usage */
   margin: 0 auto;
-  gap: 2rem;
+  gap: 3rem; /* Increased gap from 2rem for better breathing room */
   position: relative;
 }
 
@@ -298,15 +298,15 @@ p {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Increased from 180px for larger cards */
+  gap: 2.5rem 1.5rem; /* Increased gaps for less cramped appearance */
   margin-bottom: 3rem;
 }
 
 .works-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3rem 2rem;
+  gap: 4rem 3rem; /* Increased gaps significantly from 3rem 2rem for better spacing */
   margin-top: 2rem;
 }
 
@@ -318,13 +318,18 @@ p {
 .works-column .category-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem; /* Increased from 1.5rem for better vertical spacing */
   margin-bottom: 2rem;
 }
 
 @media (max-width: 1200px) {
   .works-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2rem; /* Increased gaps for medium screens */
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted for medium screens */
     gap: 2rem 1.5rem;
   }
 }
@@ -332,26 +337,37 @@ p {
 @media (max-width: 1024px) {
   .works-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem 1.5rem;
+    gap: 2.5rem 2rem; /* Maintained generous spacing on tablets */
   }
 
   .portfolio-section {
     flex-direction: column;
+    gap: 2rem; /* Maintained good spacing when stacked */
   }
 
   .works-grid {
     max-width: 100%;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .works-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem; /* Increased from 1.5rem for mobile */
   }
 
   .works-column .category-grid {
-    gap: 1rem;
+    gap: 1.5rem; /* Maintained reasonable spacing on mobile */
+  }
+
+  .portfolio-section {
+    padding: 0 1.5rem 4rem;
+    gap: 1.5rem;
   }
 }
 
@@ -363,8 +379,10 @@ p {
 
   .category-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  }
+
+  .portfolio-section {
+    padding: 0 1rem 4rem;
   }
 }
 
@@ -677,7 +695,7 @@ body.sidebar-open .portfolio-section {
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-weight: 400;
+  border-radius: 2px;
   margin-right: 1rem;
   margin-bottom: 1rem;
   transition: all 0.2s ease;
@@ -1269,13 +1287,15 @@ body.sidebar-open .portfolio-section {
 
 .modal-themes,
 .modal-technical,
-.modal-technology {
+.modal-technology,
+.modal-urls {
   margin-bottom: 1.5rem;
 }
 
 .modal-themes h4,
 .modal-technical h4,
-.modal-technology h4 {
+.modal-technology h4,
+.modal-urls h4 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1291,20 +1311,30 @@ body.sidebar-open .portfolio-section {
   opacity: 0.8;
 }
 
-.modal-tags {
+/* Added styles for modal links section */
+.modal-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
-  margin-top: 2rem;
 }
 
-.modal-tag {
+.modal-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: #2a2a2a;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(42, 42, 42, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background: rgba(42, 42, 42, 0.02);
+}
+
+.modal-link:hover,
+.modal-link:focus {
   background: rgba(42, 42, 42, 0.05);
-  padding: 4px 8px;
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-radius: 2px;
+  border-color: rgba(42, 42, 42, 0.3);
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {

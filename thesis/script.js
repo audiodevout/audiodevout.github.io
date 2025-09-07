@@ -28,6 +28,7 @@ class PortfolioApp {
       this.setupIntersectionObserver()
       this.setupKeyboardNavigation()
       this.setupAccessibility()
+      this.setupImageModals()
 
       this.restoreState()
 
@@ -382,7 +383,7 @@ class PortfolioApp {
     const columns = [
       {
         title: "Installations",
-        works: [...(this.data.projects.soundInstallations || []), ...(this.data.projects.installations || [])],
+        works: [...(this.data.projects.installations || [])],
       },
       {
         title: "Performances",
@@ -434,29 +435,19 @@ class PortfolioApp {
   }
 
   createWorkCard(work) {
-    const card = document.createElement("article")
+    const card = document.createElement("div")
     card.className = "work-card"
-    card.setAttribute("data-color", work.color || "default")
-    card.setAttribute("data-testid", `work-card-${work.id}`)
-
-    const hasMedia = work.images?.length > 0 || work.videos?.length > 0
-    const primaryImage = work.images?.[0]
-    const coverArt = work.bandcampTracks?.[0]?.coverArt
-    const displayImage = primaryImage || coverArt
-
     card.innerHTML = `
       ${
-        hasMedia || coverArt
+        work.images && work.images.length > 0
           ? `
-        <div class="work-media" data-testid="work-media-${work.id}">
+        <div class="work-image-container">
           ${
-            displayImage
-              ? `
-            <img 
-              src="${displayImage}"
-              data-src="${displayImage}"
+            work.images[0]
+              ? `<img 
+              src="${work.images[0]}" 
               alt="${work.title}"
-              class="work-image lazy-loading clickable-image"
+              class="work-image clickable-image"
               loading="lazy"
               data-testid="work-image-${work.id}"
               data-modal-title="${work.title}"
@@ -465,6 +456,7 @@ class PortfolioApp {
               data-modal-themes="${work.themes || ""}"
               data-modal-technical="${work.technical || ""}"
               data-modal-technology="${work.technology || ""}"
+              data-modal-urls="${work.urls ? JSON.stringify(work.urls).replace(/"/g, "&quot;") : ""}"
             >
           `
               : ""
@@ -483,18 +475,20 @@ class PortfolioApp {
 
     // Make card clickable
     card.addEventListener("click", (e) => {
-      if (e.target.classList.contains("clickable-image") && e.target.dataset.modalTitle) {
+      const cardImage = card.querySelector(".clickable-image")
+      if (cardImage && cardImage.dataset.modalTitle) {
         e.preventDefault()
         e.stopPropagation()
-        const imageSrc = e.target.src || e.target.dataset.src
+        const imageSrc = cardImage.src || cardImage.dataset.src
         this.openModal(
           imageSrc,
-          e.target.dataset.modalTitle,
-          e.target.dataset.modalDescription,
-          e.target.dataset.modalCategory,
-          e.target.dataset.modalThemes,
-          e.target.dataset.modalTechnical,
-          e.target.dataset.modalTechnology,
+          cardImage.dataset.modalTitle,
+          cardImage.dataset.modalDescription,
+          cardImage.dataset.modalCategory,
+          cardImage.dataset.modalThemes,
+          cardImage.dataset.modalTechnical,
+          cardImage.dataset.modalTechnology,
+          cardImage.dataset.modalUrls,
         )
         return
       }
@@ -549,6 +543,7 @@ class PortfolioApp {
                 data-modal-themes="${work.themes || ""}"
                 data-modal-technical="${work.technical || ""}"
                 data-modal-technology="${work.technology || ""}"
+                data-modal-urls="${work.urls ? JSON.stringify(work.urls).replace(/"/g, "&quot;") : ""}"
               >
             </figure>
           `,
@@ -655,6 +650,7 @@ class PortfolioApp {
             <div class="modal-themes"></div>
             <div class="modal-technical"></div>
             <div class="modal-technology"></div>
+            <div class="modal-urls"></div>
             <div class="modal-tags"></div>
           </div>
           <div class="modal-image-container">
@@ -676,27 +672,9 @@ class PortfolioApp {
         if (e.key === "Escape") this.closeModal()
       })
     }
-
-    // Add click listeners to images
-    document.querySelectorAll(".clickable-image").forEach((img) => {
-      img.addEventListener("click", (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        const imageSrc = img.src || img.dataset.src
-        this.openModal(
-          imageSrc,
-          img.dataset.modalTitle,
-          img.dataset.modalDescription,
-          img.dataset.modalCategory,
-          img.dataset.modalThemes,
-          img.dataset.modalTechnical,
-          img.dataset.modalTechnology,
-        )
-      })
-    })
   }
 
-  openModal(imageSrc, title, description, category, themes, technical, technology) {
+  openModal(imageSrc, title, description, category, themes, technical, technology, urls) {
     const modal = document.querySelector(".modal")
     const modalImage = modal.querySelector(".modal-image")
     const modalTitle = modal.querySelector(".modal-title")
@@ -706,6 +684,7 @@ class PortfolioApp {
     const modalThemes = modal.querySelector(".modal-themes")
     const modalTechnical = modal.querySelector(".modal-technical")
     const modalTechnology = modal.querySelector(".modal-technology")
+    const modalUrls = modal.querySelector(".modal-urls")
 
     modalImage.src = imageSrc
     modalTitle.textContent = title
@@ -744,6 +723,27 @@ class PortfolioApp {
       modalTechnology.style.display = "none"
     }
 
+    if (urls) {
+      try {
+        const urlsData = JSON.parse(urls.replace(/&quot;/g, '"'))
+        let urlsHtml = '<h4>Links</h4><div class="modal-links">'
+
+        Object.entries(urlsData).forEach(([key, url]) => {
+          const linkText = key.charAt(0).toUpperCase() + key.slice(1)
+          urlsHtml += `<a href="${url}" target="_blank" rel="noopener noreferrer" class="modal-link">${linkText}</a>`
+        })
+
+        urlsHtml += "</div>"
+        modalUrls.innerHTML = urlsHtml
+        modalUrls.style.display = "block"
+      } catch (error) {
+        console.error("Error parsing URLs:", error)
+        modalUrls.style.display = "none"
+      }
+    } else {
+      modalUrls.style.display = "none"
+    }
+
     modal.classList.add("open")
     document.body.style.overflow = "hidden"
 
@@ -755,6 +755,7 @@ class PortfolioApp {
       themes,
       technical,
       technology,
+      urls,
     }
     this.saveState()
   }
@@ -807,6 +808,7 @@ class PortfolioApp {
               modalState.themes,
               modalState.technical,
               modalState.technology,
+              modalState.urls,
             )
           }, 100)
         }
@@ -1087,7 +1089,6 @@ class PortfolioApp {
 
   findWork(workId) {
     const allWorks = [
-      ...(this.data.projects.soundInstallations || []),
       ...(this.data.projects.performance || []),
       ...(this.data.projects.installations || []),
       ...(this.data.projects.drawings || []),
