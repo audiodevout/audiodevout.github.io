@@ -283,39 +283,39 @@ try {
       ],
 
       // OTHERS (drawings, writing, etc)
-      others: [
-        {
-          id: "ritual-computing-solo-sessions",
-          title: "Ritual Computing and Coding Sessions",
-          description:
-            "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
-          fullDescription:
-            "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator.",
-          medium: "Code sketching, procedural visuals, AI collaboration",
-          category: "SOLO • RESEARCH-BASED",
-          color: "electric-lime",
-          documentation: "In-progress sketches and logs",
-          images: [
-            "./assets/images/ritual-computing-1.png",
-            "./assets/images/ritual-computing-2.png",
-            "./assets/images/ritual-computing-3.jpg",
-          ],
-        },
-        {
-          id: "digital-sketches",
-          title: "Digital Sketches + Visual Explorations",
-          description:
-            "A collection of digital drawings exploring geometric patterns, urban textures, and algorithmic aesthetics.",
-          fullDescription:
-            "These sketches serve as visual research for larger projects, exploring the intersection of traditional South Asian geometric patterns with contemporary digital aesthetics. They range from quick gestural studies to more developed compositions that inform installation and performance work.",
-          medium: "Digital drawing, algorithmic pattern generation, mixed media",
-          category: "VISUAL RESEARCH",
-          color: "saffron",
-          themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
-          tools: "TouchDesigner, generative algorithms",
-          images: ["./assets/images/sketch1.jpg", "./assets/images/sketch2.png", "./assets/images/sketch3.png"],
-        },
-      ],
+      // others: [
+      //   {
+      //     id: "ritual-computing-solo-sessions",
+      //     title: "Ritual Computing and Coding Sessions",
+      //     description:
+      //       "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
+      //     fullDescription:
+      //       "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator.",
+      //     medium: "Code sketching, procedural visuals, AI collaboration",
+      //     category: "SOLO • RESEARCH-BASED",
+      //     color: "electric-lime",
+      //     documentation: "In-progress sketches and logs",
+      //     images: [
+      //       "./assets/images/ritual-computing-1.png",
+      //       "./assets/images/ritual-computing-2.png",
+      //       "./assets/images/ritual-computing-3.jpg",
+      //     ],
+      //   },
+      //   {
+      //     id: "digital-sketches",
+      //     title: "Digital Sketches + Visual Explorations",
+      //     description:
+      //       "A collection of digital drawings exploring geometric patterns, urban textures, and algorithmic aesthetics.",
+      //     fullDescription:
+      //       "These sketches serve as visual research for larger projects, exploring the intersection of traditional South Asian geometric patterns with contemporary digital aesthetics. They range from quick gestural studies to more developed compositions that inform installation and performance work.",
+      //     medium: "Digital drawing, algorithmic pattern generation, mixed media",
+      //     category: "VISUAL RESEARCH",
+      //     color: "saffron",
+      //     themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
+      //     tools: "TouchDesigner, generative algorithms",
+      //     images: ["./assets/images/sketch1.jpg", "./assets/images/sketch2.png", "./assets/images/sketch3.png"],
+      //   },
+      // ],
     },
 
     // Get all Bandcamp tracks for the sidebar

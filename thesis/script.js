@@ -10,6 +10,9 @@ class PortfolioApp {
     this.currentWork = null
     this.audioPlayer = null
     this.intersectionObserver = null
+    this.modalState = null
+    this.sidebarState = false
+    this.scrollPosition = 0
 
     this.init()
   }
@@ -26,13 +29,17 @@ class PortfolioApp {
       this.setupKeyboardNavigation()
       this.setupAccessibility()
 
+      this.restoreState()
+
       // Handle initial URL
       this.handleInitialRoute()
 
-      // Render initial view
-      this.renderPortfolio()
+      if (!this.stateRestored) {
+        this.renderPortfolio()
+        this.showPortfolio()
+      }
+
       this.renderBandcampTracks()
-      this.showPortfolio()
       this.hideLoading()
       this.updateButtonVisibility()
     } catch (error) {
@@ -122,41 +129,25 @@ class PortfolioApp {
   }
 
   setupBandcampSidebar() {
-    const bandcampToggle = document.querySelector(".bandcamp-toggle")
-    const bandcampSidebar = document.querySelector(".bandcamp-sidebar")
+    const musicButton = document.querySelector(".bandcamp-toggle")
+    const sidebar = document.querySelector(".bandcamp-sidebar")
+    const closeButton = document.querySelector(".sidebar-close")
 
-    if (!bandcampToggle || !bandcampSidebar) {
-      console.warn("Bandcamp sidebar elements not found")
-      return
-    }
+    if (musicButton && sidebar) {
+      musicButton.addEventListener("click", () => {
+        sidebar.classList.toggle("open")
+        this.sidebarState = sidebar.classList.contains("open")
+        this.saveState()
+      })
 
-    // Toggle sidebar
-    bandcampToggle.addEventListener("click", () => {
-      const isOpen = bandcampSidebar.classList.contains("open")
-      const isExpanded = bandcampToggle.getAttribute("aria-expanded") === "true"
-
-      bandcampSidebar.classList.toggle("open")
-      bandcampToggle.setAttribute("aria-expanded", !isExpanded)
-      document.body.classList.toggle("sidebar-open")
-
-      // Update toggle text
-      bandcampToggle.textContent = isOpen ? "Music" : "Close"
-    })
-
-    // Close sidebar when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!bandcampToggle.contains(e.target) && !bandcampSidebar.contains(e.target)) {
-        bandcampSidebar.classList.remove("open")
-        bandcampToggle.setAttribute("aria-expanded", "false")
-        document.body.classList.remove("sidebar-open")
-        bandcampToggle.textContent = "Music"
+      if (closeButton) {
+        closeButton.addEventListener("click", () => {
+          sidebar.classList.remove("open")
+          this.sidebarState = false
+          this.saveState()
+        })
       }
-    })
-
-    // Prevent sidebar close when clicking inside sidebar
-    bandcampSidebar.addEventListener("click", (e) => {
-      e.stopPropagation()
-    })
+    }
   }
 
   updateButtonVisibility() {
@@ -308,11 +299,22 @@ class PortfolioApp {
         this.navigateTo(parts[0] || "portfolio", null, false)
       }
     } else {
-      this.navigateTo("portfolio", null, false)
+      const storedView = sessionStorage.getItem("portfolioCurrentView")
+      const storedWork = sessionStorage.getItem("portfolioCurrentWork")
+
+      if (storedView && storedWork) {
+        this.navigateTo(storedView, storedWork, false)
+      } else if (storedView && storedView !== "work-detail") {
+        this.navigateTo(storedView, null, false)
+      } else {
+        this.navigateTo("portfolio", null, false)
+      }
     }
   }
 
   navigateTo(view, work = null, pushState = true) {
+    this.scrollPosition = window.pageYOffset
+
     // Determine the actual view to display
     if (work) {
       this.currentView = "work-detail"
@@ -321,6 +323,8 @@ class PortfolioApp {
       this.currentView = view
       this.currentWork = null
     }
+
+    this.saveState()
 
     // Update URL
     if (pushState) {
@@ -404,12 +408,10 @@ class PortfolioApp {
         const columnDiv = document.createElement("div")
         columnDiv.className = "works-column"
 
-        // Create column header
         const columnHeader = document.createElement("div")
         columnHeader.className = "category-header"
         columnHeader.innerHTML = `
           <h2 class="category-title">${column.title}</h2>
-          <div class="category-count">${column.works.length} ${column.works.length === 1 ? "work" : "works"}</div>
         `
         columnDiv.appendChild(columnHeader)
 
@@ -451,11 +453,18 @@ class PortfolioApp {
             displayImage
               ? `
             <img 
+              src="${displayImage}"
               data-src="${displayImage}"
               alt="${work.title}"
-              class="work-image lazy-loading"
+              class="work-image lazy-loading clickable-image"
               loading="lazy"
               data-testid="work-image-${work.id}"
+              data-modal-title="${work.title}"
+              data-modal-description="${work.description || work.fullDescription || ""}"
+              data-modal-category="${work.category || work.medium}"
+              data-modal-themes="${work.themes || ""}"
+              data-modal-technical="${work.technical || ""}"
+              data-modal-technology="${work.technology || ""}"
             >
           `
               : ""
@@ -474,6 +483,22 @@ class PortfolioApp {
 
     // Make card clickable
     card.addEventListener("click", (e) => {
+      if (e.target.classList.contains("clickable-image") && e.target.dataset.modalTitle) {
+        e.preventDefault()
+        e.stopPropagation()
+        const imageSrc = e.target.src || e.target.dataset.src
+        this.openModal(
+          imageSrc,
+          e.target.dataset.modalTitle,
+          e.target.dataset.modalDescription,
+          e.target.dataset.modalCategory,
+          e.target.dataset.modalThemes,
+          e.target.dataset.modalTechnical,
+          e.target.dataset.modalTechnology,
+        )
+        return
+      }
+
       // Don't navigate if clicking on action buttons
       if (!e.target.closest(".work-actions")) {
         this.navigateTo("portfolio", work.id)
@@ -493,7 +518,6 @@ class PortfolioApp {
     const container = document.querySelector(".work-content")
     const hasImages = work.images?.length > 0
     const hasVideos = work.videos?.length > 0
-    const hasBandcamp = work.bandcampTracks?.length > 0
 
     container.innerHTML = `
       <header class="work-header">
@@ -513,14 +537,18 @@ class PortfolioApp {
               (image, index) => `
             <figure class="gallery-item">
               <img 
+                src="${image}"
                 data-src="${image}"
                 alt="${work.title} - Image ${index + 1}"
                 class="gallery-image lazy-loading clickable-image"
                 loading="lazy"
                 data-testid="gallery-image-${index}"
                 data-modal-title="${work.title}"
-                data-modal-description="${work.description}"
+                data-modal-description="${work.fullDescription || work.description}"
                 data-modal-category="${work.category || work.medium}"
+                data-modal-themes="${work.themes || ""}"
+                data-modal-technical="${work.technical || ""}"
+                data-modal-technology="${work.technology || ""}"
               >
             </figure>
           `,
@@ -586,7 +614,7 @@ class PortfolioApp {
           work.technical
             ? `
           <div class="work-technical" data-testid="work-technical">
-            <h3>Technical</h3>
+            <h3>Technical Details</h3>
             <p>${work.technical}</p>
           </div>
         `
@@ -604,59 +632,6 @@ class PortfolioApp {
             : ""
         }
       </div>
-
-      ${
-        hasBandcamp
-          ? `
-        <div class="work-audio" data-testid="work-audio">
-          <h3>Audio</h3>
-          <div class="bandcamp-tracks">
-            ${work.bandcampTracks
-              .map(
-                (track, index) => `
-              <div class="bandcamp-embed" data-testid="bandcamp-embed-${track.trackId || index}">
-                <iframe
-                  style="border: 0; width: 100%; height: 120px;"
-                  src="https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=small/transparent=true/"
-                  seamless
-                  title="${track.title} by Asymmetrica"
-                  data-testid="bandcamp-iframe-${track.trackId || index}"
-                >
-                  <a href="${track.url}" target="_blank" rel="noopener noreferrer">
-                    ${track.title} by Asymmetrica
-                  </a>
-                </iframe>
-                <a href="${track.url}" target="_blank" rel="noopener noreferrer" class="bandcamp-link" data-testid="bandcamp-link-${track.trackId || index}">
-                  ▶ ${track.title} (Bandcamp)
-                </a>
-              </div>
-            `,
-              )
-              .join("")}
-          </div>
-        </div>
-      `
-          : ""
-      }
-
-      ${
-        work.urls
-          ? `
-        <div class="work-links" data-testid="work-links">
-          <h3>Links</h3>
-          ${Object.entries(work.urls)
-            .map(
-              ([type, url]) => `
-            <a href="${url}" target="_blank" rel="noopener noreferrer" class="external-link" data-testid="external-link-${type}">
-              ${type.toUpperCase()}
-            </a>
-          `,
-            )
-            .join("")}
-        </div>
-      `
-          : ""
-      }
     `
 
     // Setup lazy loading for new images
@@ -676,6 +651,10 @@ class PortfolioApp {
             <h2 class="modal-title"></h2>
             <div class="modal-meta"></div>
             <div class="modal-description"></div>
+            <div class="modal-full-description"></div>
+            <div class="modal-themes"></div>
+            <div class="modal-technical"></div>
+            <div class="modal-technology"></div>
             <div class="modal-tags"></div>
           </div>
           <div class="modal-image-container">
@@ -701,49 +680,150 @@ class PortfolioApp {
     // Add click listeners to images
     document.querySelectorAll(".clickable-image").forEach((img) => {
       img.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const imageSrc = img.src || img.dataset.src
         this.openModal(
-          img.src || img.dataset.src,
+          imageSrc,
           img.dataset.modalTitle,
           img.dataset.modalDescription,
           img.dataset.modalCategory,
+          img.dataset.modalThemes,
+          img.dataset.modalTechnical,
+          img.dataset.modalTechnology,
         )
       })
     })
   }
 
-  openModal(imageSrc, title, description, category) {
+  openModal(imageSrc, title, description, category, themes, technical, technology) {
     const modal = document.querySelector(".modal")
     const modalImage = modal.querySelector(".modal-image")
     const modalTitle = modal.querySelector(".modal-title")
     const modalMeta = modal.querySelector(".modal-meta")
     const modalDescription = modal.querySelector(".modal-description")
+    const modalFullDescription = modal.querySelector(".modal-full-description")
+    const modalThemes = modal.querySelector(".modal-themes")
+    const modalTechnical = modal.querySelector(".modal-technical")
+    const modalTechnology = modal.querySelector(".modal-technology")
 
     modalImage.src = imageSrc
     modalTitle.textContent = title
     modalMeta.textContent = category
-    modalDescription.textContent = description
+
+    // Handle description vs full description
+    if (description && description.length > 200) {
+      modalDescription.style.display = "none"
+      modalFullDescription.innerHTML = this.formatTextContent(description)
+      modalFullDescription.style.display = "block"
+    } else {
+      modalDescription.textContent = description
+      modalDescription.style.display = "block"
+      modalFullDescription.style.display = "none"
+    }
+
+    // Handle additional content sections
+    if (themes) {
+      modalThemes.innerHTML = `<h4>Themes</h4><p>${themes}</p>`
+      modalThemes.style.display = "block"
+    } else {
+      modalThemes.style.display = "none"
+    }
+
+    if (technical) {
+      modalTechnical.innerHTML = `<h4>Technical Details</h4><p>${technical}</p>`
+      modalTechnical.style.display = "block"
+    } else {
+      modalTechnical.style.display = "none"
+    }
+
+    if (technology) {
+      modalTechnology.innerHTML = `<h4>Technology</h4><p>${technology}</p>`
+      modalTechnology.style.display = "block"
+    } else {
+      modalTechnology.style.display = "none"
+    }
 
     modal.classList.add("open")
     document.body.style.overflow = "hidden"
+
+    this.modalState = {
+      imageSrc,
+      title,
+      description,
+      category,
+      themes,
+      technical,
+      technology,
+    }
+    this.saveState()
   }
 
   closeModal() {
     const modal = document.querySelector(".modal")
     modal.classList.remove("open")
     document.body.style.overflow = ""
+
+    this.modalState = null
+    this.saveState()
   }
 
-  findWork(workId) {
-    const allWorks = [
-      ...(this.data.projects.soundInstallations || []),
-      ...(this.data.projects.performance || []),
-      ...(this.data.projects.installations || []),
-      ...(this.data.projects.drawings || []),
-      ...(this.data.projects.writing || []),
-      ...(this.data.cv.exhibitions || []),
-    ]
+  saveState() {
+    try {
+      sessionStorage.setItem("portfolioCurrentView", this.currentView)
+      sessionStorage.setItem("portfolioCurrentWork", this.currentWork || "")
+      sessionStorage.setItem("portfolioModalState", JSON.stringify(this.modalState))
+      sessionStorage.setItem("portfolioSidebarState", this.sidebarState.toString())
+      sessionStorage.setItem("portfolioScrollPosition", this.scrollPosition.toString())
+    } catch (error) {
+      console.warn("Failed to save state:", error)
+    }
+  }
 
-    return allWorks.find((work) => work.id === workId)
+  restoreState() {
+    try {
+      // Restore sidebar state
+      const savedSidebarState = sessionStorage.getItem("portfolioSidebarState")
+      if (savedSidebarState === "true") {
+        this.sidebarState = true
+        const sidebar = document.querySelector(".bandcamp-sidebar")
+        if (sidebar) {
+          sidebar.classList.add("open")
+        }
+      }
+
+      // Restore modal state
+      const savedModalState = sessionStorage.getItem("portfolioModalState")
+      if (savedModalState && savedModalState !== "null") {
+        const modalState = JSON.parse(savedModalState)
+        if (modalState) {
+          // Delay modal restoration to ensure DOM is ready
+          setTimeout(() => {
+            this.openModal(
+              modalState.imageSrc,
+              modalState.title,
+              modalState.description,
+              modalState.category,
+              modalState.themes,
+              modalState.technical,
+              modalState.technology,
+            )
+          }, 100)
+        }
+      }
+
+      // Restore scroll position
+      const savedScrollPosition = sessionStorage.getItem("portfolioScrollPosition")
+      if (savedScrollPosition) {
+        setTimeout(() => {
+          window.scrollTo(0, Number.parseInt(savedScrollPosition))
+        }, 200)
+      }
+
+      this.stateRestored = true
+    } catch (error) {
+      console.warn("Failed to restore state:", error)
+    }
   }
 
   renderThesis() {
@@ -1003,6 +1083,19 @@ class PortfolioApp {
     if (loading) {
       loading.innerHTML = `<span class="error-text">${message}</span>`
     }
+  }
+
+  findWork(workId) {
+    const allWorks = [
+      ...(this.data.projects.soundInstallations || []),
+      ...(this.data.projects.performance || []),
+      ...(this.data.projects.installations || []),
+      ...(this.data.projects.drawings || []),
+      ...(this.data.projects.writing || []),
+      ...(this.data.cv.exhibitions || []),
+    ]
+
+    return allWorks.find((work) => work.id === workId)
   }
 }
 
