@@ -749,10 +749,7 @@
           <div class="page-content">
             <div class="page-header">
               <h2 class="page-title">INSTALLATIONS</h2>
-              <p style="margin-top: var(--spacing-md); font-size: var(--text-md);">
-                Generative and interactive works exploring computational creativity
-              </p>
-            </div>
+             </div>
             
             <div class="project-grid">
               ${

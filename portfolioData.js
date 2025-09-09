@@ -44,7 +44,7 @@ try {
            "Bell-driven experimental textures by asymmetrica, meditative yet fleeting.",
          fullDescription:
            "have a nice last few days of summer centers on bell tones and resonant layers. The piece balances clarity and haze, echoing cycles of memory and transition, like the shimmer of late-season light dissolving into air.",
-         medium: "Audio track",
+         medium: "Digital Audio, Generative Synthesis",
          category: "ASYMMETRICA AUDIO COLLECTION",
          color: "cerulean",
          themes: "Transience, resonance, seasonal atmosphere",
@@ -64,7 +64,7 @@ try {
            "Glitchy percussive experiment by asymmetrica, exploring timing and texture.",
          fullDescription:
            "biding my time is a rhythmic study shaped through glitch techniques and Reaktor experiments. It navigates broken beats, digital stutters, and layered percussive fragments, producing an evolving sense of restless suspension.",
-         medium: "Audio track",
+         medium: "Digital Audio, Reaktor",
          category: "ASYMMETRICA AUDIO COLLECTION",
          color: "cerulean",
          themes: "Glitch, rhythm, experimentation",
@@ -84,7 +84,7 @@ try {
            "Frequency modulation study by asymmetrica, balancing chaos and control.",
          fullDescription:
            "a reasonable crashout is a raw FM synthesis exploration. Shifting between tonal density and fractured collapse, it unfolds as a study of timbre, saturation, and volatility, testing the boundaries of sound’s structural integrity.",
-         medium: "Audio track",
+         medium: "Frequency Modulation",
          category: "ASYMMETRICA AUDIO COLLECTION",
          color: "cerulean",
          themes: "FM synthesis, intensity, sonic collapse",
@@ -292,19 +292,19 @@ try {
               },
             ],
           },
-        {
-          id: "ambient-sound-production",
-          title: "Ambient Sound Production Experiments",
-          description: "Explorations in generative sound design shaped by presence, data, and environment.",
-          fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
-          medium: "Generative audio, environmental data, custom-built software/hardware systems",
-          category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
-          tags: ["generative", "responsive", "sensor-based", "atmospheric"],
-          color: "saffron",
-          technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines",
-          // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
-          // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
-        }
+        // {
+        //   id: "ambient-sound-production",
+        //   title: "Ambient Sound Production Experiments",
+        //   description: "Explorations in generative sound design shaped by presence, data, and environment.",
+        //   fullDescription: "Working with sound as a subtle presence—designing systems that generate evolving audio textures in response to environmental inputs. These experiments are guided by a meditative, process-driven approach to coding and sonic composition.",
+        //   medium: "Generative audio, environmental data, custom-built software/hardware systems",
+        //   category: "SOUND SYSTEMS / ENVIRONMENTAL AUDIO",
+        //   tags: ["generative", "responsive", "sensor-based", "atmospheric"],
+        //   color: "saffron",
+        //   technical: "Arduino, environmental sensors, real-time sound synthesis, custom DSP pipelines",
+        //   // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
+        //   // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
+        // }
 
       ],
 
@@ -654,22 +654,6 @@ try {
       ],
 
       writing: [
-        
-        {
-          id: "symmetrical-fictions-paper",
-          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-          description: "A research paper exploring the theoretical framework behind the video installation project.",
-          fullDescription:
-            "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
-          medium: "Academic paper, theoretical research",
-          category: "RESEARCH & THEORY",
-          color: "cerulean",
-          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
-          urls: {
-            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-          },
-        },
 
         {
           id: "nervous-systems-kel30",
@@ -698,7 +682,59 @@ try {
           images: [
             "./assets/images/fever-dream-poster.jpg"
                   ],          
-        }
+        },
+        
+        {
+          id: "symmetrical-fictions-paper",
+          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
+          description: "A research paper exploring the theoretical framework behind the video installation project.",
+          fullDescription:
+            "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
+          medium: "Academic paper, theoretical research",
+          category: "RESEARCH & THEORY",
+          color: "cerulean",
+          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          urls: {
+            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+          },
+        },
+        
+
+        {
+          id: "transcending-identities",
+          title: "Transcending Identities: Gender Performance and Psychedelic Trance in Goa’s Rave Scene",
+          description: "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
+          fullDescription: "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
+          medium: "Ethnographic research, festival case study, electronic music culture",
+          category: "RESEARCH & WRITING",
+          tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
+          color: "violet",
+          themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
+          urls: {
+            pdf: "./assets/documents/gspm-paper.pdf"
+          }
+        },
+        
+        {
+          id: "post-television-audiences",
+          title: "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
+          description: "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
+          fullDescription: "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while remaining embedded in corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
+          medium: "Research paper, digital media studies, cultural theory",
+          category: "RESEARCH & WRITING",
+          tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
+          color: "crimson",
+          themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
+          urls: {
+            pdf: "./assets/documents/aps-paper.pdf"
+          }
+        },
+
+
+        
+
+
         // {
         //     id: "prime-spiral-visualizer-tox",
         //     title: "Prime Spiral Visualizer (.tox download)",
@@ -939,6 +975,7 @@ try {
       ],
       description: "Connect for collaborations, commissions, or critical discourse.",
     },
+
 
 
     pageContent: {

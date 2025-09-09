@@ -38,32 +38,33 @@
   --text-4xl: 2.4rem;   /* Increased from 2.25rem */
   --text-5xl: 3.2rem;   /* Increased from 3rem */
 
-  /* Enhanced color palette for better contrast */
-  --warm-white: #faf9f7;
-  --soft-gray: #e0ddd6;     /* Slightly darker for better contrast */
-  --medium-gray: #8b8680;   /* Darker for WCAG AA compliance */
-  --charcoal: #1a1816;
-  --dark-gray: #3a3631;
-  --deep-charcoal: #1a1816;
-  
-  /* Muted accent colors - Enhanced contrast */
-  --clay-orange: #c4935f;   /* Slightly darker */
-  --sage-green: #7a9b7e;    /* Darker for better contrast */
-  --dusty-blue: #6b7d91;    /* Darker for better contrast */
-  --warm-beige: #b5a688;    /* Darker for better contrast */
-  --soft-terracotta: #a6846a; /* Darker for better contrast */
+  /* Modern minimal balanced neutral palette */
+    --warm-white: #1e1e1c;       /* charcoal, neutral slightly warm */
+    --soft-gray: #2e2d2b;        /* medium neutral gray */
+    --medium-gray: #f4f3f2;      /* soft light gray for contrast */
+    --charcoal: #d6d5d2;         /* light muted gray */
+    --dark-gray: #7f7d78;        /* medium warm-gray */
+    --deep-charcoal: #f9f8f7;    /* very light neutral, originally warm-white */
+    
+    /* Muted accent colors - keep for subtlety */
+    --clay-orange: #c4935f;      /* clay-orange */
+    --sage-green: #7a9b7e;       /* sage-green */
+    --dusty-blue: #6b7d91;       /* dusty-blue */
+    --warm-beige: #b5a688;       /* warm-beige */
+    --soft-terracotta: #a6846a;  /* soft-terracotta */
 
-  /* Transparent layered materials - Enhanced contrast */
-  --glass-panel: hsla(35, 15%, 96%, 0.85);        /* Lighter background */
-  --glass-panel-dark: hsla(25, 8%, 12%, 0.9);     /* Darker for contrast */
-  --glass-overlay: hsla(35, 15%, 97%, 0.95);      /* Higher opacity */
-  --glass-border: hsla(35, 15%, 65%, 0.4);        /* Darker border */
-  --glass-accent: hsla(35, 15%, 90%, 0.25);       /* More visible */
+    /* Transparent layered materials - balanced neutrals */
+    --glass-panel: hsla(35, 8%, 15%, 0.85);       /* dark neutral overlay */
+    --glass-panel-dark: hsla(35, 8%, 95%, 0.9);   /* light neutral overlay */
+    --glass-overlay: hsla(35, 8%, 18%, 0.95);     /* subtle neutral layer */
+    --glass-border: hsla(35, 8%, 55%, 0.4);       /* neutral border */
+    --glass-accent: hsla(35, 8%, 25%, 0.25);      /* subtle accent */
 
-  /* Subtle shadow colors */
-  --shadow-warm: hsla(35, 25%, 50%, 0.2);         /* Darker for visibility */
-  --shadow-cool: hsla(210, 15%, 50%, 0.18);       /* Darker for visibility */
-  --shadow-neutral: hsla(0, 0%, 0%, 0.12);        /* Darker for visibility */
+    /* Subtle shadow colors - neutral warm shadows */
+    --shadow-warm: hsla(35, 20%, 30%, 0.2);       /* slightly warm shadow */
+    --shadow-cool: hsla(35, 15%, 35%, 0.18);      /* slightly warm gray shadow */
+    --shadow-neutral: hsla(0, 0%, 0%, 0.12);      /* neutral black for contrast */
+
 
   /* Typography */
   --font-primary: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -903,7 +904,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title-line:nth-child(4) {
-  color: var(--charcoal);
+  color: var(--soft-terracotta);
   animation-delay: 1.5s;
 }
 
@@ -1259,49 +1260,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--charcoal);
 }
 
-/* Fixed Background Elements - Reduced Opacity */
-.particle-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: var(--z-mandala);
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.mandala-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: var(--z-background);
-  pointer-events: none;
-  opacity: 0.7;
-  transition: opacity 0.5s ease;
-  will-change: opacity;
-}
-
-.galaxy-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: var(--z-galaxy);
-  pointer-events: none;
-  opacity: 0.1;
-  transition: opacity 0.5s ease;
-  will-change: opacity;
-}
-
-/* Cursor Effects - Desktop Only */
-.cursor-crosshair,
-.cursor-trail {
-  display: none;
-}
 
 /* Bandcamp Embed Styles */
 .bandcamp-embeds {
