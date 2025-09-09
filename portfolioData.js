@@ -331,7 +331,32 @@ try {
             "./assets/images/fever-dream-performance-1.jpg",
             "./assets/images/fever-dream-poster.jpg"
           ]
+        },
+
+        {
+          id: "spaces-groningen",
+          title: "VJ - Spaces",
+          description:
+            "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
+          fullDescription:
+            "A collaborative event combining ambient soundscapes, poetry, and visual projections, designed to immerse attendees in a meditative, sensory environment. The event merges curated ambient music with live visuals, transforming the club space into a reflective, poetic experience. Performances explore the intersection of sound, text, and imagery, allowing the audience to drift between contemplation and subtle stimulation.",
+          medium: "Live VJing, ambient music, poetry, audiovisual installation",
+          category: "VJ • AMBIENT MUSIC • POETRY",
+          themes: "Immersive sound, ambient textures, poetic expression, club-based audiovisual experience",
+          tags: "LIVE • VJ • AMBIENT • POETRY • AUDIOVISUAL",
+          color: "cerulean",
+          technical: "Video projection, live music mixing, audiovisual sequencing",
+          // videos: [
+          //   "./assets/videos/spaces-video-1.mp4",
+          //   "./assets/videos/spaces-video-2.mp4",
+          //   "./assets/videos/spaces-video-3.mp4"
+          // ],
+          images: [
+            "./assets/images/spaces.jpg",
+            "./assets/images/spaces-1.jpg"
+          ]
         }
+
 
         
       ],
@@ -919,22 +944,21 @@ try {
     },
 
      contact: {
-      about: {
-        title: "About",
-        description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. 
-        My practice explores how computational systems can become vehicles for meditative experience, cultural memory, and speculative futures.
-        Through installations, performances, and research, I investigate the unstable boundaries between organic and synthetic, 
-        rational and intuitive, individual and collective. My work often incorporates elements relating to entropy and noise, (a)symmetry, and healing through technology, reimagined through contemporary digital tools.
-        Currently based between experimental sound activities, creative codingn and academic research contexts, I develop projects that challenge techno-positivist 
-        narratives while creating space for contemplative engagement with technology.`,
-        image: "./assets/images/atharva.jpeg",
-        credentials: [
-          "Experimental Sound Artist (Asymmetrica)",
-          "Kinetic Sculptures",
-          "AudioVisual Performances",
-          "TouchDesigner Tutorials (AudioDevOut)"
-        ]
-      },
+       about: {
+         title: "ABOUT ME",
+         description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. 
+         My practice spans kinetic sculpture, audiovisual performance, generative systems, and research-driven writing—using computational processes as both medium and method. I approach sound and code as materials for building contemplative experiences, often drawing from noise, entropy, and (a)symmetry to reimagine how we listen, perceive, and engage with digital systems. 
+
+         Through installations, performances, and academic inquiry, I explore the unstable boundaries between the organic and synthetic, the rational and intuitive, the individual and collective. My work reflects on ritual, memory, and healing through technology—whether transforming environmental data into generative soundscapes, designing embodied performance tools, or composing speculative cartographies. Based between experimental sound practice, creative coding, and research contexts, I develop projects that question techno-positivist narratives while creating spaces for reflection, presence, and poetic engagement with technology.`,
+         image: "./assets/images/atharva.jpeg",
+         credentials: [
+           "Experimental Sound Artist (asymmetrica)",
+           "Kinetic Sculptures",
+           "AudioVisual Performances",
+           "TouchDesigner Tutorials (audiodevout)"
+         ]
+       },
+
       social: [
         {
           name: "YouTube",
@@ -973,7 +997,7 @@ try {
           color: "cerulean",
         },
       ],
-      description: "Connect for collaborations, commissions, or critical discourse.",
+      description: "I love to talk about stuff!",
     },
 
 

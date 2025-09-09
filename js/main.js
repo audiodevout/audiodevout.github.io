@@ -712,7 +712,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title">SOUND INSTALLATIONS</h2>
+              <h2 class="page-title">SOUND</h2>
             </div>
             
             <div class="project-grid">
@@ -776,7 +776,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title">DRAWINGS / SKETCH</h2>
+              <h2 class="page-title">DRAWINGS</h2>
             </div>
             
             <div class="project-grid">
@@ -800,7 +800,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title">WRITING / THEORY</h2>
+              <h2 class="page-title">ARCHIVE</h2>
             </div>
             
             <div class="project-grid">
@@ -827,7 +827,7 @@
         <section class="page-section active">
           <div class="page-content">
             <div class="page-header">
-              <h2 class="page-title">WHO AM I?</h2>
+              <h2 class="page-title">ATHARVA GUPTA</h2>
             </div>
             
             <!-- About Section -->
@@ -894,7 +894,7 @@
             <!-- Contact Section -->
             <div class="contact-section">
               <h3 class="contact-heading">
-                CONNECT & COLLABORATE
+                MY SOCIALS
               </h3>
 
               <div class="social-grid">
