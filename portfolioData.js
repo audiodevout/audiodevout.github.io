@@ -37,66 +37,63 @@ try {
         //   ]
         // },
 
-       {
-         id: "asymmetrica-have-a-nice-last-few-days-of-summer",
-         title: "have a nice last few days of summer",
-         description:
-           "Bell-driven experimental textures by asymmetrica, meditative yet fleeting.",
-         fullDescription:
-           "have a nice last few days of summer centers on bell tones and resonant layers. The piece balances clarity and haze, echoing cycles of memory and transition, like the shimmer of late-season light dissolving into air.",
-         medium: "Digital Audio, Generative Synthesis",
-         category: "ASYMMETRICA AUDIO COLLECTION",
-         color: "cerulean",
-         themes: "Transience, resonance, seasonal atmosphere",
-         technology: "Bandcamp, bell synthesis",
-         bandcampTracks: [
-           {
-             title: "have a nice last few days of summer",
-             trackId: "1778941986",
-             url: "https://asymmetrica.bandcamp.com/track/have-a-nice-last-few-days-of-summer",
-           },
-         ],
-       },
-       {
-         id: "asymmetrica-biding-my-time",
-         title: "biding my time",
-         description:
-           "Glitchy percussive experiment by asymmetrica, exploring timing and texture.",
-         fullDescription:
-           "biding my time is a rhythmic study shaped through glitch techniques and Reaktor experiments. It navigates broken beats, digital stutters, and layered percussive fragments, producing an evolving sense of restless suspension.",
-         medium: "Digital Audio, Reaktor",
-         category: "ASYMMETRICA AUDIO COLLECTION",
-         color: "cerulean",
-         themes: "Glitch, rhythm, experimentation",
-         technology: "Bandcamp, Reaktor",
-         bandcampTracks: [
-           {
-             title: "biding my time",
-             trackId: "1736065382",
-             url: "https://asymmetrica.bandcamp.com/track/biding-my-time",
-           },
-         ],
-       },
-       {
-         id: "asymmetrica-a-reasonable-crashout",
-         title: "a reasonable crashout",
-         description:
-           "Frequency modulation study by asymmetrica, balancing chaos and control.",
-         fullDescription:
-           "a reasonable crashout is a raw FM synthesis exploration. Shifting between tonal density and fractured collapse, it unfolds as a study of timbre, saturation, and volatility, testing the boundaries of sound’s structural integrity.",
-         medium: "Frequency Modulation",
-         category: "ASYMMETRICA AUDIO COLLECTION",
-         color: "cerulean",
-         themes: "FM synthesis, intensity, sonic collapse",
-         technology: "Bandcamp, frequency modulation synthesis",
-         bandcampTracks: [
-           {
-             title: "a reasonable crashout",
-             trackId: "4106544270",
-             url: "https://asymmetrica.bandcamp.com/track/a-reasonable-crashout",
-           },
-         ],
-       },
+        {
+          id: "asymmetrica-have-a-nice-last-few-days-of-summer",
+          title: "have a nice last few days of summer",
+          description: "Bell-driven experimental textures by asymmetrica, meditative yet fleeting.",
+          fullDescription:
+            "have a nice last few days of summer centers on bell tones and resonant layers. The piece balances clarity and haze, echoing cycles of memory and transition, like the shimmer of late-season light dissolving into air.",
+          medium: "Digital Audio, Generative Synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Transience, resonance, seasonal atmosphere",
+          technology: "Bandcamp, bell synthesis",
+          bandcampTracks: [
+            {
+              title: "have a nice last few days of summer",
+              trackId: "1778941986",
+              url: "https://asymmetrica.bandcamp.com/track/have-a-nice-last-few-days-of-summer",
+            },
+          ],
+        },
+        {
+          id: "asymmetrica-biding-my-time",
+          title: "biding my time",
+          description: "Glitchy percussive experiment by asymmetrica, exploring timing and texture.",
+          fullDescription:
+            "biding my time is a rhythmic study shaped through glitch techniques and Reaktor experiments. It navigates broken beats, digital stutters, and layered percussive fragments, producing an evolving sense of restless suspension.",
+          medium: "Digital Audio, Reaktor",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Glitch, rhythm, experimentation",
+          technology: "Bandcamp, Reaktor",
+          bandcampTracks: [
+            {
+              title: "biding my time",
+              trackId: "1736065382",
+              url: "https://asymmetrica.bandcamp.com/track/biding-my-time",
+            },
+          ],
+        },
+        {
+          id: "asymmetrica-a-reasonable-crashout",
+          title: "a reasonable crashout",
+          description: "Frequency modulation study by asymmetrica, balancing chaos and control.",
+          fullDescription:
+            "a reasonable crashout is a raw FM synthesis exploration. Shifting between tonal density and fractured collapse, it unfolds as a study of timbre, saturation, and volatility, testing the boundaries of sound’s structural integrity.",
+          medium: "Frequency Modulation",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "FM synthesis, intensity, sonic collapse",
+          technology: "Bandcamp, frequency modulation synthesis",
+          bandcampTracks: [
+            {
+              title: "a reasonable crashout",
+              trackId: "4106544270",
+              url: "https://asymmetrica.bandcamp.com/track/a-reasonable-crashout",
+            },
+          ],
+        },
 
         {
           id: "asymmetrica-symmetrical-fictions",
@@ -122,8 +119,7 @@ try {
         {
           id: "asymmetrica-a-reasonable-crashout",
           title: "A Reasonable Crashout",
-          description:
-            "A chaotic yet rhythmic experiment in modular-style sequencing inside Ableton Live.",
+          description: "A chaotic yet rhythmic experiment in modular-style sequencing inside Ableton Live.",
           fullDescription:
             "A Reasonable Crashout is a deliberately unstable composition—a digital homage to modular synthesis built entirely in Ableton. The track oscillates between glitchy randomness and hypnotic repetition, filled with jittery pattern jumps, unpredictable modulation, and a constantly morphing yet grounded melodic pulse. It's a study in fractured coherence: non-linear, algorithmically warped, but held together by an insistent sense of drive.",
           medium: "Digital audio, algorithmic sequencing",
@@ -140,158 +136,153 @@ try {
           ],
         },
 
+        {
+          id: "asymmetrica-stranded-deep",
+          title: "Stranded Deep Series",
+          description:
+            "A paired exploration of displacement and rapid flux through digital soundscapes, merging organic resonance and synthetic textures.",
+          fullDescription:
+            "This pair—'stranded deep' and 'stranded deep but fast'—represents a sonic dive into temporal distortion and emotional flux. These compositions juxtapose slow meditative pulses with accelerated glitch rhythms, reflecting themes of isolation and rapid change.",
+          medium: "Digital audio, generative synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "neon-magenta",
+          themes: "Temporal manipulation, glitch aesthetics, organic-synthetic synthesis",
+          technology: "DAW, granular synthesis, digital manipulation",
+          bandcampTracks: [
+            {
+              title: "stranded deep but fast",
+              trackId: "2743015108",
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
+            },
+            {
+              title: "stranded deep",
+              trackId: "2338898025",
+              url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
+            },
+          ],
+        },
 
         {
-            id: "asymmetrica-stranded-deep",
-            title: "Stranded Deep Series",
-            description:
-              "A paired exploration of displacement and rapid flux through digital soundscapes, merging organic resonance and synthetic textures.",
-            fullDescription:
-              "This pair—'stranded deep' and 'stranded deep but fast'—represents a sonic dive into temporal distortion and emotional flux. These compositions juxtapose slow meditative pulses with accelerated glitch rhythms, reflecting themes of isolation and rapid change.",
-            medium: "Digital audio, generative synthesis",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "neon-magenta",
-            themes: "Temporal manipulation, glitch aesthetics, organic-synthetic synthesis",
-            technology: "DAW, granular synthesis, digital manipulation",
-            bandcampTracks: [
-              {
-                title: "stranded deep but fast",
-                trackId: "2743015108",
-                url: "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast",
-              },
-              {
-                title: "stranded deep",
-                trackId: "2338898025",
-                url: "https://asymmetrica.bandcamp.com/track/stranded-deep",
-              },
-            ],
-          },
+          id: "asymmetrica-tiptoe",
+          title: "Tiptoe",
+          description:
+            "A delicate balance of tension and subtle sonic shifts, tiptoeing between ambient textures and rhythmic pulses.",
+          fullDescription:
+            "Tiptoe navigates quiet spaces filled with fragile sound detail, exploring the interface between near silence and low-frequency movements. It’s an experiment in minimalism and patience.",
+          medium: "Digital audio, ambient synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Minimalism, ambient textures, tension and release",
+          technology: "DAW, modular synth, field recording",
+          bandcampTracks: [
+            {
+              title: "tiptoe",
+              trackId: "1726285270",
+              url: "https://asymmetrica.bandcamp.com/track/tiptoe",
+            },
+          ],
+        },
 
-          {
-            id: "asymmetrica-tiptoe",
-            title: "Tiptoe",
-            description:
-              "A delicate balance of tension and subtle sonic shifts, tiptoeing between ambient textures and rhythmic pulses.",
-            fullDescription:
-              "Tiptoe navigates quiet spaces filled with fragile sound detail, exploring the interface between near silence and low-frequency movements. It’s an experiment in minimalism and patience.",
-            medium: "Digital audio, ambient synthesis",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "cerulean",
-            themes: "Minimalism, ambient textures, tension and release",
-            technology: "DAW, modular synth, field recording",
-            bandcampTracks: [
-              {
-                title: "tiptoe",
-                trackId: "1726285270",
-                url: "https://asymmetrica.bandcamp.com/track/tiptoe",
-              },
-            ],
-          },
+        {
+          id: "asymmetrica-supersounds",
+          title: "Supersounds",
+          description: "An experimental dive into layered synthetic timbres and expansive sound fields.",
+          fullDescription:
+            "Supersounds layers evolving textures and synthetic drones to create a complex soundscape that challenges perception and embraces machine improvisation.",
+          medium: "Digital audio, experimental electronics",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "electric-lime",
+          themes: "Synthetic layering, machine improvisation, drone textures",
+          technology: "DAW, Max/MSP, modular synth",
+          bandcampTracks: [
+            {
+              title: "supersounds",
+              trackId: "960218379",
+              url: "https://asymmetrica.bandcamp.com/track/supersounds",
+            },
+          ],
+        },
 
-          {
-            id: "asymmetrica-supersounds",
-            title: "Supersounds",
-            description:
-              "An experimental dive into layered synthetic timbres and expansive sound fields.",
-            fullDescription:
-              "Supersounds layers evolving textures and synthetic drones to create a complex soundscape that challenges perception and embraces machine improvisation.",
-            medium: "Digital audio, experimental electronics",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "electric-lime",
-            themes: "Synthetic layering, machine improvisation, drone textures",
-            technology: "DAW, Max/MSP, modular synth",
-            bandcampTracks: [
-              {
-                title: "supersounds",
-                trackId: "960218379",
-                url: "https://asymmetrica.bandcamp.com/track/supersounds",
-              },
-            ],
-          },
+        {
+          id: "asymmetrica-stretching",
+          title: "Stretching",
+          description: "A sonic exploration of elasticity and temporal extension within digital sound design.",
+          fullDescription:
+            "Stretching plays with time, slowing and elongating motifs to blur boundaries between moment and duration, creating a meditative auditory space.",
+          medium: "Digital audio, time-stretching techniques",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "saffron",
+          themes: "Temporal extension, meditative soundscapes",
+          technology: "DAW, granular synthesis, field recordings",
+          bandcampTracks: [
+            {
+              title: "stretching",
+              trackId: "2000021307",
+              url: "https://asymmetrica.bandcamp.com/track/stretching",
+            },
+          ],
+        },
 
-          {
-            id: "asymmetrica-stretching",
-            title: "Stretching",
-            description:
-              "A sonic exploration of elasticity and temporal extension within digital sound design.",
-            fullDescription:
-              "Stretching plays with time, slowing and elongating motifs to blur boundaries between moment and duration, creating a meditative auditory space.",
-            medium: "Digital audio, time-stretching techniques",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "saffron",
-            themes: "Temporal extension, meditative soundscapes",
-            technology: "DAW, granular synthesis, field recordings",
-            bandcampTracks: [
-              {
-                title: "stretching",
-                trackId: "2000021307",
-                url: "https://asymmetrica.bandcamp.com/track/stretching",
-              },
-            ],
-          },
+        {
+          id: "asymmetrica-the-machine",
+          title: "The Machine",
+          description:
+            "An exploration of mechanized rhythms and synthetic textures embodying the essence of automated sound production.",
+          fullDescription:
+            "The Machine evokes industrial soundscapes with tight rhythmic patterns and digital noise, interrogating the relationship between human and machine in sound creation.",
+          medium: "Digital audio, rhythm synthesis",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "cerulean",
+          themes: "Industrial aesthetics, mechanized rhythm, synthetic textures",
+          technology: "DAW, Max/MSP, modular synthesis",
+          bandcampTracks: [
+            {
+              title: "the machine",
+              trackId: "73420518",
+              url: "https://asymmetrica.bandcamp.com/track/the-machine",
+            },
+          ],
+        },
 
-          {
-            id: "asymmetrica-the-machine",
-            title: "The Machine",
-            description:
-              "An exploration of mechanized rhythms and synthetic textures embodying the essence of automated sound production.",
-            fullDescription:
-              "The Machine evokes industrial soundscapes with tight rhythmic patterns and digital noise, interrogating the relationship between human and machine in sound creation.",
-            medium: "Digital audio, rhythm synthesis",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "cerulean",
-            themes: "Industrial aesthetics, mechanized rhythm, synthetic textures",
-            technology: "DAW, Max/MSP, modular synthesis",
-            bandcampTracks: [
-              {
-                title: "the machine",
-                trackId: "73420518",
-                url: "https://asymmetrica.bandcamp.com/track/the-machine",
-              },
-            ],
-          },
+        {
+          id: "asymmetrica-not-as-i-remember-it",
+          title: "Not As I Remember It",
+          description: "A reflective piece examining memory through fragmented sound and abstract textures.",
+          fullDescription:
+            "Not As I Remember It distorts familiar motifs into abstract forms, questioning the reliability of recollection and the fluidity of sonic memory.",
+          medium: "Digital audio, sound manipulation",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "electric-lime",
+          themes: "Memory, abstraction, sonic fragmentation",
+          technology: "DAW, field recording, granular synthesis",
+          bandcampTracks: [
+            {
+              title: "not as i remember it",
+              trackId: "750668778",
+              url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
+            },
+          ],
+        },
 
-          {
-            id: "asymmetrica-not-as-i-remember-it",
-            title: "Not As I Remember It",
-            description:
-              "A reflective piece examining memory through fragmented sound and abstract textures.",
-            fullDescription:
-              "Not As I Remember It distorts familiar motifs into abstract forms, questioning the reliability of recollection and the fluidity of sonic memory.",
-            medium: "Digital audio, sound manipulation",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "electric-lime",
-            themes: "Memory, abstraction, sonic fragmentation",
-            technology: "DAW, field recording, granular synthesis",
-            bandcampTracks: [
-              {
-                title: "not as i remember it",
-                trackId: "750668778",
-                url: "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it",
-              },
-            ],
-          },
-
-          {
-            id: "asymmetrica-automaton",
-            title: "Automaton",
-            description:
-              "An exploration of mechanical repetition and evolving digital patterns.",
-            fullDescription:
-              "Automaton features repetitive motifs and incremental variations that evoke mechanized processes and evolving synthetic life.",
-            medium: "Digital audio, generative patterns",
-            category: "ASYMMETRICA AUDIO COLLECTION",
-            color: "neon-magenta",
-            themes: "Repetition, mechanization, generative synthesis",
-            technology: "DAW, modular synthesis, Max/MSP",
-            bandcampTracks: [
-              {
-                title: "automaton",
-                trackId: "3985467816",
-                url: "https://asymmetrica.bandcamp.com/track/automaton",
-              },
-            ],
-          },
+        {
+          id: "asymmetrica-automaton",
+          title: "Automaton",
+          description: "An exploration of mechanical repetition and evolving digital patterns.",
+          fullDescription:
+            "Automaton features repetitive motifs and incremental variations that evoke mechanized processes and evolving synthetic life.",
+          medium: "Digital audio, generative patterns",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "neon-magenta",
+          themes: "Repetition, mechanization, generative synthesis",
+          technology: "DAW, modular synthesis, Max/MSP",
+          bandcampTracks: [
+            {
+              title: "automaton",
+              trackId: "3985467816",
+              url: "https://asymmetrica.bandcamp.com/track/automaton",
+            },
+          ],
+        },
         // {
         //   id: "ambient-sound-production",
         //   title: "Ambient Sound Production Experiments",
@@ -305,7 +296,6 @@ try {
         //   // audioFile: "./assets/audio/ambient-sound-production-sample.mp3",
         //   // images: ["./assets/images/ambient-sound-1.jpg", "./assets/images/ambient-sound-2.jpg"],
         // }
-
       ],
 
       performance: [
@@ -316,9 +306,11 @@ try {
             "A modular gesture-driven audiovisual system where the body becomes the instrument—generating sound, visuals, and presence in real time.",
           fullDescription:
             "This ongoing system merges gesture detection, real-time sound design, and generative visuals into a single performance toolkit. Built with MediaPipe and TouchDesigner, it uses body movement to manipulate soundscapes and visuals simultaneously—blurring the lines between code, choreography, and live ritual. First presented at *Fever Dream*—a glitch-poetic installation exploring digital anxiety through spoken word and ambient sound production—the system has evolved into a modular, expressive platform for live A/V performance. The gestures control everything from glitchy textures and drone tones to cinematic pulses and dynamic projections, all shaped by an ambient, meditative coding process rooted in presence and flow. It is not just a tool, but a responsive ecosystem—sensorial, poetic, and embodied.",
-          medium: "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
+          medium:
+            "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
           category: "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
-          themes: "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
+          themes:
+            "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
           tags: "INTERACTIVE • GESTURE • AUDIOVISUAL • SENSORIAL • REAL-TIME",
           color: "cerulean",
           technical: "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
@@ -329,15 +321,14 @@ try {
           images: [
             "./assets/images/fever-dream-performance.jpg",
             "./assets/images/fever-dream-performance-1.jpg",
-            "./assets/images/fever-dream-poster.jpg"
-          ]
+            "./assets/images/fever-dream-poster.jpg",
+          ],
         },
 
         {
           id: "spaces-groningen",
           title: "VJ - Spaces",
-          description:
-            "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
+          description: "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
           fullDescription:
             "A collaborative event combining ambient soundscapes, poetry, and visual projections, designed to immerse attendees in a meditative, sensory environment. The event merges curated ambient music with live visuals, transforming the club space into a reflective, poetic experience. Performances explore the intersection of sound, text, and imagery, allowing the audience to drift between contemplation and subtle stimulation.",
           medium: "Live VJing, ambient music, poetry, audiovisual installation",
@@ -351,77 +342,79 @@ try {
           //   "./assets/videos/spaces-video-2.mp4",
           //   "./assets/videos/spaces-video-3.mp4"
           // ],
-          images: [
-            "./assets/images/spaces.jpg",
-            "./assets/images/spaces-1.jpg"
-          ]
-        }
-
-
-        
+          images: ["./assets/images/spaces.jpg", "./assets/images/spaces-1.jpg"],
+        },
       ],
 
       // REPLACE the existing generativeAV and interactive arrays with:
       installations: [
-        {
-          id: "rain-reminders",
-          title: "Rain Reminders",
-          description:
-            "A 1.8-meter-tall kinetic sound sculpture featuring a slowly rotating rain stick suspended on a raw wooden and steel armature.",
-          fullDescription:
-            "Rain Reminders is a meditative kinetic installation that reimagines the rain stick—not as a novelty or ritual toy, but as a durational sound object. The sculpture features a custom motor-driven rotation system that turns a handmade 80 cm rain stick slowly on its horizontal axis. As it rotates, seeds cascade inside, producing a gentle, unamplified texture reminiscent of rainfall.\n\nConstructed from coarse and industrial materials—steel square tube rods, a 6x4 wood beam, grey duct tape, and many exposed screws—the piece emphasizes its own rough logic and raw construction. A jute or coir mat rests underneath, visually grounding the machine while softening its material boundary with the floor.\n\nThe surface of the rain stick is sealed in grey duct tape, echoing a Dadaist appreciation for found aesthetics and provisional design. Wiring remains visible. Materials are left unpolished. The form resists smoothness.\n\nConceptually, the piece addresses acoustic ritual through mechanical persistence. It began as a personal response to tinnitus—an inner weather I’ve lived with for four years—where white noise became the only reliable relief. In this context, the sculpture becomes a kind of sonic prosthesis, a quiet companion humming gently in the background, made by and for its maker.\n\nThis is not a spectacle. It’s a machine for listening. A contradiction between industrial form and soft sound. An object that operates in the background, inviting focused attention through its very persistence. Rain Reminders is a reminder—of time, of noise, of stillness, and of the rituals we build to live beside them.",
-          medium:
-            "Motorized kinetic sculpture, acoustic rain stick, wood, steel, raw hardware, exposed electronics",
-          category: "KINETIC SCULPTURE • NOISE • ARDUINO",
-          color: "saffron",
-          dimensions: "1.8m (height)",
-          technical:
-            "Custom low-RPM motor system, handmade rain stick with internal grain cascade, steel and wood framework, coir matting",
-          themes:
-            "Tinnitus and White Noise, Acoustic Ritual and Duration, Dadaism and Raw Construction, Meditative Distraction",
-          // videos: [
-          //   "./assets/videos/rain-stick-video.mp4"
-          // ],
-          // audioFile: "./assets/audio/rain-reminders-sample.mp3",
-          images: [
-            "./assets/images/rain-stick-3.JPG",
-            "./assets/images/rain-stick-2.JPG",
-            "./assets/images/rain-stick-1.JPG"
-          ]
-        },
+       {
+         id: "rain-reminders",
+         title: "Rain Reminders",
+         description:
+           "A 1.8-meter-tall kinetic sound sculpture with a slowly rotating 80 cm rain stick mounted on a raw wooden and steel armature.",
+         fullDescription:
+           "Rain Reminders is a meditative kinetic installation that reimagines the rain stick as a durational sound object. At its center, a handmade 80 cm rain stick is rotated on its horizontal axis by a custom low-RPM motor, releasing a steady cascade of seeds that generate an unamplified texture reminiscent of rainfall.\n\nThe sculpture is built from coarse, industrial elements—steel square tubing, a 6x4 wood beam, exposed screws, grey duct tape, and visible wiring. A coir mat rests beneath the frame, softening the transition between structure and floor while grounding the machine in place. The rain stick itself is fully wrapped in grey duct tape, a provisional skin that embraces imperfection and raw construction.\n\nThe work emerged as a personal response to tinnitus, where the steady presence of white noise became a form of relief. In this context, the installation functions as a sonic prosthesis: a quiet companion producing persistent acoustic weather. Its sound is soft but continuous, mechanical yet organic, an object that occupies the background while inviting careful listening.\n\nRain Reminders is not built for spectacle. It sits between ritual and mechanism, noise and stillness. A machine for listening, a reminder of persistence, of time, and of the fragile systems we construct to live alongside our inner noise.",
+         medium: "Motorized kinetic sculpture, acoustic rain stick, wood, steel, raw hardware, exposed electronics",
+         category: "KINETIC SCULPTURE • NOISE • ARDUINO",
+         color: "saffron",
+         dimensions: "1.8m (height)",
+         technical:
+           "Custom low-RPM motor system, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting",
+         themes:
+           "Tinnitus and White Noise, Acoustic Ritual and Duration, Provisional Construction, Meditative Distraction",
+         images: [
+           "./assets/images/rain-stick-3.JPG",
+           "./assets/images/rain-stick-2.JPG",
+           "./assets/images/rain-stick-1.JPG",
+         ],
+
+       },
 
 
         {
           id: "symmetrical-fictions",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1",
-          description: "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
-          fullDescription: "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
+          description:
+            "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
+          fullDescription:
+            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
           medium: "Video installation, satellite imagery recomposition, speculative cartography",
           category: "INSTALLATION & RESEARCH",
           tags: ["generative", "video", "research"], // ADD TAGS
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
           // videos: ["./assets/videos/symmetrical-fictions-excerpt.mp4"],
-          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          images: [
+            "./assets/images/39.jpg",
+            "./assets/images/72.jpg",
+            "./assets/images/73.jpg",
+            "./assets/images/6.jpg",
+          ],
           urls: {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
           },
-        }
-
+        },
       ],
 
       drawings: [
         {
           id: "ritual-computing-solo-sessions",
           title: "Ritual Computing and Coding Sessions",
-          description: "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
-          fullDescription: "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
+          description:
+            "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
+          fullDescription:
+            "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
           medium: "Code sketching, procedural visuals, AI collaboration",
           category: "SOLO • RESEARCH-BASED",
           tags: ["generative", "code", "research"], // ADD TAGS
           color: "electric-lime",
           documentation: "In-progress sketches and logs",
-          images: ["./assets/images/ritual-computing-1.png", "./assets/images/ritual-computing-2.png", "./assets/images/ritual-computing-3.jpg"],
+          images: [
+            "./assets/images/ritual-computing-1.png",
+            "./assets/images/ritual-computing-2.png",
+            "./assets/images/ritual-computing-3.jpg",
+          ],
         },
         {
           id: "digital-sketches",
@@ -436,17 +429,15 @@ try {
           themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
           tools: "TouchDesigner, generative algorithms",
           // FIXED: Updated image paths
-          images: [
-            "./assets/images/sketch1.jpg",
-            "./assets/images/sketch2.png",
-            "./assets/images/sketch3.png"
-          ],
+          images: ["./assets/images/sketch1.jpg", "./assets/images/sketch2.png", "./assets/images/sketch3.png"],
         },
         {
           id: "old-drawings-sketchbook-series",
           title: "Old Digital+Analog Drawings",
-          description: "Early explorations in digital sketching and coloring using Autodesk SketchBook - studies of form, color, and imagination.",
-          fullDescription: "These six drawings mark a formative period of digital creativity, made during an early engagement with Autodesk SketchBook. They reflect a phase of intuitive experimentation, where sketching and digital coloring were driven by curiosity, play, and a desire to shape inner visions. Though rough and spontaneous, these pieces represent personal milestones in visual expression and digital practice.",
+          description:
+            "Early explorations in digital sketching and coloring using Autodesk SketchBook - studies of form, color, and imagination.",
+          fullDescription:
+            "These six drawings mark a formative period of digital creativity, made during an early engagement with Autodesk SketchBook. They reflect a phase of intuitive experimentation, where sketching and digital coloring were driven by curiosity, play, and a desire to shape inner visions. Though rough and spontaneous, these pieces represent personal milestones in visual expression and digital practice.",
           medium: "Analog sketching and digital coloring",
           category: "ARCHIVE • PERSONAL WORK",
           tags: ["digital", "sketches"],
@@ -457,7 +448,7 @@ try {
             "./assets/images/old drawing (2).jpg",
             "./assets/images/old drawing (3).jpg",
             "./assets/images/old drawing (4).jpg",
-            "./assets/images/old drawing (6).jpg"
+            "./assets/images/old drawing (6).jpg",
           ],
         },
 
@@ -471,7 +462,7 @@ try {
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "noise sculpting", "tutorial", "generative art"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=Mu1TpRVujuY"]
+          videos: ["https://www.youtube.com/watch?v=Mu1TpRVujuY"],
         },
         {
           id: "audiodevout-particlesgpu-noise-sculpting",
@@ -483,7 +474,7 @@ try {
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["ParticlesGPU", "noise sculpting", "generative visuals", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=kcZH2zcHANc"]
+          videos: ["https://www.youtube.com/watch?v=kcZH2zcHANc"],
         },
         {
           id: "audiodevout-noise-sculpting-part4",
@@ -495,18 +486,20 @@ try {
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["noise sculpting", "geometry", "TouchDesigner", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=s8ea30HlTHE"]
+          videos: ["https://www.youtube.com/watch?v=s8ea30HlTHE"],
         },
         {
           id: "audiodevout-instancing-to-midi",
           title: "Interactive Instrument – Instancing to MIDI in TouchDesigner",
-          description: "Use RenderPick CHOP to extract instancing data and convert clicks into MIDI — click to play in TouchDesigner.",
-          fullDescription: "In this tutorial, audiodevout demonstrates a special interactive project that uses TouchDesigner’s RenderPick CHOP to capture instancing data and translate it into MIDI notes, allowing clickable visual geometry to play sound. A clean, high‑performance demo of touch‑mapped MIDI instancing.",
+          description:
+            "Use RenderPick CHOP to extract instancing data and convert clicks into MIDI — click to play in TouchDesigner.",
+          fullDescription:
+            "In this tutorial, audiodevout demonstrates a special interactive project that uses TouchDesigner’s RenderPick CHOP to capture instancing data and translate it into MIDI notes, allowing clickable visual geometry to play sound. A clean, high‑performance demo of touch‑mapped MIDI instancing.",
           medium: "TouchDesigner, interactive generative visuals, MIDI integration",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "instancing", "RenderPick CHOP", "MIDI", "interactive", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=Qrtwn5XjDzk"]
+          videos: ["https://www.youtube.com/watch?v=Qrtwn5XjDzk"],
         },
 
         // The rest in the same style:
@@ -514,172 +507,187 @@ try {
         {
           id: "audiodevout-prime-spiral-visualizer",
           title: "Prime Spiral Visualizer – TouchDesigner .tox Component",
-          description: "Real-time TouchDesigner visualizer inspired by prime exponential sums and Veritasium’s Goldbach video.",
-          fullDescription: "A complex exponential sum visualization over primes, inspired by Hardy, Littlewood, Ramanujan, and Veritasium’s $1,000,000 Goldbach Conjecture video. Includes controls for prime count, modulation angle, animation toggle, and more.",
+          description:
+            "Real-time TouchDesigner visualizer inspired by prime exponential sums and Veritasium’s Goldbach video.",
+          fullDescription:
+            "A complex exponential sum visualization over primes, inspired by Hardy, Littlewood, Ramanujan, and Veritasium’s $1,000,000 Goldbach Conjecture video. Includes controls for prime count, modulation angle, animation toggle, and more.",
           medium: "TouchDesigner, generative visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "visualizer", "primes", "generative", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=a6lC3tAVilo"]
+          videos: ["https://www.youtube.com/watch?v=a6lC3tAVilo"],
         },
         {
           id: "audiodevout-quick-emboss-filter",
           title: "Quick Emboss Filter for TouchDesigner (FREE COMPONENT FILE)",
           description: "A quick emboss filter tutorial with free component download for TouchDesigner users.",
-          fullDescription: "Demonstrates how to create a quick emboss filter effect in TouchDesigner with project files and tox component freely available on Patreon.",
+          fullDescription:
+            "Demonstrates how to create a quick emboss filter effect in TouchDesigner with project files and tox component freely available on Patreon.",
           medium: "TouchDesigner, visual effects",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "emboss filter", "free component", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=CelbrPlWM_k"]
+          videos: ["https://www.youtube.com/watch?v=CelbrPlWM_k"],
         },
         {
           id: "audiodevout-kaleidoscopic-fractals-particlesgpu",
           title: "Kaleidoscopic Fractals with ParticlesGPU in TouchDesigner - Tutorial",
           description: "Create fractal patterns using ParticlesGPU with tiling, mirroring, and feedback loops.",
-          fullDescription: "Explore fractal generation techniques in TouchDesigner combining ParticlesGPU, tiling and mirroring operators, and feedback loops to create stunning kaleidoscopic visuals.",
+          fullDescription:
+            "Explore fractal generation techniques in TouchDesigner combining ParticlesGPU, tiling and mirroring operators, and feedback loops to create stunning kaleidoscopic visuals.",
           medium: "TouchDesigner, particle systems, generative art",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "ParticlesGPU", "fractals", "generative art", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=TUOnPUHWpIU"]
+          videos: ["https://www.youtube.com/watch?v=TUOnPUHWpIU"],
         },
         {
           id: "audiodevout-audioreactive-text-showcase",
           title: "Audioreactive Text in TouchDesigner - Project Showcase",
           description: "A snippet of an audioreactive text project used in a recent VJ performance.",
-          fullDescription: "Showcasing an audioreactive text visualization built in TouchDesigner, demonstrating dynamic text effects synced to audio input. Project files are available on Patreon.",
+          fullDescription:
+            "Showcasing an audioreactive text visualization built in TouchDesigner, demonstrating dynamic text effects synced to audio input. Project files are available on Patreon.",
           medium: "TouchDesigner, audioreactive visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "audioreactive", "text", "VJ", "performance"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=GlMgtr-ejzs"]
+          videos: ["https://www.youtube.com/watch?v=GlMgtr-ejzs"],
         },
         {
           id: "audiodevout-noise-sculpting-part6-radial-lighting",
           title: "Noise Sculpting Part 6 - Radial Lighting",
           description: "Abstract structure using geo instancing with circular lighting and shadows.",
-          fullDescription: "Techniques for building abstract 3D structures using geometry instancing and introducing radial lighting effects with circular ramps and compositing modes in TouchDesigner.",
+          fullDescription:
+            "Techniques for building abstract 3D structures using geometry instancing and introducing radial lighting effects with circular ramps and compositing modes in TouchDesigner.",
           medium: "TouchDesigner, 3D geometry, lighting",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "noise sculpting", "instancing", "lighting", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=mkVa8D8_FIw"]
+          videos: ["https://www.youtube.com/watch?v=mkVa8D8_FIw"],
         },
         {
           id: "audiodevout-controlled-feedback-cache-tops",
           title: "Controlled Feedback with Cache TOPs in TouchDesigner",
           description: "Tutorial on controlling feedback trails using the Cache TOP in TouchDesigner.",
-          fullDescription: "Learn how to manage and control feedback effects in TouchDesigner using Cache TOPs for more precise visual trails and effects. Project files available on Patreon.",
+          fullDescription:
+            "Learn how to manage and control feedback effects in TouchDesigner using Cache TOPs for more precise visual trails and effects. Project files available on Patreon.",
           medium: "TouchDesigner, visual effects, feedback control",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "feedback", "Cache TOP", "tutorial", "visual effects"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=TXbIgtYaNqQ"]
+          videos: ["https://www.youtube.com/watch?v=TXbIgtYaNqQ"],
         },
         {
           id: "audiodevout-replicator-limit-feedback",
           title: "Replicator-Limit-Feedback (Project Overview)",
           description: "Short overview of a replicator feedback project with Patreon support request.",
-          fullDescription: "An introduction and brief overview of the Replicator-Limit-Feedback project with links to Patreon support and future tutorial plans involving Ableton and TouchDesigner.",
+          fullDescription:
+            "An introduction and brief overview of the Replicator-Limit-Feedback project with links to Patreon support and future tutorial plans involving Ableton and TouchDesigner.",
           medium: "TouchDesigner, generative visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "feedback", "replicator", "project overview"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=IR0T0t49gnw"]
+          videos: ["https://www.youtube.com/watch?v=IR0T0t49gnw"],
         },
         {
           id: "audiodevout-particle-structures-mesh-generator",
           title: "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
           description: "Using Mesh Generator and operator techniques to create spiral particle structures.",
-          fullDescription: "This project uses the Mesh Generator tool combined with operator tricks in TouchDesigner to produce cool spiral particle structures. Files available for Patreon members.",
+          fullDescription:
+            "This project uses the Mesh Generator tool combined with operator tricks in TouchDesigner to produce cool spiral particle structures. Files available for Patreon members.",
           medium: "TouchDesigner, mesh generation, particle systems",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "Mesh Generator", "particles", "spiral", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=XHGeICkx9lU"]
+          videos: ["https://www.youtube.com/watch?v=XHGeICkx9lU"],
         },
         {
           id: "audiodevout-simple-grid-patterns",
           title: "Simple Grid Patterns with Touchdesigner (Tutorial)",
           description: "Creating simple grid-based visual patterns in TouchDesigner.",
-          fullDescription: "A straightforward tutorial for building simple grid patterns in TouchDesigner to help beginners understand basic layout and pattern creation.",
+          fullDescription:
+            "A straightforward tutorial for building simple grid patterns in TouchDesigner to help beginners understand basic layout and pattern creation.",
           medium: "TouchDesigner, pattern design",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "grid patterns", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=TbRtV-ix8RE"]
+          videos: ["https://www.youtube.com/watch?v=TbRtV-ix8RE"],
         },
         {
           id: "audiodevout-geometric-iterations-behind-network",
           title: "Geometric Iterations - Behind the Network",
           description: "Simple geometric patterns for a music video project.",
-          fullDescription: "Demonstrates noise sculpting and geometric iteration techniques used in a music video project, inspired by tutorials and shared on Patreon.",
+          fullDescription:
+            "Demonstrates noise sculpting and geometric iteration techniques used in a music video project, inspired by tutorials and shared on Patreon.",
           medium: "TouchDesigner, generative visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "noise sculpting", "geometric patterns", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=QG-Kluyuveg"]
+          videos: ["https://www.youtube.com/watch?v=QG-Kluyuveg"],
         },
         {
           id: "audiodevout-noise-sculpting-part2",
           title: "Noise Sculpting in TouchDesigner - Part 2",
           description: "3D geometry creation with Noise TOP and instancing.",
-          fullDescription: "Fresh take on noise sculpting using Noise TOP and instancing to craft diverse 3D patterns in TouchDesigner. Project files on Patreon.",
+          fullDescription:
+            "Fresh take on noise sculpting using Noise TOP and instancing to craft diverse 3D patterns in TouchDesigner. Project files on Patreon.",
           medium: "TouchDesigner, procedural geometry",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["noise sculpting", "Noise TOP", "TouchDesigner", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=p9TwiixKvXQ"]
+          videos: ["https://www.youtube.com/watch?v=p9TwiixKvXQ"],
         },
         {
           id: "audiodevout-audioreactive-doodle-geometry-instancing",
           title: "Audioreactive Doodle with Geometry Instancing in TouchDesigner - Behind The Network",
           description: "Overview of an audioreactive geometry instancing project without formal tutorial.",
-          fullDescription: "Sharing the network structure and techniques behind an audioreactive geometry instancing project in TouchDesigner, showcasing layering and switching tricks.",
+          fullDescription:
+            "Sharing the network structure and techniques behind an audioreactive geometry instancing project in TouchDesigner, showcasing layering and switching tricks.",
           medium: "TouchDesigner, audioreactive visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "audioreactive", "geometry instancing"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=Hk0uF7s-DjU"]
+          videos: ["https://www.youtube.com/watch?v=Hk0uF7s-DjU"],
         },
         {
           id: "audiodevout-moving-crystal-effect",
           title: "Moving Crystal Effect in TouchDesigner (Tutorial)",
           description: "Tutorial to create a twisting, wavy glass-like effect.",
-          fullDescription: "Learn to recreate the visual effect of twisting and warping images as seen through glass using TouchDesigner techniques.",
+          fullDescription:
+            "Learn to recreate the visual effect of twisting and warping images as seen through glass using TouchDesigner techniques.",
           medium: "TouchDesigner, image effects",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "image distortion", "glass effect", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=pc34xAXCRlg"]
+          videos: ["https://www.youtube.com/watch?v=pc34xAXCRlg"],
         },
         {
           id: "audiodevout-basic-uv-mapping-noise-sculpting",
           title: "Basic UV Mapping and Noise Sculpting in TouchDesigner (Tutorial)",
           description: "Intro to UV mapping combined with noise sculpting for 3D geometry.",
-          fullDescription: "A beginner-friendly tutorial combining UV mapping and noise sculpting techniques to build 3D geometry instancing effects in TouchDesigner.",
+          fullDescription:
+            "A beginner-friendly tutorial combining UV mapping and noise sculpting techniques to build 3D geometry instancing effects in TouchDesigner.",
           medium: "TouchDesigner, UV mapping, noise sculpting",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "UV mapping", "noise sculpting", "tutorial"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=4rm5dcoQHBc"]
+          videos: ["https://www.youtube.com/watch?v=4rm5dcoQHBc"],
         },
         {
           id: "audiodevout-audioreactive-visuals-003",
           title: "AudioReactive Visuals With TouchDesigner 003",
           description: "Quick audioreactive visual snippet with personal note.",
-          fullDescription: "A short video showing reactive visuals with TouchDesigner, including a personal note about wisdom teeth removal and a track ID.",
+          fullDescription:
+            "A short video showing reactive visuals with TouchDesigner, including a personal note about wisdom teeth removal and a track ID.",
           medium: "TouchDesigner, audioreactive visuals",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
           tags: ["TouchDesigner", "audioreactive", "visuals"],
           color: "cerulean",
-          videos: ["https://www.youtube.com/watch?v=J-fppN9-v-o"]
-        }
+          videos: ["https://www.youtube.com/watch?v=J-fppN9-v-o"],
+        },
       ],
 
       writing: [
-
         {
           id: "nervous-systems-kel30",
           title: "Nervous Systems",
@@ -691,7 +699,7 @@ try {
           color: "electric-blue",
           themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
           images: ["./assets/images/nervous-system-1.jpg"],
-          urls: {}
+          urls: {},
         },
         {
           id: "fever-dream-minerva",
@@ -704,11 +712,9 @@ try {
           color: "crimson",
           themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
           videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
-          images: [
-            "./assets/images/fever-dream-poster.jpg"
-                  ],          
+          images: ["./assets/images/fever-dream-poster.jpg"],
         },
-        
+
         {
           id: "symmetrical-fictions-paper",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
@@ -719,46 +725,50 @@ try {
           category: "RESEARCH & THEORY",
           color: "cerulean",
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          images: ["./assets/images/39.jpg", "./assets/images/72.jpg", "./assets/images/73.jpg", "./assets/images/6.jpg"],
+          images: [
+            "./assets/images/39.jpg",
+            "./assets/images/72.jpg",
+            "./assets/images/73.jpg",
+            "./assets/images/6.jpg",
+          ],
           urls: {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
           },
         },
-        
 
         {
           id: "transcending-identities",
           title: "Transcending Identities: Gender Performance and Psychedelic Trance in Goa’s Rave Scene",
-          description: "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
-          fullDescription: "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
+          description:
+            "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
+          fullDescription:
+            "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
           medium: "Ethnographic research, festival case study, electronic music culture",
           category: "RESEARCH & WRITING",
           tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
           color: "violet",
           themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
           urls: {
-            pdf: "./assets/documents/gspm-paper.pdf"
-          }
+            pdf: "./assets/documents/gspm-paper.pdf",
+          },
         },
-        
+
         {
           id: "post-television-audiences",
           title: "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
-          description: "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
-          fullDescription: "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while remaining embedded in corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
+          description:
+            "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
+          fullDescription:
+            "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while remaining embedded in corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
           medium: "Research paper, digital media studies, cultural theory",
           category: "RESEARCH & WRITING",
           tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
           color: "crimson",
           themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
           urls: {
-            pdf: "./assets/documents/aps-paper.pdf"
-          }
+            pdf: "./assets/documents/aps-paper.pdf",
+          },
         },
-
-
-        
-
 
         // {
         //     id: "prime-spiral-visualizer-tox",
@@ -770,7 +780,7 @@ try {
         //     color: "electric-lime",
         //     urls: {
         //       Patreon: "https://www.patreon.com/posts/131907000"
-        //     },            
+        //     },
         //   },
         //   {
         //     id: "quick-emboss-filter-tox",
@@ -943,21 +953,92 @@ try {
       ],
     },
 
-     contact: {
-       about: {
-         title: "ABOUT ME",
-         description: `I am an experimental artist and researcher working at the intersection of sound, technology, and space. 
-         My practice spans kinetic sculpture, audiovisual performance, generative systems, and research-driven writing—using computational processes as both medium and method. I approach sound and code as materials for building contemplative experiences, often drawing from noise, entropy, and (a)symmetry to reimagine how we listen, perceive, and engage with digital systems. 
+    contact: {
+      about: {
+        title: "ABOUT ME",
+        description: `I am an artist and researcher working at the intersection of sound, technology, and space. My practice spans kinetic sculpture, audiovisual performance, generative systems, and research-driven writing, with computational processes serving as both medium and method. I treat sound and code as materials for constructing contemplative and surreal experiences, drawing on noise, entropy, and asymmetry to reimagine how we listen, perceive, and engage with digital systems.
 
-         Through installations, performances, and academic inquiry, I explore the unstable boundaries between the organic and synthetic, the rational and intuitive, the individual and collective. My work reflects on ritual, memory, and healing through technology—whether transforming environmental data into generative soundscapes, designing embodied performance tools, or composing speculative cartographies. Based between experimental sound practice, creative coding, and research contexts, I develop projects that question techno-positivist narratives while creating spaces for reflection, presence, and poetic engagement with technology.`,
-         image: "./assets/images/atharva.jpeg",
-         credentials: [
-           "Experimental Sound Artist (asymmetrica)",
-           "Kinetic Sculptures",
-           "AudioVisual Performances",
-           "TouchDesigner Tutorials (audiodevout)"
-         ]
-       },
+Across installations, performances, and academic inquiry, I explore the shifting boundaries between organic and synthetic, rational and intuitive, individual and collective. Ritual, memory, and healing often surface as themes, whether through transforming environmental data into generative soundscapes, designing embodied tools for performance, or composing speculative environments. Grounded in experimental sound practice, creative coding, and critical research, my work questions techno-positivist narratives while opening spaces for reflection, presence, and poetic engagement with technology.`,
+
+        image: "./assets/images/atharva.jpeg",
+        credentials: [
+          "Experimental Sound Artist (asymmetrica)",
+          "Kinetic Sculptures",
+          "AudioVisual Performances",
+          "TouchDesigner Tutorials (audiodevout)",
+        ],
+      },
+      cv: {
+        workExperience: [
+          {
+            title: "Freelance Art Producer",
+            company: "Art Researcher and Educator",
+            location: "Groningen, NL",
+            period: "Oct. 2023 - Present",
+            responsibilities: [
+              "TouchDesigner tutorials on YouTube @audiodevout",
+              "Experimental music production and sound design @asymmetrica",
+              "Visual Jockey (VJ) for events including club nights and poetry readings.",
+            ],
+          },
+          {
+            title: "Research and Development Intern",
+            company: "Broedplaats De Campagne",
+            location: "Groningen, NL",
+            period: "Feb. 2023 – Oct. 2023",
+            responsibilities: [
+              "Worked on large-scale art installations under Artist and Theatre Professional Chantalla Pleiter.",
+              "Contributed to the creation and presentation of 4 different projects related to XR technologies and sound design at festivals like Noorderzon Performing Arts Festival and Expeditie Next.",
+              "Handled day-to-day research, logistics and maintenance of equipment related to the projects.",
+            ],
+          },
+          {
+            title: "Research Assistant",
+            company: "University of Groningen",
+            location: "Groningen, NL",
+            period: "Oct. 2022 – Aug. 2023",
+            responsibilities: [
+              "Research assistant for the project 'Listen Here Now' - A study into the urban soundscapes of Groningen by Rudolf Agricola School of Sustainable Development",
+              "Oversaw core project responsibilities, participant communication, logistics, and marketing. Also including audio-visual logistics, procurement, and maintenance of equipment.",
+            ],
+          },
+        ],
+        education: [
+          {
+            degree: "Master of Arts (MA), Fine Arts (Media, Art, Design and Technology)",
+            institution: "Minerva Academy, Hanze University of Applied Sciences",
+            location: "Groningen, NL",
+            period: "Sep 2024 – Aug 2026",
+          },
+          {
+            degree: "Master of Arts and Culture (Arts, Cognition and Criticism)",
+            institution: "University of Groningen",
+            location: "Groningen, NL",
+            period: "Sep 2022 – Aug. 2023",
+          },
+          {
+            degree: "Bachelor of Arts (Triple Major: Psychology, Sociology and Literature)",
+            institution: "Christ University",
+            location: "Bangalore, IN",
+            period: "Aug 2017 – Jun 2020",
+          },
+        ],
+        skills: {
+          general: [
+            "Art Research",
+            "Art Education",
+            "New Media Art",
+            "Visual Arts",
+            "Cultural Research",
+            "Concept Art",
+            "Interactive Media",
+            "Creative Concept Design",
+            "Sound Design",
+          ],
+          technologies: ["TouchDesigner", "Ableton Live", "Arduino IDE", "Max (Cycling '74)", "Python"],
+          interests: ["Interactive Audiovisual Installations", "Workshops", "Digital Art", "Gaming"],
+        },
+      },
 
       social: [
         {
@@ -999,8 +1080,6 @@ try {
       ],
       description: "I love to talk about stuff!",
     },
-
-
 
     pageContent: {
       home: {

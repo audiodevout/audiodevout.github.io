@@ -7,7 +7,7 @@
  */
 
 /* Import Work Sans font family */
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;600&display=swap");
 
 /* ROOT VARIABLES - Enhanced for Accessibility */
 :root {
@@ -28,43 +28,42 @@
   --spacing-xxl: 4rem;
 
   /* Typography scale - Enhanced for readability */
-  --text-xs: 0.8rem;    /* Increased from 0.75rem */
-  --text-sm: 0.9rem;    /* Increased from 0.875rem */
+  --text-xs: 0.8rem; /* Increased from 0.75rem */
+  --text-sm: 0.9rem; /* Increased from 0.875rem */
   --text-base: 1rem;
-  --text-lg: 1.15rem;   /* Increased from 1.125rem */
-  --text-xl: 1.3rem;    /* Increased from 1.25rem */
-  --text-2xl: 1.6rem;   /* Increased from 1.5rem */
-  --text-3xl: 1.95rem;  /* Increased from 1.875rem */
-  --text-4xl: 2.4rem;   /* Increased from 2.25rem */
-  --text-5xl: 3.2rem;   /* Increased from 3rem */
+  --text-lg: 1.15rem; /* Increased from 1.125rem */
+  --text-xl: 1.3rem; /* Increased from 1.25rem */
+  --text-2xl: 1.6rem; /* Increased from 1.5rem */
+  --text-3xl: 1.95rem; /* Increased from 1.875rem */
+  --text-4xl: 2.4rem; /* Increased from 2.25rem */
+  --text-5xl: 3.2rem; /* Increased from 3rem */
 
   /* Modern minimal balanced neutral palette */
-    --warm-white: #1e1e1c;       /* charcoal, neutral slightly warm */
-    --soft-gray: #2e2d2b;        /* medium neutral gray */
-    --medium-gray: #f4f3f2;      /* soft light gray for contrast */
-    --charcoal: #d6d5d2;         /* light muted gray */
-    --dark-gray: #7f7d78;        /* medium warm-gray */
-    --deep-charcoal: #f9f8f7;    /* very light neutral, originally warm-white */
-    
-    /* Muted accent colors - keep for subtlety */
-    --clay-orange: #c4935f;      /* clay-orange */
-    --sage-green: #7a9b7e;       /* sage-green */
-    --dusty-blue: #6b7d91;       /* dusty-blue */
-    --warm-beige: #b5a688;       /* warm-beige */
-    --soft-terracotta: #a6846a;  /* soft-terracotta */
+  --warm-white: #1e1e1c; /* charcoal, neutral slightly warm */
+  --soft-gray: #2e2d2b; /* medium neutral gray */
+  --medium-gray: #f4f3f2; /* soft light gray for contrast */
+  --charcoal: #d6d5d2; /* light muted gray */
+  --dark-gray: #7f7d78; /* medium warm-gray */
+  --deep-charcoal: #f9f8f7; /* very light neutral, originally warm-white */
 
-    /* Transparent layered materials - balanced neutrals */
-    --glass-panel: hsla(35, 8%, 15%, 0.85);       /* dark neutral overlay */
-    --glass-panel-dark: hsla(35, 8%, 95%, 0.9);   /* light neutral overlay */
-    --glass-overlay: hsla(35, 8%, 18%, 0.95);     /* subtle neutral layer */
-    --glass-border: hsla(35, 8%, 55%, 0.4);       /* neutral border */
-    --glass-accent: hsla(35, 8%, 25%, 0.25);      /* subtle accent */
+  /* Muted accent colors - keep for subtlety */
+  --clay-orange: #c4935f; /* clay-orange */
+  --sage-green: #7a9b7e; /* sage-green */
+  --dusty-blue: #6b7d91; /* dusty-blue */
+  --warm-beige: #b5a688; /* warm-beige */
+  --soft-terracotta: #a6846a; /* soft-terracotta */
 
-    /* Subtle shadow colors - neutral warm shadows */
-    --shadow-warm: hsla(35, 20%, 30%, 0.2);       /* slightly warm shadow */
-    --shadow-cool: hsla(35, 15%, 35%, 0.18);      /* slightly warm gray shadow */
-    --shadow-neutral: hsla(0, 0%, 0%, 0.12);      /* neutral black for contrast */
+  /* Transparent layered materials - balanced neutrals */
+  --glass-panel: hsla(35, 8%, 15%, 0.85); /* dark neutral overlay */
+  --glass-panel-dark: hsla(35, 8%, 95%, 0.9); /* light neutral overlay */
+  --glass-overlay: hsla(35, 8%, 18%, 0.95); /* subtle neutral layer */
+  --glass-border: hsla(35, 8%, 55%, 0.4); /* neutral border */
+  --glass-accent: hsla(35, 8%, 25%, 0.25); /* subtle accent */
 
+  /* Subtle shadow colors - neutral warm shadows */
+  --shadow-warm: hsla(35, 20%, 30%, 0.2); /* slightly warm shadow */
+  --shadow-cool: hsla(35, 15%, 35%, 0.18); /* slightly warm gray shadow */
+  --shadow-neutral: hsla(0, 0%, 0%, 0.12); /* neutral black for contrast */
 
   /* Typography */
   --font-primary: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -218,7 +217,12 @@ body {
 }
 
 /* Typography - Enhanced for Accessibility */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-primary);
   font-weight: 600; /* Work Sans SemiBold */
   line-height: var(--line-height-tight);
@@ -361,7 +365,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -418,7 +422,6 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 }
-
 
 .mobile-menu-toggle:hover,
 .mobile-menu-toggle:focus {
@@ -602,24 +605,22 @@ h1, h2, h3, h4, h5, h6 {
   align-items: stretch;
   justify-content: flex-start;
   text-align: left;
-  
+
   /* Variable heights for organic feel */
   min-height: 200px;
-  
+
   /* Subtle hover lift */
   position: relative;
 }
 
 .project-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    hsla(35, 25%, 85%, 0.1) 0%, 
-    hsla(210, 15%, 85%, 0.05) 100%);
+  background: linear-gradient(135deg, hsla(35, 25%, 85%, 0.1) 0%, hsla(210, 15%, 85%, 0.05) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
   border-radius: 1.5rem;
@@ -809,6 +810,13 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   border: none;
   border-radius: 1.25rem;
+  transition: all 0.4s ease;
+  background: var(--glass-panel-light);
+}
+
+.video-wrapper:hover iframe {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px var(--shadow-neutral);
 }
 
 /* Centered YouTube embeds */
@@ -913,10 +921,10 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;           /* reduced gap (was var(--spacing-md)) */
+  gap: 0.5rem; /* reduced gap (was var(--spacing-md)) */
   flex-wrap: nowrap;
   margin-bottom: 1.5rem; /* reduced margin (was var(--spacing-xl)) */
-  padding: 0 0.5rem;     /* reduced padding (was var(--spacing-sm)) */
+  padding: 0 0.5rem; /* reduced padding (was var(--spacing-sm)) */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -929,8 +937,8 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
   .social-grid {
-    gap: 0.25rem;         /* smaller gap */
-    padding: 0 0.25rem;   /* smaller padding */
+    gap: 0.25rem; /* smaller gap */
+    padding: 0 0.25rem; /* smaller padding */
   }
 }
 
@@ -944,15 +952,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .social-link {
   flex: 0 0 auto;
-  width: 100px;           /* smaller width (was 140px) */
+  width: 100px; /* smaller width (was 140px) */
   max-width: 100%;
   box-sizing: border-box;
-  height: 100px;          /* smaller height (was 140px) */
+  height: 100px; /* smaller height (was 140px) */
   background: var(--soft-gray);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 1rem;    /* slightly smaller radius */
+  border-radius: 1rem; /* slightly smaller radius */
   text-decoration: none;
   text-align: center;
   transition: all 0.4s ease;
@@ -961,14 +969,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   transform: translateZ(0);
-  min-height: 3rem;       /* smaller touch target if needed */
+  min-height: 3rem; /* smaller touch target if needed */
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  padding: 0.75rem;       /* smaller padding */
+  padding: 0.75rem; /* smaller padding */
   white-space: nowrap;
   overflow: hidden;
 }
-
 
 /* Responsive social link sizes */
 @media (max-width: 480px) {
@@ -1078,6 +1085,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto 3rem auto;
   color: var(--charcoal);
   font-family: var(--font-primary);
+
 }
 
 .contact-heading {
@@ -1092,7 +1100,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contact-description {
-  background: var(--glass-panel);
+  background: var(--glass-panel-dark);
   border: 1px solid var(--glass-border);
   border-radius: 1.5rem;
   padding: var(--spacing-lg);
@@ -1104,6 +1112,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   box-shadow: 0 4px 15px var(--shadow-neutral);
   transition: all 0.3s ease;
+
 }
 
 .contact-description p {
@@ -1177,6 +1186,173 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--glass-border);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px var(--shadow-neutral);
+}
+
+/* CV Section Styles */
+.cv-section {
+  margin-top: var(--spacing-xxl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-overlay);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  justify-content: center;
+  padding: var(--spacing-xxl);
+
+}
+
+.cv-section h3 {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: var(--spacing-xl);
+  letter-spacing: 0.05em;  
+}
+
+.cv-category {
+  margin-bottom: var(--spacing-xl);
+}
+
+.cv-category h4 {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cv-item {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.cv-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-md);
+}
+
+.cv-title-company {
+  flex: 1;
+}
+
+.cv-title {
+  display: block;
+  font-weight: 600;
+  color: var(--charcoal);
+  font-size: var(--text-base);
+  line-height: var(--line-height-tight);
+}
+
+.cv-company {
+  display: block;
+  font-weight: 400;
+  color: var(--charcoal);
+  font-size: var(--text-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.cv-period-location {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.cv-period {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--charcoal);
+  line-height: var(--line-height-tight);
+}
+
+.cv-location {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--charcoal);
+  margin-top: var(--spacing-xs);
+}
+
+.cv-responsibilities {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cv-responsibilities li {
+  position: relative;
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+  color: var(--charcoal);
+}
+
+.cv-responsibilities li::before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: var(--charcoal);
+}
+
+.cv-skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.cv-skill-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+}
+
+.cv-skill-label {
+  font-weight: 600;
+  color: var(--charcoal);
+  font-size: var(--text-sm);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.cv-skill-list {
+  font-size: var(--text-sm);
+  color: var(--charcoal);
+  line-height: var(--line-height-normal);
+}
+
+/* Responsive CV Layout */
+@media (max-width: 768px) {
+  .cv-header {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .cv-period-location {
+    text-align: left;
+  }
+
+  .cv-skill-group {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .cv-skill-label {
+    min-width: auto;
+  }
 }
 
 /* Modal - Enhanced Contrast */
@@ -1260,7 +1436,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--charcoal);
 }
 
-
 /* Bandcamp Embed Styles */
 .bandcamp-embeds {
   border-top: 1px solid var(--glass-border);
@@ -1304,7 +1479,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes gentle-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -1313,7 +1489,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes gentle-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -1355,7 +1532,7 @@ h1, h2, h3, h4, h5, h6 {
   .project-card {
     padding: var(--spacing-md);
   }
-  
+
   .page-content {
     padding: 0 var(--spacing-md);
   }

@@ -241,58 +241,58 @@
 
       try {
         // Initialize particle system
-        if (this.elements.particleCanvas && window.ParticleSystem) {
-          setupPromises.push(
-            new Promise((resolve) => {
-              try {
-                this.particleSystem = new window.ParticleSystem(this.elements.particleCanvas, {
-                  maxParticles: this.config.particleCount,
-                  enableConnections: this.deviceProfile !== "mobile",
-                  animationQuality: this.config.animationQuality,
-                })
-                this.particleSystem.start()
-                if (this.debug) console.log("Particle system initialized")
-                resolve()
-              } catch (error) {
-                console.warn("Particle system failed to initialize:", error)
-                resolve()
-              }
-            }),
-          )
-        }
+        // if (this.elements.particleCanvas && window.ParticleSystem) {
+        //   setupPromises.push(
+        //     new Promise((resolve) => {
+        //       try {
+        //         this.particleSystem = new window.ParticleSystem(this.elements.particleCanvas, {
+        //           maxParticles: this.config.particleCount,
+        //           enableConnections: this.deviceProfile !== "mobile",
+        //           animationQuality: this.config.animationQuality,
+        //         })
+        //         this.particleSystem.start()
+        //         if (this.debug) console.log("Particle system initialized")
+        //         resolve()
+        //       } catch (error) {
+        //         console.warn("Particle system failed to initialize:", error)
+        //         resolve()
+        //       }
+        //     }),
+        //   )
+        // }
 
-        // Initialize mandala generator
-        if (this.elements.mandalaCanvas && window.MandalaGenerator) {
-          setupPromises.push(
-            new Promise((resolve) => {
-              try {
-                this.mandalaGenerator = new window.MandalaGenerator(this.elements.mandalaCanvas)
-                this.mandalaGenerator.startAnimation()
-                if (this.debug) console.log("Mandala generator initialized")
-                resolve()
-              } catch (error) {
-                console.warn("Mandala generator failed to initialize:", error)
-                resolve()
-              }
-            }),
-          )
-        }
+        // // Initialize mandala generator
+        // if (this.elements.mandalaCanvas && window.MandalaGenerator) {
+        //   setupPromises.push(
+        //     new Promise((resolve) => {
+        //       try {
+        //         this.mandalaGenerator = new window.MandalaGenerator(this.elements.mandalaCanvas)
+        //         this.mandalaGenerator.startAnimation()
+        //         if (this.debug) console.log("Mandala generator initialized")
+        //         resolve()
+        //       } catch (error) {
+        //         console.warn("Mandala generator failed to initialize:", error)
+        //         resolve()
+        //       }
+        //     }),
+        //   )
+        // }
 
-        // Initialize cursor trail (desktop only)
-        if (this.config.enableCursor && window.CursorTrail) {
-          setupPromises.push(
-            new Promise((resolve) => {
-              try {
-                this.cursorTrail = new window.CursorTrail()
-                if (this.debug) console.log("Cursor trail initialized")
-                resolve()
-              } catch (error) {
-                console.warn("Cursor trail failed to initialize:", error)
-                resolve()
-              }
-            }),
-          )
-        }
+        // // Initialize cursor trail (desktop only)
+        // if (this.config.enableCursor && window.CursorTrail) {
+        //   setupPromises.push(
+        //     new Promise((resolve) => {
+        //       try {
+        //         this.cursorTrail = new window.CursorTrail()
+        //         if (this.debug) console.log("Cursor trail initialized")
+        //         resolve()
+        //       } catch (error) {
+        //         console.warn("Cursor trail failed to initialize:", error)
+        //         resolve()
+        //       }
+        //     }),
+        //   )
+        // }
 
         await Promise.all(setupPromises)
         this.setupResizeHandler()
@@ -891,6 +891,85 @@
               </div>
             </div>
             
+            <!-- Adding CV Section -->
+            ${
+              contact.cv
+                ? `
+            <div class="cv-section">
+              <h3>CURRICULUM VITAE</h3>
+              
+              <!-- Work Experience -->
+              <div class="cv-category">
+                <h4>WORK EXPERIENCE</h4>
+                ${contact.cv.workExperience
+                  .map(
+                    (job) => `
+                  <div class="cv-item">
+                    <div class="cv-header">
+                      <div class="cv-title-company">
+                        <span class="cv-title">${job.title}</span>
+                        <span class="cv-company">${job.company}</span>
+                      </div>
+                      <div class="cv-period-location">
+                        <span class="cv-period">${job.period}</span>
+                        <span class="cv-location">${job.location}</span>
+                      </div>
+                    </div>
+                    <ul class="cv-responsibilities">
+                      ${job.responsibilities.map((resp) => `<li>${resp}</li>`).join("")}
+                    </ul>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>
+              
+              <!-- Education -->
+              <div class="cv-category">
+                <h4>EDUCATION</h4>
+                ${contact.cv.education
+                  .map(
+                    (edu) => `
+                  <div class="cv-item">
+                    <div class="cv-header">
+                      <div class="cv-title-company">
+                        <span class="cv-title">${edu.degree}</span>
+                        <span class="cv-company">${edu.institution}</span>
+                      </div>
+                      <div class="cv-period-location">
+                        <span class="cv-period">${edu.period}</span>
+                        <span class="cv-location">${edu.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>
+              
+              <!-- Skills & Interests -->
+              <div class="cv-category">
+                <h4>SKILLS & INTERESTS</h4>
+                <div class="cv-skills">
+                  <div class="cv-skill-group">
+                    <span class="cv-skill-label">Skills:</span>
+                    <span class="cv-skill-list">${contact.cv.skills.general.join(", ")}</span>
+                  </div>
+                  <div class="cv-skill-group">
+                    <span class="cv-skill-label">Technologies:</span>
+                    <span class="cv-skill-list">${contact.cv.skills.technologies.join(", ")}</span>
+                  </div>
+                  <div class="cv-skill-group">
+                    <span class="cv-skill-label">Interests:</span>
+                    <span class="cv-skill-list">${contact.cv.skills.interests.join(", ")}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            `
+                : ""
+            }
+            
             <!-- Contact Section -->
             <div class="contact-section">
               <h3 class="contact-heading">
@@ -898,7 +977,7 @@
               </h3>
 
               <div class="social-grid">
-                ${contact.social.map(platform => this.renderSocialLink(platform)).join('')}
+                ${contact.social.map((platform) => this.renderSocialLink(platform)).join("")}
               </div>
 
               <div class="contact-description">
