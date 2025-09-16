@@ -30,34 +30,7 @@
     
     <!-- Added inline particle system styles and color palette -->
     <style>
-        :root {
-            /* Modern minimal balanced neutral palette */
-            --warm-white: #1e1e1c;       /* charcoal, neutral slightly warm */
-            --soft-gray: #2e2d2b;        /* medium neutral gray */
-            --medium-gray: #f4f3f2;      /* soft light gray for contrast */
-            --charcoal: #d6d5d2;         /* light muted gray */
-            --dark-gray: #7f7d78;        /* medium warm-gray */
-            --deep-charcoal: #f9f8f7;    /* very light neutral, originally warm-white */
-            
-            /* Muted accent colors - keep for subtlety */
-            --clay-orange: #c4935f;      /* clay-orange */
-            --sage-green: #7a9b7e;       /* sage-green */
-            --dusty-blue: #6b7d91;       /* dusty-blue */
-            --warm-beige: #b5a688;       /* warm-beige */
-            --soft-terracotta: #a6846a;  /* soft-terracotta */
-
-            /* Transparent layered materials - balanced neutrals */
-            --glass-panel: hsla(35, 8%, 15%, 0.85);       /* dark neutral overlay */
-            --glass-panel-dark: hsla(35, 8%, 95%, 0.9);   /* light neutral overlay */
-            --glass-overlay: hsla(35, 8%, 18%, 0.95);     /* subtle neutral layer */
-            --glass-border: hsla(35, 8%, 55%, 0.4);       /* neutral border */
-            --glass-accent: hsla(35, 8%, 25%, 0.25);      /* subtle accent */
-
-            /* Subtle shadow colors - neutral warm shadows */
-            --shadow-warm: hsla(35, 20%, 30%, 0.2);       /* slightly warm shadow */
-            --shadow-cool: hsla(35, 15%, 35%, 0.18);      /* slightly warm gray shadow */
-            --shadow-neutral: hsla(0, 0%, 0%, 0.12);      /* neutral black for contrast */
-        }
+        
 
         .particle-canvas {
             position: fixed;
@@ -218,22 +191,22 @@
                 this.particles = [];
                 this.mouse = { x: 0, y: 0, clicked: false };
                 this.colors = [
-                    { r: 196, g: 147, b: 95 },   // clay-orange
-                    { r: 122, g: 155, b: 126 },  // sage-green
-                    { r: 107, g: 125, b: 145 },  // dusty-blue
-                    { r: 181, g: 166, b: 136 },  // warm-beige
-                    { r: 166, g: 132, b: 106 },  // soft-terracotta
-                    { r: 127, g: 125, b: 120 },  // dark-gray
-                    { r: 214, g: 213, b: 210 }   // charcoal
+                    // { r: 50,  g: 50,  b: 50 },   // deep charcoal  
+                    // { r: 85,  g: 85,  b: 85 },   // dark gray  
+                    { r: 120, g: 120, b: 120 },  // medium gray  
+                    { r: 155, g: 155, b: 155 },  // muted silver  
+                    { r: 190, g: 190, b: 190 },  // soft light gray  
+                    { r: 220, g: 220, b: 220 },  // near-white  
+                    { r: 240, g: 240, b: 240 }   // pale gray-white  
                 ];
                 
                 this.config = {
                     particleCount: 4000,
-                    maxDistance: 220,
+                    maxDistance: 260,
                     mouseDistance: 200,
                     particleSpeed: 0.8,
-                    lineOpacity: 0.15,
-                    particleOpacity: 0.4,
+                    lineOpacity: 0.3,
+                    particleOpacity: 0.3,
                     mouseRepelForce: 500
                 };
                 

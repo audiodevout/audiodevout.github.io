@@ -978,8 +978,10 @@ Across installations, performances, and academic inquiry, I explore the shifting
             responsibilities: [
               "TouchDesigner tutorials on YouTube @audiodevout",
               "Experimental music production and sound design @asymmetrica",
-              "Visual Jockey (VJ) for events including club nights and poetry readings.",
-            ],
+              "Visual Jockey (VJ)",
+              "Sound Design for Art Installations",
+              "Creative Coding Workshops",
+              ],
           },
           {
             title: "Research and Development Intern",
