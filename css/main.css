@@ -265,7 +265,7 @@ h6 {
 .nav-logo {
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: var(--text-3xl);
   color: var(--charcoal);
   text-decoration: none;
   letter-spacing: 0.02em;
@@ -1100,7 +1100,7 @@ h6 {
 }
 
 .contact-description {
-  background: var(--glass-panel-dark);
+  background: var(--glass-panel);
   border: 1px solid var(--glass-border);
   border-radius: 1.5rem;
   padding: var(--spacing-lg);
@@ -1112,7 +1112,7 @@ h6 {
   text-align: center;
   box-shadow: 0 4px 15px var(--shadow-neutral);
   transition: all 0.3s ease;
-
+  
 }
 
 .contact-description p {

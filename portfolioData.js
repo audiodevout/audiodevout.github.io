@@ -1006,12 +1006,12 @@ Across installations, performances, and academic inquiry, I explore the shifting
         education: [
           {
             degree: "Master of Arts (MA), Fine Arts (Media, Art, Design and Technology)",
-            institution: "Minerva Academy, Hanze University of Applied Sciences",
+            institution: "Frank Mohr Institute, Minerva Academy, Hanze University of Applied Sciences",
             location: "Groningen, NL",
             period: "Sep 2024 – Aug 2026",
           },
           {
-            degree: "Master of Arts and Culture (Arts, Cognition and Criticism)",
+            degree: "Master of Arts (MA), Arts and Culture (Arts, Cognition and Criticism)",
             institution: "University of Groningen",
             location: "Groningen, NL",
             period: "Sep 2022 – Aug. 2023",
@@ -1028,15 +1028,15 @@ Across installations, performances, and academic inquiry, I explore the shifting
             "Art Research",
             "Art Education",
             "New Media Art",
-            "Visual Arts",
-            "Cultural Research",
-            "Concept Art",
+            "Cultural Research",,
             "Interactive Media",
             "Creative Concept Design",
             "Sound Design",
+            "VJing",
+            "DJing"
           ],
-          technologies: ["TouchDesigner", "Ableton Live", "Arduino IDE", "Max (Cycling '74)", "Python"],
-          interests: ["Interactive Audiovisual Installations", "Workshops", "Digital Art", "Gaming"],
+          technologies: ["TouchDesigner", "Ableton Live", "Arduino IDE", "Web UI", "Python"],
+          interests: ["Interactive Audiovisual Installations", "Workshops", "Digital Art", "Generative AV"],
         },
       },
 
