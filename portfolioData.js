@@ -962,7 +962,7 @@ Across installations, performances, and academic inquiry, I explore the shifting
 
         image: "./assets/images/atharva.jpeg",
         credentials: [
-          "Experimental Sound Artist (asymmetrica)",
+          "Sound Artist (asymmetrica)",
           "Kinetic Sculptures",
           "AudioVisual Performances",
           "TouchDesigner Tutorials (audiodevout)",
@@ -977,7 +977,7 @@ Across installations, performances, and academic inquiry, I explore the shifting
             period: "Oct. 2023 - Present",
             responsibilities: [
               "TouchDesigner tutorials on YouTube @audiodevout",
-              "Experimental music production and sound design @asymmetrica",
+              "Music production and sound design @asymmetrica",
               "Visual Jockey (VJ)",
               "Sound Design for Art Installations",
               "Creative Coding Workshops",

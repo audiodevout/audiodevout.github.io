@@ -49,7 +49,7 @@
 /* Muted accent colors - adjusted to monochrome (except yellows/terracottas kept) */
 --clay-orange: #c4935f; /* clay-orange */
 --sage-green: #7f7f7f; /* sage-green → neutral gray */
---dusty-blue: #a0a0a0; /* dusty-blue → lighter gray */
+--dusty-blue: #265ba6; /* dusty-blue → lighter gray */
 --warm-beige: #b5a688; /* warm-beige */
 --soft-terracotta: #a6846a; /* soft-terracotta */
 
@@ -899,17 +899,17 @@ h6 {
 }
 
 .title-line:nth-child(1) {
-  color: var(--charcoal);
+  color: var(--clay-orange);
   animation-delay: 0.3s;
 }
 
 .title-line:nth-child(2) {
-  color: var(--dusty-blue);
+  color: var(--clay-orange);
   animation-delay: 0.7s;
 }
 
 .title-line:nth-child(3) {
-  color: var(--sage-green);
+  color: var(--clay-orange);
   animation-delay: 1.1s;
 }
 

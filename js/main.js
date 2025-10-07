@@ -695,10 +695,10 @@
         <section class="page-section active" id="mainContent">
           <div class="home-container">
             <h1 class="tri-phase-title">
-              <span class="title-line">EXPERIMENTAL</span>
-              <span class="title-line">SYSTEMS</span>
-              <span class="title-line">BY</span>
-              <span class="title-line">ATHARVA GUPTA</span>
+              <span class="title-line">MAGIC    //</span>
+              <span class="title-line">NOISE    //</span>
+              <span class="title-line">SYSTEMS  //</span>
+              <span class="title-line"></span>
             </h1>
           </div>
         </section>
