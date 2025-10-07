@@ -48,10 +48,10 @@
   --text-tertiary: #a8a8a8; /* medium grey */
 
   /* Pastel accent colors */
-  --pastel-23: #b4a7d6; /* soft purple */
-  --pastel-4: #a7d6c3; /* soft green */
-  --pastel-1: #a7c3d6; /* soft neon light blue */
-  --pastel-2: #f0e68c; /* soft pastel yellow */
+  --pastel-23: #aaaaaa; /* soft purple */
+  --pastel-4: #bbbbbb; /* soft green */
+  --pastel-1: #cccccc; /* soft neon light blue */
+  --pastel-2: #dddddd; /* soft pastel yellow */
 
 
 

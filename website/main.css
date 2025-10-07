@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap');
+
+/* Minimal CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base layout and typography */
+body {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 200;
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.6;
+  padding: 1.5rem;
+  text-align: left;
+  font-size: 18px;
+}
+
+/* Header */
+header {
+  margin-bottom: 3rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+header h1 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+header h1 a:hover {
+  text-decoration: underline;
+}
+
+header a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 300;
+  margin-top: 3rem;
+  margin-bottom: 0.3rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 1rem;
+  white-space: pre-line;
+  font-size: 20px;
+}
+
+/* Links */
+a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+ul li {
+  margin-bottom: 0.2rem;
+  font-size: 20px;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Videos and iframes */
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
+
+iframe {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+/* Media gallery */
+#media-gallery-wrapper {
+  margin-top: 3rem;
+}
+
+#project-media {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+#project-media > * {
+  flex: 0 0 auto;
+  max-width: 600px;
+  width: 600px;
+  object-fit: contain;
+}
+
+#project-media img {
+  margin: 0;
+  height: auto;
+  object-fit: contain;
+}
+
+#project-media iframe,
+#project-media video {
+  margin: 0;
+  width: 600px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Gallery navigation */
+.gallery-nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.gallery-nav button {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 0.5rem 1rem;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  transition: background-color 0.2s;
+}
+
+.gallery-nav button:hover:not(:disabled) {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.gallery-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gallery-counter {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ffffff;
+}
+
+/* Section spacing */
+main > div {
+  margin-bottom: 3rem;
+}
+
+/* CV and education sections */
+#work-experience > div,
+#education > div {
+  margin-bottom: 2rem;
+}
+
+#work-experience h4,
+#education h4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+  margin-top: 1rem;
+}
+
+#work-experience p,
+#education p {
+  font-size: 18px;
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+
+#work-experience ul,
+#education ul {
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+#work-experience ul li,
+#education ul li {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Skills */
+#skills > div {
+  margin-bottom: 1.5rem;
+}
+
+#skills h4 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+  margin-top: 1rem;
+}
+
+#skills p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Landing page */
+.landing-page {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  max-width: none;
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.landing-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.landing-overlay.fade-out {
+  opacity: 0;
+}
+
+.landing-title {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.landing-subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+}
