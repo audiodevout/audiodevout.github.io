@@ -1073,7 +1073,7 @@ try {
           description: "A group exhibition by first-year MADTech students at KEL-30.",
           fullDescription:
             "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Exhibition, installation",
+          medium: "Installation, performance, new media",
           category: "EXHIBITION",
           color: "electric-blue",
           themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
@@ -1338,7 +1338,7 @@ try {
           description: "A group exhibition by first-year MADTech students at KEL-30.",
           fullDescription:
             "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Exhibition, installation",
+          medium: "Installation, performance, new media",
           category: "EXHIBITION",
           color: "electric-blue",
           themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
@@ -1602,24 +1602,24 @@ try {
           title: "Nervous Systems",
           description: "A group exhibition by first-year MADTech students at KEL-30.",
           fullDescription:
-            "Presented on July 24th, 2025, this exhibition showcased experimental and interdisciplinary works by the MADTech batch of 2026, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "",
+            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
+          medium: "Installation, performance, new media",
           category: "EXHIBITION",
           color: "electric-blue",
-          themes: "",
+          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
           images: ["./assets/images/nervous-system-1.jpg"],
           urls: {},
         },
         {
           id: "fever-dream-minerva",
           title: "Fever Dream",
-          description: "A collaborative performance organized by the MADTech batch of 2026 at Minerva Academy.",
+          description: "A collaborative performance at Minerva Academy.",
           fullDescription:
-            "Held on May 30th 2025, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
-          medium: "",
-          category: "PERFORMANCE",
+            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
+          medium: "Performance, audiovisual installation, sound art",
+          category: "EXHIBITION",
           color: "crimson",
-          themes: "",
+          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
           videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
           images: ["./assets/images/fever-dream-poster.jpg"],
         },
@@ -1865,22 +1865,22 @@ try {
     contact: {
       about: {
         title: "ABOUT ME",
+        description: `I am an artist and researcher working at the intersection of sound, technology, and space. My practice spans kinetic sculpture, audiovisual performance, generative systems, and research-driven writing, with computational processes serving as both medium and method. I treat sound and code as materials for constructing contemplative and surreal experiences, drawing on noise, entropy, and asymmetry to reimagine how we listen, perceive, and engage with digital systems.
 
-        description: `I build kinetic sound installations and generative systems that translate environmental or algorithmic data into acoustic form. My work combines fabrication and electronics with real-time synthesis, sonic experimentation, and audiovisual processes developed in TouchDesigner and related tools. 
-        I often use field-sourced or salvaged materials, treating sound and code as sculptural matter. Through iterative prototyping and modular construction, I explore noise, asymmetry, ritual, and embodied listening. My approach moves fluidly between making, performance, and writing, forming a polypositional practice concerned with how systems produce both sonic and social resonance.`,
+Across installations, performances, and academic inquiry, I explore the shifting boundaries between organic and synthetic, rational and intuitive, individual and collective. Ritual, memory, and healing often surface as themes, whether through transforming environmental data into generative soundscapes, designing embodied tools for performance, or composing speculative environments. Grounded in experimental sound practice, creative coding, and critical research, my work questions techno-positivist narratives while opening spaces for reflection, presence, and poetic engagement with technology.`,
 
         image: "./assets/images/atharva.jpeg",
         credentials: [
-          "Kinetic and Sonic Sculptures",
+          "Sound Artist (asymmetrica)",
+          "Kinetic Sculptures",
           "AudioVisual Performances",
-          "Sound Design and Composition (asymmetrica)",
           "TouchDesigner Tutorials (audiodevout)",
         ],
       },
       cv: {
         workExperience: [
           {
-            title: "Art Producer",
+            title: "Freelance Art Producer",
             company: "Art Researcher and Educator",
             location: "Groningen, NL",
             period: "Oct. 2023 - Present",

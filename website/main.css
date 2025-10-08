@@ -1,4 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap');
+/* ============================================
+   CONFIGURATION VARIABLES
+   Modify these values to customize the site
+   ============================================ */
+
+/* COLORS */
+:root {
+  --color-background: #000000;
+  --color-text: #ffffff;
+  --color-link: #ffffff;
+  --color-border: #ffffff;
+}
+
+/* TYPOGRAPHY */
+:root {
+  --font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 20px;
+  --font-size-h1: 3.5rem;
+  --font-size-h2: 3rem;
+  --font-size-h3: 2.5rem;
+  --font-size-h4: 2rem;
+  --line-height: 1.6;
+}
+
+/* SPACING */
+:root {
+  --spacing-small: 0.2rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+  --spacing-xlarge: 3rem;
+  --padding-body: 1.5rem;
+}
+
+/* GALLERY */
+:root {
+  --gallery-item-width: 600px;
+  --gallery-gap: 1.5rem;
+  --gallery-items-per-view: 2;
+}
+
+/* LANDING PAGE ANIMATION */
+:root {
+  --landing-transition-delay: 4000; /* milliseconds before auto-transition */
+  --particle-count: 40;
+  --grid-size: 20;
+  --noise-resolution: 200;
+}
+
+/* ============================================
+   END CONFIGURATION
+   ============================================ */
 
 /* Minimal CSS reset */
 * {
@@ -11,31 +61,30 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Base layout and typography */
 body {
-  font-family: "Work Sans", sans-serif;
-  font-weight: 200;
-  background-color: #000000;
-  color: #ffffff;
-  line-height: 1.6;
-  padding: 1.5rem;
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: var(--line-height);
+  padding: var(--padding-body);
   text-align: left;
-  font-size: 18px;
+  font-size: var(--font-size-base);
 }
 
-/* Header */
+/* Header h1 is no longer italic, and links are styled */
 header {
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-xlarge);
 }
 
 header h1 {
-  font-size: 3rem;
-  font-weight: 300;
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  font-style: normal;
   margin-bottom: 0.5rem;
 }
 
 header h1 a {
-  color: #ffffff;
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -44,7 +93,7 @@ header h1 a:hover {
 }
 
 header a {
-  color: #ffffff;
+  color: var(--color-link);
   text-decoration: underline;
 }
 
@@ -52,42 +101,42 @@ header a:hover {
   text-decoration: none;
 }
 
-/* Headings */
+/* Increased heading sizes and kept italic, reduced margin-bottom for tighter grouping */
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 300;
-  margin-top: 3rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: var(--spacing-xlarge);
   margin-bottom: 0.3rem;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: var(--font-size-h1);
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-h2);
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: var(--font-size-h3);
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-h4);
 }
 
-/* Paragraphs */
 p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-medium);
   white-space: pre-line;
-  font-size: 20px;
+  font-size: var(--font-size-base);
 }
 
-/* Links */
+/* Plain hyperlinks with underline and hover effect */
 a {
-  color: #ffffff;
+  color: var(--color-link);
   text-decoration: underline;
 }
 
@@ -95,33 +144,37 @@ a:hover {
   text-decoration: none;
 }
 
-/* Lists */
+/* Make specific credentials italic */
+#about-credentials li {
+  font-style: italic;
+}
+
 ul {
   list-style: none;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-large);
 }
 
 ul li {
-  margin-bottom: 0.2rem;
-  font-size: 20px;
+  margin-bottom: var(--spacing-small);
+  font-size: var(--font-size-base);
 }
 
-/* Images */
+/* Responsive images */
 img {
   max-width: 100%;
   max-width: 800px;
   height: auto;
   display: block;
-  margin: 1rem 0;
+  margin: var(--spacing-medium) 0;
 }
 
-/* Videos and iframes */
+/* Video and iframe responsive */
 video,
 iframe {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 1rem 0;
+  margin: var(--spacing-medium) 0;
 }
 
 iframe {
@@ -129,25 +182,26 @@ iframe {
   width: 100%;
 }
 
-/* Media gallery */
+/* Media gallery wrapper to contain gallery and navigation together */
 #media-gallery-wrapper {
-  margin-top: 3rem;
+  margin-top: var(--spacing-xlarge);
 }
 
+/* Horizontal gallery layout for project media */
 #project-media {
   display: flex;
   flex-wrap: nowrap;
   overflow: hidden;
-  gap: 1.5rem;
-  padding-bottom: 1rem;
+  gap: var(--gallery-gap);
+  padding-bottom: var(--spacing-medium);
   position: relative;
   scroll-behavior: smooth;
 }
 
 #project-media > * {
   flex: 0 0 auto;
-  max-width: 600px;
-  width: 600px;
+  max-width: var(--gallery-item-width);
+  width: var(--gallery-item-width);
   object-fit: contain;
 }
 
@@ -160,34 +214,33 @@ iframe {
 #project-media iframe,
 #project-media video {
   margin: 0;
-  width: 600px;
+  width: var(--gallery-item-width);
   height: auto;
   aspect-ratio: 16 / 9;
 }
 
-/* Gallery navigation */
+/* Navigation buttons positioned right after gallery */
 .gallery-nav {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: var(--spacing-medium);
+  margin-top: var(--spacing-medium);
   align-items: center;
 }
 
 .gallery-nav button {
   background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #ffffff;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   padding: 0.5rem 1rem;
   font-size: 18px;
   cursor: pointer;
-  font-family: "Work Sans", sans-serif;
-  font-weight: 300;
+  font-family: var(--font-family);
   transition: background-color 0.2s;
 }
 
 .gallery-nav button:hover:not(:disabled) {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 .gallery-nav button:disabled {
@@ -200,30 +253,31 @@ iframe {
   opacity: 0.8;
 }
 
-/* Footer */
+/* Simple footer */
 footer {
   margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid #ffffff;
+  padding-top: var(--spacing-large);
+  border-top: 1px solid var(--color-border);
 }
 
-/* Section spacing */
+/* Reduced spacing between sections for tighter grouping */
 main > div {
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-xlarge);
 }
 
-/* CV and education sections */
+/* Added styling for CV items to create better contrast */
 #work-experience > div,
 #education > div {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-large);
 }
 
 #work-experience h4,
 #education h4 {
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
+  font-style: normal;
   margin-bottom: 0.2rem;
-  margin-top: 1rem;
+  margin-top: var(--spacing-medium);
 }
 
 #work-experience p,
@@ -246,16 +300,16 @@ main > div {
   opacity: 0.9;
 }
 
-/* Skills */
 #skills > div {
   margin-bottom: 1.5rem;
 }
 
 #skills h4 {
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 600;
+  font-style: normal;
   margin-bottom: 0.2rem;
-  margin-top: 1rem;
+  margin-top: var(--spacing-medium);
 }
 
 #skills p {
@@ -263,7 +317,7 @@ main > div {
   opacity: 0.9;
 }
 
-/* Landing page */
+/* Updated landing page styles for p5.js canvas */
 .landing-page {
   height: 100vh;
   overflow: hidden;
@@ -272,24 +326,16 @@ main > div {
   max-width: none;
 }
 
-#canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
 .landing-overlay {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 2;
+  z-index: 10;
   opacity: 1;
   transition: opacity 1s ease;
+  pointer-events: none;
 }
 
 .landing-overlay.fade-out {
@@ -300,7 +346,7 @@ main > div {
   font-size: clamp(2rem, 8vw, 5rem);
   font-weight: 300;
   letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-medium);
 }
 
 .landing-subtitle {
@@ -309,9 +355,9 @@ main > div {
   letter-spacing: 0.1em;
 }
 
-/* Mobile */
+/* Mobile responsive */
 @media (max-width: 768px) {
   body {
-    padding: 1rem;
+    padding: var(--spacing-medium);
   }
 }

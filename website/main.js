@@ -16,130 +16,228 @@ const slugify = (text) => {
     .replace(/--+/g, "-")
 }
 
-// Canvas Animation for Landing Page
-class ParticleSystem {
-  constructor(canvas) {
-    this.canvas = canvas
-    this.ctx = canvas.getContext("2d")
-    this.particles = []
-    this.particleCount = 100
-    this.mouse = { x: null, y: null, radius: 150 }
+// ============================================
+// CONFIGURATION VARIABLES
+// Modify these values to customize behavior
+// ============================================
 
-    this.resize()
-    this.init()
+const CONFIG = {
+  // Landing page animation settings
+  landing: {
+    transitionDelay: 4000, // milliseconds before auto-transition to main page
+    particleCount: 40, // number of particles in the animation
+    gridSize: 20, // size of the flow field grid
+    noiseResolution: 200, // resolution of Perlin noise
+    frameRate: 20, // animation frame rate
+  },
 
-    window.addEventListener("resize", () => this.resize())
-    window.addEventListener("mousemove", (e) => {
-      this.mouse.x = e.x
-      this.mouse.y = e.y
-    })
-  }
+  // Gallery settings
+  gallery: {
+    itemWidth: 600, // width of each gallery item in pixels
+    gap: 24, // gap between gallery items in pixels
+    itemsPerView: 2, // number of items visible at once
+  },
 
-  resize() {
-    this.canvas.width = window.innerWidth
-    this.canvas.height = window.innerHeight
-  }
-
-  init() {
-    this.particles = []
-    for (let i = 0; i < this.particleCount; i++) {
-      const size = Math.random() * 3 + 1
-      const x = Math.random() * this.canvas.width
-      const y = Math.random() * this.canvas.height
-      const speedX = (Math.random() - 0.5) * 0.5
-      const speedY = (Math.random() - 0.5) * 0.5
-
-      this.particles.push({
-        x,
-        y,
-        size,
-        speedX,
-        speedY,
-        baseX: x,
-        baseY: y,
-      })
-    }
-  }
-
-  drawParticles() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-
-    for (let i = 0; i < this.particles.length; i++) {
-      const particle = this.particles[i]
-
-      // Draw particle
-      this.ctx.fillStyle = "rgba(232, 232, 232, 0.5)"
-      this.ctx.beginPath()
-      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-      this.ctx.fill()
-
-      // Draw connections
-      for (let j = i + 1; j < this.particles.length; j++) {
-        const particle2 = this.particles[j]
-        const dx = particle.x - particle2.x
-        const dy = particle.y - particle2.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-
-        if (distance < 100) {
-          this.ctx.strokeStyle = `rgba(232, 232, 232, ${0.2 * (1 - distance / 100)})`
-          this.ctx.lineWidth = 0.5
-          this.ctx.beginPath()
-          this.ctx.moveTo(particle.x, particle.y)
-          this.ctx.lineTo(particle2.x, particle2.y)
-          this.ctx.stroke()
-        }
-      }
-
-      // Mouse interaction
-      const dx = this.mouse.x - particle.x
-      const dy = this.mouse.y - particle.y
-      const distance = Math.sqrt(dx * dx + dy * dy)
-
-      if (distance < this.mouse.radius) {
-        const force = (this.mouse.radius - distance) / this.mouse.radius
-        const directionX = dx / distance
-        const directionY = dy / distance
-        particle.x -= directionX * force * 2
-        particle.y -= directionY * force * 2
-      } else {
-        // Return to base position
-        if (particle.x !== particle.baseX) {
-          const dx = particle.x - particle.baseX
-          particle.x -= dx / 20
-        }
-        if (particle.y !== particle.baseY) {
-          const dy = particle.y - particle.baseY
-          particle.y -= dy / 20
-        }
-      }
-
-      // Move particles
-      particle.x += particle.speedX
-      particle.y += particle.speedY
-
-      // Bounce off edges
-      if (particle.x < 0 || particle.x > this.canvas.width) {
-        particle.speedX *= -1
-      }
-      if (particle.y < 0 || particle.y > this.canvas.height) {
-        particle.speedY *= -1
-      }
-    }
-  }
-
-  animate() {
-    this.drawParticles()
-    requestAnimationFrame(() => this.animate())
-  }
+  // Color palette for landing animation (monochrome)
+  colors: {
+    color1: [255, 255, 255], // white
+    color2: [200, 200, 200], // light gray
+    color3: [150, 150, 150], // medium gray
+    color4: [100, 100, 100], // dark gray
+    color5: [50, 50, 50], // very dark gray
+  },
 }
 
-// Landing Page Logic
-if (document.body.classList.contains("landing-page")) {
-  const canvas = document.getElementById("canvas")
-  const particleSystem = new ParticleSystem(canvas)
-  particleSystem.animate()
+// ============================================
+// END CONFIGURATION
+// ============================================
 
-  // Transition to main page after 4 seconds
+// Canvas Animation for Landing Page using p5.js
+if (document.body.classList.contains("landing-page")) {
+  let gridSize, cols, rows
+  let noiseResolution
+  const flowField = []
+  const particles = []
+
+  // Use configured color palette
+  const colorPalette = [
+    CONFIG.colors.color1,
+    0.2,
+    CONFIG.colors.color2,
+    0.1,
+    CONFIG.colors.color3,
+    0.3,
+    CONFIG.colors.color4,
+    0.1,
+    CONFIG.colors.color5,
+    0.3,
+  ]
+
+  function setup() {
+    const canvas = window.createCanvas(window.innerWidth, window.innerHeight)
+    canvas.parent(document.body)
+    canvas.style("position", "fixed")
+    canvas.style("top", "0")
+    canvas.style("left", "0")
+    canvas.style("z-index", "0")
+    window.frameRate(CONFIG.landing.frameRate)
+    window.background(0)
+
+    gridSize = CONFIG.landing.gridSize
+    noiseResolution = CONFIG.landing.noiseResolution
+    cols = Math.floor(window.innerWidth / gridSize)
+    rows = Math.floor(window.innerHeight / gridSize)
+
+    for (let y = 0; y < rows; y++) {
+      flowField[y] = []
+      for (let x = 0; x < cols; x++) {
+        const angle = window.noise(x / noiseResolution, y / noiseResolution) * window.TWO_PI * 4
+        const v = window.p5.Vector.fromAngle(angle)
+        flowField[y][x] = v
+      }
+    }
+
+    for (let i = 0; i < CONFIG.landing.particleCount; i++) {
+      particles[i] = new Particle(
+        window.createVector(window.random(window.innerWidth), window.random(window.innerHeight)),
+      )
+    }
+
+    drawGrid()
+  }
+
+  function windowResized() {
+    window.resizeCanvas(window.innerWidth, window.innerHeight)
+    window.background(0)
+  }
+
+  function mousePressed() {
+    particles.length = 0
+    for (let i = 0; i < 20; i++) {
+      particles[i] = new Particle(
+        window.createVector(window.random(window.innerWidth), window.random(window.innerHeight)),
+      )
+    }
+  }
+
+  function draw() {
+    window.fill(0, 5)
+    window.noStroke()
+    window.ellipse(
+      window.random(window.innerWidth),
+      window.random(window.innerHeight),
+      window.random(200, 600),
+      window.random(200, 600),
+    )
+
+    for (let i = 0; i < particles.length; i++) {
+      if (particles[i].finished) {
+        continue
+      }
+
+      particles[i].update(flowField)
+      if (particles.some((p) => p != particles[i] && p.tooClose(particles[i].pos))) {
+        particles[i].finished = true
+        for (let j = 0; j < 10; j++) {
+          const position = window.createVector(window.random(window.innerWidth), window.random(window.innerHeight))
+          if (!particles.some((p) => p.tooClose(position))) {
+            const p = new Particle(position)
+            particles.push(p)
+            break
+          }
+        }
+      } else {
+        particles[i].display()
+      }
+    }
+  }
+
+  function drawGrid() {
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = flowField[y][x]
+        window.push()
+        window.translate(x * gridSize, y * gridSize)
+        window.fill(20)
+        window.noStroke()
+        window.rect(1, 1, gridSize - 2, gridSize - 2)
+        window.translate(gridSize / 2, gridSize / 2)
+        window.stroke(80)
+        window.strokeWeight(1)
+        window.line(0, 0, (v.x * gridSize) / 2, (v.y * gridSize) / 2)
+        window.pop()
+      }
+    }
+  }
+
+  class Particle {
+    constructor(position) {
+      this.pos = position
+      this.vel = window.createVector(0, 0)
+      this.acc = window.createVector(0, 0)
+      this.radius = window.random(10, 30)
+      this.color = weightedValue(colorPalette)
+      this.path = []
+      this.maxLength = weightedValue([20, 0.5, 60, 0.5])
+    }
+
+    update(flowField) {
+      const x = window.constrain(Math.floor(this.pos.x / gridSize), 0, rows - 1)
+      const y = window.constrain(Math.floor(this.pos.y / gridSize), 0, cols - 1)
+      this.acc.add(flowField[x][y])
+      this.acc.mult(8)
+      this.vel.add(this.acc)
+      this.vel.normalize()
+      this.vel.mult(5)
+      this.pos.add(this.vel)
+      this.acc.mult(0)
+    }
+
+    display() {
+      const pathCoverage = window.map(this.path.length, 0, this.maxLength, 0, 1)
+      if (pathCoverage <= 0.1 || pathCoverage > 0.8) {
+        this.color = weightedValue(colorPalette)
+      } else {
+        this.color = [180, 180, 180] // center gray
+      }
+
+      if (this.path.length > this.maxLength) {
+        this.finished = true
+      }
+
+      window.push()
+      window.rectMode(window.CENTER)
+      window.translate(this.pos.x, this.pos.y)
+      window.fill(this.color.concat([60]))
+      window.noStroke()
+      window.rotate(this.vel.heading())
+      for (let i = 0; i < 50; i++) {
+        window.rotate(window.radians(window.random(-2, 2)))
+        window.rect(0, 0, -this.vel.mag() - 2, this.radius)
+      }
+      window.rectMode(window.CORNER)
+      window.pop()
+      this.path.push(this.pos.copy())
+    }
+
+    tooClose(v) {
+      return this.path.some((d) => d.dist(v) < this.radius * 2)
+    }
+  }
+
+  function weightedValue(array) {
+    let randomNumber = window.random(0, 1),
+      weightSum = 0,
+      value
+    for (let i = 0; i < array.length; i += 2) {
+      value = array[i]
+      weightSum += array[i + 1]
+      if (randomNumber < weightSum) break
+    }
+    return value
+  }
+
+  // Transition to main page after configured delay
   setTimeout(() => {
     const overlay = document.querySelector(".landing-overlay")
     overlay.classList.add("fade-out")
@@ -147,7 +245,7 @@ if (document.body.classList.contains("landing-page")) {
     setTimeout(() => {
       window.location.href = "main.html"
     }, 1000)
-  }, 4000)
+  }, CONFIG.landing.transitionDelay)
 }
 
 // Main Page Logic
@@ -198,9 +296,21 @@ if (document.body.classList.contains("main-page")) {
     })
 
     const drawingsList = document.getElementById("drawings-list")
-    data.projects.drawings.forEach((project) => {
+
+    // Filter out audiodevout projects from drawings
+    const nonAudiodevoutDrawings = data.projects.drawings.filter((project) => !project.id.startsWith("audiodevout-"))
+
+    nonAudiodevoutDrawings.forEach((project) => {
       drawingsList.appendChild(createProjectLink(project, "drawings"))
     })
+
+    // Add single link to TouchDesigner Tutorials page
+    const tutorialsLi = document.createElement("li")
+    const tutorialsLink = document.createElement("a")
+    tutorialsLink.href = "touchdesigner-tutorials.html"
+    tutorialsLink.textContent = "TouchDesigner Tutorials"
+    tutorialsLi.appendChild(tutorialsLink)
+    drawingsList.appendChild(tutorialsLi)
 
     const writingList = document.getElementById("writing-list")
     data.projects.writing.forEach((project) => {
@@ -430,8 +540,8 @@ if (document.body.classList.contains("project-page")) {
       wrapper.appendChild(navContainer)
 
       let currentPosition = 0
-      const itemWidth = 600 + 24 // width + gap
-      const itemsPerView = 2
+      const itemWidth = CONFIG.gallery.itemWidth + CONFIG.gallery.gap
+      const itemsPerView = CONFIG.gallery.itemsPerView
 
       const updateButtons = () => {
         prevButton.disabled = currentPosition === 0
@@ -468,6 +578,24 @@ if (document.body.classList.contains("project-page")) {
       <a href="main.html">← Back to Portfolio</a>
     `
   }
+}
+
+// TouchDesigner Tutorials Page Logic
+if (document.body.classList.contains("tutorials-page")) {
+  const data = window.portfolioData
+  const tutorialsList = document.getElementById("tutorials-list")
+
+  // Get all audiodevout projects from drawings category
+  const audiodevoutProjects = data.projects.drawings.filter((project) => project.id.startsWith("audiodevout-"))
+
+  audiodevoutProjects.forEach((project) => {
+    const li = document.createElement("li")
+    const link = document.createElement("a")
+    link.href = `project.html?id=${project.id}&category=drawings`
+    link.textContent = project.title
+    li.appendChild(link)
+    tutorialsList.appendChild(li)
+  })
 }
 
 // Smooth scroll behavior
