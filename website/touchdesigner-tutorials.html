@@ -17,7 +17,25 @@
             <h2>TouchDesigner Tutorials</h2>
             <p>A collection of TouchDesigner tutorials and creative coding projects exploring generative visuals, particle systems, and audioreactive art.</p>
             
-            <ul id="tutorials-list"></ul>
+            <ul id="tutorials-list">
+                <script>
+                    const tutorialsList = document.getElementById("tutorials-list");
+                    const audiodevoutProjects = [
+                        { id: 1, title: "Generative Visuals" },
+                        { id: 2, title: "Particle Systems" },
+                        { id: 3, title: "Audioreactive Art" }
+                    ];
+
+                    audiodevoutProjects.forEach((project) => {
+                        const li = document.createElement("li");
+                        const link = document.createElement("a");
+                        link.href = `project.html?id=${project.id}`;
+                        link.textContent = project.title;
+                        li.appendChild(link);
+                        tutorialsList.appendChild(li);
+                    });
+                </script>
+            </ul>
             
             <p><a href="main.html">← Back to Portfolio</a></p>
         </article>

@@ -16,6 +16,11 @@ const slugify = (text) => {
     .replace(/--+/g, "-")
 }
 
+// Simplified URL generation function
+const createProjectUrl = (projectId) => {
+  return `project.html?id=${projectId}`
+}
+
 // ============================================
 // CONFIGURATION VARIABLES
 // Modify these values to customize behavior
@@ -272,7 +277,7 @@ if (document.body.classList.contains("main-page")) {
   const createProjectLink = (project, category) => {
     const li = document.createElement("li")
     const link = document.createElement("a")
-    link.href = `project.html?id=${project.id}&category=${category}`
+    link.href = createProjectUrl(project.id)
     link.textContent = project.title
     li.appendChild(link)
     return li
@@ -286,9 +291,12 @@ if (document.body.classList.contains("main-page")) {
     })
 
     const soundList = document.getElementById("sound-list")
-    data.projects.soundInstallations.forEach((project) => {
-      soundList.appendChild(createProjectLink(project, "soundInstallations"))
-    })
+    const audioCollectionLi = document.createElement("li")
+    const audioCollectionLink = document.createElement("a")
+    audioCollectionLink.href = "asymmetrica-audio.html"
+    audioCollectionLink.textContent = "Asymmetrica Audio Collection"
+    audioCollectionLi.appendChild(audioCollectionLink)
+    soundList.appendChild(audioCollectionLi)
 
     const performanceList = document.getElementById("performance-list")
     data.projects.performance.forEach((project) => {
@@ -318,7 +326,6 @@ if (document.body.classList.contains("main-page")) {
     })
   }
 
-  // Populate CV Section
   const populateCV = () => {
     // Work Experience
     const workExperience = document.getElementById("work-experience")
@@ -372,7 +379,6 @@ if (document.body.classList.contains("main-page")) {
     skills.appendChild(interests)
   }
 
-  // Populate Contact Section
   const populateContact = () => {
     const contactDescription = document.getElementById("contact-description")
     const socialLinks = document.getElementById("social-links")
@@ -404,19 +410,26 @@ if (document.body.classList.contains("main-page")) {
 // Project Detail Page Logic
 if (document.body.classList.contains("project-page")) {
   const projectId = getUrlParameter("id")
-  const category = getUrlParameter("category")
   const data = window.portfolioData
 
   let project = null
-  if (category && data.projects[category]) {
-    project = data.projects[category].find((p) => p.id === projectId)
+  let foundCategory = null
+
+  // Search through all project categories to find the project
+  for (const [category, projects] of Object.entries(data.projects)) {
+    const found = projects.find((p) => p.id === projectId)
+    if (found) {
+      project = found
+      foundCategory = category
+      break
+    }
   }
 
   if (project) {
     document.title = `${project.title} - Atharva Gupta`
 
     document.getElementById("project-title").textContent = project.title
-    document.getElementById("project-category").textContent = project.category || category
+    document.getElementById("project-category").textContent = project.category || foundCategory
 
     const descriptionContainer = document.getElementById("project-description")
     const description = document.createElement("p")
@@ -591,10 +604,30 @@ if (document.body.classList.contains("tutorials-page")) {
   audiodevoutProjects.forEach((project) => {
     const li = document.createElement("li")
     const link = document.createElement("a")
-    link.href = `project.html?id=${project.id}&category=drawings`
+    link.href = createProjectUrl(project.id)
     link.textContent = project.title
     li.appendChild(link)
     tutorialsList.appendChild(li)
+  })
+}
+
+// Asymmetrica Audio Collection page logic
+if (document.body.classList.contains("audio-collection-page")) {
+  const data = window.portfolioData
+  const audioCollectionList = document.getElementById("audio-collection-list")
+
+  // Get all asymmetrica projects from soundInstallations category
+  const asymmetricaProjects = data.projects.soundInstallations.filter((project) =>
+    project.id.startsWith("asymmetrica-"),
+  )
+
+  asymmetricaProjects.forEach((project) => {
+    const li = document.createElement("li")
+    const link = document.createElement("a")
+    link.href = createProjectUrl(project.id)
+    link.textContent = project.title
+    li.appendChild(link)
+    audioCollectionList.appendChild(li)
   })
 }
 
