@@ -368,14 +368,13 @@ try {
           // ],
           images: [
             "./assets/images/fever-dream-performance.jpg",
-            "./assets/images/fever-dream-performance-1.jpg",
-            "./assets/images/fever-dream-poster.jpg",
+            "./assets/images/fever-dream-performance-1.jpg",            
           ],
         },
 
         {
           id: "spaces-groningen",
-          title: "VJ - Spaces",
+          title: "Spaces, Groningen",
           description: "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
           fullDescription:
             "A collaborative event combining ambient soundscapes, poetry, and visual projections, designed to immerse attendees in a meditative, sensory environment. The event merges curated ambient music with live visuals, transforming the club space into a reflective, poetic experience. Performances explore the intersection of sound, text, and imagery, allowing the audience to drift between contemplation and subtle stimulation.",
@@ -829,26 +828,26 @@ try {
           images: ["./assets/images/fever-dream-poster.jpg"],
         },
 
-        {
-          id: "symmetrical-fictions-paper",
-          title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-          description: "A research paper exploring the theoretical framework behind the video installation project.",
-          fullDescription:
-            "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
-          medium: "Academic paper, theoretical research",
-          category: "RESEARCH & THEORY",
-          color: "cerulean",
-          themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-          images: [
-            "./assets/images/39.jpg",
-            "./assets/images/72.jpg",
-            "./assets/images/73.jpg",
-            "./assets/images/6.jpg",
-          ],
-          urls: {
-            pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-          },
-        },
+        // {
+        //   id: "symmetrical-fictions-paper",
+        //   title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
+        //   description: "A research paper exploring the theoretical framework behind the video installation project.",
+        //   fullDescription:
+        //     "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
+        //   medium: "Academic paper, theoretical research",
+        //   category: "RESEARCH & THEORY",
+        //   color: "cerulean",
+        //   themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+        //   images: [
+        //     "./assets/images/39.jpg",
+        //     "./assets/images/72.jpg",
+        //     "./assets/images/73.jpg",
+        //     "./assets/images/6.jpg",
+        //   ],
+        //   urls: {
+        //     pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
+        //   },
+        // },
 
         {
           id: "transcending-identities",
