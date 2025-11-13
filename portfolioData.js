@@ -415,7 +415,7 @@ try {
             "./assets/images/rain-stick-6.JPG",
             "./assets/images/rain-stick-5.JPG",
             "./assets/images/rain-stick-4.JPG",
-            "./assets/images/rain-stick-3.JPG",
+            // "./assets/images/rain-stick-3.JPG",
             "./assets/images/rain-stick-2.JPG",
             "./assets/images/rain-stick-1.JPG",
           ],
