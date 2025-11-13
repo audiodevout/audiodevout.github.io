@@ -33,9 +33,9 @@
 
 /* GALLERY */
 :root {
-  --gallery-item-width: 600px;
-  --gallery-gap: 1.5rem;
-  --gallery-items-per-view: 2;
+  --gallery-item-width: 400px;
+  --gallery-gap: 1rem;
+  --gallery-items-per-view: 1;
 }
 
 /* LANDING PAGE ANIMATION */
