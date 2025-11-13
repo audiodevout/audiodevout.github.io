@@ -327,6 +327,7 @@ if (document.body.classList.contains("main-page")) {
   }
 
   const populateCV = () => {
+    
     // Work Experience
     const workExperience = document.getElementById("work-experience")
     data.contact.cv.workExperience.forEach((job) => {

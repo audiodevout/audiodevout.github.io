@@ -375,7 +375,7 @@ try {
 
         {
           id: "spaces-groningen",
-          title: "Spaces, Groningen",
+          title: "Spaces @ OOST",
           description: "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
           fullDescription:
             "A collaborative event combining ambient soundscapes, poetry, and visual projections, designed to immerse attendees in a meditative, sensory environment. The event merges curated ambient music with live visuals, transforming the club space into a reflective, poetic experience. Performances explore the intersection of sound, text, and imagery, allowing the audience to drift between contemplation and subtle stimulation.",
