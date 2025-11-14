@@ -20,6 +20,10 @@
   --font-size-h3: 2.5rem;
   --font-size-h4: 2rem;
   --line-height: 1.6;
+  /* Added letter spacing for improved typography */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
 }
 
 /* SPACING */
@@ -33,9 +37,10 @@
 
 /* GALLERY */
 :root {
-  --gallery-item-width: 400px;
-  --gallery-gap: 1rem;
-  --gallery-items-per-view: 1;
+  --gallery-item-width: 600px;
+  --gallery-item-height: 600px;
+  --gallery-gap: 1.5rem;
+  --gallery-items-per-view: 2;
 }
 
 /* LANDING PAGE ANIMATION */
@@ -69,6 +74,10 @@ body {
   padding: var(--padding-body);
   text-align: left;
   font-size: var(--font-size-base);
+  /* Added anti-aliasing for smoother text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Header h1 is no longer italic, and links are styled */
@@ -81,24 +90,34 @@ header h1 {
   font-weight: 400;
   font-style: normal;
   margin-bottom: 0.5rem;
+  /* Added letter spacing for improved heading aesthetics */
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 header h1 a {
   color: var(--color-link);
   text-decoration: none;
+  /* Added smooth transition for hover effects */
+  transition: opacity 0.2s ease;
 }
 
 header h1 a:hover {
   text-decoration: underline;
+  /* Added subtle opacity change on hover */
+  opacity: 0.8;
 }
 
 header a {
   color: var(--color-link);
   text-decoration: underline;
+  /* Added smooth transition for hover effects */
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
 }
 
 header a:hover {
   text-decoration: none;
+  /* Added subtle opacity change on hover */
+  opacity: 0.8;
 }
 
 /* Increased heading sizes and kept italic, reduced margin-bottom for tighter grouping */
@@ -110,6 +129,8 @@ h4 {
   font-style: italic;
   margin-top: var(--spacing-xlarge);
   margin-bottom: 0.3rem;
+  /* Added letter spacing for improved heading aesthetics */
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 h1 {
@@ -132,16 +153,30 @@ p {
   margin-bottom: var(--spacing-medium);
   white-space: pre-line;
   font-size: var(--font-size-base);
+  /* Added better line height for improved readability */
+  line-height: 1.7;
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 /* Plain hyperlinks with underline and hover effect */
 a {
   color: var(--color-link);
   text-decoration: underline;
+  /* Added smooth transition for hover effects */
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
 }
 
 a:hover {
   text-decoration: none;
+  /* Added subtle opacity change on hover */
+  opacity: 0.8;
+}
+
+/* Added focus states for better accessibility */
+a:focus,
+button:focus {
+  outline: 2px solid var(--color-border);
+  outline-offset: 2px;
 }
 
 /* Make specific credentials italic */
@@ -166,6 +201,9 @@ img {
   height: auto;
   display: block;
   margin: var(--spacing-medium) 0;
+  /* Added image-rendering for better quality */
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 /* Video and iframe responsive */
@@ -180,6 +218,8 @@ iframe {
 iframe {
   aspect-ratio: 16 / 9;
   width: 100%;
+  /* Added subtle border for better visual definition */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Media gallery wrapper to contain gallery and navigation together */
@@ -196,6 +236,26 @@ iframe {
   padding-bottom: var(--spacing-medium);
   position: relative;
   scroll-behavior: smooth;
+  /* Added scrollbar styling for better aesthetics */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+#project-media::-webkit-scrollbar {
+  height: 8px;
+}
+
+#project-media::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#project-media::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+#project-media::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 #project-media > * {
@@ -209,6 +269,12 @@ iframe {
   margin: 0;
   height: auto;
   object-fit: contain;
+  max-height: 600px;
+  max-width: 800px;
+  /* Added subtle shadow for depth */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  /* Added transition for smoother loading */
+  transition: opacity 0.3s ease;
 }
 
 #project-media iframe,
@@ -217,6 +283,8 @@ iframe {
   width: var(--gallery-item-width);
   height: auto;
   aspect-ratio: 16 / 9;
+  /* Added subtle shadow for depth */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Navigation buttons positioned right after gallery */
@@ -235,22 +303,38 @@ iframe {
   font-size: 18px;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: background-color 0.2s;
+  /* Enhanced transition for smoother hover effects */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease, border-color 0.3s ease;
+  /* Added letter spacing for better button text */
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 .gallery-nav button:hover:not(:disabled) {
   background-color: var(--color-text);
   color: var(--color-background);
+  /* Added subtle scale on hover for better feedback */
+  transform: translateY(-1px);
+}
+
+.gallery-nav button:active:not(:disabled) {
+  /* Added active state for better interaction feedback */
+  transform: translateY(0);
 }
 
 .gallery-nav button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+  /* Added visual feedback for disabled state */
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .gallery-counter {
   font-size: 18px;
   opacity: 0.8;
+  /* Added letter spacing for consistency */
+  letter-spacing: var(--letter-spacing-normal);
+  /* Added font variant for better numerals */
+  font-variant-numeric: tabular-nums;
 }
 
 /* Simple footer */
@@ -258,6 +342,8 @@ footer {
   margin-top: 4rem;
   padding-top: var(--spacing-large);
   border-top: 1px solid var(--color-border);
+  /* Added subtle opacity to footer for visual hierarchy */
+  opacity: 0.9;
 }
 
 /* Reduced spacing between sections for tighter grouping */
@@ -269,6 +355,14 @@ main > div {
 #work-experience > div,
 #education > div {
   margin-bottom: var(--spacing-large);
+  /* Added subtle border for section separation */
+  padding-bottom: var(--spacing-large);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#work-experience > div:last-child,
+#education > div:last-child {
+  border-bottom: none;
 }
 
 #work-experience h4,
@@ -278,6 +372,8 @@ main > div {
   font-style: normal;
   margin-bottom: 0.2rem;
   margin-top: var(--spacing-medium);
+  /* Added letter spacing for improved readability */
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 #work-experience p,
@@ -285,6 +381,8 @@ main > div {
   font-size: 18px;
   margin-bottom: 0.3rem;
   opacity: 0.8;
+  /* Improved line height for better readability */
+  line-height: 1.6;
 }
 
 #work-experience ul,
@@ -298,6 +396,9 @@ main > div {
 #education ul li {
   font-size: 18px;
   opacity: 0.9;
+  /* Improved line height and spacing for lists */
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
 }
 
 #skills > div {
@@ -310,11 +411,15 @@ main > div {
   font-style: normal;
   margin-bottom: 0.2rem;
   margin-top: var(--spacing-medium);
+  /* Added letter spacing for improved readability */
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 #skills p {
   font-size: 18px;
   opacity: 0.9;
+  /* Improved line height for better readability */
+  line-height: 1.6;
 }
 
 /* Updated landing page styles for p5.js canvas */
@@ -334,7 +439,8 @@ main > div {
   text-align: center;
   z-index: 10;
   opacity: 1;
-  transition: opacity 1s ease;
+  /* Enhanced transition timing for smoother fade */
+  transition: opacity 1.2s ease-out;
   pointer-events: none;
 }
 
@@ -347,17 +453,69 @@ main > div {
   font-weight: 300;
   letter-spacing: 0.05em;
   margin-bottom: var(--spacing-medium);
+  /* Added text shadow for better contrast against animation */
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .landing-subtitle {
   font-size: clamp(1rem, 3vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 0.1em;
+  /* Added text shadow for better contrast against animation */
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Added selection styling for better visual feedback */
+::selection {
+  background-color: var(--color-text);
+  color: var(--color-background);
+}
+
+::-moz-selection {
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
   body {
     padding: var(--spacing-medium);
+  }
+
+  /* Improved mobile typography */
+  :root {
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.75rem;
+    --font-size-h4: 1.5rem;
+  }
+
+  /* Better mobile gallery navigation */
+  .gallery-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gallery-nav button {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+
+  .gallery-counter {
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Added media query for reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

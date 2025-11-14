@@ -326,8 +326,27 @@ if (document.body.classList.contains("main-page")) {
     })
   }
 
+const populateExhibitions = () => {
+  const exhibitionsContainer = document.getElementById("exhibitions-list")
+
+  data.exhibitions.forEach((exhibition) => {
+    const item = document.createElement("div")
+    item.className = "exhibition-item"
+
+    let line = `${exhibition.title} • ${exhibition.venue} • ${exhibition.location} • ${exhibition.date}`
+
+    if (exhibition.description) line += ` • ${exhibition.description}`
+    if (exhibition.role) line += ` • <em>${exhibition.role}</em>`  // keep italics
+
+    item.innerHTML = `<p>${line}</p>`
+
+    exhibitionsContainer.appendChild(item)
+  })
+}
+
+
   const populateCV = () => {
-    
+
     // Work Experience
     const workExperience = document.getElementById("work-experience")
     data.contact.cv.workExperience.forEach((job) => {
@@ -404,6 +423,7 @@ if (document.body.classList.contains("main-page")) {
   // Initialize Main Page
   populateAbout()
   populateWork()
+  populateExhibitions()
   populateCV()
   populateContact()
 }

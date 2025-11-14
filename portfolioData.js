@@ -1867,7 +1867,41 @@ try {
         //   }
       ],
     },
+    exhibitions: [
+        {
+          title: "Urban Arts Tour: Extended living room",
+          venue: "Nieuwe Markt/Forum",
+          location: "Groningen, NL",
+          date: "November 2025",
+          description: "Rain Reminders",
+          role: "Kinetic Sculpture"
+        },
+        {
+          title: "Nervous Systems",
+          venue: "KEL-30",
+          location: "Haren, NL",
+          date: "June 2025",
+          description: "Rain Reminders",
+          role: "Kinetic Sculpture"
+        },
+        {
+          title: "Fever Dream",
+          venue: "Minerva Academy",
+          location: "Groningen, NL",
+          date: "May 2025",
+          description: "Gesture Controlled Generative AudioVisual System",
+          role: "AV Performance"
+        },
+        {
+          title: "On Contemporary Art and Artistic Practice in The Netherlands and Western Europe",
+          venue: "Government Girls College",
+          location: "Ajmer, IN",
+          date: "February 2025",
+          description: "",
+          role: "Lecture/Presentation"
+        },
 
+      ],
     contact: {
       about: {
         title: "ABOUT ME",
@@ -1946,7 +1980,6 @@ Across installations, performances, and academic inquiry, I explore the shifting
             "Art Education",
             "New Media Art",
             "Cultural Research",
-            ,
             "Interactive Media",
             "Creative Concept Design",
             "Sound Design",
@@ -2016,7 +2049,7 @@ Across installations, performances, and academic inquiry, I explore the shifting
   }
 } catch (error) {
   console.error("Error loading portfolio data:", error)
-  // FIXED: Provide fallback data
+  
   if (typeof window !== "undefined") {
     window.portfolioData = {
       projects: {
