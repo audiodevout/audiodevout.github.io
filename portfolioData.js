@@ -10,33 +10,6 @@ try {
   const portfolioData = {
     projects: {
       soundInstallations: [
-        // {
-        //   id: "rain-reminders",
-        //   title: "Rain Reminders",
-        //   description:
-        //     "A 1.8-meter-tall kinetic sound sculpture featuring a slowly rotating rain stick suspended on a raw wooden and steel armature.",
-        //   fullDescription:
-        //     "Rain Reminders is a meditative kinetic installation that reimagines the rain stick—not as a novelty or ritual toy, but as a durational sound object. The sculpture features a custom motor-driven rotation system that turns a handmade 80 cm rain stick slowly on its horizontal axis. As it rotates, seeds cascade inside, producing a gentle, unamplified texture reminiscent of rainfall.\n\nConstructed from coarse and industrial materials—steel square tube rods, a 6x4 wood beam, grey duct tape, and many exposed screws—the piece emphasizes its own rough logic and raw construction. A jute or coir mat rests underneath, visually grounding the machine while softening its material boundary with the floor.\n\nThe surface of the rain stick is sealed in grey duct tape, echoing a Dadaist appreciation for found aesthetics and provisional design. Wiring remains visible. Materials are left unpolished. The form resists smoothness.\n\nConceptually, the piece addresses acoustic ritual through mechanical persistence. It began as a personal response to tinnitus—an inner weather I’ve lived with for four years—where white noise became the only reliable relief. In this context, the sculpture becomes a kind of sonic prosthesis, a quiet companion humming gently in the background, made by and for its maker.\n\nThis is not a spectacle. It’s a machine for listening. A contradiction between industrial form and soft sound. An object that operates in the background, inviting focused attention through its very persistence. Rain Reminders is a reminder—of time, of noise, of stillness, and of the rituals we build to live beside them.",
-        //   medium:
-        //     "Motorized kinetic sculpture, acoustic rain stick, wood, steel, raw hardware, exposed electronics",
-        //   category: "KINETIC SCULPTURE • NOISE • ARDUINO",
-        //   color: "saffron",
-        //   dimensions: "1.8m (height)",
-        //   technical:
-        //     "Custom low-RPM motor system, handmade rain stick with internal grain cascade, steel and wood framework, coir matting",
-        //   themes:
-        //     "Tinnitus and White Noise, Acoustic Ritual and Duration, Dadaism and Raw Construction, Meditative Distraction",
-        //   // videos: [
-        //   //   "./assets/videos/rain-stick-video.mp4"
-        //   // ],
-        //   // audioFile: "./assets/audio/rain-reminders-sample.mp3",
-        //   images: [
-        //     "./assets/images/rain-stick-3.JPG",
-        //     "./assets/images/rain-stick-2.JPG",
-        //     "./assets/images/rain-stick-1.JPG"
-        //   ]
-        // },
-
         {
           id: "asymmetrica-have-a-nice-last-few-days-of-summer",
           title: "have a nice last few days of summer",
@@ -807,33 +780,10 @@ try {
         },
       ],
 
+      
+
       writing: [
-        {
-          id: "nervous-systems-kel30",
-          title: "Nervous Systems",
-          description: "A group exhibition by first-year MADTech students at KEL-30.",
-          fullDescription:
-            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Installation, performance, new media",
-          category: "EXHIBITION",
-          color: "electric-blue",
-          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
-          images: ["./assets/images/nervous-system-1.jpg"],
-          urls: {},
-        },
-        {
-          id: "fever-dream-minerva",
-          title: "Fever Dream",
-          description: "A collaborative performance at Minerva Academy.",
-          fullDescription:
-            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
-          medium: "Performance, audiovisual installation, sound art",
-          category: "EXHIBITION",
-          color: "crimson",
-          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
-          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
-          images: ["./assets/images/fever-dream-poster.jpg"],
-        },
+        
 
         // {
         //   id: "symmetrical-fictions-paper",
@@ -856,800 +806,7 @@ try {
         //   },
         // },
 
-        {
-          id: "transcending-identities",
-          title: "Transcending Identities: Gender Performance and Psychedelic Trance in Goa’s Rave Scene",
-          description:
-            "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
-          fullDescription:
-            "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
-          medium: "Ethnographic research, festival case study, electronic music culture",
-          category: "RESEARCH & WRITING",
-          tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
-          color: "violet",
-          themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
-          urls: {
-            pdf: "./assets/documents/gspm-paper.pdf",
-          },
-        },
-
-        {
-          id: "post-television-audiences",
-          title: "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
-          description:
-            "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
-          fullDescription:
-            "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while embedding itself within corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
-          medium: "Research paper, digital media studies, cultural theory",
-          category: "RESEARCH & WRITING",
-          tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
-          color: "crimson",
-          themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
-          urls: {
-            pdf: "./assets/documents/aps-paper.pdf",
-          },
-        },
-
-        // {
-        //     id: "prime-spiral-visualizer-tox",
-        //     title: "Prime Spiral Visualizer (.tox download)",
-        //     description: "TouchDesigner project file featuring a prime spiral visualizer, downloadable as a .tox file.",
-        //     fullDescription: "Detailed TouchDesigner project file showcasing a prime spiral visualizer, available for experimentation and learning.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131907000"
-        //     },
-        //   },
-        //   {
-        //     id: "quick-emboss-filter-tox",
-        //     title: "FREE! Quick Emboss Filter - Project File and TOX",
-        //     description: "Free downloadable TouchDesigner project file featuring a quick emboss filter effect.",
-        //     fullDescription: "Beginner-friendly TouchDesigner project file demonstrating a quick emboss filter effect. Free download.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131295324"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-police-lights-bloom",
-        //     title: "(Free!) Simple police lights with switches and bloom",
-        //     description: "TouchDesigner project files showing simple police lights with switches and bloom effects.",
-        //     fullDescription: "Includes files demonstrating police lights simulation with switches and bloom effects. Free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/126001531"
-        //     },
-        //   },
-        //   {
-        //     id: "psychedelic-fractals-particlesgpu",
-        //     title: "PROJECT FILES - Psychedelic Fractals with ParticlesGPU in TouchDesigner",
-        //     description: "Paid project files demonstrating psychedelic fractals using ParticlesGPU in TouchDesigner.",
-        //     fullDescription: "Advanced fractal generation techniques with ParticlesGPU inside TouchDesigner for immersive visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/125860099"
-        //     },
-        //   },
-        //   {
-        //     id: "project-files-audioreactive-text",
-        //     title: "Project Files - Audioreactive Text",
-        //     description: "Paid project files for audioreactive text visualization in TouchDesigner.",
-        //     fullDescription: "TouchDesigner files enabling generative audioreactive text visuals with customizable parameters.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/121479952"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-structural-variation",
-        //     title: "Noise Sculpting - Structural Variation (Patreon Exclusive)",
-        //     description: "Paid project files exploring structural variation in noise sculpting techniques.",
-        //     fullDescription: "A deeper dive into noise sculpting with advanced structural variation techniques inside TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/120456027"
-        //     },
-        //   },
-        //   {
-        //     id: "moving-lights-effect-tops",
-        //     title: "Moving Lights Effect with TOPs (Project File)",
-        //     description: "Paid project files for creating moving light effects with TouchDesigner TOPs.",
-        //     fullDescription: "Files demonstrating dynamic moving lights using TOP operators in TouchDesigner for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/115405003"
-        //     },
-        //   },
-        //   {
-        //     id: "controlled-feedback-cache-tops",
-        //     title: "Project Files - Controlled Feedback with Cache TOPs",
-        //     description: "Paid project files illustrating controlled feedback loops with Cache TOPs in TouchDesigner.",
-        //     fullDescription: "Detailed TouchDesigner projects focusing on feedback control using Cache TOPs for complex visual effects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/113051861"
-        //     },
-        //   },
-        //   {
-        //     id: "replicator-limit-feedback",
-        //     title: "(Project Files) Replicator-Limit-Feedback - Members Exclusive!!",
-        //     description: "Paid TouchDesigner project files for replicator limit feedback techniques.",
-        //     fullDescription: "Exclusive project files exploring replicator limit feedback methods for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/111659656"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-6-mesh-generator",
-        //     title: "Project Files - Noise Sculpting Part 6 (Mesh Generator)",
-        //     description: "Free project files for Noise Sculpting Part 6 featuring mesh generation.",
-        //     fullDescription: "TouchDesigner files for mesh generation techniques as part of the Noise Sculpting series, free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/108481444"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-touchdesigner-particlesgpu-part5",
-        //     title: "PROJECT FILES - Noise Sculpting in TouchDesigner with ParticleGPU - Part 5",
-        //     description: "Paid project files for Noise Sculpting Part 5 using ParticleGPU TOP.",
-        //     fullDescription: "Advanced TouchDesigner files demonstrating noise sculpting techniques combined with ParticleGPU processing.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/107686431"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-grid-patterns-touchdesigner",
-        //     title: "Simple Grid Patterns with Touchdesigner",
-        //     description: "Paid project files showing simple grid patterns in TouchDesigner.",
-        //     fullDescription: "Files demonstrating basic grid pattern creation and manipulation in TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/106357613"
-        //     },
-        //   },
-        //   {
-        //     id: "particle-instancing-default-project",
-        //     title: "Particle Instancing - Default Project (FREE!)",
-        //     description: "Free default TouchDesigner project files for particle instancing.",
-        //     fullDescription: "Basic TouchDesigner project illustrating particle instancing techniques, available for free.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Public",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/105476204"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-5-tutorial",
-        //     title: "Noise Sculpting in TouchDesigner - Part 5 (Tutorial)",
-        //     description: "Paid project files and tutorial for Noise Sculpting Part 5.",
-        //     fullDescription: "Tutorial and project files focused on noise sculpting techniques in TouchDesigner Part 5.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/104148759"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-geometric-iterations",
-        //     title: "Noise Sculpting Geometric Iterations - Project File",
-        //     description: "Paid project files for geometric iteration techniques in noise sculpting.",
-        //     fullDescription: "TouchDesigner files demonstrating iterative geometry manipulations in noise sculpting projects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/103982664"
-        //     },
-        //   }
-      ],
-
-      writing: [
-        {
-          id: "nervous-systems-kel30",
-          title: "Nervous Systems",
-          description: "A group exhibition by first-year MADTech students at KEL-30.",
-          fullDescription:
-            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Installation, performance, new media",
-          category: "EXHIBITION",
-          color: "electric-blue",
-          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
-          images: ["./assets/images/nervous-system-1.jpg"],
-          urls: {},
-        },
-        {
-          id: "fever-dream-minerva",
-          title: "Fever Dream",
-          description: "A collaborative performance at Minerva Academy.",
-          fullDescription:
-            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
-          medium: "Performance, audiovisual installation, sound art",
-          category: "EXHIBITION",
-          color: "crimson",
-          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
-          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
-          images: ["./assets/images/fever-dream-poster.jpg"],
-        },
-
-        // {
-        //   id: "symmetrical-fictions-paper",
-        //   title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-        //   description: "A research paper exploring the theoretical framework behind the video installation project.",
-        //   fullDescription:
-        //     "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
-        //   medium: "Academic paper, theoretical research",
-        //   category: "RESEARCH & THEORY",
-        //   color: "cerulean",
-        //   themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-        //   images: [
-        //     "./assets/images/39.jpg",
-        //     "./assets/images/72.jpg",
-        //     "./assets/images/73.jpg",
-        //     "./assets/images/6.jpg",
-        //   ],
-        //   urls: {
-        //     pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-        //   },
-        // },
-
-        {
-          id: "transcending-identities",
-          title: "Transcending Identities: Gender Performance and Psychedelic Trance in Goa’s Rave Scene",
-          description:
-            "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
-          fullDescription:
-            "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
-          medium: "Ethnographic research, festival case study, electronic music culture",
-          category: "RESEARCH & WRITING",
-          tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
-          color: "violet",
-          themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
-          urls: {
-            pdf: "./assets/documents/gspm-paper.pdf",
-          },
-        },
-
-        {
-          id: "post-television-audiences",
-          title: "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
-          description:
-            "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
-          fullDescription:
-            "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while embedding itself within corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
-          medium: "Research paper, digital media studies, cultural theory",
-          category: "RESEARCH & WRITING",
-          tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
-          color: "crimson",
-          themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
-          urls: {
-            pdf: "./assets/documents/aps-paper.pdf",
-          },
-        },
-
-        // {
-        //     id: "prime-spiral-visualizer-tox",
-        //     title: "Prime Spiral Visualizer (.tox download)",
-        //     description: "TouchDesigner project file featuring a prime spiral visualizer, downloadable as a .tox file.",
-        //     fullDescription: "Detailed TouchDesigner project file showcasing a prime spiral visualizer, available for experimentation and learning.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131907000"
-        //     },
-        //   },
-        //   {
-        //     id: "quick-emboss-filter-tox",
-        //     title: "FREE! Quick Emboss Filter - Project File and TOX",
-        //     description: "Free downloadable TouchDesigner project file featuring a quick emboss filter effect.",
-        //     fullDescription: "Beginner-friendly TouchDesigner project file demonstrating a quick emboss filter effect. Free download.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131295324"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-police-lights-bloom",
-        //     title: "(Free!) Simple police lights with switches and bloom",
-        //     description: "TouchDesigner project files showing simple police lights with switches and bloom effects.",
-        //     fullDescription: "Includes files demonstrating police lights simulation with switches and bloom effects. Free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/126001531"
-        //     },
-        //   },
-        //   {
-        //     id: "psychedelic-fractals-particlesgpu",
-        //     title: "PROJECT FILES - Psychedelic Fractals with ParticlesGPU in TouchDesigner",
-        //     description: "Paid project files demonstrating psychedelic fractals using ParticlesGPU in TouchDesigner.",
-        //     fullDescription: "Advanced fractal generation techniques with ParticlesGPU inside TouchDesigner for immersive visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/125860099"
-        //     },
-        //   },
-        //   {
-        //     id: "project-files-audioreactive-text",
-        //     title: "Project Files - Audioreactive Text",
-        //     description: "Paid project files for audioreactive text visualization in TouchDesigner.",
-        //     fullDescription: "TouchDesigner files enabling generative audioreactive text visuals with customizable parameters.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/121479952"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-structural-variation",
-        //     title: "Noise Sculpting - Structural Variation (Patreon Exclusive)",
-        //     description: "Paid project files exploring structural variation in noise sculpting techniques.",
-        //     fullDescription: "A deeper dive into noise sculpting with advanced structural variation techniques inside TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/120456027"
-        //     },
-        //   },
-        //   {
-        //     id: "moving-lights-effect-tops",
-        //     title: "Moving Lights Effect with TOPs (Project File)",
-        //     description: "Paid project files for creating moving light effects with TouchDesigner TOPs.",
-        //     fullDescription: "Files demonstrating dynamic moving lights using TOP operators in TouchDesigner for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/115405003"
-        //     },
-        //   },
-        //   {
-        //     id: "controlled-feedback-cache-tops",
-        //     title: "Project Files - Controlled Feedback with Cache TOPs",
-        //     description: "Paid project files illustrating controlled feedback loops with Cache TOPs in TouchDesigner.",
-        //     fullDescription: "Detailed TouchDesigner projects focusing on feedback control using Cache TOPs for complex visual effects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/113051861"
-        //     },
-        //   },
-        //   {
-        //     id: "replicator-limit-feedback",
-        //     title: "(Project Files) Replicator-Limit-Feedback - Members Exclusive!!",
-        //     description: "Paid TouchDesigner project files for replicator limit feedback techniques.",
-        //     fullDescription: "Exclusive project files exploring replicator limit feedback methods for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/111659656"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-6-mesh-generator",
-        //     title: "Project Files - Noise Sculpting Part 6 (Mesh Generator)",
-        //     description: "Free project files for Noise Sculpting Part 6 featuring mesh generation.",
-        //     fullDescription: "TouchDesigner files for mesh generation techniques as part of the Noise Sculpting series, free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/108481444"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-touchdesigner-particlesgpu-part5",
-        //     title: "PROJECT FILES - Noise Sculpting in TouchDesigner with ParticleGPU - Part 5",
-        //     description: "Paid project files for Noise Sculpting Part 5 using ParticleGPU TOP.",
-        //     fullDescription: "Advanced TouchDesigner files demonstrating noise sculpting techniques combined with ParticleGPU processing.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/107686431"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-grid-patterns-touchdesigner",
-        //     title: "Simple Grid Patterns with Touchdesigner",
-        //     description: "Paid project files showing simple grid patterns in TouchDesigner.",
-        //     fullDescription: "Files demonstrating basic grid pattern creation and manipulation in TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/106357613"
-        //     },
-        //   },
-        //   {
-        //     id: "particle-instancing-default-project",
-        //     title: "Particle Instancing - Default Project (FREE!)",
-        //     description: "Free default TouchDesigner project files for particle instancing.",
-        //     fullDescription: "Basic TouchDesigner project illustrating particle instancing techniques, available for free.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Public",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/105476204"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-5-tutorial",
-        //     title: "Noise Sculpting in TouchDesigner - Part 5 (Tutorial)",
-        //     description: "Paid project files and tutorial for Noise Sculpting Part 5.",
-        //     fullDescription: "Tutorial and project files focused on noise sculpting techniques in TouchDesigner Part 5.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/104148759"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-geometric-iterations",
-        //     title: "Noise Sculpting Geometric Iterations - Project File",
-        //     description: "Paid project files for geometric iteration techniques in noise sculpting.",
-        //     fullDescription: "TouchDesigner files demonstrating iterative geometry manipulations in noise sculpting projects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/103982664"
-        //     },
-        //   }
-      ],
-
-      writing: [
-        {
-          id: "nervous-systems-kel30",
-          title: "Nervous Systems",
-          description: "A group exhibition by first-year MADTech students at KEL-30.",
-          fullDescription:
-            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Installation, performance, new media",
-          category: "EXHIBITION",
-          color: "electric-blue",
-          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
-          images: ["./assets/images/nervous-system-1.jpg"],
-          urls: {},
-        },
-        {
-          id: "fever-dream-minerva",
-          title: "Fever Dream",
-          description: "A collaborative performance at Minerva Academy.",
-          fullDescription:
-            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
-          medium: "Performance, audiovisual installation, sound art",
-          category: "EXHIBITION",
-          color: "crimson",
-          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
-          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
-          images: ["./assets/images/fever-dream-poster.jpg"],
-        },
-
-        // {
-        //   id: "symmetrical-fictions-paper",
-        //   title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-        //   description: "A research paper exploring the theoretical framework behind the video installation project.",
-        //   fullDescription:
-        //     "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
-        //   medium: "Academic paper, theoretical research",
-        //   category: "RESEARCH & THEORY",
-        //   color: "cerulean",
-        //   themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-        //   images: [
-        //     "./assets/images/39.jpg",
-        //     "./assets/images/72.jpg",
-        //     "./assets/images/73.jpg",
-        //     "./assets/images/6.jpg",
-        //   ],
-        //   urls: {
-        //     pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-        //   },
-        // },
-
-        {
-          id: "transcending-identities",
-          title: "Transcending Identities: Gender Performance and Psychedelic Trance in Goa’s Rave Scene",
-          description:
-            "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
-          fullDescription:
-            "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini’s frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
-          medium: "Ethnographic research, festival case study, electronic music culture",
-          category: "RESEARCH & WRITING",
-          tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
-          color: "violet",
-          themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
-          urls: {
-            pdf: "./assets/documents/gspm-paper.pdf",
-          },
-        },
-
-        {
-          id: "post-television-audiences",
-          title: "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
-          description:
-            "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
-          fullDescription:
-            "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas’ concept of the public sphere and Dahlgren’s digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while embedding itself within corporate structures. By contrasting television’s centralized, passive reception with YouTube’s interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
-          medium: "Research paper, digital media studies, cultural theory",
-          category: "RESEARCH & WRITING",
-          tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
-          color: "crimson",
-          themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
-          urls: {
-            pdf: "./assets/documents/aps-paper.pdf",
-          },
-        },
-
-        // {
-        //     id: "prime-spiral-visualizer-tox",
-        //     title: "Prime Spiral Visualizer (.tox download)",
-        //     description: "TouchDesigner project file featuring a prime spiral visualizer, downloadable as a .tox file.",
-        //     fullDescription: "Detailed TouchDesigner project file showcasing a prime spiral visualizer, available for experimentation and learning.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131907000"
-        //     },
-        //   },
-        //   {
-        //     id: "quick-emboss-filter-tox",
-        //     title: "FREE! Quick Emboss Filter - Project File and TOX",
-        //     description: "Free downloadable TouchDesigner project file featuring a quick emboss filter effect.",
-        //     fullDescription: "Beginner-friendly TouchDesigner project file demonstrating a quick emboss filter effect. Free download.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/131295324"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-police-lights-bloom",
-        //     title: "(Free!) Simple police lights with switches and bloom",
-        //     description: "TouchDesigner project files showing simple police lights with switches and bloom effects.",
-        //     fullDescription: "Includes files demonstrating police lights simulation with switches and bloom effects. Free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/126001531"
-        //     },
-        //   },
-        //   {
-        //     id: "psychedelic-fractals-particlesgpu",
-        //     title: "PROJECT FILES - Psychedelic Fractals with ParticlesGPU in TouchDesigner",
-        //     description: "Paid project files demonstrating psychedelic fractals using ParticlesGPU in TouchDesigner.",
-        //     fullDescription: "Advanced fractal generation techniques with ParticlesGPU inside TouchDesigner for immersive visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/125860099"
-        //     },
-        //   },
-        //   {
-        //     id: "project-files-audioreactive-text",
-        //     title: "Project Files - Audioreactive Text",
-        //     description: "Paid project files for audioreactive text visualization in TouchDesigner.",
-        //     fullDescription: "TouchDesigner files enabling generative audioreactive text visuals with customizable parameters.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/121479952"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-structural-variation",
-        //     title: "Noise Sculpting - Structural Variation (Patreon Exclusive)",
-        //     description: "Paid project files exploring structural variation in noise sculpting techniques.",
-        //     fullDescription: "A deeper dive into noise sculpting with advanced structural variation techniques inside TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/120456027"
-        //     },
-        //   },
-        //   {
-        //     id: "moving-lights-effect-tops",
-        //     title: "Moving Lights Effect with TOPs (Project File)",
-        //     description: "Paid project files for creating moving light effects with TouchDesigner TOPs.",
-        //     fullDescription: "Files demonstrating dynamic moving lights using TOP operators in TouchDesigner for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/115405003"
-        //     },
-        //   },
-        //   {
-        //     id: "controlled-feedback-cache-tops",
-        //     title: "Project Files - Controlled Feedback with Cache TOPs",
-        //     description: "Paid project files illustrating controlled feedback loops with Cache TOPs in TouchDesigner.",
-        //     fullDescription: "Detailed TouchDesigner projects focusing on feedback control using Cache TOPs for complex visual effects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/113051861"
-        //     },
-        //   },
-        //   {
-        //     id: "replicator-limit-feedback",
-        //     title: "(Project Files) Replicator-Limit-Feedback - Members Exclusive!!",
-        //     description: "Paid TouchDesigner project files for replicator limit feedback techniques.",
-        //     fullDescription: "Exclusive project files exploring replicator limit feedback methods for generative visuals.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/111659656"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-6-mesh-generator",
-        //     title: "Project Files - Noise Sculpting Part 6 (Mesh Generator)",
-        //     description: "Free project files for Noise Sculpting Part 6 featuring mesh generation.",
-        //     fullDescription: "TouchDesigner files for mesh generation techniques as part of the Noise Sculpting series, free for all members.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - All members",
-        //     color: "cerulean",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/108481444"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-touchdesigner-particlesgpu-part5",
-        //     title: "PROJECT FILES - Noise Sculpting in TouchDesigner with ParticleGPU - Part 5",
-        //     description: "Paid project files for Noise Sculpting Part 5 using ParticleGPU TOP.",
-        //     fullDescription: "Advanced TouchDesigner files demonstrating noise sculpting techniques combined with ParticleGPU processing.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/107686431"
-        //     },
-        //   },
-        //   {
-        //     id: "simple-grid-patterns-touchdesigner",
-        //     title: "Simple Grid Patterns with Touchdesigner",
-        //     description: "Paid project files showing simple grid patterns in TouchDesigner.",
-        //     fullDescription: "Files demonstrating basic grid pattern creation and manipulation in TouchDesigner.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/106357613"
-        //     },
-        //   },
-        //   {
-        //     id: "particle-instancing-default-project",
-        //     title: "Particle Instancing - Default Project (FREE!)",
-        //     description: "Free default TouchDesigner project files for particle instancing.",
-        //     fullDescription: "Basic TouchDesigner project illustrating particle instancing techniques, available for free.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Public",
-        //     color: "electric-lime",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/105476204"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-part-5-tutorial",
-        //     title: "Noise Sculpting in TouchDesigner - Part 5 (Tutorial)",
-        //     description: "Paid project files and tutorial for Noise Sculpting Part 5.",
-        //     fullDescription: "Tutorial and project files focused on noise sculpting techniques in TouchDesigner Part 5.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/104148759"
-        //     },
-        //   },
-        //   {
-        //     id: "noise-sculpting-geometric-iterations",
-        //     title: "Noise Sculpting Geometric Iterations - Project File",
-        //     description: "Paid project files for geometric iteration techniques in noise sculpting.",
-        //     fullDescription: "TouchDesigner files demonstrating iterative geometry manipulations in noise sculpting projects.",
-        //     medium: "TouchDesigner project file",
-        //     category: "PROJECT FILE - Paid only",
-        //     color: "neon-magenta",
-        //     urls: {
-        //       Patreon: "https://www.patreon.com/posts/103982664"
-        //     },
-        //   }
-      ],
-
-      writing: [
-        {
-          id: "nervous-systems-kel30",
-          title: "Nervous Systems",
-          description: "A group exhibition by first-year MADTech students at KEL-30.",
-          fullDescription:
-            "Presented on July 24th, this exhibition showcased experimental and interdisciplinary works by the first-year MADTech students, exploring themes of connectivity, embodiment, and emergent systems within new media and contemporary art.",
-          medium: "Installation, performance, new media",
-          category: "EXHIBITION",
-          color: "electric-blue",
-          themes: "Connectivity, embodiment, emergent systems, interdisciplinary collaboration",
-          images: ["./assets/images/nervous-system-1.jpg"],
-          urls: {},
-        },
-        {
-          id: "fever-dream-minerva",
-          title: "Fever Dream",
-          description: "A collaborative performance at Minerva Academy.",
-          fullDescription:
-            "Held on May 30th, this project featured MADTech performers alongside musicians from the NAIP program at the Conservatory and the collective Akiyoxmadzine. The work delved into sonic abstraction, meditative distraction, and embodied states of anxiety through audiovisual installation and live improvisation.",
-          medium: "Performance, audiovisual installation, sound art",
-          category: "EXHIBITION",
-          color: "crimson",
-          themes: "Sound art, embodiment, anxiety, improvisation, interdisciplinary collaboration",
-          videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
-          images: ["./assets/images/fever-dream-poster.jpg"],
-        },
-
-        // {
-        //   id: "symmetrical-fictions-paper",
-        //   title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation",
-        //   description: "A research paper exploring the theoretical framework behind the video installation project.",
-        //   fullDescription:
-        //     "This abstract examines how symmetrical recomposition of satellite imagery can serve as a methodology for post-rational transmutation, challenging techno-positivist knowledge systems through speculative cartography and planetary imagination.",
-        //   medium: "Academic paper, theoretical research",
-        //   category: "RESEARCH & THEORY",
-        //   color: "cerulean",
-        //   themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
-        //   images: [
-        //     "./assets/images/39.jpg",
-        //     "./assets/images/72.jpg",
-        //     "./assets/images/73.jpg",
-        //     "./assets/images/6.jpg",
-        //   ],
-        //   urls: {
-        //     pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
-        //   },
-        // },
+        
 
         {
           id: "transcending-identities",
@@ -1868,40 +1025,83 @@ try {
       ],
     },
     exhibitions: [
-        {
-          title: "Urban Arts Tour: Extended living room",
-          venue: "Nieuwe Markt/Forum",
-          location: "Groningen, NL",
-          date: "November 2025",
-          description: "Rain Reminders",
-          role: "Kinetic Sculpture"
-        },
-        {
-          title: "Nervous Systems",
-          venue: "KEL-30",
-          location: "Haren, NL",
-          date: "June 2025",
-          description: "Rain Reminders",
-          role: "Kinetic Sculpture"
-        },
-        {
-          title: "Fever Dream",
-          venue: "Minerva Academy",
-          location: "Groningen, NL",
-          date: "May 2025",
-          description: "Gesture Controlled Generative AudioVisual System",
-          role: "AV Performance"
-        },
-        {
-          title: "On Contemporary Art and Artistic Practice in The Netherlands and Western Europe",
-          venue: "Government Girls College",
-          location: "Ajmer, IN",
-          date: "February 2025",
-          description: "",
-          role: "Lecture/Presentation"
-        },
-
+      {
+  id: "ectlab5-symmetrical-fictions",
+  title: "5th European Culture and Technology Lab+ Annual Conference",
+  venue: "Baltan Laboratories",
+  location: "Eindhoven, NL",
+  date: "November 2025",
+  description: "Presented the talk 'Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation' as part of the fifth ECT Lab+ conference, focusing on the relationships between technological culture, contemporary art, and speculative research.",
+  videos: [
+            "./assets/video/ect5-1.mp4",
+          ],
+      images: [
+            "./assets/images/ect5.png"
       ],
+  urls: {
+    link: "https://www.baltanlaboratories.org/events/5th-european-culture-and-technology-lab-annual-conference",
+    pdf: "./assets/documents/symmetrical-fictions-paper.pdf"
+
+  },  
+  role: "Talk/Presentation"
+},
+
+    {
+      id: "urban-arts-tour",
+      title: "Urban Arts Tour: Extended living room",
+      venue: "Nieuwe Markt/Forum",
+      location: "Groningen, NL",
+      date: "November 2025",
+      description: "Part of the Urban Arts Tour, 'Extended Living Room' transformed public spaces into interactive art zones. The featured work, 'Rain Reminders', was a kinetic sculpture that responded to environmental changes, engaging passersby in a playful dialogue between city life and natural patterns.",
+      videos: [
+            "./assets/video/rain-stick-video-1.mp4",
+          ],
+      images: [
+            "./assets/images/rain-stick-6.JPG",
+            "./assets/images/rain-stick-5.JPG",
+            "./assets/images/rain-stick-4.JPG",
+      ],
+      urls: {
+  link: "https://forum.nl/nl/agenda/talks-events/urban-arts-tour-extended-living-room"
+},
+      role: "Kinetic Sculpture"
+    },
+    {
+      id: "nervous-systems-kel30",
+      title: "Nervous Systems",
+      venue: "KEL-30",
+      location: "Haren, NL",
+      date: "June 2025",
+      description: "This exhibition explored the interplay between human perception and reactive environments. 'Rain Reminders', my kinetic sculpture, was presented as a dynamic installation, highlighting the subtle feedback between human interaction and automated motion within the space.",
+      images: ["./assets/images/nervous-system-1.jpg"],
+      urls: {
+  instagram: "https://www.instagram.com/p/DLAl1LYsGLo/"
+  },
+
+      role: "Kinetic Sculpture"
+    },
+    {
+      id: "fever-dream-minerva",
+      title: "Fever Dream",
+      venue: "Minerva Academy",
+      location: "Groningen, NL",
+      date: "May 2025",
+      description: "'Fever Dream' showcased experimental audiovisual performances. I presented a gesture-controlled generative system that transformed performers’ movements into immersive audiovisual experiences, creating a responsive environment that blurred the line between performer and installation.",
+      videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
+      images: ["./assets/images/fever-dream-poster.jpg"],
+      role: "AV Performance"
+    },
+    {
+      id: "contemporary-art-lecture",
+      title: "On Contemporary Art and Artistic Practice in The Netherlands and Western Europe",
+      venue: "Government Girls College",
+      location: "Ajmer, IN",
+      date: "February 2025",
+      description: "Delivered a lecture examining contemporary art practices across the Netherlands and Western Europe. Discussed evolving artistic strategies, interdisciplinary collaborations, and presented examples of my own work to illustrate the intersection of technology, performance, and public engagement.",
+      role: "Lecture/Presentation"
+    }
+  ],
+
     contact: {
       about: {
         title: "ABOUT ME",

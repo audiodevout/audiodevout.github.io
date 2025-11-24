@@ -328,21 +328,28 @@ if (document.body.classList.contains("main-page")) {
 
 const populateExhibitions = () => {
   const exhibitionsContainer = document.getElementById("exhibitions-list")
+  const separator = "&nbsp;&nbsp;•&nbsp;&nbsp;"
 
   data.exhibitions.forEach((exhibition) => {
     const item = document.createElement("div")
     item.className = "exhibition-item"
 
-    let line = `${exhibition.title} • ${exhibition.venue} • ${exhibition.location} • ${exhibition.date}`
+    let line = `${exhibition.title}`
+    
+    if (exhibition.id) {
+      line = `<a href="project.html?id=${exhibition.id}">${exhibition.title}</a>`
+    }
 
-    if (exhibition.description) line += ` • ${exhibition.description}`
-    if (exhibition.role) line += ` • <em>${exhibition.role}</em>`  // keep italics
+    line += `${separator}${exhibition.venue}${separator}${exhibition.location}${separator}${exhibition.date}`
+
+    // URLs intentionally NOT included here
 
     item.innerHTML = `<p>${line}</p>`
-
     exhibitionsContainer.appendChild(item)
   })
 }
+
+
 
 
   const populateCV = () => {
@@ -433,24 +440,37 @@ if (document.body.classList.contains("project-page")) {
   const projectId = getUrlParameter("id")
   const data = window.portfolioData
 
-  let project = null
-  let foundCategory = null
+ let project = null
+let foundCategory = null
 
-  // Search through all project categories to find the project
-  for (const [category, projects] of Object.entries(data.projects)) {
-    const found = projects.find((p) => p.id === projectId)
-    if (found) {
-      project = found
-      foundCategory = category
-      break
-    }
+// <CHANGE> First search through all project categories
+for (const [category, projects] of Object.entries(data.projects)) {
+  const found = projects.find((p) => p.id === projectId)
+  if (found) {
+    project = found
+    foundCategory = category
+    break
   }
+}
+
+// <CHANGE> If not found in projects, search exhibitions
+if (!project && data.exhibitions) {
+  const found = data.exhibitions.find((e) => e.id === projectId)
+  if (found) {
+    project = found
+    foundCategory = "exhibitions"
+  }
+}
 
   if (project) {
     document.title = `${project.title} - Atharva Gupta`
 
     document.getElementById("project-title").textContent = project.title
-    document.getElementById("project-category").textContent = project.category || foundCategory
+    // Capitalize only the first letter, leave rest lowercase
+const categoryName = (project.category || foundCategory || "").toLowerCase()
+document.getElementById("project-category").textContent =
+  categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
+
 
     const descriptionContainer = document.getElementById("project-description")
     const description = document.createElement("p")
@@ -481,12 +501,12 @@ if (document.body.classList.contains("project-page")) {
         link.href = url
         link.target = "_blank"
         link.rel = "noopener noreferrer"
-        link.textContent = `View ${label.toUpperCase()}`
+        link.textContent = `${label.toUpperCase()}`
         linksContainer.appendChild(link)
 
         const entries = Object.entries(project.urls)
         if (entries.indexOf([label, url]) < entries.length - 1) {
-          linksContainer.appendChild(document.createTextNode(" • "))
+          linksContainer.appendChild(document.createTextNode("  "))
         }
       })
     }
