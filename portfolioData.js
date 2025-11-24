@@ -737,9 +737,9 @@ try {
         role: "Kinetic Sculpture",
         venue: "Nieuwe Markt/Forum",
         images: [
-          "./assets/images/rain-stick-6.JPG",
-          "./assets/images/rain-stick-5.JPG",
-          "./assets/images/rain-stick-4.JPG",
+          "./assets/images/rain-stick-6.jpg",
+          "./assets/images/rain-stick-5.jpg",
+          "./assets/images/rain-stick-4.jpg",
         ],
         urls: {
           link: "https://forum.nl/nl/agenda/talks-events/urban-arts-tour-extended-living-room",
