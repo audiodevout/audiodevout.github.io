@@ -773,8 +773,23 @@ try {
         videos: ["https://www.youtube.com/watch?v=sSkNm3GcGq8"],
       },
       {
+        id: "ddd-error-failure-option-pt3",
+        title: "Diverse Digital Dimensions: Error – Failure Is an Option, Part Three",
+        date: "March 2025",
+        description:
+          "Participated in the annual collaboration between the NAIP European Music Masters program (Prince Claus Conservatoire and Iceland University of the Arts) and MADTech, Frank Mohr Institute. The project combines sonic, visual, technological, and performative practices across four Live Lab sessions and a five-day residency at the Grand Theatre. The residency involved collective experimentation in hybrid physical–digital spaces, with a focus on co-making, improvisation, and working with the sensuous and the imperfect. The program concluded with a public sharing of the group’s work.",
+        location: "Groningen, NL",
+        role: "Residency and Group Presentation",
+        venue: "Grand Theatre Groningen",
+        images: [],
+        urls: {
+          link: "https://www.grandtheatregroningen.nl/en/programma/archief/diverse-digital-dimensions-error-failure-is-an-option-part-three"
+        },
+        videos: [],
+      },
+      {
         id: "contemporary-art-lecture",
-        title: "On Contemporary Art and Artistic Practice in The Netherlands and Western Europe",
+        title: "On Art and Contemporary Artistic Practice",
         date: "February 2025",
         description:
           "Delivered a lecture examining contemporary art practices across the Netherlands and Western Europe. Discussed evolving artistic strategies, interdisciplinary collaborations, and presented examples of my own work to illustrate the intersection of technology, performance, and public engagement.",
@@ -788,14 +803,15 @@ try {
     // CONTACT & ABOUT
     // ===========================================
     contact: {
-      about: {
-        title: "ABOUT ME",
-        description: `I am an artist and researcher working at the intersection of sound, technology, and space. My practice spans kinetic sculpture, audiovisual performance, generative systems, and research-driven writing, with computational processes serving as both medium and method. I treat sound and code as materials for constructing contemplative and surreal experiences, drawing on noise, entropy, and asymmetry to reimagine how we listen, perceive, and engage with digital systems.
+  about: {
+    title: "ABOUT ME",
+    description: `I am an artist and researcher working with sound, technology, and spatial practice. My work moves between kinetic sculpture, audiovisual performance, generative systems, and research-led writing. Computational processes function as both material and method, and I approach sound and code as substances that can shape contemplative or quietly surreal situations. Noise, entropy, and asymmetry guide much of this work, forming a basis for rethinking how we listen to and perceive digital systems.
 
-Across installations, performances, and academic inquiry, I explore the shifting boundaries between organic and synthetic, rational and intuitive, individual and collective. Ritual, memory, and healing often surface as themes, whether through transforming environmental data into generative soundscapes, designing embodied tools for performance, or composing speculative environments. Grounded in experimental sound practice, creative coding, and critical research, my work questions techno-positivist narratives while opening spaces for reflection, presence, and poetic engagement with technology.`,
-        credentials: ["Sound Art", "Kinetic Sculpture", "AudioVisual Performance", "TouchDesigner Tutorials"],
-        image: "./assets/images/atharva.jpeg",
-      },
+Across installations, performances, and theoretical projects, I follow questions about the thresholds between organic and synthetic behaviour, analytical and intuitive modes of making, and individual and collective experience. Themes of ritual, memory, and repair recur in different forms, whether in translating environmental data into evolving sound structures, building embodied tools for performance, or constructing speculative environments. My practice is grounded in experimental sound, creative coding, and critical inquiry, and I use these frameworks to examine contemporary technological narratives while opening spaces for reflection, presence, and subtle forms of engagement with technical systems.`,
+    credentials: [],
+    image: "./assets/images/atharva.jpeg",
+  },
+
 
       cv: {
         education: [

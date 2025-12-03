@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equilibrium: Noise ; Magic ; System</title>
+  <meta name="description" content="A distributed essay investigating equilibrium as a lived, perceptual, and systemic experience through noise, magic, and systems.">
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="index.html" class="nav-logo">Equilibrium</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Constellation</a>
+      <a href="project.html?id=bibliography" class="nav-link">Bibliography</a>
+      <a href="project.html?id=about" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <canvas id="constellation-canvas"></canvas>
+  
+  <div class="home-content">
+    <header class="home-header">
+      <h1 class="title">Equilibrium</h1>
+      <p class="subtitle">Noise ; Magic ; System</p>
+      <p class="author">Atharva Gupta — 2025</p>
+    </header>
+    
+    <div class="intro-text">
+      <p class="quote">"Art should comfort the disturbed and disturb the comfortable."</p>
+      <p class="description">
+        A distributed essay investigating equilibrium as a lived, perceptual, and systemic experience.
+        <br><span class="hint">Click the floating particles to explore.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+  
+  <div class="transition-overlay" id="transition-overlay"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

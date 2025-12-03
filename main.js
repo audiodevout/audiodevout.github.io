@@ -622,8 +622,8 @@
             const iframe = document.createElement("iframe")
             iframe.style.border = "0"
             iframe.style.width = "100%"
-            iframe.style.height = "120px"
-            iframe.src = `https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=000000/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/`
+            iframe.style.height = "480px"
+            iframe.src = `https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=000000/linkcol=ffffff/tracklist=false/artwork=large/transparent=false/`
             iframe.seamless = true
             iframe.loading = "lazy"
             fragment.appendChild(iframe)
