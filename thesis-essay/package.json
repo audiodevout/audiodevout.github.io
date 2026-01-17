@@ -1,0 +1,11 @@
+{
+  "name": "equilibrium-thesis",
+  "version": "1.0.0",
+  "description": "A distributed essay investigating equilibrium as a lived, perceptual, and systemic experience through noise, magic, and systems.",
+  "author": "Atharva Gupta",
+  "license": "MIT",
+  "scripts": {
+    "dev": "python3 -m http.server 5000",
+    "serve": "python3 -m http.server 5000"
+  }
+}
