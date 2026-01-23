@@ -348,13 +348,37 @@ try {
           themes:
             "Tinnitus and White Noise, Acoustic Ritual and Duration, Provisional Construction, Meditative Distraction",
           images: [
-            "./assets/images/rain-stick-6.JPG",
-            "./assets/images/rain-stick-4.JPG",
             "./assets/images/rain-stick-2.JPG",
             "./assets/images/rain-stick-1.JPG",
+            "./assets/images/rain-stick-6.JPG",
+            "./assets/images/rain-stick-4.JPG",
+            
           ],
           videos: ["./assets/video/rain-stick-video-1.mp4"],
         },
+        {
+          id: "spinny-sticks",
+          title: "Spinny Sticks",
+          category: "KINETIC DRAWING • SONIC OBJECTS • MOTOR SYSTEMS",
+          color: "graphite",
+          description:
+            "A suspended series of motor-driven drawing and tension instruments composed of rotating rod structures, pencils, and stretched threads.",
+          fullDescription:
+            "Spinny Sticks is a kinetic installation consisting of multiple hanging rotary structures built from thin metal rods, pencils, and tensioned threads. Each unit is driven by a low-speed motor that induces continuous rotation, storing and releasing mechanical stress through flexible connections and weighted elements.\nThe pencils operate as both drawing tools and structural members, marking surfaces over time while remaining under constant strain. Threads are stretched, twisted, and slowly fatigued by rotation, producing subtle creaks, frictional sounds, and irregular oscillations. The system never settles into equilibrium; minor variations in balance, material fatigue, and motor tolerance accumulate into divergent behaviors.\nThe work treats tension as an active condition rather than a problem to be resolved. Suspended between control and instability, the instruments operate as autonomous agents that rehearse persistence, stress, and repetition. The visual language evokes infant mobiles, improvised machines, and aerial devices, while the underlying logic remains closer to a nervous system than a clockwork mechanism.",
+          dimensions: "Variable installation, individual units approx. 40–80 cm diameter",
+          medium:
+            "Motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
+          technical:
+            "Low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
+          themes:
+            "Tension and Attention, Mechanical Fatigue, Unstable Systems, Drawing as Duration",
+          images: [
+            "./assets/images/spinny-sticks-1.png",
+            "./assets/images/spinny-sticks-2.png"
+          ],
+          videos: ["https://youtu.be/SWMkYxuWrNE"]
+        },
+
         {
           id: "symmetrical-fictions",
           title: "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1",
@@ -386,57 +410,85 @@ try {
       drawings: [
         // Visual Research & Sketches
         {
-          id: "digital-sketches",
-          title: "Digital Sketches + Visual Explorations",
+          id: "digital-sketch-01",
+          title: "Untitled Sketch 01",
           category: "VISUAL RESEARCH",
           color: "saffron",
-          description:
-            "A collection of digital drawings exploring geometric patterns, urban textures, and algorithmic aesthetics.",
-          fullDescription:
-            "These sketches serve as visual research for larger projects, exploring the intersection of traditional South Asian geometric patterns with contemporary digital aesthetics. They range from quick gestural studies to more developed compositions that inform installation and performance work.",
-          medium: "Digital drawing, algorithmic pattern generation, mixed media",
-          themes: "Geometric abstraction, urban textures, cultural pattern synthesis",
-          tools: "TouchDesigner, generative algorithms",
-          images: ["./assets/images/sketch1.jpg", "./assets/images/sketch2.png", "./assets/images/sketch3.png"],
+          images: ["./assets/images/sketch1.jpg"],
         },
         {
-          id: "old-drawings-sketchbook-series",
-          title: "Old Digital+Analog Drawings",
-          category: "ARCHIVE • PERSONAL WORK",
-          color: "cerulean",
-          description:
-            "Early explorations in digital sketching and coloring using Autodesk SketchBook - studies of form, color, and imagination.",
-          fullDescription:
-            "These six drawings mark a formative period of digital creativity, made during an early engagement with Autodesk SketchBook. They reflect a phase of intuitive experimentation, where sketching and digital coloring were driven by curiosity, play, and a desire to shape inner visions. Though rough and spontaneous, these pieces represent personal milestones in visual expression and digital practice.",
-          documentation: "Archived drawings from early digital sessions",
-          medium: "Analog sketching and digital coloring",
-          tags: ["digital", "sketches"],
-          images: [
-            "./assets/images/old drawing (1).jpg",
-            "./assets/images/old drawing (2).jpg",
-            "./assets/images/old drawing (3).jpg",
-            "./assets/images/old drawing (4).jpg",
-            "./assets/images/old drawing (6).jpg",
-          ],
+          id: "digital-sketch-02",
+          title: "Untitled Sketch 02",
+          category: "VISUAL RESEARCH",
+          color: "saffron",
+          images: ["./assets/images/sketch2.png"],
         },
         {
-          id: "ritual-computing-solo-sessions",
-          title: "Ritual Computing and Coding Sessions",
+          id: "digital-sketch-03",
+          title: "Untitled Sketch 03",
+          category: "VISUAL RESEARCH",
+          color: "saffron",
+          images: ["./assets/images/sketch3.png"],
+        },
+        
+        {
+          id: "ritual-computing-01",
+          title: "Untitled Session 01",
           category: "SOLO • RESEARCH-BASED",
           color: "electric-lime",
-          description:
-            "Solo sessions of meditative coding and sketching in TouchDesigner—private rituals of thought, structure, and experimentation.",
-          fullDescription:
-            "These sessions are personal, introspective rituals where code becomes a tool for artistic inquiry and self-reflection. They are not participatory performances but private explorations—into the aesthetics of computation, the poetics of systems, and the possibilities of AI as a creative collaborator. Through repeated practice, I engage with code as both medium and method, researching form, structure, and the intersection of technology with artistic process.",
-          documentation: "In-progress sketches and logs",
-          medium: "Code sketching, procedural visuals, AI collaboration",
-          tags: ["generative", "code", "research"],
-          images: [
-            "./assets/images/ritual-computing-1.png",
-            "./assets/images/ritual-computing-2.png",
-            "./assets/images/ritual-computing-3.jpg",
-          ],
+          images: ["./assets/images/ritual-computing-1.png"],
         },
+        {
+          id: "ritual-computing-02",
+          title: "Untitled Session 02",
+          category: "SOLO • RESEARCH-BASED",
+          color: "electric-lime",
+          images: ["./assets/images/ritual-computing-2.png"],
+        },
+        {
+          id: "ritual-computing-03",
+          title: "Untitled Session 03",
+          category: "SOLO • RESEARCH-BASED",
+          color: "electric-lime",
+          images: ["./assets/images/ritual-computing-3.jpg"],
+        },
+
+        {
+          id: "riso-mono-test-01",
+          title: "Untitled Image 01",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: ["./assets/images/riso mono export test - 1 -.0.jpg"],
+        },
+        {
+          id: "feedback-worms-02",
+          title: "Untitled Image 02",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: ["./assets/images/feedback worms.2.png"],
+        },
+        {
+          id: "abstract-sculpture-series-01",
+          title: "Untitled Image 03",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: ["./assets/images/abstract_sculpture_series.1.jpg"],
+        },
+        {
+          id: "riso-mono-test-102",
+          title: "Untitled Image 04",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: ["./assets/images/riso mono export test - 1 -.102.jpg"],
+        },
+        {
+          id: "morsecode-export-12",
+          title: "Untitled Image 05",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: ["./assets/images/morsecode_exports.12.jpg"],
+        },
+
 
         // TouchDesigner Tutorials (sorted alphabetically by title)
         {

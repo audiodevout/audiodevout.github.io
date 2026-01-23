@@ -21,7 +21,7 @@
     gallery: {
       itemWidth: 600,
       gap: 0,
-      itemsPerView: 6,
+      itemsPerView: 2,
     },
   }
 
