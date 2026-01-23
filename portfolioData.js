@@ -22,6 +22,87 @@ try {
       // Sorted alphabetically by title
       // -------------------------------------------
       soundInstallations: [
+                {
+          id: "asymmetrica-minus-12-c",
+          title: "-12° C",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "glacier",
+          description: "Cold, restrained electronic composition shaped by sparse motion.",
+          fullDescription:
+            "-12° C maintains a reduced palette, favouring brittle textures, low-energy movement, and extended silences between events. The track is structured around restraint, with sounds appearing isolated and exposed rather than layered. Its pacing and tonal temperature suggest an environment where energy is conserved and every action carries weight.",
+          medium: "Digital audio, sparse electronic composition",
+          technology: "Ableton Live, restrained synthesis, minimal sequencing, spatial reverb",
+          themes: "coldness, restraint, isolation, minimal motion, sonic economy",
+          bandcampTracks: [
+            {
+              title: "-12° C",
+              trackId: "1009465888",
+              url: "https://asymmetrica.bandcamp.com/track/12-c",
+            },
+          ],
+        }
+        ,
+                {
+          id: "asymmetrica-impulse",
+          title: "Impulse",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "crimson",
+          description: "Short-form rhythmic study centred on attack and immediacy.",
+          fullDescription:
+            "Impulse is built from sharp transient events and tightly gated signals, foregrounding attack as the primary compositional material. The piece avoids development in favour of insistence, pushing a small set of gestures through rapid repetition and abrupt interruption. The result is a compact, physical track that reads more as signal behaviour than song structure.",
+          medium: "Digital audio, transient-focused composition",
+          technology: "Ableton Live, envelope shaping, transient control, rhythmic gating",
+          themes: "attack, immediacy, signal behaviour, repetition, interruption",
+          bandcampTracks: [
+            {
+              title: "impulse",
+              trackId: "2193793800",
+              url: "https://asymmetrica.bandcamp.com/track/impulse",
+            },
+          ],
+        },
+
+        {
+          id: "asymmetrica-sublimatic",
+          title: "Sublimatic",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "violet",
+          description: "Minimalist electronic structure driven by gradual transformation.",
+          fullDescription:
+            "Sublimatic unfolds slowly, prioritising temporal stretch over event density. Small shifts in timbre, modulation depth, and spatial placement accumulate across the duration, producing a perceptual drift rather than narrative progression. The track functions as a listening environment, asking attention to recalibrate to subtle changes rather than explicit musical gestures.",
+          medium: "Digital audio, minimal composition, slow modulation systems",
+          technology: "Ableton Live, long-form automation, subtractive synthesis, spatial effects",
+          themes: "gradual change, duration, minimalism, perception, sonic environment",
+          bandcampTracks: [
+            {
+              title: "sublimatic",
+              trackId: "2633361304",
+              url: "https://asymmetrica.bandcamp.com/track/sublimatic",
+            },
+          ],
+        },
+
+
+                {
+          id: "asymmetrica-the-sauce",
+          title: "The Sauce",
+          category: "ASYMMETRICA AUDIO COLLECTION",
+          color: "amber",
+          description: "Rhythmic distortion study built around pressure, repetition, and release.",
+          fullDescription:
+            "The Sauce operates as a compressed loop ecology, where distorted percussive gestures fold back onto themselves through tight timing and aggressive filtering. The track leans on repetition as a stress mechanism, gradually thickening its own texture through saturation, micro-variation, and controlled overload. What emerges is a functional groove that feels constantly on the verge of destabilising, yet never fully breaks.",
+          medium: "Digital audio, loop-based composition, distortion processing",
+          technology: "Ableton Live, audio effects chains, saturation, filtering, rhythmic automation",
+          themes: "pressure, repetition, groove collapse, texture, rhythmic insistence",
+          bandcampTracks: [
+            {
+              title: "the sauce",
+              trackId: "1297041022",
+              url: "https://asymmetrica.bandcamp.com/track/the-sauce",
+            },
+          ],
+        },
+
         {
           id: "asymmetrica-a-reasonable-crashout",
           title: "A Reasonable Crashout",
