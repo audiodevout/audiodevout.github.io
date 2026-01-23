@@ -704,6 +704,8 @@ section > h2:first-child {
   margin-bottom: var(--space-sm);
   padding-bottom: var(--space-xs);
   border-bottom: 1px solid var(--color-border);
+  align-items: right;
+  text-aligh: right;
 }
 
 #work ul {

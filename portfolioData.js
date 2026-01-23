@@ -908,11 +908,11 @@ Across installations, performances, and theoretical projects, I follow questions
             location: "Groningen, NL",
             period: "Oct 2025 - Present",
             responsibilities: [
-              "Supporting with programming, electronics, and fabrication tools",
-              "Guiding students in using fabrication software, tools and technologies",
-              "Assistance with TouchDesigner, Arduino, and coding workflows",
-              "Maintainence of workspace and equipment",
-              "Creatiom instructional materials",
+              // "Supporting with programming, electronics, and fabrication tools",
+              // "Guiding students in using fabrication software, tools and technologies",
+              // "Assistance with TouchDesigner, Arduino, and coding workflows",
+              // "Maintainence of workspace and equipment",
+              // "Creatiom instructional materials",
             ],
           },
 
@@ -923,11 +923,11 @@ Across installations, performances, and theoretical projects, I follow questions
             location: "Groningen, NL",
             period: "Oct. 2023 - Present",
             responsibilities: [
-              "TouchDesigner tutorials on YouTube @audiodevout",
-              "Music production and sound design @asymmetrica",
-              "Visual Jockey (VJ)",
-              "Sound Design for Art Installations",
-              "Creative Coding Workshops",
+              // "TouchDesigner tutorials on YouTube @audiodevout",
+              // "Music production and sound design @asymmetrica",
+              // "Visual Jockey (VJ)",
+              // "Sound Design for Art Installations",
+              // "Creative Coding Workshops",
             ],
           },
           {
@@ -936,8 +936,8 @@ Across installations, performances, and theoretical projects, I follow questions
             location: "Groningen, NL",
             period: "Feb. 2023 – Oct. 2023",
             responsibilities: [
-              "Worked on large-scale art installations under Artist and Theatre Professional Chantalla Pleiter.",
-              "Contributed to the creation and presentation of 4 different projects related to XR technologies and sound design at festivals like Noorderzon Performing Arts Festival and Expeditie Next.",
+            //   "Worked on large-scale art installations under Artist and Theatre Professional Chantalla Pleiter.",
+            //   "Contributed to the creation and presentation of 4 different projects related to XR technologies and sound design at festivals like Noorderzon Performing Arts Festival and Expeditie Next.",
             ],
           },
           {
@@ -946,8 +946,8 @@ Across installations, performances, and theoretical projects, I follow questions
             location: "Groningen, NL",
             period: "Oct. 2022 – Aug. 2023",
             responsibilities: [
-              "Research assistant for the project 'Listen Here Now' - A study into the urban soundscapes of Groningen by Rudolf Agricola School of Sustainable Development",
-              "Oversaw core project responsibilities, participant communication, logistics, and marketing. Also including audio-visual logistics, procurement, and maintenance of equipment.",
+            //   "Research assistant for the project 'Listen Here Now' - A study into the urban soundscapes of Groningen by Rudolf Agricola School of Sustainable Development",
+            //   "Oversaw core project responsibilities, participant communication, logistics, and marketing. Also including audio-visual logistics, procurement, and maintenance of equipment.",
             ],
           },
         ],
