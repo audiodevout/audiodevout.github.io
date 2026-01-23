@@ -18,259 +18,62 @@
   // ============================================
 
   const CONFIG = {
-    landing: {
-      transitionDelay: 4000,
-      particleCount: 40,
-      gridSize: 20,
-      noiseResolution: 200,
-      frameRate: 20,
-    },
     gallery: {
       itemWidth: 600,
-      gap: 24,
-      itemsPerView: 2,
-    },
-    colors: {
-      color1: [255, 255, 255],
-      color2: [200, 200, 200],
-      color3: [150, 150, 150],
-      color4: [100, 100, 100],
-      color5: [50, 50, 50],
+      gap: 0,
+      itemsPerView: 6,
     },
   }
 
   // ============================================
-  // LANDING PAGE - p5.js Animation
+  // MOBILE NAVIGATION TOGGLE
   // ============================================
 
-  if (document.body.classList.contains("landing-page")) {
-    const landingState = {
-      gridSize: null,
-      cols: null,
-      rows: null,
-      noiseResolution: null,
-      flowField: [],
-      particles: [],
-    }
+  const navToggle = document.getElementById("nav-toggle")
+  const mainNav = document.getElementById("main-nav")
 
-    const colorPalette = [
-      CONFIG.colors.color1,
-      0.2,
-      CONFIG.colors.color2,
-      0.1,
-      CONFIG.colors.color3,
-      0.3,
-      CONFIG.colors.color4,
-      0.1,
-      CONFIG.colors.color5,
-      0.3,
-    ]
+  if (navToggle && mainNav) {
+    navToggle.addEventListener("click", () => {
+      mainNav.classList.toggle("open")
+      navToggle.classList.toggle("active")
+    })
 
-    const p5 = {
-      createCanvas: (...args) => window.createCanvas?.(...args),
-      frameRate: (...args) => window.frameRate?.(...args),
-      background: (...args) => window.background?.(...args),
-      noise: (...args) => window.noise?.(...args),
-      random: (...args) => window.random?.(...args),
-      createVector: (...args) => window.createVector?.(...args),
-      resizeCanvas: (...args) => window.resizeCanvas?.(...args),
-      fill: (...args) => window.fill?.(...args),
-      noStroke: (...args) => window.noStroke?.(...args),
-      stroke: (...args) => window.stroke?.(...args),
-      strokeWeight: (...args) => window.strokeWeight?.(...args),
-      ellipse: (...args) => window.ellipse?.(...args),
-      rect: (...args) => window.rect?.(...args),
-      line: (...args) => window.line?.(...args),
-      push: (...args) => window.push?.(...args),
-      pop: (...args) => window.pop?.(...args),
-      translate: (...args) => window.translate?.(...args),
-      rotate: (...args) => window.rotate?.(...args),
-      radians: (...args) => window.radians?.(...args),
-      map: (...args) => window.map?.(...args),
-      constrain: (...args) => window.constrain?.(...args),
-      rectMode: (...args) => window.rectMode?.(...args),
-      get TWO_PI() {
-        return window.TWO_PI
-      },
-      get CENTER() {
-        return window.CENTER
-      },
-      get CORNER() {
-        return window.CORNER
-      },
-      Vector: window.p5?.Vector,
-    }
-
-    class Particle {
-      constructor(position) {
-        this.pos = position
-        this.vel = p5.createVector(0, 0)
-        this.acc = p5.createVector(0, 0)
-        this.radius = p5.random(10, 30)
-        this.color = weightedValue(colorPalette)
-        this.path = []
-        this.maxLength = weightedValue([20, 0.5, 60, 0.5])
-        this.finished = false
-      }
-
-      update(flowField) {
-        const x = p5.constrain(Math.floor(this.pos.x / landingState.gridSize), 0, landingState.rows - 1)
-        const y = p5.constrain(Math.floor(this.pos.y / landingState.gridSize), 0, landingState.cols - 1)
-        this.acc.add(flowField[x][y])
-        this.acc.mult(8)
-        this.vel.add(this.acc)
-        this.vel.normalize()
-        this.vel.mult(5)
-        this.pos.add(this.vel)
-        this.acc.mult(0)
-      }
-
-      display() {
-        const pathCoverage = p5.map(this.path.length, 0, this.maxLength, 0, 1)
-        if (pathCoverage <= 0.1 || pathCoverage > 0.8) {
-          this.color = weightedValue(colorPalette)
-        } else {
-          this.color = [180, 180, 180]
-        }
-
-        if (this.path.length > this.maxLength) {
-          this.finished = true
-        }
-
-        p5.push()
-        p5.rectMode(p5.CENTER)
-        p5.translate(this.pos.x, this.pos.y)
-        p5.fill(this.color.concat([60]))
-        p5.noStroke()
-        p5.rotate(this.vel.heading())
-        for (let i = 0; i < 50; i++) {
-          p5.rotate(p5.radians(p5.random(-2, 2)))
-          p5.rect(0, 0, -this.vel.mag() - 2, this.radius)
-        }
-        p5.rectMode(p5.CORNER)
-        p5.pop()
-        this.path.push(this.pos.copy())
-      }
-
-      tooClose(v) {
-        return this.path.some((d) => d.dist(v) < this.radius * 2)
-      }
-    }
-
-    function weightedValue(array) {
-      const randomNumber = p5.random(0, 1)
-      let weightSum = 0
-      let value
-      for (let i = 0; i < array.length; i += 2) {
-        value = array[i]
-        weightSum += array[i + 1]
-        if (randomNumber < weightSum) break
-      }
-      return value
-    }
-
-    function drawGrid() {
-      const { rows, cols, gridSize, flowField } = landingState
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const v = flowField[y][x]
-          p5.push()
-          p5.translate(x * gridSize, y * gridSize)
-          p5.fill(20)
-          p5.noStroke()
-          p5.rect(1, 1, gridSize - 2, gridSize - 2)
-          p5.translate(gridSize / 2, gridSize / 2)
-          p5.stroke(80)
-          p5.strokeWeight(1)
-          p5.line(0, 0, (v.x * gridSize) / 2, (v.y * gridSize) / 2)
-          p5.pop()
-        }
-      }
-    }
-
-    window.setup = () => {
-      const canvas = p5.createCanvas(window.innerWidth, window.innerHeight)
-      canvas.parent(document.body)
-      canvas.style("position", "fixed")
-      canvas.style("top", "0")
-      canvas.style("left", "0")
-      canvas.style("z-index", "0")
-      p5.frameRate(CONFIG.landing.frameRate)
-      p5.background(0)
-
-      landingState.gridSize = CONFIG.landing.gridSize
-      landingState.noiseResolution = CONFIG.landing.noiseResolution
-      landingState.cols = Math.floor(window.innerWidth / landingState.gridSize)
-      landingState.rows = Math.floor(window.innerHeight / landingState.gridSize)
-
-      for (let y = 0; y < landingState.rows; y++) {
-        landingState.flowField[y] = []
-        for (let x = 0; x < landingState.cols; x++) {
-          const angle = p5.noise(x / landingState.noiseResolution, y / landingState.noiseResolution) * p5.TWO_PI * 4
-          const v = p5.Vector.fromAngle(angle)
-          landingState.flowField[y][x] = v
-        }
-      }
-
-      for (let i = 0; i < CONFIG.landing.particleCount; i++) {
-        landingState.particles[i] = new Particle(
-          p5.createVector(p5.random(window.innerWidth), p5.random(window.innerHeight)),
-        )
-      }
-
-      drawGrid()
-    }
-
-    window.windowResized = () => {
-      p5.resizeCanvas(window.innerWidth, window.innerHeight)
-      p5.background(0)
-    }
-
-    window.mousePressed = () => {
-      landingState.particles.length = 0
-      for (let i = 0; i < 20; i++) {
-        landingState.particles[i] = new Particle(
-          p5.createVector(p5.random(window.innerWidth), p5.random(window.innerHeight)),
-        )
-      }
-    }
-
-    window.draw = () => {
-      p5.fill(0, 5)
-      p5.noStroke()
-      p5.ellipse(p5.random(window.innerWidth), p5.random(window.innerHeight), p5.random(200, 600), p5.random(200, 600))
-
-      for (let i = 0; i < landingState.particles.length; i++) {
-        const particle = landingState.particles[i]
-        if (particle.finished) continue
-
-        particle.update(landingState.flowField)
-        if (landingState.particles.some((p) => p !== particle && p.tooClose(particle.pos))) {
-          particle.finished = true
-          for (let j = 0; j < 10; j++) {
-            const position = p5.createVector(p5.random(window.innerWidth), p5.random(window.innerHeight))
-            if (!landingState.particles.some((p) => p.tooClose(position))) {
-              landingState.particles.push(new Particle(position))
-              break
-            }
-          }
-        } else {
-          particle.display()
-        }
-      }
-    }
-
-    // Transition to main page
-    setTimeout(() => {
-      const overlay = document.querySelector(".landing-overlay")
-      if (overlay) {
-        overlay.classList.add("fade-out")
-      }
-      setTimeout(() => {
-        window.location.href = "main.html"
-      }, 1000)
-    }, CONFIG.landing.transitionDelay)
+    // Close nav when clicking a link
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open")
+        navToggle.classList.remove("active")
+      })
+    })
   }
+
+  // ============================================
+  // ACTIVE NAV LINK HIGHLIGHTING
+  // ============================================
+
+  const updateActiveNav = () => {
+    const sections = document.querySelectorAll("section[id]")
+    const navLinks = document.querySelectorAll("nav a[href^='#']")
+    
+    let currentSection = ""
+    
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 100
+      if (window.scrollY >= sectionTop) {
+        currentSection = section.getAttribute("id")
+      }
+    })
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active")
+      if (link.getAttribute("href") === `#${currentSection}`) {
+        link.classList.add("active")
+      }
+    })
+  }
+
+  window.addEventListener("scroll", updateActiveNav)
+  updateActiveNav()
 
   // ============================================
   // MAIN PAGE
@@ -278,6 +81,66 @@
 
   if (document.body.classList.contains("main-page")) {
     const data = window.portfolioData
+
+    // ============================================
+    // GALLERY GRID - All project images
+    // ============================================
+    const populateGallery = () => {
+      const galleryGrid = document.getElementById("gallery-grid")
+      if (!galleryGrid) return
+
+      const fragment = document.createDocumentFragment()
+      const allProjects = []
+
+      // Collect all projects with images
+      const categories = ["installations", "performance", "drawings"]
+      categories.forEach((category) => {
+        if (data.projects[category]) {
+          data.projects[category].forEach((project) => {
+            if (project.images && project.images.length > 0) {
+              allProjects.push({
+                ...project,
+                categoryName: category,
+              })
+            }
+          })
+        }
+      })
+
+      // Create gallery items
+      allProjects.forEach((project) => {
+        const item = document.createElement("div")
+        item.className = "gallery-item"
+
+        const link = document.createElement("a")
+        link.href = createProjectUrl(project.id)
+
+        const img = document.createElement("img")
+        img.src = project.images[0]
+        img.alt = project.title
+        img.loading = "lazy"
+
+        const info = document.createElement("div")
+        info.className = "gallery-item-info"
+
+        const title = document.createElement("h4")
+        title.className = "gallery-item-title"
+        title.textContent = project.title
+
+        const category = document.createElement("p")
+        category.className = "gallery-item-category"
+        category.textContent = project.categoryName.charAt(0).toUpperCase() + project.categoryName.slice(1)
+
+        info.appendChild(title)
+        info.appendChild(category)
+        link.appendChild(img)
+        link.appendChild(info)
+        item.appendChild(link)
+        fragment.appendChild(item)
+      })
+
+      galleryGrid.appendChild(fragment)
+    }
 
     const populateAbout = () => {
       const aboutImage = document.getElementById("about-image")
@@ -485,6 +348,7 @@
     }
 
     // Initialize Main Page
+    populateGallery()
     populateAbout()
     populateWork()
     populateExhibitions()
@@ -710,7 +574,7 @@
         article.innerHTML = `
           <h1>Project Not Found</h1>
           <p>The project you're looking for doesn't exist.</p>
-          <a href="main.html">← Back to Portfolio</a>
+          <a href="index.html">← Back to Portfolio</a>
         `
       }
     }

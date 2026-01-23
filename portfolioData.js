@@ -851,6 +851,21 @@ Across installations, performances, and theoretical projects, I follow questions
         },
         workExperience: [
           {
+            title: "Workshop Assistant - Electronics and Programming",
+            company: "Hanze",
+            location: "Groningen, NL",
+            period: "Oct 2025 - Present",
+            responsibilities: [
+              "Supporting with programming, electronics, and fabrication tools",
+              "Guiding students in using fabrication software, tools and technologies",
+              "Assistance with TouchDesigner, Arduino, and coding workflows",
+              "Maintainence of workspace and equipment",
+              "Creatiom instructional materials",
+            ],
+          },
+
+
+          {
             title: "Freelance Art Producer",
             company: "Art Researcher and Educator",
             location: "Groningen, NL",
