@@ -35,9 +35,9 @@
   --text-xl: 1.5rem;
   --text-2xl: 1.875rem;
   --text-3xl: 2.5rem;
-  --text-4xl: 3.25rem;
-  --text-5xl: 4.5rem;
-  --text-6xl: 6rem;
+  --text-4xl: 3.00rem;
+  --text-5xl: 3.5rem;
+  --text-6xl: 4rem;
 
   /* === FONT WEIGHTS === */
   --weight-light: 300;
@@ -46,7 +46,7 @@
   --weight-bold: 600;
 
   /* === LAYOUT === */
-  --content-width: 1400px;
+  --content-width: 2000px;
   --content-narrow: 900px;
   --content-padding: 2.5rem;
   --nav-height: 4.5rem;
@@ -655,7 +655,7 @@ section > h2:first-child {
 .gallery-item:hover img,
 .gallery-item:hover video {
   transform: scale(1.03);
-  filter: brightness(0.7);
+  filter: brightness(0.6);
 }
 
 .gallery-item-info {
