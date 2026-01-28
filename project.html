@@ -8,25 +8,44 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body class="project-page">
-    <header>
-        <a href="main.html">← Back to Portfolio</a>
-    </header>
+  <header>
+    <div class="header-inner">
+      <h1 class="site-title"><a href="index.html">Atharva Gupta</a></h1>
+      <nav id="main-nav">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#exhibitions">Exhibitions</a>
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
 
     <main>
         <article>
+          <header class="project-header">
             <h1 id="project-title"></h1>
             <p id="project-category"></p>
+          </header>
 
-            <!-- Removed unnecessary visible text -->
-            <div id="project-description"></div>
-            
-            <div id="project-meta"></div>
-
-            <div id="project-links"></div>
-
-            <div id="media-gallery-wrapper">
-                <div id="project-media"></div>
+          <div class="project-layout">
+            <div class="project-text">
+              <div id="project-description"></div>
+              <div id="project-meta"></div>
+              <div id="project-links"></div>
             </div>
+
+            <div class="project-media-col">
+              <div id="media-gallery-wrapper">
+                <div id="project-media"></div>
+              </div>
+            </div>
+          </div>
         </article>
     </main>
 
@@ -34,7 +53,7 @@
         <p>&copy; 2025 Atharva Gupta. All rights reserved.</p>
     </footer>
 
-    <script src="portfolioData.js"></script>
-    <script src="main.js"></script>
+    <script src="portfolioData.js" defer></script>
+    <script src="main.js" defer></script>
 </body>
 </html>

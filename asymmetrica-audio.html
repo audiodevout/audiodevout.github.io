@@ -8,18 +8,30 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body class="audio-collection-page">
-    <header>
-        <h1><a href="index.html">Atharva Gupta</a></h1>
-    </header>
+  <header>
+    <div class="header-inner">
+      <h1 class="site-title"><a href="index.html">Atharva Gupta</a></h1>
+      <nav id="main-nav">
+        <a href="index.html#work">Work</a>
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
 
     <main>
         <article>
             <h2>Asymmetrica Audio Collection</h2>
             <p>A collection of experimental sound works exploring generative synthesis, glitch aesthetics, and sonic textures.</p>
             
-            <ul id="audio-collection-list"></ul>
-            
-            <p><a href="main.html">← Back to Portfolio</a></p>
+            <div id="audio-collection-list" class="asymmetrica-grid"></div>
         </article>
     </main>
 
@@ -27,7 +39,7 @@
         <p>&copy; 2025 Atharva Gupta. All rights reserved.</p>
     </footer>
 
-    <script src="portfolioData.js"></script>
-    <script src="main.js"></script>
+    <script src="portfolioData.js" defer></script>
+    <script src="main.js" defer></script>
 </body>
 </html>

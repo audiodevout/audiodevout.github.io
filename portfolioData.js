@@ -429,11 +429,10 @@ try {
           themes:
             "Tinnitus and White Noise, Acoustic Ritual and Duration, Provisional Construction, Meditative Distraction",
           images: [
-            "./assets/images/rain-stick-2.JPG",
             "./assets/images/rain-stick-1.JPG",
-            "./assets/images/rain-stick-6.JPG",
+            "./assets/images/rain-stick-2.JPG",
             "./assets/images/rain-stick-4.JPG",
-            
+            "./assets/images/rain-stick-6.JPG"
           ],
           videos: ["./assets/video/rain-stick-video-1.mp4"],
         },
@@ -473,10 +472,10 @@ try {
           tags: ["generative", "video", "research"],
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
           images: [
+            "./assets/images/6.jpg",
             "./assets/images/39.jpg",
             "./assets/images/72.jpg",
-            "./assets/images/73.jpg",
-            "./assets/images/6.jpg",
+            "./assets/images/73.jpg"
           ],
           urls: {
             pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
@@ -524,7 +523,23 @@ try {
           title: "Noise Sculpting - 2",
           category: "SOLO • RESEARCH-BASED",
           color: "electric-lime",
-          images: ["./assets/images/ritual-computing-2.png"],
+          images: [
+            "./assets/images/ritual-computing-2.png",
+            "./assets/images/diamonddoodles.15.png",
+            "./assets/images/diamonddoodles.16.png",
+            "./assets/images/diamonddoodles.17.png",
+            "./assets/images/diamonddoodles.18.png",
+            "./assets/images/diamonddoodles.19.png",
+            "./assets/images/diamonddoodles.20.png",
+            "./assets/images/diamonddoodles.21.png",
+            "./assets/images/diamonddoodles.22.png",
+            "./assets/images/diamonddoodles.23.png",
+            "./assets/images/diamonddoodles.24.png",
+            "./assets/images/diamonddoodles.25.png",
+            "./assets/images/diamonddoodles.26.png",
+            "./assets/images/diamonddoodles.27.png",
+            "./assets/images/diamonddoodles.28.png",
+          ],
         },
         {
           id: "ritual-computing-03",
@@ -535,18 +550,61 @@ try {
         },
 
         {
-          id: "riso-mono-test-01",
-          title: "Packing Tests 1",
+          id: "superboxes-01",
+          title: "Superboxes",
           category: "VISUAL EXPERIMENT",
           color: "saffron",
-          images: ["./assets/images/riso mono export test - 1 -.0.jpg"],
+          images: [
+            "./assets/images/superboxex.0.jpg",
+            "./assets/images/superboxex.1.jpg",
+            "./assets/images/superboxex.2.jpg",
+            "./assets/images/superboxex.3.jpg",
+            "./assets/images/superboxes.0.jpg",
+            "./assets/images/superboxes.2.jpg",
+            "./assets/images/superboxes.3.jpg",
+            "./assets/images/superboxes.4.jpg",
+            "./assets/images/superboxes.5.jpg",
+            "./assets/images/superboxes.6.jpg",
+            "./assets/images/sprbxes.0.jpg",
+            "./assets/images/sprbxes.1.jpg",
+            "./assets/images/sprbxes.2.jpg",
+            "./assets/images/sprbxes.3.jpg",
+            "./assets/images/sprbxes.4.jpg",
+            "./assets/images/sprbxes.5.jpg",
+            "./assets/images/sprbxes.6.jpg",
+          ],
+        },
+
+        {
+          id: "riso-mono-test-01",
+          title: "Packing Tests",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/riso mono export test - 1 -.0.jpg",
+            "./assets/images/riso mono export test - 1 -.31.jpg",
+            "./assets/images/riso mono export test - 1 -.62.jpg",
+            "./assets/images/riso mono export test - 1 -.70.jpg",
+            "./assets/images/riso mono export test - 1 -.75.jpg",
+            "./assets/images/riso mono export test - 1 -.82.jpg",
+            "./assets/images/riso mono export test - 1 -.94.jpg",
+            "./assets/images/riso mono export test - 1 -.99.jpg",
+            "./assets/images/riso mono export test - 1 -.102.jpg",
+          ],
         },
         {
           id: "feedback-worms-02",
           title: "Feedback Worms",
           category: "VISUAL EXPERIMENT",
           color: "saffron",
-          images: ["./assets/images/feedback worms.2.png"],
+          images: [
+            "./assets/images/feedback worms.2.png",
+            "./assets/images/feedback worms.3.png",
+            "./assets/images/feedback worms.7.png",
+            "./assets/images/feedback worms.14.png",
+            "./assets/images/feedback worms.22.png",
+            "./assets/images/feedback worms.29.png",
+          ],
         },
         {
           id: "abstract-sculpture-series-01",
@@ -556,11 +614,17 @@ try {
           images: ["./assets/images/abstract_sculpture_series.1.jpg"],
         },
         {
-          id: "riso-mono-test-102",
-          title: "Packing Test 2",
+          id: "magical-wells-01",
+          title: "Magical Wells",
           category: "VISUAL EXPERIMENT",
           color: "saffron",
-          images: ["./assets/images/riso mono export test - 1 -.102.jpg"],
+          images: [
+            "./assets/images/TDMovieOut.3.png",
+            "./assets/images/TDMovieOut.4.png",
+            "./assets/images/TDMovieOut.9.png",
+            "./assets/images/TDMovieOut.13.png",
+            "./assets/images/TDMovieOut.14.png",
+          ],
         },
         {
           id: "morsecode-export-12",
@@ -572,18 +636,6 @@ try {
 
 
         // TouchDesigner Tutorials (sorted alphabetically by title)
-        {
-          id: "audiodevout-video-1",
-          title: "AudioReactive Text with Tracing and Instancing - TouchDesigner Tutorial",
-          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-          color: "cerulean",
-          description:
-            "Learn how to create audioreactive text with tracing and instancing techniques in TouchDesigner.",
-          fullDescription:
-            "A comprehensive tutorial exploring audioreactive text generation using tracing and instancing methods in TouchDesigner for dynamic visual performances.",
-          medium: "TouchDesigner, generative visuals",
-          videos: ["https://youtu.be/Di4fRVElkro"],
-        },
         {
           id: "audiodevout-audioreactive-text-showcase",
           title: "Audioreactive Text in TouchDesigner - Project Showcase",
@@ -738,31 +790,6 @@ try {
           videos: ["https://www.youtube.com/watch?v=XHGeICkx9lU"],
         },
         {
-          id: "audiodevout-prime-spiral-visualizer",
-          title: "Prime Spiral Visualizer – TouchDesigner .tox Component",
-          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-          color: "cerulean",
-          description:
-            "Real-time TouchDesigner visualizer inspired by prime exponential sums and Veritasium's Goldbach video.",
-          fullDescription:
-            "A complex exponential sum visualization over primes, inspired by Hardy, Littlewood, Ramanujan, and Veritasium's $1,000,000 Goldbach Conjecture video. Includes controls for prime count, modulation angle, animation toggle, and more.",
-          medium: "TouchDesigner, generative visuals",
-          tags: ["TouchDesigner", "visualizer", "primes", "generative", "tutorial"],
-          videos: ["https://www.youtube.com/watch?v=a6lC3tAVilo"],
-        },
-        {
-          id: "audiodevout-quick-emboss-filter",
-          title: "Quick Emboss Filter for TouchDesigner (FREE COMPONENT FILE)",
-          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-          color: "cerulean",
-          description: "A quick emboss filter tutorial with free component download for TouchDesigner users.",
-          fullDescription:
-            "Demonstrates how to create a quick emboss filter effect in TouchDesigner with project files and tox component freely available on Patreon.",
-          medium: "TouchDesigner, visual effects",
-          tags: ["TouchDesigner", "emboss filter", "free component", "tutorial"],
-          videos: ["https://www.youtube.com/watch?v=CelbrPlWM_k"],
-        },
-        {
           id: "audiodevout-replicator-limit-feedback",
           title: "Replicator-Limit-Feedback (Project Overview)",
           category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
@@ -773,18 +800,6 @@ try {
           medium: "TouchDesigner, generative visuals",
           tags: ["TouchDesigner", "feedback", "replicator", "project overview"],
           videos: ["https://www.youtube.com/watch?v=IR0T0t49gnw"],
-        },
-        {
-          id: "audiodevout-simple-grid-patterns",
-          title: "Simple Grid Patterns with TouchDesigner (Tutorial)",
-          category: "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-          color: "cerulean",
-          description: "Creating simple grid-based visual patterns in TouchDesigner.",
-          fullDescription:
-            "A straightforward tutorial for building simple grid patterns in TouchDesigner to help beginners understand basic layout and pattern creation.",
-          medium: "TouchDesigner, pattern design",
-          tags: ["TouchDesigner", "grid patterns", "tutorial"],
-          videos: ["https://www.youtube.com/watch?v=TbRtV"],
         },
         {
           id: "audiodevout-video-6",
@@ -870,10 +885,10 @@ try {
         role: "Kinetic Sculpture",
         venue: "Nieuwe Markt/Forum",
         images: [
-          "./assets/images/rain-stick-6.jpg",
-          "./assets/images/rain-stick-5.jpg",
-          "./assets/images/rain-stick-4.jpg",
-        ],
+            "./assets/images/rain-stick-4.jpg",
+            "./assets/images/rain-stick-5.jpg",
+            "./assets/images/rain-stick-6.jpg"
+          ],
         urls: {
           link: "https://forum.nl/nl/agenda/talks-events/urban-arts-tour-extended-living-room",
         },
