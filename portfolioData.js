@@ -431,8 +431,8 @@ try {
           images: [
             "./assets/images/rain-stick-1.JPG",
             "./assets/images/rain-stick-2.JPG",
-            "./assets/images/rain-stick-4.JPG",
-            "./assets/images/rain-stick-6.JPG"
+            "./assets/images/rain-stick-4.jpg",
+            "./assets/images/rain-stick-6.jpg"
           ],
           videos: ["./assets/video/rain-stick-video-1.mp4"],
         },
