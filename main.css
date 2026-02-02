@@ -162,7 +162,7 @@ header .header-inner {
 
 /* Site Title in Header */
 header .site-title {
-  font-size: var(--text-lg);
+  font-size: 1.2rem;
   font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-ultra);
   line-height: 1;
@@ -393,7 +393,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
-  font-style: italic;
+  /*font-style: italic;*/
   letter-spacing: var(--tracking-tight);
   margin-top: 0;
   margin-bottom: var(--space-lg);
@@ -1314,7 +1314,7 @@ section > h2:first-child {
 
 .media-lightbox-inner {
   width: min(1200px, 95vw);
-  height: min(90vh, 900px);
+  max-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: var(--space-md);
@@ -1338,11 +1338,56 @@ section > h2:first-child {
   color: var(--color-bg);
 }
 
-.media-lightbox-img {
+.media-lightbox-content {
   width: 100%;
-  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.media-lightbox-content img,
+.media-lightbox-content video,
+.media-lightbox-content iframe {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.media-lightbox-img {
+  /* kept for backwards compatibility; now styled by .media-lightbox-content img */
+}
+
+/* Media grouping labels on installations/exhibitions pages */
+.media-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.media-group-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  display: none;
+}
+
+.media-group-images,
+.media-group-videos {
+  margin-bottom: var(--space-md);
+}
+
+.media-clickable {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {

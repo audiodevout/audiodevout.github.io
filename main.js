@@ -38,6 +38,124 @@
     return ""
   }
 
+  // ============================================
+  // SHARED LIGHTBOX (IMAGES & VIDEOS)
+  // ============================================
+
+  const ensureLightbox = () => {
+    if (document.getElementById("media-lightbox")) return
+
+    const overlay = document.createElement("div")
+    overlay.id = "media-lightbox"
+    overlay.className = "media-lightbox"
+    overlay.setAttribute("aria-hidden", "true")
+
+    overlay.innerHTML = `
+      <div class="media-lightbox-inner" role="dialog" aria-modal="true" aria-label="Media preview">
+        <button class="media-lightbox-close" type="button" aria-label="Close">Close</button>
+        <div class="media-lightbox-content"></div>
+      </div>
+    `
+
+    const closeOverlay = () => {
+      const container = overlay.querySelector(".media-lightbox-content")
+
+      if (container) {
+        // Stop any playing videos
+        container.querySelectorAll("video").forEach((video) => {
+          try {
+            video.pause()
+            video.currentTime = 0
+          } catch (e) {
+            // ignore
+          }
+        })
+
+        // Stop any iframe playback (YouTube, Bandcamp, etc.)
+        container.querySelectorAll("iframe").forEach((frame) => {
+          try {
+            frame.src = "about:blank"
+          } catch (e) {
+            // ignore
+          }
+        })
+
+        // Clear content so it can be rebuilt cleanly next open
+        while (container.firstChild) {
+          container.removeChild(container.firstChild)
+        }
+      }
+
+      overlay.classList.remove("open")
+      overlay.setAttribute("aria-hidden", "true")
+    }
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeOverlay()
+    })
+
+    overlay.querySelector(".media-lightbox-close")?.addEventListener("click", () => {
+      closeOverlay()
+    })
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeOverlay()
+      }
+    })
+
+    document.body.appendChild(overlay)
+  }
+
+  /**
+   * Open a full-screen gallery view for images or videos.
+   * opts = { kind: "image" | "video", src: string, alt?: string, youtubeId?: string }
+   */
+  const openLightbox = (opts) => {
+    if (!opts || !opts.src) return
+    ensureLightbox()
+
+    const overlay = document.getElementById("media-lightbox")
+    const container = overlay?.querySelector(".media-lightbox-content")
+    if (!overlay || !container) return
+
+    while (container.firstChild) {
+      container.removeChild(container.firstChild)
+    }
+
+    if (opts.kind === "video") {
+      if (opts.youtubeId) {
+        const iframe = document.createElement("iframe")
+        iframe.src = `https://www.youtube.com/embed/${opts.youtubeId}`
+        iframe.frameBorder = "0"
+        iframe.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        iframe.allowFullscreen = true
+        iframe.loading = "lazy"
+        container.appendChild(iframe)
+      } else {
+        const video = document.createElement("video")
+        video.src = opts.src
+        video.controls = true
+        video.autoplay = true
+        video.playsInline = true
+        video.preload = "auto"
+        container.appendChild(video)
+      }
+    } else {
+      const img = document.createElement("img")
+      img.src = opts.src
+      img.alt = opts.alt || ""
+      img.className = "media-lightbox-img"
+      img.loading = "lazy"
+      img.decoding = "async"
+      container.appendChild(img)
+    }
+
+    overlay.classList.add("open")
+    overlay.setAttribute("aria-hidden", "false")
+  }
+
   // Compute a lightweight thumbnail path for gallery images.
   // Convention:
   //  - Original: ./assets/images/foo.jpg
@@ -180,7 +298,10 @@
 
       const title = document.createElement("h3")
       title.className = "exhibition-block-title"
-      title.textContent = exhibition.title
+      const titleLink = document.createElement("a")
+      titleLink.href = createProjectUrl(exhibition.id)
+      titleLink.textContent = exhibition.title
+      title.appendChild(titleLink)
 
       const meta = document.createElement("p")
       meta.className = "exhibition-block-meta"
@@ -208,50 +329,100 @@
       const videos = Array.isArray(exhibition.videos) ? exhibition.videos : []
 
       if (images.length > 0 || videos.length > 0) {
-        const gallery = document.createElement("div")
-        gallery.className = "exhibition-block-gallery work-gallery-grid"
+        const mediaWrapper = document.createElement("div")
+        mediaWrapper.className = "media-group"
 
-        images.forEach((src) => {
-          const item = document.createElement("div")
-          item.className = "gallery-item"
-          const wrap = document.createElement("div")
-          wrap.className = "gallery-item-inner"
-          const img = document.createElement("img")
-          img.src = src
-          img.alt = exhibition.title
-          img.loading = "lazy"
-          wrap.appendChild(img)
-          item.appendChild(wrap)
-          gallery.appendChild(item)
-        })
+        if (images.length > 0) {
+          const label = document.createElement("div")
+          label.className = "media-group-label"
+          label.textContent = "Images"
+          mediaWrapper.appendChild(label)
 
-        videos.forEach((url) => {
-          const item = document.createElement("div")
-          item.className = "gallery-item"
-          const wrap = document.createElement("div")
-          wrap.className = "gallery-item-inner"
-          if (url.includes("youtube.com") || url.includes("youtu.be")) {
-            const videoId = getYoutubeId(url)
-            if (videoId) {
-              const img = document.createElement("img")
-              img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-              img.alt = `${exhibition.title} (video)`
-              img.loading = "lazy"
-              wrap.appendChild(img)
+          const imagesSection = document.createElement("div")
+          imagesSection.className = "exhibition-block-gallery work-gallery-grid media-group-images"
+
+          images.forEach((src) => {
+            const item = document.createElement("button")
+            item.type = "button"
+            item.className = "gallery-item media-clickable"
+            const wrap = document.createElement("div")
+            wrap.className = "gallery-item-inner"
+            const img = document.createElement("img")
+            img.src = src
+            img.alt = exhibition.title
+            img.loading = "lazy"
+            img.decoding = "async"
+            wrap.appendChild(img)
+            item.appendChild(wrap)
+            item.addEventListener("click", () =>
+              openLightbox({ kind: "image", src, alt: exhibition.title }),
+            )
+            imagesSection.appendChild(item)
+          })
+
+          mediaWrapper.appendChild(imagesSection)
+        }
+
+        if (videos.length > 0) {
+          const label = document.createElement("div")
+          label.className = "media-group-label"
+          label.textContent = "Video"
+          mediaWrapper.appendChild(label)
+
+          const videosSection = document.createElement("div")
+          videosSection.className = "exhibition-block-gallery work-gallery-grid media-group-videos"
+
+          videos.forEach((url) => {
+            const item = document.createElement("button")
+            item.type = "button"
+            item.className = "gallery-item media-clickable"
+            const wrap = document.createElement("div")
+            wrap.className = "gallery-item-inner"
+
+            if (url.includes("youtube.com") || url.includes("youtu.be")) {
+              const videoId = getYoutubeId(url)
+              if (videoId) {
+                const img = document.createElement("img")
+                img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+                img.alt = `${exhibition.title} (video)`
+                img.loading = "lazy"
+                wrap.appendChild(img)
+
+                item.addEventListener("click", () =>
+                  openLightbox({
+                    kind: "video",
+                    src: url,
+                    youtubeId: videoId,
+                    alt: `${exhibition.title} (video)`,
+                  }),
+                )
+              }
+            } else {
+              const video = document.createElement("video")
+              video.src = url
+              video.controls = true
+              video.muted = true
+              video.playsInline = true
+              video.preload = "metadata"
+              wrap.appendChild(video)
+
+              item.addEventListener("click", () =>
+                openLightbox({
+                  kind: "video",
+                  src: url,
+                  alt: `${exhibition.title} (video)`,
+                }),
+              )
             }
-          } else {
-            const video = document.createElement("video")
-            video.src = url
-            video.muted = true
-            video.playsInline = true
-            video.preload = "metadata"
-            wrap.appendChild(video)
-          }
-          item.appendChild(wrap)
-          gallery.appendChild(item)
-        })
 
-        block.appendChild(gallery)
+            item.appendChild(wrap)
+            videosSection.appendChild(item)
+          })
+
+          mediaWrapper.appendChild(videosSection)
+        }
+
+        block.appendChild(mediaWrapper)
       }
 
       if (exhibition.urls && Object.keys(exhibition.urls).length > 0) {
@@ -657,7 +828,10 @@
 
       const title = document.createElement("h3")
       title.className = "installation-block-title"
-      title.textContent = project.title
+      const titleLink = document.createElement("a")
+      titleLink.href = createProjectUrl(project.id)
+      titleLink.textContent = project.title
+      title.appendChild(titleLink)
 
       const meta = document.createElement("p")
       meta.className = "installation-block-meta"
@@ -680,51 +854,100 @@
       const videos = Array.isArray(project.videos) ? project.videos : []
 
       if (images.length > 0 || videos.length > 0) {
-        const gallery = document.createElement("div")
-        gallery.className = "installation-block-gallery work-gallery-grid"
+        const mediaWrapper = document.createElement("div")
+        mediaWrapper.className = "media-group"
 
-        images.forEach((src) => {
-          const item = document.createElement("div")
-          item.className = "gallery-item"
-          const wrap = document.createElement("div")
-          wrap.className = "gallery-item-inner"
-          const img = document.createElement("img")
-          img.src = src
-          img.alt = project.title
-          img.loading = "lazy"
-          img.decoding = "async"
-          wrap.appendChild(img)
-          item.appendChild(wrap)
-          gallery.appendChild(item)
-        })
+        if (images.length > 0) {
+          const label = document.createElement("div")
+          label.className = "media-group-label"
+          label.textContent = "Images"
+          mediaWrapper.appendChild(label)
 
-        videos.forEach((url) => {
-          const item = document.createElement("div")
-          item.className = "gallery-item"
-          const wrap = document.createElement("div")
-          wrap.className = "gallery-item-inner"
-          if (url.includes("youtube.com") || url.includes("youtu.be")) {
-            const videoId = getYoutubeId(url)
-            if (videoId) {
-              const img = document.createElement("img")
-              img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-              img.alt = `${project.title} (video)`
-              img.loading = "lazy"
-              wrap.appendChild(img)
+          const imagesSection = document.createElement("div")
+          imagesSection.className = "installation-block-gallery work-gallery-grid media-group-images"
+
+          images.forEach((src) => {
+            const item = document.createElement("button")
+            item.type = "button"
+            item.className = "gallery-item media-clickable"
+            const wrap = document.createElement("div")
+            wrap.className = "gallery-item-inner"
+            const img = document.createElement("img")
+            img.src = src
+            img.alt = project.title
+            img.loading = "lazy"
+            img.decoding = "async"
+            wrap.appendChild(img)
+            item.appendChild(wrap)
+            item.addEventListener("click", () =>
+              openLightbox({ kind: "image", src, alt: project.title }),
+            )
+            imagesSection.appendChild(item)
+          })
+
+          mediaWrapper.appendChild(imagesSection)
+        }
+
+        if (videos.length > 0) {
+          const label = document.createElement("div")
+          label.className = "media-group-label"
+          label.textContent = "Video"
+          mediaWrapper.appendChild(label)
+
+          const videosSection = document.createElement("div")
+          videosSection.className = "installation-block-gallery work-gallery-grid media-group-videos"
+
+          videos.forEach((url) => {
+            const item = document.createElement("button")
+            item.type = "button"
+            item.className = "gallery-item media-clickable"
+            const wrap = document.createElement("div")
+            wrap.className = "gallery-item-inner"
+
+            if (url.includes("youtube.com") || url.includes("youtu.be")) {
+              const videoId = getYoutubeId(url)
+              if (videoId) {
+                const img = document.createElement("img")
+                img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+                img.alt = `${project.title} (video)`
+                img.loading = "lazy"
+                wrap.appendChild(img)
+
+                item.addEventListener("click", () =>
+                  openLightbox({
+                    kind: "video",
+                    src: url,
+                    youtubeId: videoId,
+                    alt: `${project.title} (video)`,
+                  }),
+                )
+              }
+            } else {
+              const video = document.createElement("video")
+              video.src = url
+              video.controls = true
+              video.muted = true
+              video.playsInline = true
+              video.preload = "metadata"
+              wrap.appendChild(video)
+
+              item.addEventListener("click", () =>
+                openLightbox({
+                  kind: "video",
+                  src: url,
+                  alt: `${project.title} (video)`,
+                }),
+              )
             }
-          } else {
-            const video = document.createElement("video")
-            video.src = url
-            video.muted = true
-            video.playsInline = true
-            video.preload = "metadata"
-            wrap.appendChild(video)
-          }
-          item.appendChild(wrap)
-          gallery.appendChild(item)
-        })
 
-        block.appendChild(gallery)
+            item.appendChild(wrap)
+            videosSection.appendChild(item)
+          })
+
+          mediaWrapper.appendChild(videosSection)
+        }
+
+        block.appendChild(mediaWrapper)
       }
 
       if (project.urls && Object.keys(project.urls).length > 0) {
@@ -812,9 +1035,60 @@
     if (data) populateVisualGallery(data)
   }
 
+  const populateArchivePage = (data) => {
+    const container = document.getElementById("archive-page-list")
+    if (!container) return
+
+    const fragment = document.createDocumentFragment()
+
+    data.projects.writing.forEach((project) => {
+      const li = document.createElement("li")
+
+      const title = document.createElement("h3")
+      title.className = "archive-item-title"
+      const link = document.createElement("a")
+      link.href = createProjectUrl(project.id)
+      link.textContent = project.title
+      title.appendChild(link)
+      li.appendChild(title)
+
+      if (project.category) {
+        const meta = document.createElement("p")
+        meta.className = "archive-item-meta"
+        meta.textContent = project.category
+        li.appendChild(meta)
+      }
+
+      if (project.description) {
+        const desc = document.createElement("p")
+        desc.className = "archive-item-description"
+        desc.textContent = project.description
+        li.appendChild(desc)
+      }
+
+      if (project.urls && Object.keys(project.urls).length > 0) {
+        const links = document.createElement("div")
+        links.className = "archive-item-links"
+        Object.entries(project.urls).forEach(([label, href]) => {
+          const a = document.createElement("a")
+          a.href = href
+          a.target = "_blank"
+          a.rel = "noopener noreferrer"
+          a.textContent = label.toUpperCase()
+          links.appendChild(a)
+        })
+        li.appendChild(links)
+      }
+
+      fragment.appendChild(li)
+    })
+
+    container.appendChild(fragment)
+  }
+
   if (document.body.classList.contains("archive-page")) {
     const data = window.portfolioData
-    if (data) populateSimpleListPage(data.projects.writing, "archive-page-list")
+    if (data) populateArchivePage(data)
   }
 
   // ============================================
@@ -964,46 +1238,6 @@
       if (mediaContainer) {
         const fragment = document.createDocumentFragment()
 
-        const ensureLightbox = () => {
-          if (document.getElementById("media-lightbox")) return
-
-          const overlay = document.createElement("div")
-          overlay.id = "media-lightbox"
-          overlay.className = "media-lightbox"
-          overlay.setAttribute("aria-hidden", "true")
-
-          overlay.innerHTML = `
-            <div class="media-lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
-              <button class="media-lightbox-close" type="button" aria-label="Close">Close</button>
-              <img class="media-lightbox-img" alt="">
-            </div>
-          `
-
-          overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) overlay.classList.remove("open")
-          })
-          overlay.querySelector(".media-lightbox-close")?.addEventListener("click", () => {
-            overlay.classList.remove("open")
-          })
-
-          document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") overlay.classList.remove("open")
-          })
-
-          document.body.appendChild(overlay)
-        }
-
-        const openLightbox = (src, alt) => {
-          ensureLightbox()
-          const overlay = document.getElementById("media-lightbox")
-          const img = overlay?.querySelector(".media-lightbox-img")
-          if (overlay && img) {
-            img.src = src
-            img.alt = alt || ""
-            overlay.classList.add("open")
-          }
-        }
-
         // Videos
         if (project.videos?.length > 0) {
           project.videos.forEach((videoUrl) => {
@@ -1073,7 +1307,9 @@
             img.loading = "lazy"
 
             btn.appendChild(img)
-            btn.addEventListener("click", () => openLightbox(image, project.title))
+            btn.addEventListener("click", () =>
+              openLightbox({ kind: "image", src: image, alt: project.title }),
+            )
 
             const wrap = document.createElement("div")
             wrap.className = "project-media-item"
