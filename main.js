@@ -25,6 +25,33 @@
     },
   }
 
+  const getYoutubeId = (url) => {
+    if (!url) return ""
+    if (url.includes("youtube.com")) {
+      const qs = url.split("?")[1] || ""
+      const params = new URLSearchParams(qs)
+      return params.get("v") || ""
+    }
+    if (url.includes("youtu.be/")) {
+      return url.split("/").pop().split("?")[0]
+    }
+    return ""
+  }
+
+  // Compute a lightweight thumbnail path for gallery images.
+  // Convention:
+  //  - Original: ./assets/images/foo.jpg
+  //  - Thumb:    ./assets/images/thumbs/foo.jpg  (25% scale, generated offline)
+  //
+  // If the thumb is missing, we fall back to the original at runtime.
+  const getThumbnailSrc = (src) => {
+    if (!src || typeof src !== "string") return src
+    // Only rewrite local image paths that live in ./assets/images
+    if (!src.startsWith("./assets/images/")) return src
+    const withoutPrefix = src.replace("./assets/images/", "")
+    return `./assets/images/thumbs/${withoutPrefix}`
+  }
+
   // ============================================
   // SHARED RENDERERS (used across pages)
   // ============================================
@@ -148,29 +175,100 @@
     const fragment = document.createDocumentFragment()
 
     data.exhibitions.forEach((exhibition) => {
-      const item = document.createElement("div")
-      item.className = "exhibition-item"
+      const block = document.createElement("article")
+      block.className = "exhibition-block"
 
-      const title = document.createElement(exhibition.id ? "a" : "div")
-      title.className = "exhibition-title"
-      if (exhibition.id) title.href = `project.html?id=${exhibition.id}`
+      const title = document.createElement("h3")
+      title.className = "exhibition-block-title"
       title.textContent = exhibition.title
 
-      const meta = document.createElement("div")
-      meta.className = "exhibition-meta"
-
+      const meta = document.createElement("p")
+      meta.className = "exhibition-block-meta"
       const parts = [
         exhibition.venue,
         exhibition.location,
         exhibition.date,
+        exhibition.role,
       ].filter(Boolean)
-
-      // meta line: "Venue • City, Country • Month YYYY"
       meta.textContent = parts.join(" • ")
 
-      item.appendChild(title)
-      item.appendChild(meta)
-      fragment.appendChild(item)
+      block.appendChild(title)
+      block.appendChild(meta)
+
+      if (exhibition.description) {
+        const desc = document.createElement("div")
+        desc.className = "exhibition-block-description"
+        const p = document.createElement("p")
+        p.textContent = exhibition.description
+        desc.appendChild(p)
+        block.appendChild(desc)
+      }
+
+      const images = Array.isArray(exhibition.images) ? exhibition.images : []
+      const videos = Array.isArray(exhibition.videos) ? exhibition.videos : []
+
+      if (images.length > 0 || videos.length > 0) {
+        const gallery = document.createElement("div")
+        gallery.className = "exhibition-block-gallery work-gallery-grid"
+
+        images.forEach((src) => {
+          const item = document.createElement("div")
+          item.className = "gallery-item"
+          const wrap = document.createElement("div")
+          wrap.className = "gallery-item-inner"
+          const img = document.createElement("img")
+          img.src = src
+          img.alt = exhibition.title
+          img.loading = "lazy"
+          wrap.appendChild(img)
+          item.appendChild(wrap)
+          gallery.appendChild(item)
+        })
+
+        videos.forEach((url) => {
+          const item = document.createElement("div")
+          item.className = "gallery-item"
+          const wrap = document.createElement("div")
+          wrap.className = "gallery-item-inner"
+          if (url.includes("youtube.com") || url.includes("youtu.be")) {
+            const videoId = getYoutubeId(url)
+            if (videoId) {
+              const img = document.createElement("img")
+              img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+              img.alt = `${exhibition.title} (video)`
+              img.loading = "lazy"
+              wrap.appendChild(img)
+            }
+          } else {
+            const video = document.createElement("video")
+            video.src = url
+            video.muted = true
+            video.playsInline = true
+            video.preload = "metadata"
+            wrap.appendChild(video)
+          }
+          item.appendChild(wrap)
+          gallery.appendChild(item)
+        })
+
+        block.appendChild(gallery)
+      }
+
+      if (exhibition.urls && Object.keys(exhibition.urls).length > 0) {
+        const links = document.createElement("div")
+        links.className = "exhibition-block-links"
+        Object.entries(exhibition.urls).forEach(([label, href]) => {
+          const a = document.createElement("a")
+          a.href = href
+          a.target = "_blank"
+          a.rel = "noopener noreferrer"
+          a.textContent = label
+          links.appendChild(a)
+        })
+        block.appendChild(links)
+      }
+
+      fragment.appendChild(block)
     })
 
     exhibitionsContainer.appendChild(fragment)
@@ -197,6 +295,16 @@
       })
     })
   }
+
+  // Dropdown nav groups (for Media section)
+  const navGroupToggles = document.querySelectorAll(".nav-group-toggle")
+  navGroupToggles.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const group = btn.closest(".nav-group")
+      if (!group) return
+      group.classList.toggle("open")
+    })
+  })
 
   // ============================================
   // ACTIVE NAV LINK HIGHLIGHTING
@@ -281,8 +389,8 @@
 
       const tutorialsLi = document.createElement("li")
       const tutorialsLink = document.createElement("a")
-      tutorialsLink.href = "touchdesigner-tutorials.html"
-      tutorialsLink.textContent = "TouchDesigner Tutorials"
+      tutorialsLink.href = "audiodevout.html"
+      tutorialsLink.textContent = "Audiodevout (TouchDesigner)"
       tutorialsLi.appendChild(tutorialsLink)
       fragment.appendChild(tutorialsLi)
 
@@ -319,19 +427,6 @@
         return typeof n === "number" && n > 0 ? n : 4
       }
 
-      const getYoutubeId = (url) => {
-        if (!url) return ""
-        if (url.includes("youtube.com")) {
-          const qs = url.split("?")[1] || ""
-          const params = new URLSearchParams(qs)
-          return params.get("v") || ""
-        }
-        if (url.includes("youtu.be/")) {
-          return url.split("/").pop().split("?")[0]
-        }
-        return ""
-      }
-
       const pushProjectMedia = (project, categoryName) => {
         // per-entry option: default YES (show everything)
         if (project.showInGallery === false) return
@@ -366,9 +461,15 @@
           seenMedia.add(m.src)
           perProjectCount.set(pid, already + 1)
 
+          // Separate audiodevout (YouTube) from visual explorations in index gallery
+          const displayCategory =
+            categoryName === "drawings" && project.id && project.id.startsWith("audiodevout-")
+              ? "audiodevout"
+              : categoryName
+
           allMediaItems.push({
             project,
-            categoryName,
+            categoryName: displayCategory,
             media: m,
           })
         })
@@ -385,60 +486,132 @@
         data.exhibitions.forEach((exhibition) => pushProjectMedia(exhibition, "exhibitions"))
       }
 
-      // Create gallery items (one tile per image/video)
-      allMediaItems.forEach(({ project, categoryName, media }) => {
-        const item = document.createElement("div")
-        item.className = "gallery-item"
+      // Group items by category
+      const groupedByCategory = new Map()
+      allMediaItems.forEach((item) => {
+        const cat = item.categoryName
+        if (!groupedByCategory.has(cat)) {
+          groupedByCategory.set(cat, [])
+        }
+        groupedByCategory.get(cat).push(item)
+      })
 
-        const link = document.createElement("a")
-        link.href = createProjectUrl(project.id)
+      // Define category order for display (audiodevout separate from drawings)
+      const categoryOrder = [
+        "performance",
+        "installations",
+        "drawings",
+        "audiodevout",
+        "soundInstallations",
+        "writing",
+        "exhibitions",
+      ]
 
-        let thumbEl = null
+      // Get all categories, ordered: first the predefined order, then any others
+      const orderedCategories = []
+      categoryOrder.forEach((cat) => {
+        if (groupedByCategory.has(cat) && groupedByCategory.get(cat).length > 0) {
+          orderedCategories.push(cat)
+        }
+      })
+      // Add any remaining categories not in the predefined order
+      groupedByCategory.forEach((items, cat) => {
+        if (!categoryOrder.includes(cat) && items.length > 0) {
+          orderedCategories.push(cat)
+        }
+      })
 
-        if (media.kind === "image") {
-          const img = document.createElement("img")
-          img.src = media.src
-          img.alt = project.title
-          img.loading = "lazy"
-          thumbEl = img
-        } else {
-          const videoUrl = media.src
-          if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
-            const videoId = getYoutubeId(videoUrl)
+      // Create gallery items grouped by category with separators
+      let isFirstCategory = true
+      orderedCategories.forEach((categoryName) => {
+        const categoryItems = groupedByCategory.get(categoryName)
+
+        // Add separator before category (except first)
+        if (!isFirstCategory) {
+          const separator = document.createElement("div")
+          separator.className = "gallery-section-separator"
+          separator.setAttribute("aria-hidden", "true")
+          fragment.appendChild(separator)
+        }
+        isFirstCategory = false
+
+        // Add all items from this category
+        categoryItems.forEach(({ project, media }) => {
+          const item = document.createElement("div")
+          item.className = "gallery-item"
+
+          const link = document.createElement("a")
+          link.href = createProjectUrl(project.id)
+
+          let thumbEl = null
+
+          if (media.kind === "image") {
             const img = document.createElement("img")
-            img.src = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : ""
-            img.alt = `${project.title} (video)`
+
+            const thumbSrc = getThumbnailSrc(media.src)
+            // Try loading the smaller thumbnail first; if it fails, fall back to the full-res image.
+            img.src = thumbSrc || media.src
+            img.alt = project.title
             img.loading = "lazy"
+            img.decoding = "async"
+            img.referrerPolicy = "no-referrer"
+            img.onerror = () => {
+              if (img.src !== media.src) {
+                img.src = media.src
+              }
+            }
+
             thumbEl = img
           } else {
-            const video = document.createElement("video")
-            video.src = videoUrl
-            video.muted = true
-            video.playsInline = true
-            // Performance: don't autoplay videos in the grid
-            video.preload = "none"
-            thumbEl = video
+            const videoUrl = media.src
+            if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+              const videoId = getYoutubeId(videoUrl)
+              const img = document.createElement("img")
+              img.src = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : ""
+              img.alt = `${project.title} (video)`
+              img.loading = "lazy"
+              thumbEl = img
+            } else {
+              const video = document.createElement("video")
+              video.src = videoUrl
+              video.muted = true
+              video.playsInline = true
+              // Performance: don't autoplay videos in the grid
+              video.preload = "none"
+              thumbEl = video
+            }
           }
-        }
 
-        const info = document.createElement("div")
-        info.className = "gallery-item-info"
+          const info = document.createElement("div")
+          info.className = "gallery-item-info"
 
-        const title = document.createElement("h4")
-        title.className = "gallery-item-title"
-        title.textContent = project.title
+          const title = document.createElement("h4")
+          title.className = "gallery-item-title"
+          title.textContent = project.title
 
-        const category = document.createElement("p")
-        category.className = "gallery-item-category"
-        category.textContent =
-          categoryName.charAt(0).toUpperCase() + categoryName.slice(1) + (media.kind === "video" ? " • Video" : "")
+          const category = document.createElement("p")
+          category.className = "gallery-item-category"
 
-        info.appendChild(title)
-        info.appendChild(category)
-        if (thumbEl) link.appendChild(thumbEl)
-        link.appendChild(info)
-        item.appendChild(link)
-        fragment.appendChild(item)
+          let label = ""
+          if (project.category) {
+            label = project.category
+          } else if (categoryName === "soundInstallations") {
+            label = "Asymmetrica Audio Collection"
+          } else if (categoryName === "audiodevout") {
+            label = "Audiodevout / TouchDesigner"
+          } else {
+            label = categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
+          }
+
+          category.textContent = label
+
+          info.appendChild(title)
+          info.appendChild(category)
+          if (thumbEl) link.appendChild(thumbEl)
+          link.appendChild(info)
+          item.appendChild(link)
+          fragment.appendChild(item)
+        })
       })
 
       galleryGrid.appendChild(fragment)
@@ -455,6 +628,193 @@
   if (document.body.classList.contains("works-page")) {
     const data = window.portfolioData
     if (data) populateWorkList(data)
+  }
+
+  // ============================================
+  // INSTALLATIONS / PERFORMANCE / VISUAL / ARCHIVE PAGES
+  // ============================================
+
+  const populateSimpleListPage = (projects, containerId) => {
+    const container = document.getElementById(containerId)
+    if (!container || !projects || !projects.length) return
+
+    const fragment = document.createDocumentFragment()
+    projects.forEach((project) => {
+      fragment.appendChild(createProjectLink(project))
+    })
+    container.appendChild(fragment)
+  }
+
+  const populateInstallationsPage = (data) => {
+    const container = document.getElementById("installations-list")
+    if (!container) return
+
+    const fragment = document.createDocumentFragment()
+
+    data.projects.installations.forEach((project) => {
+      const block = document.createElement("article")
+      block.className = "installation-block"
+
+      const title = document.createElement("h3")
+      title.className = "installation-block-title"
+      title.textContent = project.title
+
+      const meta = document.createElement("p")
+      meta.className = "installation-block-meta"
+      const parts = [project.category, project.dimensions].filter(Boolean)
+      meta.textContent = parts.join(" • ")
+
+      block.appendChild(title)
+      if (parts.length > 0) block.appendChild(meta)
+
+      if (project.fullDescription || project.description) {
+        const desc = document.createElement("div")
+        desc.className = "installation-block-description"
+        const p = document.createElement("p")
+        p.textContent = (project.fullDescription || project.description || "").trim()
+        desc.appendChild(p)
+        block.appendChild(desc)
+      }
+
+      const images = Array.isArray(project.images) ? project.images : []
+      const videos = Array.isArray(project.videos) ? project.videos : []
+
+      if (images.length > 0 || videos.length > 0) {
+        const gallery = document.createElement("div")
+        gallery.className = "installation-block-gallery work-gallery-grid"
+
+        images.forEach((src) => {
+          const item = document.createElement("div")
+          item.className = "gallery-item"
+          const wrap = document.createElement("div")
+          wrap.className = "gallery-item-inner"
+          const img = document.createElement("img")
+          img.src = src
+          img.alt = project.title
+          img.loading = "lazy"
+          img.decoding = "async"
+          wrap.appendChild(img)
+          item.appendChild(wrap)
+          gallery.appendChild(item)
+        })
+
+        videos.forEach((url) => {
+          const item = document.createElement("div")
+          item.className = "gallery-item"
+          const wrap = document.createElement("div")
+          wrap.className = "gallery-item-inner"
+          if (url.includes("youtube.com") || url.includes("youtu.be")) {
+            const videoId = getYoutubeId(url)
+            if (videoId) {
+              const img = document.createElement("img")
+              img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+              img.alt = `${project.title} (video)`
+              img.loading = "lazy"
+              wrap.appendChild(img)
+            }
+          } else {
+            const video = document.createElement("video")
+            video.src = url
+            video.muted = true
+            video.playsInline = true
+            video.preload = "metadata"
+            wrap.appendChild(video)
+          }
+          item.appendChild(wrap)
+          gallery.appendChild(item)
+        })
+
+        block.appendChild(gallery)
+      }
+
+      if (project.urls && Object.keys(project.urls).length > 0) {
+        const links = document.createElement("div")
+        links.className = "installation-block-links"
+        Object.entries(project.urls).forEach(([label, href]) => {
+          const a = document.createElement("a")
+          a.href = href
+          a.target = "_blank"
+          a.rel = "noopener noreferrer"
+          a.textContent = label
+          links.appendChild(a)
+        })
+        block.appendChild(links)
+      }
+
+      fragment.appendChild(block)
+    })
+
+    container.appendChild(fragment)
+  }
+
+  if (document.body.classList.contains("installations-page")) {
+    const data = window.portfolioData
+    if (data) populateInstallationsPage(data)
+  }
+
+  if (document.body.classList.contains("performance-page")) {
+    const data = window.portfolioData
+    if (data) populateSimpleListPage(data.projects.performance, "performance-page-list")
+  }
+
+  const populateVisualGallery = (data) => {
+    const gallery = document.getElementById("visual-gallery")
+    if (!gallery) return
+
+    const fragment = document.createDocumentFragment()
+    const projects = data.projects.drawings.filter((project) => !project.id.startsWith("audiodevout-"))
+
+    projects.forEach((project) => {
+      const images = Array.isArray(project.images) ? project.images : []
+      if (!images[0]) return
+
+      const item = document.createElement("div")
+      item.className = "gallery-item"
+
+      const link = document.createElement("a")
+      link.href = createProjectUrl(project.id)
+
+      const img = document.createElement("img")
+      const thumbSrc = getThumbnailSrc(images[0])
+      img.src = thumbSrc || images[0]
+      img.alt = project.title
+      img.loading = "lazy"
+      img.decoding = "async"
+      img.referrerPolicy = "no-referrer"
+      img.onerror = () => {
+        if (img.src !== images[0]) img.src = images[0]
+      }
+
+      const info = document.createElement("div")
+      info.className = "gallery-item-info"
+
+      const title = document.createElement("h4")
+      title.className = "gallery-item-title"
+      title.textContent = project.title
+
+      const category = document.createElement("p")
+      category.className = "gallery-item-category"
+      category.textContent = project.category || "Visual Exploration"
+
+      info.appendChild(title)
+      info.appendChild(category)
+      link.appendChild(img)
+      link.appendChild(info)
+      item.appendChild(link)
+      fragment.appendChild(item)
+    })
+
+    gallery.appendChild(fragment)
+  }
+
+  if (document.body.classList.contains("visual-page")) {
+    const data = window.portfolioData
+    if (data) populateVisualGallery(data)
+  }
+
+  if (document.body.classList.contains("archive-page")) {
+    const data = window.portfolioData
+    if (data) populateSimpleListPage(data.projects.writing, "archive-page-list")
   }
 
   // ============================================
@@ -476,12 +836,17 @@
   }
 
   // ============================================
-  // ABOUT PAGE
+  // ABOUT / CONTACT PAGE
   // ============================================
 
   if (document.body.classList.contains("about-page")) {
     const data = window.portfolioData
-    if (data) populateAbout(data)
+    if (data) {
+      // About text, contact block, and inline CV on the same page
+      populateAbout(data)
+      populateContact(data)
+      populateCV(data)
+    }
   }
 
   // ============================================
@@ -677,15 +1042,16 @@
           })
         }
 
-        // Bandcamp tracks
+        // Bandcamp tracks (artwork + play controls visible)
         if (project.bandcampTracks?.length > 0) {
           project.bandcampTracks.forEach((track) => {
             const iframe = document.createElement("iframe")
+            iframe.className = "project-bandcamp-embed"
             iframe.style.border = "0"
             iframe.style.width = "100%"
-            iframe.style.height = "480px"
+            iframe.style.height = "472px"
             iframe.src = `https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=000000/linkcol=ffffff/tracklist=false/artwork=large/transparent=false/`
-            iframe.seamless = true
+            iframe.setAttribute("seamless", "true")
             iframe.loading = "lazy"
             const wrap = document.createElement("div")
             wrap.className = "project-media-item"
@@ -810,22 +1176,50 @@
 
   if (document.body.classList.contains("tutorials-page")) {
     const data = window.portfolioData
-    const tutorialsList = document.getElementById("tutorials-list")
+    const tutorialsGrid = document.getElementById("tutorials-grid")
 
-    if (tutorialsList) {
+    if (tutorialsGrid) {
       const fragment = document.createDocumentFragment()
       const audiodevoutProjects = data.projects.drawings.filter((project) => project.id.startsWith("audiodevout-"))
 
       audiodevoutProjects.forEach((project) => {
-        const li = document.createElement("li")
+        const primaryVideo = Array.isArray(project.videos) && project.videos.length > 0 ? project.videos[0] : null
+        if (!primaryVideo) return
+
+        const item = document.createElement("div")
+        item.className = "gallery-item"
+
         const link = document.createElement("a")
         link.href = createProjectUrl(project.id)
-        link.textContent = project.title
-        li.appendChild(link)
-        fragment.appendChild(li)
+
+        const videoId = getYoutubeId(primaryVideo)
+        if (videoId) {
+          const img = document.createElement("img")
+          img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+          img.alt = project.title
+          img.loading = "lazy"
+          link.appendChild(img)
+        }
+
+        const info = document.createElement("div")
+        info.className = "gallery-item-info"
+
+        const title = document.createElement("h4")
+        title.className = "gallery-item-title"
+        title.textContent = project.title
+
+        const category = document.createElement("p")
+        category.className = "gallery-item-category"
+        category.textContent = "Audiodevout / TouchDesigner"
+
+        info.appendChild(title)
+        info.appendChild(category)
+        link.appendChild(info)
+        item.appendChild(link)
+        fragment.appendChild(item)
       })
 
-      tutorialsList.appendChild(fragment)
+      tutorialsGrid.appendChild(fragment)
     }
   }
 
@@ -844,38 +1238,47 @@
       )
 
       asymmetricaProjects.forEach((project) => {
-        const card = document.createElement("div")
-        card.className = "asymmetrica-item"
-
-        const title = document.createElement("h4")
-        title.textContent = project.title
-
-        const desc = document.createElement("p")
-        desc.textContent = project.description || ""
+        const item = document.createElement("div")
+        item.className = "gallery-item gallery-item-bandcamp"
 
         const link = document.createElement("a")
         link.href = createProjectUrl(project.id)
-        link.textContent = "Open project →"
+        link.className = "gallery-item-bandcamp-link"
 
-        card.appendChild(title)
-        if (project.description) card.appendChild(desc)
+        const info = document.createElement("div")
+        info.className = "gallery-item-info"
 
-        // Bandcamp embeds (single-track minimal player; correct size + play button visible)
-        if (project.bandcampTracks?.length > 0) {
-          project.bandcampTracks.forEach((track) => {
-            const iframe = document.createElement("iframe")
-            iframe.style.border = "0"
-            iframe.style.width = "100%"
-            iframe.style.height = "120px"
-            iframe.loading = "lazy"
-            iframe.src = `https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=000000/linkcol=ffffff/transparent=true/`
-            iframe.setAttribute("seamless", "true")
-            card.appendChild(iframe)
-          })
+        const title = document.createElement("h4")
+        title.className = "gallery-item-title"
+        title.textContent = project.title
+
+        const category = document.createElement("p")
+        category.className = "gallery-item-category"
+        category.textContent = "Asymmetrica Audio Collection"
+
+        info.appendChild(title)
+        if (project.description) {
+          const desc = document.createElement("span")
+          desc.textContent = ` • ${project.description}`
+          category.appendChild(desc)
+        }
+        info.appendChild(category)
+
+        link.appendChild(info)
+
+        if (project.bandcampTracks && project.bandcampTracks.length > 0) {
+          const track = project.bandcampTracks[0]
+          const iframe = document.createElement("iframe")
+          iframe.className = "gallery-bandcamp-embed"
+          iframe.src = `https://bandcamp.com/EmbeddedPlayer/track=${track.trackId}/size=large/bgcol=000000/linkcol=ffffff/tracklist=false/artwork=large/transparent=false/`
+          iframe.style.border = "0"
+          iframe.loading = "lazy"
+          iframe.setAttribute("seamless", "true")
+          link.insertBefore(iframe, info)
         }
 
-        card.appendChild(link)
-        fragment.appendChild(card)
+        item.appendChild(link)
+        fragment.appendChild(item)
       })
 
       audioCollectionList.appendChild(fragment)

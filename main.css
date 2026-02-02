@@ -27,17 +27,17 @@
   --space-2xl: 6rem;
   --space-3xl: 10rem;
 
-  /* === EDITORIAL TEXT SCALE (calmer mids, strong headlines) === */
-  --text-xs: 0.875rem;
+  /* === TEXT SCALE (text-sm is max; single readable size) === */
+  --text-xs: 0.8rem;
   --text-sm: 0.98rem;
-  --text-base: 1.12rem;
-  --text-lg: 1.28rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.85rem;
-  --text-3xl: 2.35rem;
-  --text-4xl: 2.9rem;
-  --text-5xl: 3.6rem;
-  --text-6xl: 4.25rem;
+  --text-base: 0.98rem;
+  --text-lg: 0.98rem;
+  --text-xl: 0.98rem;
+  --text-2xl: 0.98rem;
+  --text-3xl: 0.98rem;
+  --text-4xl: 0.98rem;
+  --text-5xl: 0.98rem;
+  --text-6xl: 0.98rem;
 
   /* === FONT WEIGHTS === */
   --weight-light: 300;
@@ -121,7 +121,7 @@ html {
 
 body {
   font-family: "Swis721", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: var(--text-base);
+  font-size: var(--text-xs);
   font-weight: var(--weight-light);
   line-height: var(--leading-normal);
   letter-spacing: var(--tracking-normal);
@@ -260,6 +260,47 @@ nav a {
   transition: color var(--transition-fast);
 }
 
+/* Nav group (dropdown container) */
+.nav-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-group-toggle {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  background: none;
+  border: none;
+  padding: var(--space-xs) 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.nav-group-toggle:hover {
+  color: var(--color-fg);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.98);
+  border: 1px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 220px;
+}
+
+.nav-group.open .nav-dropdown {
+  display: flex;
+}
+
 nav a::after {
   content: "";
   position: absolute;
@@ -350,44 +391,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-sm);
   font-weight: var(--weight-bold);
+  font-style: italic;
   letter-spacing: var(--tracking-tight);
   margin-top: 0;
   margin-bottom: var(--space-lg);
 }
 
 h2 {
-  font-size: var(--text-4xl);
+  font-size: var(--text-sm);
   font-weight: var(--weight-bold);
+  font-style: italic;
   letter-spacing: var(--tracking-tight);
   margin-top: var(--space-xl);
   margin-bottom: var(--space-lg);
 }
 
 h3 {
-  font-size: var(--text-3xl);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  font-style: italic;
   letter-spacing: var(--tracking-normal);
   margin-top: var(--space-xl);
   margin-bottom: var(--space-md);
 }
 
 h4 {
-  font-size: var(--text-2xl);
+  font-size: var(--text-sm);
   letter-spacing: var(--tracking-normal);
   margin-top: var(--space-lg);
   margin-bottom: var(--space-sm);
 }
 
 h5 {
-  font-size: var(--text-xl);
+  font-size: var(--text-sm);
   letter-spacing: var(--tracking-normal);
   margin-top: var(--space-lg);
   margin-bottom: var(--space-sm);
 }
 
 h6 {
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   letter-spacing: var(--tracking-normal);
   margin-top: var(--space-sm);
   margin-bottom: var(--space-sm);
@@ -627,8 +672,8 @@ section > h2:first-child {
 }
 
 /* ============================================
-   WORK GALLERY GRID - INSTAGRAM STYLE
-   Square images, zero spacing, responsive columns
+   WORK GALLERY GRID
+   Square thumbnails, multi-column gallery
    ============================================ */
 .work-gallery-grid {
   display: grid;
@@ -691,20 +736,39 @@ section > h2:first-child {
   transition: opacity var(--transition-base);
 }
 
-.gallery-item-title {
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-fg);
-  margin: 0;
+/* Gallery item title - unified across all galleries */
+.gallery-item .gallery-item-title,
+.gallery-item h4.gallery-item-title {
+  font-size: var(--text-xs) !important;
+  font-weight: var(--weight-medium) !important;
+  letter-spacing: var(--tracking-wide) !important;
+  color: var(--color-fg) !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   text-transform: uppercase;
+  line-height: var(--leading-tight);
+  font-family: "Swis721", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.gallery-item-category {
-  font-size: 0.7rem;
-  font-weight: var(--weight-regular);
-  color: var(--color-fg-muted);
-  margin-top: 2px;
+.gallery-item .gallery-item-category,
+.gallery-item p.gallery-item-category {
+  font-size: 0.7rem !important;
+  font-weight: var(--weight-regular) !important;
+  color: var(--color-fg-muted) !important;
+  margin: 0 !important;
+  margin-top: 2px !important;
+  line-height: var(--leading-normal);
+  font-family: "Swis721", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Gallery section separator - spans full width to separate categories */
+.gallery-section-separator {
+  grid-column: 1 / -1;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-md) 0;
+  opacity: 0.5;
 }
 
 /* Work categories list styling */
@@ -747,14 +811,177 @@ section > h2:first-child {
 }
 
 /* ============================================
-   EXHIBITIONS SECTION
+   EXHIBITIONS SECTION (inline blocks, gallery style)
    ============================================ */
 #exhibitions-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-2xl);
 }
 
+.exhibition-block {
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exhibition-block:last-child {
+  border-bottom: none;
+}
+
+.exhibition-block-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--color-fg);
+}
+
+.exhibition-block-meta {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.exhibition-block-description {
+  margin-bottom: var(--space-lg);
+  max-width: 72ch;
+}
+
+.exhibition-block-description p {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.exhibition-block-gallery {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.exhibition-block-gallery .gallery-item-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.02);
+}
+
+.exhibition-block-gallery .gallery-item-inner img,
+.exhibition-block-gallery .gallery-item-inner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exhibition-block-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.exhibition-block-links a {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+.exhibition-block-links a:hover {
+  color: var(--color-fg);
+}
+
+/* ============================================
+   INSTALLATIONS SECTION (inline blocks)
+   ============================================ */
+#installations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.installation-block {
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.installation-block:last-child {
+  border-bottom: none;
+}
+
+.installation-block-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  font-style: italic;
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--color-fg);
+}
+
+.installation-block-meta {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.installation-block-description {
+  margin-bottom: var(--space-lg);
+  max-width: 72ch;
+}
+
+.installation-block-description p {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.installation-block-gallery {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.installation-block-gallery .gallery-item-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.02);
+}
+
+.installation-block-gallery .gallery-item-inner img,
+.installation-block-gallery .gallery-item-inner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.installation-block-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.installation-block-links a {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+.installation-block-links a:hover {
+  color: var(--color-fg);
+}
+
+/* Legacy exhibition-item (if still used elsewhere) */
 .exhibition-item {
   padding: var(--space-md) 0;
   border-bottom: 1px solid var(--color-border);
@@ -766,13 +993,10 @@ section > h2:first-child {
 
 .exhibition-title {
   display: inline-block;
-  font-size: var(--text-xl);
+  font-size: var(--text-sm);
   font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-snug);
   color: var(--color-fg);
   margin: 0;
-  max-width: none;
 }
 
 .exhibition-title::after {
@@ -781,9 +1005,7 @@ section > h2:first-child {
 
 .exhibition-meta {
   margin-top: var(--space-xs);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-wide);
+  font-size: var(--text-xs);
   color: var(--color-fg-muted);
   text-transform: uppercase;
 }
@@ -895,7 +1117,7 @@ section > h2:first-child {
 }
 
 .project-page h1 {
-  font-size: var(--text-4xl);
+  font-size: var(--text-sm);
   margin-bottom: var(--space-sm);
 }
 
@@ -1160,14 +1382,20 @@ footer p {
 
 /* ============================================
    ASYMMETRICA AUDIO COLLECTION PAGE
+   Uses same gallery grid system as main gallery
    ============================================ */
 .asymmetrica-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
   margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  margin-left: calc(-1 * var(--content-padding));
+  margin-right: calc(-1 * var(--content-padding));
+  width: calc(100% + (2 * var(--content-padding)));
 }
 
+/* Legacy asymmetrica-item styles - kept for backwards compatibility but not used */
 .asymmetrica-item {
   padding: var(--space-md);
   border: 1px solid var(--color-border);
@@ -1190,16 +1418,54 @@ footer p {
   margin-bottom: var(--space-sm);
 }
 
+/* Bandcamp gallery items: show embed (artwork + controls) */
+.gallery-item-bandcamp {
+  aspect-ratio: auto;
+  min-height: 0;
+  height: auto;
+}
+
+.gallery-item-bandcamp .gallery-item-bandcamp-link {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  height: 100%;
+}
+
+.gallery-bandcamp-embed {
+  width: 100% !important;
+  height: 140px !important;
+  min-height: 140px;
+  flex-shrink: 0;
+}
+
+.gallery-item-bandcamp .gallery-item-info {
+  opacity: 1;
+  position: relative;
+  margin-top: auto;
+  padding-top: var(--space-xs);
+}
+
+.project-bandcamp-embed {
+  min-height: 472px;
+}
+
 /* ============================================
-   TOUCHDESIGNER TUTORIALS PAGE
+   TOUCHDESIGNER TUTORIALS PAGE (audiodevout)
+   Uses same gallery grid system as main gallery
    ============================================ */
 .tutorials-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
   margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  margin-left: calc(-1 * var(--content-padding));
+  margin-right: calc(-1 * var(--content-padding));
+  width: calc(100% + (2 * var(--content-padding)));
 }
 
+/* Legacy tutorial-item styles - kept for backwards compatibility but not used */
 .tutorial-item {
   border: 1px solid var(--color-border);
   overflow: hidden;
@@ -1238,7 +1504,9 @@ footer p {
    RESPONSIVE: LARGE DESKTOP
    ============================================ */
 @media (min-width: 1600px) {
-  .work-gallery-grid {
+  .work-gallery-grid,
+  .asymmetrica-grid,
+  .tutorials-grid {
     grid-template-columns: repeat(8, 1fr);
   }
 }
@@ -1248,15 +1516,14 @@ footer p {
    ============================================ */
 @media (max-width: 1024px) {
   :root {
-    --text-5xl: 3.5rem;
-    --text-4xl: 2.75rem;
-    --text-3xl: 2rem;
     --space-2xl: 5rem;
     --space-xl: 3rem;
     --content-padding: 2rem;
   }
 
-  .work-gallery-grid {
+  .work-gallery-grid,
+  .asymmetrica-grid,
+  .tutorials-grid {
     grid-template-columns: repeat(5, 1fr);
   }
   
@@ -1276,11 +1543,6 @@ footer p {
    ============================================ */
 @media (max-width: 768px) {
   :root {
-    --text-5xl: 2.5rem;
-    --text-4xl: 2rem;
-    --text-3xl: 1.75rem;
-    --text-2xl: 1.5rem;
-    --text-xl: 1.25rem;
     --space-2xl: 4rem;
     --space-xl: 2.5rem;
     --space-lg: 2rem;
@@ -1310,6 +1572,29 @@ footer p {
     transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
   }
 
+  .nav-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-group-toggle {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-dropdown {
+    position: static;
+    border: none;
+    padding: 0 0 0 var(--space-sm);
+    margin-top: var(--space-xs);
+    display: none;
+  }
+
+  .nav-group.open .nav-dropdown {
+    display: flex;
+  }
+
   header nav.open {
     transform: translateY(0);
     opacity: 1;
@@ -1321,7 +1606,9 @@ footer p {
     padding: var(--space-sm) 0;
   }
 
-  .work-gallery-grid {
+  .work-gallery-grid,
+  .asymmetrica-grid,
+  .tutorials-grid {
     grid-template-columns: repeat(4, 1fr);
   }
   
@@ -1329,8 +1616,13 @@ footer p {
     padding: var(--space-xs);
   }
   
-  .gallery-item-title {
-    font-size: 0.65rem;
+  .gallery-item .gallery-item-title,
+  .gallery-item h4.gallery-item-title {
+    font-size: 0.65rem !important;
+  }
+
+  .gallery-section-separator {
+    margin: var(--space-sm) 0;
   }
   
   .about-content {
@@ -1351,20 +1643,13 @@ footer p {
     max-width: 85vw;
   }
 
-  h1 {
-    font-size: var(--text-3xl);
-  }
-
-  h2 {
-    font-size: var(--text-2xl);
+  h1, h2 {
+    font-size: var(--text-sm);
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --text-5xl: 2rem;
-    --text-4xl: 1.75rem;
-    --text-3xl: 1.5rem;
     --space-2xl: 3rem;
     --space-xl: 2rem;
     --content-padding: 1rem;
@@ -1376,16 +1661,24 @@ footer p {
     letter-spacing: var(--tracking-wide);
   }
   
-  .work-gallery-grid {
+  .work-gallery-grid,
+  .asymmetrica-grid,
+  .tutorials-grid {
     grid-template-columns: repeat(3, 1fr);
   }
   
-  .gallery-item-title {
-    font-size: 0.6rem;
+  .gallery-item .gallery-item-title,
+  .gallery-item h4.gallery-item-title {
+    font-size: 0.6rem !important;
   }
   
-  .gallery-item-category {
+  .gallery-item .gallery-item-category,
+  .gallery-item p.gallery-item-category {
     display: none;
+  }
+
+  .gallery-section-separator {
+    margin: var(--space-xs) 0;
   }
   
   #about-image {

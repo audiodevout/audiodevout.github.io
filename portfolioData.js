@@ -868,7 +868,11 @@ try {
         location: "Eindhoven, NL",
         role: "Talk/Presentation",
         venue: "Baltan Laboratories",
-        images: ["./assets/images/ect5.png"],
+        images: ["./assets/images/ect5.png",
+          "./assets/images/ect.jpg",
+          "./assets/images/ect1.jpg",
+          "./assets/images/ect2.jpg",
+        ],
         urls: {
           link: "https://www.baltanlaboratories.org/events/5th-european-culture-and-technology-lab-annual-conference",
           pdf: "./assets/documents/symmetrical-fictions-paper.pdf",
@@ -925,7 +929,7 @@ try {
         title: "Diverse Digital Dimensions: Error – Failure Is an Option, Part Three",
         date: "March 2025",
         description:
-          "Participated in the annual collaboration between the NAIP European Music Masters program (Prince Claus Conservatoire and Iceland University of the Arts) and MADTech, Frank Mohr Institute. The project combines sonic, visual, technological, and performative practices across four Live Lab sessions and a five-day residency at the Grand Theatre. The residency involved collective experimentation in hybrid physical–digital spaces, with a focus on co-making, improvisation, and working with the sensuous and the imperfect. The program concluded with a public sharing of the group’s work.",
+          "Participated in the annual collaboration between the NAIP European Music Masters program (Prince Claus Conservatoire and Iceland University of the Arts) and MADTech, Frank Mohr Institute. The annual collaboration for master students of the NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) and MADTech, Frank Mohr Institute is a vibrant artistic play ground for the future of interdisciplinary talent. The project is formed in two parts: The first part being a series of four Live Lab sessions exploring core concepts behind our collaboration and the art of co-making in an 'open space' domain. And the second part is a 5-Day residency on location at Grand Theatre, working in various spaces both physically and virtually.",
         location: "Groningen, NL",
         role: "Residency and Group Presentation",
         venue: "Grand Theatre Groningen",
@@ -1107,7 +1111,6 @@ Across installations, performances, and theoretical projects, I follow questions
   // Make data available globally with error handling
   if (typeof window !== "undefined") {
     window.portfolioData = portfolioData
-    console.log("Portfolio data loaded successfully")
   }
 } catch (error) {
   console.error("Error loading portfolio data:", error)
