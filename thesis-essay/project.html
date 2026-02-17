@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Equilibrium</title>
+  <meta name="description" content="A distributed essay investigating equilibrium as a lived, perceptual, and systemic experience.">
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+<body class="project-page">
+  <nav class="nav-bar">
+    <a href="index.html" class="nav-logo">Equilibrium</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Constellation</a>
+      <a href="project.html?id=bibliography" class="nav-link">Bibliography</a>
+      <a href="project.html?id=about" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <main class="project-container">
+    <div class="sketch-container" id="sketch-container"></div>
+    
+    <article class="project-content" id="project-content">
+      <header class="project-header">
+        <span class="project-label" id="project-label">Loading...</span>
+        <h1 class="project-title" id="project-title"></h1>
+        <p class="project-subtitle" id="project-subtitle"></p>
+      </header>
+      
+      <div class="project-body" id="project-body"></div>
+      
+      <div class="project-media" id="project-media"></div>
+    </article>
+    
+    <nav class="project-nav">
+      <a href="#" class="nav-arrow prev" id="prev-project">
+        <span class="arrow">←</span>
+        <span class="nav-label">Previous</span>
+      </a>
+      <a href="index.html" class="nav-home">Back to Constellation</a>
+      <a href="#" class="nav-arrow next" id="next-project">
+        <span class="nav-label">Next</span>
+        <span class="arrow">→</span>
+      </a>
+    </nav>
+  </main>
+
+  <div class="transition-overlay" id="transition-overlay"></div>
+
+  <script src="data.js"></script>
+  <script src="project-loader.js"></script>
+</body>
+</html>

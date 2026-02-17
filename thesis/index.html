@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Atharva Gupta - Sound installations, digital works, and interdisciplinary research portfolio">
+    <meta name="keywords" content="sound art, digital installations, TouchDesigner, new media art, experimental music, kinetic sculpture">
+    <meta name="author" content="Atharva Gupta">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://atharvagupta.com/">
+    <meta property="og:title" content="Atharva Gupta - Portfolio">
+    <meta property="og:description" content="Sound installations, digital works, and interdisciplinary research">
+    <meta property="og:image" content="https://audiodevout.github.io/assets/images/atharva.jpeg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://atharvagupta.com/">
+    <meta property="twitter:title" content="Atharva Gupta - Portfolio">
+    <meta property="twitter:description" content="Sound installations, digital works, and interdisciplinary research">
+    <meta property="twitter:image" content="https://audiodevout.github.io/assets/images/atharva.jpeg">
+    
+    <title>Atharva Gupta - Portfolio</title>
+    
+    <!-- Google Fonts - Preload for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="main.css" as="style">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" data-testid="skip-link">Skip to main content</a>
+    
+    <!-- Bandcamp toggle button -->
+    <button class="bandcamp-toggle" aria-expanded="false" aria-controls="bandcamp-sidebar" aria-label="Toggle music player" data-testid="bandcamp-toggle">
+        Music
+    </button>
+    
+    <!-- Bandcamp sidebar -->
+    <aside id="bandcamp-sidebar" class="bandcamp-sidebar" role="complementary" aria-label="Music player" data-testid="bandcamp-sidebar">
+        <h3>Asymmetrica Tracks</h3>
+        <div class="bandcamp-tracks" data-testid="bandcamp-tracks">
+            <!-- Tracks will be dynamically loaded -->
+        </div>
+    </aside>
+    
+    <!-- Header with minimal navigation -->
+    <header class="site-header" role="banner">
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu" data-testid="nav-toggle">
+                <span class="nav-toggle-text">Index</span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menu" data-testid="nav-menu">
+                <li role="menuitem">
+                    <a href="#portfolio" class="nav-link" data-testid="nav-link-portfolio">Portfolio</a>
+                </li>
+                <li role="menuitem">
+                    <a href="#thesis" class="nav-link" data-testid="nav-link-thesis">Thesis</a>
+                </li>
+                <li role="menuitem">
+                    <a href="#about" class="nav-link" data-testid="nav-link-about">About</a>
+                </li>
+                <li role="menuitem">
+                    <a href="#cv" class="nav-link" data-testid="nav-link-cv">CV</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main id="main-content" class="main-content" role="main">
+        <!-- Loading indicator -->
+        <div class="loading" aria-live="polite" aria-label="Loading content" data-testid="loading-indicator">
+            <span class="loading-text">Loading...</span>
+        </div>
+
+        <!-- Portfolio section -->
+        <section id="portfolio" class="portfolio-section" aria-labelledby="portfolio-heading">
+            <h1 id="portfolio-heading" class="section-heading" data-testid="portfolio-title">Atharva Gupta</h1>
+            <div class="works-grid" role="region" aria-label="Portfolio works" data-testid="works-grid">
+                <!-- Dynamic content will be rendered here -->
+            </div>
+        </section>
+
+        <!-- Individual work view -->
+        <section id="work-detail" class="work-detail" aria-labelledby="work-title" style="display: none;">
+            <button class="back-button" aria-label="Back to portfolio" data-testid="back-button">← Back</button>
+            <article class="work-content" data-testid="work-content">
+                <!-- Individual work content will be rendered here -->
+            </article>
+        </section>
+
+        <!-- Thesis section -->
+        <section id="thesis" class="thesis-section" aria-labelledby="thesis-heading" style="display: none;">
+            <h1 id="thesis-heading" class="section-heading" data-testid="thesis-title">Thesis</h1>
+            <article class="thesis-content" data-testid="thesis-content">
+                <!-- Thesis content will be rendered here -->
+            </article>
+        </section>
+
+        <!-- About section -->
+        <section id="about" class="about-section" aria-labelledby="about-heading" style="display: none;">
+            <h1 id="about-heading" class="section-heading" data-testid="about-title">About</h1>
+            <div class="about-content" data-testid="about-content">
+                <!-- About content will be rendered here -->
+            </div>
+        </section>
+
+        <!-- CV section -->
+        <section id="cv" class="cv-section" aria-labelledby="cv-heading" style="display: none;">
+            <h1 id="cv-heading" class="section-heading" data-testid="cv-title">Curriculum Vitae</h1>
+            <div class="cv-content" data-testid="cv-content">
+                <!-- CV content will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Custom audio player (hidden by default) -->
+    <div class="audio-player" role="region" aria-label="Audio player" style="display: none;" data-testid="audio-player">
+        <audio class="audio-element" preload="none" aria-label="Audio track">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="audio-controls">
+            <button class="play-pause-btn" aria-label="Play/Pause" data-testid="audio-play-pause">▶</button>
+            <div class="progress-container">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-testid="audio-progress">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <span class="time-display" aria-live="polite" data-testid="audio-time">0:00 / 0:00</span>
+            <button class="close-player" aria-label="Close audio player" data-testid="audio-close">×</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="portfolioData.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <title>Oblique Strategies - Interactive Word Grid</title>
+  <meta name="description" content="An interactive word grid inspired by Brian Eno's Oblique Strategies. Tap or click to generate new creative prompts.">
+  
+  <!-- Preload critical fonts for better performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&family=Fira+Code:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&family=VT323&family=Share+Tech+Mono&family=Press+Start+2P&family=Major+Mono+Display&family=Nova+Mono&family=Cousine:wght@400;700&family=Cutive+Mono&family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Anonymous+Pro:wght@400;700&family=PT+Mono&family=Overpass+Mono:wght@300;400;500;600;700&family=Red+Hat+Mono:wght@300;400;500;600;700&family=Ubuntu+Mono:wght@400;700&family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Load p5.js from CDN with fallback -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js" 
+          onerror="document.getElementById('fallback-message').style.display='block'"></script>
+</head>
+<body>
+  <!-- Loading indicator -->
+  <div id="loading" class="loading-screen">
+    <div class="loading-text">Loading Oblique Strategies...</div>
+  </div>
+  
+  <!-- Fallback message if p5.js fails to load -->
+  <div id="fallback-message" class="fallback-message" style="display: none;">
+    <h2>Unable to load the interactive experience</h2>
+    <p>Please check your internet connection and refresh the page.</p>
+  </div>
+  
+  
+  <!-- p5 canvas will be created here -->
+  <script src="sketch.js"></script>
+</body>
+</html>
