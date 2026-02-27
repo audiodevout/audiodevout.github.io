@@ -1,0 +1,85 @@
+/**
+ * tokens.css — design tokens for Atharva Gupta portfolio
+ * Typography as structure: big, light, lowercase. Neue Haas Grotesk only.
+ */
+:root {
+  /* Monochrome palette — silver, grey, black, white (readable contrast) */
+  --color-bg: #0a0a0a;
+  --color-surface: #141414;
+  --color-border: #2a2a2a;
+  --color-text: #e8e8e8;
+  --color-muted: #888888;
+  --color-accent: #b0b0b0;
+  --color-accent-glacier: var(--color-accent);
+  --color-accent-crimson: var(--color-accent);
+  --color-accent-violet: var(--color-accent);
+  --color-accent-amber: var(--color-accent);
+  --color-accent-cerulean: var(--color-accent);
+  --color-accent-lime: var(--color-accent);
+  --color-accent-saffron: var(--color-accent);
+  --color-accent-magenta: var(--color-accent);
+  --color-accent-graphite: var(--color-accent);
+
+  /* Body background — greyscale gradient */
+  --body-bg: radial-gradient(
+    ellipse 120% 80% at 50% 20%,
+    #1a1a1a 0%,
+    #0c0c0c 55%,
+    #080808 100%
+  );
+  --overlay-bg: rgba(0, 0, 0, 0.88);
+
+  /* Typography — Neue Haas Grotesk: big, light, lowercase */
+  --font-display: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-size-xs: clamp(0.65rem, 1vw, 0.75rem);
+  --font-size-sm: clamp(0.8rem, 1.2vw, 0.9rem);
+  --font-size-base: 1rem;
+  --font-size-lg: clamp(1.1rem, 2vw, 1.35rem);
+  --font-size-xl: clamp(1.5rem, 3vw, 2.25rem);
+  --font-size-2xl: clamp(2.25rem, 5vw, 4rem);
+  --font-size-3xl: clamp(3rem, 8vw, 6rem);
+  --line-height-body: 1.75;
+  --line-height-tight: 1.2;
+  --letter-spacing-stamp: 0.18em;
+  --letter-spacing-wide: 0.12em;
+
+  /* Spacing — 4px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Z-index (modal above nav so lightbox is not covered) */
+  --z-base: 10;
+  --z-overlay: 100;
+  --z-nav: 300;
+  --z-modal: 400;
+}
+
+/* Light mode — monochrome */
+[data-theme="light"] {
+  --color-bg: #e8e8e8;
+  --color-surface: #ffffff;
+  --color-border: #c8c8c8;
+  --color-text: #1a1a1a;
+  --color-muted: #555555;
+  --color-accent: #404040;
+  --body-bg: radial-gradient(
+    ellipse 120% 80% at 50% 20%,
+    #f0f0f0 0%,
+    #e8e8e8 50%,
+    #e0e0e0 100%
+  );
+  --overlay-bg: rgba(0, 0, 0, 0.35);
+}

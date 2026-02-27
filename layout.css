@@ -1,0 +1,113 @@
+/**
+ * layout.css — page structure, sections, containment
+ */
+/* Phase 6b + 7: background from tokens so light theme applies */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--body-bg);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  text-transform: uppercase;
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: var(--space-12);
+}
+
+/* Section spacing — full display width with edge padding */
+.section {
+  padding: var(--space-12) clamp(var(--space-6), 5vw, var(--space-12));
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.section--marquees {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+.section--marquees:first-of-type {
+  padding-top: calc(var(--space-8) + 60px);
+}
+
+/* Phase 6c: section stacking for atmosphere overlays */
+#exhibitions,
+#about {
+  position: relative;
+}
+
+#exhibitions .section-heading,
+#exhibitions .exhibitions-section-content,
+#about .section-heading,
+#about .about-section-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Phase 6c: section atmosphere — subtle radial glows (no animation) */
+#exhibitions::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: none;
+}
+
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 40% 60%,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 60%
+  );
+}
+
+/* Phase 7: section titles = big, light, uppercase (structural) */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-8);
+  line-height: var(--line-height-tight);
+}
+
+/* Hero fills viewport — full width */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-8) clamp(var(--space-6), 5vw, var(--space-12));
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Scroll indicator container */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity var(--transition-base);
+}
+
+.hero__scroll.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}

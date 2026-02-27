@@ -1,85 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Atharva Gupta</title>
-  <meta name="description" content="About Atharva Gupta">
-  <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="About Atharva Gupta — artist and researcher" />
+  <title>About — Atharva Gupta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital@0;1&family=IBM+Plex+Mono:wght@100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./fonts.css" />
+  <link rel="stylesheet" href="./reset.css" />
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./layout.css" />
+  <link rel="stylesheet" href="./components.css" />
+  <link rel="stylesheet" href="./animations.css" />
 </head>
-  <body class="about-page">
-  <header>
+<body>
+  <header class="site-header" role="banner">
     <div class="header-inner">
-      <h1 class="site-title"><a href="index.html">Atharva Gupta</a></h1>
-      <nav id="main-nav">
-        <a href="index.html">Home</a>
-        <a href="installations.html">Installations</a>
-        <a href="exhibitions.html">Exhibitions</a>
-        <div class="nav-group">
-          <button class="nav-group-toggle" type="button">Media</button>
-          <div class="nav-dropdown">
-            <a href="asymmetrica-audio.html">Asymmetrica</a>
-            <a href="audiodevout.html">audiodevout</a>
-            <a href="performance.html">Performance</a>
-            <a href="visual-explorations.html">Visual Explorations</a>
-            <a href="archive.html">Archive</a>
-          </div>
-        </div>
-        <a href="about.html#about" class="active" aria-current="page">About</a>
-        <a href="about.html#cv">CV</a>
-      </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <a href="index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="about.html" class="nav-link">About</a>
+        </nav>
+        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <div class="about-content">
-        <div class="about-image-wrapper">
-          <img id="about-image" src="/placeholder.svg" alt="Atharva Gupta">
-        </div>
-        <div class="about-text">
-          <p id="about-description"></p>
-          <ul id="about-credentials"></ul>
-        </div>
-      </div>
+  <main class="main" role="main">
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="section-heading reveal">About</h2>
+      <div class="about-section-content" id="about-content"></div>
     </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p id="contact-description"></p>
-      <div id="social-links"></div>
-    </section>
-
-    <section id="cv">
-      <h2>CV</h2>
-      <p class="lead">Full academic and professional background, including work experience, education, and skills.</p>
-      <div>
-        <h3>Work Experience</h3>
-        <div id="work-experience"></div>
-      </div>
-      <div>
-        <h3>Education</h3>
-        <div id="education"></div>
-      </div>
-      <div>
-        <h3>Skills & Technologies</h3>
-        <div id="skills"></div>
-      </div>
+    <section id="cv" class="section" aria-labelledby="cv-heading">
+      <h2 id="cv-heading" class="section-heading reveal">CV</h2>
+      <div class="cv-section-content" id="cv-content"></div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Atharva Gupta. All rights reserved.</p>
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2025</p>
   </footer>
 
-  <script src="portfolioData.js" defer></script>
-  <script src="main.js" defer></script>
+  <script src="./portfolioData.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/render.js"></script>
+  <script src="./js/scroll-reveal.js"></script>
+  <script src="./js/router.js"></script>
+  <script src="./js/theme.js"></script>
 </body>
 </html>
-

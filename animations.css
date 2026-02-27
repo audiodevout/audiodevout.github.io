@@ -1,0 +1,60 @@
+/**
+ * animations.css — hero load, grain, scroll indicator
+ */
+
+/* Hero load: fade in whole section */
+.hero {
+  opacity: 0;
+  animation: hero-load 800ms ease forwards;
+}
+
+@keyframes hero-load {
+  to { opacity: 1; }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stagger delays for hero description words (set via JS or nth-child in Phase 1 we can use CSS only with a wrapper) */
+.hero__description .word:nth-child(1) { animation-delay: 200ms; }
+.hero__description .word:nth-child(2) { animation-delay: 280ms; }
+.hero__description .word:nth-child(3) { animation-delay: 360ms; }
+.hero__description .word:nth-child(4) { animation-delay: 440ms; }
+.hero__description .word:nth-child(5) { animation-delay: 520ms; }
+.hero__description .word:nth-child(6) { animation-delay: 600ms; }
+.hero__description .word:nth-child(7) { animation-delay: 680ms; }
+.hero__description .word:nth-child(8) { animation-delay: 760ms; }
+.hero__description .word:nth-child(9) { animation-delay: 840ms; }
+.hero__description .word:nth-child(10) { animation-delay: 920ms; }
+.hero__description .word:nth-child(n+11) { animation-delay: 1000ms; }
+
+/* ----- Scroll reveal (Phase 5) — IntersectionObserver adds .revealed ----- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal .work-card {
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.section-heading.reveal {
+  transform: translateY(24px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+
+.timeline__entry.reveal {
+  transform: translateX(-20px);
+}
+
+.timeline__entry.reveal.revealed {
+  transform: translateX(0);
+}

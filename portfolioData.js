@@ -414,13 +414,13 @@ try {
       installations: [
         {
           id: "rain-reminders",
-          title: "Rain Reminders",
+          title: "Rain Reminders • Instruments of Becoming",
           category: "KINETIC & SONIC SCULPTURE • NOISE • ARDUINO",
           color: "saffron",
           description:
-            "A 1.8-meter-tall kinetic sound sculpture with a slowly rotating 80 cm rain stick mounted on a raw wooden and steel armature.",
+            "A 1.8-meter-tall kinetic sound sculpture with a slowly rotating 80 cm rain stick mounted on a raw wooden and steel armature. Part of the Instruments of Becoming series.",
           fullDescription:
-            "Rain Reminders is a meditative kinetic installation that reimagines the rain stick as a durational, healing sound object. At its center, a handmade 80 cm rain stick made with a PVC pipe, screws and filled with a mixture of mung beans and black rice, is rotated on its horizontal axis by a stepper motor, releasing a steady cascade of trickles that generate an unamplified texture reminiscent of rainfall.\nThe sculpture is built from coarse, industrial elements—steel square tubing, a 6x4 wood beam, exposed screws, and visible wiring. A coir mat rests beneath the frame.\nThe work emerged as a personal response to tinnitus, where the steady presence of this customised noise becomes a form of relief. In this context, the installation functions as a sonic prosthesis: a quiet companion producing persistent acoustic weather. Its sound is soft but continuous, mechanically repeated yet deeply calming—a form of meditative noise that both masks and soothes.",
+            "Rain Reminders is an autonomous kinetic sound sculpture developed as one instrument within the series Instruments of Becoming, reimagining the rain stick as a durational, healing sound object. At its center, a handmade 80 cm rain stick made with a PVC pipe, screws and filled with a mixture of mung beans and black rice, is rotated on its horizontal axis by a stepper motor, releasing a steady cascade of trickles that generate an unamplified texture reminiscent of rainfall.\nThe sculpture is built from coarse, industrial elements—steel square tubing, a 6x4 wood beam, exposed screws, and visible wiring. A coir mat rests beneath the frame.\nThe work emerged as a personal response to tinnitus, where the steady presence of this customised noise becomes a form of relief. In this context, the installation functions as a sonic prosthesis: a quiet companion producing persistent acoustic weather. Its sound is soft but continuous, mechanically repeated yet deeply calming—a form of meditative noise that both masks and soothes.",
           dimensions: "1.8m (height)",
           medium:
             "Motorized kinetic sculpture, acoustic rain stick, PVC pipe, screws, wood, steel, mung beans, black rice, exposed electronics",
@@ -438,13 +438,13 @@ try {
         },
         {
           id: "spinny-sticks",
-          title: "Spinny Sticks",
+          title: "Spinny Sticks • Instruments of Becoming",
           category: "KINETIC DRAWING • SONIC OBJECTS • MOTOR SYSTEMS",
           color: "graphite",
           description:
-            "A suspended series of motor-driven drawing and tension instruments composed of rotating rod structures, pencils, and stretched threads.",
+            "A suspended series of motor-driven drawing and tension instruments composed of rotating rod structures, pencils, and stretched threads. A distinct work within the Instruments of Becoming series.",
           fullDescription:
-            "Spinny Sticks is a kinetic installation consisting of multiple hanging rotary structures built from thin metal rods, pencils, and tensioned threads. Each unit is driven by a low-speed motor that induces continuous rotation, storing and releasing mechanical stress through flexible connections and weighted elements.\nThe pencils operate as both drawing tools and structural members, marking surfaces over time while remaining under constant strain. Threads are stretched, twisted, and slowly fatigued by rotation, producing subtle creaks, frictional sounds, and irregular oscillations. The system never settles into equilibrium; minor variations in balance, material fatigue, and motor tolerance accumulate into divergent behaviors.\nThe work treats tension as an active condition rather than a problem to be resolved. Suspended between control and instability, the instruments operate as autonomous agents that rehearse persistence, stress, and repetition. The visual language evokes infant mobiles, improvised machines, and aerial devices, while the underlying logic remains closer to a nervous system than a clockwork mechanism.",
+            "Spinny Sticks is an autonomous kinetic installation developed as a separate instrument within the series Instruments of Becoming, consisting of multiple hanging rotary structures built from thin metal rods, pencils, and tensioned threads. Each unit is driven by a low-speed motor that induces continuous rotation, storing and releasing mechanical stress through flexible connections and weighted elements.\nThe pencils operate as both drawing tools and structural members, marking surfaces over time while remaining under constant strain. Threads are stretched, twisted, and slowly fatigued by rotation, producing subtle creaks, frictional sounds, and irregular oscillations. The system never settles into equilibrium; minor variations in balance, material fatigue, and motor tolerance accumulate into divergent behaviors.\nThe work treats tension as an active condition rather than a problem to be resolved. Suspended between control and instability, the instruments operate as autonomous agents that rehearse persistence, stress, and repetition. The visual language evokes infant mobiles, improvised machines, and aerial devices, while the underlying logic remains closer to a nervous system than a clockwork mechanism.",
           dimensions: "Variable installation, individual units approx. 40–80 cm diameter",
           medium:
             "Motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
@@ -458,6 +458,7 @@ try {
           ],
           videos: ["https://youtu.be/SWMkYxuWrNE"]
         },
+
 
         {
           id: "symmetrical-fictions",
@@ -572,6 +573,10 @@ try {
             "./assets/images/sprbxes.4.jpg",
             "./assets/images/sprbxes.5.jpg",
             "./assets/images/sprbxes.6.jpg",
+            "./assets/images/sprbxes.7.jpg",
+            "./assets/images/sprbxes.8.jpg",
+            "./assets/images/sprbxes.10.jpg",
+            "./assets/images/sprbxes.12.jpg"
           ],
         },
 
@@ -582,14 +587,17 @@ try {
           color: "saffron",
           images: [
             "./assets/images/riso mono export test - 1 -.0.jpg",
-            "./assets/images/riso mono export test - 1 -.31.jpg",
-            "./assets/images/riso mono export test - 1 -.62.jpg",
-            "./assets/images/riso mono export test - 1 -.70.jpg",
-            "./assets/images/riso mono export test - 1 -.75.jpg",
-            "./assets/images/riso mono export test - 1 -.82.jpg",
-            "./assets/images/riso mono export test - 1 -.94.jpg",
-            "./assets/images/riso mono export test - 1 -.99.jpg",
+            "./assets/images/riso mono export test - 1 -.1.jpg",
+            "./assets/images/riso mono export test - 1 -.2.jpg",
+            "./assets/images/riso mono export test - 1 -.3.jpg",
+            "./assets/images/riso mono export test - 1 -.4.jpg",
+            "./assets/images/riso mono export test - 1 -.5.jpg",
+            "./assets/images/riso mono export test - 1 -.6.jpg",
+            "./assets/images/riso mono export test - 1 -.7.jpg",
             "./assets/images/riso mono export test - 1 -.102.jpg",
+            "./assets/images/riso mono export test - 1 -.103.jpg",
+            "./assets/images/riso mono export test - 1 -.104.jpg",
+            "./assets/images/riso mono export test - 1 -.105.jpg"
           ],
         },
         {
@@ -598,20 +606,39 @@ try {
           category: "VISUAL EXPERIMENT",
           color: "saffron",
           images: [
+            "./assets/images/feedback worms.0.png",
+            "./assets/images/feedback worms.1.png",
             "./assets/images/feedback worms.2.png",
             "./assets/images/feedback worms.3.png",
+            "./assets/images/feedback worms.4.png",
+            "./assets/images/feedback worms.5.png",
+            "./assets/images/feedback worms.6.png",
             "./assets/images/feedback worms.7.png",
-            "./assets/images/feedback worms.14.png",
-            "./assets/images/feedback worms.22.png",
-            "./assets/images/feedback worms.29.png",
+            "./assets/images/feedback worms.8.png",
+            "./assets/images/feedback worms.9.png",
+           
+            
           ],
         },
         {
           id: "abstract-sculpture-series-01",
-          title: "Shades",
+          title: "Abstract Sculpture Series",
           category: "VISUAL EXPERIMENT",
           color: "saffron",
-          images: ["./assets/images/abstract_sculpture_series.1.jpg"],
+          images: [
+            "./assets/images/abstract_sculpture_series.0.jpg",
+            "./assets/images/abstract_sculpture_series.1.jpg",
+            "./assets/images/abstract_sculpture_series.2.jpg",
+            "./assets/images/abstract_sculpture_series.3.jpg",
+            "./assets/images/abstract_sculpture_series.4.jpg",
+            "./assets/images/abstract_sculpture_series.5.jpg",
+            "./assets/images/abstract_sculpture_series.6.jpg",
+            "./assets/images/abstract_sculpture_series.7.jpg",
+            "./assets/images/abstract_sculpture_series.8.jpg",
+            "./assets/images/abstract_sculpture_series.9.jpg",
+            "./assets/images/abstract_sculpture_series.10.jpg",
+            
+          ],
         },
         {
           id: "magical-wells-01",
@@ -632,6 +659,180 @@ try {
           category: "VISUAL EXPERIMENT",
           color: "saffron",
           images: ["./assets/images/morsecode_exports.12.jpg"],
+        },
+
+        
+        {
+          id: "asymmetrica-face-01",
+          title: "asymmetrica face",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/asymmetrica face.0.jpg",
+            "./assets/images/asymmetrica face.1.jpg",
+            "./assets/images/asymmetrica face.2.jpg",
+            "./assets/images/asymmetrica face.3.jpg",
+            "./assets/images/asymmetrica face.4.jpg",
+            "./assets/images/asymmetrica face.5.jpg",
+          ],
+        },
+        {
+          id: "flow-series-01",
+          title: "flow",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/flow.0.jpg",
+            "./assets/images/flow.1.jpg",
+            "./assets/images/flow.2.jpg",
+            "./assets/images/flow.3.jpg",
+          ],
+        },
+        {
+          id: "heat-divinity-01",
+          title: "heatdivinity",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/heatdivinitee.jpg",
+            "./assets/images/heatdivinity.jpg",
+            "./assets/images/heatdivinity2.jpg",
+          ],
+        },
+        {
+          id: "moire-play-01",
+          title: "moire play",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/moire play.0.jpg",
+            "./assets/images/moire play.1.jpg",
+            "./assets/images/moire play.2.jpg",
+            "./assets/images/moire play.3.jpg",
+          ],
+        },
+        {
+          id: "myceliumaudio-01",
+          title: "myceliumaudio",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/myceliumaudio.0.jpg",
+            "./assets/images/myceliumaudio.1.jpg",
+            "./assets/images/myceliumaudio.2.jpg",
+            "./assets/images/myceliumaudio.3.jpg",
+            "./assets/images/myceliumaudio.4.jpg",
+            "./assets/images/myceliumaudio.5.jpg",
+            "./assets/images/myceliumaudio.6.jpg",
+            "./assets/images/myceliumaudio.7.jpg",
+            "./assets/images/myceliumaudio.8.jpg",
+            "./assets/images/myceliumaudio.9.jpg",
+            "./assets/images/myceliumaudio.10.jpg",
+            "./assets/images/myceliumaudio.11.jpg",
+            "./assets/images/myceliumaudio.12.jpg",
+          ],
+        },
+        {
+          id: "noise-between-the-lines-01",
+          title: "noise between the lines",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/noise between the lines.0.jpg",
+            "./assets/images/noise between the lines.1.jpg",
+            "./assets/images/noise between the lines.2.jpg",
+            "./assets/images/noise between the lines.3.jpg",
+            "./assets/images/noise between the lines.4.jpg",
+            "./assets/images/noise between the lines.5.jpg",
+          ],
+        },
+        {
+          id: "noisepattern-01",
+          title: "noisepattern",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/noisepattern.0.jpg",
+            "./assets/images/noisepattern.1.jpg",
+            "./assets/images/noisepattern.2.jpg",
+            "./assets/images/noisepattern.3.jpg",
+            "./assets/images/noisepatternexp.0.jpg",
+            "./assets/images/noisepatternexp.1.jpg",
+            "./assets/images/noisepatternexp.2.jpg",
+            "./assets/images/noisepatternexp.3.jpg",
+            "./assets/images/noisepatternexp.4.jpg",
+            "./assets/images/noisepatternexp.5.jpg",
+            "./assets/images/noisepatternexp.6.jpg",
+            "./assets/images/noisepattexrnexp.5.jpg",
+          ],
+        },
+        {
+          id: "old-drawings-01",
+          title: "old drawings",
+          category: "VISUAL RESEARCH",
+          color: "saffron",
+          images: [
+            "./assets/images/old drawing (1).jpg",
+            "./assets/images/old drawing (2).jpg",
+            "./assets/images/old drawing (3).jpg",
+            "./assets/images/old drawing (4).jpg",
+            "./assets/images/old drawing (6).jpg",
+          ],
+        },
+        {
+          id: "oost-poster-a0-01",
+          title: "oostposterexport_physical_size_A0",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/oostposterexport_physical_size_A0.0.jpg",
+            "./assets/images/oostposterexport_physical_size_A0.1.jpg",
+            "./assets/images/oostposterexport_physical_size_A0.2.jpg",
+            "./assets/images/oostposterexport_physical_size_A0.3.jpg",
+            "./assets/images/oostposterexport_physical_size_A0.4.jpg",
+          ],
+        },
+        
+        {
+          id: "patreon-waves-01",
+          title: "wallpaper_waves",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/patreon_wallpaper_waves.0.jpg",
+            "./assets/images/patreon_wallpaper_waves.1.jpg",
+            "./assets/images/patreon_wallpaper_waves.2.jpg",
+            "./assets/images/patreon_wallpaper_waves.3.jpg",
+            "./assets/images/patreon_wallpaper_waves.4.jpg",
+            "./assets/images/patreon_wallpaper_waves.5.jpg",
+            "./assets/images/patreon_wallpaper_waves.6.jpg",
+          ],
+        },
+        {
+          id: "plotterframes-01",
+          title: "plotterframes",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/plotterframes.0.jpg",
+            "./assets/images/plotterframes.1.jpg",
+            "./assets/images/plotterframes.2.jpg",
+          ],
+        },
+        {
+          id: "structural-variations-01",
+          title: "structural variations",
+          category: "VISUAL EXPERIMENT",
+          color: "saffron",
+          images: [
+            "./assets/images/structural variations.0.jpg",
+            "./assets/images/structural variations.1.jpg",
+            "./assets/images/structural variations.2.jpg",
+            "./assets/images/structural variations.3.jpg",
+            "./assets/images/structural variations.4.jpg",
+            "./assets/images/structural variations.5.jpg",
+            "./assets/images/structural variations.6.jpg",
+          ],
         },
 
 
@@ -1102,11 +1303,62 @@ Across installations, performances, and theoretical projects, I follow questions
       home: {
         title: "Experimental Systems",
         subtitle: "by Atharva Gupta",
-        description:
-          "Exploring the intersection of technology, sound, and space through installation, performance, and research.",
       },
     },
   }
+
+  // Derive a unified works array for normalized access
+  const works = []
+
+  const pushProjects = (items, type, status) => {
+    if (!Array.isArray(items)) return
+    items.forEach((item) => {
+      if (!item || !item.id) return
+      works.push({
+        id: item.id,
+        title: item.title,
+        type,
+        status: status || null,
+        medium: item.medium || null,
+        dimensions: item.dimensions || null,
+        descriptionShort: item.description || null,
+        descriptionLong: item.fullDescription || item.description || null,
+        images: Array.isArray(item.images) ? item.images : [],
+        videos: Array.isArray(item.videos) ? item.videos : [],
+        bandcampTracks: Array.isArray(item.bandcampTracks) ? item.bandcampTracks : [],
+        tags: item.tags || null,
+        themes: item.themes || null,
+        urls: item.urls || null,
+        featured: Boolean(item.featured),
+        showInMainGallery: item.showInGallery !== false,
+        mainGalleryLimit:
+          typeof item.num_images_maingallery === "number" && item.num_images_maingallery > 0
+            ? item.num_images_maingallery
+            : null,
+      })
+    })
+  }
+
+  // Map legacy project groups into unified works
+  pushProjects(portfolioData.projects.installations, "installation", "major")
+  pushProjects(portfolioData.projects.performance, "performance", "major")
+  pushProjects(portfolioData.projects.soundInstallations, "sound", "major")
+  pushProjects(portfolioData.projects.drawings, "visual", "experiment")
+  pushProjects(portfolioData.projects.writing, "text", "major")
+
+  portfolioData.works = works
+
+  // Normalize exhibitions with derived year/month where possible
+  portfolioData.exhibitions = portfolioData.exhibitions.map((ex) => {
+    const normalized = { ...ex }
+    if (ex.date && typeof ex.date === "string") {
+      const yearMatch = ex.date.match(/(20\d{2})/)
+      normalized.year = yearMatch ? parseInt(yearMatch[1], 10) : null
+    } else {
+      normalized.year = null
+    }
+    return normalized
+  })
 
   // Make data available globally with error handling
   if (typeof window !== "undefined") {
