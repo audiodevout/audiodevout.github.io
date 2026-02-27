@@ -212,6 +212,82 @@
     if (writingItems.length > 0) addLabeledMarquee(container, 'Archive', writingItems, openLightbox);
   }
 
+  /* ---------- Home list view (minimal rows) ---------- */
+
+  function createListItem(item, openLightbox) {
+    if (!item) return null;
+
+    var article = document.createElement('article');
+    article.className = 'work-list__item';
+    article.setAttribute('role', 'button');
+    article.setAttribute('tabindex', '0');
+    article.dataset.id = item.id || '';
+
+    var title = document.createElement('h3');
+    title.className = 'work-list__title';
+    title.textContent = item.title || '';
+    article.appendChild(title);
+
+    function handleActivate(e) {
+      if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+      if (e) e.preventDefault();
+      if (typeof openLightbox === 'function') {
+        var lbItem = toLightboxItem(item);
+        if (lbItem) openLightbox(lbItem);
+      }
+    }
+
+    article.addEventListener('click', handleActivate);
+    article.addEventListener('keydown', handleActivate);
+
+    return article;
+  }
+
+  function addListGroup(listRoot, heading, items, openLightbox) {
+    if (!listRoot || !items || items.length === 0) return;
+    var group = document.createElement('section');
+    group.className = 'work-list__group';
+
+    var h = document.createElement('h2');
+    h.className = 'work-list__group-label';
+    h.textContent = heading;
+    group.appendChild(h);
+
+    items.forEach(function (item) {
+      var row = createListItem(item, openLightbox);
+      if (row) group.appendChild(row);
+    });
+
+    listRoot.appendChild(group);
+  }
+
+  function renderListSection() {
+    var container = document.getElementById('list-content');
+    if (!container) return;
+
+    var openLightbox = window.openLightbox;
+    if (typeof openLightbox !== 'function') openLightbox = null;
+
+    container.innerHTML = '';
+
+    var listRoot = document.createElement('div');
+    listRoot.className = 'work-list';
+
+    var installations = dedupeById(data.projects.installations || []);
+    var performance = dedupeById(data.projects.performance || []);
+    var drawings = dedupeById(data.projects.drawings || []);
+
+    addListGroup(listRoot, 'Installations', installations, openLightbox);
+    addListGroup(listRoot, 'Performance', performance, openLightbox);
+
+    var visualGroups = groupByCategory(drawings);
+    Object.keys(visualGroups).forEach(function (cat) {
+      addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
+    });
+
+    container.appendChild(listRoot);
+  }
+
   /* ---------- Sound section (Phase 3) ---------- */
   /* Bandcamp embed: track=ID, size=small (strip) or size=large (with artwork). Strip is 350×42. */
   var BANDCAMP_EMBED_ROOT = 'https://bandcamp.com/EmbeddedPlayer/track=';
@@ -671,11 +747,65 @@
     scheduleUpdate();
   }
 
+  /* ---------- Home view toggle (marquee vs list) ---------- */
+
+  function initHomeViewToggle() {
+    var toggleRoot = document.querySelector('.home-view-toggle');
+    if (!toggleRoot) return;
+
+    var marqueeEl = document.getElementById('marquees-content');
+    var listEl = document.getElementById('list-content');
+    var buttons = toggleRoot.querySelectorAll('.view-toggle-button');
+
+    if (!marqueeEl || !listEl || !buttons.length) return;
+
+    var currentView = 'marquee';
+    try {
+      var stored = sessionStorage.getItem('homeView');
+      if (stored === 'list' || stored === 'marquee') currentView = stored;
+    } catch (e) { /* ignore */ }
+
+    function applyView(view) {
+      currentView = view === 'list' ? 'list' : 'marquee';
+
+      marqueeEl.hidden = currentView !== 'marquee';
+      listEl.hidden = currentView !== 'list';
+
+      buttons.forEach(function (btn) {
+        var viewName = btn.getAttribute('data-view');
+        var isActive = viewName === currentView;
+        btn.classList.toggle('view-toggle-button--active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      try {
+        sessionStorage.setItem('homeView', currentView);
+      } catch (e) { /* ignore */ }
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var viewName = btn.getAttribute('data-view');
+        applyView(viewName);
+      });
+      btn.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        var viewName = btn.getAttribute('data-view');
+        applyView(viewName);
+      });
+    });
+
+    applyView(currentView);
+  }
+
   function init() {
     renderMarqueesSection();
+    renderListSection();
     renderExhibitionsSection();
     renderAboutSection();
     renderCVSection();
+    initHomeViewToggle();
     initMarqueeCursorSpeed();
   }
 

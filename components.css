@@ -1100,6 +1100,107 @@
   opacity: 0.6;
 }
 
+.home-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.view-toggle-button {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-stamp);
+  padding: var(--space-2) var(--space-5);
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.view-toggle-button--active {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.view-toggle-button:focus-visible {
+  outline: 2px solid var(--color-accent-lime);
+  outline-offset: 2px;
+}
+
+.view-toggle-button:not(.view-toggle-button--active):hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.section--list {
+  padding-top: var(--space-6);
+}
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.work-list__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.work-list__group-label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-stamp);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.work-list__item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-1) 0;
+  cursor: pointer;
+  transition: color var(--transition-fast), transform var(--transition-base);
+}
+
+.work-list__item:hover {
+  transform: translateY(-1px);
+}
+
+.work-list__item:focus-visible {
+  outline: 2px solid var(--color-accent-lime);
+  outline-offset: 2px;
+}
+
+.work-list__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-stamp);
+  margin: 0;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+ .work-list__item:hover .work-list__title {
+   color: var(--color-accent-lime);
+ }
+
 /* ----- Exhibitions timeline ----- */
 
 /* Phase 14a: year anchors */

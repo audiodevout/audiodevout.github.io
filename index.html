@@ -28,13 +28,34 @@
           <a href="exhibitions.html" class="nav-link">Exhibitions</a>
           <a href="about.html" class="nav-link">About</a>
         </nav>
+        <div class="home-view-toggle" role="group" aria-label="Home view mode">
+          <button
+            type="button"
+            class="view-toggle-button view-toggle-button--active"
+            data-view="marquee"
+            aria-label="Marquee view"
+            aria-pressed="true"
+          >
+            <span aria-hidden="true">⟲</span>
+          </button>
+          <button
+            type="button"
+            class="view-toggle-button"
+            data-view="list"
+            aria-label="List view"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">≡</span>
+          </button>
+        </div>
         <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
       </div>
     </div>
   </header>
 
   <main class="main" id="main" role="main">
-    <div class="marquees-container section section--marquees" id="marquees-content"></div>
+    <section class="marquees-container section section--marquees" id="marquees-content"></section>
+    <section class="section section--list" id="list-content" hidden></section>
   </main>
 
   <script src="./portfolioData.js"></script>
