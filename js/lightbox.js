@@ -11,6 +11,7 @@
   var esc = utils.esc || function (s) { return (s == null || s === '') ? '' : String(s); };
 
   var panel, mediaEl, titleEl, categoryEl, bodyEl, currentItem, currentIndex, mediaItems;
+  var transitionPhase = 'idle';
 
   var BANDCAMP_EMBED = 'https://bandcamp.com/EmbeddedPlayer/track=';
   var BANDCAMP_OPTS = '/size=large/bgcol=111111/linkcol=b8f400/tracklist=false/artwork=large/transparent=false/';
@@ -155,14 +156,45 @@
 
   function prevMedia() {
     if (!mediaItems || mediaItems.length <= 1) return;
-    currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
-    setMediaContent(mediaItems[currentIndex]);
+    var targetIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+    transitionToIndex(targetIndex);
   }
 
   function nextMedia() {
     if (!mediaItems || mediaItems.length <= 1) return;
-    currentIndex = (currentIndex + 1) % mediaItems.length;
-    setMediaContent(mediaItems[currentIndex]);
+    var targetIndex = (currentIndex + 1) % mediaItems.length;
+    transitionToIndex(targetIndex);
+  }
+
+  function transitionToIndex(targetIndex) {
+    if (!mediaItems || mediaItems.length === 0) return;
+    if (transitionPhase !== 'idle') return;
+
+    if (!mediaEl) {
+      currentIndex = targetIndex;
+      setMediaContent(mediaItems[currentIndex]);
+      return;
+    }
+
+    transitionPhase = 'fading-out';
+    mediaEl.classList.add('is-faded');
+
+    function handleTransition(e) {
+      if (e.target !== mediaEl || e.propertyName !== 'opacity') return;
+      if (transitionPhase === 'fading-out') {
+        currentIndex = targetIndex;
+        setMediaContent(mediaItems[currentIndex]);
+        transitionPhase = 'fading-in';
+        // force reflow so the browser applies new content at opacity 0
+        void mediaEl.offsetWidth;
+        mediaEl.classList.remove('is-faded');
+      } else if (transitionPhase === 'fading-in') {
+        mediaEl.removeEventListener('transitionend', handleTransition);
+        transitionPhase = 'idle';
+      }
+    }
+
+    mediaEl.addEventListener('transitionend', handleTransition);
   }
 
   function open(item) {
@@ -181,6 +213,7 @@
     categoryEl.textContent = item.category || '';
 
     if (mediaItems.length > 0) {
+      // Initial render: no fade animation
       setMediaContent(mediaItems[0]);
       showCarouselNav();
     } else {

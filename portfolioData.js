@@ -1158,9 +1158,17 @@ try {
     contact: {
   about: {
     title: "ABOUT ME",
-    description: `I am an artist and researcher working with sound, technology, and spatial practice. My work moves between kinetic sculpture, audiovisual performance, generative systems, and research-led writing. Computational processes function as both material and method, and I approach sound and code as substances that can shape contemplative or quietly surreal situations. Noise, entropy, and asymmetry guide much of this work, forming a basis for rethinking how we listen to and perceive digital systems.
+    description: `My practice is rooted in a persistent curiosity about how systems - technological, cultural, economic - condition our behaviour and attention. Working across sound, installation, generative code, audiovisual performance, and research, I build situations to make that conditioning become visible.
 
-Across installations, performances, and theoretical projects, I follow questions about the thresholds between organic and synthetic behaviour, analytical and intuitive modes of making, and individual and collective experience. Themes of ritual, memory, and repair recur in different forms, whether in translating environmental data into evolving sound structures, building embodied tools for performance, or constructing speculative environments. My practice is grounded in experimental sound, creative coding, and critical inquiry, and I use these frameworks to examine contemporary technological narratives while opening spaces for reflection, presence, and subtle forms of engagement with technical systems.`,
+Much of my work begins with a question about translation: what happens when one kind of data or signal becomes another? Environmental forces rendered as sound. Geometry destabilised into noise. Bodies mapped into live visuals. Satellite imagery folded into speculative geographies. In each case, I am less interested in seamless conversion and more interested in the friction and strangeness that translation produces; the moments where a system behaves unexpectedly, where the gap between input and output opens into something worth attending to.
+
+I work with instability as a primary material. They are the condition the work lives in. I am drawn to systems that are always in the middle of something: processing, fatiguing, accumulating, drifting towards and away from equilibrium. The result is work that demands duration rather than a glance.
+
+Sound design, creative code, custom electronics, motor systems, hand-built objects - each medium carries its own logic, and part of my practice is understanding what a tool wants to do, then pressing against it. I move between software and fabrication, between the screen and the physical. The questions I am asking require both registers. Digital systems can model behaviour but cannot be felt in the body. Physical objects carry weight, friction, and fatigue that no screen can replicate.
+
+My practice is also shaped by a deep interest in attention itself - how it is captured, fragmented, redirected, transformed, and reclaimed. Modern technology is extraordinarily good at pulling attention into abstraction, into screens, and into passive consumption. The work I make moves in the opposite direction: toward presence, duration, and embodied experience. I require you to be somewhere, change depending on where you stand, and go through the experience of sustained looking and listening.
+
+Across music production, generative visuals, live performance, and installation, these concerns remain consistent: how do systems shape perception, and what does it feel like to be inside one?`,
     credentials: [],
     image: "./assets/images/atharva.jpeg",
   },
@@ -1205,7 +1213,7 @@ Across installations, performances, and theoretical projects, I follow questions
         workExperience: [
           {
             title: "Workshop Assistant - Electronics and Programming",
-            company: "Hanze",
+            company: "Minerva Academy (Hanze University of Applied Sciences)",
             location: "Groningen, NL",
             period: "Oct 2025 - Present",
             responsibilities: [

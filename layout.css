@@ -10,7 +10,6 @@ body {
   background: var(--body-bg);
   background-attachment: fixed;
   overflow-x: hidden;
-  text-transform: uppercase;
 }
 
 .main {

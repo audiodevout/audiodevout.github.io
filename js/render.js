@@ -276,6 +276,7 @@
     var installations = dedupeById(data.projects.installations || []);
     var performance = dedupeById(data.projects.performance || []);
     var drawings = dedupeById(data.projects.drawings || []);
+    var soundItems = dedupeById(data.projects.soundInstallations || []);
 
     addListGroup(listRoot, 'Installations', installations, openLightbox);
     addListGroup(listRoot, 'Performance', performance, openLightbox);
@@ -284,6 +285,10 @@
     Object.keys(visualGroups).forEach(function (cat) {
       addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
     });
+
+    if (soundItems.length) {
+      addListGroup(listRoot, 'Sound', soundItems, openLightbox);
+    }
 
     container.appendChild(listRoot);
   }
