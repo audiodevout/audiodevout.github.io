@@ -664,11 +664,11 @@
       return;
     }
 
-    var DURATION_MIN = 50;
-    var DURATION_MAX = 160;
-    var DISTANCE_MAX = 500;
-    var LERP_FACTOR = 0.09;
-    var SNAP_THRESHOLD = 0.4;
+    var DURATION_MIN = 90;   // fastest (cursor very close)
+    var DURATION_MAX = 180;  // slowest (cursor far away / off-screen)
+    var DISTANCE_MAX = 800;  // pixels before clamping to slowest
+    var LERP_FACTOR = 0.05;  // smoothing factor per frame
+    var SNAP_THRESHOLD = 0.25;
     var CURSOR_LEFT_SENTINEL = -1e5;
 
     var raf = null;

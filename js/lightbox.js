@@ -11,7 +11,8 @@
   var esc = utils.esc || function (s) { return (s == null || s === '') ? '' : String(s); };
 
   var panel, mediaEl, titleEl, categoryEl, bodyEl, currentItem, currentIndex, mediaItems;
-  var transitionPhase = 'idle';
+  var currentSlide = null;
+  var isSliding = false;
 
   var BANDCAMP_EMBED = 'https://bandcamp.com/EmbeddedPlayer/track=';
   var BANDCAMP_OPTS = '/size=large/bgcol=111111/linkcol=b8f400/tracklist=false/artwork=large/transparent=false/';
@@ -95,13 +96,15 @@
     if (e.key === 'ArrowRight') nextMedia();
   }
 
-  function setMediaContent(item) {
-    mediaEl.innerHTML = '';
+  function buildSlideForMedia(item) {
+    var slide = document.createElement('div');
+    slide.className = 'lightbox__slide';
+
     if (item.type === 'image') {
       var img = document.createElement('img');
       img.src = item.src;
       img.alt = currentItem ? currentItem.title : '';
-      mediaEl.appendChild(img);
+      slide.appendChild(img);
     } else if (item.type === 'youtube') {
       var iframe = document.createElement('iframe');
       iframe.src = item.url;
@@ -111,7 +114,7 @@
       iframe.allowFullscreen = true;
       iframe.width = '800';
       iframe.height = '450';
-      mediaEl.appendChild(iframe);
+      slide.appendChild(iframe);
     } else if (item.type === 'bandcamp') {
       var iframe = document.createElement('iframe');
       iframe.src = BANDCAMP_EMBED + item.trackId + BANDCAMP_OPTS;
@@ -122,15 +125,17 @@
       iframe.style.height = '472px';
       iframe.width = '350';
       iframe.height = '472';
-      mediaEl.appendChild(iframe);
+      slide.appendChild(iframe);
     } else if (item.type === 'video') {
       var video = document.createElement('video');
       video.src = item.src;
       video.controls = true;
       video.loop = true;
       video.playsInline = true;
-      mediaEl.appendChild(video);
+      slide.appendChild(video);
     }
+
+    return slide;
   }
 
   function showCarouselNav() {
@@ -157,44 +162,63 @@
   function prevMedia() {
     if (!mediaItems || mediaItems.length <= 1) return;
     var targetIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
-    transitionToIndex(targetIndex);
+    transitionToIndex(targetIndex, 'prev');
   }
 
   function nextMedia() {
     if (!mediaItems || mediaItems.length <= 1) return;
     var targetIndex = (currentIndex + 1) % mediaItems.length;
-    transitionToIndex(targetIndex);
+    transitionToIndex(targetIndex, 'next');
   }
 
-  function transitionToIndex(targetIndex) {
+  function transitionToIndex(targetIndex, direction) {
     if (!mediaItems || mediaItems.length === 0) return;
-    if (transitionPhase !== 'idle') return;
+    if (isSliding) return;
 
     if (!mediaEl) {
       currentIndex = targetIndex;
-      setMediaContent(mediaItems[currentIndex]);
+      currentSlide = buildSlideForMedia(mediaItems[currentIndex]);
+      currentSlide.classList.add('lightbox__slide--center');
+      mediaEl.appendChild(currentSlide);
       return;
     }
 
-    transitionPhase = 'fading-out';
-    mediaEl.classList.add('is-faded');
+    isSliding = true;
+    var dir = direction === 'prev' ? 'prev' : 'next';
+    var nextItem = mediaItems[targetIndex];
+    var incoming = buildSlideForMedia(nextItem);
 
-    function handleTransition(e) {
-      if (e.target !== mediaEl || e.propertyName !== 'opacity') return;
-      if (transitionPhase === 'fading-out') {
-        currentIndex = targetIndex;
-        setMediaContent(mediaItems[currentIndex]);
-        transitionPhase = 'fading-in';
-        // force reflow so the browser applies new content at opacity 0
-        void mediaEl.offsetWidth;
-        mediaEl.classList.remove('is-faded');
-      } else if (transitionPhase === 'fading-in') {
-        mediaEl.removeEventListener('transitionend', handleTransition);
-        transitionPhase = 'idle';
+    incoming.classList.add(
+      dir === 'next' ? 'lightbox__slide--from-right' : 'lightbox__slide--from-left'
+    );
+    mediaEl.appendChild(incoming);
+
+    // Force layout so starting transform applies
+    void incoming.offsetWidth;
+
+    if (currentSlide) {
+      currentSlide.classList.remove('lightbox__slide--center');
+      currentSlide.classList.add(
+        dir === 'next' ? 'lightbox__slide--to-left' : 'lightbox__slide--to-right'
+      );
+    }
+    incoming.classList.remove(
+      dir === 'next' ? 'lightbox__slide--from-right' : 'lightbox__slide--from-left'
+    );
+    incoming.classList.add('lightbox__slide--center');
+
+    function onDone(e) {
+      if (e.target !== incoming) return;
+      incoming.removeEventListener('transitionend', onDone);
+      if (currentSlide && currentSlide !== incoming && currentSlide.parentNode === mediaEl) {
+        mediaEl.removeChild(currentSlide);
       }
+      currentSlide = incoming;
+      currentIndex = targetIndex;
+      isSliding = false;
     }
 
-    mediaEl.addEventListener('transitionend', handleTransition);
+    incoming.addEventListener('transitionend', onDone);
   }
 
   function open(item) {
@@ -213,8 +237,10 @@
     categoryEl.textContent = item.category || '';
 
     if (mediaItems.length > 0) {
-      // Initial render: no fade animation
-      setMediaContent(mediaItems[0]);
+      mediaEl.innerHTML = '';
+      currentSlide = buildSlideForMedia(mediaItems[0]);
+      currentSlide.classList.add('lightbox__slide--center');
+      mediaEl.appendChild(currentSlide);
       showCarouselNav();
     } else {
       mediaEl.innerHTML = '';

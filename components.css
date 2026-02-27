@@ -163,12 +163,24 @@
 }
 
 @media (max-width: 767px) {
-  .main-nav { gap: var(--space-4); }
-  .main-nav .nav-link { font-size: var(--font-size-sm); }
+  .main-nav {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .main-nav .nav-link {
+    font-size: var(--font-size-sm);
+  }
 }
 
 @media (min-width: 768px) {
-  .nav-overlay { display: none !important; }
+  .nav-overlay {
+    display: none !important;
+  }
+  .nav-toggle {
+    display: none;
+  }
 }
 
 /* ----- Hero — big, light, lowercase ----- */
@@ -573,8 +585,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  transition: opacity 220ms ease;
 }
 
 .lightbox__media img {
@@ -604,8 +614,34 @@
   border: 0;
 }
 
-.lightbox__media.is-faded {
-  opacity: 0;
+/* Sliding slides inside lightbox media */
+.lightbox__slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 260ms ease;
+}
+
+.lightbox__slide--center {
+  transform: translateX(0);
+}
+
+.lightbox__slide--from-right {
+  transform: translateX(100%);
+}
+
+.lightbox__slide--from-left {
+  transform: translateX(-100%);
+}
+
+.lightbox__slide--to-left {
+  transform: translateX(-100%);
+}
+
+.lightbox__slide--to-right {
+  transform: translateX(100%);
 }
 
 .lightbox__carousel-nav {
