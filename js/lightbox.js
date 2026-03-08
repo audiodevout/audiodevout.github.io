@@ -119,10 +119,8 @@
       var iframe = document.createElement('iframe');
       iframe.src = BANDCAMP_EMBED + item.trackId + BANDCAMP_OPTS;
       iframe.title = item.title || 'Bandcamp track';
+      iframe.className = 'lightbox__iframe--bandcamp';
       iframe.style.border = '0';
-      iframe.style.width = '100%';
-      iframe.style.minWidth = '300px';
-      iframe.style.height = '472px';
       iframe.width = '350';
       iframe.height = '472';
       slide.appendChild(iframe);
@@ -189,7 +187,7 @@
     var incoming = buildSlideForMedia(nextItem);
 
     incoming.classList.add(
-      dir === 'next' ? 'lightbox__slide--from-right' : 'lightbox__slide--from-left'
+      dir === 'next' ? 'lightbox__slide--enter-right' : 'lightbox__slide--enter-left'
     );
     mediaEl.appendChild(incoming);
 
@@ -199,11 +197,11 @@
     if (currentSlide) {
       currentSlide.classList.remove('lightbox__slide--center');
       currentSlide.classList.add(
-        dir === 'next' ? 'lightbox__slide--to-left' : 'lightbox__slide--to-right'
+        dir === 'next' ? 'lightbox__slide--exit-left' : 'lightbox__slide--exit-right'
       );
     }
     incoming.classList.remove(
-      dir === 'next' ? 'lightbox__slide--from-right' : 'lightbox__slide--from-left'
+      dir === 'next' ? 'lightbox__slide--enter-right' : 'lightbox__slide--enter-left'
     );
     incoming.classList.add('lightbox__slide--center');
 

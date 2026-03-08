@@ -13,6 +13,7 @@
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-4) var(--space-6);
   transition: background var(--transition-base);
+  zoom: 0.75;
 }
 
 .header-inner {
@@ -49,16 +50,6 @@
   color: var(--color-accent-lime);
 }
 
-.site-brand::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 1px;
-  background: var(--color-accent-lime);
-  transition: width var(--transition-base);
-}
 
 .site-brand.is-active::after {
   width: 100%;
@@ -345,13 +336,19 @@
   background: var(--color-border);
   overflow: hidden;
   aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .work-card__media img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 400ms var(--transition-base);
 }
 
@@ -502,14 +499,27 @@
   width: 100%;
   max-width: min(980px, 96vw);
   max-height: 92vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden auto;
   background: var(--color-surface);
   border-radius: 2px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
   transform: scale(0.98);
   transition: transform 0.25s ease;
-  -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--color-border) var(--color-surface);
+  scrollbar-width: thin;
+}
+.lightbox__panel::-webkit-scrollbar {
+  width: 8px;
+}
+.lightbox__panel::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+.lightbox__panel::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+.lightbox__panel::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
 }
 
 .lightbox.is-open .lightbox__panel {
@@ -577,47 +587,68 @@
 }
 
 .lightbox__media {
+  --lightbox-media-max-h: 75vh;
   position: relative;
-  background: #0a0a0a;
-  min-height: 200px;
-  max-height: 72vh;
+  background: var(--color-lightbox-bg);
+  display: grid;
+  grid-template: 1fr / 1fr;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-height: var(--lightbox-media-max-h);
+}
+
+/* Bandcamp needs full 472px height — allow media to expand, panel scrolls */
+.lightbox__media:has(.lightbox__iframe--bandcamp) {
+  max-height: none;
+  min-height: 472px;
 }
 
 .lightbox__media img {
   max-width: 100%;
-  max-height: 72vh;
+  max-height: var(--lightbox-media-max-h);
   width: auto;
   height: auto;
   object-fit: contain;
+  object-position: center;
   display: block;
-  vertical-align: middle;
 }
 
 .lightbox__media video {
   max-width: 100%;
-  max-height: 72vh;
+  max-height: var(--lightbox-media-max-h);
   width: auto;
   height: auto;
   display: block;
 }
 
-.lightbox__media iframe {
+/* YouTube embeds: 16:9 aspect ratio */
+.lightbox__media iframe:not(.lightbox__iframe--bandcamp) {
   width: 100%;
-  max-height: 72vh;
-  min-height: 320px;
+  height: auto;
+  max-height: var(--lightbox-media-max-h);
   aspect-ratio: 16/9;
   display: block;
   border: 0;
 }
 
-/* Sliding slides inside lightbox media */
+/* Bandcamp embeds: official 350×472px (size=large), centered, controls visible.
+   Fixed dimensions required — Bandcamp player does not scale; panel scrolls if needed. */
+.lightbox__media iframe.lightbox__iframe--bandcamp {
+  width: 350px;
+  min-width: 350px;
+  height: 472px;
+  display: block;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sliding slides inside lightbox media. Grid places all slides in same cell so they overlap;
+   the cell sizes to the media content, so lightbox height is determined by the image/video.
+   --from-left and --to-left share the same transform (off-screen left); same for right.
+   Renamed to enter/exit for clarity: enter = coming into view, exit = leaving. */
 .lightbox__slide {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -628,19 +659,19 @@
   transform: translateX(0);
 }
 
-.lightbox__slide--from-right {
+.lightbox__slide--enter-right {
   transform: translateX(100%);
 }
 
-.lightbox__slide--from-left {
+.lightbox__slide--enter-left {
   transform: translateX(-100%);
 }
 
-.lightbox__slide--to-left {
+.lightbox__slide--exit-left {
   transform: translateX(-100%);
 }
 
-.lightbox__slide--to-right {
+.lightbox__slide--exit-right {
   transform: translateX(100%);
 }
 
@@ -652,7 +683,7 @@
   height: 48px;
   border: 0;
   background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--color-on-dark);
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
@@ -669,7 +700,7 @@
 }
 
 .lightbox__carousel-nav:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid var(--color-on-dark);
   outline-offset: 2px;
 }
 
@@ -677,8 +708,11 @@
 .lightbox__carousel-nav--next { right: var(--space-4); }
 
 .lightbox__body {
+  width: 100%;
+  max-width: min(85ch, 100%);
+  margin: 0 auto;
   padding: var(--space-6) var(--space-8) var(--space-8);
-  max-width: 65ch;
+  box-sizing: border-box;
 }
 
 .lightbox__description {
@@ -713,6 +747,7 @@
   font-weight: 400;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border);
+  border-radius: 2px;
   color: var(--color-text);
   text-decoration: none;
   text-transform: uppercase;
@@ -782,10 +817,6 @@
   margin-bottom: var(--space-8);
 }
 
-.marquee-track:hover .marquee-content {
-  animation-play-state: paused;
-}
-
 .marquee-content {
   display: flex;
   white-space: nowrap;
@@ -793,7 +824,7 @@
   font-size: clamp(1rem, 2vw, 1.35rem);
   letter-spacing: 0.15em;
   color: var(--color-muted);
-  animation: marquee-scroll 140s linear infinite;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
 }
 
 @keyframes marquee-scroll {
@@ -816,16 +847,12 @@
   flex-wrap: nowrap;
   align-items: center;
   width: max-content;
-  animation: marquee-scroll-third var(--marquee-duration, 160s) linear infinite;
-}
-
-.marquee-track--clickable:hover .marquee-content--clickable {
-  animation-play-state: paused;
+  animation: marquee-scroll-third var(--marquee-duration) linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-content--clickable {
-    animation-duration: 160s;
+    animation-duration: var(--marquee-duration);
   }
 }
 
@@ -877,16 +904,12 @@
   margin-bottom: var(--space-8);
 }
 
-.embeds-marquee:hover .embeds-marquee__inner {
-  animation-play-state: paused;
-}
-
 .embeds-marquee__inner {
   display: flex;
   flex-wrap: nowrap;
   gap: var(--space-6);
   width: max-content;
-  animation: marquee-scroll 220s linear infinite;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
   padding: var(--space-4) 0;
 }
 
@@ -1093,7 +1116,7 @@
   font-family: 'Space Mono', monospace;
   font-size: 0.55rem;
   letter-spacing: 0.25em;
-  animation: marquee-scroll 80s linear infinite;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
 }
 
 .theme-strip--reverse .theme-strip-inner {
@@ -1329,18 +1352,6 @@
   margin-bottom: var(--space-2);
 }
 
-.timeline__role {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: var(--space-1) var(--space-2);
-  border-radius: 2px;
-  margin-right: var(--space-2);
-}
-
 .timeline__description {
   font-size: var(--font-size-base);
   line-height: var(--line-height-body);
@@ -1354,13 +1365,27 @@
   flex-wrap: wrap;
 }
 
-.timeline__thumb {
+.timeline__thumb-wrap {
   width: 320px;
   height: 260px;
-  object-fit: cover;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
   border-radius: 4px;
+  border: 1px solid #000;
+}
+
+.timeline__thumb {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   cursor: pointer;
-  border: 1px solid var(--color-border);
 }
 
 .timeline__links {
@@ -1557,12 +1582,19 @@
   z-index: 0;
 }
 
+.about-image-wrap {
+  max-height: min(400px, 50vh);
+}
+
 .about-image-wrap img {
   position: relative;
   z-index: 1;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: min(400px, 50vh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   border-radius: 8px;
   display: block;
 }

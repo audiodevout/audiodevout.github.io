@@ -19,14 +19,11 @@
   --color-accent-saffron: var(--color-accent);
   --color-accent-magenta: var(--color-accent);
   --color-accent-graphite: var(--color-accent);
+  --color-lightbox-bg: #0a0a0a;
+  --color-on-dark: #fff;
 
-  /* Body background — greyscale gradient */
-  --body-bg: radial-gradient(
-    ellipse 120% 80% at 50% 20%,
-    #1a1a1a 0%,
-    #0c0c0c 55%,
-    #080808 100%
-  );
+  /* Body background — plain black */
+  --body-bg: #000000;
   --overlay-bg: rgba(0, 0, 0, 0.88);
 
   /* Typography — Neue Haas Grotesk: big, light, lowercase */
@@ -55,6 +52,9 @@
   --space-10: 40px;
   --space-12: 48px;
 
+  /* Marquee — unified speed for all marquees */
+  --marquee-duration: 160s;
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -65,6 +65,11 @@
   --z-overlay: 100;
   --z-nav: 300;
   --z-modal: 400;
+
+  /* Scrollbar — monochrome, minimal */
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb: #2a2a2a;
+  --scrollbar-thumb-hover: #888888;
 }
 
 /* Light mode — monochrome */
@@ -75,11 +80,9 @@
   --color-text: #1a1a1a;
   --color-muted: #555555;
   --color-accent: #404040;
-  --body-bg: radial-gradient(
-    ellipse 120% 80% at 50% 20%,
-    #f0f0f0 0%,
-    #e8e8e8 50%,
-    #e0e0e0 100%
-  );
+  --body-bg: #e8e8e8;
   --overlay-bg: rgba(0, 0, 0, 0.35);
+  --scrollbar-track: #e8e8e8;
+  --scrollbar-thumb: #c8c8c8;
+  --scrollbar-thumb-hover: #555555;
 }

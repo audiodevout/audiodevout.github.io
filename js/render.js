@@ -188,7 +188,7 @@
     addLabeledMarquee(container, 'Performance', performance, openLightbox);
 
     var visualGroups = groupByCategory(drawings);
-    var order = ['VISUAL RESEARCH', 'VISUAL EXPERIMENT', 'SOLO • RESEARCH-BASED'];
+    var order = ['VISUAL RESEARCH'];
     order.forEach(function (cat) {
       if (visualGroups[cat] && excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
     });
@@ -381,23 +381,6 @@
   }
 
   /* ---------- Phase 4: Exhibitions, Writing, About, CV ---------- */
-  var ROLE_ACCENT_ORDER = [
-    ['Residency and Group Presentation', 'lime'],
-    ['Talk/Presentation', 'violet'],
-    ['Kinetic Sculpture', 'saffron'],
-    ['AV Performance', 'cerulean'],
-    ['Lecture/Presentation', 'amber'],
-    ['Residency', 'lime']
-  ];
-
-  function roleToAccent(role) {
-    if (!role) return 'var(--color-muted)';
-    for (var i = 0; i < ROLE_ACCENT_ORDER.length; i++) {
-      if (role.indexOf(ROLE_ACCENT_ORDER[i][0]) !== -1) return 'var(--color-accent-' + ROLE_ACCENT_ORDER[i][1] + ')';
-    }
-    return 'var(--color-muted)';
-  }
-
   function exhibitionToLightboxItem(ex) {
     return {
       title: ex.title,
@@ -464,13 +447,7 @@
 
       var meta = document.createElement('div');
       meta.className = 'timeline__meta';
-      if (ex.location) meta.appendChild(document.createTextNode(ex.location + ' · '));
-      var roleSpan = document.createElement('span');
-      roleSpan.className = 'timeline__role';
-      roleSpan.style.background = roleToAccent(ex.role);
-      roleSpan.style.color = 'var(--color-bg)';
-      roleSpan.textContent = ex.role || '';
-      meta.appendChild(roleSpan);
+      if (ex.location) meta.appendChild(document.createTextNode(ex.location));
       entry.appendChild(meta);
 
       if (ex.description) {
@@ -484,15 +461,16 @@
         var thumbs = document.createElement('div');
         thumbs.className = 'timeline__thumbs';
         ex.images.slice(0, 3).forEach(function (src) {
+          var wrap = document.createElement('div');
+          wrap.className = 'timeline__thumb-wrap';
           var img = document.createElement('img');
           img.className = 'timeline__thumb';
           img.src = src;
           img.alt = '';
           img.loading = 'lazy';
-          img.width = 80;
-          img.height = 60;
           if (openLightbox) img.addEventListener('click', function () { openLightbox(exhibitionToLightboxItem(ex)); });
-          thumbs.appendChild(img);
+          wrap.appendChild(img);
+          thumbs.appendChild(wrap);
         });
         entry.appendChild(thumbs);
       }
@@ -649,109 +627,6 @@
     }
   }
 
-  /**
-   * Marquee speed from cursor distance: close = faster, far = slower.
-   * Best practices: RAF-throttled updates, smooth lerp, resize/scroll/leave handling,
-   * prefers-reduced-motion and coarse pointer (touch) get fixed slow speed.
-   */
-  function initMarqueeCursorSpeed() {
-    var tracks = document.querySelectorAll('.marquee-track--clickable');
-    if (tracks.length === 0) return;
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-    if (prefersReducedMotion || !hasFinePointer) {
-      tracks.forEach(function (t) { t.style.setProperty('--marquee-duration', '160s'); });
-      return;
-    }
-
-    var DURATION_MIN = 90;   // fastest (cursor very close)
-    var DURATION_MAX = 180;  // slowest (cursor far away / off-screen)
-    var DISTANCE_MAX = 800;  // pixels before clamping to slowest
-    var LERP_FACTOR = 0.05;  // smoothing factor per frame
-    var SNAP_THRESHOLD = 0.25;
-    var CURSOR_LEFT_SENTINEL = -1e5;
-
-    var raf = null;
-    var dirty = false;
-    var lastX = CURSOR_LEFT_SENTINEL;
-    var lastY = CURSOR_LEFT_SENTINEL;
-    var trackData = new Map();
-
-    function getTrackData(track) {
-      if (!trackData.has(track)) {
-        trackData.set(track, { current: DURATION_MAX, target: DURATION_MAX });
-      }
-      return trackData.get(track);
-    }
-
-    function distanceFromPointToRect(x, y, rect) {
-      if (x <= CURSOR_LEFT_SENTINEL + 1e4 || y <= CURSOR_LEFT_SENTINEL + 1e4) {
-        return DISTANCE_MAX + 1;
-      }
-      var dx = Math.max(0, Math.max(rect.left - x, x - rect.right));
-      var dy = Math.max(0, Math.max(rect.top - y, y - rect.bottom));
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    function updateTargets() {
-      for (var i = 0; i < tracks.length; i++) {
-        var track = tracks[i];
-        var rect = track.getBoundingClientRect();
-        var d = distanceFromPointToRect(lastX, lastY, rect);
-        var t = Math.min(1, d / DISTANCE_MAX);
-        var target = DURATION_MIN + t * (DURATION_MAX - DURATION_MIN);
-        getTrackData(track).target = target;
-      }
-    }
-
-    function animate() {
-      raf = null;
-      if (dirty) {
-        updateTargets();
-        dirty = false;
-      }
-      var stillAnimating = false;
-      for (var i = 0; i < tracks.length; i++) {
-        var track = tracks[i];
-        var data = getTrackData(track);
-        data.current += (data.target - data.current) * LERP_FACTOR;
-        if (Math.abs(data.current - data.target) > SNAP_THRESHOLD) {
-          stillAnimating = true;
-        }
-        track.style.setProperty('--marquee-duration', data.current.toFixed(2) + 's');
-      }
-      if (stillAnimating) {
-        raf = requestAnimationFrame(animate);
-      }
-    }
-
-    function scheduleUpdate() {
-      dirty = true;
-      if (raf == null) {
-        raf = requestAnimationFrame(animate);
-      }
-    }
-
-    function onMove(e) {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      scheduleUpdate();
-    }
-
-    function onCursorLeave() {
-      lastX = CURSOR_LEFT_SENTINEL;
-      lastY = CURSOR_LEFT_SENTINEL;
-      scheduleUpdate();
-    }
-
-    document.addEventListener('mousemove', onMove, { passive: true });
-    document.documentElement.addEventListener('mouseleave', onCursorLeave, { passive: true });
-    window.addEventListener('resize', scheduleUpdate, { passive: true });
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    updateTargets();
-    scheduleUpdate();
-  }
-
   /* ---------- Home view toggle (marquee vs list) ---------- */
 
   function initHomeViewToggle() {
@@ -811,7 +686,6 @@
     renderAboutSection();
     renderCVSection();
     initHomeViewToggle();
-    initMarqueeCursorSpeed();
   }
 
   if (document.readyState === 'loading') {
