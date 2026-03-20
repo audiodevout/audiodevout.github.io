@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="6969osc">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css?v=6">
+  <title>6969osc</title>
+</head>
+<body>
+  <div class="vjc-app" role="application" aria-label="6969osc control surface">
+  <header class="vjc-status" role="status" aria-live="polite" aria-atomic="true">
+    <div class="vjc-status__left">
+      <span class="vjc-status__brand">6969osc</span>
+      <span class="vjc-status__dot" id="ws-dot" aria-hidden="true"></span>
+      <span class="vjc-status__label">WS</span>
+      <span class="vjc-status__addr" id="ws-addr" aria-label="WebSocket endpoint">---.---.---.---:----</span>
+    </div>
+    <div class="vjc-status__center">
+      <span class="vjc-status__osc-ticker" id="osc-ticker" aria-label="Last OSC address"></span>
+    </div>
+    <div class="vjc-status__right">
+      <span class="vjc-status__signal" id="signal-led" aria-hidden="true"></span>
+      <span class="vjc-status__wake" id="wake-icon" title="Screen wake lock" aria-hidden="true"></span>
+    </div>
+  </header>
+
+  <section class="vjc-zone vjc-zone--scenes">
+    <div class="vjc-zone__label">BUTTONS</div>
+    <div class="vjc-scenes__grid"></div>
+  </section>
+
+  <section class="vjc-zone vjc-zone--master">
+    <div class="vjc-zone__label">MASTER</div>
+    <div class="vjc-master__row">
+      <div class="vjc-crossfader" id="crossfader" data-initial="1.0">
+        <span class="vjc-crossfader__label">OPACITY</span>
+        <div class="vjc-crossfader__track">
+          <div class="vjc-crossfader__fill"></div>
+          <div class="vjc-crossfader__center-mark"></div>
+          <div class="vjc-crossfader__thumb"></div>
+        </div>
+        <span class="vjc-crossfader__value">1.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="vjc-zone vjc-zone--xy">
+    <div class="vjc-zone__label">XY</div>
+    <div class="vjc-xy__grid">
+      <div class="vjc-xy" id="xy1" data-pad="1">
+        <div class="vjc-xy__crosshair-h"></div>
+        <div class="vjc-xy__crosshair-v"></div>
+        <div class="vjc-xy__cursor" id="xy1-cursor"></div>
+        <span class="vjc-xy__badge">1</span>
+      </div>
+      <div class="vjc-xy" id="xy2" data-pad="2">
+        <div class="vjc-xy__crosshair-h"></div>
+        <div class="vjc-xy__crosshair-v"></div>
+        <div class="vjc-xy__cursor" id="xy2-cursor"></div>
+        <span class="vjc-xy__badge">2</span>
+      </div>
+      <div class="vjc-xy" id="xy3" data-pad="3">
+        <div class="vjc-xy__crosshair-h"></div>
+        <div class="vjc-xy__crosshair-v"></div>
+        <div class="vjc-xy__cursor" id="xy3-cursor"></div>
+        <span class="vjc-xy__badge">3</span>
+      </div>
+      <div class="vjc-xy" id="xy4" data-pad="4">
+        <div class="vjc-xy__crosshair-h"></div>
+        <div class="vjc-xy__crosshair-v"></div>
+        <div class="vjc-xy__cursor" id="xy4-cursor"></div>
+        <span class="vjc-xy__badge">4</span>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div id="vjc-toast" class="vjc-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    window.VJC_SERVER = 'ws://__SERVER_IP__:__SERVER_PORT__';
+  </script>
+  <script src="/controller.js?v=8"></script>
+</body>
+</html>

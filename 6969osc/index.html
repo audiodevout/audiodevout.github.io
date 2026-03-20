@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="6969osc — phone control surface with WebSocket and OSC for TouchDesigner." />
+  <link rel="canonical" href="https://audiodevout.github.io/6969osc/" />
+  <meta property="og:title" content="6969osc — Atharva Gupta" />
+  <meta property="og:description" content="Phone controller with OSC for TouchDesigner. Download and run on your PC." />
+  <meta property="og:image" content="https://audiodevout.github.io/assets/images/atharva.jpeg" />
+  <meta property="og:url" content="https://audiodevout.github.io/6969osc/" />
+  <meta property="og:type" content="website" />
+  <title>6969osc — Atharva Gupta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital@0;1&family=IBM+Plex+Mono:wght@100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../reset.css" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="../layout.css" />
+  <link rel="stylesheet" href="../components.css" />
+  <link rel="stylesheet" href="../animations.css" />
+  <link rel="stylesheet" href="osc-page.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="../index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="../about.html" class="nav-link">About</a>
+        </nav>
+        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav
+    id="mobile-nav"
+    class="nav-overlay"
+    aria-hidden="true"
+    aria-label="Mobile navigation"
+  >
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../exhibitions.html" class="nav-link">Exhibitions</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+
+  <main class="main osc-page" role="main">
+    <section class="section" aria-labelledby="osc-heading">
+      <h1 id="osc-heading" class="section-heading reveal">6969osc</h1>
+      <p class="osc-p">
+        A browser-based control surface for your phone: buttons, toggles, XY pads, and a master strip. It talks to a small server on your PC over WebSocket and sends <strong>OSC (UDP)</strong> into TouchDesigner (or anything listening on the same machine).
+      </p>
+      <p class="osc-p osc-p--muted osc-p--spaced">
+        This page only hosts documentation and downloads. At a venue you run <strong>START.bat</strong> on the show machine and scan the QR code so your phone loads the controller from <em>your</em> WiFi IP — not from GitHub Pages.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="download-heading">
+      <h2 id="download-heading" class="section-heading reveal">Download</h2>
+      <p class="osc-p osc-p--tight">
+        Grab the latest packaged zip from GitHub Releases (includes the app under <code class="osc-code">6969osc/6969osc</code>).
+      </p>
+      <p class="osc-actions">
+        <a
+          class="writing-card__paper-link"
+          href="https://github.com/audiodevout/audiodevout.github.io/releases/latest"
+          rel="noopener noreferrer"
+          target="_blank"
+        >Latest release on GitHub →</a>
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="dev-heading">
+      <h2 id="dev-heading" class="section-heading reveal">From the repository</h2>
+      <p class="osc-p osc-p--tight">
+        Clone or browse the project, then install dependencies and start the server from the app folder.
+      </p>
+      <ul class="osc-list">
+        <li>
+          <strong>Source:</strong>
+          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/tree/main/6969osc/6969osc" rel="noopener noreferrer" target="_blank">github.com/audiodevout/audiodevout.github.io — 6969osc/6969osc</a>
+        </li>
+        <li>
+          <strong>Setup:</strong>
+          <code class="osc-code">npm install</code> then <code class="osc-code">npm start</code>, or double-click <code class="osc-code">START.bat</code> on Windows.
+        </li>
+      </ul>
+      <p class="osc-p osc-p--spaced">
+        <a
+          class="writing-card__paper-link"
+          href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md"
+          rel="noopener noreferrer"
+          target="_blank"
+        >Full setup guide (SETUP.md) →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2026</p>
+  </footer>
+
+  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

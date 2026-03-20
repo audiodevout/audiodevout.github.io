@@ -1,0 +1,36 @@
+/**
+ * 6969osc landing page — scoped prose (loads after site CSS)
+ */
+.osc-page .osc-p {
+  max-width: 42rem;
+  margin-bottom: var(--space-6);
+  color: var(--color-text);
+}
+
+.osc-page .osc-p--muted {
+  color: var(--color-muted);
+}
+
+.osc-page .osc-p--tight {
+  margin-bottom: var(--space-4);
+}
+
+.osc-page .osc-p--spaced {
+  margin-bottom: var(--space-8);
+}
+
+.osc-page .osc-list {
+  max-width: 42rem;
+  margin: 0 0 var(--space-6) 1.25rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.osc-page .osc-code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+.osc-page .osc-actions {
+  margin-bottom: var(--space-6);
+}

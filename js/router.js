@@ -24,7 +24,14 @@
       let linkSection = null;
       if (href.indexOf('exhibitions') !== -1) linkSection = 'exhibitions';
       else if (href.indexOf('about') !== -1) linkSection = 'about';
-      else if (href === 'index.html' || href === './index.html' || href.endsWith('/')) linkSection = 'home';
+      else if (
+        href === 'index.html' ||
+        href === './index.html' ||
+        href === '/index.html' ||
+        href.endsWith('/')
+      ) {
+        linkSection = 'home';
+      }
       link.classList.toggle('is-active', linkSection !== null && linkSection === current);
     });
   }
