@@ -1,6 +1,14 @@
 /**
  * 6969osc landing page — scoped prose (loads after site CSS)
  */
+.osc-page .osc-lead {
+  max-width: 42rem;
+  margin-bottom: var(--space-6);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
 .osc-page .osc-p {
   max-width: 42rem;
   margin-bottom: var(--space-6);
@@ -24,6 +32,53 @@
   margin: 0 0 var(--space-6) 1.25rem;
   color: var(--color-text);
   line-height: 1.6;
+}
+
+.osc-page .osc-list--spaced {
+  margin-bottom: var(--space-8);
+}
+
+.osc-page .osc-subheading {
+  max-width: 42rem;
+  margin: var(--space-8) 0 var(--space-3);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.osc-page .osc-subheading:first-of-type {
+  margin-top: var(--space-4);
+}
+
+.osc-page .osc-ol {
+  max-width: 42rem;
+  margin: 0 0 var(--space-6) 1.25rem;
+  padding-left: 1rem;
+  color: var(--color-text);
+  line-height: 1.65;
+}
+
+.osc-page .osc-ol li {
+  margin-bottom: var(--space-3);
+}
+
+.osc-page .osc-pre {
+  max-width: 42rem;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  overflow-x: auto;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+
+.osc-page .osc-pre code {
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .osc-page .osc-code {

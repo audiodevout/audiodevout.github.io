@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="6969osc — phone control surface with WebSocket and OSC for TouchDesigner." />
+  <meta name="description" content="6969osc — open-source phone control surface: WebSocket + OSC (UDP) for TouchDesigner. Node.js 18+. Windows and macOS." />
   <link rel="canonical" href="https://audiodevout.github.io/6969osc/" />
-  <meta property="og:title" content="6969osc — Atharva Gupta" />
-  <meta property="og:description" content="Phone controller with OSC for TouchDesigner. Download and run on your PC." />
+  <meta property="og:title" content="6969osc" />
+  <meta property="og:description" content="Phone control surface with OSC for TouchDesigner. Run locally; scan QR on the same Wi‑Fi." />
   <meta property="og:image" content="https://audiodevout.github.io/assets/images/atharva.jpeg" />
   <meta property="og:url" content="https://audiodevout.github.io/6969osc/" />
   <meta property="og:type" content="website" />
@@ -62,18 +62,77 @@
   <main class="main osc-page" role="main">
     <section class="section" aria-labelledby="osc-heading">
       <h1 id="osc-heading" class="section-heading reveal">6969osc</h1>
+      <p class="osc-lead reveal">
+        Open-source control surface for your phone: buttons, toggles, XY pads, and a master strip. MIT licensed.
+      </p>
       <p class="osc-p">
-        A browser-based control surface for your phone: buttons, toggles, XY pads, and a master strip. It talks to a small server on your PC over WebSocket and sends <strong>OSC (UDP)</strong> into TouchDesigner (or anything listening on the same machine).
+        The phone UI connects to a <strong>Node.js</strong> server on your machine over <strong>WebSocket</strong>; the server forwards input as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any listener on the same host.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="note-heading">
+      <h2 id="note-heading" class="section-heading reveal">How you run it</h2>
+      <p class="osc-p osc-p--tight">
+        This site is <strong>documentation and downloads only</strong>. The controller is <em>not</em> served from GitHub Pages during a show.
       </p>
       <p class="osc-p osc-p--muted osc-p--spaced">
-        This page only hosts documentation and downloads. At a venue you run <strong>START.bat</strong> on the show machine and scan the QR code so your phone loads the controller from <em>your</em> WiFi IP — not from GitHub Pages.
+        On the venue machine, start the app and scan the QR code in the terminal. Your phone loads the UI from <strong>your computer’s LAN IP</strong> (same Wi‑Fi or hotspot). See <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md" rel="noopener noreferrer" target="_blank">SETUP.md</a> for firewall, TouchDesigner OSC In, and troubleshooting.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="section-heading reveal">Features</h2>
+      <ul class="osc-list">
+        <li>Momentary pads, toggles, four XY pads, master fader</li>
+        <li>Configurable OSC host, port, and rate limiting via <code class="osc-code">config.json</code></li>
+        <li>QR code for pairing on the local network; no app store install</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="requirements-heading">
+      <h2 id="requirements-heading" class="section-heading reveal">Requirements</h2>
+      <ul class="osc-list osc-list--spaced">
+        <li><strong>Node.js</strong> 18+ (<a class="writing-card__paper-link" href="https://nodejs.org/" rel="noopener noreferrer" target="_blank">nodejs.org</a>)</li>
+        <li><strong>TouchDesigner</strong> (or another OSC receiver) with UDP on the port you configure (default <code class="osc-code">6969</code>)</li>
+        <li>Phone and computer reachable on the <strong>same network</strong> (some venue Wi‑Fi blocks device-to-device traffic — see SETUP.md)</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="quickstart-heading">
+      <h2 id="quickstart-heading" class="section-heading reveal">Quick start</h2>
+      <p class="osc-p osc-p--tight">
+        Application root in this repo: <code class="osc-code">6969osc/6969osc</code>. On first run, <code class="osc-code">config.json</code> is created from <code class="osc-code">config.example.json</code> if missing.
+      </p>
+
+      <h3 class="osc-subheading">Windows</h3>
+      <ol class="osc-ol">
+        <li>Install Node.js LTS.</li>
+        <li>Double-click <code class="osc-code">START.bat</code>. First time: <strong>Run as administrator</strong> so Windows Firewall can allow inbound TCP on the web port (default <code class="osc-code">3000</code>).</li>
+        <li>Scan the QR code with your phone.</li>
+      </ol>
+
+      <h3 class="osc-subheading">macOS</h3>
+      <ol class="osc-ol">
+        <li>Install Node.js LTS (Apple Silicon or Intel).</li>
+        <li>In Terminal, <code class="osc-code">cd</code> into the app folder, then <code class="osc-code">./start.sh</code> (run <code class="osc-code">chmod +x start.sh</code> once if your clone is not executable).</li>
+        <li>Scan the QR code with your phone.</li>
+      </ol>
+      <p class="osc-p osc-p--muted osc-p--spaced">
+        If the phone cannot connect, allow <strong>Node</strong> (or the web port) in <strong>System Settings → Network → Firewall</strong>. Full steps: SETUP.md.
+      </p>
+
+      <p class="osc-p osc-p--tight"><strong>Manual / development</strong></p>
+      <pre class="osc-pre" tabindex="0"><code>npm install
+npm start</code></pre>
+      <p class="osc-p osc-p--spaced">
+        You still need <code class="osc-code">config.json</code> and an open firewall rule for the HTTP port where applicable.
       </p>
     </section>
 
     <section class="section" aria-labelledby="download-heading">
       <h2 id="download-heading" class="section-heading reveal">Download</h2>
       <p class="osc-p osc-p--tight">
-        Grab the latest packaged zip from GitHub Releases (includes the app under <code class="osc-code">6969osc/6969osc</code>).
+        Packaged zip (app under <code class="osc-code">6969osc/6969osc</code>):
       </p>
       <p class="osc-actions">
         <a
@@ -81,23 +140,23 @@
           href="https://github.com/audiodevout/audiodevout.github.io/releases/latest"
           rel="noopener noreferrer"
           target="_blank"
-        >Latest release on GitHub →</a>
+        >Latest release →</a>
       </p>
     </section>
 
-    <section class="section" aria-labelledby="dev-heading">
-      <h2 id="dev-heading" class="section-heading reveal">From the repository</h2>
-      <p class="osc-p osc-p--tight">
-        Clone or browse the project, then install dependencies and start the server from the app folder.
-      </p>
+    <section class="section" aria-labelledby="repo-heading">
+      <h2 id="repo-heading" class="section-heading reveal">Repository</h2>
       <ul class="osc-list">
         <li>
           <strong>Source:</strong>
-          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/tree/main/6969osc/6969osc" rel="noopener noreferrer" target="_blank">github.com/audiodevout/audiodevout.github.io — 6969osc/6969osc</a>
+          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/tree/main/6969osc/6969osc" rel="noopener noreferrer" target="_blank"><code class="osc-code">6969osc/6969osc</code> on GitHub</a>
         </li>
         <li>
-          <strong>Setup:</strong>
-          <code class="osc-code">npm install</code> then <code class="osc-code">npm start</code>, or double-click <code class="osc-code">START.bat</code> on Windows.
+          <strong>README:</strong>
+          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/README.md" rel="noopener noreferrer" target="_blank"><code class="osc-code">6969osc/6969osc/README.md</code></a>
+        </li>
+        <li>
+          <strong>License:</strong> MIT — <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/LICENSE" rel="noopener noreferrer" target="_blank">LICENSE</a>
         </li>
       </ul>
       <p class="osc-p osc-p--spaced">
@@ -106,7 +165,7 @@
           href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md"
           rel="noopener noreferrer"
           target="_blank"
-        >Full setup guide (SETUP.md) →</a>
+        >SETUP.md (TouchDesigner, config, troubleshooting) →</a>
       </p>
     </section>
   </main>

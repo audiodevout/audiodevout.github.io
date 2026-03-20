@@ -1,9 +1,23 @@
-# 6969osc (documentation site)
+# 6969osc
 
-**Live page:** [audiodevout.github.io/6969osc/](https://audiodevout.github.io/6969osc/)
+GitHub Pages site and docs for **6969osc**: **[audiodevout.github.io/6969osc/](https://audiodevout.github.io/6969osc/)**
 
-Standalone product page (not linked from the main portfolio nav). Share this URL for downloads and setup pointers.
+This folder is not linked from the main portfolio navigation; use that URL for releases and setup.
 
-**Application source** (Node server, `START.bat`, TouchDesigner OSC): [`6969osc/`](6969osc/) (nested folder in this repo).
+---
 
-**Styles:** [`osc-page.css`](osc-page.css) — small add-on for this page only. Shared site CSS is loaded with **relative** paths (`../fonts.css`, `../layout.css`, …) so assets resolve on GitHub Pages (including project sites) and when opening the file locally.
+## Repository layout
+
+| Path | Description |
+|------|-------------|
+| [`index.html`](index.html) | `/6969osc/` page (downloads, quick start, links to source) |
+| [`osc-page.css`](osc-page.css) | Styles scoped to this page; site chrome loads via `../` |
+| [`6969osc/`](6969osc/) | Runnable app — Node server, `START.bat`, `start.sh`, [README](6969osc/README.md), [SETUP.md](6969osc/SETUP.md) |
+
+The code you run on a show machine is **`6969osc/6969osc`**.
+
+---
+
+## Contributing
+
+Report issues or open PRs in **[audiodevout/audiodevout.github.io](https://github.com/audiodevout/audiodevout.github.io)**.

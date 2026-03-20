@@ -18,6 +18,8 @@ const VIRTUAL_ADAPTER_NAMES = [
   "expressvpn",
   "protonvpn",
   "cisco",
+  "utun",
+  "awdl",
 ];
 
 function isVirtualAdapter(name) {
@@ -36,11 +38,21 @@ function scoreInterface(name, address) {
   ) {
     score += 3;
   }
+  // macOS: primary NICs are en0, en1, … (often Wi‑Fi or Ethernet; beats VPN/bridge ties)
+  if (process.platform === "darwin" && /^en\d+$/i.test((name || "").trim())) {
+    score += 2;
+  }
   if (address.startsWith("192.168.")) {
     score += 2;
   }
   if (address.startsWith("10.")) {
     score += 1;
+  }
+  if (address.startsWith("172.")) {
+    const second = Number(address.split(".")[1]);
+    if (second >= 16 && second <= 31) {
+      score += 1;
+    }
   }
   if (nameLower.includes("ethernet") || nameLower.includes("lan")) {
     score -= 1;

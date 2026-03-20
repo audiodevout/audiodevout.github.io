@@ -21,6 +21,11 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
     cd /d "%~dp0"
 
+if not exist "config.json" (
+    copy /Y "config.example.json" "config.json" >nul
+    echo [OK] Created config.json from config.example.json
+)
+
 :: Read WS_PORT, OSC_PORT, OSC_HOST from config
 for /f "tokens=*" %%p in ('node -e "try{const c=require('./config.json');console.log(c.wsPort||3000)}catch(e){console.log(3000)}" 2^>nul') do set WS_PORT=%%p
 if not defined WS_PORT set WS_PORT=3000
