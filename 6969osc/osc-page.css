@@ -2,6 +2,12 @@
  * 6969osc landing page — scoped prose (loads after site CSS)
  */
 
+/* Slightly wider side gutters than default .section (global: clamp space-6–12) */
+.main.osc-page .section {
+  padding-left: clamp(var(--space-8), 7vw, 3.75rem);
+  padding-right: clamp(var(--space-8), 7vw, 3.75rem);
+}
+
 /* ----- Hero: front-and-center logo + JS character animation ----- */
 .osc-page .osc-hero {
   padding-top: clamp(var(--space-8), 12vh, var(--space-12));
@@ -153,6 +159,49 @@
   .osc-page .osc-hero-title--ready.osc-hero-title--idle {
     animation: none;
   }
+}
+
+.osc-page .osc-hero__download {
+  position: relative;
+  z-index: 1;
+  margin: clamp(var(--space-5), 3vh, var(--space-7)) 0 0;
+}
+
+.osc-page .osc-download-btn {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #0a0a0a;
+  background: #ff7f00;
+  border: 2px solid #ff7f00;
+  border-radius: 999px;
+  box-shadow:
+    0 0 0 1px rgba(255, 127, 0, 0.35),
+    0 0 28px rgba(255, 127, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.osc-page .osc-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(255, 127, 0, 0.5),
+    0 0 40px rgba(255, 127, 0, 0.45);
+  background: #ff9933;
+  border-color: #ff9933;
+}
+
+.osc-page .osc-download-btn:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+.osc-page .osc-download-btn:active {
+  transform: translateY(0);
 }
 
 .osc-page .osc-hero__tagline {

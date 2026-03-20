@@ -72,16 +72,25 @@
       <div class="osc-hero__stage">
         <p class="osc-hero__eyebrow">Open source · TouchDesigner · OSC</p>
         <h1 id="osc-heading" class="osc-hero-title">6969osc</h1>
+        <p class="osc-hero__download">
+          <a
+            id="download"
+            class="osc-download-btn"
+            href="https://github.com/audiodevout/audiodevout.github.io/releases/latest"
+            rel="noopener noreferrer"
+            target="_blank"
+          >Download latest release</a>
+        </p>
         <p class="osc-hero__tagline">
           Phone control surface — WebSocket in, <strong>OSC (UDP)</strong> out.
         </p>
       </div>
       <div class="osc-hero__intro">
         <p class="osc-lead reveal">
-          Open-source control surface for your phone: buttons, toggles, XY pads, and a master strip. MIT licensed.
+          A browser-based control surface for your phone — buttons, toggles, XY pads, and a master fader. MIT licensed.
         </p>
         <p class="osc-p">
-          The phone UI connects to a <strong>Node.js</strong> server on your machine over <strong>WebSocket</strong>; the server forwards input as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any listener on the same host.
+          A <strong>Node.js</strong> server runs on your machine and serves the controller UI to any phone on the same network. Touch input is sent over <strong>WebSocket</strong> and forwarded as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any OSC-capable receiver.
         </p>
       </div>
     </section>
@@ -89,7 +98,7 @@
     <section class="section" aria-labelledby="ui-heading">
       <h2 id="ui-heading" class="section-heading reveal">Interface</h2>
       <p class="osc-p osc-p--tight">
-        The controller runs in the phone browser: 16 pads (momentary and toggle zones), a master / opacity slider, and four XY pads. Status shows the WebSocket endpoint when connected.
+        The controller runs in the phone browser — no app install needed. It includes 16 pads (momentary and toggle modes), a master/opacity fader, and four XY pads. The status bar shows the WebSocket endpoint when connected.
       </p>
       <div class="osc-gallery">
         <figure class="osc-figure reveal">
@@ -119,11 +128,8 @@
 
     <section class="section" aria-labelledby="note-heading">
       <h2 id="note-heading" class="section-heading reveal">How you run it</h2>
-      <p class="osc-p osc-p--tight">
-        This site is <strong>documentation and downloads only</strong>. The controller is <em>not</em> served from GitHub Pages during a show.
-      </p>
       <p class="osc-p osc-p--muted osc-p--spaced">
-        On the venue machine, start the app and scan the QR code in the terminal. Your phone loads the UI from <strong>your computer’s LAN IP</strong> (same Wi‑Fi or hotspot). See <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md" rel="noopener noreferrer" target="_blank">SETUP.md</a> for firewall, TouchDesigner OSC In, and troubleshooting.
+        Start the server on the venue machine, then scan the QR code printed in the terminal. Your phone loads the controller UI directly from <strong>your computer’s LAN IP</strong> — both devices must be on the same Wi‑Fi or hotspot. See <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md" rel="noopener noreferrer" target="_blank">SETUP.md</a> for firewall setup, TouchDesigner OSC In configuration, and troubleshooting steps.
       </p>
     </section>
 
@@ -148,7 +154,7 @@
     <section class="section" aria-labelledby="quickstart-heading">
       <h2 id="quickstart-heading" class="section-heading reveal">Quick start</h2>
       <p class="osc-p osc-p--tight">
-        Application root in this repo: <code class="osc-code">6969osc/6969osc</code>. On first run, <code class="osc-code">config.json</code> is created from <code class="osc-code">config.example.json</code> if missing.
+        The app lives at <code class="osc-code">6969osc/6969osc</code> in the repo. On first run, <code class="osc-code">config.json</code> is auto-generated from <code class="osc-code">config.example.json</code> if it doesn't exist.
       </p>
 
       <h3 class="osc-subheading">Windows</h3>
@@ -165,7 +171,7 @@
         <li>Scan the QR code with your phone.</li>
       </ol>
       <p class="osc-p osc-p--muted osc-p--spaced">
-        If the phone cannot connect, allow <strong>Node</strong> (or the web port) in <strong>System Settings → Network → Firewall</strong>. Full steps: SETUP.md.
+        If the phone can't connect, allow <strong>Node</strong> (or the web port) through the firewall in <strong>System Settings → Network → Firewall</strong>. Full steps are in SETUP.md.
       </p>
 
       <p class="osc-p osc-p--tight"><strong>Manual / development</strong></p>
@@ -179,7 +185,7 @@ npm start</code></pre>
     <section class="section" aria-labelledby="download-heading">
       <h2 id="download-heading" class="section-heading reveal">Download</h2>
       <p class="osc-p osc-p--tight">
-        Packaged zip (app under <code class="osc-code">6969osc/6969osc</code>):
+        Packaged zip with the app at <code class="osc-code">6969osc/6969osc</code>:
       </p>
       <p class="osc-actions">
         <a
