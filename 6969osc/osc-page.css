@@ -23,6 +23,12 @@
   min-height: min(78vh, 44rem);
   margin-bottom: var(--space-10);
   position: relative;
+  /* Size the hero logo from the actual content width (not 100vw — avoids mobile overflow) */
+  container-type: inline-size;
+  container-name: osc-hero-stage;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .osc-page .osc-hero__stage::before {
@@ -53,13 +59,14 @@
   color: var(--color-muted);
 }
 
+/* ~7 monospace chars ≈ 4.2× font-size wide — cap size from available width */
 .osc-page .osc-hero-title {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 0 0.1em;
+  padding: 0 0.12em;
   font-family: "Space Mono", "IBM Plex Mono", ui-monospace, monospace;
-  font-size: clamp(4rem, 22vw, 11rem);
+  font-size: clamp(2rem, calc((100vw - 3.5rem) / 4.2), 11rem);
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.045em;
@@ -70,8 +77,28 @@
     0 0 100px rgba(255, 127, 0, 0.35),
     0 0 160px rgba(255, 127, 0, 0.15);
   min-height: 1.05em;
+  max-width: 100%;
+  box-sizing: border-box;
   transform-origin: 50% 55%;
   will-change: transform, filter;
+}
+
+@supports (font-size: 1cqi) {
+  .osc-page .osc-hero-title {
+    font-size: clamp(2rem, calc((100cqi - 1.5rem) / 4.2), 11rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .osc-page .osc-hero__stage {
+    min-height: min(68vh, 36rem);
+  }
+
+  .osc-page .osc-hero-title {
+    text-shadow:
+      0 0 28px rgba(255, 127, 0, 0.5),
+      0 0 56px rgba(255, 127, 0, 0.28);
+  }
 }
 
 /* Do not hide the title before JS: if osc-hero.js fails to load (404, etc.), the logo must stay visible. */
