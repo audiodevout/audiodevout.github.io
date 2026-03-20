@@ -21,6 +21,14 @@
   <link rel="stylesheet" href="../components.css" />
   <link rel="stylesheet" href="../animations.css" />
   <link rel="stylesheet" href="osc-page.css" />
+  <noscript>
+    <style>
+      .osc-hero-title:not(.osc-hero-title--ready) {
+        color: #ff7f00 !important;
+        text-shadow: 0 0 40px rgba(255, 127, 0, 0.35) !important;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -60,14 +68,22 @@
   </nav>
 
   <main class="main osc-page" role="main">
-    <section class="section" aria-labelledby="osc-heading">
-      <h1 id="osc-heading" class="section-heading reveal">6969osc</h1>
-      <p class="osc-lead reveal">
-        Open-source control surface for your phone: buttons, toggles, XY pads, and a master strip. MIT licensed.
-      </p>
-      <p class="osc-p">
-        The phone UI connects to a <strong>Node.js</strong> server on your machine over <strong>WebSocket</strong>; the server forwards input as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any listener on the same host.
-      </p>
+    <section class="section osc-hero" aria-labelledby="osc-heading">
+      <div class="osc-hero__stage">
+        <p class="osc-hero__eyebrow">Open source · TouchDesigner · OSC</p>
+        <h1 id="osc-heading" class="osc-hero-title">6969osc</h1>
+        <p class="osc-hero__tagline">
+          Phone control surface — WebSocket in, <strong>OSC (UDP)</strong> out.
+        </p>
+      </div>
+      <div class="osc-hero__intro">
+        <p class="osc-lead reveal">
+          Open-source control surface for your phone: buttons, toggles, XY pads, and a master strip. MIT licensed.
+        </p>
+        <p class="osc-p">
+          The phone UI connects to a <strong>Node.js</strong> server on your machine over <strong>WebSocket</strong>; the server forwards input as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any listener on the same host.
+        </p>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="ui-heading">
@@ -205,6 +221,7 @@ npm start</code></pre>
     <p class="site-footer__copy">Atharva Gupta © 2026</p>
   </footer>
 
+  <script src="osc-hero.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/theme.js"></script>

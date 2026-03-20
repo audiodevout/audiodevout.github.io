@@ -1,6 +1,176 @@
 /**
  * 6969osc landing page — scoped prose (loads after site CSS)
  */
+
+/* ----- Hero: front-and-center logo + JS character animation ----- */
+.osc-page .osc-hero {
+  padding-top: clamp(var(--space-8), 12vh, var(--space-12));
+  padding-bottom: var(--space-10);
+}
+
+.osc-page .osc-hero__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: min(78vh, 44rem);
+  margin-bottom: var(--space-10);
+  position: relative;
+}
+
+.osc-page .osc-hero__stage::before {
+  content: "";
+  position: absolute;
+  inset: -15% -30% auto;
+  height: 85%;
+  max-height: 32rem;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 60% 85% at 50% 42%,
+    rgba(255, 127, 0, 0.22) 0%,
+    rgba(255, 127, 0, 0.06) 45%,
+    transparent 70%
+  );
+}
+
+.osc-page .osc-hero__eyebrow {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 var(--space-5);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.osc-page .osc-hero-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0 0.1em;
+  font-family: "Space Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(4rem, 22vw, 11rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-transform: none;
+  color: #ff7f00;
+  text-shadow:
+    0 0 50px rgba(255, 127, 0, 0.55),
+    0 0 100px rgba(255, 127, 0, 0.35),
+    0 0 160px rgba(255, 127, 0, 0.15);
+  min-height: 1.05em;
+  transform-origin: 50% 55%;
+  will-change: transform, filter;
+}
+
+/* Hide plain text until JS splits into animated spans (avoids flash) */
+.osc-page .osc-hero-title:not(.osc-hero-title--ready) {
+  color: transparent;
+  text-shadow: none;
+}
+
+.osc-page .osc-hero-title--ready.osc-hero-title--idle {
+  animation:
+    osc-hero-glow 3.2s ease-in-out infinite,
+    osc-hero-move 5.5s ease-in-out infinite;
+}
+
+@keyframes osc-hero-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 14px rgba(255, 127, 0, 0.5)) drop-shadow(0 0 40px rgba(255, 127, 0, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 36px rgba(255, 127, 0, 0.95)) drop-shadow(0 0 90px rgba(255, 127, 0, 0.45));
+  }
+}
+
+/* Single transform track: drift + breathe (multiple animations can’t stack transform) */
+@keyframes osc-hero-move {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.85deg) scale(1);
+  }
+  25% {
+    transform: translate3d(0.75%, -0.05em, 0) rotate(0.75deg) scale(1.022);
+  }
+  50% {
+    transform: translate3d(-0.65%, 0.045em, 0) rotate(-0.5deg) scale(1.04);
+  }
+  75% {
+    transform: translate3d(0.45%, 0.025em, 0) rotate(0.55deg) scale(1.015);
+  }
+}
+
+.osc-page .osc-hero-title__char {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.55em, 0) rotate(-12deg) scale(0.55);
+  animation: osc-char-pop 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i) * 0.07s);
+}
+
+.osc-page .osc-hero-title__char--static {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes osc-char-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0.65em, 0) rotate(-18deg) scale(0.45);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(0, -0.12em, 0) rotate(4deg) scale(1.14);
+  }
+  80% {
+    transform: translate3d(0, 0.03em, 0) rotate(-1.5deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .osc-page .osc-hero-title {
+    will-change: auto;
+  }
+
+  .osc-page .osc-hero-title__char {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .osc-page .osc-hero-title--ready.osc-hero-title--idle {
+    animation: none;
+  }
+}
+
+.osc-page .osc-hero__tagline {
+  position: relative;
+  z-index: 1;
+  margin: var(--space-6) 0 0;
+  max-width: 28rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.osc-page .osc-hero__intro {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .osc-page .osc-lead {
   max-width: 42rem;
   margin-bottom: var(--space-6);
