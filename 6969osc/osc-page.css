@@ -74,11 +74,7 @@
   will-change: transform, filter;
 }
 
-/* Hide plain text until JS splits into animated spans (avoids flash) */
-.osc-page .osc-hero-title:not(.osc-hero-title--ready) {
-  color: transparent;
-  text-shadow: none;
-}
+/* Do not hide the title before JS: if osc-hero.js fails to load (404, etc.), the logo must stay visible. */
 
 .osc-page .osc-hero-title--ready.osc-hero-title--idle {
   animation:
@@ -114,6 +110,7 @@
 }
 
 .osc-page .osc-hero-title__char {
+  color: inherit;
   display: inline-block;
   opacity: 0;
   transform: translate3d(0, 0.55em, 0) rotate(-12deg) scale(0.55);
