@@ -3,7 +3,7 @@
   "oscPort": 6969,
   "oscHost": "127.0.0.1",
   "tdProjectPath": "",
-  "detectedIp": "10.27.10.72",
+  "detectedIp": "10.27.10.75",
   "ipRefreshInterval": 10000,
   "oscBundleWindow": 16,
   "oscRateLimit": 60,
