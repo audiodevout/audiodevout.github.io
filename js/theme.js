@@ -10,9 +10,9 @@
 
   function getStored() {
     try {
-      return localStorage.getItem(KEY) || DARK;
+      return localStorage.getItem(KEY) || LIGHT;
     } catch (e) {
-      return DARK;
+      return LIGHT;
     }
   }
 

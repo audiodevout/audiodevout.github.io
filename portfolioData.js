@@ -243,22 +243,6 @@ try {
           ],
         },
         {
-          id: "asymmetrica-sublimatic",
-          title: "Sublimatic",
-          category: "ASYMMETRICA AUDIO COLLECTION",
-          color: "cerulean",
-          description: "Experimental track by asymmetrica.",
-          fullDescription: "A subliminal sonic journey.",
-          medium: "Digital Audio",
-          bandcampTracks: [
-            {
-              title: "sublimatic",
-              trackId: "2633361304",
-              url: "https://asymmetrica.bandcamp.com/track/sublimatic",
-            },
-          ],
-        },
-        {
           id: "asymmetrica-supersounds",
           title: "Supersounds",
           category: "ASYMMETRICA AUDIO COLLECTION",
@@ -285,7 +269,7 @@ try {
           description:
             "A generative composition shaped by real-time weather data, translating environmental conditions into shifting sonic structures.",
           fullDescription:
-            "Symmetrical Fictions is a generative sound work sculpted from temperature, humidity, and precipitation data. These inputs are mapped to frequency modulations, pitch deviations, and rhythmic bursts. The track extends the core of the Symmetrical Fictions project—an exploration of urban landscapes and unseen forces as performative systems. The result is ambient yet unstable, synthetic in texture but grounded in natural rhythms. A sonic architecture built on shifting skies and algorithmic interpretation.",
+            "Generative audio from live weather data (temperature, humidity, precipitation), mapped to pitch, modulation, and rhythm—ambient but unstable, synthetic timbres tied to shifting outdoor conditions.",
           medium: "Generative audio, environmental data mapping",
           technology: "TouchDesigner, environmental APIs, audio synthesis",
           themes: "Weather, systems, sonic translation, speculative environments",
@@ -334,22 +318,6 @@ try {
           ],
         },
         {
-          id: "asymmetrica-the-sauce",
-          title: "The Sauce",
-          category: "ASYMMETRICA AUDIO COLLECTION",
-          color: "cerulean",
-          description: "Experimental track by asymmetrica.",
-          fullDescription: "An experimental sonic exploration.",
-          medium: "Digital Audio",
-          bandcampTracks: [
-            {
-              title: "the sauce",
-              trackId: "1297041022",
-              url: "https://asymmetrica.bandcamp.com/track/the-sauce",
-            },
-          ],
-        },
-        {
           id: "asymmetrica-tiptoe",
           title: "Tiptoe",
           category: "ASYMMETRICA AUDIO COLLECTION",
@@ -383,7 +351,7 @@ try {
           description:
             "A modular gesture-driven audiovisual system where the body becomes the instrument—generating sound, visuals, and presence in real time.",
           fullDescription:
-            "This ongoing system merges gesture detection, real-time sound design, and generative visuals into a single performance toolkit. Built with MediaPipe and TouchDesigner, it uses body movement to manipulate soundscapes and visuals simultaneously—blurring the lines between code, choreography, and live ritual. First presented at *Fever Dream*—a glitch-poetic installation exploring digital anxiety through spoken word and ambient sound production—the system has evolved into a modular, expressive platform for live A/V performance. The gestures control everything from glitchy textures and drone tones to cinematic pulses and dynamic projections, all shaped by an ambient, meditative coding process rooted in presence and flow. It is not just a tool, but a responsive ecosystem—sensorial, poetic, and embodied.",
+            "MediaPipe and TouchDesigner map body movement to real-time sound and generative visuals. First shown at Fever Dream; since then it has served as a modular live A/V platform—gestures drive glitch and drone textures, pulses, and projections—with an intentionally slow, embodied approach to control and coding.",
           medium:
             "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
           tags: "INTERACTIVE • GESTURE • AUDIOVISUAL • SENSORIAL • REAL-TIME",
@@ -399,7 +367,7 @@ try {
           color: "cerulean",
           description: "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
           fullDescription:
-            "A collaborative event combining ambient soundscapes, poetry, and visual projections, designed to immerse attendees in a meditative, sensory environment. The event merges curated ambient music with live visuals, transforming the club space into a reflective, poetic experience. Performances explore the intersection of sound, text, and imagery, allowing the audience to drift between contemplation and subtle stimulation.",
+            "One night at Ambient Room, Oost: live ambient sets, poetry, and VJ work in the same room—sound, text, and image kept deliberately slow and sensory.",
           medium: "Live VJing, ambient music, poetry, audiovisual installation",
           tags: "LIVE • VJ • AMBIENT • POETRY • AUDIOVISUAL",
           technical: "Video projection, live music mixing, audiovisual sequencing",
@@ -413,50 +381,31 @@ try {
       // -------------------------------------------
       installations: [
         {
-          id: "rain-reminders",
-          title: "Rain Reminders • Instruments of Becoming",
-          category: "KINETIC & SONIC SCULPTURE • NOISE • ARDUINO",
+          id: "instruments-for-becoming",
+          title: "Instruments for Becoming",
+          category: "KINETIC SCULPTURE • SONIC OBJECTS • MOTOR SYSTEMS",
           color: "saffron",
           description:
-            "A 1.8-meter-tall kinetic sound sculpture with a slowly rotating 80 cm rain stick mounted on a raw wooden and steel armature. Part of the Instruments of Becoming series.",
+            "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
           fullDescription:
-            "Rain Reminders is an autonomous kinetic sound sculpture developed as one instrument within the series Instruments of Becoming, reimagining the rain stick as a durational, healing sound object. At its center, a handmade 80 cm rain stick made with a PVC pipe, screws and filled with a mixture of mung beans and black rice, is rotated on its horizontal axis by a stepper motor, releasing a steady cascade of trickles that generate an unamplified texture reminiscent of rainfall.\nThe sculpture is built from coarse, industrial elements—steel square tubing, a 6x4 wood beam, exposed screws, and visible wiring. A coir mat rests beneath the frame.\nThe work emerged as a personal response to tinnitus, where the steady presence of this customised noise becomes a form of relief. In this context, the installation functions as a sonic prosthesis: a quiet companion producing persistent acoustic weather. Its sound is soft but continuous, mechanically repeated yet deeply calming—a form of meditative noise that both masks and soothes.",
-          dimensions: "1.8m (height)",
+            "Rain Reminders — A motorized rain stick (PVC, mung beans and black rice) rotated on a horizontal axis: a soft, unamplified rainfall texture. Steel, wood beam, exposed wiring, coir mat below. Developed partly in response to tinnitus—the steady grain acts as a kind of sonic prosthesis: persistent “weather” that masks and calms.\n\nSpinny Sticks — Hanging rotary assemblies of rods, pencils, and tensioned thread, each driven by a low-speed motor. Pencils mark surfaces under strain; threads fatigue slowly. The system stays off-balance—small differences in load and wear add up to divergent motion, creaks, and friction. Tension is treated as a condition, not a fault: closer to a nervous system than a clock.",
+          dimensions:
+            "Rain Reminders: 1.8 m (height). Spinny Sticks: variable installation, individual units approx. 40–80 cm diameter",
           medium:
-            "Motorized kinetic sculpture, acoustic rain stick, PVC pipe, screws, wood, steel, mung beans, black rice, exposed electronics",
+            "Motorized kinetic sculpture, acoustic rain stick, PVC, wood, steel, grains, exposed electronics; motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
           technical:
-            "Custom low-RPM motor system, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting",
+            "Custom low-RPM motor systems, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting; low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
           themes:
-            "Tinnitus and White Noise, Acoustic Ritual and Duration, Provisional Construction, Meditative Distraction",
+            "Tinnitus and acoustic ritual, tension and unstable systems, mechanical fatigue, drawing as duration, meditative noise",
           images: [
             "./assets/images/rain-stick-1.JPG",
             "./assets/images/rain-stick-2.JPG",
             "./assets/images/rain-stick-4.jpg",
-            "./assets/images/rain-stick-6.jpg"
-          ],
-          videos: ["./assets/video/rain-stick-video-1.mp4"],
-        },
-        {
-          id: "spinny-sticks",
-          title: "Spinny Sticks • Instruments of Becoming",
-          category: "KINETIC DRAWING • SONIC OBJECTS • MOTOR SYSTEMS",
-          color: "graphite",
-          description:
-            "A suspended series of motor-driven drawing and tension instruments composed of rotating rod structures, pencils, and stretched threads. A distinct work within the Instruments of Becoming series.",
-          fullDescription:
-            "Spinny Sticks is an autonomous kinetic installation developed as a separate instrument within the series Instruments of Becoming, consisting of multiple hanging rotary structures built from thin metal rods, pencils, and tensioned threads. Each unit is driven by a low-speed motor that induces continuous rotation, storing and releasing mechanical stress through flexible connections and weighted elements.\nThe pencils operate as both drawing tools and structural members, marking surfaces over time while remaining under constant strain. Threads are stretched, twisted, and slowly fatigued by rotation, producing subtle creaks, frictional sounds, and irregular oscillations. The system never settles into equilibrium; minor variations in balance, material fatigue, and motor tolerance accumulate into divergent behaviors.\nThe work treats tension as an active condition rather than a problem to be resolved. Suspended between control and instability, the instruments operate as autonomous agents that rehearse persistence, stress, and repetition. The visual language evokes infant mobiles, improvised machines, and aerial devices, while the underlying logic remains closer to a nervous system than a clockwork mechanism.",
-          dimensions: "Variable installation, individual units approx. 40–80 cm diameter",
-          medium:
-            "Motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
-          technical:
-            "Low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
-          themes:
-            "Tension and Attention, Mechanical Fatigue, Unstable Systems, Drawing as Duration",
-          images: [
+            "./assets/images/rain-stick-6.jpg",
             "./assets/images/spinny-sticks-1.png",
             "./assets/images/spinny-sticks-2.png"
           ],
-          videos: ["https://youtu.be/SWMkYxuWrNE"]
+          videos: ["./assets/video/rain-stick-video-1.mp4", "https://youtu.be/SWMkYxuWrNE"],
         },
 
 
@@ -468,7 +417,7 @@ try {
           description:
             "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
           fullDescription:
-            "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets, the installation mirrors and tiles planetary surfaces creating impossible yet eerily coherent landscapes.",
+            "Satellite tiles are mirrored and recomposed into speculative, symmetrical landscapes—coherent yet impossible terrain that sits between rational cartography, fiction, and unconscious visual patterning.",
           medium: "Video installation, satellite imagery recomposition, speculative cartography",
           tags: ["generative", "video", "research"],
           themes: "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
@@ -1069,7 +1018,7 @@ try {
           color: "cerulean",
           description: "Part 9 of the noise sculpting series: bubbles, waves, and scene switching techniques.",
           fullDescription:
-            "Part 9 of the noise sculpting series, exploring bubble effects, wave patterns, and scene switching in TouchDesigner.",
+            "Bubble effects, wave patterns, and scene switching in TouchDesigner.",
           medium: "TouchDesigner, noise sculpting, procedural visuals",
           tags: ["TouchDesigner", "noise sculpting", "bubbles", "waves", "tutorial"],
           videos: ["https://www.youtube.com/watch?v=nQIwwmKPSqs"],
@@ -1129,7 +1078,7 @@ try {
           color: "cerulean",
           description: "Create crystal-like procedural video effects in TouchDesigner.",
           fullDescription:
-            "Tutorial on building procedural crystal-like video effects and refractive visuals in TouchDesigner.",
+            "Procedural crystal-like refraction and video treatment in TouchDesigner.",
           medium: "TouchDesigner, procedural effects, video effects",
           tags: ["TouchDesigner", "crystal", "procedural", "video effects", "tutorial"],
           videos: ["https://www.youtube.com/watch?v=pc34xAXCRlg"],
@@ -1141,7 +1090,7 @@ try {
           color: "cerulean",
           description: "Generate procedural grid patterns and geometric structures in TouchDesigner.",
           fullDescription:
-            "Tutorial on creating procedural grid patterns and geometric structures in TouchDesigner.",
+            "Grid-based procedural geometry and patterning in TouchDesigner.",
           medium: "TouchDesigner, procedural patterns, generative art",
           tags: ["TouchDesigner", "grid", "procedural", "patterns", "tutorial"],
           videos: ["https://www.youtube.com/watch?v=TbRtV-ix8RE"],
@@ -1196,7 +1145,7 @@ try {
           description:
             "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
           fullDescription:
-            "Post-Television Audiences on YouTube is a research project examining the decline of traditional television audiences and the rise of participatory media consumption through YouTube. Drawing on Habermas' concept of the public sphere and Dahlgren's digital public sphere framework, the study highlights how YouTube enables new forms of democratic interaction, prosumer behavior, and niche cultural communities while embedding itself within corporate structures. By contrasting television's centralized, passive reception with YouTube's interactive, decentralized dynamics, the research argues that the digital public sphere redefines representation, cultural participation, and the production of meaning.",
+            "Uses Habermas and Dahlgren’s public-sphere frameworks to argue that YouTube shifts television’s centralized, passive model toward participatory, decentralized dynamics—prosumers, niche communities, democratic interaction—while remaining embedded in corporate structures and redefining how meaning and representation are produced.",
           medium: "Research paper, digital media studies, cultural theory",
           tags: ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
           themes: "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
@@ -1212,7 +1161,7 @@ try {
           description:
             "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
           fullDescription:
-            "Transcending Identities is a research project examining the underground rave scene as a site of gender performance, transformation, and collective liberation. Using the case study of Karacus Maracus 2021, a psychedelic trance festival in Goa, the study investigates how sound, technology, and dance interact to destabilize traditional gender binaries. Drawing from Maria Pini's frameworks on cyborgs and nomads, the research highlights how rave environments subvert normative masculinity, enabling new modes of self-expression, collective desire, and embodied politics to emerge through improvisational choreographies and trance states.",
+            "Case study: Karacus Maracus 2021 (Goa). Sound, technology, and dance as sites where normative masculinity loosens—via Pini’s cyborg/nomad lenses, tracing improvisation, trance, and collective desire as embodied politics.",
           medium: "Ethnographic research, festival case study, electronic music culture",
           tags: ["rave", "gender", "psytrance", "ethnography", "musicology"],
           themes: "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
@@ -1233,7 +1182,7 @@ try {
         title: "5th European Culture and Technology Lab+ Annual Conference",
         date: "November 2025",
         description:
-          "Presented the talk 'Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation' as part of the fifth ECT Lab+ conference, focusing on the relationships between technological culture, contemporary art, and speculative research.",
+          "Talk at the 5th ECT Lab+ (Baltan Laboratories): Symmetrical Fictions—technology, contemporary art, and speculative research.",
         location: "Eindhoven, NL",
         role: "Talk/Presentation",
         venue: "Baltan Laboratories",
@@ -1253,7 +1202,7 @@ try {
         title: "Urban Arts Tour: Extended Living Room",
         date: "November 2025",
         description:
-          "Part of the Urban Arts Tour, 'Extended Living Room' transformed public spaces into interactive art zones. The featured work, 'Rain Reminders', was a kinetic sculpture that responded to environmental changes, engaging passersby in a playful dialogue between city life and natural patterns.",
+          "Urban Arts Tour — Extended Living Room at Forum/Nieuwe Markt. Showed the rain-stick piece from Instruments for Becoming outdoors as a slow, weather-like kinetic work in public space.",
         location: "Groningen, NL",
         role: "Kinetic Sculpture",
         venue: "Nieuwe Markt/Forum",
@@ -1272,7 +1221,7 @@ try {
         title: "Nervous Systems",
         date: "June 2025",
         description:
-          "This exhibition explored the interplay between human perception and reactive environments. 'Rain Reminders', my kinetic sculpture, was presented as a dynamic installation, highlighting the subtle feedback between human interaction and automated motion within the space.",
+          "Group show on perception and reactive environments. Rain Reminders (Instruments for Becoming) installed as a motor-driven, audience-responsive kinetic work.",
         location: "Haren, NL",
         role: "Kinetic Sculpture",
         venue: "KEL-30",
@@ -1286,7 +1235,7 @@ try {
         title: "Fever Dream",
         date: "May 2025",
         description:
-          "'Fever Dream' showcased experimental audiovisual performances. I presented a gesture-controlled generative system that transformed performers' movements into immersive audiovisual experiences, creating a responsive environment that blurred the line between performer and installation.",
+          "Experimental A/V night at Minerva. Gesture-controlled system: performer movement drives live sound and image—body and patch read as one environment.",
         location: "Groningen, NL",
         role: "AV Performance",
         venue: "Minerva Academy",
@@ -1298,7 +1247,7 @@ try {
         title: "Diverse Digital Dimensions: Error – Failure Is an Option, Part Three",
         date: "March 2025",
         description:
-          "Participated in the annual collaboration between the NAIP European Music Masters program (Prince Claus Conservatoire and Iceland University of the Arts) and MADTech, Frank Mohr Institute. The annual collaboration for master students of the NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) and MADTech, Frank Mohr Institute is a vibrant artistic play ground for the future of interdisciplinary talent. The project is formed in two parts: The first part being a series of four Live Lab sessions exploring core concepts behind our collaboration and the art of co-making in an 'open space' domain. And the second part is a 5-Day residency on location at Grand Theatre, working in various spaces both physically and virtually.",
+          "NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) × MADTech (Frank Mohr Institute): four Live Labs on co-making in an open-space model, then a five-day residency at Grand Theatre Groningen (in-person and remote work).",
         location: "Groningen, NL",
         role: "Residency and Group Presentation",
         venue: "Grand Theatre Groningen",
@@ -1313,7 +1262,7 @@ try {
         title: "On Art and Contemporary Artistic Practice",
         date: "February 2025",
         description:
-          "Delivered a lecture examining contemporary art practices across the Netherlands and Western Europe. Discussed evolving artistic strategies, interdisciplinary collaborations, and presented examples of my own work to illustrate the intersection of technology, performance, and public engagement.",
+          "Lecture on contemporary practice in the Netherlands and Western Europe—strategies, collaboration, and examples from my own work at the intersection of technology, performance, and public contexts.",
         location: "Ajmer, IN",
         role: "Lecture/Presentation",
         venue: "Government Girls College",
@@ -1326,7 +1275,7 @@ try {
     contact: {
   about: {
     title: "ABOUT ME",
-    description: `Atharva Gupta is a sound and audiovisual artist-researcher who builds objects, instruments, systems, and situations that draw on personal relationships with technology. His practice begins with making and the questions that emerge from it. this takes shape across sound and kinetic sculpture, audiovisual art and performance, code art, video game mods, and many spaces in between. All of his work reaches towards broader concerns: how we perceive, how we organise ourselves, and how we process the world around us.`,
+    description: `Atharva Gupta is a sound and audiovisual artist-researcher who builds objects, instruments, systems, and situations from a hands-on relationship with technology. Practice starts with making and the questions that follow; it spans sound and kinetic sculpture, audiovisual performance, code, game mods, and what lies between. Work keeps returning to perception, social organisation, and how we process the world.`,
     credentials: [],
     image: "./assets/images/atharva.jpeg",
   },

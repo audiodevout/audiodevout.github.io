@@ -313,13 +313,20 @@
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow var(--transition-base);
+  border: 1px solid var(--color-border);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: box-shadow var(--transition-base), border-color var(--transition-fast);
   display: flex;
   flex-direction: column;
 }
 
 .work-card:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 .work-card__accent {
@@ -377,7 +384,7 @@
 
 .work-card__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-sm);
+  font-size: clamp(0.85rem, 1.35vw, var(--font-size-lg));
   font-weight: 400;
   margin-bottom: 0;
   text-transform: uppercase;
@@ -497,12 +504,15 @@
 .lightbox__panel {
   position: relative;
   width: 100%;
-  max-width: min(980px, 96vw);
+  max-width: min(1320px, calc(100vw - 2 * var(--space-4)));
   max-height: 92vh;
   overflow: hidden auto;
   background: var(--color-surface);
   border-radius: 2px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transform: scale(0.98);
   transition: transform 0.25s ease;
   scrollbar-color: var(--color-border) var(--color-surface);
@@ -563,7 +573,7 @@
 
 .lightbox__title {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(1.35rem, 3.5vw, var(--font-size-xl));
   font-weight: 500;
   margin: 0 0 var(--space-2);
   letter-spacing: 0.02em;
@@ -580,6 +590,7 @@
   text-transform: uppercase;
   color: var(--color-muted);
   margin: 0;
+  max-width: 42ch;
 }
 
 .lightbox__carousel {
@@ -587,13 +598,14 @@
 }
 
 .lightbox__media {
-  --lightbox-media-max-h: 75vh;
+  --lightbox-media-max-h: 78vh;
   position: relative;
   background: var(--color-lightbox-bg);
   display: grid;
   grid-template: 1fr / 1fr;
   overflow: hidden;
   max-height: var(--lightbox-media-max-h);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
 }
 
 /* Bandcamp needs full 472px height — allow media to expand, panel scrolls */
@@ -768,14 +780,15 @@
 /* Subsection labels above marquee blocks (Work, Sound, Archive) — same style as Installations, Performance, etc. */
 .section-sublabel {
   font-family: var(--font-display);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: 400;
-  letter-spacing: var(--letter-spacing-stamp);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-muted);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
   position: relative;
   z-index: 1;
+  opacity: 0.95;
 }
 
 /* ----- Sound section ----- */
@@ -859,7 +872,8 @@
 .marquee-item {
   font: inherit;
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-size: clamp(1rem, 1.85vw, 1.45rem);
+  font-weight: 400;
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   color: var(--color-text);
@@ -876,6 +890,42 @@
   color: var(--color-accent-lime);
 }
 
+/* Cursor-following thumbnail (js/marquee-lens.js); fine pointer + hover only */
+.marquee-lens {
+  position: fixed;
+  z-index: 350;
+  width: 240px;
+  height: 168px;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.marquee-lens[hidden] {
+  display: none !important;
+}
+
+.marquee-lens__card {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: var(--color-surface);
+}
+
+.marquee-lens__base {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 .marquee-sep {
   pointer-events: none;
   user-select: none;
@@ -890,12 +940,12 @@
 
 .work-marquee-section .work-subsection__label {
   font-family: var(--font-display);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: 400;
-  letter-spacing: var(--letter-spacing-stamp);
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-muted);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 /* Embeds marquee: Bandcamp (and YouTube) players scroll horizontally */
@@ -1303,18 +1353,29 @@
 
 .timeline__entry {
   position: relative;
+  padding: var(--space-6);
   padding-bottom: var(--space-10);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 8px 28px rgba(0, 0, 0, 0.2);
 }
 
+/* Dot sits on the timeline rail; offset accounts for entry padding + rail inset */
 .timeline__entry::before {
   content: '';
   position: absolute;
-  left: calc(-1 * (var(--space-8) + 4px));
-  top: var(--space-2);
+  left: calc(-1 * (var(--space-8) + var(--space-6) + 4px));
+  top: var(--space-6);
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-border);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  box-shadow: 0 0 0 2px var(--body-bg);
 }
 
 .timeline__date {
@@ -1339,11 +1400,12 @@
 
 .timeline__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-lg);
+  font-size: clamp(1.1rem, 2.2vw, var(--font-size-xl));
   font-weight: 400;
   margin-bottom: var(--space-2);
   text-transform: uppercase;
   line-height: var(--line-height-tight);
+  letter-spacing: 0.03em;
 }
 
 .timeline__meta {

@@ -136,10 +136,37 @@
     return slide;
   }
 
-  function showCarouselNav() {
+  function pauseVideosInElement(el) {
+    if (!el) return;
+    el.querySelectorAll('video').forEach(function (v) {
+      try {
+        v.pause();
+      } catch (e) { /* noop */ }
+    });
+  }
+
+  function clearCarouselNav() {
+    if (!panel) return;
     var wrap = panel.querySelector('.lightbox__carousel');
     if (!wrap) return;
     wrap.querySelectorAll('.lightbox__carousel-nav').forEach(function (n) { n.remove(); });
+  }
+
+  /** Stop iframe/video playback when the lightbox closes (hidden iframes keep playing otherwise). */
+  function pauseAndClearMedia() {
+    if (!mediaEl) return;
+    pauseVideosInElement(mediaEl);
+    mediaEl.innerHTML = '';
+    clearCarouselNav();
+    currentSlide = null;
+    isSliding = false;
+    currentIndex = 0;
+  }
+
+  function showCarouselNav() {
+    clearCarouselNav();
+    var wrap = panel.querySelector('.lightbox__carousel');
+    if (!wrap) return;
     if (mediaItems.length <= 1) return;
     var prev = document.createElement('button');
     prev.type = 'button';
@@ -209,6 +236,7 @@
       if (e.target !== incoming) return;
       incoming.removeEventListener('transitionend', onDone);
       if (currentSlide && currentSlide !== incoming && currentSlide.parentNode === mediaEl) {
+        pauseVideosInElement(currentSlide);
         mediaEl.removeChild(currentSlide);
       }
       currentSlide = incoming;
@@ -285,6 +313,7 @@
 
   function close() {
     if (!lightboxEl) return;
+    pauseAndClearMedia();
     lightboxEl.classList.remove('is-open');
     document.body.style.overflow = '';
     if (lastFocused) {

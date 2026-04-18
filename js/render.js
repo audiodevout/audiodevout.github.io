@@ -71,6 +71,10 @@
       btn.type = 'button';
       btn.className = 'marquee-item';
       btn.textContent = it.title || 'Untitled';
+      var thumb = firstImage(it);
+      if (thumb) {
+        btn.setAttribute('data-preview-src', thumb);
+      }
       var lbItem = toLightboxItem(it);
       btn.addEventListener('click', function () {
         if (openLightbox && lbItem) openLightbox(lbItem);
@@ -227,6 +231,11 @@
     title.className = 'work-list__title';
     title.textContent = item.title || '';
     article.appendChild(title);
+
+    var listThumb = firstImage(item);
+    if (listThumb) {
+      article.setAttribute('data-preview-src', listThumb);
+    }
 
     function handleActivate(e) {
       if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
