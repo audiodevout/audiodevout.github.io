@@ -1,0 +1,100 @@
+/*
+ * Thesis: Paged.js screen preview only.
+ * Linked with media="screen" from book.html so Paged does not remove/re-polish this
+ * sheet (see Previewer.removeStyles in pagedjs-polyfill). @media screen in other
+ * stylesheets is often dropped after polisher.add(), so spreads would not appear.
+ */
+@media screen {
+  :root {
+    --ifb-screen-spread-gap: 14px;
+  }
+
+  body {
+    background-color: var(--color-background, whitesmoke);
+  }
+
+  .pagedjs_page {
+    --pagedjs-baseline-color: #cfcfcf !important;
+  }
+
+  /* Flat light preview pages (matches overrides.css); keep partie striped @page PNG. */
+  html.ifb-print-root--light .pagedjs_page:not(.pagedjs_partie_page) {
+    --pagedjs-baseline-color: transparent !important;
+    background-color: var(--color-paper, #ffffff) !important;
+    background-image: none !important;
+  }
+
+  html.ifb-print-root--light
+    .pagedjs_titre_page
+    > .pagedjs_sheet
+    > .pagedjs_pagebox
+    > .pagedjs_area {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  html.ifb-print-root--light .pagedjs_titre_page .pagedjs_page_content,
+  html.ifb-print-root--light .pagedjs_titre_page .pagedjs_page_content > div {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .pagedjs_pages {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-content: flex-start !important;
+    justify-content: center !important;
+    gap: var(--ifb-screen-spread-gap);
+    width: calc(
+      var(--pagedjs-width) * 2 + var(--ifb-screen-spread-gap)
+    ) !important;
+    box-sizing: content-box !important;
+    margin: 0 auto !important;
+    flex: 0 !important;
+  }
+
+  .pagedjs_first_page {
+    margin-left: calc(
+      var(--pagedjs-width) + var(--ifb-screen-spread-gap)
+    ) !important;
+  }
+
+  .pagedjs_pages
+    > .pagedjs_page:last-child:nth-child(odd):not(.pagedjs_first_page) {
+    margin-right: calc(
+      var(--pagedjs-width) + var(--ifb-screen-spread-gap)
+    );
+  }
+
+  .pagedjs_page:last-of-type {
+    margin-bottom: 10mm;
+  }
+
+  /*
+   Part spreads: paint fond-parties on the sheet. Paged.js only adds
+   .pagedjs_partie_page when the page start node carries data-page="partie"; if that
+   misses, :not(.pagedjs_partie_page) in the rule above wipes ALL backgrounds
+   (background-image: none !important). These :has() selectors win via higher
+   specificity and restore the separator texture in preview for light and dark.
+  */
+  html.ifb-print-root--light .pagedjs_pages > .pagedjs_page:has(.partie_gauche),
+  html.ifb-print-root--light .pagedjs_pages > .pagedjs_page:has(.partie_droite) {
+    --pagedjs-baseline-color: transparent !important;
+    background-color: var(--color-paper, #ffffff) !important;
+    background-image: url("./fond-parties.png") !important;
+    background-position: 50% 50% !important;
+    background-size: 200mm 200mm !important;
+    background-repeat: repeat !important;
+  }
+
+  html.ifb-print-root--dark .pagedjs_pages > .pagedjs_page:has(.partie_gauche),
+  html.ifb-print-root--dark .pagedjs_pages > .pagedjs_page:has(.partie_droite) {
+    --pagedjs-baseline-color: transparent !important;
+    background-color: var(--ifb-graphite-flood, #000000) !important;
+    background-image: url("./fond-parties.png") !important;
+    background-position: 50% 50% !important;
+    background-size: 200mm 200mm !important;
+    background-repeat: repeat !important;
+  }
+}

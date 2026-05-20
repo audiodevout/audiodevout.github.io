@@ -1,0 +1,818 @@
+/* -------------------------------------------------------------------------- */
+
+/* IFB — dark print theme (book_dark.html + book-cover-spread-dark.html).      */
+
+/* -------------------------------------------------------------------------- */
+
+/* Graphite floods (~K88–92) instead of 100% K — better on glued softcover.   */
+
+/* Typography ~K8–12 on flood (#e4e4e4). Photo plates keep reproduction intent. */
+
+/* -------------------------------------------------------------------------- */
+
+
+
+:root {
+
+  --ifb-graphite-flood: #17171d;
+
+  --ifb-graphite-plate: var(--ifb-graphite-flood);
+
+  --ifb-graphite-spine: #28282e;
+
+  --ifb-graphite-ink: #e4e4e4;
+
+  --ifb-graphite-accent: #ececec;
+
+  --ifb-graphite-muted: #5c5c64;
+
+
+
+  --color-background: #121216;
+
+  --color-pageBox: #3e3e44;
+
+  --color-paper: var(--ifb-graphite-flood);
+
+  --ifb-print-paper: var(--ifb-graphite-flood);
+
+  --ifb-print-ink: var(--ifb-graphite-ink);
+
+  --ifb-accent-text: var(--ifb-graphite-accent);
+
+  --ifb-muted-rule: var(--ifb-graphite-muted);
+
+  --ifb-projet-well: var(--ifb-graphite-flood);
+
+  --ifb-partie-panel-bg: var(--ifb-graphite-flood);
+
+  --ifb-code-bg: #25252b;
+
+  --ifb-fonction-bg: #2c2c32;
+
+}
+
+
+
+/* --- Paged.js screen preview ---------------------------------------------- */
+
+@media screen {
+
+  .pagedjs_page {
+
+    --pagedjs-baseline-color: #3a3a42 !important;
+
+  }
+
+  /* Keep @page partie background (fond-parties.png via #ifb-partie-bg-cache).
+     Do not strip it here — that made part openers look blank in dark preview
+     (light theme only flattens non-.pagedjs_partie_page pages). */
+
+}
+
+
+
+.pagedjs_titre_page > .pagedjs_sheet > .pagedjs_pagebox > .pagedjs_area {
+
+  background-color: var(--ifb-graphite-flood) !important;
+
+}
+
+
+
+/* --- Body copy & headings ------------------------------------------------- */
+
+body,
+
+h1,
+
+h2,
+
+h3,
+
+h5,
+
+h6,
+
+p.intro,
+
+.type,
+
+.fonction {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+p,
+
+h4,
+
+h5,
+
+#sommaire,
+
+.crossref::after {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+figure:nth-child(even) {
+
+  border-top-color: var(--ifb-muted-rule) !important;
+
+}
+
+
+
+.fonction {
+
+  background-color: var(--ifb-fonction-bg) !important;
+
+}
+
+
+
+.code {
+
+  background-color: var(--ifb-code-bg) !important;
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+a {
+
+  color: #cfcfd4 !important;
+
+}
+
+
+
+.preface-page .preface-title,
+
+section.copyright-page .preface-title,
+
+section.acknowledgements-page .preface-title,
+
+section.ifb-author-page .preface-title {
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+section.copyright-page p,
+
+section.acknowledgements-page p {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+/* --- Covers (interior .garde) --------------------------------------------- */
+
+.garde {
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+hr.garde-cover-rule {
+
+  border-top-color: var(--ifb-muted-rule) !important;
+
+}
+
+
+
+.garde-cover-meta span + span {
+
+  color: inherit;
+
+}
+
+
+
+/* --- TOC ------------------------------------------------------------------ */
+
+.part,
+
+.part > span,
+
+.part > span > a,
+
+.part > span > a::before,
+
+.part a.proj,
+
+.part a.proj > span,
+
+.part a.proj::before {
+
+  color: #d4d4da !important;
+
+}
+
+
+
+#sommaire {
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+/* --- Chapter / part shells ------------------------------------------------ */
+
+.projet {
+
+  background-color: transparent !important;
+
+  border: none !important;
+
+  box-shadow: none !important;
+
+}
+
+
+
+.ifb-print-root--dark .partie_droite {
+
+  background-color: var(--ifb-partie-panel-bg) !important;
+
+  border: none !important;
+
+  box-shadow: none !important;
+
+}
+
+
+
+.partie_droite h2 {
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+.projet h3 {
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+/* --- Glossary ------------------------------------------------------------- */
+
+.glossaire .lettre {
+
+  color: #b8b8c0 !important;
+
+}
+
+
+
+.glossaire .ifb-glossary-term {
+
+  border-left-color: var(--ifb-muted-rule) !important;
+
+  border-right-color: var(--ifb-muted-rule) !important;
+
+  color: var(--ifb-accent-text) !important;
+
+}
+
+
+
+/* --- Bibliography --------------------------------------------------------- */
+
+.ressource {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+.ifb-plate-caption {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+.ifb-plate-droite img {
+
+  print-color-adjust: exact;
+
+  -webkit-print-color-adjust: exact;
+
+}
+
+
+
+/* Paged.js split fragments can retain an .ifb-plate shell without any <img>. */
+
+html.ifb-print-root--dark .ifb-plate-droite:not(:has(img)) {
+
+  display: none !important;
+
+}
+
+
+
+/* --- @page floods (graphite, not 100% K) ---------------------------------- */
+
+@page {
+
+  background-color: var(--ifb-graphite-flood);
+
+}
+
+
+
+@page partie {
+
+  background-color: var(--ifb-graphite-flood);
+
+}
+
+
+
+@page:right {
+
+  @bottom-right {
+
+    color: #d8d8dc;
+
+  }
+
+  @right-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page:left {
+
+  @bottom-left {
+
+    color: #d8d8dc;
+
+  }
+
+  @left-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page titre,
+
+@page garde,
+
+@page sommaire,
+
+@page blanc,
+
+@page :blank {
+
+  background-color: var(--ifb-graphite-flood);
+
+}
+
+
+
+@page blanc:right {
+
+  @bottom-right {
+
+    color: transparent;
+
+  }
+
+}
+
+
+
+@page blanc:left {
+
+  @bottom-left {
+
+    color: transparent;
+
+  }
+
+}
+
+
+
+@page preliminary:right {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-right {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page preliminary:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-left {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page debut:right {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-right {
+
+    color: #d8d8dc;
+
+  }
+
+  @right-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+  @top-left {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page debut:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-left {
+
+    color: #d8d8dc;
+
+  }
+
+  @left-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+  @top-right {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page annexe:right {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-right {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page annexe:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-left {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page ifb-author:right {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-right {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page ifb-author:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-left {
+
+    color: #d8d8dc;
+
+  }
+
+}
+
+
+
+@page ifbPlate,
+
+@page imgFull {
+
+  background-color: var(--ifb-graphite-plate);
+
+}
+
+
+
+@page encart {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @right-bottom {
+
+    color: #d0d0d6;
+
+  }
+
+  @bottom-right {
+
+    color: #d0d0d6;
+
+  }
+
+}
+
+
+
+@page encart:right,
+
+@page encart:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+}
+
+
+
+@page image {
+
+  background-color: var(--ifb-graphite-plate);
+
+  @bottom-left {
+
+    color: #c8c8ce;
+
+  }
+
+  @bottom-right {
+
+    color: #c8c8ce;
+
+  }
+
+  @right-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+  @left-bottom {
+
+    color: #c8c8ce !important;
+
+  }
+
+}
+
+
+
+@page image:right,
+
+@page image:left {
+
+  background-color: var(--ifb-graphite-plate);
+
+}
+
+
+
+@page circuit:right,
+
+@page circuit:left,
+
+@page circuitTexte {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @left-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+  @bottom-left {
+
+    color: #c8c8ce;
+
+  }
+
+  @left-top {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page code:right,
+
+@page code:left {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @bottom-left {
+
+    color: #c8c8ce;
+
+  }
+
+  @bottom-right {
+
+    color: #c8c8ce;
+
+  }
+
+  @right-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+@page imgTuto {
+
+  background-color: var(--ifb-graphite-flood);
+
+  @left-bottom {
+
+    color: #c8c8ce;
+
+  }
+
+  @bottom-left {
+
+    color: #c8c8ce;
+
+  }
+
+}
+
+
+
+/* Print&Bind 3 mm bleed: flood bleed cells + sheet (avoids white guillotine edges). */
+html.ifb-print-root--dark .pagedjs_sheet,
+html.ifb-print-root--dark .pagedjs_bleed,
+html.ifb-print-root--dark .pagedjs_pagebox {
+  background-color: var(--ifb-graphite-flood) !important;
+}
+
+html.ifb-print-root--dark .pagedjs_page:has(.ifb-plate-droite) .pagedjs_bleed {
+  background-color: var(--ifb-graphite-flood) !important;
+}
+
+/* Part spreads: graphite flood sits on sheet/bleed/pagebox; without the PNG here the
+   texture is hidden behind those opaque layers (screen + print from Paged preview). */
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_sheet,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_sheet,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_bleed,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_bleed,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_pagebox,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_pagebox {
+  background-color: var(--ifb-graphite-flood) !important;
+  background-image: url(./fond-parties.png) !important;
+  background-position: 50% 50% !important;
+  background-size: 200mm 200mm !important;
+  background-repeat: repeat !important;
+}
+
+/* Paged.js paints solid .pagedjs_area wrappers; keep transparent on part spreads so
+   the fond-parties layer on sheet/pagebox stays visible (.partie_droite retains its panel). */
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_area,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_area,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_page_content,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_page_content {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.ifb-print-root--dark .pagedjs_page:has(.partie_gauche) .pagedjs_page_content > div,
+html.ifb-print-root--dark .pagedjs_page:has(.partie_droite) .pagedjs_page_content > div {
+  background: transparent !important;
+}
+
+section.ifb-author-page p.ifb-author-bio,
+
+.ifb-author-link-url {
+
+  color: var(--ifb-print-ink) !important;
+
+}
+
+
+
+.ifb-author-link-label {
+  color: #ffffff !important;
+}
+
+
+
+@media print {
+
+  html.ifb-print-root,
+
+  body,
+
+  .pagedjs_page,
+
+  .pagedjs_area,
+
+  .projet,
+
+  .partie_droite,
+
+  .glossaire,
+
+  .ifb-plate-droite,
+
+  .code,
+
+  .fonction {
+
+    print-color-adjust: exact;
+
+    -webkit-print-color-adjust: exact;
+
+  }
+
+}
+
+

@@ -1,0 +1,681 @@
+/*
+ * thesis_html/book-cover-spread.html — single sheet: back (left) · spine · front (right).
+ *
+ * Print&Bind order spec: 306 × 210 mm (wxh), 9 mm spine, panels 148.5 mm each.
+ * Template: A5_9mm_rug_buitenkant. Safe zones: 5 mm from trim edges, 15 mm toward spine.
+ * Expert PDF: Acrobat PDF/X-1a:2001 + FOGRA39L CMYK, 300 dpi, embedded fonts.
+ * device-cmyk() is ignored by some engines; each property lists an sRGB fallback first.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Fake Receipt";
+  src: url(../fonts/fake-receipt.regular.otf) format("opentype");
+}
+
+@page coverSpread {
+  size: var(--ifb-cover-spread-w, 306mm) var(--ifb-cover-spread-h, 210mm);
+  marks: none;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Elaine Sans ExtraLight Italic";
+  src: url(../fonts/elaine-sans.extralight-italic.otf) format("opentype");
+}
+
+html {
+  background: var(--color-background, whitesmoke);
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media print {
+  html {
+    background: transparent;
+  }
+  body {
+    padding: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    page: coverSpread;
+  }
+}
+
+.ifs-cover-spread {
+  display: flex;
+  flex-direction: row;
+  width: var(--ifb-cover-spread-w, 306mm);
+  height: var(--ifb-cover-spread-h, 210mm);
+  background-color: #ffffff;
+  flex-shrink: 0;
+  outline: 1px dashed #cccccc;
+  outline-offset: -1px;
+  box-sizing: border-box;
+}
+
+/* Print&Bind: max 2 cover PDF pages — page 1 outside, page 2 inside (optional). */
+.ifs-cover-spread--outside {
+  break-after: page;
+  page-break-after: always;
+}
+
+.ifs-cover-spread--inside {
+  break-before: page;
+  page-break-before: always;
+}
+
+:root {
+  --ifb-cover-safe: 5mm;
+  --ifb-cover-gutter: 15mm;
+  --ifb-garde-content-top: calc(var(--ifb-cover-safe) + 12mm);
+  --ifb-cover-trim-bleed-bottom: var(--ifb-cover-safe);
+}
+
+/* Back = left column (fore-edge left). Front = right column (fore-edge right). */
+.ifs-flat-panel-back,
+.ifs-flat-panel-front {
+  flex: 0 0 var(--ifb-cover-panel-w, 148.5mm);
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #000000;
+  padding-top: var(--ifb-garde-content-top);
+  padding-bottom: var(--ifb-cover-trim-bleed-bottom);
+}
+
+.ifs-flat-panel-back {
+  padding-left: var(--ifb-cover-safe);
+  padding-right: var(--ifb-cover-gutter);
+}
+
+.ifs-flat-panel-front {
+  padding-left: var(--ifb-cover-gutter);
+  padding-right: var(--ifb-cover-safe);
+}
+
+/* Inside spread: inside-front left, blank spine, inside-back right (Print&Bind binnenkant). */
+.ifs-flat-panel-inside-front,
+.ifs-flat-panel-inside-back {
+  flex: 0 0 var(--ifb-cover-panel-w, 148.5mm);
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #000000;
+  padding-top: var(--ifb-garde-content-top);
+  padding-bottom: var(--ifb-cover-trim-bleed-bottom);
+}
+
+.ifs-flat-panel-inside-front {
+  padding-left: var(--ifb-cover-safe);
+  padding-right: var(--ifb-cover-gutter);
+}
+
+.ifs-flat-panel-inside-back {
+  padding-left: var(--ifb-cover-gutter);
+  padding-right: var(--ifb-cover-safe);
+}
+
+.ifs-flat-spine--blank {
+  background-image: none;
+}
+
+.ifs-inside-panel-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 120mm;
+}
+
+/* Matches overrides.css `.garde.garde-cover` / `.garde.garde-back-cover` (minus @page). */
+.ifs-garde-cover-out,
+.ifs-garde-back-out {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 94mm;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 4mm;
+  padding-right: 4mm;
+  text-align: center;
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ifs-flat-panel-back .garde-back-cover-inner,
+.ifs-flat-panel-back .garde-cover-inner.garde-back-cover-inner {
+  align-items: center;
+  text-align: center;
+}
+
+.ifs-garde-cover-out .garde-cover-inner,
+.ifs-garde-back-out .garde-cover-inner {
+  width: 100%;
+  max-width: 88mm;
+}
+
+.garde-cover-inner,
+.garde-cover-inner.garde-back-cover-inner {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.garde-cover-title {
+  font-family: inherit;
+  font-size: 21pt;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  margin: 0 0 7mm;
+}
+
+.ifs-flat-panel-back .garde-back-cover-title,
+.ifs-flat-panel-front .garde-back-cover-title,
+.ifs-garde-back-out .garde-back-cover-title {
+  font-size: 15pt;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  margin-bottom: 6mm;
+}
+
+.garde-cover-subtitle {
+  font-size: 10.5pt;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0 0 9mm;
+}
+
+hr.garde-cover-rule {
+  border: none;
+  border-top: 1px solid #d6d6d6;
+  width: 36%;
+  max-width: 42mm;
+  margin: 0 auto 9mm;
+}
+
+.garde-cover-meta {
+  font-size: 9pt;
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+}
+
+.garde-cover-meta span {
+  display: block;
+}
+
+.garde-cover-meta span + span {
+  margin-top: 1.8mm;
+}
+
+.garde-cover-meta .garde-cover-year {
+  margin-top: 5mm;
+}
+
+/*
+ * Screen: RGB spine tint. Print: flat K-only tint + opaque rules (no alpha, no gradient).
+ */
+.ifs-flat-spine {
+  flex: 0 0 var(--ifb-cover-spine-w, 9mm);
+  height: 100%;
+  background-color: #e8e8e8;
+  background-image: linear-gradient(to right, #f2f2f2, #e8e8e8);
+  border-left: 0.25pt solid #bfbfbf;
+  border-right: 0.25pt solid #bfbfbf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ifs-flat-spine-inner {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: "Fake Receipt", serif;
+  font-size: 2.5mm;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #000000;
+  transform: rotate(180deg);
+}
+
+@media screen {
+  body {
+    font-family: "Fake Receipt", Georgia, serif;
+  }
+}
+
+@media print {
+  .ifs-cover-spread {
+    outline: none;
+    background-color: #ffffff;
+    background-color: device-cmyk(0% 0% 0% 0%);
+  }
+
+  .ifs-flat-panel-back,
+  .ifs-flat-panel-front,
+  .ifs-flat-spine-inner {
+    color: #000000;
+    color: device-cmyk(0% 0% 0% 100%);
+  }
+
+  hr.garde-cover-rule {
+    border-top-color: #d6d6d6;
+    border-top-color: device-cmyk(0% 0% 0% 22%);
+  }
+
+  .ifs-flat-spine {
+    background-color: #e8e8e8;
+    background-image: none;
+    background-color: device-cmyk(0% 0% 0% 10%);
+    border-left-color: #a6a6a6;
+    border-right-color: #a6a6a6;
+    border-left-color: device-cmyk(0% 0% 0% 40%);
+    border-right-color: device-cmyk(0% 0% 0% 40%);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Outside spread: rain-stick design (Print&Bind A5 306×210, 148.5 + 9 + 148.5) */
+/* -------------------------------------------------------------------------- */
+:root {
+  --ifb-cover-bleed: 3mm;
+  --ifb-cover-content-top: calc(var(--ifb-cover-safe) + 6mm);
+}
+
+.ifs-cover-spread--designed {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: #000000;
+}
+
+.ifs-cover-spread--designed .ifs-rain-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+  color: #000000;
+}
+
+.ifs-panel-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--ifb-cover-panel-w, 148.5mm);
+  height: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+  padding-top: var(--ifb-cover-content-top);
+  padding-bottom: var(--ifb-cover-safe);
+  padding-left: var(--ifb-cover-safe);
+  padding-right: var(--ifb-cover-gutter);
+}
+
+.ifs-panel-back-inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.ifs-back-frame {
+  position: absolute;
+  left: 0;
+  top: var(--ifb-cover-safe);
+  width: 18mm;
+  height: 11mm;
+  border: 0.35pt solid currentColor;
+}
+
+.ifs-back-title {
+  margin: 14mm 0 0;
+  font-family: "Fake Receipt", Georgia, serif;
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  max-width: 62mm;
+  line-height: 1.25;
+}
+
+.ifs-back-author {
+  margin: 0;
+  font-family: "Fake Receipt", Georgia, serif;
+  font-size: 6pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ifs-panel-spine {
+  position: absolute;
+  left: var(--ifb-cover-panel-w, 148.5mm);
+  top: 0;
+  width: var(--ifb-cover-spine-w, 9mm);
+  height: 100%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--ifb-cover-content-top);
+  padding-bottom: var(--ifb-cover-safe);
+  background-color: #e8e8e8;
+  border-left: 0.25pt solid #bfbfbf;
+  border-right: 0.25pt solid #bfbfbf;
+  overflow: hidden;
+}
+
+.ifs-spine-datum {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1mm;
+  margin-top: -0.5mm;
+  background: currentColor;
+}
+
+.ifs-spine-type {
+  position: relative;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: "Fake Receipt", Georgia, serif;
+  font-size: 1.45mm;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  text-align: center;
+  max-height: 88%;
+  background-color: #ffffff;
+  padding: 0.8mm 0.25mm;
+}
+
+.ifs-spine-line {
+  display: block;
+}
+
+.ifs-panel-front {
+  position: absolute;
+  left: calc(var(--ifb-cover-panel-w, 148.5mm) + var(--ifb-cover-spine-w, 9mm));
+  top: 0;
+  width: var(--ifb-cover-panel-w, 148.5mm);
+  height: 100%;
+  z-index: 3;
+  box-sizing: border-box;
+  padding-top: var(--ifb-cover-content-top);
+  padding-bottom: var(--ifb-cover-safe);
+  padding-left: var(--ifb-cover-gutter);
+  padding-right: var(--ifb-cover-safe);
+  background-color: transparent;
+}
+
+.ifs-panel-front-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.ifs-front-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3mm;
+  flex: 0 0 auto;
+  background-color: #ffffff;
+  padding: 1.5mm 1.5mm 2.5mm;
+  margin: -1.5mm -1.5mm 0;
+}
+
+.ifs-h1 {
+  margin: 0;
+  font-family: "Fake Receipt", Georgia, serif;
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  line-height: 1.05;
+  flex-shrink: 0;
+}
+
+.ifs-h1-line {
+  display: block;
+}
+
+.ifs-front-meta {
+  flex: 1;
+  min-width: 0;
+  align-self: flex-end;
+  padding-bottom: 1.5mm;
+}
+
+.ifs-h2 {
+  margin: 0 0 1.5mm;
+  font-size: 5.5pt;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  max-width: 44mm;
+}
+
+.ifs-h3 {
+  margin: 0 0 1mm;
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ifs-h4-row {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6mm;
+}
+
+.ifs-h4 {
+  margin: 0;
+  font-size: 5.25pt;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ifs-abstract-block {
+  margin-top: auto;
+  padding-top: 4mm;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding-left: 1.5mm;
+  padding-right: 1.5mm;
+  margin-left: -1.5mm;
+  margin-right: -1.5mm;
+  padding-bottom: 1.5mm;
+}
+
+.ifs-abstract-heading {
+  margin: 0 0 2mm;
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 0.35pt solid currentColor;
+  padding-bottom: 1.2mm;
+  width: 100%;
+}
+
+.ifs-abstract-body {
+  font-size: 6pt;
+  line-height: 1.42;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.ifs-abstract-body p {
+  margin: 0 0 2mm;
+}
+
+.ifs-abstract-body p:last-child {
+  margin-bottom: 0;
+}
+
+@media screen {
+  body {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+@media print {
+  .ifs-cover-spread--designed .ifs-rain-svg {
+    color: #000000;
+    color: device-cmyk(0% 0% 0% 100%);
+  }
+
+  .ifs-panel-spine {
+    background-color: #e8e8e8;
+    background-color: device-cmyk(0% 0% 0% 10%);
+  }
+
+  .ifs-abstract-body {
+    overflow: visible;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark graphite cover (book-cover-spread-dark.html / dark-only spread)       */
+/* Tokens from ifb-print-theme-dark.css when linked; fallbacks below.        */
+/* -------------------------------------------------------------------------- */
+html.ifb-cover-root--dark {
+  color-scheme: dark;
+  --color-background: #141418;
+}
+
+html.ifb-cover-root--dark body {
+  font-family: "Fake Receipt", Georgia, serif;
+}
+
+html.ifb-cover-root--dark .ifs-cover-spread {
+  background-color: var(--ifb-graphite-flood, #000000);
+  outline-color: #44444c;
+}
+
+html.ifb-cover-root--dark .ifs-flat-panel-back,
+html.ifb-cover-root--dark .ifs-flat-panel-front {
+  color: var(--ifb-graphite-ink, #e4e4e4);
+}
+
+html.ifb-cover-root--dark hr.garde-cover-rule {
+  border-top-color: var(--ifb-graphite-muted, #5c5c64);
+}
+
+html.ifb-cover-root--dark .ifs-flat-spine {
+  background-color: var(--ifb-graphite-spine, #2e2e34);
+  background-image: none;
+  border-left-color: #484850;
+  border-right-color: #484850;
+}
+
+html.ifb-cover-root--dark .ifs-flat-spine-inner {
+  color: var(--ifb-graphite-ink, #e4e4e4);
+}
+
+html.ifb-cover-root--dark .ifs-flat-panel-inside-front,
+html.ifb-cover-root--dark .ifs-flat-panel-inside-back {
+  color: var(--ifb-graphite-ink, #e4e4e4);
+}
+
+html.ifb-cover-root--dark .ifs-flat-spine--blank {
+  background-color: var(--ifb-graphite-spine, #2e2e34);
+  border-left-color: #484850;
+  border-right-color: #484850;
+}
+
+@media print {
+  html.ifb-cover-root--dark .ifs-cover-spread {
+    background-color: var(--ifb-graphite-flood, #000000);
+    background-color: device-cmyk(0% 0% 0% 88%);
+  }
+
+  html.ifb-cover-root--dark .ifs-flat-panel-back,
+  html.ifb-cover-root--dark .ifs-flat-panel-front,
+  html.ifb-cover-root--dark .ifs-flat-spine-inner {
+    color: var(--ifb-graphite-ink, #e4e4e4);
+    color: device-cmyk(0% 0% 0% 10%);
+  }
+
+  html.ifb-cover-root--dark hr.garde-cover-rule {
+    border-top-color: var(--ifb-graphite-muted, #5c5c64);
+    border-top-color: device-cmyk(0% 0% 0% 38%);
+  }
+
+  html.ifb-cover-root--dark .ifs-flat-spine {
+    background-color: var(--ifb-graphite-spine, #2e2e34);
+    background-color: device-cmyk(0% 0% 0% 82%);
+    border-left-color: device-cmyk(0% 0% 0% 55%);
+    border-right-color: device-cmyk(0% 0% 0% 55%);
+  }
+}
+
+html.ifb-cover-root--dark .ifs-cover-spread--designed {
+  color: var(--ifb-graphite-ink, #e4e4e4);
+}
+
+html.ifb-cover-root--dark .ifs-cover-spread--designed .ifs-rain-svg {
+  color: var(--ifb-graphite-ink, #e4e4e4);
+}
+
+html.ifb-cover-root--dark .ifs-panel-spine {
+  background-color: var(--ifb-graphite-spine, #2e2e34);
+  border-left-color: #484850;
+  border-right-color: #484850;
+}
+
+html.ifb-cover-root--dark .ifs-spine-type,
+html.ifb-cover-root--dark .ifs-front-head,
+html.ifb-cover-root--dark .ifs-abstract-block {
+  background-color: var(--ifb-graphite-plate, #24242a);
+}
+
+@media print {
+  html.ifb-cover-root--dark .ifs-cover-spread--designed .ifs-rain-svg {
+    color: var(--ifb-graphite-ink, #e4e4e4);
+    color: device-cmyk(0% 0% 0% 10%);
+  }
+
+  html.ifb-cover-root--dark .ifs-panel-spine {
+    background-color: var(--ifb-graphite-spine, #2e2e34);
+    background-color: device-cmyk(0% 0% 0% 82%);
+  }
+}
