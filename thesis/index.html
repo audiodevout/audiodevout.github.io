@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 
-<html class="ifb-print-root ifb-print-root--dark" dir="ltr" lang="en">
+<html class="ifb-print-root ifb-print-root--dark ifb-web-read" dir="ltr" lang="en">
 <head>
 <meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="dark" name="color-scheme"/>
+<meta content="Instruments for Becoming — a manual for sound practitioners by Atharva Gupta." name="description"/>
 <title>Instruments for Becoming — Atharva Gupta</title>
 <link href="https://atharvagupta.net/thesis/" rel="canonical"/>
 <link href="cityfab-livre-print/livre-print-base.css?v=1779224558" rel="stylesheet"/>
 <link href="cityfab-livre-print/overrides.css?v=1779224558" rel="stylesheet"/>
 <link href="cityfab-livre-print/ifb-plates.css?v=1779224558" rel="stylesheet"/>
 <link href="cityfab-livre-print/printenbind-a5.css?v=1779224558" rel="stylesheet"/>
-<link href="cityfab-livre-print/ifb-screen-spread.css?v=1779224558" media="screen" rel="stylesheet"/>
 <link href="cityfab-livre-print/ifb-print-theme-dark.css?v=1779224558" rel="stylesheet"/>
-<link href="cityfab-livre-print/ifb-folios.css?v=1779224558" rel="stylesheet"/>
+<link href="cityfab-livre-print/ifb-web-read.css?v=20260602" media="screen" rel="stylesheet"/>
 <style id="ifb-partie-bg-cache">
   /* Cache-busted fond-parties: grout matches @page flood so PNG transparency blends */
   @page partie {
@@ -24,163 +25,18 @@
   }
 
   </style>
-<script src="cityfab-livre-print/pagedjs-polyfill.min.js"></script>
-<script src="cityfab-livre-print/jquery-1.7.1.min.js"></script>
 <script src="cityfab-livre-print/ifb-hyphenation.js"></script>
 <script src="cityfab-livre-print/qrcode.min.js"></script>
 <script src="cityfab-livre-print/ifb-author-qr.js"></script>
 <script src="cityfab-livre-print/ifb-plate-images.js"></script>
-<script src="cityfab-livre-print/ifb-folios.js"></script>
-<script>
-    var IFB_STRIP_TEXT_RE = /[\u00AD\u200B-\u200D\u2060\uFEFF\uFFFE\uFFFF]/g;
-
-    function ifbCleanTextNodeValue(text) {
-      return text.replace(IFB_STRIP_TEXT_RE, "");
-    }
-
-    function ifbStripTextArtifactsFromRoot(root) {
-      if (!root || !root.ownerDocument) return;
-      var skip = /^(script|style)$/i;
-      var w = root.ownerDocument.createTreeWalker(
-        root,
-        NodeFilter.SHOW_TEXT,
-        null
-      );
-      var n;
-      while ((n = w.nextNode())) {
-        var p = n.parentElement;
-        if (!p || skip.test(p.tagName)) continue;
-        var cleaned = ifbCleanTextNodeValue(n.textContent);
-        if (cleaned !== n.textContent) n.textContent = cleaned;
-      }
-    }
-
-    function ifbStripSoftHyphensFromHeadings(root) {
-      ifbStripTextArtifactsFromRoot(root);
-    }
-  function ifbChapterTitleBoxFits(h3, projet, pad) {
-    var r = h3.getBoundingClientRect();
-    var b = projet.getBoundingClientRect();
-    if (!r.height || !b.height) return true;
-    var maxSpread = b.width * 0.5 + 2;
-    var maxColH = b.height * 0.5 + 2;
-    return (
-      r.top >= b.top + pad - 1 &&
-      r.bottom <= b.bottom - pad + 1 &&
-      r.width <= maxSpread &&
-      r.height <= Math.min(b.height - 2 * pad, maxColH) + 1
-    );
-  }
-  function ifbAutofitVerticalChapterTitle(h3) {
-    var projet = h3.closest(".projet");
-    if (!projet) return;
-    var page = h3.closest(".pagedjs_page");
-    var isLeft = page && page.classList.contains("pagedjs_left_page");
-    var maxPt = 36;
-    var minPt = 10;
-    var pad = 5;
-    var best = minPt;
-    var w = document.createTreeWalker(h3, NodeFilter.SHOW_TEXT, null);
-    var tn;
-    while ((tn = w.nextNode())) {
-      tn.textContent = tn.textContent.replace(/\u00AD/g, "");
-    }
-    h3.style.setProperty("--ifb-chapter-fit-scale", "1");
-    for (var pt = maxPt; pt >= minPt; pt -= 0.5) {
-      h3.style.fontSize = pt + "pt";
-      if (ifbChapterTitleBoxFits(h3, projet, pad)) {
-        best = pt;
-        break;
-      }
-    }
-    h3.style.fontSize = best + "pt";
-    var guard = 0;
-    while (guard++ < 40 && !ifbChapterTitleBoxFits(h3, projet, pad)) {
-      var sc = parseFloat(h3.style.getPropertyValue("--ifb-chapter-fit-scale"), 10) || 1;
-      if (sc <= 0.72) break;
-      sc = Math.round((sc - 0.03) * 100) / 100;
-      h3.style.setProperty("--ifb-chapter-fit-scale", String(sc));
-    }
-    h3.classList.add("ifb-chapter-title--fitted");
-    h3.dataset.ifbChapterTitleSide = isLeft ? "left" : "right";
-  }
-  function ifbAutofitChapterTitlesInRoot(root) {
-    if (!root || !root.querySelectorAll) return;
-    root.querySelectorAll(".pagedjs_titre_page .projet h3").forEach(ifbAutofitVerticalChapterTitle);
-  }
-  function ifbSweepEmptyPlates(root) {
-    if (!root || !root.querySelectorAll) return;
-    root.querySelectorAll(".ifb-plate-droite").forEach(function (plate) {
-      var imgs = plate.querySelectorAll("img");
-      if (!imgs.length) {
-        plate.remove();
-        return;
-      }
-      var allDone = true;
-      var anyGood = false;
-      for (var i = 0; i < imgs.length; i++) {
-        var im = imgs[i];
-        if (!im.complete) {
-          allDone = false;
-          break;
-        }
-        if (im.naturalWidth > 0 && im.naturalHeight > 0) anyGood = true;
-      }
-      if (allDone && !anyGood) plate.remove();
-    });
-  }
-    class IFBHandler extends Paged.Handler {
-      constructor(chunker, polisher, caller) {
-        super(chunker, polisher, caller);
-      }
-      afterRendered(pages) {
-        ifbStripTextArtifactsFromRoot(document.body);
-        ifbStripSoftHyphensFromHeadings(document.body);
-        ifbAutofitChapterTitlesInRoot(document.body);
-        ifbMarkPlateLandscapeImages(document.body);
-        ifbSweepEmptyPlates(document.body);
-        ifbInitAuthorQRCodesOnPages(pages);
-        if (typeof ifbPaintFoliosInRoot === "function") ifbPaintFoliosInRoot(document.body);
-        requestAnimationFrame(function () {
-          ifbMarkPlateLandscapeImages(document.body);
-          ifbSweepEmptyPlates(document.body);
-          ifbInitAuthorQRCodesOnPages(pages);
-          if (typeof ifbPaintFoliosInRoot === "function") ifbPaintFoliosInRoot(document.body);
-        });
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            ifbAutofitChapterTitlesInRoot(document.body);
-            ifbMarkPlateLandscapeImages(document.body);
-            ifbSweepEmptyPlates(document.body);
-            if (typeof ifbPaintFoliosInRoot === "function") ifbPaintFoliosInRoot(document.body);
-          });
-        });
-      }
-      afterPageLayout(pageElement, page) {
-        if (!pageElement) return;
-        if (typeof ifbPaintFolioOnPage === "function") ifbPaintFolioOnPage(pageElement, page);
-        ifbMarkPlateLandscapeImages(pageElement);
-        if (pageElement.querySelector(".ifb-author-qr[data-ifb-qr-url]")) {
-          ifbInitAuthorQRCodes(pageElement);
-        }
-        if (pageElement.classList.contains("pagedjs_titre_page")) {
-          pageElement.querySelectorAll(".projet h3").forEach(ifbAutofitVerticalChapterTitle);
-        }
-        if (typeof ifbFixPossessiveApostrophesInRoot === "function") {
-          ifbFixPossessiveApostrophesInRoot(pageElement);
-        }
-        ifbStripTextArtifactsFromRoot(pageElement);
-      }
-    }
-    Paged.registerHandlers(IFBHandler);
-    window.addEventListener("load", function () {
-      ifbMarkPlateLandscapeImages(document.body);
-      ifbSweepEmptyPlates(document.body);
-      if (typeof ifbPaintFoliosInRoot === "function") ifbPaintFoliosInRoot(document.body);
-    });
-  </script>
+<script src="cityfab-livre-print/ifb-web-read.js?v=20260602"></script>
 </head>
 <body>
+<header class="ifb-site-bar" role="banner">
+<a class="ifb-site-bar__home" href="/index.html">← Atharva Gupta</a>
+<span class="ifb-site-bar__brand">Instruments for Becoming</span>
+</header>
+<main class="ifb-web-document" id="ifb-web-document">
 <div class="garde garde-cover">
 <div class="garde-cover-inner">
 <div class="garde-cover-title">Instruments<br/>for<br/>Becoming</div>
@@ -3357,7 +3213,7 @@ or me, so if something in here is useful to you, use it and feel free to make
 
 it your own and share it along. </p><div class="ifb-copyright-colophon">
 <div class="preface-title ifb-colophon-title">colophon</div>
-<p>the print edition is laid out using <a href="https://pagedjs.org/">paged.js</a>, a css paged media implementation in the browser, set to a5 trim (148.5 × 210 mm, 3 mm bleed); body text is left-aligned without automatic hyphenation.</p>
+<p>this web edition uses the same type palette as the print book: flowing single-column layout for screen reading; body text is left-aligned without automatic hyphenation.</p>
 <p>typefaces: <em>fake receipt</em> by velvetyne type foundry, used under the sil open font license 1.1, appears on covers, folios, part titles, and display accents. <em>elaine sans extralight italic</em> handles table of contents markers, captions, and code. <em>elaine</em> carries the continuous body text and bibliography.</p>
 </div>
 </section>
@@ -3368,5 +3224,9 @@ it your own and share it along. </p><div class="ifb-copyright-colophon">
 <div class="garde-cover-meta"><span class="garde-cover-author">Atharva Gupta</span><span class="garde-cover-programme">MADTECH</span><span class="garde-cover-institution">Frank Mohr Institute</span><span class="garde-cover-year">2026</span></div>
 </div>
 </div>
+</main>
+<footer class="ifb-site-footer">
+<p>Atharva Gupta · <a href="/index.html">atharvagupta.net</a></p>
+</footer>
 </body>
 </html>

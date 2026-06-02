@@ -1,0 +1,427 @@
+/*
+ * IFB web reading layout — screen-only flowing document.
+ * Keeps thesis typography and palette; drops Paged.js spreads, folios, and trim boxes.
+ */
+@media screen {
+  html.ifb-web-read {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  html.ifb-web-read body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--ifb-graphite-flood, #17171d);
+    color: var(--ifb-graphite-ink, #e4e4e4);
+  }
+
+  /* --- Site chrome -------------------------------------------------------- */
+  html.ifb-web-read .ifb-site-bar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem clamp(1rem, 4vw, 2rem);
+    border-bottom: 1px solid var(--ifb-graphite-muted, #5c5c64);
+    background: rgba(23, 23, 29, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  html.ifb-web-read .ifb-site-bar__brand,
+  html.ifb-web-read .ifb-site-bar__home {
+    font-family: "Elaine", ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ifb-graphite-muted, #5c5c64);
+    white-space: nowrap;
+  }
+
+  html.ifb-web-read .ifb-site-bar__brand {
+    color: var(--ifb-graphite-ink, #e4e4e4);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  html.ifb-web-read .ifb-site-bar__home:hover,
+  html.ifb-web-read .ifb-site-bar__brand:hover {
+    color: var(--ifb-graphite-accent, #ececec);
+  }
+
+  html.ifb-web-read .ifb-site-footer {
+    margin-top: 4rem;
+    padding: 2rem clamp(1rem, 4vw, 2rem) 3rem;
+    border-top: 1px solid var(--ifb-graphite-muted, #5c5c64);
+    text-align: center;
+    font-family: "Elaine", ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  html.ifb-web-read .ifb-site-footer a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* --- Document column ---------------------------------------------------- */
+  html.ifb-web-read .ifb-web-document {
+    width: min(42rem, 100%);
+    margin: 0 auto;
+    padding: clamp(1.5rem, 5vw, 2.75rem) clamp(1.1rem, 4vw, 1.75rem) 0;
+    box-sizing: border-box;
+  }
+
+  /* Book-only leaves */
+  html.ifb-web-read .partie_gauche,
+  html.ifb-web-read .page_blanche,
+  html.ifb-web-read .garde-back-cover,
+  html.ifb-web-read .ifb-front-roman:empty {
+    display: none !important;
+  }
+
+  /* --- Dark ink overrides (overrides.css forces #000 for print) ----------- */
+  html.ifb-web-read body,
+  html.ifb-web-read p,
+  html.ifb-web-read h1,
+  html.ifb-web-read h2,
+  html.ifb-web-read h3,
+  html.ifb-web-read h4,
+  html.ifb-web-read h5,
+  html.ifb-web-read h6,
+  html.ifb-web-read .type,
+  html.ifb-web-read .fonction,
+  html.ifb-web-read .code,
+  html.ifb-web-read p.intro {
+    color: var(--ifb-graphite-ink, #e4e4e4) !important;
+  }
+
+  html.ifb-web-read .fonction {
+    background-color: var(--ifb-fonction-bg, #2c2c32) !important;
+  }
+
+  html.ifb-web-read .code {
+    background-color: var(--ifb-code-bg, #25252b) !important;
+  }
+
+  html.ifb-web-read a {
+    color: var(--ifb-graphite-accent, #ececec);
+  }
+
+  html.ifb-web-read hr.ifb-closing-rule {
+    border-top-color: var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  /* --- Cover hero --------------------------------------------------------- */
+  html.ifb-web-read .garde.garde-cover {
+    page: auto !important;
+    min-height: auto !important;
+    margin: 0 0 3rem !important;
+    padding: clamp(2rem, 8vw, 4rem) 0 2.5rem !important;
+    border-bottom: 1px solid var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  html.ifb-web-read .garde.garde-cover > .garde-cover-inner {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  html.ifb-web-read .garde-cover-title {
+    font-family: "Fake Receipt", serif !important;
+    color: var(--ifb-graphite-accent, #ececec) !important;
+  }
+
+  html.ifb-web-read .garde-cover-subtitle,
+  html.ifb-web-read .garde-cover-meta {
+    color: var(--ifb-graphite-muted, #5c5c64) !important;
+  }
+
+  html.ifb-web-read hr.garde-cover-rule {
+    border-top-color: var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  /* --- Table of contents -------------------------------------------------- */
+  html.ifb-web-read .part.ifb-toc-start {
+    page: auto !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    max-width: none !important;
+    margin: 0 0 3rem !important;
+    padding: 0 0 2rem !important;
+    border-bottom: 1px solid var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  html.ifb-web-read #sommaire {
+    color: var(--ifb-graphite-accent, #ececec) !important;
+    font-family: "Fake Receipt", serif !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  html.ifb-web-read .part > span > a,
+  html.ifb-web-read .part a.proj {
+    color: var(--ifb-graphite-ink, #e4e4e4) !important;
+  }
+
+  html.ifb-web-read .part > span > a:hover,
+  html.ifb-web-read .part a.proj:hover {
+    color: var(--ifb-graphite-accent, #ececec) !important;
+  }
+
+  html.ifb-web-read .part > span > a::before,
+  html.ifb-web-read .part a.proj::before {
+    color: var(--ifb-graphite-muted, #5c5c64) !important;
+  }
+
+  /* --- Part openers ------------------------------------------------------- */
+  html.ifb-web-read .partie_droite {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    flex: none !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: clamp(2.5rem, 8vw, 4rem) 0 1.5rem !important;
+    padding: 1.75rem clamp(1rem, 4vw, 1.5rem) !important;
+    page: auto !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    background-color: var(--ifb-graphite-flood, #17171d);
+    background-image: url("./fond-parties.png");
+    background-position: 50% 50%;
+    background-size: 200mm 200mm;
+    background-repeat: repeat;
+    border-top: 1px solid var(--ifb-graphite-muted, #5c5c64);
+    border-bottom: 1px solid var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  html.ifb-web-read .partie_droite h2 {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    font-family: "Fake Receipt", serif !important;
+    font-size: clamp(1.6rem, 5vw, 2.35rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: lowercase !important;
+    color: var(--ifb-graphite-accent, #ececec) !important;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+  }
+
+  /* --- Chapter openers ---------------------------------------------------- */
+  html.ifb-web-read .projet {
+    page: auto !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin: clamp(2rem, 6vw, 3rem) 0 1rem !important;
+    padding: 0 !important;
+    border: none !important;
+    display: block !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+  }
+
+  html.ifb-web-read .projet ~ .projet {
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+
+  html.ifb-web-read .projet .bloc1 {
+    width: 100% !important;
+    display: block !important;
+    align-items: stretch !important;
+  }
+
+  html.ifb-web-read .projet h3 {
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 0 0.75rem !important;
+    padding: 0 0 0.75rem !important;
+    border-bottom: 1px solid var(--ifb-graphite-muted, #5c5c64) !important;
+    font-family: var(--ifb-chapter-title-font, "Dotrice", serif) !important;
+    font-size: clamp(1.15rem, 3.2vw, 1.55rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.03em !important;
+    text-transform: lowercase !important;
+    text-align: left !important;
+    color: var(--ifb-graphite-accent, #ececec) !important;
+  }
+
+  html.ifb-web-read .projet h3 .ifb-chapter-title-word {
+    white-space: normal !important;
+  }
+
+  /* --- Body prose --------------------------------------------------------- */
+  html.ifb-web-read p {
+    max-width: none !important;
+    width: auto !important;
+    margin-left: 0 !important;
+    text-align: left !important;
+  }
+
+  html.ifb-web-read h4,
+  html.ifb-web-read h5 {
+    max-width: none !important;
+    width: auto !important;
+    color: var(--ifb-graphite-accent, #ececec) !important;
+  }
+
+  /* --- Image plates ------------------------------------------------------- */
+  html.ifb-web-read .ifb-plate-droite {
+    page: auto !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-after: auto !important;
+    page-break-after: auto !important;
+    width: calc(100% + clamp(1.1rem, 4vw, 1.75rem) * 2) !important;
+    max-width: none !important;
+    margin: 2.5rem calc(-1 * clamp(1.1rem, 4vw, 1.75rem)) !important;
+    padding: clamp(1rem, 3vw, 1.5rem) !important;
+    background-color: var(--ifb-plate-letterbox, #000) !important;
+    box-sizing: border-box !important;
+  }
+
+  html.ifb-web-read .ifb-plate-stage,
+  html.ifb-web-read .ifb-plate-figure-wrap,
+  html.ifb-web-read .ifb-plate-figure {
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  html.ifb-web-read .ifb-plate-figure img {
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: min(85vh, 720px) !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    object-fit: contain !important;
+  }
+
+  html.ifb-web-read .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+    transform: none !important;
+    max-width: 100% !important;
+    max-height: min(70vh, 560px) !important;
+  }
+
+  /* --- Glossary ----------------------------------------------------------- */
+  html.ifb-web-read .glossaire {
+    break-before: auto !important;
+    page-break-before: auto !important;
+    max-width: none !important;
+  }
+
+  html.ifb-web-read .glossaire .ifb-glossary-term {
+    border-left-color: var(--ifb-graphite-ink, #e4e4e4) !important;
+    border-right-color: var(--ifb-graphite-ink, #e4e4e4) !important;
+    color: var(--ifb-graphite-accent, #ececec) !important;
+  }
+
+  /* --- References & prelims ----------------------------------------------- */
+  html.ifb-web-read .ifb-references-flow,
+  html.ifb-web-read .ifb-appendix-flow,
+  html.ifb-web-read section.preface-page {
+    page: auto !important;
+  }
+
+  html.ifb-web-read section.copyright-page,
+  html.ifb-web-read section.acknowledgements-page,
+  html.ifb-web-read section.ifb-author-page {
+    break-before: auto !important;
+    page-break-before: auto !important;
+    max-width: none !important;
+  }
+
+  html.ifb-web-read section.copyright-page .preface-title,
+  html.ifb-web-read section.acknowledgements-page .preface-title,
+  html.ifb-web-read section.ifb-author-page .preface-title,
+  html.ifb-web-read section.copyright-page p,
+  html.ifb-web-read section.acknowledgements-page p {
+    color: var(--ifb-graphite-ink, #e4e4e4) !important;
+  }
+
+  html.ifb-web-read section.copyright-page .ifb-copyright-colophon {
+    border-top-color: var(--ifb-graphite-muted, #5c5c64);
+  }
+
+  html.ifb-web-read .ifb-author-link-label {
+    color: var(--ifb-graphite-muted, #5c5c64) !important;
+  }
+
+  html.ifb-web-read .ifb-author-link-url {
+    color: var(--ifb-graphite-ink, #e4e4e4) !important;
+  }
+
+  html.ifb-web-read .ifb-author-links {
+    max-width: none !important;
+  }
+
+  @media (min-width: 640px) {
+    html.ifb-web-read .ifb-author-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    html.ifb-web-read .ifb-author-links {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* --- Hide Paged.js chrome if polyfill ever loads ------------------------ */
+  html.ifb-web-read .pagedjs_pages {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    gap: 0 !important;
+  }
+
+  html.ifb-web-read .pagedjs_page {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  html.ifb-web-read .pagedjs_bleed,
+  html.ifb-web-read .pagedjs_marks-crop,
+  html.ifb-web-read .pagedjs_marks-cross,
+  html.ifb-web-read .pagedjs_margin {
+    display: none !important;
+  }
+}
