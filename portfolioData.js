@@ -1277,7 +1277,7 @@ try {
     title: "ABOUT ME",
     description: `Atharva Gupta is an artist, researcher, and educator who builds objects, systems, and situations grounded in personal relationships with technology. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, treating technology as something emotional, erratic, and entangled with both body and politics.`,
     credentials: [],
-    image: "./assets/images/atharva.jpg",
+    image: "./assets/images/atharva.jpeg",
   },
 
 
