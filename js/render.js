@@ -60,7 +60,7 @@
   function createClickableMarquee(items, openLightbox, options) {
     if (!items || items.length === 0) return null;
     options = options || {};
-    var sep = options.separator !== undefined ? options.separator : ' · ';
+    var sep = options.separator !== undefined ? options.separator : ' // ';
     var track = document.createElement('div');
     track.className = 'marquee-track marquee-track--clickable';
     var content = document.createElement('div');
@@ -648,7 +648,7 @@
 
     if (!marqueeEl || !listEl || !buttons.length) return;
 
-    var currentView = 'marquee';
+    var currentView = 'list';
     try {
       var stored = sessionStorage.getItem('homeView');
       if (stored === 'list' || stored === 'marquee') currentView = stored;

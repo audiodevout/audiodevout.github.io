@@ -833,7 +833,7 @@
 .marquee-content {
   display: flex;
   white-space: nowrap;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: clamp(1rem, 2vw, 1.35rem);
   letter-spacing: 0.15em;
   color: var(--color-muted);
@@ -930,8 +930,11 @@
   pointer-events: none;
   user-select: none;
   color: var(--color-muted);
-  font-weight: 300;
-  padding: 0 0.25em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  padding: 0 0.35em;
 }
 
 .work-marquee-section {
@@ -973,7 +976,7 @@
 }
 
 .embed-tile__label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -1062,7 +1065,7 @@
 
 .sound-card__title,
 .track-title {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: var(--font-size-lg);
   margin-bottom: var(--space-2);
   text-transform: uppercase;
@@ -1163,7 +1166,7 @@
 
 .theme-strip-inner {
   white-space: nowrap;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.25em;
   animation: marquee-scroll var(--marquee-duration) linear infinite;
@@ -1331,7 +1334,7 @@
 }
 
 .year-number {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-variation-settings: 'wght' 700;
   font-size: clamp(3rem, 8vw, 6rem);
   color: transparent;
@@ -1486,7 +1489,7 @@
 
 /* Phase 14d: writing section header (letter parallax) */
 .writing-section-header {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   font-weight: 400;
   letter-spacing: var(--letter-spacing-stamp);
@@ -1557,7 +1560,7 @@
 
 .paper-title-main {
   display: block;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-variation-settings: 'wght' 700;
   font-size: clamp(1.4rem, 3vw, 2rem);
   line-height: 1.1;
@@ -1567,7 +1570,7 @@
 
 .paper-title-sub {
   display: block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 1.5vw, 1rem);
   font-weight: 400;
   font-style: italic;

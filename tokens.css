@@ -1,15 +1,15 @@
 /**
  * tokens.css — design tokens for Atharva Gupta portfolio
- * Typography as structure: big, light, lowercase. Neue Haas Grotesk only.
+ * Typography aligned with thesis: Fake Receipt, Elaine, graphite palette.
  */
 :root {
-  /* Monochrome palette — silver, grey, black, white (readable contrast) */
-  --color-bg: #0a0a0a;
-  --color-surface: #141414;
-  --color-border: #2a2a2a;
-  --color-text: #e8e8e8;
-  --color-muted: #888888;
-  --color-accent: #b0b0b0;
+  /* Graphite palette — matches thesis dark theme */
+  --color-bg: #17171d;
+  --color-surface: #28282e;
+  --color-border: #3e3e44;
+  --color-text: #e4e4e4;
+  --color-muted: #5c5c64;
+  --color-accent: #ececec;
   --color-accent-glacier: var(--color-accent);
   --color-accent-crimson: var(--color-accent);
   --color-accent-violet: var(--color-accent);
@@ -19,16 +19,17 @@
   --color-accent-saffron: var(--color-accent);
   --color-accent-magenta: var(--color-accent);
   --color-accent-graphite: var(--color-accent);
-  --color-lightbox-bg: #0a0a0a;
-  --color-on-dark: #fff;
+  --color-lightbox-bg: #17171d;
+  --color-on-dark: #ececec;
 
-  /* Body background — plain black */
-  --body-bg: #000000;
-  --overlay-bg: rgba(0, 0, 0, 0.88);
+  --body-bg: #17171d;
+  --overlay-bg: rgba(23, 23, 29, 0.88);
 
-  /* Typography — Neue Haas Grotesk: big, light, lowercase */
-  --font-display: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-body: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Typography — thesis fonts */
+  --font-display: 'Fake Receipt', serif;
+  --font-body: 'Elaine', sans-serif;
+  --font-mono: 'Elaine Sans ExtraLight Italic', sans-serif;
+  --font-chapter: 'Dotrice', serif;
   --font-size-xs: clamp(0.65rem, 1vw, 0.75rem);
   --font-size-sm: clamp(0.8rem, 1.2vw, 0.9rem);
   --font-size-base: 1rem;
@@ -66,23 +67,23 @@
   --z-nav: 300;
   --z-modal: 400;
 
-  /* Scrollbar — monochrome, minimal */
-  --scrollbar-track: #0a0a0a;
-  --scrollbar-thumb: #2a2a2a;
-  --scrollbar-thumb-hover: #888888;
+  /* Scrollbar — graphite, minimal */
+  --scrollbar-track: #17171d;
+  --scrollbar-thumb: #3e3e44;
+  --scrollbar-thumb-hover: #5c5c64;
 }
 
-/* Light mode — monochrome */
+/* Light mode — warm off-white variant */
 [data-theme="light"] {
-  --color-bg: #e8e8e8;
-  --color-surface: #ffffff;
-  --color-border: #c8c8c8;
+  --color-bg: #e8e6e1;
+  --color-surface: #f4f2ed;
+  --color-border: #c8c4bc;
   --color-text: #1a1a1a;
-  --color-muted: #555555;
+  --color-muted: #5c5c64;
   --color-accent: #404040;
-  --body-bg: #e8e8e8;
+  --body-bg: #e8e6e1;
   --overlay-bg: rgba(0, 0, 0, 0.35);
-  --scrollbar-track: #e8e8e8;
-  --scrollbar-thumb: #c8c8c8;
-  --scrollbar-thumb-hover: #555555;
+  --scrollbar-track: #e8e6e1;
+  --scrollbar-thumb: #c8c4bc;
+  --scrollbar-thumb-hover: #5c5c64;
 }

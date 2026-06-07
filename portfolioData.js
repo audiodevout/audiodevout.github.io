@@ -1296,7 +1296,7 @@ try {
             period: "Sep 2022 – Aug. 2023",
           },
           {
-            degree: "Bachelor of Arts (Triple Major: Psychology, Sociology and Literature)",
+            degree: "Bachelor of Arts (BA), Triple Major, Psychology, Sociology and Literature",
             institution: "Christ University",
             location: "Bangalore, IN",
             period: "Aug 2017 – Jun 2020",

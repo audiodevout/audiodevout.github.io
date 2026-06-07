@@ -1,30 +1,36 @@
 /**
- * fonts.css — Neue Haas Grotesk (self-hosted)
- * Add woff2 files to ./assets/fonts/; fallback to system sans until then.
+ * fonts.css — thesis typography (self-hosted from thesis/)
  */
 @font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../assets/fonts/NeueHaasGroteskText-Regular.woff2') format('woff2'),
-       url('../assets/fonts/NeueHaasGroteskText-Regular.woff') format('woff');
+  font-family: 'Elaine';
+  src: url('./thesis/cityfab-livre-print/elainesans-regular-webfont.woff2') format('woff2'),
+       url('./thesis/cityfab-livre-print/elainesans-regular-webfont.woff') format('woff'),
+       url('./thesis/cityfab-livre-print/elainesans-regular-webfont.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../assets/fonts/NeueHaasGroteskText-Medium.woff2') format('woff2'),
-       url('../assets/fonts/NeueHaasGroteskText-Medium.woff') format('woff');
-  font-weight: 500;
+  font-family: 'Fake Receipt';
+  src: url('./thesis/fonts/fake-receipt.regular.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../assets/fonts/NeueHaasGroteskDisplay-Bold.woff2') format('woff2'),
-       url('../assets/fonts/NeueHaasGroteskDisplay-Bold.woff') format('woff');
-  font-weight: 700;
+  font-family: 'Elaine Sans ExtraLight Italic';
+  src: url('./thesis/fonts/elaine-sans.extralight-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dotrice';
+  src: url('./thesis/fonts/dotrice.regular.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
