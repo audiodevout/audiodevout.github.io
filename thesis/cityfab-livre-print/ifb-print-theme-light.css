@@ -1,0 +1,50 @@
+/* -------------------------------------------------------------------------- */
+/* IFB — light palette (unused by main thesis pipeline; canonical book is book_dark.html). */
+/* -------------------------------------------------------------------------- */
+/* CMYK PDF export (recommended): Chromium print → Acrobat → FOGRA39 /       */
+/* PDF/X-1a. Intended plate mix:                                               */
+/*   • Sheet (uncoated/off-white perceived as white): C0 M0 Y0 K0             */
+/*   • Body type: K100 rich black — avoid tinting text with CMY               */
+/*   • Greys/rules: black-only screens at K25–65 only                        */
+/* sRGB below matches common coated white stock on screen previews.          */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  --color-background: whitesmoke;
+  --color-pageBox: #666666;
+  --color-paper: #ffffff;
+  --ifb-print-paper: #ffffff;
+  --ifb-print-ink: #000000;
+  --ifb-accent-text: #000000;
+}
+
+@media screen {
+  :root {
+    --color-background: #e8e8e8;
+  }
+}
+
+/*
+ * Titre-page “white card” preview fix: do NOT put it only in @media screen here —
+ * Polisher often drops those blocks from non–media=screen links. See overrides.css
+ * (root rules) and ifb-screen-spread.css (media=screen link, kept in DOM).
+ */
+
+.ifb-plate-droite img {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  html.ifb-print-root,
+  body,
+  .pagedjs_page,
+  .pagedjs_area,
+  .partie_droite,
+  .projet,
+  .glossaire,
+  .ifb-plate-droite {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

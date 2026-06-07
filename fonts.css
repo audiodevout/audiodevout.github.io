@@ -1,0 +1,36 @@
+/**
+ * fonts.css — thesis typography (self-hosted from thesis/)
+ */
+@font-face {
+  font-family: 'Elaine';
+  src: url('./thesis/cityfab-livre-print/elainesans-regular-webfont.woff2') format('woff2'),
+       url('./thesis/cityfab-livre-print/elainesans-regular-webfont.woff') format('woff'),
+       url('./thesis/cityfab-livre-print/elainesans-regular-webfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fake Receipt';
+  src: url('./thesis/fonts/fake-receipt.regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elaine Sans ExtraLight Italic';
+  src: url('./thesis/fonts/elaine-sans.extralight-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dotrice';
+  src: url('./thesis/fonts/dotrice.regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,13 @@
+{
+  "wsPort": 3000,
+  "oscPort": 6969,
+  "oscHost": "127.0.0.1",
+  "tdProjectPath": "",
+  "detectedIp": "",
+  "ipRefreshInterval": 10000,
+  "oscBundleWindow": 16,
+  "oscRateLimit": 60,
+  "heartbeatInterval": 5000,
+  "heartbeatTimeout": 3,
+  "pongTimeoutMs": 15000
+}

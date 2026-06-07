@@ -1,0 +1,151 @@
+/**
+ * layout.css — page structure, sections, containment
+ */
+/* Custom scrollbar — monochrome, minimal, matches design tokens */
+html {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+html::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  border: 2px solid var(--scrollbar-track);
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Phase 6b + 7: background from tokens so light theme applies */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--body-bg);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Global: prevent images from exceeding container width */
+img {
+  max-width: 100%;
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: var(--space-12);
+}
+
+/* Section spacing — full display width with edge padding */
+.section {
+  padding: var(--space-12) clamp(var(--space-6), 5vw, var(--space-12));
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Full-viewport presence without zoom (avoids blurry text and “small island” feel) */
+.section--marquees {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-10);
+  padding-left: clamp(var(--space-4), 3vw, var(--space-10));
+  padding-right: clamp(var(--space-4), 3vw, var(--space-10));
+}
+
+.section--marquees:first-of-type {
+  padding-top: max(var(--space-10), calc(52px + env(safe-area-inset-top, 0px)));
+  min-height: min(88vh, 960px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* JS toggles hidden; author .section--marquees display:flex must not beat the attribute */
+#marquees-content[hidden],
+#list-content[hidden] {
+  display: none !important;
+}
+
+/* Phase 6c: section stacking for atmosphere overlays */
+#exhibitions,
+#about {
+  position: relative;
+}
+
+#exhibitions .section-heading,
+#exhibitions .exhibitions-section-content,
+#about .section-heading,
+#about .about-section-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Phase 6c: section atmosphere — subtle radial glows (no animation) */
+#exhibitions::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: none;
+}
+
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 40% 60%,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 60%
+  );
+}
+
+/* Phase 7: section titles = big, light, uppercase (structural) */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-8);
+  line-height: var(--line-height-tight);
+}
+
+/* Hero fills viewport — full width */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-8) clamp(var(--space-6), 5vw, var(--space-12));
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Scroll indicator container */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity var(--transition-base);
+}
+
+.hero__scroll.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}

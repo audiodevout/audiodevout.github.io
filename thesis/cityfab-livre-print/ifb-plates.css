@@ -1,0 +1,828 @@
+/* -------------------------------------------------------------------------- */
+/* image-plates-mockup.html — .mock-sheet / .mock-plate (standalone preview) */
+/* -------------------------------------------------------------------------- */
+:root {
+  --sheet-w: 148.5mm;
+  --sheet-min-h: 210mm;
+  /* Mock recto: Print&Bind 5 mm top/bottom/fore-edge, 15 mm gutter */
+  --pad-top: 5mm;
+  --pad-bottom: 5mm;
+  --pad-side: 5mm;
+  --pad-gutter: 15mm;
+  --content-w: calc(var(--sheet-w) - var(--pad-gutter) - var(--pad-side));
+  --frame-bg: url(./fond-parties.png);
+  --frame-bg-size: 200mm 200mm;
+  /* Shared plate tokens (book + mock) */
+  --ifb-plate-safe: 5mm;
+  --ifb-plate-safe-outer: 1mm;
+  --ifb-plate-safe-inner: 5mm;
+  --ifb-plate-safe-y: 5mm;
+  --ifb-plate-w: calc(var(--sheet-w) - var(--ifb-plate-safe-outer) - var(--ifb-plate-safe-inner));
+  /* Tall as trim allows — keeps ≥ (--ifb-plate-safe-y) inside trim without using bleed */
+  --ifb-plate-img-max-h: calc(var(--sheet-min-h) - 2 * var(--ifb-plate-safe-y));
+  --ifb-plate-scrim-h: 32mm;
+  --ifb-plate-letterbox: #000;
+  --ifb-body-leading: calc(14.72pt + 1px);
+  --mock-plate-img-max-h: var(--ifb-plate-img-max-h);
+  --mock-plate-img-max-h-double: calc((var(--ifb-plate-img-max-h) - 4mm) / 2);
+  --mock-plate-img-max-h-double-row: calc(var(--ifb-plate-img-max-h) - 4mm);
+  --mock-plate-img-max-h-multi-parallel: 78mm;
+  --mock-plate-img-max-h-multi-diy: 88mm;
+  --mock-plate-img-max-h-multi-doc: 72mm;
+  --ink: #000;
+  --ink-muted: #000;
+  --hairline: rgba(0, 0, 0, 0.12);
+  --caption: 11pt;
+  --plate-well: var(--ifb-plate-letterbox);
+}
+
+.mock-sheet *,
+.mock-sheet *::before,
+.mock-sheet *::after {
+  box-sizing: border-box;
+}
+
+.mock-sheet {
+  width: var(--sheet-w);
+  min-height: var(--sheet-min-h);
+  margin: 0 auto 20px;
+  padding: var(--pad-top) var(--pad-side) var(--pad-bottom) var(--pad-gutter);
+  background: #fff;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  break-after: page;
+  page-break-after: always;
+  break-inside: avoid;
+  overflow: hidden;
+}
+
+.mock-sheet.mock-plate {
+  padding: var(--ifb-plate-safe);
+  border: none;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  background-color: var(--ifb-plate-letterbox);
+  background-image: none;
+}
+
+.mock-plate__well {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mock-sheet:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+.mock-sheet--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mock-sheet--text p {
+  margin: 0 0 0.85em;
+  text-align: left;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.mock-sheet--text h4,
+.mock-sheet--text h5 {
+  margin: 1em 0 0.5em;
+  font-weight: 600;
+  text-align: left;
+  page-break-after: avoid;
+}
+
+.mock-sheet--text h4 { font-size: 11pt; }
+.mock-sheet--text h5 { font-size: 10pt; }
+
+.mock-sheet--text p:last-child {
+  margin-bottom: 0;
+}
+
+.mock-plate {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--sheet-min-h);
+  box-sizing: border-box;
+}
+
+.mock-plate__stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+}
+
+.mock-plate--double .mock-plate__stage {
+  gap: 4mm;
+}
+
+.mock-plate--double.mock-plate--axis-row .mock-plate__stage {
+  flex-direction: row;
+  gap: 5mm;
+  align-items: stretch;
+}
+
+.mock-plate--double.mock-plate--axis-row .mock-plate__well {
+  flex: 1 1 44%;
+  max-width: 50%;
+  padding: 6mm 7mm 7mm;
+}
+
+.mock-plate--double:not(.mock-plate--axis-row) .mock-plate__well {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.mock-plate--double.mock-plate--axis-row .mock-plate__slot img {
+  max-height: var(--mock-plate-img-max-h-double-row);
+  max-width: 100%;
+}
+
+.mock-plate__body-rows {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4mm;
+  width: 100%;
+  max-width: var(--content-w);
+}
+
+.mock-plate__row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3mm 4mm;
+}
+
+.mock-plate__row .mock-plate__slot {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: none;
+}
+
+.mock-plate--multi-parallel .mock-plate__row .mock-plate__slot img {
+  max-height: var(--mock-plate-img-max-h-multi-parallel);
+  max-width: 52mm;
+}
+
+.mock-plate--multi-diy .mock-plate__row .mock-plate__slot img {
+  max-height: var(--mock-plate-img-max-h-multi-diy);
+  max-width: 38mm;
+}
+
+.mock-plate--multi-doc .mock-plate__row .mock-plate__slot img {
+  max-height: var(--mock-plate-img-max-h-multi-doc);
+  max-width: 34mm;
+}
+
+.mock-plate--multi-doc .mock-plate__row:last-child .mock-plate__slot img {
+  max-width: 48mm;
+}
+
+.mock-plate--multi .mock-plate__well {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  padding: 7mm 8mm 8mm;
+}
+
+.mock-plate__footer-captions {
+  flex-shrink: 0;
+  margin-top: 3mm;
+  padding-top: 4mm;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: var(--caption);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  line-height: 1.48;
+  color: var(--ink-muted);
+  text-align: left;
+  max-width: 100%;
+  width: 100%;
+  font-family: inherit;
+}
+
+.mock-plate__footer-captions p {
+  margin: 0 0 0.55em;
+  text-align: left;
+  text-indent: 0;
+  max-width: 38em;
+}
+
+.mock-plate__footer-captions p:last-child {
+  margin-bottom: 0;
+}
+
+.mock-plate__footer-captions p::before {
+  content: none !important;
+}
+
+.mock-plate__figure-wrap {
+  display: block;
+  position: relative;
+  max-width: var(--ifb-plate-w);
+  background: var(--ifb-plate-letterbox);
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.mock-plate__slot {
+  margin: 0;
+  display: block;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.mock-plate__slot img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: var(--ifb-plate-w);
+  max-height: var(--mock-plate-img-max-h);
+  object-fit: contain;
+  object-position: center center;
+  margin: 0 auto;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.mock-plate--double:not(.mock-plate--axis-row) .mock-plate__slot img {
+  max-height: var(--mock-plate-img-max-h-double);
+}
+
+.mock-plate--multi .mock-plate__stage {
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.mock-plate--multi .mock-plate__body-rows {
+  flex: 1 1 auto;
+  max-width: none;
+}
+
+@media print {
+  .mock-sheet {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .mock-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* book.html — one .ifb-plate-droite per plate (@page ifbPlate: no texture)    */
+/* No empty verso twin: one flow page per plate.                               */
+/* -------------------------------------------------------------------------- */
+/* Paged.js vs Prince (page floats): unless-fit / snap-block / float-reference: */
+/* page are not assumed to work in Chromium+Paged.js. Spike before relying; see */
+/* project plan §E. Side floats for body prose remain a separate follow-up.    */
+/* -------------------------------------------------------------------------- */
+
+.ifb-plate-droite {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-block-size: 0;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  background-color: var(--ifb-plate-letterbox);
+  color: #fff;
+  page: ifbPlate;
+  /* Extend plate flood into Paged.js bleed strip (Print&Bind 3 mm). */
+  margin-top: calc(-1 * var(--pagedjs-bleed-top, 0mm));
+  margin-right: calc(-1 * var(--pagedjs-bleed-right, 0mm));
+  margin-bottom: calc(-1 * var(--pagedjs-bleed-bottom, 0mm));
+  margin-left: calc(-1 * var(--pagedjs-bleed-left, 0mm));
+  padding-top: calc(var(--ifb-plate-safe-y) + var(--pagedjs-bleed-top, 0mm));
+  padding-right: calc(var(--ifb-plate-safe-inner) + var(--pagedjs-bleed-right, 0mm));
+  padding-bottom: calc(var(--ifb-plate-safe-y) + var(--pagedjs-bleed-bottom, 0mm));
+  padding-left: calc(var(--ifb-plate-safe-inner) + var(--pagedjs-bleed-left, 0mm));
+  break-before: page;
+  page-break-before: always;
+  /* Let the next paragraph flow after the plate; break-after: page forced an
+     extra empty sheet after many full-page plates in Paged.js. */
+  page-break-after: auto;
+  break-after: auto;
+  break-inside: avoid;
+}
+
+/* Fore-edge (outer margin) per spread side; pagedjs left/right = spread position. */
+.pagedjs_right_page .ifb-plate-droite {
+  padding-left: calc(var(--ifb-plate-safe-outer) + var(--pagedjs-bleed-left, 0mm));
+  padding-right: calc(var(--ifb-plate-safe-inner) + var(--pagedjs-bleed-right, 0mm));
+}
+
+.pagedjs_left_page .ifb-plate-droite {
+  padding-left: calc(var(--ifb-plate-safe-inner) + var(--pagedjs-bleed-left, 0mm));
+  padding-right: calc(var(--ifb-plate-safe-outer) + var(--pagedjs-bleed-right, 0mm));
+}
+
+.ifb-plate-block {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  min-height: 0;
+}
+
+.ifb-plate-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  /* Must not stack min-heights that exceed one trim sheet after plate padding +
+     bleed — Paged.js splits the box and leaves empty continuation pages. */
+  min-height: 0;
+  width: 100%;
+}
+
+.pagedjs_left_page .ifb-plate--full .ifb-plate-stage {
+  align-items: flex-end;
+}
+
+.pagedjs_right_page .ifb-plate--full .ifb-plate-stage {
+  align-items: flex-start;
+}
+
+.ifb-plate-droite.ifb-plate--full {
+  min-height: 0;
+}
+
+.ifb-plate-figure-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: var(--ifb-plate-w);
+  min-block-size: 0;
+  min-height: 0;
+  background: var(--ifb-plate-letterbox);
+}
+
+.pagedjs_right_page .ifb-plate-figure-wrap:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-start;
+}
+
+.pagedjs_left_page .ifb-plate-figure-wrap:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-end;
+}
+
+.ifb-plate-figure-wrap:has(.ifb-plate-img--landscape-rot) {
+  justify-content: center;
+}
+
+.pagedjs_right_page .ifb-plate-figure-wrap {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.pagedjs_left_page .ifb-plate-figure-wrap {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.ifb-plate-figure {
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.pagedjs_right_page .ifb-plate-figure:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-start;
+}
+
+.pagedjs_left_page .ifb-plate-figure:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-end;
+}
+
+/* Optional manifest ``scrim_mm`` cap (rare — most plates fill the sheet). */
+.ifb-plate-droite.ifb-plate--single .ifb-plate-figure-wrap.ifb-plate--has-img-cap {
+  max-height: var(--ifb-plate-img-cap-h);
+  flex: 0 0 auto;
+}
+
+.ifb-plate-droite.ifb-plate--single .ifb-plate-figure-wrap.ifb-plate--has-img-cap .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  max-height: min(var(--ifb-plate-img-cap-h), var(--ifb-plate-img-max-h)) !important;
+  max-width: min(var(--ifb-plate-w), 100%) !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure-wrap.ifb-plate--has-img-cap .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  max-width: min(var(--ifb-plate-img-cap-h), var(--ifb-plate-img-max-h)) !important;
+  max-height: min(var(--ifb-plate-w), 100%) !important;
+}
+
+/* Full single plates: one image, as large as trim allows (portrait or rotated landscape). */
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-stage {
+  align-items: center;
+  justify-content: center;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-stage,
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-stage {
+  align-items: center;
+}
+
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure-wrap {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: var(--ifb-plate-w);
+  max-height: var(--ifb-plate-img-max-h);
+}
+
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure-wrap:has(.ifb-plate-img--landscape-rot) {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure {
+  flex: 0 1 auto;
+}
+
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  max-width: var(--ifb-plate-w);
+  max-height: var(--ifb-plate-img-max-h);
+  width: auto;
+  height: auto;
+}
+
+.ifb-plate-figure img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: auto;
+  max-width: min(var(--ifb-plate-w), 100%);
+  max-height: min(var(--ifb-plate-img-max-h), 100%);
+  object-fit: contain;
+  image-rendering: auto;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.pagedjs_right_page .ifb-plate-figure img {
+  object-position: left center;
+}
+
+.pagedjs_left_page .ifb-plate-figure img {
+  object-position: right center;
+}
+
+/* Landscape (w>h): rotate 90deg so long side uses plate height — image bottom faces fore-edge */
+.ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  transform-origin: center center;
+  object-position: center center;
+}
+
+/* Right page: gutter left, fore-edge right — CCW −90deg sends upright “bottom” toward right */
+.pagedjs_right_page .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  transform: rotate(-90deg);
+}
+
+/* Left page: gutter right, fore-edge left — clockwise +90 sends upright “bottom” toward left */
+.pagedjs_left_page .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  transform: rotate(90deg);
+}
+
+/* Rotated landscape on full single plates: long side uses sheet height, short side uses plate width */
+.ifb-plate-droite.ifb-plate--full.ifb-plate--single .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  max-width: var(--ifb-plate-img-max-h);
+  max-height: var(--ifb-plate-w);
+  width: auto;
+  height: auto;
+}
+
+.ifb-plate-figure-wrap.ifb-plate-fit-cover .ifb-plate-figure {
+  flex: none;
+  width: var(--ifb-plate-w);
+  height: var(--ifb-plate-img-max-h);
+}
+
+.ifb-plate-figure-wrap.ifb-plate-fit-cover .ifb-plate-figure img {
+  object-fit: cover;
+  width: var(--ifb-plate-w);
+  height: var(--ifb-plate-img-max-h);
+  max-width: var(--ifb-plate-w);
+  max-height: var(--ifb-plate-img-max-h);
+}
+
+/* Multi thumbnails: disable flex-grow slot sizing */
+.ifb-plate-droite.ifb-plate--multi-parallel .ifb-plate-block,
+.ifb-plate-droite.ifb-plate--multi-diy .ifb-plate-block,
+.ifb-plate-droite.ifb-plate--multi-doc .ifb-plate-block {
+  flex: none;
+}
+
+.ifb-plate-droite.ifb-plate--multi-parallel .ifb-plate-figure-wrap,
+.ifb-plate-droite.ifb-plate--multi-diy .ifb-plate-figure-wrap,
+.ifb-plate-droite.ifb-plate--multi-doc .ifb-plate-figure-wrap {
+  flex: none;
+  display: block;
+  height: auto;
+}
+
+.ifb-plate-droite.ifb-plate--multi-parallel .ifb-plate-figure,
+.ifb-plate-droite.ifb-plate--multi-diy .ifb-plate-figure,
+.ifb-plate-droite.ifb-plate--multi-doc .ifb-plate-figure {
+  display: block;
+  flex: none;
+  height: auto;
+}
+
+.ifb-plate-droite.ifb-plate--multi-parallel .ifb-plate-figure img,
+.ifb-plate-droite.ifb-plate--multi-diy .ifb-plate-figure img,
+.ifb-plate-droite.ifb-plate--multi-doc .ifb-plate-figure img {
+  max-width: unset;
+  max-height: unset;
+}
+
+.ifb-plate-droite.ifb-plate--multi-parallel .ifb-plate-figure img {
+  max-height: 68mm;
+  max-width: 48mm;
+}
+
+.ifb-plate-droite.ifb-plate--multi-diy .ifb-plate-figure img {
+  max-height: 62mm;
+  max-width: 34mm;
+}
+
+.ifb-plate-droite.ifb-plate--multi-doc .ifb-plate-figure img {
+  max-height: 52mm;
+  max-width: 30mm;
+}
+
+/* Side-by-side doubles: full plate width, overlay per cell */
+.ifb-plate-droite.ifb-plate--double-row {
+  max-width: none;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-stage {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4mm;
+  flex: 1 1 auto;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--double-row .ifb-plate-stage {
+  justify-content: flex-start;
+}
+
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--double-row .ifb-plate-stage {
+  justify-content: flex-end;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-row {
+  display: flex;
+  flex-direction: row;
+  gap: 4mm;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: var(--ifb-plate-w);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--double-row .ifb-plate-row {
+  justify-content: flex-start;
+  margin-inline: 0 auto;
+}
+
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--double-row .ifb-plate-row {
+  justify-content: flex-end;
+  margin-inline: auto 0;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-cell {
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 50%;
+  min-height: 0;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-cell .ifb-plate-block {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-figure-wrap {
+  max-width: 100%;
+}
+
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-figure img {
+  max-width: 100%;
+  max-height: min(var(--mock-plate-img-max-h-double-row), 100%, 84vh);
+}
+
+/* Stacked doubles: top half / bottom half on one plate page */
+.ifb-plate-droite.ifb-plate--double-col {
+  max-width: none;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ifb-plate-droite.ifb-plate--double-col .ifb-plate-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  justify-content: center;
+  gap: var(--ifb-plate-double-gap, 3mm);
+  align-items: stretch;
+  width: 100%;
+  max-width: var(--ifb-plate-w);
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.ifb-plate-droite.ifb-plate--double-col.ifb-plate--double-spaced .ifb-plate-block {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.ifb-plate-droite.ifb-plate--double-col.ifb-plate--double-spaced .ifb-plate-stage {
+  flex: 0 1 auto;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.pagedjs_right_page .ifb-plate--double-col .ifb-plate-stage {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.ifb-plate-droite.ifb-plate--double-col .ifb-plate-block {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure-wrap {
+  width: 100%;
+  max-width: 100%;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-start;
+}
+
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure:not(:has(.ifb-plate-img--landscape-rot)) {
+  justify-content: flex-end;
+}
+
+.ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  max-width: min(100%, var(--ifb-plate-w));
+  max-height: min(var(--ifb-plate-double-img-cap-h, var(--mock-plate-img-max-h-double)), 100%);
+  width: auto;
+  height: auto;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  object-position: left center;
+}
+
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  object-position: right center;
+}
+
+/* Must follow non-rotating double-* img rules above (same specificity, order cascade) */
+.ifb-plate-droite.ifb-plate--double-row .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  max-width: min(var(--mock-plate-img-max-h-double-row), 100%, 84vh);
+  max-height: min(calc((var(--ifb-plate-w) - 4mm) / 2), 100%);
+}
+
+.ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  max-width: min(calc((var(--ifb-plate-img-max-h) - 4mm) / 2), 100%);
+  max-height: min(var(--ifb-plate-w), 100%);
+}
+
+/* Stacked doubles with manifest ``double_max_h_mm`` / ``double_gap_mm`` */
+.ifb-plate-droite.ifb-plate--double-col.ifb-plate--double-spaced .ifb-plate-figure-wrap {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: var(--ifb-plate-w);
+}
+
+.ifb-plate-droite.ifb-plate--double-col.ifb-plate--double-spaced .ifb-plate-figure img:not(.ifb-plate-img--landscape-rot) {
+  max-width: min(100%, var(--ifb-plate-w)) !important;
+  max-height: min(var(--ifb-plate-double-img-cap-h), var(--mock-plate-img-max-h-double), 100%) !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.ifb-plate-droite.ifb-plate--double-col.ifb-plate--double-spaced .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  max-width: min(var(--ifb-plate-double-img-cap-h), var(--mock-plate-img-max-h-double), 100%) !important;
+  max-height: min(var(--ifb-plate-w), 100%) !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.pagedjs_right_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img.ifb-plate-img--landscape-rot,
+.pagedjs_left_page .ifb-plate-droite.ifb-plate--double-col .ifb-plate-figure img.ifb-plate-img--landscape-rot {
+  object-position: center center;
+}
+
+.ifb-plate-droite .ifb-plate-grid-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 3mm 4mm;
+  margin-bottom: 4mm;
+  width: 100%;
+  max-width: var(--ifb-plate-w);
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.pagedjs_right_page .ifb-plate-droite .ifb-plate-grid-row {
+  justify-content: flex-start;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+html.ifb-print-root--light .ifb-plate-droite {
+  --ifb-plate-letterbox: #000;
+}
+
+html.ifb-print-root--dark .ifb-plate-droite {
+  --ifb-plate-letterbox: var(--ifb-graphite-flood, #1c1c20);
+  color: #e4e4e4;
+}
+
+/* Paged.js: stretch plate page column so %-height slots resolve to full trimmed area */
+.pagedjs_page:has(.ifb-plate-droite) > .pagedjs_sheet > .pagedjs_pagebox > .pagedjs_area {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+.pagedjs_page:has(.ifb-plate-droite) .pagedjs_page_content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+.pagedjs_page:has(.ifb-plate-droite) .pagedjs_page_content > div {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+@media screen {
+  .pagedjs_area .ifb-plate-droite {
+    outline: 1px dashed rgba(58, 58, 58, 0.2);
+  }
+}
