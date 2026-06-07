@@ -1275,7 +1275,7 @@ try {
     contact: {
   about: {
     title: "ABOUT ME",
-    description: `Atharva Gupta is a sound and audiovisual artist-researcher who builds objects, instruments, systems, and situations from a hands-on relationship with technology. Practice starts with making and the questions that follow; it spans sound and kinetic sculpture, audiovisual performance, code, game mods, and what lies between. Work keeps returning to perception, social organisation, and how we process the world.`,
+    description: `Atharva Gupta is an artist, researcher, and educator who builds objects, systems, and situations grounded in personal relationships with technology. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, treating technology as something emotional, erratic, and entangled with both body and politics.`,
     credentials: [],
     image: "./assets/images/atharva.jpeg",
   },
@@ -1284,13 +1284,13 @@ try {
       cv: {
         education: [
           {
-            degree: "Master of Arts (MA), Fine Arts (Media, Art, Design and Technology)",
+            degree: "Master of Arts (MA), Fine Arts, Media, Art, Design and Technology",
             institution: "Frank Mohr Institute, Minerva Academy, Hanze University of Applied Sciences",
             location: "Groningen, NL",
             period: "Sep 2024 – Aug 2026",
           },
           {
-            degree: "Master of Arts (MA), Arts and Culture (Arts, Cognition and Criticism)",
+            degree: "Master of Arts (MA), Arts and Culture, Arts, Cognition and Criticism",
             institution: "University of Groningen",
             location: "Groningen, NL",
             period: "Sep 2022 – Aug. 2023",
