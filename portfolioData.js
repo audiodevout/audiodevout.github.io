@@ -1,7 +1,7 @@
 /**
  * portfolioData.js - Portfolio Content Loader
  *
- * PURPOSE: Fetches content from /data/*.json (editable via Decap CMS) and
+ * PURPOSE: Fetches content from data/*.json (editable via Decap CMS) and
  *   assembles the window.portfolioData object consumed by the renderer.
  *
  * STRUCTURE (assembled shape, unchanged from the previous inline data):
@@ -18,18 +18,44 @@
 (function () {
   "use strict";
 
+  function dataUrl(filename) {
+    return new URL("data/" + filename, window.location.href).href;
+  }
+
   var DATA_FILES = {
-    sound: "/data/sound.json",
-    performance: "/data/performance.json",
-    installations: "/data/installations.json",
-    visual: "/data/visual.json",
-    writing: "/data/writing.json",
-    exhibitions: "/data/exhibitions.json",
-    links: "/data/links.json",
-    profile: "/data/profile.json",
+    sound: dataUrl("sound.json"),
+    performance: dataUrl("performance.json"),
+    installations: dataUrl("installations.json"),
+    visual: dataUrl("visual.json"),
+    writing: dataUrl("writing.json"),
+    exhibitions: dataUrl("exhibitions.json"),
+    links: dataUrl("links.json"),
+    profile: dataUrl("profile.json"),
   };
 
   function fetchJson(url) {
+    if (window.location.protocol === "file:") {
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+          if (xhr.status === 0 || (xhr.status >= 200 && xhr.status < 300)) {
+            try {
+              resolve(JSON.parse(xhr.responseText));
+            } catch (parseError) {
+              reject(parseError);
+            }
+          } else {
+            reject(new Error("Failed to load " + url + " (" + xhr.status + ")"));
+          }
+        };
+        xhr.onerror = function () {
+          reject(new Error("Failed to load " + url));
+        };
+        xhr.send();
+      });
+    }
+
     return fetch(url, { cache: "no-cache" }).then(function (res) {
       if (!res.ok) throw new Error("Failed to load " + url + " (" + res.status + ")");
       return res.json();
