@@ -11,7 +11,7 @@
       "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • SENSORIAL • REAL-TIME",
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
       "themes": "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
-      "images": ["./assets/images/fever-dream-performance.jpg", "./assets/images/fever-dream-performance-1.jpg"]
+      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.jpg", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.jpg"]
     },
     {
       "id": "spaces-groningen",
@@ -24,7 +24,7 @@
       "tags": "LIVE • VJ • AMBIENT • POETRY • AUDIOVISUAL",
       "technical": "Video projection, live music mixing, audiovisual sequencing",
       "themes": "Immersive sound, ambient textures, poetic expression, club-based audiovisual experience",
-      "images": ["./assets/images/spaces.jpg", "./assets/images/spaces-1.jpg"]
+      "images": ["./assets/images/performance/spaces-groningen/spaces.jpg", "./assets/images/performance/spaces-groningen/spaces-1.jpg"]
     }
   ]
 }

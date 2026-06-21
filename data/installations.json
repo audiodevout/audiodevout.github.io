@@ -6,20 +6,24 @@
       "category": "KINETIC SCULPTURE • SONIC OBJECTS • MOTOR SYSTEMS",
       "color": "saffron",
       "description": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
-      "fullDescription": "Rain Reminders — A motorized rain stick (PVC, mung beans and black rice) rotated on a horizontal axis: a soft, unamplified rainfall texture. Steel, wood beam, exposed wiring, coir mat below. Developed partly in response to tinnitus—the steady grain acts as a kind of sonic prosthesis: persistent “weather” that masks and calms.\n\nSpinny Sticks — Hanging rotary assemblies of rods, pencils, and tensioned thread, each driven by a low-speed motor. Pencils mark surfaces under strain; threads fatigue slowly. The system stays off-balance—small differences in load and wear add up to divergent motion, creaks, and friction. Tension is treated as a condition, not a fault: closer to a nervous system than a clock.",
+      "fullDescription": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
       "dimensions": "Rain Reminders: 1.8 m (height). Spinny Sticks: variable installation, individual units approx. 40–80 cm diameter",
       "medium": "Motorized kinetic sculpture, acoustic rain stick, PVC, wood, steel, grains, exposed electronics; motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
       "technical": "Custom low-RPM motor systems, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting; low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
       "themes": "Tinnitus and acoustic ritual, tension and unstable systems, mechanical fatigue, drawing as duration, meditative noise",
       "images": [
-        "./assets/images/rain-stick-1.JPG",
-        "./assets/images/rain-stick-2.JPG",
-        "./assets/images/rain-stick-4.jpg",
-        "./assets/images/rain-stick-6.jpg",
-        "./assets/images/spinny-sticks-1.png",
-        "./assets/images/spinny-sticks-2.png"
+        "./assets/images/installations/instruments-for-becoming/rain-stick-1.JPG",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-2.JPG",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-4.jpg",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-6.jpg",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-1.png",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-2.png"
       ],
-      "videos": ["./assets/video/rain-stick-video-1.mp4", "https://youtu.be/SWMkYxuWrNE"]
+      "videos": [
+        "./assets/video/rain-stick-video-1.mp4",
+        "https://youtu.be/SWMkYxuWrNE"
+      ],
+      "youtubeDate": "20260122"
     },
     {
       "id": "symmetrical-fictions",
@@ -29,13 +33,17 @@
       "description": "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
       "fullDescription": "Satellite tiles are mirrored and recomposed into speculative, symmetrical landscapes—coherent yet impossible terrain that sits between rational cartography, fiction, and unconscious visual patterning.",
       "medium": "Video installation, satellite imagery recomposition, speculative cartography",
-      "tags": ["generative", "video", "research"],
+      "tags": [
+        "generative",
+        "video",
+        "research"
+      ],
       "themes": "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
       "images": [
-        "./assets/images/6.jpg",
-        "./assets/images/39.jpg",
-        "./assets/images/72.jpg",
-        "./assets/images/73.jpg"
+        "./assets/images/installations/symmetrical-fictions/6.jpg",
+        "./assets/images/installations/symmetrical-fictions/39.jpg",
+        "./assets/images/installations/symmetrical-fictions/72.jpg",
+        "./assets/images/installations/symmetrical-fictions/73.jpg"
       ],
       "urls": {
         "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"

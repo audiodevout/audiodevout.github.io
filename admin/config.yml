@@ -158,6 +158,7 @@ collections:
               - { name: description, label: "Short description", widget: text, required: false }
               - { name: fullDescription, label: "Full description", widget: text, required: false }
               - { name: medium, label: "Medium", widget: string, required: false }
+              - { name: youtubeDate, label: "YouTube upload date (YYYYMMDD)", widget: string, required: false }
               - name: tags
                 label: "Tags"
                 widget: list
@@ -173,6 +174,13 @@ collections:
                 widget: list
                 required: false
                 field: { name: video, label: "Video URL or path", widget: string }
+              - name: urls
+                label: "Links"
+                widget: object
+                required: false
+                fields:
+                  - { name: link, label: "Link", widget: string, required: false }
+                  - { name: patreon, label: "Patreon", widget: string, required: false }
 
   - name: "writing"
     label: "Writing"

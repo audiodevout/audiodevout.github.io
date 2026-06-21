@@ -294,6 +294,24 @@
       });
       bodyEl.appendChild(pillWrap);
     }
+    if (item.urls && item.urls.link) {
+      var extLink = document.createElement('a');
+      extLink.href = item.urls.link;
+      extLink.target = '_blank';
+      extLink.rel = 'noopener noreferrer';
+      extLink.className = 'lightbox__paper-link';
+      extLink.textContent = 'Link ↗';
+      bodyEl.appendChild(extLink);
+    }
+    if (item.urls && item.urls.patreon) {
+      var patreon = document.createElement('a');
+      patreon.href = item.urls.patreon;
+      patreon.target = '_blank';
+      patreon.rel = 'noopener noreferrer';
+      patreon.className = 'lightbox__paper-link';
+      patreon.textContent = 'Patreon ↗';
+      bodyEl.appendChild(patreon);
+    }
     if (item.urls && item.urls.pdf) {
       var a = document.createElement('a');
       a.href = item.urls.pdf;

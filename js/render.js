@@ -159,6 +159,28 @@
     return groups;
   }
 
+  function sortByYoutubeDate(items) {
+    return (items || []).slice().sort(function (a, b) {
+      var dA = a.youtubeDate || '';
+      var dB = b.youtubeDate || '';
+      if (dB !== dA) return dB.localeCompare(dA);
+      return (a.title || '').localeCompare(b.title || '');
+    });
+  }
+
+  function sortVisualGroupsByYoutubeDate(groups) {
+    var sorted = {};
+    Object.keys(groups).forEach(function (cat) {
+      var list = groups[cat] || [];
+      if (cat === 'CREATIVE TECHNOLOGY / AUDIOVISUAL ART') {
+        sorted[cat] = sortByYoutubeDate(list);
+      } else {
+        sorted[cat] = list;
+      }
+    });
+    return sorted;
+  }
+
   function addLabeledMarquee(container, label, items, openLightbox) {
     if (!items || items.length === 0) return;
     var section = document.createElement('div');
@@ -190,7 +212,7 @@
     addLabeledMarquee(container, 'Installations', installations, openLightbox);
     addLabeledMarquee(container, 'Performance', performance, openLightbox);
 
-    var visualGroups = groupByCategory(drawings);
+    var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     var order = ['VISUAL RESEARCH'];
     order.forEach(function (cat) {
       if (visualGroups[cat] && excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
@@ -206,7 +228,7 @@
         if (ytUrl) youtubeItems.push(item);
       });
     });
-    addLabeledMarquee(container, 'Tutorials & Showcases', youtubeItems, openLightbox);
+    addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems), openLightbox);
 
     var soundItems = dedupeById(data.projects.soundInstallations || []);
     if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems, openLightbox);
@@ -289,7 +311,7 @@
     addListGroup(listRoot, 'Installations', installations, openLightbox);
     addListGroup(listRoot, 'Performance', performance, openLightbox);
 
-    var visualGroups = groupByCategory(drawings);
+    var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     Object.keys(visualGroups).forEach(function (cat) {
       addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
     });

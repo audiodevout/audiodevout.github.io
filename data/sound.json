@@ -1,6 +1,57 @@
 {
   "items": [
     {
+      "id": "asymmetrica-gcpssm",
+      "title": "G.C.P.S.S.M.",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "violet",
+      "description": "Gesture-controlled performance system for slow music—reworking older material through speed and movement.",
+      "fullDescription": "G.C.P.S.S.M. (Gesture Controlled Performance System for Slow Music) experiments with gesture and speed control, reworking old songs as samples. Released May 2026 on asymmetrica.",
+      "medium": "Digital audio, gesture-controlled performance",
+      "technology": "TouchDesigner, gesture control, sampling, speed mapping",
+      "themes": "gesture, performance systems, slow music, code music, sample rework",
+      "bandcampTracks": [
+        {
+          "title": "G.C.P.S.S.M.",
+          "trackId": "3225034213",
+          "url": "https://asymmetrica.bandcamp.com/track/g-c-p-s-s-m"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-recording-tests-akerk",
+      "title": "recording tests at the akerk, groningen",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "graphite",
+      "description": "Field recording tests in the Akerk, Groningen—paired takes with professional and DIY electret microphones.",
+      "fullDescription": "Four long-form recording tests captured in the Akerk, Groningen, comparing AudioTechnica and DIY electret microphone setups in the center hall and left benches. Released March 2026 on asymmetrica.",
+      "medium": "Digital audio, field recording, acoustic space documentation",
+      "technology": "AudioTechnica microphone, DIY electret microphone, church acoustics",
+      "themes": "field recording, acoustic architecture, microphone comparison, Groningen",
+      "bandcampTracks": [
+        {
+          "title": "Center Hall (AudioTechnica Microphone)",
+          "trackId": "4029596154",
+          "url": "https://asymmetrica.bandcamp.com/track/center-hall-audiotechnica-microphone"
+        },
+        {
+          "title": "Center Hall (DIY Electret Microphone)",
+          "trackId": "1735193177",
+          "url": "https://asymmetrica.bandcamp.com/track/center-hall-diy-electret-microphone"
+        },
+        {
+          "title": "Left Benches (AudioTechnica Microphone)",
+          "trackId": "1195261827",
+          "url": "https://asymmetrica.bandcamp.com/track/left-benches-audiotechnica-microphone"
+        },
+        {
+          "title": "Left Benches (DIY Electret Microphone)",
+          "trackId": "934372852",
+          "url": "https://asymmetrica.bandcamp.com/track/left-benches-diy-electret-microphone"
+        }
+      ]
+    },
+    {
       "id": "asymmetrica-minus-12-c",
       "title": "-12° C",
       "category": "ASYMMETRICA AUDIO COLLECTION",

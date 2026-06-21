@@ -5,28 +5,36 @@
       "title": "Surveillance",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
-      "images": ["./assets/images/sketch1.jpg"]
+      "images": [
+        "./assets/images/visual/digital-sketch-01/sketch1.jpg"
+      ]
     },
     {
       "id": "digital-sketch-02",
       "title": "Oost - October 2024",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
-      "images": ["./assets/images/sketch2.png"]
+      "images": [
+        "./assets/images/visual/digital-sketch-02/sketch2.png"
+      ]
     },
     {
       "id": "digital-sketch-03",
       "title": "Flow",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
-      "images": ["./assets/images/sketch3.png"]
+      "images": [
+        "./assets/images/visual/digital-sketch-03/sketch3.png"
+      ]
     },
     {
       "id": "ritual-computing-01",
       "title": "Noise Sculpting - 1",
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
-      "images": ["./assets/images/ritual-computing-1.png"]
+      "images": [
+        "./assets/images/visual/ritual-computing-01/ritual-computing-1.png"
+      ]
     },
     {
       "id": "ritual-computing-02",
@@ -34,21 +42,21 @@
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
       "images": [
-        "./assets/images/ritual-computing-2.png",
-        "./assets/images/diamonddoodles.15.png",
-        "./assets/images/diamonddoodles.16.png",
-        "./assets/images/diamonddoodles.17.png",
-        "./assets/images/diamonddoodles.18.png",
-        "./assets/images/diamonddoodles.19.png",
-        "./assets/images/diamonddoodles.20.png",
-        "./assets/images/diamonddoodles.21.png",
-        "./assets/images/diamonddoodles.22.png",
-        "./assets/images/diamonddoodles.23.png",
-        "./assets/images/diamonddoodles.24.png",
-        "./assets/images/diamonddoodles.25.png",
-        "./assets/images/diamonddoodles.26.png",
-        "./assets/images/diamonddoodles.27.png",
-        "./assets/images/diamonddoodles.28.png"
+        "./assets/images/visual/ritual-computing-02/ritual-computing-2.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.15.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.16.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.17.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.18.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.19.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.20.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.21.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.22.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.23.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.24.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.25.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.26.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.27.png",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.28.png"
       ]
     },
     {
@@ -56,7 +64,9 @@
       "title": "Noise Sculpting - 3",
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
-      "images": ["./assets/images/ritual-computing-3.jpg"]
+      "images": [
+        "./assets/images/visual/ritual-computing-03/ritual-computing-3.jpg"
+      ]
     },
     {
       "id": "superboxes-01",
@@ -64,27 +74,27 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/superboxex.0.jpg",
-        "./assets/images/superboxex.1.jpg",
-        "./assets/images/superboxex.2.jpg",
-        "./assets/images/superboxex.3.jpg",
-        "./assets/images/superboxes.0.jpg",
-        "./assets/images/superboxes.2.jpg",
-        "./assets/images/superboxes.3.jpg",
-        "./assets/images/superboxes.4.jpg",
-        "./assets/images/superboxes.5.jpg",
-        "./assets/images/superboxes.6.jpg",
-        "./assets/images/sprbxes.0.jpg",
-        "./assets/images/sprbxes.1.jpg",
-        "./assets/images/sprbxes.2.jpg",
-        "./assets/images/sprbxes.3.jpg",
-        "./assets/images/sprbxes.4.jpg",
-        "./assets/images/sprbxes.5.jpg",
-        "./assets/images/sprbxes.6.jpg",
-        "./assets/images/sprbxes.7.jpg",
-        "./assets/images/sprbxes.8.jpg",
-        "./assets/images/sprbxes.10.jpg",
-        "./assets/images/sprbxes.12.jpg"
+        "./assets/images/visual/superboxes-01/superboxex.0.jpg",
+        "./assets/images/visual/superboxes-01/superboxex.1.jpg",
+        "./assets/images/visual/superboxes-01/superboxex.2.jpg",
+        "./assets/images/visual/superboxes-01/superboxex.3.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.0.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.2.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.3.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.4.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.5.jpg",
+        "./assets/images/visual/superboxes-01/superboxes.6.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.0.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.1.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.2.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.3.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.4.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.5.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.6.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.7.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.8.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.10.jpg",
+        "./assets/images/visual/superboxes-01/sprbxes.12.jpg"
       ]
     },
     {
@@ -93,18 +103,18 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/riso mono export test - 1 -.0.jpg",
-        "./assets/images/riso mono export test - 1 -.1.jpg",
-        "./assets/images/riso mono export test - 1 -.2.jpg",
-        "./assets/images/riso mono export test - 1 -.3.jpg",
-        "./assets/images/riso mono export test - 1 -.4.jpg",
-        "./assets/images/riso mono export test - 1 -.5.jpg",
-        "./assets/images/riso mono export test - 1 -.6.jpg",
-        "./assets/images/riso mono export test - 1 -.7.jpg",
-        "./assets/images/riso mono export test - 1 -.102.jpg",
-        "./assets/images/riso mono export test - 1 -.103.jpg",
-        "./assets/images/riso mono export test - 1 -.104.jpg",
-        "./assets/images/riso mono export test - 1 -.105.jpg"
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.0.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.1.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.2.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.3.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.4.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.5.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.6.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.7.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.102.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.103.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.104.jpg",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.105.jpg"
       ]
     },
     {
@@ -113,16 +123,16 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/feedback worms.0.png",
-        "./assets/images/feedback worms.1.png",
-        "./assets/images/feedback worms.2.png",
-        "./assets/images/feedback worms.3.png",
-        "./assets/images/feedback worms.4.png",
-        "./assets/images/feedback worms.5.png",
-        "./assets/images/feedback worms.6.png",
-        "./assets/images/feedback worms.7.png",
-        "./assets/images/feedback worms.8.png",
-        "./assets/images/feedback worms.9.png"
+        "./assets/images/visual/feedback-worms-02/feedback worms.0.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.1.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.2.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.3.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.4.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.5.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.6.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.7.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.8.png",
+        "./assets/images/visual/feedback-worms-02/feedback worms.9.png"
       ]
     },
     {
@@ -131,17 +141,17 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/abstract_sculpture_series.0.jpg",
-        "./assets/images/abstract_sculpture_series.1.jpg",
-        "./assets/images/abstract_sculpture_series.2.jpg",
-        "./assets/images/abstract_sculpture_series.3.jpg",
-        "./assets/images/abstract_sculpture_series.4.jpg",
-        "./assets/images/abstract_sculpture_series.5.jpg",
-        "./assets/images/abstract_sculpture_series.6.jpg",
-        "./assets/images/abstract_sculpture_series.7.jpg",
-        "./assets/images/abstract_sculpture_series.8.jpg",
-        "./assets/images/abstract_sculpture_series.9.jpg",
-        "./assets/images/abstract_sculpture_series.10.jpg"
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.0.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.1.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.2.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.3.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.4.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.5.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.6.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.7.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.8.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.9.jpg",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.10.jpg"
       ]
     },
     {
@@ -150,11 +160,11 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/TDMovieOut.3.png",
-        "./assets/images/TDMovieOut.4.png",
-        "./assets/images/TDMovieOut.9.png",
-        "./assets/images/TDMovieOut.13.png",
-        "./assets/images/TDMovieOut.14.png"
+        "./assets/images/visual/magical-wells-01/TDMovieOut.3.png",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.4.png",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.9.png",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.13.png",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.14.png"
       ]
     },
     {
@@ -162,7 +172,9 @@
       "title": "Noise Sculpting 3",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
-      "images": ["./assets/images/morsecode_exports.12.jpg"]
+      "images": [
+        "./assets/images/visual/morsecode-export-12/morsecode_exports.12.jpg"
+      ]
     },
     {
       "id": "asymmetrica-face-01",
@@ -170,12 +182,12 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/asymmetrica face.0.jpg",
-        "./assets/images/asymmetrica face.1.jpg",
-        "./assets/images/asymmetrica face.2.jpg",
-        "./assets/images/asymmetrica face.3.jpg",
-        "./assets/images/asymmetrica face.4.jpg",
-        "./assets/images/asymmetrica face.5.jpg"
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.0.jpg",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.1.jpg",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.2.jpg",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.3.jpg",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.4.jpg",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.5.jpg"
       ]
     },
     {
@@ -184,10 +196,10 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/flow.0.jpg",
-        "./assets/images/flow.1.jpg",
-        "./assets/images/flow.2.jpg",
-        "./assets/images/flow.3.jpg"
+        "./assets/images/visual/flow-series-01/flow.0.jpg",
+        "./assets/images/visual/flow-series-01/flow.1.jpg",
+        "./assets/images/visual/flow-series-01/flow.2.jpg",
+        "./assets/images/visual/flow-series-01/flow.3.jpg"
       ]
     },
     {
@@ -196,9 +208,9 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/heatdivinitee.jpg",
-        "./assets/images/heatdivinity.jpg",
-        "./assets/images/heatdivinity2.jpg"
+        "./assets/images/visual/heat-divinity-01/heatdivinitee.jpg",
+        "./assets/images/visual/heat-divinity-01/heatdivinity.jpg",
+        "./assets/images/visual/heat-divinity-01/heatdivinity2.jpg"
       ]
     },
     {
@@ -207,10 +219,10 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/moire play.0.jpg",
-        "./assets/images/moire play.1.jpg",
-        "./assets/images/moire play.2.jpg",
-        "./assets/images/moire play.3.jpg"
+        "./assets/images/visual/moire-play-01/moire play.0.jpg",
+        "./assets/images/visual/moire-play-01/moire play.1.jpg",
+        "./assets/images/visual/moire-play-01/moire play.2.jpg",
+        "./assets/images/visual/moire-play-01/moire play.3.jpg"
       ]
     },
     {
@@ -219,19 +231,19 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/myceliumaudio.0.jpg",
-        "./assets/images/myceliumaudio.1.jpg",
-        "./assets/images/myceliumaudio.2.jpg",
-        "./assets/images/myceliumaudio.3.jpg",
-        "./assets/images/myceliumaudio.4.jpg",
-        "./assets/images/myceliumaudio.5.jpg",
-        "./assets/images/myceliumaudio.6.jpg",
-        "./assets/images/myceliumaudio.7.jpg",
-        "./assets/images/myceliumaudio.8.jpg",
-        "./assets/images/myceliumaudio.9.jpg",
-        "./assets/images/myceliumaudio.10.jpg",
-        "./assets/images/myceliumaudio.11.jpg",
-        "./assets/images/myceliumaudio.12.jpg"
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.0.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.1.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.2.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.3.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.4.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.5.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.6.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.7.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.8.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.9.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.10.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.11.jpg",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.12.jpg"
       ]
     },
     {
@@ -240,12 +252,12 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/noise between the lines.0.jpg",
-        "./assets/images/noise between the lines.1.jpg",
-        "./assets/images/noise between the lines.2.jpg",
-        "./assets/images/noise between the lines.3.jpg",
-        "./assets/images/noise between the lines.4.jpg",
-        "./assets/images/noise between the lines.5.jpg"
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.0.jpg",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.1.jpg",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.2.jpg",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.3.jpg",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.4.jpg",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.5.jpg"
       ]
     },
     {
@@ -254,18 +266,18 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/noisepattern.0.jpg",
-        "./assets/images/noisepattern.1.jpg",
-        "./assets/images/noisepattern.2.jpg",
-        "./assets/images/noisepattern.3.jpg",
-        "./assets/images/noisepatternexp.0.jpg",
-        "./assets/images/noisepatternexp.1.jpg",
-        "./assets/images/noisepatternexp.2.jpg",
-        "./assets/images/noisepatternexp.3.jpg",
-        "./assets/images/noisepatternexp.4.jpg",
-        "./assets/images/noisepatternexp.5.jpg",
-        "./assets/images/noisepatternexp.6.jpg",
-        "./assets/images/noisepattexrnexp.5.jpg"
+        "./assets/images/visual/noisepattern-01/noisepattern.0.jpg",
+        "./assets/images/visual/noisepattern-01/noisepattern.1.jpg",
+        "./assets/images/visual/noisepattern-01/noisepattern.2.jpg",
+        "./assets/images/visual/noisepattern-01/noisepattern.3.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.0.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.1.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.2.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.3.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.4.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.5.jpg",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.6.jpg",
+        "./assets/images/visual/noisepattern-01/noisepattexrnexp.5.jpg"
       ]
     },
     {
@@ -274,11 +286,11 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/old drawing (1).jpg",
-        "./assets/images/old drawing (2).jpg",
-        "./assets/images/old drawing (3).jpg",
-        "./assets/images/old drawing (4).jpg",
-        "./assets/images/old drawing (6).jpg"
+        "./assets/images/visual/old-drawings-01/old drawing (1).jpg",
+        "./assets/images/visual/old-drawings-01/old drawing (2).jpg",
+        "./assets/images/visual/old-drawings-01/old drawing (3).jpg",
+        "./assets/images/visual/old-drawings-01/old drawing (4).jpg",
+        "./assets/images/visual/old-drawings-01/old drawing (6).jpg"
       ]
     },
     {
@@ -286,13 +298,17 @@
       "title": "oostposterexport_physical_size_A0",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
+      "description": "October 2024 poster for OOST / Dimemesional.",
       "images": [
-        "./assets/images/oostposterexport_physical_size_A0.0.jpg",
-        "./assets/images/oostposterexport_physical_size_A0.1.jpg",
-        "./assets/images/oostposterexport_physical_size_A0.2.jpg",
-        "./assets/images/oostposterexport_physical_size_A0.3.jpg",
-        "./assets/images/oostposterexport_physical_size_A0.4.jpg"
-      ]
+        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.0.jpg",
+        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.1.jpg",
+        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.2.jpg",
+        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.3.jpg",
+        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.4.jpg"
+      ],
+      "urls": {
+        "link": "https://www.komoost.blog/october-2024-by-dimemesional/"
+      }
     },
     {
       "id": "patreon-waves-01",
@@ -300,13 +316,13 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/patreon_wallpaper_waves.0.jpg",
-        "./assets/images/patreon_wallpaper_waves.1.jpg",
-        "./assets/images/patreon_wallpaper_waves.2.jpg",
-        "./assets/images/patreon_wallpaper_waves.3.jpg",
-        "./assets/images/patreon_wallpaper_waves.4.jpg",
-        "./assets/images/patreon_wallpaper_waves.5.jpg",
-        "./assets/images/patreon_wallpaper_waves.6.jpg"
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.0.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.1.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.2.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.3.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.4.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.5.jpg",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.6.jpg"
       ]
     },
     {
@@ -315,9 +331,9 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/plotterframes.0.jpg",
-        "./assets/images/plotterframes.1.jpg",
-        "./assets/images/plotterframes.2.jpg"
+        "./assets/images/visual/plotterframes-01/plotterframes.0.jpg",
+        "./assets/images/visual/plotterframes-01/plotterframes.1.jpg",
+        "./assets/images/visual/plotterframes-01/plotterframes.2.jpg"
       ]
     },
     {
@@ -326,328 +342,661 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/structural variations.0.jpg",
-        "./assets/images/structural variations.1.jpg",
-        "./assets/images/structural variations.2.jpg",
-        "./assets/images/structural variations.3.jpg",
-        "./assets/images/structural variations.4.jpg",
-        "./assets/images/structural variations.5.jpg",
-        "./assets/images/structural variations.6.jpg"
+        "./assets/images/visual/structural-variations-01/structural variations.0.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.1.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.2.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.3.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.4.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.5.jpg",
+        "./assets/images/visual/structural-variations-01/structural variations.6.jpg"
       ]
     },
     {
-      "id": "audiodevout-audio-reactive-text-animations",
-      "title": "Audio-Reactive Text Animations - TouchDesigner Tutorial",
+      "id": "audiodevout-video-glitch-tracing-instancing",
+      "title": "Video Glitch Effects with Tracing and Instancing - TouchDesigner Tutorial",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Create text animations that react to audio input in TouchDesigner.",
-      "fullDescription": "Tutorial on building audio-reactive text animations in TouchDesigner, syncing typography and motion to sound.",
-      "medium": "TouchDesigner, audioreactive visuals, typography",
-      "tags": ["TouchDesigner", "audioreactive", "text", "animation", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=sDOvmhu6DWY"]
-    },
-    {
-      "id": "audiodevout-audioreactive-doodle-geometry-instancing",
-      "title": "Audioreactive Doodle with Geometry Instancing in TouchDesigner - Behind The Network",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Behind-the-scenes look at an audioreactive doodle project using geometry instancing.",
-      "fullDescription": "A behind-the-network exploration of creating audioreactive visuals with geometry instancing in TouchDesigner.",
-      "medium": "TouchDesigner, audioreactive visuals, geometry instancing",
-      "tags": ["TouchDesigner", "audioreactive", "instancing", "behind the network"],
-      "videos": ["https://www.youtube.com/watch?v=Hk0uF7s-DjU"]
-    },
-    {
-      "id": "audiodevout-audioreactive-text-showcase",
-      "title": "Audioreactive Text in TouchDesigner - Project Showcase",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "A snippet of an audioreactive text project used in a recent VJ performance.",
-      "fullDescription": "Showcasing an audioreactive text visualization built in TouchDesigner, demonstrating dynamic text effects synced to audio input. Project files are available on Patreon.",
-      "medium": "TouchDesigner, audioreactive visuals",
-      "tags": ["TouchDesigner", "audioreactive", "text", "VJ", "performance"],
-      "videos": ["https://www.youtube.com/watch?v=GlMgtr-ejzs"]
-    },
-    {
-      "id": "audiodevout-video-5",
-      "title": "Audioreactive ParticlesGPU in TouchDesigner (with AudioAnalysis)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Building audioreactive particle systems with audio analysis integration.",
-      "fullDescription": "Comprehensive tutorial on creating audioreactive particle systems using ParticlesGPU and audio analysis tools in TouchDesigner.",
-      "medium": "TouchDesigner, generative visuals",
-      "videos": ["https://youtu.be/u5JXHaGVywI"]
-    },
-    {
-      "id": "audiodevout-basic-uv-mapping-noise-sculpting",
-      "title": "Basic UV Mapping and Noise Sculpting in Touchdesigner (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Introduction to UV mapping and noise sculpting techniques in TouchDesigner.",
-      "fullDescription": "Foundational tutorial covering basic UV mapping and noise sculpting workflows in TouchDesigner.",
-      "medium": "TouchDesigner, UV mapping, procedural geometry",
-      "tags": ["TouchDesigner", "UV mapping", "noise sculpting", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=4rm5dcoQHBc"]
-    },
-    {
-      "id": "audiodevout-chop-top-chop-sop",
-      "title": "CHOP-TOP-CHOP-SOP - Simple Multioperator Processing on TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Simple multioperator processing workflow connecting CHOPs, TOPs, and SOPs.",
-      "fullDescription": "Tutorial on chaining CHOP, TOP, and SOP operators for simple multioperator processing in TouchDesigner.",
-      "medium": "TouchDesigner, operator chains, data flow",
-      "tags": ["TouchDesigner", "CHOP", "TOP", "SOP", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=ZhddPQfyN5A"]
+      "description": "A new video technique I have been seeing on Instagram a lot these days.",
+      "fullDescription": "A new video technique I have been seeing on Instagram a lot these days. Here are some of the results from my experiments in deconstructing it.",
+      "medium": "TouchDesigner, video effects, instancing",
+      "tags": [
+        "TouchDesigner",
+        "glitch",
+        "tracing",
+        "instancing",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=0ZesLWqJHO4"
+      ],
+      "youtubeDate": "20260319",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/153464028"
+      }
     },
     {
       "id": "audiodevout-contour-experiments",
       "title": "Contour Experiments in TouchDesigner",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Experiments with contour-based visual effects in TouchDesigner.",
-      "fullDescription": "Exploring contour detection and contour-based visual effects in TouchDesigner.",
+      "description": "Here's a video about creating contours using variations of ramps, noise and displace tops.",
+      "fullDescription": "Here's a video about creating contours using variations of ramps, noise and displace tops. Some of the effects look just like the drawings I used to make in my free time. Also very nice to create a very analog hand-drawn effects with a digital twist.",
       "medium": "TouchDesigner, contour detection, visual effects",
-      "tags": ["TouchDesigner", "contour", "visual effects", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=DPWZV4OTAn4"]
-    },
-    {
-      "id": "audiodevout-controlled-feedback-cache-tops",
-      "title": "Controlled Feedback with Cache TOPs in TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Tutorial on controlling feedback trails using the Cache TOP in TouchDesigner.",
-      "fullDescription": "Learn how to manage and control feedback effects in TouchDesigner using Cache TOPs for more precise visual trails and effects. Project files available on Patreon.",
-      "medium": "TouchDesigner, visual effects, feedback control",
-      "tags": ["TouchDesigner", "feedback", "Cache TOP", "tutorial", "visual effects"],
-      "videos": ["https://www.youtube.com/watch?v=TXbIgtYaNqQ"]
-    },
-    {
-      "id": "audiodevout-creating-smoky-particle-effects",
-      "title": "Creating Smoky Particle Effects with ParticlesGPU - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Create smoky, atmospheric particle effects using ParticlesGPU.",
-      "fullDescription": "Tutorial on building smoky particle effects and atmospheric visuals with ParticlesGPU in TouchDesigner.",
-      "medium": "TouchDesigner, ParticlesGPU, particle effects",
-      "tags": ["TouchDesigner", "ParticlesGPU", "particles", "smoke", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=7A6_PazyKSw"]
-    },
-    {
-      "id": "audiodevout-video-4",
-      "title": "Force Fields and Mouse Inputs with ParticlesGPU - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Interactive particle systems controlled by force fields and mouse input.",
-      "fullDescription": "Learn how to create interactive particle systems using ParticlesGPU with force field dynamics and mouse-driven controls in TouchDesigner.",
-      "medium": "TouchDesigner, generative visuals",
-      "videos": ["https://youtu.be/uusZcyW7o9Q"]
-    },
-    {
-      "id": "audiodevout-generative-soundscapes-data-driven",
-      "title": "Generative Soundscapes and Data Driven Signal Processing - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Build generative soundscapes using data-driven signal processing in TouchDesigner.",
-      "fullDescription": "Tutorial on creating generative soundscapes and applying data-driven signal processing techniques in TouchDesigner.",
-      "medium": "TouchDesigner, generative audio, signal processing",
-      "tags": ["TouchDesigner", "generative", "soundscapes", "signal processing", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=lJMMNPUpK-w"]
-    },
-    {
-      "id": "audiodevout-geometric-iterations-behind-network",
-      "title": "Geometric Iterations - Behind the Network",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Behind-the-scenes look at geometric iteration techniques in TouchDesigner.",
-      "fullDescription": "A behind-the-network exploration of geometric iteration and procedural pattern generation in TouchDesigner.",
-      "medium": "TouchDesigner, procedural geometry, generative art",
-      "tags": ["TouchDesigner", "geometric", "iterations", "behind the network"],
-      "videos": ["https://www.youtube.com/watch?v=QG-Kluyuveg"]
-    },
-    {
-      "id": "audiodevout-instancing-to-midi",
-      "title": "Interactive Instrument – Instancing to MIDI in TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Use RenderPick CHOP to extract instancing data and convert clicks into MIDI — click to play in TouchDesigner.",
-      "fullDescription": "In this tutorial, audiodevout demonstrates a special interactive project that uses TouchDesigner's RenderPick CHOP to capture instancing data and translate it into MIDI notes, allowing clickable visual geometry to play sound. A clean, high-performance demo of touch-mapped MIDI instancing.",
-      "medium": "TouchDesigner, interactive generative visuals, MIDI integration",
-      "tags": ["TouchDesigner", "instancing", "RenderPick CHOP", "MIDI", "interactive", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=Qrtwn5XjDzk"]
-    },
-    {
-      "id": "audiodevout-kaleidoscopic-fractals-particlesgpu",
-      "title": "Kaleidoscopic Fractals with ParticlesGPU in TouchDesigner - Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Create fractal patterns using ParticlesGPU with tiling, mirroring, and feedback loops.",
-      "fullDescription": "Explore fractal generation techniques in TouchDesigner combining ParticlesGPU, tiling and mirroring operators, and feedback loops to create stunning kaleidoscopic visuals.",
-      "medium": "TouchDesigner, particle systems, generative art",
-      "tags": ["TouchDesigner", "ParticlesGPU", "fractals", "generative art", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=TUOnPUHWpIU"]
-    },
-    {
-      "id": "audiodevout-video-2",
-      "title": "Noise Sculpting in TouchDesigner (Part 8) - Abstract Particle Structures",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Advanced noise sculpting techniques for creating abstract particle structures.",
-      "fullDescription": "Part 8 of the noise sculpting series, focusing on building complex abstract particle structures using advanced noise manipulation in TouchDesigner.",
-      "medium": "TouchDesigner, generative visuals",
-      "videos": ["https://youtu.be/uSVB-EnoRkk"]
-    },
-    {
-      "id": "audiodevout-video-3",
-      "title": "Noise Sculpting with TouchDesigner (Part 7) - Ghostly Particles",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Creating ethereal, ghostly particle effects using noise sculpting.",
-      "fullDescription": "Part 7 of the noise sculpting series, demonstrating how to create haunting, ghostly particle effects through noise manipulation techniques.",
-      "medium": "TouchDesigner, generative visuals",
-      "videos": ["https://youtu.be/4GkBT_fUNOM"]
-    },
-    {
-      "id": "audiodevout-noise-sculpting-part2",
-      "title": "Noise Sculpting in TouchDesigner - Part 2 (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Second part of the noise sculpting series, building on foundational techniques.",
-      "fullDescription": "Part 2 of the noise sculpting series, continuing to explore procedural noise manipulation and geometry sculpting in TouchDesigner.",
-      "medium": "TouchDesigner, noise sculpting, procedural geometry",
-      "tags": ["TouchDesigner", "noise sculpting", "tutorial", "generative art"],
-      "videos": ["https://www.youtube.com/watch?v=p9TwiixKvXQ"]
-    },
-    {
-      "id": "audiodevout-noise-sculpting-part3",
-      "title": "Noise Sculpting in TouchDesigner – Part 3",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Continuing the series, exploring procedural noise sculpting techniques in TD.",
-      "fullDescription": "In this installment of audiodevout's Noise Sculpting series, dive into advanced noise manipulation workflows in TouchDesigner to produce evolving textures and structures.",
-      "medium": "TouchDesigner, generative visuals",
-      "tags": ["TouchDesigner", "noise sculpting", "tutorial", "generative art"],
-      "videos": ["https://www.youtube.com/watch?v=Mu1TpRVujuY"]
-    },
-    {
-      "id": "audiodevout-noise-sculpting-part4",
-      "title": "Noise Sculpting in TouchDesigner – Part 4",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Further exploration of noisy geometry manipulation techniques.",
-      "fullDescription": "In Part 4, audiodevout continues to sculpt geometry with noise and compositing in TouchDesigner, refining structure and color interactions.",
-      "medium": "TouchDesigner, procedural geometry",
-      "tags": ["noise sculpting", "geometry", "TouchDesigner", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=s8ea30HlTHE"]
+      "tags": [
+        "TouchDesigner",
+        "contour",
+        "visual effects",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=DPWZV4OTAn4"
+      ],
+      "youtubeDate": "20260207",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/150167699"
+      }
     },
     {
       "id": "audiodevout-noise-sculpting-part9",
       "title": "Noise Sculpting in TouchDesigner (Part 9*) - Bubbles, Waves and Scene Switching",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Part 9 of the noise sculpting series: bubbles, waves, and scene switching techniques.",
-      "fullDescription": "Bubble effects, wave patterns, and scene switching in TouchDesigner.",
+      "description": "We are going back to basics with this one!",
+      "fullDescription": "We are going back to basics with this one! In this video I am working with some position instancing techniques that use compositing and feedback for some cool structures.",
       "medium": "TouchDesigner, noise sculpting, procedural visuals",
-      "tags": ["TouchDesigner", "noise sculpting", "bubbles", "waves", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=nQIwwmKPSqs"]
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "bubbles",
+        "waves",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=nQIwwmKPSqs"
+      ],
+      "youtubeDate": "20260124",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/149004106"
+      }
     },
     {
-      "id": "audiodevout-noise-sculpting-part6-radial-lighting",
-      "title": "Noise Sculpting Part 6 - Radial Lighting",
+      "id": "audiodevout-generative-soundscapes-data-driven",
+      "title": "Generative Soundscapes and Data Driven Signal Processing - TouchDesigner Tutorial",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Abstract structure using geo instancing with circular lighting and shadows.",
-      "fullDescription": "Techniques for building abstract 3D structures using geometry instancing and introducing radial lighting effects with circular ramps and compositing modes in TouchDesigner.",
-      "medium": "TouchDesigner, 3D geometry, lighting",
-      "tags": ["TouchDesigner", "noise sculpting", "instancing", "lighting", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=mkVa8D8_FIw"]
+      "description": "I've been experimenting with audio triggers in TouchDesigner for a while now and I really like the interaction between the LFOs and the sound trigger so I made a tutorial around i…",
+      "fullDescription": "I've been experimenting with audio triggers in TouchDesigner for a while now and I really like the interaction between the LFOs and the sound trigger so I made a tutorial around it.",
+      "medium": "TouchDesigner, generative audio, signal processing",
+      "tags": [
+        "TouchDesigner",
+        "generative",
+        "soundscapes",
+        "signal processing",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=lJMMNPUpK-w"
+      ],
+      "youtubeDate": "20251222",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/146432423"
+      }
     },
     {
-      "id": "audiodevout-particlesgpu-noise-sculpting",
-      "title": "Noise Sculpting in TouchDesigner with ParticlesGPU",
+      "id": "audiodevout-typewriter-effect",
+      "title": "typewriter.tox - Typing Effect in TouchDesigner - Free TOX FIle",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Leveraging ParticlesGPU for realtime noise-driven particle visuals.",
-      "fullDescription": "In this tutorial, audiodevout combines the Noise Sculpting series with the ParticlesGPU TOP in TouchDesigner, building reactive, particle-based generative visuals.",
-      "medium": "TouchDesigner, particle systems",
-      "tags": ["ParticlesGPU", "noise sculpting", "generative visuals", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=kcZH2zcHANc"]
+      "description": "Made this on a boring evening as a doodle!",
+      "fullDescription": "Made this on a boring evening as a doodle! Then I though people would be interested in this effect as a tool as well so here it is!",
+      "medium": "TouchDesigner, text effects, typography",
+      "tags": [
+        "TouchDesigner",
+        "typewriter",
+        "text",
+        "TOX",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=DMOS3fV_msc"
+      ],
+      "youtubeDate": "20251124",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/144304145"
+      }
+    },
+    {
+      "id": "audiodevout-creating-smoky-particle-effects",
+      "title": "Creating Smoky Particle Effects with ParticlesGPU - TouchDesigner Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Inspired by the recent tutorial by Scott Mann on the @TheInteractiveImmersiveHQ, I made a quick video about ParticlesGPU and external forces you can use for some very cool effects.",
+      "fullDescription": "Inspired by the recent tutorial by Scott Mann on the @TheInteractiveImmersiveHQ, I made a quick video about ParticlesGPU and external forces you can use for some very cool effects.",
+      "medium": "TouchDesigner, ParticlesGPU, particle effects",
+      "tags": [
+        "TouchDesigner",
+        "ParticlesGPU",
+        "particles",
+        "smoke",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=7A6_PazyKSw"
+      ],
+      "youtubeDate": "20251111",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/143322392"
+      }
     },
     {
       "id": "audiodevout-nvidia-flex-touchdesigner",
       "title": "NVIDIA Flex in TouchDesigner: Real-Time Soft Body & Fluid Experiments",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Real-time soft body and fluid simulation using NVIDIA Flex in TouchDesigner.",
-      "fullDescription": "Tutorial on integrating NVIDIA Flex for real-time soft body and fluid simulation experiments in TouchDesigner.",
+      "description": "Here's a video about the some of the NVIDIA flex components in TouchDesigner.",
+      "fullDescription": "Here's a video about the some of the NVIDIA flex components in TouchDesigner. I used the Force COMP and some feedback loops to turn this into a very interesting effect with exploding particles. You can also play with different bounding SOPs and change around the input geometry before the instancing for some cool effects.",
       "medium": "TouchDesigner, NVIDIA Flex, physics simulation, fluids",
-      "tags": ["TouchDesigner", "NVIDIA Flex", "soft body", "fluid", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=6QdLMXyzyuY"]
+      "tags": [
+        "TouchDesigner",
+        "NVIDIA Flex",
+        "soft body",
+        "fluid",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=6QdLMXyzyuY"
+      ],
+      "youtubeDate": "20251101",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/142529670"
+      }
     },
     {
-      "id": "audiodevout-particle-structures-mesh-generator",
-      "title": "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
+      "id": "audiodevout-audio-reactive-text-animations",
+      "title": "Audio-Reactive Text Animations -  TouchDesigner Tutorial",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Using Mesh Generator and operator techniques to create spiral particle structures.",
-      "fullDescription": "This project uses the Mesh Generator tool combined with operator tricks in TouchDesigner to produce cool spiral particle structures. Files available for Patreon members.",
-      "medium": "TouchDesigner, mesh generation, particle systems",
-      "tags": ["TouchDesigner", "Mesh Generator", "particles", "spiral", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=XHGeICkx9lU"]
+      "description": "A new audioreactive project!!",
+      "fullDescription": "A new audioreactive project!! I finally made a tutorial for the demo I posted some time ago. We use instancing to create varying geometries based around the structure of the text, and then the AudioAnalysis tool to map values from the audio to the rest of the network.",
+      "medium": "TouchDesigner, audioreactive visuals, typography",
+      "tags": [
+        "TouchDesigner",
+        "audioreactive",
+        "text",
+        "animation",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=sDOvmhu6DWY"
+      ],
+      "youtubeDate": "20251019",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/140653238"
+      }
     },
     {
-      "id": "audiodevout-procedural-crystal-video-effects",
-      "title": "Procedural Crystal-Like Video Effects - TouchDesigner Tutorial",
+      "id": "audiodevout-video-2",
+      "title": "Noise Sculpting in TouchDesigner (Part 8) - Abstract Particle Structures",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Create crystal-like procedural video effects in TouchDesigner.",
-      "fullDescription": "Procedural crystal-like refraction and video treatment in TouchDesigner.",
-      "medium": "TouchDesigner, procedural effects, video effects",
-      "tags": ["TouchDesigner", "crystal", "procedural", "video effects", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=pc34xAXCRlg"]
-    },
-    {
-      "id": "audiodevout-procedural-grid-patterns",
-      "title": "Procedural Grid Patterns - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Generate procedural grid patterns and geometric structures in TouchDesigner.",
-      "fullDescription": "Grid-based procedural geometry and patterning in TouchDesigner.",
-      "medium": "TouchDesigner, procedural patterns, generative art",
-      "tags": ["TouchDesigner", "grid", "procedural", "patterns", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=TbRtV-ix8RE"]
-    },
-    {
-      "id": "audiodevout-replicator-limit-feedback",
-      "title": "Replicator-Limit-Feedback (Project Overview)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
-      "color": "cerulean",
-      "description": "Short overview of a replicator feedback project with Patreon support request.",
-      "fullDescription": "An introduction and brief overview of the Replicator-Limit-Feedback project with links to Patreon support and future tutorial plans involving Ableton and TouchDesigner.",
+      "description": "I used similar instancing technique as the previous video here, but with some additions.",
+      "fullDescription": "I used similar instancing technique as the previous video here, but with some additions. For the position data, I used a limit to quantize the positions of the particles; and for rendering I used a lumablur that is controlled by the depth TOP (which takes its depth data from the render TOP) and a RGB Delay. All of these in combination create quite beautiful structures. As always, you're encouraged to tweak all the relevant values in all the different TOPs and SOPs and the results will always be different.",
       "medium": "TouchDesigner, generative visuals",
-      "tags": ["TouchDesigner", "feedback", "replicator", "project overview"],
-      "videos": ["https://www.youtube.com/watch?v=IR0T0t49gnw"]
+      "videos": [
+        "https://www.youtube.com/watch?v=uSVB-EnoRkk"
+      ],
+      "youtubeDate": "20251003",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
     },
     {
-      "id": "audiodevout-typewriter-effect",
-      "title": "Typewriter Effect in TouchDesigner - Free TOX FIle",
+      "id": "audiodevout-video-3",
+      "title": "Noise Sculpting with TouchDesigner (Part 7) -  Ghostly Particles",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Create a typewriter text effect in TouchDesigner with free TOX file.",
-      "fullDescription": "Tutorial on building a typewriter text effect in TouchDesigner, with a free TOX file available for download.",
-      "medium": "TouchDesigner, text effects, typography",
-      "tags": ["TouchDesigner", "typewriter", "text", "TOX", "tutorial"],
-      "videos": ["https://www.youtube.com/watch?v=DMOS3fV_msc"]
+      "description": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial.",
+      "fullDescription": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial. I love the little ghostly/spider web textures that come out of this technique.",
+      "medium": "TouchDesigner, generative visuals",
+      "videos": [
+        "https://www.youtube.com/watch?v=4GkBT_fUNOM"
+      ],
+      "youtubeDate": "20250927",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-139875793"
+      }
+    },
+    {
+      "id": "audiodevout-video-4",
+      "title": "Mouse Tracking and Force Fields with ParticlesGPU - TouchDesigner Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "I have a little tutorial here to create a force field for ParticlesGPU that moves around using a mouse input chop.",
+      "fullDescription": "I have a little tutorial here to create a force field for ParticlesGPU that moves around using a mouse input chop. If you play around with the force values for the force field and the ParticlesGPU, you will get some beautiful results!! Of course you can switch out the input positions from Mediapipe or a Kinect and use this as you like.",
+      "medium": "TouchDesigner, generative visuals",
+      "videos": [
+        "https://www.youtube.com/watch?v=uusZcyW7o9Q"
+      ],
+      "youtubeDate": "20250912",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-video-5",
+      "title": "Audioreactive ParticlesGPU in TouchDesigner (with AudioAnalysis)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Finally I have made an audioreactive project you can follow along.",
+      "fullDescription": "Finally I have made an audioreactive project you can follow along. Here I am using the AudioAnalysis tool to get the values from a track and use them to drive forces in the ParticlesGPU and the opacities of different inputs in the layout. You can go as extreme or minimal as you want to with these techniques. I tried to show all the different levels of audioreactivity and how you can use these values in different ways. Also exciting is the multicamera rendering, which gives you 3 different perspectives of the same geo object.\n\nI tried very hard but could not get the audio syncing in the intro :ppp and replaying the song again and again gets tiring to the ears ik, if that bothers you, you might be better off making a playlist of similar songs and play them one after another!! make sure to check/adjust the threshold levels of the audioanalysis when you do that!",
+      "medium": "TouchDesigner, generative visuals",
+      "videos": [
+        "https://www.youtube.com/watch?v=u5JXHaGVywI"
+      ],
+      "youtubeDate": "20250901",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/audioreactive-in-137848273"
+      }
     },
     {
       "id": "audiodevout-video-6",
       "title": "Vibing with ParticlesGPU in TouchDesigner",
       "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
       "color": "cerulean",
-      "description": "Exploring creative particle effects and vibes with ParticlesGPU.",
-      "fullDescription": "A creative exploration of ParticlesGPU capabilities in TouchDesigner, focusing on aesthetic particle effects and visual vibes.",
+      "description": "In this video I am exploring/vibing w ParticlesGPU and seeing what sort of structures pop and when we play with the forces and perspectives.",
+      "fullDescription": "In this video I am exploring/vibing w ParticlesGPU and seeing what sort of structures pop and when we play with the forces and perspectives. Very interesting shapes and figures come out with the tiniest changes.",
       "medium": "TouchDesigner, generative visuals",
-      "videos": ["https://youtu.be/jFzNeCwaeEM"]
+      "videos": [
+        "https://www.youtube.com/watch?v=jFzNeCwaeEM"
+      ],
+      "youtubeDate": "20250826",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-kaleidoscopic-fractals-particlesgpu",
+      "title": "Kaleidoscopic Fractals with ParticlesGPU in TouchDesigner - Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "I was inspired by @elekktronaut creating fractals with a similar technique.",
+      "fullDescription": "I was inspired by @elekktronaut creating fractals with a similar technique. I thought it would look quite cool will ParticlesGPU as an input and I was pleasantly surprised!! I'm using various tiling and mirroring techniques as well as a feedback loop to generate these amazing patterns.",
+      "medium": "TouchDesigner, particle systems, generative art",
+      "tags": [
+        "TouchDesigner",
+        "ParticlesGPU",
+        "fractals",
+        "generative art",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=TUOnPUHWpIU"
+      ],
+      "youtubeDate": "20250404",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/project-files-in-125860099"
+      }
+    },
+    {
+      "id": "audiodevout-audioreactive-text-showcase",
+      "title": "Audioreactive Text in TouchDesigner - Project Showcase",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Here I have a snippet of an audioreactive text project I used for a VJ performance recently.",
+      "fullDescription": "Here I have a snippet of an audioreactive text project I used for a VJ performance recently.",
+      "medium": "TouchDesigner, audioreactive visuals",
+      "tags": [
+        "TouchDesigner",
+        "audioreactive",
+        "text",
+        "VJ",
+        "performance"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=GlMgtr-ejzs"
+      ],
+      "youtubeDate": "20250204",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/project-files-121479952"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part6-radial-lighting",
+      "title": "Radial Lighting  - TouchDesigner Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top.",
+      "fullDescription": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top. By changing the compositing modes, you will find that you can introduce some exciting changes to the structures. You can play with the parameters of the noise TOPs and displace to get some really crazy results.",
+      "medium": "TouchDesigner, 3D geometry, lighting",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "instancing",
+        "lighting",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=mkVa8D8_FIw"
+      ],
+      "youtubeDate": "20250105",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-controlled-feedback-cache-tops",
+      "title": "Controlled Feedback with Cache TOPs in TouchDesigner",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Here's a quick tutorial for controlling the feedback trails with the Cache TOP!",
+      "fullDescription": "Here's a quick tutorial for controlling the feedback trails with the Cache TOP!",
+      "medium": "TouchDesigner, visual effects, feedback control",
+      "tags": [
+        "TouchDesigner",
+        "feedback",
+        "Cache TOP",
+        "tutorial",
+        "visual effects"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=TXbIgtYaNqQ"
+      ],
+      "youtubeDate": "20240930",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-replicator-limit-feedback",
+      "title": "Replicator-Limit-Feedback (Project Overview)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Replicator-Limit-Feedback (Project Overview).",
+      "fullDescription": "Replicator-Limit-Feedback (Project Overview).",
+      "medium": "TouchDesigner, generative visuals",
+      "tags": [
+        "TouchDesigner",
+        "feedback",
+        "replicator",
+        "project overview"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=IR0T0t49gnw"
+      ],
+      "youtubeDate": "20240908",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/project-files-111659656"
+      }
+    },
+    {
+      "id": "audiodevout-particle-structures-mesh-generator",
+      "title": "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
+      "fullDescription": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
+      "medium": "TouchDesigner, mesh generation, particle systems",
+      "tags": [
+        "TouchDesigner",
+        "Mesh Generator",
+        "particles",
+        "spiral",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=XHGeICkx9lU"
+      ],
+      "youtubeDate": "20240720",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-particlesgpu-noise-sculpting",
+      "title": "Noise Sculpting in TouchDesigner with ParticlesGPU - Part 5 (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns!",
+      "fullDescription": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns! These are just some simple tricks to get you started with the particlesGPU tool which seemed very complicated to me in the beginning. Remember that TouchDesigner is extremely versatile so you can add all sorts of stuff in here and manipulate it as you wish!",
+      "medium": "TouchDesigner, particle systems",
+      "tags": [
+        "ParticlesGPU",
+        "noise sculpting",
+        "generative visuals",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=kcZH2zcHANc"
+      ],
+      "youtubeDate": "20240707",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-procedural-grid-patterns",
+      "title": "Procedural Grid Patterns - TouchDesigner Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Procedural Grid Patterns.",
+      "fullDescription": "Procedural Grid Patterns.",
+      "medium": "TouchDesigner, procedural patterns, generative art",
+      "tags": [
+        "TouchDesigner",
+        "grid",
+        "procedural",
+        "patterns",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=TbRtV-ix8RE"
+      ],
+      "youtubeDate": "20240617",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/simple-grid-with-106357613"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part4",
+      "title": "Noise Sculpting in TouchDesigner - Part 4 (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
+      "fullDescription": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
+      "medium": "TouchDesigner, procedural geometry",
+      "tags": [
+        "noise sculpting",
+        "geometry",
+        "TouchDesigner",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=s8ea30HlTHE"
+      ],
+      "youtubeDate": "20240513",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-104148759"
+      }
+    },
+    {
+      "id": "audiodevout-geometric-iterations-behind-network",
+      "title": "Geometric Iterations - Behind the Network",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "A really simple project I have been working on as part of a music video.",
+      "fullDescription": "A really simple project I have been working on as part of a music video. I used the techniques from my noise sculpting videos as well as some tutorials by @pppanik007\n\nI'm working on a tutorial for this and a couple other techniques which will be out soon!",
+      "medium": "TouchDesigner, procedural geometry, generative art",
+      "tags": [
+        "TouchDesigner",
+        "geometric",
+        "iterations",
+        "behind the network"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=QG-Kluyuveg"
+      ],
+      "youtubeDate": "20240510",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-103982664"
+      }
+    },
+    {
+      "id": "audiodevout-instancing-to-midi",
+      "title": "Interactive Instrument - Instancing to MIDI in TouchDesigner (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this tutorial, I'll show you a special project I've been working on for a couple of days.",
+      "fullDescription": "In this tutorial, I'll show you a special project I've been working on for a couple of days. We'll use the RenderPickCHOP to extract instancing data and convert it to MIDI, allowing you to click and play!\n\nThe formula for the Fan CHOP is cut off at 09:40 it is - 'chan[0-' + str(op('merge2').numSamples) + ']'\n\nThis project was inspired by elekktronaut's video on playing drums with Kinect. (Their videos are great if you want to understand the workflow of making a project with Kinect.) I thought it would be fun to create something similar with TouchDesigner!",
+      "medium": "TouchDesigner, interactive generative visuals, MIDI integration",
+      "tags": [
+        "TouchDesigner",
+        "instancing",
+        "RenderPick CHOP",
+        "MIDI",
+        "interactive",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Qrtwn5XjDzk"
+      ],
+      "youtubeDate": "20240425",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/interactive-to-103074496"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part3",
+      "title": "Noise Sculpting in TouchDesigner - Part 3 (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "This is another noise sculpting doodle I made for you guys today!",
+      "fullDescription": "This is another noise sculpting doodle I made for you guys today! We are using pattern chops and compositing techniques to generate structures in 3d instancing.",
+      "medium": "TouchDesigner, generative visuals",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "tutorial",
+        "generative art"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Mu1TpRVujuY"
+      ],
+      "youtubeDate": "20240419",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-102644244"
+      }
+    },
+    {
+      "id": "audiodevout-chop-top-chop-sop",
+      "title": "CHOP-TOP-CHOP-SOP - Simple Multioperator Processing on TouchDesigner",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this quick tutorial, I explore creating 3D patterns using the Pattern CHOP in TouchDesigner.",
+      "fullDescription": "In this quick tutorial, I explore creating 3D patterns using the Pattern CHOP in TouchDesigner. I demonstrate how to process the data through various operators to generate diverse variations suitable for instancing. It's a straightforward technique with the potential for producing captivating results.",
+      "medium": "TouchDesigner, operator chains, data flow",
+      "tags": [
+        "TouchDesigner",
+        "CHOP",
+        "TOP",
+        "SOP",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=ZhddPQfyN5A"
+      ],
+      "youtubeDate": "20240415",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/chop-top-chop-on-102374891"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part2",
+      "title": "Noise Sculpting in TouchDesigner - Part 2 (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this video, I'm presenting a fresh take on our previous tutorial.",
+      "fullDescription": "In this video, I'm presenting a fresh take on our previous tutorial. This time, I'm diving into the world of 3D geometry creation using the Noise TOP in TouchDesigner and using instancing to craft diverse patterns.",
+      "medium": "TouchDesigner, noise sculpting, procedural geometry",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "tutorial",
+        "generative art"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=p9TwiixKvXQ"
+      ],
+      "youtubeDate": "20240405",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-101751158"
+      }
+    },
+    {
+      "id": "audiodevout-audioreactive-doodle-geometry-instancing",
+      "title": "Audioreactive Doodle with Geometry Instancing in TouchDesigner - Behind The Network",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Today, I'm excited to share the network of my latest audioreactive project.",
+      "fullDescription": "Today, I'm excited to share the network of my latest audioreactive project. Admittedly, it's not the most organized (oops!), but I'm confident you'll still get some valuable insights into my process. Keep an eye out for the tricks I've employed with switches and instance layering to bring this piece to life.\n\nI want to give a shoutout to the track that accompanied this project: \"Urminnes Tider\" from Doctor Evazan – Fold Reality by Jens Eriksson (Oval Harmonique). It's an absolute vibe!",
+      "medium": "TouchDesigner, audioreactive visuals, geometry instancing",
+      "tags": [
+        "TouchDesigner",
+        "audioreactive",
+        "instancing",
+        "behind the network"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Hk0uF7s-DjU"
+      ],
+      "youtubeDate": "20240401",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/audioreactive-in-102700297"
+      }
+    },
+    {
+      "id": "audiodevout-procedural-crystal-video-effects",
+      "title": "Procedural Crystal-Like Video Effects - TouchDesigner Tutorial",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "Procedural Crystal-Like Video Effects.",
+      "fullDescription": "Procedural Crystal-Like Video Effects.",
+      "medium": "TouchDesigner, procedural effects, video effects",
+      "tags": [
+        "TouchDesigner",
+        "crystal",
+        "procedural",
+        "video effects",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=pc34xAXCRlg"
+      ],
+      "youtubeDate": "20240322",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/embossed-glass-100911024"
+      }
+    },
+    {
+      "id": "audiodevout-basic-uv-mapping-noise-sculpting",
+      "title": "Basic UV Mapping and Noise Sculpting in Touchdesigner (Tutorial)",
+      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "color": "cerulean",
+      "description": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007.",
+      "fullDescription": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007. We'll be diving into the world of UV mapping with ramp tops and using it as a foundation for 3D geometry instancing. This demonstration is really basic but can create really beautiful structures.",
+      "medium": "TouchDesigner, UV mapping, procedural geometry",
+      "tags": [
+        "TouchDesigner",
+        "UV mapping",
+        "noise sculpting",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=4rm5dcoQHBc"
+      ],
+      "youtubeDate": "20240315",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/project-files-uv-100412204"
+      }
     }
   ]
 }
