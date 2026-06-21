@@ -29,6 +29,16 @@
 
     isYoutubeUrl: function (url) {
       return typeof url === 'string' && (url.indexOf('youtube') !== -1 || url.indexOf('youtu.be') !== -1);
+    },
+
+    getThumbSrc: function (src) {
+      if (!src || typeof src !== 'string') return src;
+      if (src.indexOf('./assets/images/thumbs/') === 0) return src;
+      if (src.indexOf('./assets/images/') !== 0) return src;
+      var rel = src.slice('./assets/images/'.length);
+      var dot = rel.lastIndexOf('.');
+      if (dot !== -1) rel = rel.slice(0, dot) + '.webp';
+      return './assets/images/thumbs/' + rel;
     }
   };
 

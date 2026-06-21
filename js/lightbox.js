@@ -250,8 +250,10 @@
     incoming.addEventListener('transitionend', onDone);
   }
 
-  function open(item) {
+  function open(item, options) {
     if (!item) return;
+    options = options || {};
+    var minimal = !!options.minimal || !!item.minimal;
     lastFocused = document.activeElement;
     currentItem = item;
     mediaItems = getMediaItems(item);
@@ -269,12 +271,15 @@
       }
     }
 
+    lightboxEl.classList.toggle('lightbox--minimal', minimal);
+
     titleEl.textContent = item.title || '';
     categoryEl.textContent = item.category || '';
+    categoryEl.hidden = minimal;
     var metaParts = [item.date, item.venue, item.location].filter(Boolean);
     if (metaEl) {
       metaEl.textContent = metaParts.join(' · ');
-      metaEl.hidden = metaParts.length === 0;
+      metaEl.hidden = minimal || metaParts.length === 0;
     }
 
     if (mediaItems.length > 0) {
@@ -288,7 +293,7 @@
     }
 
     bodyEl.innerHTML = '';
-    if (item.fullDescription) {
+    if (!minimal && item.fullDescription) {
       var desc = document.createElement('p');
       desc.className = 'lightbox__description';
       desc.textContent = item.fullDescription;
@@ -298,7 +303,7 @@
     if (item.medium) pills.push(esc(item.medium));
     if (item.themes) pills.push(esc(item.themes));
     if (item.technical) pills.push(esc(item.technical));
-    if (pills.length > 0) {
+    if (!minimal && pills.length > 0) {
       var pillWrap = document.createElement('div');
       pillWrap.className = 'lightbox__pills';
       pills.forEach(function (text) {
@@ -309,7 +314,7 @@
       });
       bodyEl.appendChild(pillWrap);
     }
-    if (item.urls) {
+    if (!minimal && item.urls) {
       var linksWrap = document.createElement('div');
       linksWrap.className = 'lightbox__links';
       var hasLinks = false;
@@ -352,6 +357,7 @@
     if (!lightboxEl) return;
     pauseAndClearMedia();
     lightboxEl.classList.remove('is-open');
+    lightboxEl.classList.remove('lightbox--minimal');
     document.body.style.overflow = '';
     if (lastFocused) {
       try { lastFocused.focus(); } catch (e) { /* noop */ }
@@ -385,5 +391,17 @@
     }
   }
 
+  function openSingleImage(opts) {
+    if (!opts || !opts.src) return;
+    open({
+      title: opts.title || '',
+      category: opts.category || '',
+      images: [opts.src],
+      videos: [],
+      fullDescription: opts.fullDescription || ''
+    }, { minimal: !!opts.minimal });
+  }
+
   window.openLightbox = open;
+  window.openLightboxSingle = openSingleImage;
 })();

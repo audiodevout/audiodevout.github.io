@@ -6,16 +6,7 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/digital-sketch-01/sketch1.jpg"
-      ]
-    },
-    {
-      "id": "digital-sketch-02",
-      "title": "Oost - October 2024",
-      "category": "VISUAL RESEARCH",
-      "color": "saffron",
-      "images": [
-        "./assets/images/visual/digital-sketch-02/sketch2.png"
+        "./assets/images/visual/digital-sketch-01/sketch1.webp"
       ]
     },
     {
@@ -24,7 +15,7 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/digital-sketch-03/sketch3.png"
+        "./assets/images/visual/digital-sketch-03/sketch3.webp"
       ]
     },
     {
@@ -33,7 +24,7 @@
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
       "images": [
-        "./assets/images/visual/ritual-computing-01/ritual-computing-1.png"
+        "./assets/images/visual/ritual-computing-01/ritual-computing-1.webp"
       ]
     },
     {
@@ -42,21 +33,21 @@
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
       "images": [
-        "./assets/images/visual/ritual-computing-02/ritual-computing-2.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.15.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.16.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.17.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.18.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.19.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.20.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.21.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.22.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.23.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.24.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.25.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.26.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.27.png",
-        "./assets/images/visual/ritual-computing-02/diamonddoodles.28.png"
+        "./assets/images/visual/ritual-computing-02/ritual-computing-2.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.15.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.16.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.17.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.18.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.19.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.20.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.21.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.22.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.23.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.24.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.25.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.26.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.27.webp",
+        "./assets/images/visual/ritual-computing-02/diamonddoodles.28.webp"
       ]
     },
     {
@@ -65,7 +56,7 @@
       "category": "VISUAL RESEARCH",
       "color": "electric-lime",
       "images": [
-        "./assets/images/visual/ritual-computing-03/ritual-computing-3.jpg"
+        "./assets/images/visual/ritual-computing-03/ritual-computing-3.webp"
       ]
     },
     {
@@ -74,27 +65,27 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/superboxes-01/superboxex.0.jpg",
-        "./assets/images/visual/superboxes-01/superboxex.1.jpg",
-        "./assets/images/visual/superboxes-01/superboxex.2.jpg",
-        "./assets/images/visual/superboxes-01/superboxex.3.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.0.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.2.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.3.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.4.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.5.jpg",
-        "./assets/images/visual/superboxes-01/superboxes.6.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.0.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.1.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.2.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.3.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.4.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.5.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.6.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.7.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.8.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.10.jpg",
-        "./assets/images/visual/superboxes-01/sprbxes.12.jpg"
+        "./assets/images/visual/superboxes-01/superboxex.0.webp",
+        "./assets/images/visual/superboxes-01/superboxex.1.webp",
+        "./assets/images/visual/superboxes-01/superboxex.2.webp",
+        "./assets/images/visual/superboxes-01/superboxex.3.webp",
+        "./assets/images/visual/superboxes-01/superboxes.0.webp",
+        "./assets/images/visual/superboxes-01/superboxes.2.webp",
+        "./assets/images/visual/superboxes-01/superboxes.3.webp",
+        "./assets/images/visual/superboxes-01/superboxes.4.webp",
+        "./assets/images/visual/superboxes-01/superboxes.5.webp",
+        "./assets/images/visual/superboxes-01/superboxes.6.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.0.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.1.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.2.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.3.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.4.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.5.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.6.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.7.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.8.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.10.webp",
+        "./assets/images/visual/superboxes-01/sprbxes.12.webp"
       ]
     },
     {
@@ -103,18 +94,18 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.0.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.1.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.2.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.3.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.4.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.5.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.6.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.7.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.102.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.103.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.104.jpg",
-        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.105.jpg"
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.0.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.1.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.2.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.3.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.4.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.5.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.6.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.7.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.102.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.103.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.104.webp",
+        "./assets/images/visual/riso-mono-test-01/riso mono export test - 1 -.105.webp"
       ]
     },
     {
@@ -123,16 +114,16 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/feedback-worms-02/feedback worms.0.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.1.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.2.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.3.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.4.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.5.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.6.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.7.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.8.png",
-        "./assets/images/visual/feedback-worms-02/feedback worms.9.png"
+        "./assets/images/visual/feedback-worms-02/feedback worms.0.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.1.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.2.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.3.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.4.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.5.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.6.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.7.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.8.webp",
+        "./assets/images/visual/feedback-worms-02/feedback worms.9.webp"
       ]
     },
     {
@@ -141,17 +132,17 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.0.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.1.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.2.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.3.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.4.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.5.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.6.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.7.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.8.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.9.jpg",
-        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.10.jpg"
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.0.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.1.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.2.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.3.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.4.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.5.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.6.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.7.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.8.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.9.webp",
+        "./assets/images/visual/abstract-sculpture-series-01/abstract_sculpture_series.10.webp"
       ]
     },
     {
@@ -160,11 +151,11 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/magical-wells-01/TDMovieOut.3.png",
-        "./assets/images/visual/magical-wells-01/TDMovieOut.4.png",
-        "./assets/images/visual/magical-wells-01/TDMovieOut.9.png",
-        "./assets/images/visual/magical-wells-01/TDMovieOut.13.png",
-        "./assets/images/visual/magical-wells-01/TDMovieOut.14.png"
+        "./assets/images/visual/magical-wells-01/TDMovieOut.3.webp",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.4.webp",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.9.webp",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.13.webp",
+        "./assets/images/visual/magical-wells-01/TDMovieOut.14.webp"
       ]
     },
     {
@@ -173,7 +164,7 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/morsecode-export-12/morsecode_exports.12.jpg"
+        "./assets/images/visual/morsecode-export-12/morsecode_exports.12.webp"
       ]
     },
     {
@@ -182,12 +173,12 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.0.jpg",
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.1.jpg",
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.2.jpg",
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.3.jpg",
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.4.jpg",
-        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.5.jpg"
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.0.webp",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.1.webp",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.2.webp",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.3.webp",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.4.webp",
+        "./assets/images/visual/asymmetrica-face-01/asymmetrica face.5.webp"
       ]
     },
     {
@@ -196,10 +187,10 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/flow-series-01/flow.0.jpg",
-        "./assets/images/visual/flow-series-01/flow.1.jpg",
-        "./assets/images/visual/flow-series-01/flow.2.jpg",
-        "./assets/images/visual/flow-series-01/flow.3.jpg"
+        "./assets/images/visual/flow-series-01/flow.0.webp",
+        "./assets/images/visual/flow-series-01/flow.1.webp",
+        "./assets/images/visual/flow-series-01/flow.2.webp",
+        "./assets/images/visual/flow-series-01/flow.3.webp"
       ]
     },
     {
@@ -208,9 +199,9 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/heat-divinity-01/heatdivinitee.jpg",
-        "./assets/images/visual/heat-divinity-01/heatdivinity.jpg",
-        "./assets/images/visual/heat-divinity-01/heatdivinity2.jpg"
+        "./assets/images/visual/heat-divinity-01/heatdivinitee.webp",
+        "./assets/images/visual/heat-divinity-01/heatdivinity.webp",
+        "./assets/images/visual/heat-divinity-01/heatdivinity2.webp"
       ]
     },
     {
@@ -219,10 +210,10 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/moire-play-01/moire play.0.jpg",
-        "./assets/images/visual/moire-play-01/moire play.1.jpg",
-        "./assets/images/visual/moire-play-01/moire play.2.jpg",
-        "./assets/images/visual/moire-play-01/moire play.3.jpg"
+        "./assets/images/visual/moire-play-01/moire play.0.webp",
+        "./assets/images/visual/moire-play-01/moire play.1.webp",
+        "./assets/images/visual/moire-play-01/moire play.2.webp",
+        "./assets/images/visual/moire-play-01/moire play.3.webp"
       ]
     },
     {
@@ -231,19 +222,19 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.0.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.1.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.2.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.3.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.4.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.5.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.6.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.7.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.8.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.9.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.10.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.11.jpg",
-        "./assets/images/visual/myceliumaudio-01/myceliumaudio.12.jpg"
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.0.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.1.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.2.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.3.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.4.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.5.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.6.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.7.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.8.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.9.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.10.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.11.webp",
+        "./assets/images/visual/myceliumaudio-01/myceliumaudio.12.webp"
       ]
     },
     {
@@ -252,12 +243,12 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.0.jpg",
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.1.jpg",
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.2.jpg",
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.3.jpg",
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.4.jpg",
-        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.5.jpg"
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.0.webp",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.1.webp",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.2.webp",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.3.webp",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.4.webp",
+        "./assets/images/visual/noise-between-the-lines-01/noise between the lines.5.webp"
       ]
     },
     {
@@ -266,18 +257,18 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/noisepattern-01/noisepattern.0.jpg",
-        "./assets/images/visual/noisepattern-01/noisepattern.1.jpg",
-        "./assets/images/visual/noisepattern-01/noisepattern.2.jpg",
-        "./assets/images/visual/noisepattern-01/noisepattern.3.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.0.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.1.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.2.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.3.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.4.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.5.jpg",
-        "./assets/images/visual/noisepattern-01/noisepatternexp.6.jpg",
-        "./assets/images/visual/noisepattern-01/noisepattexrnexp.5.jpg"
+        "./assets/images/visual/noisepattern-01/noisepattern.0.webp",
+        "./assets/images/visual/noisepattern-01/noisepattern.1.webp",
+        "./assets/images/visual/noisepattern-01/noisepattern.2.webp",
+        "./assets/images/visual/noisepattern-01/noisepattern.3.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.0.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.1.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.2.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.3.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.4.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.5.webp",
+        "./assets/images/visual/noisepattern-01/noisepatternexp.6.webp",
+        "./assets/images/visual/noisepattern-01/noisepattexrnexp.5.webp"
       ]
     },
     {
@@ -286,29 +277,12 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/old-drawings-01/old drawing (1).jpg",
-        "./assets/images/visual/old-drawings-01/old drawing (2).jpg",
-        "./assets/images/visual/old-drawings-01/old drawing (3).jpg",
-        "./assets/images/visual/old-drawings-01/old drawing (4).jpg",
-        "./assets/images/visual/old-drawings-01/old drawing (6).jpg"
+        "./assets/images/visual/old-drawings-01/old drawing (1).webp",
+        "./assets/images/visual/old-drawings-01/old drawing (2).webp",
+        "./assets/images/visual/old-drawings-01/old drawing (3).webp",
+        "./assets/images/visual/old-drawings-01/old drawing (4).webp",
+        "./assets/images/visual/old-drawings-01/old drawing (6).webp"
       ]
-    },
-    {
-      "id": "oost-poster-a0-01",
-      "title": "oostposterexport_physical_size_A0",
-      "category": "VISUAL RESEARCH",
-      "color": "saffron",
-      "description": "October 2024 poster for OOST / Dimemesional.",
-      "images": [
-        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.0.jpg",
-        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.1.jpg",
-        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.2.jpg",
-        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.3.jpg",
-        "./assets/images/visual/oost-poster-a0-01/oostposterexport_physical_size_A0.4.jpg"
-      ],
-      "urls": {
-        "link": "https://www.komoost.blog/october-2024-by-dimemesional/"
-      }
     },
     {
       "id": "patreon-waves-01",
@@ -316,13 +290,13 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.0.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.1.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.2.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.3.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.4.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.5.jpg",
-        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.6.jpg"
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.0.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.1.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.2.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.3.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.4.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.5.webp",
+        "./assets/images/visual/patreon-waves-01/patreon_wallpaper_waves.6.webp"
       ]
     },
     {
@@ -331,9 +305,9 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/plotterframes-01/plotterframes.0.jpg",
-        "./assets/images/visual/plotterframes-01/plotterframes.1.jpg",
-        "./assets/images/visual/plotterframes-01/plotterframes.2.jpg"
+        "./assets/images/visual/plotterframes-01/plotterframes.0.webp",
+        "./assets/images/visual/plotterframes-01/plotterframes.1.webp",
+        "./assets/images/visual/plotterframes-01/plotterframes.2.webp"
       ]
     },
     {
@@ -342,19 +316,19 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/structural-variations-01/structural variations.0.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.1.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.2.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.3.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.4.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.5.jpg",
-        "./assets/images/visual/structural-variations-01/structural variations.6.jpg"
+        "./assets/images/visual/structural-variations-01/structural variations.0.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.1.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.2.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.3.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.4.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.5.webp",
+        "./assets/images/visual/structural-variations-01/structural variations.6.webp"
       ]
     },
     {
       "id": "audiodevout-video-glitch-tracing-instancing",
-      "title": "Video Glitch Effects with Tracing and Instancing - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Video Glitch Effects with Tracing and Instancing",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "A new video technique I have been seeing on Instagram a lot these days.",
       "fullDescription": "A new video technique I have been seeing on Instagram a lot these days. Here are some of the results from my experiments in deconstructing it.",
@@ -376,8 +350,8 @@
     },
     {
       "id": "audiodevout-contour-experiments",
-      "title": "Contour Experiments in TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Contour Experiments",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Here's a video about creating contours using variations of ramps, noise and displace tops.",
       "fullDescription": "Here's a video about creating contours using variations of ramps, noise and displace tops. Some of the effects look just like the drawings I used to make in my free time. Also very nice to create a very analog hand-drawn effects with a digital twist.",
@@ -398,8 +372,8 @@
     },
     {
       "id": "audiodevout-noise-sculpting-part9",
-      "title": "Noise Sculpting in TouchDesigner (Part 9*) - Bubbles, Waves and Scene Switching",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting (Part 9*) - Bubbles, Waves and Scene Switching",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "We are going back to basics with this one!",
       "fullDescription": "We are going back to basics with this one! In this video I am working with some position instancing techniques that use compositing and feedback for some cool structures.",
@@ -421,8 +395,8 @@
     },
     {
       "id": "audiodevout-generative-soundscapes-data-driven",
-      "title": "Generative Soundscapes and Data Driven Signal Processing - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Generative Soundscapes and Data Driven Signal Processing",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I've been experimenting with audio triggers in TouchDesigner for a while now and I really like the interaction between the LFOs and the sound trigger so I made a tutorial around i…",
       "fullDescription": "I've been experimenting with audio triggers in TouchDesigner for a while now and I really like the interaction between the LFOs and the sound trigger so I made a tutorial around it.",
@@ -444,8 +418,8 @@
     },
     {
       "id": "audiodevout-typewriter-effect",
-      "title": "typewriter.tox - Typing Effect in TouchDesigner - Free TOX FIle",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "typewriter.tox - Typing Effect - Free TOX FIle",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Made this on a boring evening as a doodle!",
       "fullDescription": "Made this on a boring evening as a doodle! Then I though people would be interested in this effect as a tool as well so here it is!",
@@ -467,8 +441,8 @@
     },
     {
       "id": "audiodevout-creating-smoky-particle-effects",
-      "title": "Creating Smoky Particle Effects with ParticlesGPU - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Creating Smoky Particle Effects with ParticlesGPU",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Inspired by the recent tutorial by Scott Mann on the @TheInteractiveImmersiveHQ, I made a quick video about ParticlesGPU and external forces you can use for some very cool effects.",
       "fullDescription": "Inspired by the recent tutorial by Scott Mann on the @TheInteractiveImmersiveHQ, I made a quick video about ParticlesGPU and external forces you can use for some very cool effects.",
@@ -490,8 +464,8 @@
     },
     {
       "id": "audiodevout-nvidia-flex-touchdesigner",
-      "title": "NVIDIA Flex in TouchDesigner: Real-Time Soft Body & Fluid Experiments",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "NVIDIA Flex: Real-Time Soft Body & Fluid Experiments",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Here's a video about the some of the NVIDIA flex components in TouchDesigner.",
       "fullDescription": "Here's a video about the some of the NVIDIA flex components in TouchDesigner. I used the Force COMP and some feedback loops to turn this into a very interesting effect with exploding particles. You can also play with different bounding SOPs and change around the input geometry before the instancing for some cool effects.",
@@ -513,8 +487,8 @@
     },
     {
       "id": "audiodevout-audio-reactive-text-animations",
-      "title": "Audio-Reactive Text Animations -  TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Audio-Reactive Text Animations",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "A new audioreactive project!!",
       "fullDescription": "A new audioreactive project!! I finally made a tutorial for the demo I posted some time ago. We use instancing to create varying geometries based around the structure of the text, and then the AudioAnalysis tool to map values from the audio to the rest of the network.",
@@ -536,8 +510,8 @@
     },
     {
       "id": "audiodevout-video-2",
-      "title": "Noise Sculpting in TouchDesigner (Part 8) - Abstract Particle Structures",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting (Part 8) - Abstract Particle Structures",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I used similar instancing technique as the previous video here, but with some additions.",
       "fullDescription": "I used similar instancing technique as the previous video here, but with some additions. For the position data, I used a limit to quantize the positions of the particles; and for rendering I used a lumablur that is controlled by the depth TOP (which takes its depth data from the render TOP) and a RGB Delay. All of these in combination create quite beautiful structures. As always, you're encouraged to tweak all the relevant values in all the different TOPs and SOPs and the results will always be different.",
@@ -552,8 +526,8 @@
     },
     {
       "id": "audiodevout-video-3",
-      "title": "Noise Sculpting with TouchDesigner (Part 7) -  Ghostly Particles",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting (Part 7) - Ghostly Particles",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial.",
       "fullDescription": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial. I love the little ghostly/spider web textures that come out of this technique.",
@@ -568,8 +542,8 @@
     },
     {
       "id": "audiodevout-video-4",
-      "title": "Mouse Tracking and Force Fields with ParticlesGPU - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Mouse Tracking and Force Fields with ParticlesGPU",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I have a little tutorial here to create a force field for ParticlesGPU that moves around using a mouse input chop.",
       "fullDescription": "I have a little tutorial here to create a force field for ParticlesGPU that moves around using a mouse input chop. If you play around with the force values for the force field and the ParticlesGPU, you will get some beautiful results!! Of course you can switch out the input positions from Mediapipe or a Kinect and use this as you like.",
@@ -584,8 +558,8 @@
     },
     {
       "id": "audiodevout-video-5",
-      "title": "Audioreactive ParticlesGPU in TouchDesigner (with AudioAnalysis)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Audioreactive ParticlesGPU (with AudioAnalysis)",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Finally I have made an audioreactive project you can follow along.",
       "fullDescription": "Finally I have made an audioreactive project you can follow along. Here I am using the AudioAnalysis tool to get the values from a track and use them to drive forces in the ParticlesGPU and the opacities of different inputs in the layout. You can go as extreme or minimal as you want to with these techniques. I tried to show all the different levels of audioreactivity and how you can use these values in different ways. Also exciting is the multicamera rendering, which gives you 3 different perspectives of the same geo object.\n\nI tried very hard but could not get the audio syncing in the intro :ppp and replaying the song again and again gets tiring to the ears ik, if that bothers you, you might be better off making a playlist of similar songs and play them one after another!! make sure to check/adjust the threshold levels of the audioanalysis when you do that!",
@@ -600,8 +574,8 @@
     },
     {
       "id": "audiodevout-video-6",
-      "title": "Vibing with ParticlesGPU in TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Vibing with ParticlesGPU",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this video I am exploring/vibing w ParticlesGPU and seeing what sort of structures pop and when we play with the forces and perspectives.",
       "fullDescription": "In this video I am exploring/vibing w ParticlesGPU and seeing what sort of structures pop and when we play with the forces and perspectives. Very interesting shapes and figures come out with the tiniest changes.",
@@ -616,8 +590,8 @@
     },
     {
       "id": "audiodevout-kaleidoscopic-fractals-particlesgpu",
-      "title": "Kaleidoscopic Fractals with ParticlesGPU in TouchDesigner - Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Kaleidoscopic Fractals with ParticlesGPU",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I was inspired by @elekktronaut creating fractals with a similar technique.",
       "fullDescription": "I was inspired by @elekktronaut creating fractals with a similar technique. I thought it would look quite cool will ParticlesGPU as an input and I was pleasantly surprised!! I'm using various tiling and mirroring techniques as well as a feedback loop to generate these amazing patterns.",
@@ -639,8 +613,8 @@
     },
     {
       "id": "audiodevout-audioreactive-text-showcase",
-      "title": "Audioreactive Text in TouchDesigner - Project Showcase",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Audioreactive Text - Project Showcase",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Here I have a snippet of an audioreactive text project I used for a VJ performance recently.",
       "fullDescription": "Here I have a snippet of an audioreactive text project I used for a VJ performance recently.",
@@ -662,8 +636,8 @@
     },
     {
       "id": "audiodevout-noise-sculpting-part6-radial-lighting",
-      "title": "Radial Lighting  - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Radial Lighting",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top.",
       "fullDescription": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top. By changing the compositing modes, you will find that you can introduce some exciting changes to the structures. You can play with the parameters of the noise TOPs and displace to get some really crazy results.",
@@ -685,8 +659,8 @@
     },
     {
       "id": "audiodevout-controlled-feedback-cache-tops",
-      "title": "Controlled Feedback with Cache TOPs in TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Controlled Feedback with Cache TOPs",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Here's a quick tutorial for controlling the feedback trails with the Cache TOP!",
       "fullDescription": "Here's a quick tutorial for controlling the feedback trails with the Cache TOP!",
@@ -709,7 +683,7 @@
     {
       "id": "audiodevout-replicator-limit-feedback",
       "title": "Replicator-Limit-Feedback (Project Overview)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Replicator-Limit-Feedback (Project Overview).",
       "fullDescription": "Replicator-Limit-Feedback (Project Overview).",
@@ -731,7 +705,7 @@
     {
       "id": "audiodevout-particle-structures-mesh-generator",
       "title": "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
       "fullDescription": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
@@ -753,8 +727,8 @@
     },
     {
       "id": "audiodevout-particlesgpu-noise-sculpting",
-      "title": "Noise Sculpting in TouchDesigner with ParticlesGPU - Part 5 (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting with ParticlesGPU - Part 5",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns!",
       "fullDescription": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns! These are just some simple tricks to get you started with the particlesGPU tool which seemed very complicated to me in the beginning. Remember that TouchDesigner is extremely versatile so you can add all sorts of stuff in here and manipulate it as you wish!",
@@ -775,8 +749,8 @@
     },
     {
       "id": "audiodevout-procedural-grid-patterns",
-      "title": "Procedural Grid Patterns - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Procedural Grid Patterns",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Procedural Grid Patterns.",
       "fullDescription": "Procedural Grid Patterns.",
@@ -798,8 +772,8 @@
     },
     {
       "id": "audiodevout-noise-sculpting-part4",
-      "title": "Noise Sculpting in TouchDesigner - Part 4 (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting - Part 4",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
       "fullDescription": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
@@ -821,7 +795,7 @@
     {
       "id": "audiodevout-geometric-iterations-behind-network",
       "title": "Geometric Iterations - Behind the Network",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "A really simple project I have been working on as part of a music video.",
       "fullDescription": "A really simple project I have been working on as part of a music video. I used the techniques from my noise sculpting videos as well as some tutorials by @pppanik007\n\nI'm working on a tutorial for this and a couple other techniques which will be out soon!",
@@ -842,8 +816,8 @@
     },
     {
       "id": "audiodevout-instancing-to-midi",
-      "title": "Interactive Instrument - Instancing to MIDI in TouchDesigner (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Interactive Instrument - Instancing to MIDI",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this tutorial, I'll show you a special project I've been working on for a couple of days.",
       "fullDescription": "In this tutorial, I'll show you a special project I've been working on for a couple of days. We'll use the RenderPickCHOP to extract instancing data and convert it to MIDI, allowing you to click and play!\n\nThe formula for the Fan CHOP is cut off at 09:40 it is - 'chan[0-' + str(op('merge2').numSamples) + ']'\n\nThis project was inspired by elekktronaut's video on playing drums with Kinect. (Their videos are great if you want to understand the workflow of making a project with Kinect.) I thought it would be fun to create something similar with TouchDesigner!",
@@ -866,8 +840,8 @@
     },
     {
       "id": "audiodevout-noise-sculpting-part3",
-      "title": "Noise Sculpting in TouchDesigner - Part 3 (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting - Part 3",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "This is another noise sculpting doodle I made for you guys today!",
       "fullDescription": "This is another noise sculpting doodle I made for you guys today! We are using pattern chops and compositing techniques to generate structures in 3d instancing.",
@@ -888,8 +862,8 @@
     },
     {
       "id": "audiodevout-chop-top-chop-sop",
-      "title": "CHOP-TOP-CHOP-SOP - Simple Multioperator Processing on TouchDesigner",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "CHOP-TOP-CHOP-SOP - Simple Multioperator Processing",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this quick tutorial, I explore creating 3D patterns using the Pattern CHOP in TouchDesigner.",
       "fullDescription": "In this quick tutorial, I explore creating 3D patterns using the Pattern CHOP in TouchDesigner. I demonstrate how to process the data through various operators to generate diverse variations suitable for instancing. It's a straightforward technique with the potential for producing captivating results.",
@@ -911,8 +885,8 @@
     },
     {
       "id": "audiodevout-noise-sculpting-part2",
-      "title": "Noise Sculpting in TouchDesigner - Part 2 (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Noise Sculpting - Part 2",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this video, I'm presenting a fresh take on our previous tutorial.",
       "fullDescription": "In this video, I'm presenting a fresh take on our previous tutorial. This time, I'm diving into the world of 3D geometry creation using the Noise TOP in TouchDesigner and using instancing to craft diverse patterns.",
@@ -933,8 +907,8 @@
     },
     {
       "id": "audiodevout-audioreactive-doodle-geometry-instancing",
-      "title": "Audioreactive Doodle with Geometry Instancing in TouchDesigner - Behind The Network",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Audioreactive Doodle with Geometry Instancing - Behind The Network",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Today, I'm excited to share the network of my latest audioreactive project.",
       "fullDescription": "Today, I'm excited to share the network of my latest audioreactive project. Admittedly, it's not the most organized (oops!), but I'm confident you'll still get some valuable insights into my process. Keep an eye out for the tricks I've employed with switches and instance layering to bring this piece to life.\n\nI want to give a shoutout to the track that accompanied this project: \"Urminnes Tider\" from Doctor Evazan – Fold Reality by Jens Eriksson (Oval Harmonique). It's an absolute vibe!",
@@ -955,8 +929,8 @@
     },
     {
       "id": "audiodevout-procedural-crystal-video-effects",
-      "title": "Procedural Crystal-Like Video Effects - TouchDesigner Tutorial",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Procedural Crystal-Like Video Effects",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "Procedural Crystal-Like Video Effects.",
       "fullDescription": "Procedural Crystal-Like Video Effects.",
@@ -978,8 +952,8 @@
     },
     {
       "id": "audiodevout-basic-uv-mapping-noise-sculpting",
-      "title": "Basic UV Mapping and Noise Sculpting in Touchdesigner (Tutorial)",
-      "category": "CREATIVE TECHNOLOGY / AUDIOVISUAL ART",
+      "title": "Basic UV Mapping and Noise Sculpting",
+      "category": "TouchDesigner Tutorials",
       "color": "cerulean",
       "description": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007.",
       "fullDescription": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007. We'll be diving into the world of UV mapping with ramp tops and using it as a foundation for 3D geometry instancing. This demonstration is really basic but can create really beautiful structures.",

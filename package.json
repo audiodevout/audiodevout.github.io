@@ -1,0 +1,13 @@
+{
+  "name": "audiodevout-portfolio",
+  "private": true,
+  "description": "Build scripts for Atharva Gupta portfolio site",
+  "scripts": {
+    "generate-images": "node scripts/generate-images.js",
+    "generate-images:rewrite": "node scripts/generate-images.js --rewrite",
+    "build-data": "node scripts/build-portfolio-data.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

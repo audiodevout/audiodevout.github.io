@@ -12,12 +12,12 @@
       "technical": "Custom low-RPM motor systems, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting; low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
       "themes": "Tinnitus and acoustic ritual, tension and unstable systems, mechanical fatigue, drawing as duration, meditative noise",
       "images": [
-        "./assets/images/installations/instruments-for-becoming/rain-stick-1.JPG",
-        "./assets/images/installations/instruments-for-becoming/rain-stick-2.JPG",
-        "./assets/images/installations/instruments-for-becoming/rain-stick-4.jpg",
-        "./assets/images/installations/instruments-for-becoming/rain-stick-6.jpg",
-        "./assets/images/installations/instruments-for-becoming/spinny-sticks-1.png",
-        "./assets/images/installations/instruments-for-becoming/spinny-sticks-2.png"
+        "./assets/images/installations/instruments-for-becoming/rain-stick-1.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-2.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-4.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-6.webp",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-1.webp",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-2.webp"
       ],
       "videos": [
         "./assets/video/rain-stick-video-1.mp4",
@@ -40,10 +40,10 @@
       ],
       "themes": "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
       "images": [
-        "./assets/images/installations/symmetrical-fictions/6.jpg",
-        "./assets/images/installations/symmetrical-fictions/39.jpg",
-        "./assets/images/installations/symmetrical-fictions/72.jpg",
-        "./assets/images/installations/symmetrical-fictions/73.jpg"
+        "./assets/images/installations/symmetrical-fictions/6.webp",
+        "./assets/images/installations/symmetrical-fictions/39.webp",
+        "./assets/images/installations/symmetrical-fictions/72.webp",
+        "./assets/images/installations/symmetrical-fictions/73.webp"
       ],
       "urls": {
         "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"

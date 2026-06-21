@@ -11,7 +11,7 @@
       "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • G.C.P.S.S.M. • REAL-TIME",
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
       "themes": "Embodied computation, glitch aesthetics, slow music, gesture-controlled performance, poetic control systems",
-      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.jpg", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.jpg"],
+      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.webp", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.webp"],
       "bandcampTracks": [
         {
           "title": "G.C.P.S.S.M.",
@@ -19,19 +19,6 @@
           "url": "https://asymmetrica.bandcamp.com/track/g-c-p-s-s-m"
         }
       ]
-    },
-    {
-      "id": "spaces-groningen",
-      "title": "Spaces @ OOST",
-      "category": "VJ • AMBIENT MUSIC • POETRY",
-      "color": "cerulean",
-      "description": "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
-      "fullDescription": "One night at Ambient Room, Oost: live ambient sets, poetry, and VJ work in the same room—sound, text, and image kept deliberately slow and sensory.",
-      "medium": "Live VJing, ambient music, poetry, audiovisual installation",
-      "tags": "LIVE • VJ • AMBIENT • POETRY • AUDIOVISUAL",
-      "technical": "Video projection, live music mixing, audiovisual sequencing",
-      "themes": "Immersive sound, ambient textures, poetic expression, club-based audiovisual experience",
-      "images": ["./assets/images/performance/spaces-groningen/spaces.jpg", "./assets/images/performance/spaces-groningen/spaces-1.jpg"]
     }
   ]
 }

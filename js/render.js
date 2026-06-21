@@ -172,7 +172,7 @@
     var sorted = {};
     Object.keys(groups).forEach(function (cat) {
       var list = groups[cat] || [];
-      if (cat === 'CREATIVE TECHNOLOGY / AUDIOVISUAL ART') {
+      if (cat === 'TouchDesigner Tutorials') {
         sorted[cat] = sortByYoutubeDate(list);
       } else {
         sorted[cat] = list;
@@ -194,7 +194,7 @@
     container.appendChild(section);
   }
 
-  /** Single marquee block: Installations, Performance, visual groups, Tutorials, Sound, Archive (subsection labels in JS). */
+  /** Single marquee block: Works, visual groups, Tutorials, Sound, Archive (subsection labels in JS). */
   function renderMarqueesSection() {
     var container = document.getElementById('marquees-content');
     if (!container) return;
@@ -206,19 +206,15 @@
 
     var installations = dedupeById(data.projects.installations || []);
     var performance = dedupeById(data.projects.performance || []);
+    var worksItems = installations.concat(performance);
     var drawings = dedupeById(data.projects.drawings || []);
-    var excludeCategories = ['CREATIVE TECHNOLOGY / AUDIOVISUAL ART'];
+    var excludeCategories = ['TouchDesigner Tutorials', 'VISUAL RESEARCH'];
 
-    addLabeledMarquee(container, 'Installations', installations, openLightbox);
-    addLabeledMarquee(container, 'Performance', performance, openLightbox);
+    addLabeledMarquee(container, 'Works', worksItems, openLightbox);
 
     var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
-    var order = ['VISUAL RESEARCH'];
-    order.forEach(function (cat) {
-      if (visualGroups[cat] && excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
-    });
     Object.keys(visualGroups).forEach(function (cat) {
-      if (order.indexOf(cat) === -1 && excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
+      if (excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
     });
 
     var youtubeItems = [];
@@ -305,14 +301,15 @@
 
     var installations = dedupeById(data.projects.installations || []);
     var performance = dedupeById(data.projects.performance || []);
+    var worksItems = installations.concat(performance);
     var drawings = dedupeById(data.projects.drawings || []);
     var soundItems = dedupeById(data.projects.soundInstallations || []);
 
-    addListGroup(listRoot, 'Installations', installations, openLightbox);
-    addListGroup(listRoot, 'Performance', performance, openLightbox);
+    addListGroup(listRoot, 'Works', worksItems, openLightbox);
 
     var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     Object.keys(visualGroups).forEach(function (cat) {
+      if (cat === 'VISUAL RESEARCH') return;
       addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
     });
 

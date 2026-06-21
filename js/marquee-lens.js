@@ -140,6 +140,8 @@
   function show(src, e) {
     ensureLensDOM();
     if (!src || !lensEl) return;
+    var utils = window.portfolioUtils || {};
+    var thumbSrc = typeof utils.getThumbSrc === 'function' ? utils.getThumbSrc(src) : src;
     active = true;
     pendingX = e.clientX;
     pendingY = e.clientY;
@@ -152,17 +154,25 @@
       setPosition(pendingX, pendingY);
     }
 
-    if (baseImg.src === src && baseImg.complete && baseImg.naturalWidth) {
+    if (baseImg.src === thumbSrc && baseImg.complete && baseImg.naturalWidth) {
       afterImageReady();
       return;
     }
 
     baseImg.onload = afterImageReady;
     baseImg.onerror = function () {
+      if (thumbSrc !== src) {
+        baseImg.onerror = function () {
+          applyCardSize(MAX_W, MAX_H);
+          setPosition(pendingX, pendingY);
+        };
+        baseImg.src = src;
+        return;
+      }
       applyCardSize(MAX_W, MAX_H);
       setPosition(pendingX, pendingY);
     };
-    baseImg.src = src;
+    baseImg.src = thumbSrc;
 
     if (baseImg.complete && baseImg.naturalWidth) {
       afterImageReady();
