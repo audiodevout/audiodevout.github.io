@@ -1,6 +1,36 @@
 {
   "items": [
     {
+      "id": "graduation-show-fmi-2026",
+      "title": "Graduation Show - Masters Frank Mohr Institute",
+      "date": "June 25 – 28, 2026",
+      "description": "Group graduation show for Frank Mohr Institute masters at Akerk. Instruments for Becoming and related work presented as part of the Media, Art, Design & Technology graduation cohort.",
+      "location": "Akerkhof 2, Groningen, NL",
+      "role": "Graduation Show (FMI MADtech)",
+      "venue": "Akerk",
+      "images": [],
+      "urls": {
+        "link": "https://www.academieminerva.nl/en/events/2026/06/graduation-show-frank-mohr-institute",
+        "akerk": "https://akerk.nl/event/graduation-show-masters-frank-mohr-institute",
+        "profile": "https://www.academieminerva.nl/en/projects/2026/graduation-show-2026/atharva-gupta",
+        "instagram": "https://www.instagram.com/p/DZmvODwCNL3/"
+      }
+    },
+    {
+      "id": "rot-2026",
+      "title": "ROT",
+      "date": "7 May 2026",
+      "description": "Evening of poetry, music, and art at The Moshpit of Creation. Performed the Gesture-Controlled Performance System for Slow Music (G.C.P.S.S.M.) without visuals.",
+      "location": "Groningen, NL",
+      "role": "Performance (G.C.P.S.S.M.)",
+      "venue": "The Moshpit of Creation",
+      "images": [
+        "./assets/images/exhibitions/rot/rotposter.jpg",
+        "./assets/images/exhibitions/rot/rotposter2.jpg"
+      ],
+      "fullDescription": "What is rotting beside you? Here's a peek into tonight and the thoughts of some performers. How do we celebrate the revolving? How do we give back to our One Mother Earth?\n\n⫘⫘The dust of your bones will far outlive your name⫘⫘The fruit on your counter knows⫘⫘The chestnut leaves on wet autumn floors know⫘Eventually, so will you⫘⫘\n\nWe're inviting you to ROT – an evening of poetry, music, and art about something that unites us all. The (brain)rot of algorithms feeding on the last of your serotonin. The social rot of misdeeds we've stopped noticing. And the organic rot, through which everything that has ever lived gives itself back.\n\n⫘⫘Rot isn't decay. It's a replacing. The mass stays; something else moves in⫘\n\nPerformed the gesture-controlled slow music without the visuals this time."
+    },
+    {
       "id": "rearrange-3",
       "title": "RE:Arrange! #3",
       "date": "24–25 April 2026",
@@ -172,7 +202,20 @@
         "https://www.youtube.com/watch?v=sSkNm3GcGq8"
       ],
       "youtubeDate": "20260214",
-      "fullDescription": "Experimental A/V night at Minerva. Gesture-controlled system: performer movement drives live sound and image—body and patch read as one environment."
+      "fullDescription": "Experimental A/V night at Minerva. First public showing of the Gesture-Controlled Performance System (G.C.P.S.S.M.—Gesture-Controlled Performance System for Slow Music): performer movement drives live sound and image—body and patch read as one environment."
+    },
+    {
+      "id": "lets-get-lyrical-vj-2025",
+      "title": "Let's Get Lyrical met Cissy Joan",
+      "date": "21 October 2025",
+      "description": "VJ performance with Romano Liu and Dara McHugh Murphy at Grand Theatre. (Don't) forget it—between wanting to forget and wanting to remember, the paradox tries to find a balance. How does it feel to be stuck in your head and at the same time want to run away from it as fast as you can? How delicate is the line between uncertainty and greatness? Romano Liu presents an introspective, audiovisual spoken word experience with guitarist Dara McHugh Murphy.",
+      "location": "Groningen, NL",
+      "role": "VJ Performance",
+      "venue": "Grand Theatre Groningen",
+      "images": [],
+      "urls": {
+        "instagram": "https://www.instagram.com/p/DP02M8qCJLl/"
+      }
     },
     {
       "id": "ddd-error-failure-option-pt3",
@@ -182,7 +225,9 @@
       "location": "Groningen, NL",
       "role": "Residency and Group Presentation",
       "venue": "Grand Theatre Groningen",
-      "images": [],
+      "images": [
+        "./assets/images/exhibitions/diverse-digital-dimensions/Screenshot 2026-06-21 171305.png"
+      ],
       "urls": {
         "link": "https://www.grandtheatregroningen.nl/en/programma/archief/diverse-digital-dimensions-error-failure-is-an-option-part-three"
       },
@@ -196,6 +241,19 @@
       "location": "Ajmer, IN",
       "role": "Lecture/Presentation",
       "venue": "Government Girls College"
+    },
+    {
+      "id": "virtual-bodies-sonic-space-2023",
+      "title": "'Virtual' Bodies in Sonic Space",
+      "date": "18–21 August 2023",
+      "description": "VR theater by Chantalla Pleiter & Jan Klug at Noorderzon (local program). Production and technical assistance. With a VR headset on your head, your reality suddenly becomes very different—the world takes shape based on what you see. Go on an exploration with others and build your own surprising and magical dimension.",
+      "location": "Groningen, NL",
+      "role": "Production & Technical Assistance",
+      "venue": "VRIJDAG Theater",
+      "images": [],
+      "urls": {
+        "link": "https://www.noorderzon.nl/over/historie/programma-archief/programma-2023-archief/chantalla-pleiter-jan-klug"
+      }
     }
   ]
 }

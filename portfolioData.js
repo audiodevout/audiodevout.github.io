@@ -33,6 +33,33 @@
     profile: dataUrl("profile.json"),
   };
 
+  function parseExhibitionSortKey(dateStr) {
+    if (!dateStr || typeof dateStr !== "string") return 0;
+
+    var lower = dateStr.toLowerCase();
+    var yearMatch = dateStr.match(/(20\d{2})/);
+    var year = yearMatch ? parseInt(yearMatch[1], 10) : 0;
+    if (!year) return 0;
+
+    var months = {
+      january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
+      july: 7, august: 8, september: 9, october: 10, november: 11, december: 12,
+    };
+    var month = 0;
+    Object.keys(months).forEach(function (name) {
+      if (lower.indexOf(name) !== -1) month = months[name];
+    });
+
+    var day = 1;
+    var dayBeforeMonth = dateStr.match(/(\d{1,2})\s*[–—-]?\s*\d{0,2}\s+[A-Za-z]+/);
+    var dayAfterMonth = dateStr.match(/[A-Za-z]+\s+(\d{1,2})(?!\d)/);
+    if (dayBeforeMonth) day = parseInt(dayBeforeMonth[1], 10);
+    else if (dayAfterMonth) day = parseInt(dayAfterMonth[1], 10);
+
+    if (!month) month = 1;
+    return year * 10000 + month * 100 + day;
+  }
+
   function fetchJson(url) {
     return fetch(url, { cache: "no-cache" }).then(function (res) {
       if (!res.ok) throw new Error("Failed to load " + url + " (" + res.status + ")");
@@ -157,8 +184,10 @@
       if (ex.date && typeof ex.date === "string") {
         var yearMatch = ex.date.match(/(20\d{2})/);
         normalized.year = yearMatch ? parseInt(yearMatch[1], 10) : null;
+        normalized.sortDate = parseExhibitionSortKey(ex.date);
       } else {
         normalized.year = null;
+        normalized.sortDate = 0;
       }
       return normalized;
     });

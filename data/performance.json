@@ -2,16 +2,23 @@
   "items": [
     {
       "id": "gesture-performance-system",
-      "title": "Gesture-Controlled Performance System",
+      "title": "Gesture-Controlled Performance System for Slow Music",
       "category": "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
       "color": "cerulean",
-      "description": "A modular gesture-driven audiovisual system where the body becomes the instrument—generating sound, visuals, and presence in real time.",
-      "fullDescription": "MediaPipe and TouchDesigner map body movement to real-time sound and generative visuals. First shown at Fever Dream; since then it has served as a modular live A/V platform—gestures drive glitch and drone textures, pulses, and projections—with an intentionally slow, embodied approach to control and coding.",
+      "description": "A modular gesture-driven audiovisual system where the body becomes the instrument—G.C.P.S.S.M. (Gesture-Controlled Performance System for Slow Music) extends it into released audio.",
+      "fullDescription": "MediaPipe and TouchDesigner map body movement to real-time sound and generative visuals. First shown at Fever Dream; since then it has served as a modular live A/V platform—gestures drive glitch and drone textures, pulses, and projections—with an intentionally slow, embodied approach to control and coding. G.C.P.S.S.M. (Gesture-Controlled Performance System for Slow Music) is the slow-music branch of this system: gesture and speed control rework older material as samples, released on asymmetrica.",
       "medium": "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
-      "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • SENSORIAL • REAL-TIME",
+      "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • G.C.P.S.S.M. • REAL-TIME",
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
-      "themes": "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
-      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.jpg", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.jpg"]
+      "themes": "Embodied computation, glitch aesthetics, slow music, gesture-controlled performance, poetic control systems",
+      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.jpg", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.jpg"],
+      "bandcampTracks": [
+        {
+          "title": "G.C.P.S.S.M.",
+          "trackId": "3225034213",
+          "url": "https://asymmetrica.bandcamp.com/track/g-c-p-s-s-m"
+        }
+      ]
     },
     {
       "id": "spaces-groningen",

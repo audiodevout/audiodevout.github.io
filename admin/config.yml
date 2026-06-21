@@ -82,6 +82,17 @@ collections:
                 widget: list
                 required: false
                 field: { name: video, label: "Video URL or path", widget: string }
+              - name: bandcampTracks
+                label: "Bandcamp tracks"
+                label_singular: "Bandcamp track"
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Link audio releases from this performance (e.g. G.C.P.S.S.M.)."
+                fields:
+                  - { name: title, label: "Title", widget: string }
+                  - { name: trackId, label: "Track ID", widget: string }
+                  - { name: url, label: "URL", widget: string }
 
   - name: "installations"
     label: "Installations"
@@ -255,6 +266,8 @@ collections:
                 required: false
                 fields:
                   - { name: link, label: "Link", widget: string, required: false }
+                  - { name: akerk, label: "Akerk", widget: string, required: false }
+                  - { name: profile, label: "Profile", widget: string, required: false }
                   - { name: kunstpunt, label: "Kunstpunt", widget: string, required: false }
                   - { name: pdf, label: "PDF", widget: string, required: false }
                   - { name: instagram, label: "Instagram", widget: string, required: false }

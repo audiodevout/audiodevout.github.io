@@ -413,13 +413,89 @@
   /* ---------- Phase 4: Exhibitions, Writing, About, CV ---------- */
   function exhibitionToLightboxItem(ex) {
     return {
-      title: ex.title,
+      title: ex.title || '',
       category: ex.role || '',
-      fullDescription: ex.description || '',
+      fullDescription: ex.fullDescription || ex.description || '',
+      date: ex.date || '',
+      location: ex.location || '',
+      venue: ex.venue || '',
       images: ex.images || [],
       videos: ex.videos || [],
       urls: ex.urls || {}
     };
+  }
+
+  function createExhibitionListItem(ex, openLightbox) {
+    if (!ex) return null;
+
+    var article = document.createElement('article');
+    article.className = 'work-list__item work-list__item--exhibition';
+    article.setAttribute('role', 'button');
+    article.setAttribute('tabindex', '0');
+    article.dataset.id = ex.id || '';
+
+    var line = document.createElement('p');
+    line.className = 'work-list__line';
+
+    var parts = [
+      { text: ex.title, className: 'work-list__title' },
+      { text: ex.venue, className: 'work-list__detail' },
+      { text: ex.location, className: 'work-list__detail' },
+      { text: ex.date, className: 'work-list__detail' }
+    ].filter(function (part) { return part.text; });
+
+    parts.forEach(function (part, index) {
+      if (index > 0) {
+        var sep = document.createElement('span');
+        sep.className = 'work-list__sep';
+        sep.setAttribute('aria-hidden', 'true');
+        sep.textContent = ' · ';
+        line.appendChild(sep);
+      }
+      var span = document.createElement('span');
+      span.className = part.className;
+      span.textContent = part.text;
+      line.appendChild(span);
+    });
+
+    article.appendChild(line);
+
+    var listThumb = firstImage(ex);
+    if (listThumb) {
+      article.setAttribute('data-preview-src', listThumb);
+    }
+
+    function handleActivate(e) {
+      if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+      if (e) e.preventDefault();
+      if (typeof openLightbox === 'function') {
+        openLightbox(exhibitionToLightboxItem(ex));
+      }
+    }
+
+    article.addEventListener('click', handleActivate);
+    article.addEventListener('keydown', handleActivate);
+
+    return article;
+  }
+
+  function addExhibitionListGroup(listRoot, heading, items, openLightbox) {
+    if (!listRoot || !items || items.length === 0) return;
+
+    var group = document.createElement('section');
+    group.className = 'work-list__group';
+
+    var h = document.createElement('h2');
+    h.className = 'work-list__group-label';
+    h.textContent = heading;
+    group.appendChild(h);
+
+    items.forEach(function (ex) {
+      var row = createExhibitionListItem(ex, openLightbox);
+      if (row) group.appendChild(row);
+    });
+
+    listRoot.appendChild(group);
   }
 
   function renderExhibitionsSection() {
@@ -431,115 +507,36 @@
       var yA = a.year != null ? a.year : 0;
       var yB = b.year != null ? b.year : 0;
       if (yB !== yA) return yB - yA;
-      return (b.date || '').localeCompare(a.date || '');
+      var sA = a.sortDate != null ? a.sortDate : 0;
+      var sB = b.sortDate != null ? b.sortDate : 0;
+      if (sB !== sA) return sB - sA;
+      return (a.title || '').localeCompare(b.title || '');
     });
 
     container.innerHTML = '';
-    var timeline = document.createElement('div');
-    timeline.className = 'timeline';
-    var openLightbox = window.openLightbox;
 
-    /* Phase 14a: group by year, insert year-anchor rows */
-    var currentYear = null;
+    var listRoot = document.createElement('div');
+    listRoot.className = 'work-list';
+    var openLightbox = window.openLightbox;
+    if (typeof openLightbox !== 'function') openLightbox = null;
+
+    var yearBuckets = [];
+    var currentBucket = null;
     list.forEach(function (ex) {
       var year = ex.year != null ? ex.year : (ex.date ? parseInt(String(ex.date).slice(0, 4), 10) : 0);
-      if (year && year !== currentYear) {
-        currentYear = year;
-        var yearAnchor = document.createElement('div');
-        yearAnchor.className = 'year-anchor';
-        var yearNum = document.createElement('span');
-        yearNum.className = 'year-number';
-        yearNum.textContent = String(year);
-        yearAnchor.appendChild(yearNum);
-        var yearRule = document.createElement('span');
-        yearRule.className = 'year-rule';
-        yearAnchor.appendChild(yearRule);
-        timeline.appendChild(yearAnchor);
+      var label = year ? String(year) : 'Other';
+      if (!currentBucket || currentBucket.label !== label) {
+        currentBucket = { label: label, items: [] };
+        yearBuckets.push(currentBucket);
       }
-
-      var entry = document.createElement('article');
-      entry.className = 'timeline__entry reveal';
-
-      var dateEl = document.createElement('div');
-      dateEl.className = 'timeline__date';
-      dateEl.textContent = ex.date || '';
-      entry.appendChild(dateEl);
-
-      var venue = document.createElement('div');
-      venue.className = 'timeline__venue';
-      venue.textContent = ex.venue || '';
-      entry.appendChild(venue);
-
-      var title = document.createElement('h3');
-      title.className = 'timeline__title';
-      title.textContent = ex.title || '';
-      entry.appendChild(title);
-
-      var meta = document.createElement('div');
-      meta.className = 'timeline__meta';
-      if (ex.location) meta.appendChild(document.createTextNode(ex.location));
-      entry.appendChild(meta);
-
-      if (ex.description) {
-        var desc = document.createElement('p');
-        desc.className = 'timeline__description';
-        desc.textContent = ex.description;
-        entry.appendChild(desc);
-      }
-
-      if (ex.images && ex.images.length > 0) {
-        var thumbs = document.createElement('div');
-        thumbs.className = 'timeline__thumbs';
-        ex.images.slice(0, 3).forEach(function (src) {
-          var wrap = document.createElement('div');
-          wrap.className = 'timeline__thumb-wrap';
-          var img = document.createElement('img');
-          img.className = 'timeline__thumb';
-          img.src = src;
-          img.alt = '';
-          img.loading = 'lazy';
-          if (openLightbox) img.addEventListener('click', function () { openLightbox(exhibitionToLightboxItem(ex)); });
-          wrap.appendChild(img);
-          thumbs.appendChild(wrap);
-        });
-        entry.appendChild(thumbs);
-      }
-
-      var linksWrap = document.createElement('div');
-      linksWrap.className = 'timeline__links';
-      if (ex.urls && ex.urls.link) {
-        var link = document.createElement('a');
-        link.href = ex.urls.link;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.className = 'timeline__link';
-        link.textContent = ex.urls.kunstpunt ? 'NP3 ↗' : 'Link ↗';
-        linksWrap.appendChild(link);
-      }
-      if (ex.urls && ex.urls.kunstpunt) {
-        var kunstpunt = document.createElement('a');
-        kunstpunt.href = ex.urls.kunstpunt;
-        kunstpunt.target = '_blank';
-        kunstpunt.rel = 'noopener noreferrer';
-        kunstpunt.className = 'timeline__link';
-        kunstpunt.textContent = 'Kunstpunt ↗';
-        linksWrap.appendChild(kunstpunt);
-      }
-      if (ex.urls && ex.urls.pdf) {
-        var paper = document.createElement('a');
-        paper.href = ex.urls.pdf;
-        paper.target = '_blank';
-        paper.rel = 'noopener noreferrer';
-        paper.className = 'timeline__link timeline__link--paper';
-        paper.textContent = 'Paper ↗';
-        linksWrap.appendChild(paper);
-      }
-      entry.appendChild(linksWrap);
-
-      timeline.appendChild(entry);
+      currentBucket.items.push(ex);
     });
 
-    container.appendChild(timeline);
+    yearBuckets.forEach(function (bucket) {
+      addExhibitionListGroup(listRoot, bucket.label, bucket.items, openLightbox);
+    });
+
+    container.appendChild(listRoot);
   }
 
   function renderAboutSection() {

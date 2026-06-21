@@ -473,6 +473,9 @@
 
 /* ----- Lightbox (artist/portfolio best practices: content-first, minimal chrome) ----- */
 .lightbox {
+  --lightbox-panel-bg: #000000;
+  --lightbox-muted: #a8a8b0;
+  --lightbox-border: rgba(255, 255, 255, 0.1);
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
@@ -480,7 +483,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
-  background: rgba(0, 0, 0, 0.92);
+  background: #000000;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.25s ease, visibility 0.25s ease;
@@ -492,7 +495,7 @@
 }
 
 [data-theme="light"] .lightbox {
-  background: rgba(0, 0, 0, 0.85);
+  background: #000000;
 }
 
 .lightbox__backdrop {
@@ -507,29 +510,28 @@
   max-width: min(1320px, calc(100vw - 2 * var(--space-4)));
   max-height: 92vh;
   overflow: hidden auto;
-  background: var(--color-surface);
+  background: var(--lightbox-panel-bg);
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--lightbox-border);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
   transform: scale(0.98);
   transition: transform 0.25s ease;
-  scrollbar-color: var(--color-border) var(--color-surface);
+  scrollbar-color: var(--lightbox-border) var(--lightbox-panel-bg);
   scrollbar-width: thin;
+  color: var(--color-on-dark);
 }
 .lightbox__panel::-webkit-scrollbar {
   width: 8px;
 }
 .lightbox__panel::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: var(--lightbox-panel-bg);
 }
 .lightbox__panel::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: var(--lightbox-border);
   border-radius: 4px;
 }
 .lightbox__panel::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+  background: var(--lightbox-muted);
 }
 
 .lightbox.is-open .lightbox__panel {
@@ -544,7 +546,7 @@
   height: 44px;
   border: 0;
   background: transparent;
-  color: var(--color-muted);
+  color: var(--lightbox-muted);
   font-size: 1.75rem;
   line-height: 1;
   cursor: pointer;
@@ -557,8 +559,8 @@
 }
 
 .lightbox__close:hover {
-  color: var(--color-text);
-  background: var(--color-border);
+  color: var(--color-on-dark);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .lightbox__close:focus-visible {
@@ -579,7 +581,7 @@
   letter-spacing: 0.02em;
   line-height: 1.25;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-on-dark);
 }
 
 .lightbox__category {
@@ -588,9 +590,27 @@
   font-weight: 400;
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--lightbox-muted);
   margin: 0;
   max-width: 42ch;
+}
+
+.lightbox__meta {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-stamp);
+  text-transform: uppercase;
+  color: var(--lightbox-muted);
+  margin: var(--space-1) 0 0;
+  max-width: 42ch;
+}
+
+.lightbox__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .lightbox__carousel {
@@ -600,12 +620,12 @@
 .lightbox__media {
   --lightbox-media-max-h: 78vh;
   position: relative;
-  background: var(--color-lightbox-bg);
+  background: var(--lightbox-panel-bg);
   display: grid;
   grid-template: 1fr / 1fr;
   overflow: hidden;
   max-height: var(--lightbox-media-max-h);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px var(--lightbox-border);
 }
 
 /* Bandcamp needs full 472px height — allow media to expand, panel scrolls */
@@ -732,7 +752,7 @@
   line-height: 1.7;
   margin: 0 0 var(--space-5);
   white-space: pre-wrap;
-  color: var(--color-text);
+  color: var(--color-on-dark);
 }
 
 .lightbox__pills {
@@ -746,8 +766,8 @@
   font-family: var(--font-display);
   font-size: var(--font-size-xs);
   padding: var(--space-1) var(--space-3);
-  background: var(--color-border);
-  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-on-dark);
   border-radius: 2px;
   letter-spacing: 0.05em;
 }
@@ -758,9 +778,9 @@
   font-size: var(--font-size-sm);
   font-weight: 400;
   padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--lightbox-border);
   border-radius: 2px;
-  color: var(--color-text);
+  color: var(--color-on-dark);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-stamp);
@@ -768,8 +788,8 @@
 }
 
 .lightbox__paper-link:hover {
-  background: var(--color-border);
-  border-color: var(--color-text);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--lightbox-muted);
 }
 
 .lightbox__paper-link:focus-visible {
@@ -900,6 +920,7 @@
   left: 0;
   top: 0;
   box-sizing: border-box;
+  /* width/height updated per image in js/marquee-lens.js */
 }
 
 .marquee-lens[hidden] {
@@ -921,8 +942,6 @@
 .marquee-lens__base {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
   display: block;
 }
 
@@ -1318,6 +1337,51 @@
  .work-list__item:hover .work-list__title {
    color: var(--color-accent-lime);
  }
+
+.work-list__item--exhibition .work-list__line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.work-list__item--exhibition .work-list__title {
+  width: auto;
+  flex-shrink: 0;
+}
+
+.work-list__detail,
+.work-list__sep {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-stamp);
+  text-transform: uppercase;
+}
+
+.work-list__detail {
+  color: var(--color-muted);
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-list__sep {
+  color: var(--color-muted);
+  flex-shrink: 0;
+  padding: 0 0.25em;
+}
+
+.work-list__item--exhibition:hover .work-list__title,
+.work-list__item--exhibition:hover .work-list__detail,
+.work-list__item--exhibition:hover .work-list__sep {
+  color: var(--color-accent-lime);
+}
 
 /* ----- Exhibitions timeline ----- */
 

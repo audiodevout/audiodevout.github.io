@@ -24,8 +24,10 @@
 
   var OFFSET_X = 20;
   var OFFSET_Y = 20;
-  var CARD_W = 240;
-  var CARD_H = 168;
+  var MAX_W = 240;
+  var MAX_H = 168;
+  var cardW = MAX_W;
+  var cardH = MAX_H;
 
   var lensEl;
   var baseImg;
@@ -88,14 +90,36 @@
     document.body.appendChild(lensEl);
   }
 
+  function fitDimensions(naturalW, naturalH) {
+    if (!naturalW || !naturalH) return { w: MAX_W, h: MAX_H };
+    var scale = Math.min(MAX_W / naturalW, MAX_H / naturalH);
+    return {
+      w: Math.round(naturalW * scale),
+      h: Math.round(naturalH * scale)
+    };
+  }
+
+  function applyCardSize(w, h) {
+    cardW = w;
+    cardH = h;
+    lensEl.style.width = w + 'px';
+    lensEl.style.height = h + 'px';
+  }
+
+  function syncCardToImage() {
+    if (!baseImg || !lensEl) return;
+    var dims = fitDimensions(baseImg.naturalWidth, baseImg.naturalHeight);
+    applyCardSize(dims.w, dims.h);
+  }
+
   function setPosition(clientX, clientY) {
     if (!lensEl) return;
     var x = clientX + OFFSET_X;
     var y = clientY + OFFSET_Y;
-    var maxX = window.innerWidth - CARD_W - 8;
-    var maxY = window.innerHeight - CARD_H - 8;
-    if (x > maxX) x = clientX - CARD_W - OFFSET_X;
-    if (y > maxY) y = clientY - CARD_H - OFFSET_Y;
+    var maxX = window.innerWidth - cardW - 8;
+    var maxY = window.innerHeight - cardH - 8;
+    if (x > maxX) x = clientX - cardW - OFFSET_X;
+    if (y > maxY) y = clientY - cardH - OFFSET_Y;
     if (x < 8) x = 8;
     if (y < 8) y = 8;
     lensEl.style.left = x + 'px';
@@ -117,15 +141,44 @@
     ensureLensDOM();
     if (!src || !lensEl) return;
     active = true;
-    baseImg.src = src;
+    pendingX = e.clientX;
+    pendingY = e.clientY;
     lensEl.hidden = false;
-    setPosition(e.clientX, e.clientY);
+    baseImg.onload = null;
+    baseImg.onerror = null;
+
+    function afterImageReady() {
+      syncCardToImage();
+      setPosition(pendingX, pendingY);
+    }
+
+    if (baseImg.src === src && baseImg.complete && baseImg.naturalWidth) {
+      afterImageReady();
+      return;
+    }
+
+    baseImg.onload = afterImageReady;
+    baseImg.onerror = function () {
+      applyCardSize(MAX_W, MAX_H);
+      setPosition(pendingX, pendingY);
+    };
+    baseImg.src = src;
+
+    if (baseImg.complete && baseImg.naturalWidth) {
+      afterImageReady();
+    } else {
+      setPosition(pendingX, pendingY);
+    }
   }
 
   function hide() {
     active = false;
     if (lensEl) lensEl.hidden = true;
-    if (baseImg) baseImg.removeAttribute('src');
+    if (baseImg) {
+      baseImg.onload = null;
+      baseImg.onerror = null;
+      baseImg.removeAttribute('src');
+    }
   }
 
   function bindPreviewEl(el) {
@@ -146,11 +199,13 @@
   function init() {
     var marqueeRoot = document.getElementById('marquees-content');
     var listRoot = document.getElementById('list-content');
-    if (!marqueeRoot && !listRoot) return;
+    var exhibitionsRoot = document.getElementById('exhibitions-content');
+    if (!marqueeRoot && !listRoot && !exhibitionsRoot) return;
 
     function bindAll() {
       bindStacks(marqueeRoot);
       bindStacks(listRoot);
+      bindStacks(exhibitionsRoot);
     }
     bindAll();
 
@@ -159,6 +214,7 @@
     });
     if (marqueeRoot) obs.observe(marqueeRoot, { childList: true, subtree: true });
     if (listRoot) obs.observe(listRoot, { childList: true, subtree: true });
+    if (exhibitionsRoot) obs.observe(exhibitionsRoot, { childList: true, subtree: true });
     document.addEventListener('scroll', hide, { passive: true, capture: true });
     window.addEventListener('blur', hide);
   }

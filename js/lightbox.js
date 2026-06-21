@@ -10,7 +10,7 @@
   var isYoutubeUrl = utils.isYoutubeUrl || function (url) { return url && (url.indexOf('youtube') !== -1 || url.indexOf('youtu.be') !== -1); };
   var esc = utils.esc || function (s) { return (s == null || s === '') ? '' : String(s); };
 
-  var panel, mediaEl, titleEl, categoryEl, bodyEl, currentItem, currentIndex, mediaItems;
+  var panel, mediaEl, titleEl, categoryEl, metaEl, bodyEl, currentItem, currentIndex, mediaItems;
   var currentSlide = null;
   var isSliding = false;
 
@@ -63,8 +63,11 @@
     titleEl.className = 'lightbox__title';
     categoryEl = document.createElement('p');
     categoryEl.className = 'lightbox__category';
+    metaEl = document.createElement('p');
+    metaEl.className = 'lightbox__meta';
     header.appendChild(titleEl);
     header.appendChild(categoryEl);
+    header.appendChild(metaEl);
     panel.appendChild(header);
     panel.appendChild(closeBtn);
 
@@ -257,10 +260,22 @@
     if (!lightboxEl) {
       lightboxEl = buildLightboxDOM();
       document.body.appendChild(lightboxEl);
+    } else if (!metaEl && panel) {
+      var header = panel.querySelector('.lightbox__header');
+      if (header && !header.querySelector('.lightbox__meta')) {
+        metaEl = document.createElement('p');
+        metaEl.className = 'lightbox__meta';
+        header.appendChild(metaEl);
+      }
     }
 
     titleEl.textContent = item.title || '';
     categoryEl.textContent = item.category || '';
+    var metaParts = [item.date, item.venue, item.location].filter(Boolean);
+    if (metaEl) {
+      metaEl.textContent = metaParts.join(' · ');
+      metaEl.hidden = metaParts.length === 0;
+    }
 
     if (mediaItems.length > 0) {
       mediaEl.innerHTML = '';
@@ -294,32 +309,36 @@
       });
       bodyEl.appendChild(pillWrap);
     }
-    if (item.urls && item.urls.link) {
-      var extLink = document.createElement('a');
-      extLink.href = item.urls.link;
-      extLink.target = '_blank';
-      extLink.rel = 'noopener noreferrer';
-      extLink.className = 'lightbox__paper-link';
-      extLink.textContent = 'Link ↗';
-      bodyEl.appendChild(extLink);
-    }
-    if (item.urls && item.urls.patreon) {
-      var patreon = document.createElement('a');
-      patreon.href = item.urls.patreon;
-      patreon.target = '_blank';
-      patreon.rel = 'noopener noreferrer';
-      patreon.className = 'lightbox__paper-link';
-      patreon.textContent = 'Patreon ↗';
-      bodyEl.appendChild(patreon);
-    }
-    if (item.urls && item.urls.pdf) {
-      var a = document.createElement('a');
-      a.href = item.urls.pdf;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.className = 'lightbox__paper-link';
-      a.textContent = 'Read Paper ↗';
-      bodyEl.appendChild(a);
+    if (item.urls) {
+      var linksWrap = document.createElement('div');
+      linksWrap.className = 'lightbox__links';
+      var hasLinks = false;
+
+      function appendLink(href, text) {
+        if (!href) return;
+        var link = document.createElement('a');
+        link.href = href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'lightbox__paper-link';
+        link.textContent = text;
+        linksWrap.appendChild(link);
+        hasLinks = true;
+      }
+
+      if (item.urls.link) {
+        appendLink(item.urls.link, item.urls.kunstpunt ? 'NP3 ↗' : (item.urls.profile ? 'Show ↗' : 'Link ↗'));
+      }
+      appendLink(item.urls.akerk, 'Akerk ↗');
+      appendLink(item.urls.profile, 'Profile ↗');
+      appendLink(item.urls.kunstpunt, 'Kunstpunt ↗');
+      appendLink(item.urls.instagram, 'Instagram ↗');
+      appendLink(item.urls.patreon, 'Patreon ↗');
+      if (item.urls.pdf) {
+        appendLink(item.urls.pdf, 'Read Paper ↗');
+      }
+
+      if (hasLinks) bodyEl.appendChild(linksWrap);
     }
 
     document.body.style.overflow = 'hidden';
