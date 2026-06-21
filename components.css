@@ -1974,22 +1974,16 @@
   background: var(--color-bg);
 }
 
-.gallery-canvas-wrap canvas {
+.gallery-canvas-wrap canvas,
+#gallery-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-}
-
-#gallery-canvas-fg {
   cursor: grab;
   touch-action: none;
   z-index: 1;
-}
-
-#gallery-canvas-bg {
-  z-index: 0;
 }
 
 .gallery-loading {

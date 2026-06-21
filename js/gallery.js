@@ -12,7 +12,7 @@
   var EXPANDED_IMG = 68;
   var DPR_CAP = 2;
 
-  var wrap, canvasBg, canvasFg, ctxBg, ctxFg;
+  var wrap, canvas, ctx;
   var tooltipEl, hintEl, loadingEl;
   var cssW = 0;
   var cssH = 0;
@@ -29,7 +29,6 @@
   var thumbCache = Object.create(null);
   var coversLoaded = 0;
   var totalCovers = 0;
-  var bgDirty = true;
 
   var pointer = {
     down: false,
@@ -436,26 +435,28 @@
     return wx >= minX && wx <= maxX && wy >= minY && wy <= maxY;
   }
 
-  function drawBackground() {
-    ctxBg.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctxBg.fillStyle = colors.bg;
-    ctxBg.fillRect(0, 0, cssW, cssH);
+  function drawFrame() {
+    if (!ctx) return;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = colors.bg;
+    ctx.fillRect(0, 0, cssW, cssH);
 
     var cx = cssW * 0.5 + cam.x;
     var cy = cssH * 0.5 + cam.y;
-    var vig = ctxBg.createRadialGradient(cx, cy, cssH * 0.1, cx, cy, cssH * 0.75);
+    var vig = ctx.createRadialGradient(cx, cy, cssH * 0.1, cx, cy, cssH * 0.75);
     vig.addColorStop(0, 'rgba(23, 23, 29, 0)');
     vig.addColorStop(1, 'rgba(0, 0, 0, 0.55)');
-    ctxBg.fillStyle = vig;
-    ctxBg.fillRect(0, 0, cssW, cssH);
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, cssW, cssH);
 
-    ctxBg.save();
-    ctxBg.translate(cx, cy);
-    ctxBg.scale(cam.z, cam.z);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(cam.z, cam.z);
 
-    ctxBg.lineWidth = 1 / cam.z;
+    ctx.lineWidth = 1 / cam.z;
 
-    ctxBg.beginPath();
+    ctx.beginPath();
     edges.forEach(function (e) {
       var ca = clusters[e.a];
       var cb = clusters[e.b];
@@ -463,36 +464,24 @@
       var hi = hoveredCluster && (ca === hoveredCluster || cb === hoveredCluster);
       if (hi) return;
       if (!isInViewport((ca.x + cb.x) * 0.5, (ca.y + cb.y) * 0.5, 120)) return;
-      ctxBg.moveTo(ca.x, ca.y);
-      ctxBg.lineTo(cb.x, cb.y);
+      ctx.moveTo(ca.x, ca.y);
+      ctx.lineTo(cb.x, cb.y);
     });
-    ctxBg.strokeStyle = colors.edge;
-    ctxBg.stroke();
+    ctx.strokeStyle = colors.edge;
+    ctx.stroke();
 
-    ctxBg.beginPath();
+    ctx.beginPath();
     edges.forEach(function (e) {
       var ca = clusters[e.a];
       var cb = clusters[e.b];
       if (!ca || !cb) return;
       var hi = hoveredCluster && (ca === hoveredCluster || cb === hoveredCluster);
       if (!hi) return;
-      ctxBg.moveTo(ca.x, ca.y);
-      ctxBg.lineTo(cb.x, cb.y);
+      ctx.moveTo(ca.x, ca.y);
+      ctx.lineTo(cb.x, cb.y);
     });
-    ctxBg.strokeStyle = colors.edgeHi;
-    ctxBg.stroke();
-
-    ctxBg.restore();
-    bgDirty = false;
-  }
-
-  function drawForeground() {
-    ctxFg.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctxFg.clearRect(0, 0, cssW, cssH);
-
-    ctxFg.save();
-    ctxFg.translate(cssW * 0.5 + cam.x, cssH * 0.5 + cam.y);
-    ctxFg.scale(cam.z, cam.z);
+    ctx.strokeStyle = colors.edgeHi;
+    ctx.stroke();
 
     var hasExpanded = expandedId !== null;
 
@@ -507,47 +496,47 @@
         if (!isInViewport(w.x, w.y, imgSize + 40)) return;
 
         var thumb = getThumbnail(node.src, tier, cluster.accent);
-        ctxFg.save();
-        ctxFg.globalAlpha = alpha;
+        ctx.save();
+        ctx.globalAlpha = alpha;
 
         if (thumb) {
           var tx = Math.floor(w.x - thumb.width * 0.5);
           var ty = Math.floor(w.y - thumb.height * 0.5);
-          ctxFg.drawImage(thumb, tx, ty);
+          ctx.drawImage(thumb, tx, ty);
         } else {
-          ctxFg.fillStyle = 'rgba(62, 62, 68, 0.8)';
-          roundedRectPath(ctxFg, w.x - imgSize * 0.5, w.y - imgSize * 0.5, imgSize, imgSize, 6);
-          ctxFg.fill();
+          ctx.fillStyle = 'rgba(62, 62, 68, 0.8)';
+          roundedRectPath(ctx, w.x - imgSize * 0.5, w.y - imgSize * 0.5, imgSize, imgSize, 6);
+          ctx.fill();
         }
 
         if (hoveredNode === node && hoveredCluster === cluster) {
-          ctxFg.globalAlpha = alpha * 0.35;
-          ctxFg.strokeStyle = cluster.accent;
-          ctxFg.lineWidth = 2 / cam.z;
-          ctxFg.beginPath();
-          ctxFg.arc(w.x, w.y, imgSize * 0.55, 0, Math.PI * 2);
-          ctxFg.stroke();
+          ctx.globalAlpha = alpha * 0.35;
+          ctx.strokeStyle = cluster.accent;
+          ctx.lineWidth = 2 / cam.z;
+          ctx.beginPath();
+          ctx.arc(w.x, w.y, imgSize * 0.55, 0, Math.PI * 2);
+          ctx.stroke();
         }
 
-        ctxFg.restore();
+        ctx.restore();
       });
 
       if (cluster.id === expandedId && cluster.expandT > 0.5) {
         var r = clusterRadius(cluster);
-        ctxFg.save();
-        ctxFg.globalAlpha = 0.12 * cluster.expandT;
-        ctxFg.strokeStyle = cluster.accent;
-        ctxFg.lineWidth = 1 / cam.z;
+        ctx.save();
+        ctx.globalAlpha = 0.12 * cluster.expandT;
+        ctx.strokeStyle = cluster.accent;
+        ctx.lineWidth = 1 / cam.z;
         for (var g = 1; g <= 2; g++) {
-          ctxFg.beginPath();
-          ctxFg.arc(cluster.x, cluster.y, r + g * 10, 0, Math.PI * 2);
-          ctxFg.stroke();
+          ctx.beginPath();
+          ctx.arc(cluster.x, cluster.y, r + g * 10, 0, Math.PI * 2);
+          ctx.stroke();
         }
-        ctxFg.restore();
+        ctx.restore();
       }
     });
 
-    ctxFg.restore();
+    ctx.restore();
   }
 
   function hitTestNode(wx, wy) {
@@ -572,7 +561,6 @@
 
   function setExpanded(clusterId) {
     expandedId = clusterId;
-    bgDirty = true;
     clusters.forEach(function (c) {
       if (c.id === clusterId) {
         c.imageNodes.forEach(function (n) {
@@ -585,7 +573,6 @@
   function collapseAll() {
     if (expandedId === null) return;
     expandedId = null;
-    bgDirty = true;
   }
 
   function hideHintOnce() {
@@ -609,7 +596,7 @@
   function onPointerDown(e) {
     if (e.button !== 0) return;
     hideHintOnce();
-    var rect = canvasFg.getBoundingClientRect();
+    var rect = canvas.getBoundingClientRect();
     pointer.down = true;
     pointer.dragging = false;
     pointer.panning = false;
@@ -627,27 +614,25 @@
     if (hit) {
       pointer.dragLastWorldX = world.x;
       pointer.dragLastWorldY = world.y;
-      canvasFg.setPointerCapture(e.pointerId);
+      canvas.setPointerCapture(e.pointerId);
     } else {
       pointer.panning = true;
-      canvasFg.setPointerCapture(e.pointerId);
+      canvas.setPointerCapture(e.pointerId);
     }
   }
 
   function onPointerMove(e) {
-    var rect = canvasFg.getBoundingClientRect();
+    var rect = canvas.getBoundingClientRect();
     pointer.x = e.clientX - rect.left;
     pointer.y = e.clientY - rect.top;
 
     if (!pointer.down) {
       var world = screenToWorld(pointer.x, pointer.y);
       var hit = hitTestNode(world.x, world.y);
-      var prev = hoveredCluster;
       hoveredCluster = hit ? hit.cluster : null;
       hoveredNode = hit ? hit.node : null;
-      if (prev !== hoveredCluster) bgDirty = true;
       updateTooltip();
-      canvasFg.style.cursor = hit ? 'pointer' : 'grab';
+      canvas.style.cursor = hit ? 'pointer' : 'grab';
       return;
     }
 
@@ -668,15 +653,13 @@
       pointer.dragLastWorldY = world.y;
       cluster.vx = 0;
       cluster.vy = 0;
-      bgDirty = true;
       return;
     }
 
     if (pointer.panning) {
       cam.x = pointer.lastCamX + dx;
       cam.y = pointer.lastCamY + dy;
-      bgDirty = true;
-      canvasFg.style.cursor = 'grabbing';
+      canvas.style.cursor = 'grabbing';
     }
   }
 
@@ -705,15 +688,15 @@
     pointer.panning = false;
     pointer.targetCluster = null;
     pointer.targetNode = null;
-    try { canvasFg.releasePointerCapture(e.pointerId); } catch (err) { /* noop */ }
-    canvasFg.style.cursor = hoveredNode ? 'pointer' : 'grab';
+    try { canvas.releasePointerCapture(e.pointerId); } catch (err) { /* noop */ }
+    canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
     updateTooltip();
   }
 
   function onWheel(e) {
     e.preventDefault();
     hideHintOnce();
-    var rect = canvasFg.getBoundingClientRect();
+    var rect = canvas.getBoundingClientRect();
     var mx = e.clientX - rect.left;
     var my = e.clientY - rect.top;
     var factor = e.deltaY > 0 ? 0.92 : 1.08;
@@ -722,7 +705,6 @@
     cam.z = clamp(cam.z * factor, 0.35, 2.5);
     cam.x = mx - cssW * 0.5 - wx * cam.z;
     cam.y = my - cssH * 0.5 - wy * cam.z;
-    bgDirty = true;
   }
 
   function resize() {
@@ -732,16 +714,12 @@
     cssH = rect.height;
     dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
 
-    [canvasBg, canvasFg].forEach(function (c) {
-      c.width = Math.floor(cssW * dpr);
-      c.height = Math.floor(cssH * dpr);
-      c.style.width = cssW + 'px';
-      c.style.height = cssH + 'px';
-    });
+    canvas.width = Math.floor(cssW * dpr);
+    canvas.height = Math.floor(cssH * dpr);
+    canvas.style.width = cssW + 'px';
+    canvas.style.height = cssH + 'px';
 
-    ctxBg = canvasBg.getContext('2d', { alpha: false });
-    ctxFg = canvasFg.getContext('2d', { alpha: true });
-    bgDirty = true;
+    ctx = canvas.getContext('2d', { alpha: false });
   }
 
   function tick(now) {
@@ -763,16 +741,15 @@
       });
     }
 
-    if (bgDirty) drawBackground();
-    drawForeground();
+    drawFrame();
   }
 
   function bindEvents() {
-    canvasFg.addEventListener('pointerdown', onPointerDown);
-    canvasFg.addEventListener('pointermove', onPointerMove);
-    canvasFg.addEventListener('pointerup', onPointerUp);
-    canvasFg.addEventListener('pointercancel', onPointerUp);
-    canvasFg.addEventListener('wheel', onWheel, { passive: false });
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointercancel', onPointerUp);
+    canvas.addEventListener('wheel', onWheel, { passive: false });
     window.addEventListener('resize', resize);
     document.addEventListener('visibilitychange', function () {
       running = !document.hidden;
@@ -811,18 +788,16 @@
       if (loadingEl) loadingEl.hidden = true;
     });
 
-    bgDirty = true;
     rafId = requestAnimationFrame(tick);
   }
 
   function init() {
     wrap = document.getElementById('gallery-canvas-wrap');
-    canvasBg = document.getElementById('gallery-canvas-bg');
-    canvasFg = document.getElementById('gallery-canvas-fg');
+    canvas = document.getElementById('gallery-canvas');
     tooltipEl = document.getElementById('gallery-tooltip');
     hintEl = document.getElementById('gallery-hint');
     loadingEl = document.getElementById('gallery-loading');
-    if (!wrap || !canvasBg || !canvasFg) return;
+    if (!wrap || !canvas) return;
 
     if (window.portfolioData) {
       initFromData(window.portfolioData);

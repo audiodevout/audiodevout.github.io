@@ -217,6 +217,9 @@
       if (excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
     });
 
+    var soundItems = dedupeById(data.projects.soundInstallations || []);
+    if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems, openLightbox);
+
     var youtubeItems = [];
     [data.projects.installations, data.projects.performance, data.projects.drawings].filter(Boolean).forEach(function (arr) {
       (arr || []).forEach(function (item) {
@@ -225,9 +228,6 @@
       });
     });
     addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems), openLightbox);
-
-    var soundItems = dedupeById(data.projects.soundInstallations || []);
-    if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems, openLightbox);
 
     var writingItems = (data.projects && data.projects.writing) ? data.projects.writing : [];
     if (writingItems.length > 0) addLabeledMarquee(container, 'Archive', writingItems, openLightbox);
@@ -307,15 +307,15 @@
 
     addListGroup(listRoot, 'Works', worksItems, openLightbox);
 
+    if (soundItems.length) {
+      addListGroup(listRoot, 'Sound', soundItems, openLightbox);
+    }
+
     var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     Object.keys(visualGroups).forEach(function (cat) {
       if (cat === 'VISUAL RESEARCH') return;
       addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
     });
-
-    if (soundItems.length) {
-      addListGroup(listRoot, 'Sound', soundItems, openLightbox);
-    }
 
     container.appendChild(listRoot);
   }
