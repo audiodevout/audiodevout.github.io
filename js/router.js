@@ -11,7 +11,7 @@
     const path = (window.location.pathname || '').toLowerCase();
     if (path.indexOf('exhibitions') !== -1) return 'exhibitions';
     if (path.indexOf('gallery') !== -1) return 'gallery';
-    if (path.indexOf('thesis') !== -1) return 'thesis';
+    if (path.indexOf('archive') !== -1 || path.indexOf('thesis') !== -1) return 'archive';
     if (path.indexOf('about') !== -1) return 'about';
     return 'home';
   }
@@ -26,7 +26,7 @@
       let linkSection = null;
       if (href.indexOf('exhibitions') !== -1) linkSection = 'exhibitions';
       else if (href.indexOf('gallery') !== -1) linkSection = 'gallery';
-      else if (href.indexOf('thesis') !== -1) linkSection = 'thesis';
+      else if (href.indexOf('archive') !== -1) linkSection = 'archive';
       else if (href.indexOf('about') !== -1) linkSection = 'about';
       else if (
         href === 'index.html' ||

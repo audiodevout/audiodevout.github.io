@@ -194,7 +194,7 @@
     container.appendChild(section);
   }
 
-  /** Single marquee block: Works, visual groups, Tutorials, Sound, Archive (subsection labels in JS). */
+  /** Single marquee block: Works, visual groups, Tutorials, Sound (subsection labels in JS). */
   function renderMarqueesSection() {
     var container = document.getElementById('marquees-content');
     if (!container) return;
@@ -228,9 +228,56 @@
       });
     });
     addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems), openLightbox);
+  }
 
-    var writingItems = (data.projects && data.projects.writing) ? data.projects.writing : [];
-    if (writingItems.length > 0) addLabeledMarquee(container, 'Archive', writingItems, openLightbox);
+  var THESIS_ARCHIVE_ITEM = {
+    id: 'thesis-instruments-for-becoming',
+    title: 'Instruments for Becoming',
+    category: 'THESIS',
+    description: 'A manual for sound practitioners — MADTECH, Frank Mohr Institute, 2026',
+    urls: { page: './thesis/' }
+  };
+
+  function createArchiveListItem(item, openLightbox) {
+    if (!item) return null;
+
+    if (item.urls && item.urls.page) {
+      var link = document.createElement('a');
+      link.className = 'work-list__item work-list__item--link';
+      link.href = item.urls.page;
+
+      var linkTitle = document.createElement('h3');
+      linkTitle.className = 'work-list__title';
+      linkTitle.textContent = item.title || '';
+      link.appendChild(linkTitle);
+
+      return link;
+    }
+
+    return createListItem(item, openLightbox);
+  }
+
+  function renderArchiveSection() {
+    var container = document.getElementById('archive-content');
+    if (!container) return;
+
+    var openLightbox = window.openLightbox;
+    if (typeof openLightbox !== 'function') openLightbox = null;
+
+    var writingItems = dedupeById((data.projects && data.projects.writing) ? data.projects.writing : []);
+    var archiveItems = [THESIS_ARCHIVE_ITEM].concat(writingItems);
+
+    container.innerHTML = '';
+
+    var listRoot = document.createElement('div');
+    listRoot.className = 'work-list';
+
+    archiveItems.forEach(function (item) {
+      var row = createArchiveListItem(item, openLightbox);
+      if (row) listRoot.appendChild(row);
+    });
+
+    container.appendChild(listRoot);
   }
 
   /* ---------- Home list view (minimal rows) ---------- */
@@ -718,6 +765,7 @@
     if (!data) return;
 
     if (document.getElementById('exhibitions-content')) renderExhibitionsSection();
+    if (document.getElementById('archive-content')) renderArchiveSection();
     if (document.getElementById('about-content')) renderAboutSection();
     if (document.getElementById('cv-content')) renderCVSection();
 

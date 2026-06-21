@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Visual research gallery — Atharva Gupta" />
-  <title>Gallery — Atharva Gupta</title>
+  <meta name="description" content="Archive — text works and writing by Atharva Gupta" />
+  <title>Archive — Atharva Gupta</title>
   <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
   <script>
@@ -63,21 +63,23 @@
     <a href="./about.html" class="nav-link">About</a>
   </nav>
 
-  <main class="main main--gallery" role="main">
-    <section class="gallery-stage" aria-label="Visual research gallery">
-      <div class="gallery-canvas-wrap" id="gallery-canvas-wrap">
-        <canvas id="gallery-canvas" aria-label="Interactive visual research cluster field"></canvas>
-        <p class="gallery-loading" id="gallery-loading">Loading images…</p>
-        <p class="gallery-hint" id="gallery-hint">Drag images · Scroll to zoom · Click to expand · Click again to view</p>
-        <div class="gallery-tooltip" id="gallery-tooltip" role="tooltip" hidden></div>
-      </div>
+  <main class="main" role="main">
+    <section id="archive" class="section section--list" aria-labelledby="archive-heading">
+      <h2 id="archive-heading" class="section-heading reveal">Archive</h2>
+      <div class="archive-section-content" id="archive-content"></div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2025</p>
+  </footer>
 
   <script src="./portfolioData.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/lightbox.js"></script>
-  <script src="./js/gallery.js"></script>
+  <script src="./js/render.js"></script>
+  <script src="./js/marquee-lens.js"></script>
+  <script src="./js/scroll-reveal.js"></script>
   <script src="./js/router.js"></script>
   <script src="./js/nav.js"></script>
   <script src="./js/theme.js"></script>

@@ -1339,6 +1339,11 @@
   transition: color var(--transition-fast), transform var(--transition-base);
 }
 
+a.work-list__item--link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .work-list__item:hover {
   transform: translateY(-1px);
 }
