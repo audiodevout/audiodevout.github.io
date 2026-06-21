@@ -5,6 +5,7 @@
   "scripts": {
     "generate-images": "node scripts/generate-images.js",
     "generate-images:rewrite": "node scripts/generate-images.js --rewrite",
+    "generate-gallery-thumbs": "node scripts/generate-gallery-thumbs.js",
     "build-data": "node scripts/build-portfolio-data.js"
   },
   "devDependencies": {

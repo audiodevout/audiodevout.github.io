@@ -62,17 +62,23 @@ function isRasterFile(filePath) {
   return RASTER_EXT.has(path.extname(filePath).toLowerCase());
 }
 
+function hasWebpSibling(filePath) {
+  var parsed = path.parse(filePath);
+  return fs.existsSync(path.join(parsed.dir, parsed.name + ".webp"));
+}
+
 function walkImages(dir, results) {
   if (!fs.existsSync(dir)) return;
   var entries = fs.readdirSync(dir, { withFileTypes: true });
   entries.forEach(function (ent) {
     var full = path.join(dir, ent.name);
     if (ent.isDirectory()) {
-      if (ent.name === "thumbs") return;
+      if (ent.name === "thumbs" || ent.name === "gallery-thumbs") return;
       walkImages(full, results);
       return;
     }
     if (!ent.isFile() || !isRasterFile(full)) return;
+    if (hasWebpSibling(full)) return;
     results.push(full);
   });
 }
@@ -93,13 +99,15 @@ function thumbPathForSource(srcAbs) {
   return path.join(thumbsRoot, parsed.dir, parsed.name + ".webp");
 }
 
-function isUpToDate(srcAbs, webpAbs, thumbAbs) {
+function isUpToDate(srcAbs, webpAbs, thumbAbs, skipThumb) {
   if (force) return false;
   try {
     var srcM = fs.statSync(srcAbs).mtimeMs;
     var webpM = fs.statSync(webpAbs).mtimeMs;
+    if (webpM < srcM) return false;
+    if (skipThumb) return true;
     var thumbM = fs.statSync(thumbAbs).mtimeMs;
-    return webpM >= srcM && thumbM >= srcM;
+    return thumbM >= srcM;
   } catch (e) {
     return false;
   }
@@ -119,14 +127,16 @@ async function convertOne(sharp, srcAbs) {
   stats.scanned++;
   var webpAbs = webpPathForSource(srcAbs);
   var thumbAbs = thumbPathForSource(srcAbs);
+  var rel = relFromImages(srcAbs);
+  var skipThumb = rel.indexOf("visual/") === 0;
 
-  if (isUpToDate(srcAbs, webpAbs, thumbAbs)) {
+  if (isUpToDate(srcAbs, webpAbs, thumbAbs, skipThumb)) {
     stats.skipped++;
     return;
   }
 
   ensureDir(path.dirname(webpAbs));
-  ensureDir(path.dirname(thumbAbs));
+  if (!skipThumb) ensureDir(path.dirname(thumbAbs));
 
   if (dryRun) {
     console.log("[dry-run] convert " + path.relative(root, srcAbs));
@@ -146,13 +156,15 @@ async function convertOne(sharp, srcAbs) {
         .toFile(tmp);
     });
 
-    await safeWriteFile(thumbAbs, function (tmp) {
-      return sharp(srcAbs, { failOnError: false })
-        .rotate()
-        .resize(THUMB_SIZE, THUMB_SIZE, { fit: "inside", withoutEnlargement: true })
-        .webp({ quality: THUMB_QUALITY, effort: 4 })
-        .toFile(tmp);
-    });
+    if (!skipThumb) {
+      await safeWriteFile(thumbAbs, function (tmp) {
+        return sharp(srcAbs, { failOnError: false })
+          .rotate()
+          .resize(THUMB_SIZE, THUMB_SIZE, { fit: "inside", withoutEnlargement: true })
+          .webp({ quality: THUMB_QUALITY, effort: 4 })
+          .toFile(tmp);
+      });
+    }
 
     stats.converted++;
   } catch (err) {

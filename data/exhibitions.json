@@ -186,6 +186,23 @@
       }
     },
     {
+      "id": "noorderlicht-student-open-call-2025",
+      "title": "Noorderlicht Student Open Call — Machine Entanglements",
+      "date": "12 July – 7 September 2025",
+      "description": "Student Open Call presentation within the Noorderlicht Biennial 2025 at De Proef: a lens-based still from Symmetrical Fictions, shown alongside international student submissions responding to technology, ecology, and heritage.",
+      "location": "Frederiksoord, Drenthe, NL",
+      "role": "Student Open Call (FMI MADtech)",
+      "venue": "De Proef",
+      "images": [
+        "./assets/images/exhibitions/noorderlicht/symmetrical_fictions_export.43.webp",
+        "./assets/images/exhibitions/noorderlicht/NL_studentopencall2025.webp"
+      ],
+      "urls": {
+        "link": "https://noorderlicht.com/updates/student-open-call-2025"
+      },
+      "fullDescription": "Noorderlicht invited students worldwide from photography and lens-based media programmes to submit a single image on Machine Entanglements—the 2025 biennial theme on the intertwined relationship between technology, ecology, and heritage. All submissions were exhibited without selection or competition, presented alphabetically during the biennial.\n\nSubmitted a still from Symmetrical Fictions: mirrored satellite tiles recomposed into speculative, symmetrical terrain—lens-based work at the intersection of surveillance imagery, landscape memory, and machine-mediated vision of the planet. Shown at De Proef, a working landscape and living archive on the grounds of the Netherlands' first horticultural school in Frederiksoord, as part of the biennial's exploration of technocultivation, data-driven care, and the entanglement of memory, progress, and the living landscape."
+    },
+    {
       "id": "nervous-systems-kel30",
       "title": "Nervous Systems",
       "date": "June 2025",
