@@ -698,20 +698,29 @@
 
   var initialized = false;
   function init() {
-    if (initialized) return;
     data = (typeof window !== 'undefined') ? window.portfolioData : null;
-    if (!data || !data.projects) return;
+    if (!data) return;
+
+    if (document.getElementById('exhibitions-content')) renderExhibitionsSection();
+    if (document.getElementById('about-content')) renderAboutSection();
+    if (document.getElementById('cv-content')) renderCVSection();
+
+    if (!data.projects) return;
+    if (initialized) return;
     initialized = true;
     renderMarqueesSection();
     renderListSection();
-    renderExhibitionsSection();
-    renderAboutSection();
-    renderCVSection();
     initHomeViewToggle();
+
+    if (typeof window.refreshScrollReveal === 'function') {
+      window.refreshScrollReveal();
+    }
   }
 
   document.addEventListener('portfolio:ready', init);
-  if (document.readyState === 'loading') {
+  if (window.portfolioData) {
+    init();
+  } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();

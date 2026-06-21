@@ -7,7 +7,14 @@
   <title>About — Atharva Gupta</title>
   <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
-  <link rel="manifest" href="./assets/icons/site.webmanifest" />
+  <script>
+    if (location.protocol !== "file:") {
+      var manifestLink = document.createElement("link");
+      manifestLink.rel = "manifest";
+      manifestLink.href = "./assets/icons/site.webmanifest";
+      document.head.appendChild(manifestLink);
+    }
+  </script>
   <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./reset.css" />
   <link rel="stylesheet" href="./tokens.css" />

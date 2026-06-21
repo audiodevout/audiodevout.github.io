@@ -34,31 +34,50 @@
   };
 
   function fetchJson(url) {
-    if (window.location.protocol === "file:") {
-      return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.onload = function () {
-          if (xhr.status === 0 || (xhr.status >= 200 && xhr.status < 300)) {
-            try {
-              resolve(JSON.parse(xhr.responseText));
-            } catch (parseError) {
-              reject(parseError);
-            }
-          } else {
-            reject(new Error("Failed to load " + url + " (" + xhr.status + ")"));
-          }
-        };
-        xhr.onerror = function () {
-          reject(new Error("Failed to load " + url));
-        };
-        xhr.send();
-      });
-    }
-
     return fetch(url, { cache: "no-cache" }).then(function (res) {
       if (!res.ok) throw new Error("Failed to load " + url + " (" + res.status + ")");
       return res.json();
+    });
+  }
+
+  function loadPartsFromScript() {
+    return new Promise(function (resolve, reject) {
+      if (window.__PORTFOLIO_PARTS__) {
+        resolve(window.__PORTFOLIO_PARTS__);
+        return;
+      }
+      var script = document.createElement("script");
+      script.src = new URL("js/portfolioData.parts.js", window.location.href).href;
+      script.onload = function () {
+        if (window.__PORTFOLIO_PARTS__) {
+          resolve(window.__PORTFOLIO_PARTS__);
+        } else {
+          reject(new Error("Portfolio parts bundle is empty"));
+        }
+      };
+      script.onerror = function () {
+        reject(
+          new Error(
+            "Failed to load js/portfolioData.parts.js. Run: node scripts/build-portfolio-data.js"
+          )
+        );
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  function loadPartsFromFetch() {
+    var keys = Object.keys(DATA_FILES);
+    return Promise.all(
+      keys.map(function (key) {
+        return fetchJson(DATA_FILES[key]);
+      })
+    ).then(function (results) {
+      var parts = {};
+      keys.forEach(function (key, i) {
+        parts[key] = results[i];
+      });
+      return parts;
     });
   }
 
@@ -181,18 +200,11 @@
     }
   }
 
-  var keys = Object.keys(DATA_FILES);
+  var loadParts =
+    window.location.protocol === "file:" ? loadPartsFromScript : loadPartsFromFetch;
 
-  Promise.all(
-    keys.map(function (key) {
-      return fetchJson(DATA_FILES[key]);
-    })
-  )
-    .then(function (results) {
-      var parts = {};
-      keys.forEach(function (key, i) {
-        parts[key] = results[i];
-      });
+  loadParts()
+    .then(function (parts) {
       publish(assemble(parts));
     })
     .catch(function (error) {
