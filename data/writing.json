@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": "post-television-audiences",
+      "title": "Post-Television Audiences on YouTube: Production and Consumption in the Digital Public Sphere",
+      "category": "RESEARCH & WRITING",
+      "color": "crimson",
+      "description": "A research paper analyzing how YouTube reshapes audience participation, blurs boundaries between consumers and producers, and transforms cultural discourse in the digital public sphere.",
+      "fullDescription": "Uses Habermas and Dahlgren’s public-sphere frameworks to argue that YouTube shifts television’s centralized, passive model toward participatory, decentralized dynamics—prosumers, niche communities, democratic interaction—while remaining embedded in corporate structures and redefining how meaning and representation are produced.",
+      "medium": "Research paper, digital media studies, cultural theory",
+      "tags": ["digital media", "YouTube", "audience studies", "public sphere", "prosumer culture"],
+      "themes": "Democratization of media, prosumer culture, audience autonomy, corporate control, digital commons",
+      "urls": {
+        "pdf": "./assets/documents/aps-paper.pdf"
+      }
+    },
+    {
+      "id": "transcending-identities",
+      "title": "Transcending Identities: Gender Performance and Psychedelic Trance in Goa's Rave Scene",
+      "category": "RESEARCH & WRITING",
+      "color": "violet",
+      "description": "An ethnographic study exploring how underground psytrance festivals act as transformative spaces for (masculine) gender identity, technology-mediated performance, and collective self-expression.",
+      "fullDescription": "Case study: Karacus Maracus 2021 (Goa). Sound, technology, and dance as sites where normative masculinity loosens—via Pini’s cyborg/nomad lenses, tracing improvisation, trance, and collective desire as embodied politics.",
+      "medium": "Ethnographic research, festival case study, electronic music culture",
+      "tags": ["rave", "gender", "psytrance", "ethnography", "musicology"],
+      "themes": "Gender fluidity, collective identity, trance states, techno-primitivism, embodied politics",
+      "urls": {
+        "pdf": "./assets/documents/gspm-paper.pdf"
+      }
+    }
+  ]
+}

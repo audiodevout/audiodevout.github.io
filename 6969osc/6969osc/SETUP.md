@@ -21,7 +21,7 @@
 2. **Double‑click `START.bat`.**  
    - The first time, **Run as administrator** (right‑click → *Run as administrator*) so Windows Firewall can allow port **3000** (or whatever you set as `wsPort` in `config.json`).  
    - If `config.json` is missing, `START.bat` creates it from `config.example.json`.
-3. When a QR code appears in the window, scan it with your phone.
+3. When the QR code appears (after the server is ready), scan it with your phone.
 
 ### macOS
 
@@ -35,7 +35,7 @@
 
    - If `config.json` is missing, `start.sh` creates it from `config.example.json`.
    - Dependencies install automatically the first time (`npm install`).
-3. When the QR code appears, scan it with your phone.
+3. When the QR code appears (after the server is ready), scan it with your phone.
 
 **macOS firewall:** If the controller opens on this Mac but not on the phone, open **System Settings → Network → Firewall**. Either allow **Node** / **incoming connections** for the terminal app you used, or add a rule to allow **TCP** port **3000** (or your `wsPort`). If macOS asks whether to allow incoming connections for `node`, choose **Allow**.
 
@@ -84,6 +84,16 @@ TouchDesigner receives the same addresses either way; only timing and packet cou
 | `/toggle1` … `/toggle8` | float | 0.0 or 1.0 | Pads **09–16** (toggle on/off) |
 | `/x1`, `/y1`, `/x2`, `/y2`, `/x3`, `/y3`, `/x4`, `/y4` | float | 0.0–1.0 | Four XY pads |
 | `/master` | float | 0.0–1.0 | Opacity strip |
+
+---
+
+## Presets (v1.1+)
+
+- **Save:** tap **+** on the control page or on `/presets.html` to store the current look (all buttons, XY pads, master).
+- **Recall:** open **PRESETS** in the status bar, tap a preset — OSC fires immediately.
+- **Delete:** long-press a preset on the preset page.
+- **Randomize:** tap **RND** on the control page.
+- Presets live in `presets.json` on the show computer (created from `presets.example.json` on first run). Up to **32** presets.
 
 ---
 

@@ -6,8 +6,7 @@
 (function () {
   'use strict';
 
-  var data = typeof window !== 'undefined' ? window.portfolioData : null;
-  if (!data || !data.projects) return;
+  var data = null;
 
   var utils = window.portfolioUtils || {};
   var esc = utils.esc || function (s) { return (s == null || s === '') ? '' : String(s); };
@@ -492,8 +491,17 @@
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.className = 'timeline__link';
-        link.textContent = 'Link ↗';
+        link.textContent = ex.urls.kunstpunt ? 'NP3 ↗' : 'Link ↗';
         linksWrap.appendChild(link);
+      }
+      if (ex.urls && ex.urls.kunstpunt) {
+        var kunstpunt = document.createElement('a');
+        kunstpunt.href = ex.urls.kunstpunt;
+        kunstpunt.target = '_blank';
+        kunstpunt.rel = 'noopener noreferrer';
+        kunstpunt.className = 'timeline__link';
+        kunstpunt.textContent = 'Kunstpunt ↗';
+        linksWrap.appendChild(kunstpunt);
       }
       if (ex.urls && ex.urls.pdf) {
         var paper = document.createElement('a');
@@ -688,7 +696,12 @@
     applyView(currentView);
   }
 
+  var initialized = false;
   function init() {
+    if (initialized) return;
+    data = (typeof window !== 'undefined') ? window.portfolioData : null;
+    if (!data || !data.projects) return;
+    initialized = true;
     renderMarqueesSection();
     renderListSection();
     renderExhibitionsSection();
@@ -697,6 +710,7 @@
     initHomeViewToggle();
   }
 
+  document.addEventListener('portfolio:ready', init);
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

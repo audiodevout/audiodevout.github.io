@@ -7,6 +7,7 @@ const { WebSocketServer } = require("ws");
 const { detectIp } = require("./ip-detect");
 const oscBridge = require("./osc-bridge");
 const heartbeat = require("./heartbeat");
+const presetsStore = require("./presets");
 
 const CONFIG_PATH = path.resolve(__dirname, "..", "config.json");
 const PUBLIC_PATH = path.resolve(__dirname, "..", "public");
@@ -62,12 +63,86 @@ function broadcast(msg, exclude) {
   }
 }
 
+function broadcastAll(msg) {
+  broadcast(msg);
+}
+
 function sendError(ws, message) {
   if (ws && ws.readyState === 1) {
     try {
       ws.send(JSON.stringify({ type: "error", message }));
     } catch (_) {}
   }
+}
+
+function normalizeFullState(next) {
+  const scenes = Array.isArray(next.scenes)
+    ? next.scenes.slice(0, SCENE_COUNT).map(Boolean)
+    : currentState.scenes.slice();
+  while (scenes.length < SCENE_COUNT) scenes.push(false);
+
+  let activeScene = null;
+  for (let i = 0; i < scenes.length; i++) {
+    if (scenes[i]) activeScene = i;
+  }
+
+  function xy(key) {
+    const v = next[key];
+    if (v && typeof v.x === "number" && typeof v.y === "number") {
+      return {
+        x: Math.max(0, Math.min(1, v.x)),
+        y: Math.max(0, Math.min(1, v.y)),
+      };
+    }
+    return { ...currentState[key] };
+  }
+
+  const master =
+    typeof next.master === "number" && Number.isFinite(next.master)
+      ? Math.max(0, Math.min(1, next.master))
+      : currentState.master;
+
+  return {
+    scenes,
+    activeScene,
+    xy1: xy("xy1"),
+    xy2: xy("xy2"),
+    xy3: xy("xy3"),
+    xy4: xy("xy4"),
+    master,
+  };
+}
+
+function applyFullState(next, options) {
+  const opts = options || {};
+  const normalized = normalizeFullState(next);
+
+  currentState.scenes = normalized.scenes;
+  currentState.activeScene = normalized.activeScene;
+  currentState.xy1 = normalized.xy1;
+  currentState.xy2 = normalized.xy2;
+  currentState.xy3 = normalized.xy3;
+  currentState.xy4 = normalized.xy4;
+  currentState.master = normalized.master;
+
+  for (let i = 0; i < SCENE_COUNT; i++) {
+    const addr = sceneOscAddress(i);
+    if (addr) oscBridge.sendOsc(addr, currentState.scenes[i] ? 1.0 : 0.0);
+  }
+
+  for (let pad = 1; pad <= 4; pad++) {
+    const key = `xy${pad}`;
+    const pt = currentState[key];
+    oscBridge.sendOscXY(pad, pt.x, pt.y);
+  }
+
+  oscBridge.sendOsc("/master", currentState.master);
+
+  if (opts.broadcast !== false) {
+    broadcastAll({ type: "state-update", state: presetsStore.cloneState(currentState) });
+  }
+
+  return presetsStore.cloneState(currentState);
 }
 
 function validateMessage(msg) {
@@ -104,18 +179,11 @@ function validateMessage(msg) {
 
   if (t === "master") {
     const v = msg.value;
-    if (typeof v !== "number" || !Number.isFinite(v) || v < 0 || v > 1)
-      return false;
+    if (typeof v !== "number" || !Number.isFinite(v) || v < 0 || v > 1) return false;
     return true;
   }
 
-  if (t === "ping") {
-    return true;
-  }
-
-  if (t === "pong") {
-    return true;
-  }
+  if (t === "ping" || t === "pong") return true;
 
   return false;
 }
@@ -176,25 +244,95 @@ function handleMessage(ws, msg) {
   }
 }
 
-const server = http.createServer((req, res) => {
+function sendJson(res, status, obj, noCache) {
+  res.writeHead(status, { "Content-Type": "application/json", ...noCache });
+  res.end(JSON.stringify(obj));
+}
+
+async function handleApi(req, res, urlPath, noCache) {
+  if (req.method === "GET" && urlPath === "/api/ip") {
+    sendJson(
+      res,
+      200,
+      { ip: getDetectedIp(), port: config.wsPort || 3000 },
+      noCache
+    );
+    return true;
+  }
+
+  if (req.method === "GET" && urlPath === "/api/presets") {
+    sendJson(res, 200, { presets: presetsStore.listPresets() }, noCache);
+    return true;
+  }
+
+  if (req.method === "POST" && urlPath === "/api/presets") {
+    try {
+      const preset = presetsStore.addPreset(currentState);
+      sendJson(res, 201, { preset: { id: preset.id, name: preset.name, createdAt: preset.createdAt } }, noCache);
+    } catch (err) {
+      const status = err.code === "PRESET_LIMIT" ? 409 : 500;
+      sendJson(res, status, { error: err.message || "Failed to save preset" }, noCache);
+    }
+    return true;
+  }
+
+  if (req.method === "POST" && urlPath === "/api/randomize") {
+    const randomState = presetsStore.randomFullState(SCENE_COUNT);
+    const applied = applyFullState(randomState);
+    sendJson(res, 200, { state: applied }, noCache);
+    return true;
+  }
+
+  const applyMatch = urlPath.match(/^\/api\/presets\/([^/]+)\/apply$/);
+  if (req.method === "POST" && applyMatch) {
+    const preset = presetsStore.getPreset(applyMatch[1]);
+    if (!preset) {
+      sendJson(res, 404, { error: "Preset not found" }, noCache);
+      return true;
+    }
+    const applied = applyFullState(preset.state);
+    sendJson(res, 200, { state: applied, preset: { id: preset.id, name: preset.name } }, noCache);
+    return true;
+  }
+
+  const deleteMatch = urlPath.match(/^\/api\/presets\/([^/]+)$/);
+  if (req.method === "DELETE" && deleteMatch) {
+    const ok = presetsStore.deletePreset(deleteMatch[1]);
+    sendJson(res, ok ? 200 : 404, ok ? { ok: true } : { error: "Preset not found" }, noCache);
+    return true;
+  }
+
+  return false;
+}
+
+function injectServerVars(body) {
+  return body
+    .replace(/__SERVER_IP__/g, getDetectedIp())
+    .replace(/__SERVER_PORT__/g, String(config.wsPort || 3000));
+}
+
+const server = http.createServer(async (req, res) => {
   const noCache = {
     "Cache-Control": "no-store, no-cache, must-revalidate",
     Pragma: "no-cache",
   };
 
-  if (req.url === "/api/ip") {
-    res.writeHead(200, { "Content-Type": "application/json", ...noCache });
-    res.end(
-      JSON.stringify({
-        ip: getDetectedIp(),
-        port: config.wsPort || 3000,
-      })
-    );
+  const urlPath = (req.url || "/").split("?")[0];
+
+  if (urlPath.startsWith("/api/")) {
+    try {
+      if (await handleApi(req, res, urlPath, noCache)) return;
+    } catch (err) {
+      sendJson(res, 500, { error: err.message || "Server error" }, noCache);
+      return;
+    }
+    res.writeHead(404);
+    res.end("Not found");
     return;
   }
 
-  const urlPath = (req.url || "/").split("?")[0];
-  const safePath = urlPath === "/" ? "index.html" : urlPath.replace(/^\/+/, "").replace(/\.\./g, "");
+  const safePath =
+    urlPath === "/" ? "index.html" : urlPath.replace(/^\/+/, "").replace(/\.\./g, "");
   let filePath = path.join(PUBLIC_PATH, safePath || "index.html");
   const publicResolved = path.resolve(PUBLIC_PATH);
   filePath = path.resolve(filePath);
@@ -217,13 +355,8 @@ const server = http.createServer((req, res) => {
           res.end("Not found");
           return;
         }
-        let body = data2.toString();
-        body = body.replace(/__SERVER_IP__/g, getDetectedIp());
-        body = body.replace(/__SERVER_PORT__/g, String(config.wsPort || 3000));
-        res.writeHead(200, {
-          "Content-Type": "text/html",
-          ...noCache,
-        });
+        let body = injectServerVars(data2.toString());
+        res.writeHead(200, { "Content-Type": "text/html", ...noCache });
         res.end(body);
       });
       return;
@@ -241,9 +374,8 @@ const server = http.createServer((req, res) => {
         ? "application/json"
         : "application/octet-stream";
 
-    if (filePath.endsWith("index.html")) {
-      body = body.replace(/__SERVER_IP__/g, getDetectedIp());
-      body = body.replace(/__SERVER_PORT__/g, String(config.wsPort || 3000));
+    if (ext === ".html") {
+      body = injectServerVars(body);
     }
 
     res.writeHead(200, { "Content-Type": contentType, ...noCache });
@@ -261,7 +393,7 @@ wss.on("connection", (ws, req) => {
   ws.missedPings = 0;
 
   try {
-    ws.send(JSON.stringify({ type: "init", state: currentState }));
+    ws.send(JSON.stringify({ type: "init", state: presetsStore.cloneState(currentState) }));
   } catch (_) {}
 
   ws.on("message", (data) => {
@@ -270,7 +402,9 @@ wss.on("connection", (ws, req) => {
       if (raw.length > 65536) return;
       const msg = JSON.parse(raw);
       handleMessage(ws, msg);
-    } catch (_) {}
+    } catch (err) {
+      console.warn("[WS] Invalid message from", ip, "—", err.message);
+    }
   });
 
   ws.on("close", () => {
@@ -351,3 +485,5 @@ function shutdown() {
 
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
+
+module.exports = { applyFullState, currentState };

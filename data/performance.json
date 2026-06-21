@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "id": "gesture-performance-system",
+      "title": "Gesture-Controlled Performance System",
+      "category": "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
+      "color": "cerulean",
+      "description": "A modular gesture-driven audiovisual system where the body becomes the instrument—generating sound, visuals, and presence in real time.",
+      "fullDescription": "MediaPipe and TouchDesigner map body movement to real-time sound and generative visuals. First shown at Fever Dream; since then it has served as a modular live A/V platform—gestures drive glitch and drone textures, pulses, and projections—with an intentionally slow, embodied approach to control and coding.",
+      "medium": "Gesture interfaces, real-time sound/visual generation, sensor-based interaction, ambient performance systems",
+      "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • SENSORIAL • REAL-TIME",
+      "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
+      "themes": "Embodied computation, glitch aesthetics, subconscious interaction, ambient sound design, poetic control systems",
+      "images": ["./assets/images/fever-dream-performance.jpg", "./assets/images/fever-dream-performance-1.jpg"]
+    },
+    {
+      "id": "spaces-groningen",
+      "title": "Spaces @ OOST",
+      "category": "VJ • AMBIENT MUSIC • POETRY",
+      "color": "cerulean",
+      "description": "Ambient music and poetry event at the Ambient Room at Oost, Groningen.",
+      "fullDescription": "One night at Ambient Room, Oost: live ambient sets, poetry, and VJ work in the same room—sound, text, and image kept deliberately slow and sensory.",
+      "medium": "Live VJing, ambient music, poetry, audiovisual installation",
+      "tags": "LIVE • VJ • AMBIENT • POETRY • AUDIOVISUAL",
+      "technical": "Video projection, live music mixing, audiovisual sequencing",
+      "themes": "Immersive sound, ambient textures, poetic expression, club-based audiovisual experience",
+      "images": ["./assets/images/spaces.jpg", "./assets/images/spaces-1.jpg"]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="6969osc">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css?v=9">
+  <title>6969osc — Presets</title>
+</head>
+<body>
+  <div class="vjc-app vjc-app--presets" role="application" aria-label="6969osc presets">
+    <header class="vjc-status" role="status" aria-live="polite" aria-atomic="true">
+      <div class="vjc-status__left">
+        <a href="/" class="vjc-nav-link">← CONTROL</a>
+      </div>
+      <div class="vjc-status__center">
+        <span class="vjc-status__brand">PRESETS</span>
+      </div>
+      <div class="vjc-status__right">
+        <button type="button" class="vjc-toolbar-btn" id="btn-save-preset" aria-label="Save preset">+</button>
+      </div>
+    </header>
+
+    <section class="vjc-zone vjc-zone--presets">
+      <div class="vjc-presets__grid" id="presets-grid" aria-label="Saved presets"></div>
+      <p class="vjc-presets__empty" id="presets-empty" hidden>No presets yet — tap + to save the current look.</p>
+      <p class="vjc-presets__hint">Tap to recall · Long-press to delete</p>
+    </section>
+  </div>
+
+  <div id="vjc-toast" class="vjc-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    window.VJC_SERVER = 'ws://__SERVER_IP__:__SERVER_PORT__';
+  </script>
+  <script src="/presets.js?v=1"></script>
+</body>
+</html>

@@ -33,9 +33,12 @@
   };
 
   // Populate hero from portfolioData when available
+  var heroInitialized = false;
   function initHero() {
+    if (heroInitialized) return;
     var data = window.portfolioData;
     if (!data || !data.pageContent || !data.pageContent.home) return;
+    heroInitialized = true;
     var home = data.pageContent.home;
     var labelEl = document.getElementById('hero-label');
     var titleEl = document.getElementById('hero-title');
@@ -49,6 +52,7 @@
     }
   }
 
+  document.addEventListener('portfolio:ready', initHero);
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initHero);
   } else {

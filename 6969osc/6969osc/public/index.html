@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" href="/style.css?v=6">
+  <link rel="stylesheet" href="/style.css?v=9">
   <title>6969osc</title>
 </head>
 <body>
@@ -24,6 +24,9 @@
       <span class="vjc-status__osc-ticker" id="osc-ticker" aria-label="Last OSC address"></span>
     </div>
     <div class="vjc-status__right">
+      <a href="/presets.html" class="vjc-nav-link">PRESETS</a>
+      <button type="button" class="vjc-toolbar-btn" id="btn-save-preset" aria-label="Save preset">+</button>
+      <button type="button" class="vjc-toolbar-btn vjc-toolbar-btn--rnd" id="btn-randomize" aria-label="Randomize levels">RND</button>
       <span class="vjc-status__signal" id="signal-led" aria-hidden="true"></span>
       <span class="vjc-status__wake" id="wake-icon" title="Screen wake lock" aria-hidden="true"></span>
     </div>
@@ -85,6 +88,6 @@
   <script>
     window.VJC_SERVER = 'ws://__SERVER_IP__:__SERVER_PORT__';
   </script>
-  <script src="/controller.js?v=8"></script>
+  <script src="/controller.js?v=9"></script>
 </body>
 </html>

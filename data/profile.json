@@ -1,0 +1,80 @@
+{
+  "home": {
+    "title": "Experimental Systems",
+    "subtitle": "by Atharva Gupta"
+  },
+  "contactDescription": "I love to talk about stuff!",
+  "about": {
+    "title": "ABOUT ME",
+    "description": "Atharva Gupta is an artist, researcher, and educator who builds objects, systems, and situations grounded in personal relationships with technology. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, treating technology as something emotional, erratic, and entangled with both body and politics.",
+    "credentials": [],
+    "image": "./assets/images/atharva.jpeg"
+  },
+  "cv": {
+    "education": [
+      {
+        "degree": "Master of Arts (MA), Fine Arts, Media, Art, Design and Technology",
+        "institution": "Frank Mohr Institute, Minerva Academy, Hanze University of Applied Sciences",
+        "location": "Groningen, NL",
+        "period": "Sep 2024 – Aug 2026"
+      },
+      {
+        "degree": "Master of Arts (MA), Arts and Culture, Arts, Cognition and Criticism",
+        "institution": "University of Groningen",
+        "location": "Groningen, NL",
+        "period": "Sep 2022 – Aug. 2023"
+      },
+      {
+        "degree": "Bachelor of Arts (BA), Triple Major, Psychology, Sociology and Literature",
+        "institution": "Christ University",
+        "location": "Bangalore, IN",
+        "period": "Aug 2017 – Jun 2020"
+      }
+    ],
+    "skills": {
+      "general": [
+        "Art Research",
+        "Art Education",
+        "New Media Art",
+        "Cultural Research",
+        "Interactive Media",
+        "Creative Concept Design",
+        "Sound Design",
+        "VJing",
+        "DJing"
+      ],
+      "interests": ["Interactive Audiovisual Installations", "Workshops", "Digital Art", "Generative AV"],
+      "technologies": ["TouchDesigner", "Ableton Live", "Arduino IDE", "Web UI", "Python"]
+    },
+    "workExperience": [
+      {
+        "title": "Workshop Assistant - Electronics and Programming",
+        "company": "Minerva Academy (Hanze University of Applied Sciences)",
+        "location": "Groningen, NL",
+        "period": "Oct 2025 - Present",
+        "responsibilities": []
+      },
+      {
+        "title": "Freelance Art Producer",
+        "company": "Art Researcher and Educator",
+        "location": "Groningen, NL",
+        "period": "Oct. 2023 - Present",
+        "responsibilities": []
+      },
+      {
+        "title": "Research and Development Intern",
+        "company": "Broedplaats De Campagne",
+        "location": "Groningen, NL",
+        "period": "Feb. 2023 – Oct. 2023",
+        "responsibilities": []
+      },
+      {
+        "title": "Research Assistant",
+        "company": "University of Groningen",
+        "location": "Groningen, NL",
+        "period": "Oct. 2022 – Aug. 2023",
+        "responsibilities": []
+      }
+    ]
+  }
+}

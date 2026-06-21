@@ -19,7 +19,11 @@ function xyStateKey(pad) {
 
 /* ========== 2. WEBSOCKET MANAGER ========== */
 const BACKOFF_MS = [500, 1000, 2000, 4000, 8000, 15000];
+const FAST_CONNECT_ATTEMPTS = 10;
+const FAST_CONNECT_MS = 200;
 const MAX_QUEUE = 20;
+const MOMENTARY_LAST_INDEX = 7;
+
 let ws = null;
 let reconnectAttempt = 0;
 let reconnectTimer = null;
@@ -28,12 +32,35 @@ let lastPongTs = 0;
 let clientPingTimer = null;
 let reconnectPaused = false;
 
+function isMomentarySceneMsg(msg) {
+  return (
+    msg &&
+    msg.type === "scene" &&
+    typeof msg.index === "number" &&
+    msg.index >= 0 &&
+    msg.index <= MOMENTARY_LAST_INDEX
+  );
+}
+
+function purgeMomentaryFromQueue() {
+  messageQueue = messageQueue.filter((m) => !isMomentarySceneMsg(m));
+}
+
 function getWsAddr() {
   try {
     const u = new URL(window.VJC_SERVER || "ws://0.0.0.0:3000");
     return u.host;
   } catch (_) {
     return "---.---.---.---:----";
+  }
+}
+
+function getHttpOrigin() {
+  try {
+    const u = new URL(window.VJC_SERVER || "ws://127.0.0.1:3000");
+    return `http://${u.hostname}:${u.port || 3000}`;
+  } catch (_) {
+    return "http://127.0.0.1:3000";
   }
 }
 
@@ -73,6 +100,14 @@ function showToast(message, durationMs = 4000) {
 }
 
 function send(msg) {
+  if (isMomentarySceneMsg(msg)) {
+    if (ws && ws.readyState === 1) {
+      ws.send(JSON.stringify(msg));
+      return true;
+    }
+    return false;
+  }
+
   if (ws && ws.readyState === 1) {
     ws.send(JSON.stringify(msg));
     return true;
@@ -87,68 +122,124 @@ function send(msg) {
 }
 
 function flushQueue() {
+  purgeMomentaryFromQueue();
   while (messageQueue.length > 0 && ws && ws.readyState === 1) {
     const msg = messageQueue.shift();
     ws.send(JSON.stringify(msg));
   }
 }
 
+function closeExistingWs() {
+  if (reconnectTimer) {
+    clearTimeout(reconnectTimer);
+    reconnectTimer = null;
+  }
+  if (ws) {
+    ws.onopen = null;
+    ws.onmessage = null;
+    ws.onclose = null;
+    ws.onerror = null;
+    if (ws.readyState === WebSocket.CONNECTING || ws.readyState === WebSocket.OPEN) {
+      try {
+        ws.close();
+      } catch (_) {}
+    }
+    ws = null;
+  }
+}
+
+async function probeServer() {
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 2000);
+    const res = await fetch(`${getHttpOrigin()}/api/ip`, {
+      cache: "no-store",
+      signal: ctrl.signal,
+    });
+    clearTimeout(t);
+    return res.ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+function scheduleReconnect() {
+  if (reconnectPaused) return;
+  const delay =
+    reconnectAttempt < FAST_CONNECT_ATTEMPTS
+      ? FAST_CONNECT_MS
+      : BACKOFF_MS[Math.min(reconnectAttempt - FAST_CONNECT_ATTEMPTS, BACKOFF_MS.length - 1)];
+  reconnectAttempt++;
+  updateStatusLabel(
+    reconnectAttempt <= FAST_CONNECT_ATTEMPTS ? "CONNECTING…" : `RECONNECT ${reconnectAttempt}`
+  );
+  reconnectTimer = setTimeout(connect, delay);
+}
+
 function connect() {
   if (reconnectPaused) return;
+
+  closeExistingWs();
+
   const url = window.VJC_SERVER || "ws://127.0.0.1:3000";
   updateStatusDot("connecting");
   updateStatusAddr(url.replace(/^ws:\/\//, "").replace(/\/$/, ""));
-  updateStatusLabel("WS");
+  updateStatusLabel("CONNECTING…");
 
-  ws = new WebSocket(url);
+  probeServer().then((ok) => {
+    if (reconnectPaused) return;
 
-  ws.onopen = () => {
-    reconnectAttempt = 0;
-    lastPongTs = Date.now();
-    updateStatusDot("connected");
-    updateStatusAddr(getWsAddr());
-    flushQueue();
-  };
+    ws = new WebSocket(url);
 
-  ws.onmessage = (ev) => {
-    try {
-      const msg = JSON.parse(ev.data);
-      const t = msg.type;
-      if (t === "init") {
-        Object.assign(state, msg.state || {});
-        applyState();
-      } else if (t === "scene-update") {
-        if (msg.index >= 0 && msg.index < SCENE_COUNT) {
-          state.scenes[msg.index] = msg.active;
-          applySceneLEDs();
+    ws.onopen = () => {
+      reconnectAttempt = 0;
+      lastPongTs = Date.now();
+      updateStatusDot("connected");
+      updateStatusAddr(getWsAddr());
+      updateStatusLabel("WS");
+      flushQueue();
+    };
+
+    ws.onmessage = (ev) => {
+      try {
+        const msg = JSON.parse(ev.data);
+        const t = msg.type;
+        if (t === "init" || t === "state-update") {
+          Object.assign(state, msg.state || {});
+          applyState();
+        } else if (t === "scene-update") {
+          if (msg.index >= 0 && msg.index < SCENE_COUNT) {
+            state.scenes[msg.index] = msg.active;
+            applySceneLEDs();
+          }
+        } else if (t === "ip-changed") {
+          window.VJC_SERVER = `ws://${msg.newIp}:${msg.port}`;
+          showToast("Network updated — reconnecting…");
+          reconnectAttempt = 0;
+          closeExistingWs();
+          setTimeout(connect, 100);
+        } else if (t === "ping") {
+          send({ type: "pong", ts: typeof msg.ts === "number" ? msg.ts : Date.now() });
+        } else if (t === "pong") {
+          lastPongTs = Date.now();
+        } else if (t === "error") {
+          showToast(msg.message || "Server error");
         }
-      } else if (t === "ip-changed") {
-        window.VJC_SERVER = `ws://${msg.newIp}:${msg.port}`;
-        showToast("Network updated — reconnecting…");
-        if (ws) ws.close();
-        reconnectAttempt = 0;
-        setTimeout(connect, 100);
-      } else if (t === "ping") {
-        send({ type: "pong", ts: typeof msg.ts === "number" ? msg.ts : Date.now() });
-      } else if (t === "pong") {
-        lastPongTs = Date.now();
-      } else if (t === "error") {
-        console.warn("[6969osc]", msg.message);
-      }
-    } catch (_) {}
-  };
+      } catch (_) {}
+    };
 
-  ws.onclose = () => {
-    updateStatusDot("disconnected");
-    if (!reconnectPaused) {
-      const delay = BACKOFF_MS[Math.min(reconnectAttempt, BACKOFF_MS.length - 1)];
-      reconnectAttempt++;
-      updateStatusLabel(`RECONNECT ${reconnectAttempt}`);
-      reconnectTimer = setTimeout(connect, delay);
+    ws.onclose = () => {
+      updateStatusDot("disconnected");
+      purgeMomentaryFromQueue();
+      scheduleReconnect();
+    };
+
+    ws.onerror = () => {};
+
+    if (!ok && reconnectAttempt === 0) {
+      updateStatusLabel("WAITING FOR SERVER…");
     }
-  };
-
-  ws.onerror = () => {};
+  });
 }
 
 /* ========== 3. CLIENT HEARTBEAT ========== */
@@ -165,9 +256,6 @@ function startClientHeartbeat() {
 }
 
 /* ========== 4. SCENE BUTTONS ========== */
-/** Buttons 01–08 (index 0–7): momentary. Buttons 09–16 (index 8–15): toggle. */
-const MOMENTARY_LAST_INDEX = 7;
-
 function sceneOscTicker(index) {
   if (index >= 0 && index <= 7) return `/button${index + 1}`;
   if (index >= 8 && index <= 15) return `/toggle${index - 7}`;
@@ -178,6 +266,7 @@ function applySceneLEDs() {
   document.querySelectorAll(".vjc-scene").forEach((btn, i) => {
     const on = state.scenes[i];
     btn.classList.toggle("vjc-scene--lit", on);
+    btn.classList.remove("vjc-scene--active");
     if (i > MOMENTARY_LAST_INDEX) {
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     }
@@ -205,6 +294,16 @@ function applyState() {
   });
 }
 
+function releaseMomentary(btn, index, pointerId) {
+  if (pointerId != null) {
+    try {
+      btn.releasePointerCapture(pointerId);
+    } catch (_) {}
+  }
+  send({ type: "scene", index, active: false });
+  btn.classList.remove("vjc-scene--active");
+}
+
 function initScenes() {
   const grid = document.querySelector(".vjc-scenes__grid");
   if (!grid) return;
@@ -218,9 +317,15 @@ function initScenes() {
     btn.innerHTML = `<span class="vjc-scene__num">${numLabel}</span><span class="vjc-scene__led"></span>`;
 
     if (i <= MOMENTARY_LAST_INDEX) {
+      let activePointerId = null;
+
       btn.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         hapticShort();
+        activePointerId = e.pointerId;
+        try {
+          btn.setPointerCapture(e.pointerId);
+        } catch (_) {}
         send({ type: "scene", index: i, active: true });
         btn.classList.add("vjc-scene--active");
         updateOscTicker(sceneOscTicker(i));
@@ -228,14 +333,25 @@ function initScenes() {
 
       btn.addEventListener("pointerup", (e) => {
         e.preventDefault();
-        send({ type: "scene", index: i, active: false });
-        btn.classList.remove("vjc-scene--active");
+        if (activePointerId == null || e.pointerId === activePointerId) {
+          releaseMomentary(btn, i, activePointerId);
+          activePointerId = null;
+        }
       });
 
       btn.addEventListener("pointercancel", (e) => {
         e.preventDefault();
-        send({ type: "scene", index: i, active: false });
-        btn.classList.remove("vjc-scene--active");
+        if (activePointerId != null && e.pointerId === activePointerId) {
+          releaseMomentary(btn, i, activePointerId);
+          activePointerId = null;
+        }
+      });
+
+      btn.addEventListener("lostpointercapture", (e) => {
+        if (activePointerId != null && e.pointerId === activePointerId) {
+          releaseMomentary(btn, i, null);
+          activePointerId = null;
+        }
       });
     } else {
       btn.classList.add("vjc-scene--toggle");
@@ -384,10 +500,8 @@ window.addEventListener("offline", () => {
   updateStatusDot("disconnected");
   updateStatusLabel("OFFLINE");
   reconnectPaused = true;
-  if (reconnectTimer) {
-    clearTimeout(reconnectTimer);
-    reconnectTimer = null;
-  }
+  purgeMomentaryFromQueue();
+  closeExistingWs();
 });
 
 window.addEventListener("online", () => {
@@ -421,6 +535,48 @@ function updateOscTicker(addr) {
   }, 1500);
 }
 
+/* ========== 10. PRESETS & RANDOMIZE ========== */
+async function apiPost(path) {
+  const res = await fetch(`${getHttpOrigin()}${path}`, {
+    method: "POST",
+    cache: "no-store",
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+async function savePreset() {
+  try {
+    const data = await apiPost("/api/presets");
+    showToast(`Saved ${data.preset?.name || "preset"}`);
+    hapticShort();
+  } catch (err) {
+    showToast(err.message || "Could not save preset");
+  }
+}
+
+async function randomizeLevels() {
+  try {
+    const data = await apiPost("/api/randomize");
+    if (data.state) {
+      Object.assign(state, data.state);
+      applyState();
+    }
+    showToast("Randomized");
+    hapticShort();
+  } catch (err) {
+    showToast(err.message || "Randomize failed");
+  }
+}
+
+function setupToolbar() {
+  const saveBtn = document.getElementById("btn-save-preset");
+  const randomBtn = document.getElementById("btn-randomize");
+  if (saveBtn) saveBtn.addEventListener("click", () => savePreset());
+  if (randomBtn) randomBtn.addEventListener("click", () => randomizeLevels());
+}
+
 /* ========== INIT ========== */
 function init() {
   initScenes();
@@ -429,6 +585,7 @@ function init() {
   if (crossfader) setupMasterCrossfader(crossfader);
 
   document.querySelectorAll(".vjc-xy").forEach(setupXYPad);
+  setupToolbar();
 
   requestWakeLock();
   connect();

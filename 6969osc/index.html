@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="6969osc — open-source phone control surface: WebSocket + OSC (UDP) for TouchDesigner. Node.js 18+. Windows and macOS." />
+  <meta name="description" content="6969osc — phone control surface: WebSocket + OSC (UDP) for TouchDesigner. Node.js 18+. Windows and macOS." />
   <link rel="canonical" href="https://audiodevout.github.io/6969osc/" />
   <meta property="og:title" content="6969osc" />
   <meta property="og:description" content="Phone control surface with OSC for TouchDesigner. Run locally; scan QR on the same Wi‑Fi." />
@@ -62,7 +62,7 @@
   <main class="main osc-page" role="main">
     <section class="section osc-hero" aria-labelledby="osc-heading">
       <div class="osc-hero__stage">
-        <p class="osc-hero__eyebrow">Open source · TouchDesigner · OSC</p>
+        <p class="osc-hero__eyebrow">TouchDesigner · OSC</p>
         <h1 id="osc-heading" class="osc-hero-title">6969osc</h1>
         <p class="osc-hero__download">
           <a
@@ -79,7 +79,7 @@
       </div>
       <div class="osc-hero__intro">
         <p class="osc-lead reveal">
-          A browser-based control surface for your phone — buttons, toggles, XY pads, and a master fader. MIT licensed.
+          A browser-based control surface for your phone — buttons, toggles, XY pads, and a master fader.
         </p>
         <p class="osc-p">
           A <strong>Node.js</strong> server runs on your machine and serves the controller UI to any phone on the same network. Touch input is sent over <strong>WebSocket</strong> and forwarded as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any OSC-capable receiver.
@@ -87,10 +87,33 @@
       </div>
     </section>
 
+    <section class="section osc-demo-section" aria-labelledby="demo-heading">
+      <h2 id="demo-heading" class="section-heading reveal">See it work</h2>
+      <p class="osc-p osc-p--tight osc-demo-lead reveal">
+        A live preview of the phone UI — momentary pads, toggles, master fader, and XY controls sending OSC in real time.
+      </p>
+      <div class="osc-demo-wrap reveal">
+        <div class="osc-demo-layout">
+          <div class="osc-demo-phone" role="img" aria-labelledby="demo-heading" aria-describedby="osc-demo-caption">
+            <canvas id="osc-demo-canvas" width="360" height="640" aria-hidden="true"></canvas>
+          </div>
+          <div class="osc-demo-meta">
+            <p class="osc-demo-caption" id="osc-demo-caption">Scan QR · same Wi‑Fi · controller loads in the browser</p>
+            <ul class="osc-demo-legend">
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--momentary"></span>01–08 momentary</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--toggle"></span>09–16 toggle</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--xy"></span>XY · bundled OSC</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--master"></span>Master / opacity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="ui-heading">
       <h2 id="ui-heading" class="section-heading reveal">Interface</h2>
       <p class="osc-p osc-p--tight">
-        The controller runs in the phone browser — no app install needed. It includes 16 pads (momentary and toggle modes), a master/opacity fader, and four XY pads. The status bar shows the WebSocket endpoint when connected.
+        The controller runs in the phone browser — no app install. Sixteen pads, master fader, four XY pads, presets, and randomize. The status bar shows connection and the last OSC address.
       </p>
       <div class="osc-gallery">
         <figure class="osc-figure reveal">
@@ -129,6 +152,7 @@
       <h2 id="features-heading" class="section-heading reveal">Features</h2>
       <ul class="osc-list">
         <li>Momentary pads, toggles, four XY pads, master fader</li>
+        <li>Server-stored presets and one-tap randomize (v1.1)</li>
         <li>Configurable OSC host, port, and rate limiting via <code class="osc-code">config.json</code></li>
         <li>QR code for pairing on the local network; no app store install</li>
       </ul>
@@ -200,9 +224,6 @@ npm start</code></pre>
           <strong>README:</strong>
           <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/README.md" rel="noopener noreferrer" target="_blank"><code class="osc-code">6969osc/6969osc/README.md</code></a>
         </li>
-        <li>
-          <strong>License:</strong> MIT — <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/LICENSE" rel="noopener noreferrer" target="_blank">LICENSE</a>
-        </li>
       </ul>
       <p class="osc-p osc-p--spaced">
         <a
@@ -220,6 +241,7 @@ npm start</code></pre>
   </footer>
 
   <script src="osc-hero.js"></script>
+  <script src="osc-demo.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/theme.js"></script>

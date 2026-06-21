@@ -26,12 +26,18 @@ if not exist "config.json" (
     echo [OK] Created config.json from config.example.json
 )
 
-:: Read WS_PORT, OSC_PORT, OSC_HOST from config
-for /f "tokens=*" %%p in ('node -e "try{const c=require('./config.json');console.log(c.wsPort||3000)}catch(e){console.log(3000)}" 2^>nul') do set WS_PORT=%%p
+if not exist "presets.json" (
+    copy /Y "presets.example.json" "presets.json" >nul
+)
+
+:: Read ports from config
+for /f "tokens=*" %%p in ('node server/launcher-config.js read-port 2^>nul') do set WS_PORT=%%p
 if not defined WS_PORT set WS_PORT=3000
-for /f "tokens=*" %%p in ('node -e "try{const c=require('./config.json');console.log(c.oscPort||6969)}catch(e){console.log(6969)}" 2^>nul') do set OSC_PORT=%%p
+for /f "tokens=1,2" %%a in ('node server/launcher-config.js read-osc 2^>nul') do (
+    set OSC_PORT=%%a
+    set OSC_HOST=%%b
+)
 if not defined OSC_PORT set OSC_PORT=6969
-for /f "tokens=*" %%p in ('node -e "try{const c=require('./config.json');console.log(c.oscHost||'127.0.0.1')}catch(e){console.log('127.0.0.1')}" 2^>nul') do set OSC_HOST=%%p
 if not defined OSC_HOST set OSC_HOST=127.0.0.1
 
 :: Step 1 - Check Node.js
@@ -54,8 +60,8 @@ if not exist "node_modules" (
     )
 )
 
-:: Step 3 - Detect LAN IP
-for /f "tokens=*" %%i in ('node server/ip-detect.js 2^>nul') do set DETECTED_IP=%%i
+:: Step 3 - Detect LAN IP (retry)
+for /f "tokens=*" %%i in ('node server/detect-ip-retry.js 3 2000 2^>nul') do set DETECTED_IP=%%i
 if not defined DETECTED_IP set DETECTED_IP=ERROR
 if "%DETECTED_IP%"=="" set DETECTED_IP=ERROR
 if "%DETECTED_IP%"=="ERROR" (
@@ -65,20 +71,24 @@ if "%DETECTED_IP%"=="ERROR" (
 )
 echo [OK] IP detected: %DETECTED_IP%
 
-:: Step 4 - Write config (update detectedIp only)
-node -e "const fs=require('fs');const p='./config.json';let c={};try{c=require(p)}catch(e){};c.detectedIp=process.argv[1];fs.writeFileSync(p,JSON.stringify(c,null,2))" "%DETECTED_IP%"
+:: Step 4 - Write config (merge detectedIp only)
+node server/launcher-config.js merge-ip "%DETECTED_IP%"
+if errorlevel 1 (
+    echo [FAIL] Could not update config.json
+    pause
+    exit /B 1
+)
 echo [OK] Config updated
 
-:: Step 5 - Free the port
-for /f "tokens=5" %%a in ('netstat -ano 2^>nul ^| findstr ":%WS_PORT%" ^| findstr "LISTENING"') do (
-    taskkill /F /PID %%a >nul 2>&1
-    echo [OK] Port %WS_PORT% freed
-    goto :portDone
+:: Step 5 - Free port (6969osc only)
+node server/check-port.js %WS_PORT%
+if errorlevel 2 (
+    echo.
+    pause
+    exit /B 1
 )
-echo [OK] Port %WS_PORT% available
-:portDone
 
-:: Step 6 - Firewall rule (delete old, add fresh with profile=any)
+:: Step 6 - Firewall rule
 netsh advfirewall firewall delete rule name="6969osc" >nul 2>&1
 netsh advfirewall firewall delete rule name="6969osc-Node" >nul 2>&1
 netsh advfirewall firewall add rule name="6969osc" dir=in action=allow protocol=TCP localport=%WS_PORT% profile=any
@@ -90,20 +100,25 @@ for /f "tokens=*" %%n in ('where node 2^>nul') do (
 echo [OK] Firewall rule active
 
 :: Step 7 - Launch Node server
-start "6969osc Server" /min node server/index.js
-timeout /t 2 /nobreak >nul
-echo [OK] Server starting on port %WS_PORT%
+start "6969osc Server" /min cmd /c "node server/index.js >> server.log 2>&1"
+echo [OK] Waiting for server on port %WS_PORT%...
+node server/wait-ready.js %WS_PORT% 30000
+if errorlevel 1 (
+    echo [FAIL] Server did not start — check server.log or the minimized server window.
+    pause
+    exit /B 1
+)
+echo [OK] Server ready on port %WS_PORT%
 
-:: Step 8 - Show QR code in terminal
+:: Step 8 - Show QR code
 node server/qr-generate.js %DETECTED_IP% %WS_PORT%
 echo [OK] Scan the QR code above with your phone
 echo.
 echo TIP: Test on PC first - open http://%DETECTED_IP%:%WS_PORT% in a browser.
-echo      If PC works but phone fails, check SETUP.md troubleshooting.
 
 :: Step 9 - Launch TouchDesigner (optional)
 set TD_PATH=
-for /f "tokens=*" %%t in ('node -e "try{const c=require('./config.json');const p=c.tdProjectPath||'';if(p)console.log(p)}catch(e){}" 2^>nul') do set TD_PATH=%%t
+for /f "tokens=*" %%t in ('node server/launcher-config.js read-td 2^>nul') do set TD_PATH=%%t
 if defined TD_PATH if not "!TD_PATH!"=="" (
     if exist "!TD_PATH!" (
         tasklist | findstr /I "TouchDesigner.exe" >nul 2>&1
@@ -121,11 +136,9 @@ echo.
 echo =======================================
 echo   6969osc RUNNING
 echo   Controller: http://%DETECTED_IP%:%WS_PORT%
-echo   Scan the QR code above with your phone
+echo   Presets:    http://%DETECTED_IP%:%WS_PORT%/presets.html
 echo.
-echo   OSC:  server sends UDP to  %OSC_HOST%:%OSC_PORT%  ^(TouchDesigner etc.^)
-echo         OSC In CHOP: Port %OSC_PORT%, Protocol UDP, Network 127.0.0.1
-echo         Edit config.json: wsPort, oscPort, oscHost
+echo   OSC:  server sends UDP to  %OSC_HOST%:%OSC_PORT%
 echo =======================================
 echo.
 echo Press any key to shut down server...

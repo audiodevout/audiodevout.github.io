@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "color": "saffron",
+      "icon": "bandcamp",
+      "name": "Bandcamp",
+      "url": "https://asymmetrica.bandcamp.com/"
+    },
+    {
+      "color": "neon-magenta",
+      "icon": "instagram",
+      "name": "Instagram (Personal)",
+      "url": "https://www.instagram.com/asymmetrica_/"
+    },
+    {
+      "color": "electric-lime",
+      "icon": "instagram",
+      "name": "Instagram (Art)",
+      "url": "https://www.instagram.com/audiodevout/"
+    },
+    {
+      "color": "cerulean",
+      "icon": "linkedin",
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/atharva--gupta/"
+    },
+    {
+      "color": "electric-lime",
+      "icon": "patreon",
+      "name": "Patreon",
+      "url": "https://www.patreon.com/audiodevout"
+    },
+    {
+      "color": "cerulean",
+      "icon": "youtube",
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@audiodevout"
+    }
+  ]
+}

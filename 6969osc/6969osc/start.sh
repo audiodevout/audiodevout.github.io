@@ -13,32 +13,30 @@ if [[ ! -f config.json ]]; then
   echo "Created config.json from config.example.json (edit if needed)."
 fi
 
+if [[ ! -f presets.json ]]; then
+  cp presets.example.json presets.json
+fi
+
 if [[ ! -d node_modules ]]; then
   echo "Installing dependencies..."
   npm install
 fi
 
-WS_PORT=$(node -e "try{const c=require('./config.json');console.log(c.wsPort||3000)}catch(e){console.log(3000)}")
-OSC_PORT=$(node -e "try{const c=require('./config.json');console.log(c.oscPort||6969)}catch(e){console.log(6969)}")
-OSC_HOST=$(node -e "try{const c=require('./config.json');console.log(c.oscHost||'127.0.0.1')}catch(e){console.log('127.0.0.1')}")
+WS_PORT=$(node server/launcher-config.js read-port)
+OSC_PORT=$(node server/launcher-config.js read-osc | head -n 1)
+OSC_HOST=$(node server/launcher-config.js read-osc | tail -n 1)
 
-DETECTED_IP=$(node server/ip-detect.js)
+DETECTED_IP=$(node server/detect-ip-retry.js 3 2000)
 if [[ -z "$DETECTED_IP" || "$DETECTED_IP" == "ERROR" ]]; then
   echo "Could not detect a LAN IP. Connect to Wi‑Fi or Ethernet, then try again."
   exit 1
 fi
 
-node -e "const fs=require('fs');const p='./config.json';let c={};try{c=require(p)}catch(e){};c.detectedIp=process.argv[1];fs.writeFileSync(p,JSON.stringify(c,null,2))" "$DETECTED_IP"
+node server/launcher-config.js merge-ip "$DETECTED_IP"
 
-if command -v lsof >/dev/null 2>&1; then
-  PIDS=$(lsof -t -i ":${WS_PORT}" -sTCP:LISTEN 2>/dev/null || true)
-  if [[ -n "${PIDS:-}" ]]; then
-    echo "$PIDS" | xargs kill -9 2>/dev/null || true
-    echo "Freed port ${WS_PORT}"
-  fi
-fi
+node server/check-port.js "$WS_PORT"
 
-TD_PATH=$(node -e "try{const c=require('./config.json');if(c.tdProjectPath)console.log(c.tdProjectPath)}catch(e){}" 2>/dev/null || true)
+TD_PATH=$(node server/launcher-config.js read-td 2>/dev/null || true)
 if [[ -n "${TD_PATH:-}" && -f "$TD_PATH" ]]; then
   if [[ "$(uname -s)" == "Darwin" ]]; then
     if ! pgrep -i touchdesigner >/dev/null 2>&1; then
@@ -50,13 +48,27 @@ if [[ -n "${TD_PATH:-}" && -f "$TD_PATH" ]]; then
 fi
 
 echo ""
+echo "  Starting server on port ${WS_PORT}..."
+node server/index.js >> server.log 2>&1 &
+SERVER_PID=$!
+
+cleanup() {
+  kill "$SERVER_PID" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+if ! node server/wait-ready.js "$WS_PORT" 30000; then
+  echo "Server did not start — check server.log"
+  exit 1
+fi
+
 echo "  Controller: http://${DETECTED_IP}:${WS_PORT}"
+echo "  Presets:    http://${DETECTED_IP}:${WS_PORT}/presets.html"
 echo "  OSC (UDP):  ${OSC_HOST}:${OSC_PORT}  → TouchDesigner OSC In CHOP"
 echo ""
 node server/qr-generate.js "$DETECTED_IP" "$WS_PORT"
 echo "Scan the QR with your phone (same network as this computer)."
-echo "Test on this machine first: open the URL above in a browser."
 echo "Press Ctrl+C to stop."
 echo ""
 
-exec node server/index.js
+wait "$SERVER_PID"

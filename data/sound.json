@@ -1,0 +1,295 @@
+{
+  "items": [
+    {
+      "id": "asymmetrica-minus-12-c",
+      "title": "-12° C",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "glacier",
+      "description": "Cold, restrained electronic composition shaped by sparse motion.",
+      "fullDescription": "-12° C maintains a reduced palette, favouring brittle textures, low-energy movement, and extended silences between events. The track is structured around restraint, with sounds appearing isolated and exposed rather than layered. Its pacing and tonal temperature suggest an environment where energy is conserved and every action carries weight.",
+      "medium": "Digital audio, sparse electronic composition",
+      "technology": "Ableton Live, restrained synthesis, minimal sequencing, spatial reverb",
+      "themes": "coldness, restraint, isolation, minimal motion, sonic economy",
+      "bandcampTracks": [
+        {
+          "title": "-12° C",
+          "trackId": "1009465888",
+          "url": "https://asymmetrica.bandcamp.com/track/12-c"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-impulse",
+      "title": "Impulse",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "crimson",
+      "description": "Short-form rhythmic study centred on attack and immediacy.",
+      "fullDescription": "Impulse is built from sharp transient events and tightly gated signals, foregrounding attack as the primary compositional material. The piece avoids development in favour of insistence, pushing a small set of gestures through rapid repetition and abrupt interruption. The result is a compact, physical track that reads more as signal behaviour than song structure.",
+      "medium": "Digital audio, transient-focused composition",
+      "technology": "Ableton Live, envelope shaping, transient control, rhythmic gating",
+      "themes": "attack, immediacy, signal behaviour, repetition, interruption",
+      "bandcampTracks": [
+        {
+          "title": "impulse",
+          "trackId": "2193793800",
+          "url": "https://asymmetrica.bandcamp.com/track/impulse"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-sublimatic",
+      "title": "Sublimatic",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "violet",
+      "description": "Minimalist electronic structure driven by gradual transformation.",
+      "fullDescription": "Sublimatic unfolds slowly, prioritising temporal stretch over event density. Small shifts in timbre, modulation depth, and spatial placement accumulate across the duration, producing a perceptual drift rather than narrative progression. The track functions as a listening environment, asking attention to recalibrate to subtle changes rather than explicit musical gestures.",
+      "medium": "Digital audio, minimal composition, slow modulation systems",
+      "technology": "Ableton Live, long-form automation, subtractive synthesis, spatial effects",
+      "themes": "gradual change, duration, minimalism, perception, sonic environment",
+      "bandcampTracks": [
+        {
+          "title": "sublimatic",
+          "trackId": "2633361304",
+          "url": "https://asymmetrica.bandcamp.com/track/sublimatic"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-the-sauce",
+      "title": "The Sauce",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "amber",
+      "description": "Rhythmic distortion study built around pressure, repetition, and release.",
+      "fullDescription": "The Sauce operates as a compressed loop ecology, where distorted percussive gestures fold back onto themselves through tight timing and aggressive filtering. The track leans on repetition as a stress mechanism, gradually thickening its own texture through saturation, micro-variation, and controlled overload. What emerges is a functional groove that feels constantly on the verge of destabilising, yet never fully breaks.",
+      "medium": "Digital audio, loop-based composition, distortion processing",
+      "technology": "Ableton Live, audio effects chains, saturation, filtering, rhythmic automation",
+      "themes": "pressure, repetition, groove collapse, texture, rhythmic insistence",
+      "bandcampTracks": [
+        {
+          "title": "the sauce",
+          "trackId": "1297041022",
+          "url": "https://asymmetrica.bandcamp.com/track/the-sauce"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-a-reasonable-crashout",
+      "title": "A Reasonable Crashout",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "Frequency modulation study by asymmetrica, balancing chaos and control.",
+      "fullDescription": "A Reasonable Crashout is a deliberately unstable composition—a digital homage to modular synthesis built entirely in Ableton. The track oscillates between glitchy randomness and hypnotic repetition, filled with jittery pattern jumps, unpredictable modulation, and a constantly morphing yet grounded melodic pulse. It's a study in fractured coherence: non-linear, algorithmically warped, but held together by an insistent sense of drive.",
+      "medium": "Digital audio, algorithmic sequencing, Frequency Modulation",
+      "technology": "Ableton Live, randomized MIDI effects, automation envelopes, FM synthesis",
+      "themes": "FM synthesis, intensity, sonic collapse, modularity, chaos, rhythm, generative structure",
+      "bandcampTracks": [
+        {
+          "title": "a reasonable crashout",
+          "trackId": "4106544270",
+          "url": "https://asymmetrica.bandcamp.com/track/a-reasonable-crashout"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-automaton",
+      "title": "Automaton",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "neon-magenta",
+      "description": "An exploration of mechanical repetition and evolving digital patterns.",
+      "fullDescription": "Automaton features repetitive motifs and incremental variations that evoke mechanized processes and evolving synthetic life.",
+      "medium": "Digital audio, generative patterns",
+      "technology": "DAW, modular synthesis, Max/MSP",
+      "themes": "Repetition, mechanization, generative synthesis",
+      "bandcampTracks": [
+        {
+          "title": "automaton",
+          "trackId": "3985467816",
+          "url": "https://asymmetrica.bandcamp.com/track/automaton"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-biding-my-time",
+      "title": "Biding My Time",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "Glitchy percussive experiment by asymmetrica, exploring timing and texture.",
+      "fullDescription": "Biding My Time is a rhythmic study shaped through glitch techniques and Reaktor experiments. It navigates broken beats, digital stutters, and layered percussive fragments, producing an evolving sense of restless suspension.",
+      "medium": "Digital Audio, Reaktor",
+      "technology": "Bandcamp, Reaktor",
+      "themes": "Glitch, rhythm, experimentation",
+      "bandcampTracks": [
+        {
+          "title": "biding my time",
+          "trackId": "1736065382",
+          "url": "https://asymmetrica.bandcamp.com/track/biding-my-time"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-have-a-nice-last-few-days-of-summer",
+      "title": "Have a Nice Last Few Days of Summer",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "Bell-driven experimental textures by asymmetrica, meditative yet fleeting.",
+      "fullDescription": "Have a Nice Last Few Days of Summer centers on bell tones and resonant layers. The piece balances clarity and haze, echoing cycles of memory and transition, like the shimmer of late-season light dissolving into air.",
+      "medium": "Digital Audio, Generative Synthesis",
+      "technology": "Bandcamp, bell synthesis",
+      "themes": "Transience, resonance, seasonal atmosphere",
+      "bandcampTracks": [
+        {
+          "title": "have a nice last few days of summer",
+          "trackId": "1778941986",
+          "url": "https://asymmetrica.bandcamp.com/track/have-a-nice-last-few-days-of-summer"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-not-as-i-remember-it",
+      "title": "Not As I Remember It",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "electric-lime",
+      "description": "A reflective piece examining memory through fragmented sound and abstract textures.",
+      "fullDescription": "Not As I Remember It distorts familiar motifs into abstract forms, questioning the reliability of recollection and the fluidity of sonic memory.",
+      "medium": "Digital audio, sound manipulation",
+      "technology": "DAW, field recording, granular synthesis",
+      "themes": "Memory, abstraction, sonic fragmentation",
+      "bandcampTracks": [
+        {
+          "title": "not as i remember it",
+          "trackId": "750668778",
+          "url": "https://asymmetrica.bandcamp.com/track/not-as-i-remember-it"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-stranded-deep",
+      "title": "Stranded Deep Series",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "neon-magenta",
+      "description": "A paired exploration of displacement and rapid flux through digital soundscapes, merging organic resonance and synthetic textures.",
+      "fullDescription": "This pair—'stranded deep' and 'stranded deep but fast'—represents a sonic dive into temporal distortion and emotional flux. These compositions juxtapose slow meditative pulses with accelerated glitch rhythms, reflecting themes of isolation and rapid change.",
+      "medium": "Digital audio, generative synthesis",
+      "technology": "DAW, granular synthesis, digital manipulation",
+      "themes": "Temporal manipulation, glitch aesthetics, organic-synthetic synthesis",
+      "bandcampTracks": [
+        {
+          "title": "stranded deep but fast",
+          "trackId": "2743015108",
+          "url": "https://asymmetrica.bandcamp.com/track/stranded-deep-but-fast"
+        },
+        {
+          "title": "stranded deep",
+          "trackId": "2338898025",
+          "url": "https://asymmetrica.bandcamp.com/track/stranded-deep"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-stretching",
+      "title": "Stretching",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "saffron",
+      "description": "A sonic exploration of elasticity and temporal extension within digital sound design.",
+      "fullDescription": "Stretching plays with time, slowing and elongating motifs to blur boundaries between moment and duration, creating a meditative auditory space.",
+      "medium": "Digital audio, time-stretching techniques",
+      "technology": "DAW, granular synthesis, field recordings",
+      "themes": "Temporal extension, meditative soundscapes",
+      "bandcampTracks": [
+        {
+          "title": "stretching",
+          "trackId": "2000021307",
+          "url": "https://asymmetrica.bandcamp.com/track/stretching"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-supersounds",
+      "title": "Supersounds",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "electric-lime",
+      "description": "An experimental dive into layered synthetic timbres and expansive sound fields.",
+      "fullDescription": "Supersounds layers evolving textures and synthetic drones to create a complex soundscape that challenges perception and embraces machine improvisation.",
+      "medium": "Digital audio, experimental electronics",
+      "technology": "DAW, Max/MSP, modular synth",
+      "themes": "Synthetic layering, machine improvisation, drone textures",
+      "bandcampTracks": [
+        {
+          "title": "supersounds",
+          "trackId": "960218379",
+          "url": "https://asymmetrica.bandcamp.com/track/supersounds"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-symmetrical-fictions",
+      "title": "Symmetrical Fictions",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "A generative composition shaped by real-time weather data, translating environmental conditions into shifting sonic structures.",
+      "fullDescription": "Generative audio from live weather data (temperature, humidity, precipitation), mapped to pitch, modulation, and rhythm—ambient but unstable, synthetic timbres tied to shifting outdoor conditions.",
+      "medium": "Generative audio, environmental data mapping",
+      "technology": "TouchDesigner, environmental APIs, audio synthesis",
+      "themes": "Weather, systems, sonic translation, speculative environments",
+      "bandcampTracks": [
+        {
+          "title": "symmetrical fictions",
+          "trackId": "520992353",
+          "url": "https://asymmetrica.bandcamp.com/track/symmetrical-fictions"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-the-machine",
+      "title": "The Machine",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "An exploration of mechanized rhythms and synthetic textures embodying the essence of automated sound production.",
+      "fullDescription": "The Machine evokes industrial soundscapes with tight rhythmic patterns and digital noise, interrogating the relationship between human and machine in sound creation.",
+      "medium": "Digital audio, rhythm synthesis",
+      "technology": "DAW, Max/MSP, modular synthesis",
+      "themes": "Industrial aesthetics, mechanized rhythm, synthetic textures",
+      "bandcampTracks": [
+        {
+          "title": "the machine",
+          "trackId": "73420518",
+          "url": "https://asymmetrica.bandcamp.com/track/the-machine"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-the-overlap-a-fickle-thing",
+      "title": "The Overlap / A Fickle Thing",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "Experimental track by asymmetrica.",
+      "fullDescription": "Exploring overlapping sonic textures.",
+      "medium": "Digital Audio",
+      "bandcampTracks": [
+        {
+          "title": "the overlap / a fickle thing",
+          "trackId": "593874775",
+          "url": "https://asymmetrica.bandcamp.com/track/the-overlap-a-fickle-thing"
+        }
+      ]
+    },
+    {
+      "id": "asymmetrica-tiptoe",
+      "title": "Tiptoe",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "cerulean",
+      "description": "A delicate balance of tension and subtle sonic shifts, tiptoeing between ambient textures and rhythmic pulses.",
+      "fullDescription": "Tiptoe navigates quiet spaces filled with fragile sound detail, exploring the interface between near silence and low-frequency movements. It's an experiment in minimalism and patience.",
+      "medium": "Digital audio, ambient synthesis",
+      "technology": "DAW, modular synth, field recording",
+      "themes": "Minimalism, ambient textures, tension and release",
+      "bandcampTracks": [
+        {
+          "title": "tiptoe",
+          "trackId": "1726285270",
+          "url": "https://asymmetrica.bandcamp.com/track/tiptoe"
+        }
+      ]
+    }
+  ]
+}

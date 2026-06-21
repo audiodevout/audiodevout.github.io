@@ -1,6 +1,6 @@
 {
   "name": "6969osc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "6969osc — WebSocket phone controller with OSC output for TouchDesigner",
   "main": "server/index.js",
   "engines": {
