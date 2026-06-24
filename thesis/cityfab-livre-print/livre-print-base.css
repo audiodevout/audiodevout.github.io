@@ -1,0 +1,1537 @@
+
+
+
+/* To define how the book look on the screen: */
+:root{
+  --color-background:  whitesmoke;
+  --color-pageBox: #666;
+  --color-paper: white;
+  --color-marginBox: transparent;
+}
+
+
+/* To define how the book look on the screen: */
+@media screen {
+  body {
+      background-color: var(--color-background);
+  }
+  .pagedjs_pages {
+      display: flex;
+      width: calc(var(--pagedjs-width) * 2);
+      flex: 0;
+      flex-wrap: wrap;
+      margin: 0 auto;
+  }
+  .pagedjs_page{
+        --pagedjs-baseline: 10mm;
+        --pagedjs-baseline-position: 9mm;
+        --pagedjs-baseline-color: cyan;
+        background: linear-gradient( var(--color-paper) 0%, var(--color-paper) calc(var(--pagedjs-baseline) - 1px), var(--pagedjs-baseline-color) calc(var(--pagedjs-baseline) - 1px),  var(--pagedjs-baseline-color) var(--pagedjs-baseline)), transparent;
+        background-size: 100% var(--pagedjs-baseline);
+        background-repeat: repeat-y;
+        background-position-y: var(--pagedjs-baseline-position);
+    }
+
+  .pagedjs_first_page {
+      margin-left: var(--pagedjs-width);
+  }
+
+  .pagedjs_page:last-of-type{
+      margin-bottom: 10mm;
+  }
+
+
+
+
+}
+
+
+
+.pagedjs_titre_page > .pagedjs_sheet > .pagedjs_pagebox > .pagedjs_area {
+  background-color: white !important;
+}
+
+
+  @page {
+    size : 155mm 205mm;
+    margin: 9mm;
+    marks: crop;
+    bleed: 5mm;
+  }
+
+  @page:right {
+    margin-left: 18mm;
+    padding-left: 10mm;
+    @bottom-right {
+      content: counter(page);
+      font-family: 'Fake Receipt';
+      font-size: 18pt;
+      margin-top: -1mm;
+      margin-left: 11.5mm;
+      margin-right: -5mm;
+      vertical-align: top;
+      text-align:  right;
+    }
+    @right-bottom {
+      content: string(projet);
+      font-family: 'Elaine';
+      font-size: 7pt;
+      text-transform: uppercase;
+      text-align: left;
+      margin-left: 9mm;
+      margin-top: 72mm;
+      vertical-align: top;
+      width: 100mm;
+      transform: rotate(-90deg);
+    }
+
+  }
+
+  @page:left {
+    margin-left: 30mm;
+    padding-right: 20mm;
+    @bottom-left {
+      content: counter(page);
+      font-family: 'Fake Receipt';
+      font-size: 18pt;
+      margin-top: -1mm;
+      margin-left: -25.5mm;
+      vertical-align: top;
+      text-align: left;
+    }
+    @left-bottom{
+      content: string(partie);
+      font-family: 'Elaine';
+      font-size: 7pt;
+      text-transform: uppercase;
+      text-align: left;
+      margin-left: 12.5mm;
+      margin-top: 91.5mm;
+      vertical-align: top;
+      width: 80mm;
+      transform: rotate(-90deg);
+    }
+  }
+
+  @page image {
+    margin-left: 9mm;
+    padding-left: 0mm;
+    background-color: #3a3a3a;
+    @bottom-left{
+      color: white;
+    }
+    @bottom-right{
+      color: white;
+    }
+    @right-bottom {
+      color: white;
+    }
+    @left-bottom{
+      color: white !important;
+      margin-left: 5mm;
+    }
+  }
+
+  @page titre {
+    page-break-before: right !important;
+    margin: 4mm;
+    padding-left: 0mm;
+    @right-bottom {
+      content: none;
+    }
+    @bottom-left {
+      content: none;
+    }
+    @bottom-right {
+      content: none;
+    }
+    @left-bottom{
+      content: none;
+    }
+  }
+
+  @page annexe {
+    @right-bottom {
+      content: none;
+    }
+
+    @left-bottom{
+      content: none;
+    }
+  }
+
+  @page garde {
+    margin: 9mm;
+    @right-bottom {
+      content: none;
+    }
+    @bottom-left {
+      content: none;
+    }
+    @bottom-right {
+      content: none;
+    }
+    @left-bottom{
+      content: none;
+    }
+  }
+
+  @page sommaire {
+    margin: 9mm;
+    margin-bottom: 7mm;
+    @right-bottom {
+      content: none;
+    }
+    @bottom-left {
+      content: none;
+    }
+    @bottom-right {
+      content: none;
+    }
+    @left-bottom{
+      content: none;
+    }
+  }
+
+  @page encart {
+    margin: 9mm;
+    margin-top: 4mm;
+    background-color: #3a3a3a;
+    @right-bottom {
+      margin-top: 76mm;
+      margin-left: 10mm;
+      color:  white;
+    }
+    @bottom-right{
+      color: white;
+    }
+  }
+
+  @page blanc {
+    margin: 4mm;
+    padding-left: 0mm;
+    @right-bottom {
+      content: none;
+    }
+    @left-bottom {
+      content: none;
+    }
+    @bottom-left{
+      content: none;
+    }
+    @bottom-right-corner{
+      content: none;
+    }
+  }
+
+  @page debut {
+    margin-left: 18mm;
+    padding-left: 10mm;
+     @bottom-right {
+      content: counter(page);
+      font-family: 'Fake Receipt';
+      font-size: 17pt;
+      margin-top: -1mm;
+      margin-left: 12mm;
+      vertical-align: top;
+      text-align:  right;
+    }
+    @right-bottom {
+      content: 'Instruments for Becoming';
+      font-family: 'Elaine';
+      font-size: 7pt;
+      text-transform: uppercase;
+      text-align: left;
+      margin-left: 9mm;
+      margin-top: 72mm;
+      vertical-align: top;
+      width: 100mm;
+      transform: rotate(-90deg);
+    }
+
+    @top-left {
+      content: 'AVANT-PROPOS';
+      font-family: 'Fake Receipt';
+      font-size: 7pt;
+      margin-left: -5mm;
+      text-align: left;
+      width: 105mm;
+    }
+  }
+
+  @page partie {
+    margin: 0;
+    padding: 0;
+    background-image: url(./fond-parties.png);
+    background-position: 50% 50%;
+    background-size: 200mm 200mm;
+    @right-bottom {
+      content: none;
+
+    }
+    @left-bottom {
+      content: none;
+    }
+    @bottom-right{
+      content: none;
+    }
+    @bottom-left{
+      content: none;
+    }
+    @bottom-right-corner{
+      content: none;
+    }
+  }
+
+  /* Thesis image plates: no part texture; folios cleared like @page partie. */
+  @page ifbPlate {
+    margin: 0;
+    padding: 0;
+    @right-bottom {
+      content: none;
+    }
+    @left-bottom {
+      content: none;
+    }
+    @bottom-right {
+      content: none;
+    }
+    @bottom-left {
+      content: none;
+    }
+    @bottom-right-corner {
+      content: none;
+    }
+  }
+
+  @page :blank {
+    @right-bottom {
+      content: none;
+    }
+    @left-bottom {
+      content: none;
+    }
+    @bottom-left-corner{
+      content: none;
+    }
+    @bottom-right-corner{
+      content: none;
+    }
+  }
+
+  @page imgFull {
+    margin: 0mm;
+    background-color: #3a3a3a;
+    @right-bottom {
+      content: none;
+    }
+    @bottom-right {
+      content: none;
+    }
+    @bottom-left-corner{
+      content: none;
+    }
+    @bottom-right-corner{
+      content: none;
+    }
+  }
+
+
+  @page imgTuto {
+    padding-left: 0mm;
+    @left-bottom {
+      color: #3a3a3a;
+    }
+    @bottom-left {
+      color: #3a3a3a;
+    }
+    @right-bottom {
+      margin-top: 72mm;
+      margin-left: 9mm;
+    }
+    @bottom-right{
+      
+    }
+  }
+
+  @page circuit {
+    margin-left: 30mm;
+    padding-right: 20mm;
+    @left-bottom{
+      content: string(partie);
+      font-family: 'Elaine';
+      font-size: 7pt;
+      text-transform: uppercase;
+      text-align: left;
+      margin-left: -35.5mm;
+      margin-top: 46mm;
+      vertical-align: top;
+      width: 80mm;
+      transform: rotate(-90deg);
+      color: #3a3a3a;
+    }
+    @bottom-left {
+      color: #3a3a3a;
+    }
+    @left-top {
+      content: 'LE CIRCUIT';
+      font-family: 'Fake Receipt';
+      font-size: 8pt;
+      transform: rotate(-90deg);
+      color: #3a3a3a;
+      vertical-align: top;
+      justify-content: flex-end !important;
+      text-align: right;
+      position: absolute;
+      top:28mm;
+      left:-5mm;
+    }
+
+
+  }
+
+  @page circuitTexte {
+    padding-left: 0mm;
+    @left-bottom {
+      color: #3a3a3a;
+    }
+    @bottom-left {
+      color: #3a3a3a;
+    }
+    @right-bottom {
+      margin-top: 72mm;
+      margin-left: 9mm;
+      color: #3a3a3a;
+    }
+    @bottom-right{
+      color: #3a3a3a;
+    }
+  }
+
+  @page code {
+    margin: 9mm;
+    margin-left: 0mm;
+    background-color: #3a3a3a;
+    @bottom-left{
+      color: white;
+      margin-left: 5mm;
+    }
+    @bottom-right{
+      color:  white;
+    }
+
+    @right-bottom {
+      color:  white;
+    }
+    @left-bottom{
+      color:  white;
+    }
+  }
+
+
+  body {
+
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.garde {
+  font-family: 'Fake Receipt';
+  font-size: 10pt;
+  font-weight: normal;
+  line-height: 125%;
+  margin-top: -1mm;
+  page: garde;
+  margin-bottom: 2mm;
+  width: 85mm;
+  text-transform: uppercase;
+  margin-left: 5mm;
+}
+
+.crossref::after {
+  content: " " target-counter(attr(href url), page);
+}
+
+.cityfab {
+  font-family: 'Fake Receipt';
+  font-size: 10pt;
+  text-transform: uppercase;
+  page-break-after: always;
+  font-weight: normal;
+}
+
+h4.ap {
+  page:debut !important;
+}
+
+#sommaire {
+  font-family: 'Elaine Sans ExtraLight Italic';
+  font-size: 12pt;
+  position: absolute;
+  transform: rotate(-90deg);
+  left:-35mm;
+  top:9mm;
+  text-align: right;
+}
+
+#col {
+  font-family: 'Elaine Sans ExtraLight Italic';
+  font-size: 12pt;
+  position: absolute;
+  transform: rotate(-90deg);
+  left:-35mm !important;
+  top:9mm !important;
+  text-align: right;
+}
+
+.part {
+  font-family: 'Fake Receipt';
+  text-transform: uppercase;
+  column-count: 2;
+  column-gap: 15mm;
+  width: 124mm;
+  margin-left: -15mm;
+  margin-top: 0mm;
+}
+
+.img_part {
+  height: 14mm;
+}
+
+.part > span {
+  margin-top: 12mm;
+  padding-left: 0mm;
+  text-indent: -3mm;
+  padding-top: 2.5mm;
+  margin-left: 0mm;
+  display: block;
+  font-size: 11.5pt;
+  padding-bottom: 2mm;
+  margin-bottom: 2mm;
+  line-height: 115%;
+}
+
+.part>span>a {
+  font-family: 'Elaine Sans ExtraLight Italic';
+  margin-right: 0mm;
+}
+
+.part > span > a::before {
+  content: target-counter(attr(href url), page) " ";
+}
+
+
+.part > span:first-of-type {
+
+}
+
+.proj {
+  font-family: 'Elaine Sans ExtraLight Italic';
+  font-size: 9pt;
+  color: black;
+  text-decoration: none;
+  line-height: 123%;
+  margin-bottom: 3mm;
+  margin-left: 2mm;
+  display: block;
+  text-transform: none;
+
+}
+
+.proj>span {
+  font-family: 'Elaine' !important;
+  font-size: 10.5pt;
+  border: 0px solid black;
+  line-height: 118%;
+}
+
+.proj::before{
+  content: target-counter(attr(href url), page) " ";
+}
+
+.underscore {
+  color: transparent;
+}
+
+.icone {
+  display: inline-block;
+  height: 5mm;
+  vertical-align: bottom;
+}
+
+  h1 {
+    font-family: 'Elaine';
+    font-size: 12pt;
+    font-weight: normal;
+    line-height: 125%;
+    margin-top: -1mm;
+    page: debut;
+    margin-bottom: 2mm;
+    width: 85mm;
+    text-indent: 10mm;
+    page-break-inside: auto;
+    widows: 2;
+    orphans: 2;
+    page-break-before: avoid !important;
+  }
+
+  #ap {
+    page:debut;
+    page-break-after: avoid;
+  }
+
+  .annexe {
+    page: annexe;
+    page-break-before: always;
+    font-family: 'Elaine Sans ExtraLight Italic';
+    font-size: 12pt;
+    position: absolute;
+    transform: rotate(-90deg);
+    left:-12mm;
+    top:6mm;
+    text-align: right;
+  }
+
+
+
+  .ressource {
+    margin-left: 2mm;
+    text-indent: -2.75mm;
+    margin-bottom: 2mm;
+    line-height: 120%;
+  }
+
+  .ressource::before {
+    content: "- ";
+  }
+
+  .ressource > span {
+    text-indent: 0mm;
+    margin-left: -2.75mm;
+    font-family: 'Elaine Sans ExtraLight Italic';
+    letter-spacing: 1px;
+    display: block;
+  }
+
+  #gloss {
+    font-size: 36pt;
+    position: relative;
+    transform: rotate(0deg);
+    text-align: left;
+    margin-bottom: 55mm;
+    margin-left: 16mm;
+  }
+
+  .glossaire {
+    page: annexe;
+    font-family: 'Elaine';
+    font-size: 10pt;
+    columns: 2;
+    column-gap: 10mm;
+    margin-left: -10mm;
+    width: 115mm;
+  }
+
+  .lettre {
+    font-family: 'Fake Receipt';
+    font-size: 48pt;
+    text-align: left;
+    margin-left: 6mm;
+    margin-bottom: 2mm;
+    margin-top: 8mm;
+  }
+
+  .lettre:first-of-type {
+    margin-top: 0mm !important;
+  }
+
+  .entree {
+    margin-bottom: 3mm;
+    line-height: 120%;
+    padding-left:5mm !important;
+    widows: 3;
+    orphans: 3;
+  }
+
+  .entree > span {
+    display: block;
+    border-radius: 100px;
+    border-left: 1px dashed black;
+    border-right: 1px dashed black;
+    margin-left: -2mm;
+    margin-bottom: 1mm;
+    padding: 1mm;
+    text-align: center;
+    width: fit-content;
+    font-weight: 500;
+    page-break-after: avoid !important;
+  }
+
+  .entrees {
+    line-height: 120%;
+  }
+
+  .entrees > span {
+    display: block;
+    text-decoration: underline;
+    margin-left: -2mm;
+    margin-bottom: 0mm;
+    padding: 1mm;
+    text-align: center;
+    width: fit-content;
+    font-weight: 500;
+    margin-top: 7mm;
+    page-break-after: avoid !important;
+  }
+
+  p {
+    font-family: 'Elaine';
+    font-size: 11pt;
+    margin-left: 7mm;
+    width: 85mm;
+    line-height: calc(15pt + 1px);
+    counter-increment: listCounter;
+    text-indent: -3mm;
+    widows: 3;
+    orphans: 3;
+  }
+
+  p::before {
+    content: "‣ ";
+  }
+
+  .intro::before{
+    content: none;
+  }
+
+  .code {
+    background-color: #3a3a3a;
+    font-family: 'Elaine Sans ExtraLight Italic';
+    color: white;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.1px;
+  }
+
+  h2 {
+    string-set: partie content(text);
+    counter-reset: numProjet;
+    page: partie;
+    font-family: 'Fake Receipt';
+    font-size: 44pt;
+    color: #3a3a3a;
+    padding-top: 7mm;
+    padding-left: 0;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  .partie_gauche {
+    width: 165mm;
+    height: 225mm;
+    page: partie;
+    margin-left: -5mm;
+    margin-top: -5mm;
+    page-break-after: always;
+  }
+
+  .partie_droite {
+    width: 140mm;
+    height: 195mm;
+    page: partie;
+    background-color: white;
+    margin-left: 10mm;
+    margin-top: 5mm;
+  }
+
+  h3 {
+    font-family: 'Elaine Sans ExtraLight Italic';
+    font-size: 35pt;
+    letter-spacing: 2px;
+    font-weight: normal;
+    string-set: projet content(text);
+    padding: 6mm;
+    margin: 0mm;
+    border-bottom: 2px solid #3a3a3a;
+    width: fit-content;
+    page: titre;
+    color: #3a3a3a;
+    flex-basis: auto;
+    flex-grow: 0;
+    height: fit-content;
+  }
+
+  h4 {
+    font-family: 'Elaine Sans ExtraLight Italic';
+    font-size: 20pt;
+    width: 80mm;
+    color: black;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-left: -20mm;
+    margin-top: -3mm;
+    margin-bottom: 13mm;
+    text-align: left;
+    page-break-before: always;
+  }
+
+
+
+  figure {
+    page: encart;
+    break-inside: avoid;
+    margin-bottom: 15mm;
+    margin-left: -5mm;
+    height: 80mm;
+  }
+
+  figure:nth-child(even){
+    position: absolute;
+    top: 93mm;
+    margin-left: -25mm;
+    padding-left: 20mm;
+    width: 153.5mm;
+    border-top: 1px solid white;
+    padding-top: 5mm;
+  }
+
+  .projet {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: stretch;
+    border: 2px solid #3a3a3a;
+    height: 197mm;
+    margin-left: 5mm;
+    counter-reset: figureNumber;
+    page-break-inside: avoid !important;
+    page: titre;
+  }
+
+  .page_blanche {
+    page: blanc;
+    height: 170mm;
+  }
+
+  .bloc1 {
+    page: titre;
+    display: flex;
+    flex-direction: row;
+    width: 180mm;
+  }
+
+  .cadre {
+    page: titre;
+    flex-grow: 1;
+    border-left: 2px solid #3a3a3a;
+    width: 24mm;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    counter-increment: numProjet;
+    padding: 7mm;
+  }
+
+  .num {
+    color: white;
+    background-color: #3a3a3a;
+    border-radius: 150px;
+    font-size: 30pt;
+    padding: 5.5mm;
+    padding-top: 1mm;
+    padding-bottom: 1mm;
+    height: fit-content;
+    font-family: 'Elaine';
+  }
+
+  .num::before {
+    content: counter(numProjet);
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    page: titre;
+    width: 30mm;
+    border-top: 2px solid #3a3a3a;
+  }
+
+  .logo > img {
+    margin-left: 5mm;
+    margin-top: 4mm;
+    margin-bottom: 4mm;
+    width: 20mm;
+    height: auto;
+  }
+
+  .blanc_logo {
+    flex-grow: 1;
+    border-top: 2px solid #3a3a3a;
+  }
+
+  .remplissage {
+    page: titre;
+    flex-grow: 1;
+    border-top: 2px solid #3a3a3a;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1mm;
+    width: 40mm;
+    align-items: flex-start;
+    align-content: flex-start;
+    counter-reset: listCounter;
+  }
+
+  .led {
+    width: 11mm;
+    padding: 2mm;
+  }
+
+  .bouton {
+    width: 17mm;
+    padding: 2mm;
+  }
+
+  .tilt {
+    width: 17mm;
+    padding: 2mm;
+  }
+
+  .condensateur {
+    width: 10mm;
+    padding: 2mm;
+  }
+
+  .resistance {
+    width: 17mm;
+    padding: 2mm;
+  }
+
+  .potentiometre {
+    width: 20mm;
+    padding: 2mm;
+  }
+
+  .neopixel {
+    width: 20mm;
+    padding: 2mm;
+  }
+
+  .bmp {
+    width: 22mm;
+    padding: 2mm;
+  }
+
+  .photoresistance {
+    width: 16mm;
+    padding: 2mm;
+  }
+
+  .temperature {
+    width: 12mm;
+    padding: 2mm;
+  }
+
+  .piezo {
+    width: 40mm;
+    padding: 2mm;
+  }
+
+  .servo {
+    width: 40mm;
+    padding: 2mm;
+  }
+
+  .moteurcc {
+    width: 28mm;
+    padding: 2mm;
+  }
+
+  .l293d {
+    width: 27mm;
+    padding: 2mm;
+  }
+
+  .stepper {
+    width: 50mm;
+    padding: 2mm;
+  }
+
+  .shell {
+    width: 35mm;
+    padding: 2mm;
+  }
+
+  .lcd {
+    width: 38mm;
+    padding: 2mm;
+  }
+
+  .dht {
+    width: 25mm;
+    padding: 2mm;
+  }
+
+  .gps {
+    width: 33mm;
+    padding: 2mm;
+  }
+
+  #schema01 {
+    margin-left: 2mm !important;
+  }
+
+  #schema02 {
+    margin-left: -7mm !important;
+  }
+
+  #schema03 {
+    margin-top: 25mm !important;
+  }
+
+  #schema04 {
+    margin-left: -15mm !important;
+    margin-top: -1mm !important;
+  }
+
+  #schema05 {
+    margin-top: 38mm !important;
+    width: 66mm;
+    margin-left: -1mm !important;
+  }
+
+  #schema06 {
+    margin-left: -18mm !important;
+    margin-top: 12mm !important;
+    width: 130mm;
+  }
+
+  #schema07 {
+    margin-left: -22mm !important;
+    margin-top: 3mm !important;
+    width: 125mm;
+  }
+
+  #schema08 {
+    margin-left: -10mm !important;
+    margin-top: 3mm !important;
+  }
+
+  #schema09 {
+    margin-left: 5mm !important;
+    margin-top: 17mm !important;
+  }
+
+  #schema10 {
+    margin-top: 0mm !important;
+  }
+
+  #schema11 {
+    margin-top: 0mm !important;
+    margin-left: -5mm !important;
+  }
+
+  #schema12 {
+    margin-top: 30mm !important;
+    margin-left: 8mm !important;
+  }
+
+  #schema13 {
+    margin-top: 0mm !important;
+    margin-left: -16mm !important;
+  }
+
+  #schema14 {
+    margin-left: -19mm !important;
+    margin-top: 4mm !important;
+    width: 125mm;
+  }
+
+  #schema15 {
+    margin-left: 10mm !important;
+    margin-top: 19mm !important;
+  }
+
+  #schema16 {
+    margin-left: 8mm !important;
+    margin-top: 23mm !important;
+  }
+
+  #schema17 {
+    margin-left: 17mm !important;
+    margin-top: -3.5mm !important;
+  }
+
+  #schema18 {
+    margin-left: 5mm !important;
+    margin-top: 3mm !important;
+  }
+
+  .led>img,
+  .bouton>img,
+  .resistance>img,
+  .potentiometre>img,
+  .piezo>img,
+  .photoresistance>img,
+  .tilt>img,
+  .condensateur>img,
+  .servo>img,
+  .moteurcc>img,
+  .l293d>img,
+  .bmp>img,
+  .lcd>img,
+  .temperature>img,
+  .dht>img {
+    width: 80%;
+  }
+
+  .stepper>img, .shell>img, .neopixel>img, .gps>img {
+    width: 100%;
+  }
+
+
+
+
+  .bloc_intro {
+    display: flex;
+    page: titre;
+    flex-direction: column;
+  }
+
+  p.intro {
+    page: titre;
+    font-size: 12pt;
+    margin: 0mm;
+    padding: 5mm;
+    color: #3a3a3a;
+    width: 66mm;
+    line-height: 130%;
+    border: 2px solid #3a3a3a;
+    text-indent: 0mm;
+    hyphens: none;
+  }
+
+  .blanc_intro {
+    flex-grow: 1;
+    page: titre;
+    border-right: 2px solid #3a3a3a;
+    border-left: 2px solid #3a3a3a;
+  }
+
+  p.intro_longue {
+    width: 80mm !important;
+  }
+
+  p + figure {
+    margin-top: 3mm;
+  }
+
+
+  figure > img {
+    width: 130mm;
+    margin-bottom: 0mm;
+  }
+
+  .col_break {
+    break-after: column !important;
+    -webkit-column-break-after: always;
+  }
+
+
+  figcaption {
+    font-family: 'Elaine';
+    color: white;
+    margin-top: 1.25mm;
+    width: 70mm;
+    font-size: 12pt;
+    padding: 1mm;
+    display: inline-block;
+    line-height: 110%;
+  }
+
+  .numero {
+    counter-increment: figureNumber;
+    font-family: 'Elaine';
+    color: #3a3a3a;
+    background-color: white;
+    font-size: 12pt;
+    border: 1.75px solid white;
+    border-radius: 100px;
+    padding: 0.8mm;
+    display: inline-block;
+    margin-left: 32mm;
+    vertical-align: top;
+    width: 9mm;
+    text-align: center;
+    margin-top: 2mm;
+    margin-right: 3mm;
+  }
+
+  .numero::before {
+  content: counter(figureNumber) "";
+}
+
+.schema {
+  page-break-after: always;
+  page: circuit;
+  margin-left: 13mm;
+  margin-top: 7mm;
+}
+
+ol {
+  page: circuitTexte;
+  font-family: 'Elaine';
+  font-size: 13pt;
+  color: #3a3a3a;
+  padding-left: 7mm;
+  padding-right: 15mm;
+  hyphens: none;
+}
+
+ol > li {
+  margin-bottom: 3mm;
+  list-style-type: disc;
+  line-height: 127%;
+}
+
+pre:not(.command) {
+  page: code;
+  font-family: 'Elaine Sans ExtraLight Italic';
+  font-size: 12pt;
+  letter-spacing: 1px;
+  width: 140mm;
+  margin-left: -15mm;
+  border-top: 1px solid white;
+  padding-top: 5mm;
+  color: white;
+  -webkit-text-stroke: 0.1px;
+}
+
+pre.command {
+  border-top: 0px solid #3a3a3a;
+  page-break-before: avoid;
+  break-inside: avoid;
+  font-family: 'Elaine Sans ExtraLight Italic';
+  font-size: 10pt;
+  letter-spacing: 1px;
+  width: 107mm;
+  margin-left: -5mm;
+  padding-top: 4mm;
+  margin-bottom: 5mm;
+  background-color: #3a3a3a;
+  color: white;
+  -webkit-text-stroke: 0.1px;
+}
+
+
+.expl_code {
+  border-top: 1px solid #3a3a3a;
+  width: 120mm;
+  padding-right: 35mm;
+  padding-top: 5mm;
+  margin-top: 8mm;
+}
+
+.expl_break {
+  page-break-before: always;
+  border-top: 0px solid #3a3a3a;
+}
+
+.expl_nn {
+  border-top: 0px solid #3a3a3a;
+  text-indent: 0mm;
+  counter-increment: listCounter -0;
+}
+
+.expl_nn::before, .expl_liste::before {
+  content: none;
+}
+
+.expl_sh {
+  border-top: 0px solid #3a3a3a;
+  text-indent: -4mm;
+  margin-top: 10mm;
+}
+
+.expl_liste {
+  border-top: 0px solid #3a3a3a;
+  text-indent: 0mm;
+  margin-left: 13mm;
+  margin-top: 2mm;
+  counter-increment: listCounter -0;
+}
+
+
+
+.prenb {
+  border-top: 0px solid #3a3a3a !important;
+  padding-top: 0mm !important;
+  page: code;
+}
+
+.prefp {
+  page-break-before: always !important;
+  border-top: 0px solid #3a3a3a !important;
+  padding-top: 0mm !important;
+  page: code;
+}
+
+.pre01 {
+  margin-top: 19mm !important;
+}
+
+#pre02 {
+  margin-top: 22.25mm;
+}
+
+#pre03 {
+  margin-top: 54.75mm;
+}
+
+#pre04 {
+  margin-top: 32.75mm;
+}
+
+#pre05 {
+  margin-top: 22.25mm;
+}
+
+#pre06 {
+  margin-top: 42.75mm;
+}
+
+#pre07 {
+  margin-top: 15.25mm;
+}
+
+#pre08 {
+  margin-top: 56.25mm;
+}
+
+#pre09 {
+  margin-top: 21.5mm;
+}
+
+#pre10 {
+  margin-top: 13.25mm;
+}
+
+#pre11 {
+  margin-top: 27.25mm;
+}
+
+#pre12 {
+  margin-top: 32.75mm;
+}
+
+#pre13 {
+  margin-top: 11.25mm;
+}
+
+#pre14 {
+  margin-top: 50mm;
+}
+
+#pre15 {
+  margin-top: 24.25mm;
+}
+
+#pre16 {
+  margin-top: 44.75mm;
+}
+
+#pre17 {
+  margin-top: 5.75mm;
+}
+
+#pre18 {
+  margin-top: 5mm;
+}
+
+#pre19 {
+  margin-top: 50mm;
+}
+
+#pre20 {
+  margin-top: 53.5mm;
+}
+
+#pre22 {
+  margin-top: 78.5mm;
+}
+
+#pre21 {
+  margin-top: 17.75mm;
+}
+
+#pre23 {
+  margin-top: 17.5mm;
+}
+
+#pre24 {
+  margin-top: 33mm;
+}
+
+#pre25 {
+  margin-top: 31.75mm;
+}
+
+#pre26 {
+  margin-top: 23.25mm;
+}
+
+#pre27 {
+  margin-top: 4.25mm;
+}
+
+#pre28 {
+  margin-top: 23.75mm;
+}
+
+#pre29 {
+  margin-top: 7.25mm;
+}
+
+#pre30 {
+  margin-top: 23.5mm;
+}
+
+#p01 {
+  margin-top: 22.25mm;
+}
+
+#p02 {
+  margin-top: 52.25mm;
+}
+
+#p03 {
+  margin-top: 42mm;
+}
+
+#p04 {
+  margin-top: 12.25mm;
+}
+
+#p05 {
+  margin-top: 61.5mm;
+}
+
+#p06 {
+  margin-top: 50mm;
+}
+
+#p07 {
+  margin-top: 25.75mm;
+}
+
+#p08 {
+  margin-top: 14.5mm;
+}
+
+#p09 {
+  margin-top: 18.25mm;
+}
+
+#p10 {
+  margin-top: 20mm;
+}
+
+.type {
+  background-color: white;
+  color: #3a3a3a;
+}
+
+.fonction {
+  color: white;
+  background-color: #ababab;
+}
+
+ul {
+  font-family: 'Elaine';
+  font-size: 11pt;
+}
+
+ul > li {
+  list-style-type: none;
+  margin-bottom: 3mm;
+  text-indent: -3mm;
+}
+
+ul > li::before {
+  content: "- ";
+}
+
+.img_full_page {
+  page: imgFull;
+  transform: rotate(-90deg);
+  width: 190mm;
+  height: auto;
+  margin-left: -22.5mm;
+  margin-top:50mm;
+  page-break-after: always;
+}
+
+#img_fp01 {
+  width: 270mm;
+  margin-top: -3mm;
+  margin-left: -55mm;
+}
+
+.img_tuto {
+  width: 130mm;
+  page: imgTuto;
+  display: block;
+  margin-left: -4mm;
+}
+
+h5 {
+  font-family: 'Elaine';
+  font-size: 11pt;
+  margin-left: 13mm;
+  text-decoration: underline;
+  font-weight: normal;
+  margin-bottom: 0mm;
+  margin-bottom: 2mm;
+}
+
+.p_img_bas {
+  position: absolute;
+  top: 88.25mm;
+  width: 115mm;
+  padding-right: 30mm;
+  padding-top: 5mm;
+  border-top: 1px solid #3a3a3a;
+}
+
+
+
+
+
+@font-face {
+    font-family: 'Elaine';
+    src: url(./elainesans-regular-webfont.woff2) format('woff2'),
+         url(./elainesans-regular-webfont.woff) format('woff'),
+         url(./elainesans-regular-webfont.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Fake Receipt';
+    src: url(../fonts/fake-receipt.regular.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'Elaine Sans ExtraLight Italic';
+    src: url(../fonts/elaine-sans.extralight-italic.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'Josefin Sans Semibold';
+    src: url(../fonts/josefin-sans.semibold.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

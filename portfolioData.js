@@ -1,0 +1,243 @@
+/**
+ * portfolioData.js - Portfolio Content Loader
+ *
+ * PURPOSE: Fetches content from data/*.json (editable via Decap CMS) and
+ *   assembles the window.portfolioData object consumed by the renderer.
+ *
+ * STRUCTURE (assembled shape, unchanged from the previous inline data):
+ *   - projects: soundInstallations, performance, installations, drawings, writing
+ *   - exhibitions: chronological list of exhibitions/presentations
+ *   - contact: about, cv, social links
+ *   - pageContent: homepage content
+ *   - works: derived unified array for normalized access
+ *
+ * On success, sets window.portfolioData and dispatches the "portfolio:ready"
+ * event on document. On failure, falls back to an empty-but-valid structure.
+ */
+
+(function () {
+  "use strict";
+
+  function dataUrl(filename) {
+    return new URL("data/" + filename, window.location.href).href;
+  }
+
+  var DATA_FILES = {
+    sound: dataUrl("sound.json"),
+    performance: dataUrl("performance.json"),
+    installations: dataUrl("installations.json"),
+    visual: dataUrl("visual.json"),
+    writing: dataUrl("writing.json"),
+    exhibitions: dataUrl("exhibitions.json"),
+    links: dataUrl("links.json"),
+    profile: dataUrl("profile.json"),
+  };
+
+  function parseExhibitionSortKey(dateStr) {
+    if (!dateStr || typeof dateStr !== "string") return 0;
+
+    var lower = dateStr.toLowerCase();
+    var yearMatch = dateStr.match(/(20\d{2})/);
+    var year = yearMatch ? parseInt(yearMatch[1], 10) : 0;
+    if (!year) return 0;
+
+    var months = {
+      january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
+      july: 7, august: 8, september: 9, october: 10, november: 11, december: 12,
+    };
+    var month = 0;
+    Object.keys(months).forEach(function (name) {
+      if (lower.indexOf(name) !== -1) month = months[name];
+    });
+
+    var day = 1;
+    var dayBeforeMonth = dateStr.match(/(\d{1,2})\s*[–—-]?\s*\d{0,2}\s+[A-Za-z]+/);
+    var dayAfterMonth = dateStr.match(/[A-Za-z]+\s+(\d{1,2})(?!\d)/);
+    if (dayBeforeMonth) day = parseInt(dayBeforeMonth[1], 10);
+    else if (dayAfterMonth) day = parseInt(dayAfterMonth[1], 10);
+
+    if (!month) month = 1;
+    return year * 10000 + month * 100 + day;
+  }
+
+  function fetchJson(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (res) {
+      if (!res.ok) throw new Error("Failed to load " + url + " (" + res.status + ")");
+      return res.json();
+    });
+  }
+
+  function loadPartsFromScript() {
+    return new Promise(function (resolve, reject) {
+      if (window.__PORTFOLIO_PARTS__) {
+        resolve(window.__PORTFOLIO_PARTS__);
+        return;
+      }
+      var script = document.createElement("script");
+      script.src = new URL("js/portfolioData.parts.js", window.location.href).href;
+      script.onload = function () {
+        if (window.__PORTFOLIO_PARTS__) {
+          resolve(window.__PORTFOLIO_PARTS__);
+        } else {
+          reject(new Error("Portfolio parts bundle is empty"));
+        }
+      };
+      script.onerror = function () {
+        reject(
+          new Error(
+            "Failed to load js/portfolioData.parts.js. Run: node scripts/build-portfolio-data.js"
+          )
+        );
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  function loadPartsFromFetch() {
+    var keys = Object.keys(DATA_FILES);
+    return Promise.all(
+      keys.map(function (key) {
+        return fetchJson(DATA_FILES[key]);
+      })
+    ).then(function (results) {
+      var parts = {};
+      keys.forEach(function (key, i) {
+        parts[key] = results[i];
+      });
+      return parts;
+    });
+  }
+
+  function items(obj) {
+    return obj && Array.isArray(obj.items) ? obj.items : [];
+  }
+
+  function assemble(parts) {
+    var profile = parts.profile || {};
+
+    var portfolioData = {
+      projects: {
+        soundInstallations: items(parts.sound),
+        performance: items(parts.performance),
+        installations: items(parts.installations),
+        drawings: items(parts.visual),
+        writing: items(parts.writing),
+      },
+      exhibitions: items(parts.exhibitions),
+      contact: {
+        about: profile.about || {},
+        cv: profile.cv || {},
+        description: profile.contactDescription || "",
+        social: items(parts.links),
+      },
+      pageContent: {
+        home: profile.home || {},
+      },
+    };
+
+    // Derive a unified works array for normalized access
+    var works = [];
+
+    var pushProjects = function (list, type, status) {
+      if (!Array.isArray(list)) return;
+      list.forEach(function (item) {
+        if (!item || !item.id) return;
+        works.push({
+          id: item.id,
+          title: item.title,
+          type: type,
+          status: status || null,
+          medium: item.medium || null,
+          dimensions: item.dimensions || null,
+          descriptionShort: item.description || null,
+          descriptionLong: item.fullDescription || item.description || null,
+          images: Array.isArray(item.images) ? item.images : [],
+          videos: Array.isArray(item.videos) ? item.videos : [],
+          bandcampTracks: Array.isArray(item.bandcampTracks) ? item.bandcampTracks : [],
+          tags: item.tags || null,
+          themes: item.themes || null,
+          urls: item.urls || null,
+          featured: Boolean(item.featured),
+          showInMainGallery: item.showInGallery !== false,
+          mainGalleryLimit:
+            typeof item.num_images_maingallery === "number" && item.num_images_maingallery > 0
+              ? item.num_images_maingallery
+              : null,
+        });
+      });
+    };
+
+    pushProjects(portfolioData.projects.installations, "installation", "major");
+    pushProjects(portfolioData.projects.performance, "performance", "major");
+    pushProjects(portfolioData.projects.soundInstallations, "sound", "major");
+    pushProjects(portfolioData.projects.drawings, "visual", "experiment");
+    pushProjects(portfolioData.projects.writing, "text", "major");
+
+    portfolioData.works = works;
+
+    // Normalize exhibitions with derived year where possible
+    portfolioData.exhibitions = portfolioData.exhibitions.map(function (ex) {
+      var normalized = {};
+      for (var k in ex) {
+        if (Object.prototype.hasOwnProperty.call(ex, k)) normalized[k] = ex[k];
+      }
+      if (ex.date && typeof ex.date === "string") {
+        var yearMatch = ex.date.match(/(20\d{2})/);
+        normalized.year = yearMatch ? parseInt(yearMatch[1], 10) : null;
+        normalized.sortDate = parseExhibitionSortKey(ex.date);
+      } else {
+        normalized.year = null;
+        normalized.sortDate = 0;
+      }
+      return normalized;
+    });
+
+    return portfolioData;
+  }
+
+  function fallbackData() {
+    return {
+      projects: {
+        drawings: [],
+        installations: [],
+        performance: [],
+        soundInstallations: [],
+        writing: [],
+      },
+      exhibitions: [],
+      contact: {
+        description: "Portfolio data failed to load. Please refresh the page.",
+        social: [],
+      },
+      pageContent: {
+        home: {
+          title: "Experimental Systems",
+          subtitle: "Loading Error",
+          description: "Please refresh the page.",
+        },
+      },
+      works: [],
+    };
+  }
+
+  function publish(data) {
+    if (typeof window !== "undefined") {
+      window.portfolioData = data;
+    }
+    if (typeof document !== "undefined" && typeof document.dispatchEvent === "function") {
+      document.dispatchEvent(new CustomEvent("portfolio:ready", { detail: data }));
+    }
+  }
+
+  var loadParts =
+    window.location.protocol === "file:" ? loadPartsFromScript : loadPartsFromFetch;
+
+  loadParts()
+    .then(function (parts) {
+      publish(assemble(parts));
+    })
+    .catch(function (error) {
+      console.error("Error loading portfolio data:", error);
+      publish(fallbackData());
+    });
+})();

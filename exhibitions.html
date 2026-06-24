@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Exhibitions and presentations — Atharva Gupta" />
+  <title>Exhibitions — Atharva Gupta</title>
+  <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+  <script>
+    if (location.protocol !== "file:") {
+      var manifestLink = document.createElement("link");
+      manifestLink.rel = "manifest";
+      manifestLink.href = "./assets/icons/site.webmanifest";
+      document.head.appendChild(manifestLink);
+    }
+  </script>
+  <link rel="stylesheet" href="./fonts.css" />
+  <link rel="stylesheet" href="./reset.css" />
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./layout.css" />
+  <link rel="stylesheet" href="./components.css" />
+  <link rel="stylesheet" href="./animations.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="./index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="./gallery.html" class="nav-link">Gallery</a>
+          <a href="./exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="./archive.html" class="nav-link">Archive</a>
+          <a href="./about.html" class="nav-link">About</a>
+        </nav>
+        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav
+    id="mobile-nav"
+    class="nav-overlay"
+    aria-hidden="true"
+    aria-label="Mobile navigation"
+  >
+    <a href="./index.html" class="nav-link">Home</a>
+    <a href="./gallery.html" class="nav-link">Gallery</a>
+    <a href="./exhibitions.html" class="nav-link">Exhibitions</a>
+    <a href="./archive.html" class="nav-link">Archive</a>
+    <a href="./about.html" class="nav-link">About</a>
+  </nav>
+
+  <main class="main" role="main">
+    <section id="exhibitions" class="section section--list" aria-labelledby="exhibitions-heading">
+      <h2 id="exhibitions-heading" class="section-heading reveal">Exhibitions</h2>
+      <div class="exhibitions-section-content" id="exhibitions-content"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2025</p>
+  </footer>
+
+  <script src="./portfolioData.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/lightbox.js"></script>
+  <script src="./js/render.js"></script>
+  <script src="./js/marquee-lens.js"></script>
+  <script src="./js/scroll-reveal.js"></script>
+  <script src="./js/router.js"></script>
+  <script src="./js/nav.js"></script>
+  <script src="./js/theme.js"></script>
+</body>
+</html>

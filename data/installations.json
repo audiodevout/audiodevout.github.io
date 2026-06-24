@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "instruments-for-becoming",
+      "title": "Instruments for Becoming",
+      "category": "KINETIC SCULPTURE • SONIC OBJECTS • MOTOR SYSTEMS",
+      "color": "saffron",
+      "description": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
+      "fullDescription": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
+      "dimensions": "Rain Reminders: 1.8 m (height). Spinny Sticks: variable installation, individual units approx. 40–80 cm diameter",
+      "medium": "Motorized kinetic sculpture, acoustic rain stick, PVC, wood, steel, grains, exposed electronics; motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
+      "technical": "Custom low-RPM motor systems, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting; low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
+      "themes": "Tinnitus and acoustic ritual, tension and unstable systems, mechanical fatigue, drawing as duration, meditative noise",
+      "images": [
+        "./assets/images/installations/instruments-for-becoming/rain-stick-1.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-2.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-4.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-6.webp",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-1.webp",
+        "./assets/images/installations/instruments-for-becoming/spinny-sticks-2.webp"
+      ],
+      "videos": [
+        "./assets/video/rain-stick-video-1.mp4",
+        "https://youtu.be/SWMkYxuWrNE"
+      ],
+      "youtubeDate": "20260122"
+    },
+    {
+      "id": "symmetrical-fictions",
+      "title": "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1",
+      "category": "INSTALLATION & RESEARCH",
+      "color": "cerulean",
+      "description": "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
+      "fullDescription": "Satellite tiles are mirrored and recomposed into speculative, symmetrical landscapes—coherent yet impossible terrain that sits between rational cartography, fiction, and unconscious visual patterning.",
+      "medium": "Video installation, satellite imagery recomposition, speculative cartography",
+      "tags": [
+        "generative",
+        "video",
+        "research"
+      ],
+      "themes": "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
+      "images": [
+        "./assets/images/installations/symmetrical-fictions/6.webp",
+        "./assets/images/installations/symmetrical-fictions/39.webp",
+        "./assets/images/installations/symmetrical-fictions/72.webp",
+        "./assets/images/installations/symmetrical-fictions/73.webp"
+      ],
+      "urls": {
+        "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"
+      }
+    }
+  ]
+}

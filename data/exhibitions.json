@@ -1,0 +1,310 @@
+{
+  "items": [
+    {
+      "id": "graduation-show-fmi-2026",
+      "title": "Graduation Show - Masters Frank Mohr Institute",
+      "date": "June 25 – 28, 2026",
+      "description": "Group graduation show for Frank Mohr Institute masters at Akerk. Instruments for Becoming and related work presented as part of the Media, Art, Design & Technology graduation cohort.",
+      "location": "Akerkhof 2, Groningen, NL",
+      "role": "Graduation Show (FMI MADtech)",
+      "venue": "Akerk",
+      "images": [],
+      "urls": {
+        "link": "https://www.academieminerva.nl/en/events/2026/06/graduation-show-frank-mohr-institute",
+        "akerk": "https://akerk.nl/event/graduation-show-masters-frank-mohr-institute",
+        "profile": "https://www.academieminerva.nl/en/projects/2026/graduation-show-2026/atharva-gupta",
+        "instagram": "https://www.instagram.com/p/DZmvODwCNL3/"
+      }
+    },
+    {
+      "id": "rot-2026",
+      "title": "ROT",
+      "date": "7 May 2026",
+      "description": "Evening of poetry, music, and art at The Moshpit of Creation. Performed the Gesture-Controlled Performance System for Slow Music (G.C.P.S.S.M.) without visuals.",
+      "location": "Groningen, NL",
+      "role": "Performance (G.C.P.S.S.M.)",
+      "venue": "Moshpit of Creation",
+      "images": [
+        "./assets/images/exhibitions/rot/rotposter.webp",
+        "./assets/images/exhibitions/rot/rotposter2.webp"
+      ],
+      "fullDescription": "What is rotting beside you? Here's a peek into tonight and the thoughts of some performers. How do we celebrate the revolving? How do we give back to our One Mother Earth?\n\n⫘⫘The dust of your bones will far outlive your name⫘⫘The fruit on your counter knows⫘⫘The chestnut leaves on wet autumn floors know⫘Eventually, so will you⫘⫘\n\nWe're inviting you to ROT – an evening of poetry, music, and art about something that unites us all. The (brain)rot of algorithms feeding on the last of your serotonin. The social rot of misdeeds we've stopped noticing. And the organic rot, through which everything that has ever lived gives itself back.\n\n⫘⫘Rot isn't decay. It's a replacing. The mass stays; something else moves in⫘\n\nPerformed the gesture-controlled slow music without the visuals this time."
+    },
+    {
+      "id": "rearrange-3",
+      "title": "RE:Arrange! #3",
+      "date": "24–25 April 2026",
+      "description": "Third and final version of RE:Arrange! at NP3 RE:Search:Gallery, RE:Arranged by Clare Molloy (Curator of Contemporary Art, Groninger Museum). NP3 × Frank Mohr Institute collaboration on reordering and reinterpretation across Painting and MADtech. Instruments for Becoming installed as a kinetic sculpture among eighteen fellow artists.",
+      "location": "Groningen, NL",
+      "role": "Group Exhibition (FMI MADtech)",
+      "venue": "NP3 / RE:Search:Gallery",
+      "images": [
+        "./assets/images/exhibitions/rearrange-3/Insta_POST_Rearrange3_jpeg_NP3-2-768x960.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08568.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08570.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08571.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08572.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08573.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08574.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08575.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08576.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08577.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08581.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08582.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08583.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08609.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08610.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08612.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08613.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08705.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08710.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08715.webp",
+        "./assets/images/exhibitions/rearrange-3/DSC08720.webp",
+        "./assets/images/exhibitions/rearrange-3/INSTA08578.webp",
+        "./assets/images/exhibitions/rearrange-3/INSTA08611.webp",
+        "./assets/images/exhibitions/rearrange-3/INSTA08703.webp",
+        "./assets/images/exhibitions/rearrange-3/INSTA08709.webp"
+      ],
+      "urls": {
+        "link": "https://www.np3.nu/rearrange3/",
+        "kunstpunt": "https://www.kunstpuntgroningen.nl/en/agenda/rearrange-3-rearranged-by-clare-molloy/"
+      }
+    },
+    {
+      "id": "rearrange-2",
+      "title": "RE:Arrange! #2",
+      "date": "17–18 April 2026",
+      "description": "Second version of RE:Arrange! at NP3 RE:Search:Gallery, RE:Arranged by Sander Jorn Vermeulen (Kunstpunt Groningen — Art in Public Space). NP3 × Frank Mohr Institute collaboration bringing Painting and MADtech work into dialogue through a public-space curatorial lens. Instruments for Becoming shown as a motor-driven kinetic installation.",
+      "location": "Groningen, NL",
+      "role": "Group Exhibition (FMI MADtech)",
+      "venue": "NP3 / RE:Search:Gallery",
+      "images": [
+        "./assets/images/exhibitions/rearrange-2/Insta_POST_Rearrange2_jpeg_NP3-768x960.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08481.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08493.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08494.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08497.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08501.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08505.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08506.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08515.webp",
+        "./assets/images/exhibitions/rearrange-2/DSC08516.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08492.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08495.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08496.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08498.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08504.webp",
+        "./assets/images/exhibitions/rearrange-2/INSTA08507.webp"
+      ],
+      "urls": {
+        "link": "https://www.np3.nu/rearrange2/",
+        "kunstpunt": "https://www.kunstpuntgroningen.nl/en/agenda/rearrange-2-rearranged-by-sander-jorn-vermeulen/"
+      }
+    },
+    {
+      "id": "rearrange-1",
+      "title": "RE:Arrange! #1",
+      "date": "10–11 April 2026",
+      "description": "Opening edition of RE:Arrange! at NP3, arranged by the artists and NP3. Group exhibition with FMI Painting & MADtech students exploring reordering and reinterpretation. First public showing of Instruments for Becoming at RE:Search:Gallery.",
+      "location": "Groningen, NL",
+      "role": "Group Exhibition (FMI MADtech)",
+      "venue": "NP3 / RE:Search:Gallery",
+      "images": [
+        "./assets/images/exhibitions/rearrange-1/Insta_POST_Rearrange1-768x960.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08337.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08339.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08340.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08342.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08343.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08378.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08379.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08380.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08413.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08415.webp",
+        "./assets/images/exhibitions/rearrange-1/DSC08470.webp",
+        "./assets/images/exhibitions/rearrange-1/INSTA08338.webp",
+        "./assets/images/exhibitions/rearrange-1/INSTA08471.webp"
+      ],
+      "urls": {
+        "link": "https://www.np3.nu/rearrange1/",
+        "kunstpunt": "https://www.kunstpuntgroningen.nl/en/agenda/rearrange-1/"
+      }
+    },
+    {
+      "id": "ectlab5-symmetrical-fictions",
+      "title": "5th European Culture and Technology Lab+ Annual Conference",
+      "date": "20-21 November 2025",
+      "description": "Talk at the 5th ECT Lab+ (Baltan Laboratories): Symmetrical Fictions—technology, contemporary art, and speculative research.",
+      "location": "Eindhoven, NL",
+      "role": "Talk/Presentation",
+      "venue": "Baltan Laboratories",
+      "images": [
+        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect5.webp",
+        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect.webp",
+        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect1.webp",
+        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect2.webp"
+      ],
+      "urls": {
+        "link": "https://www.baltanlaboratories.org/events/5th-european-culture-and-technology-lab-annual-conference",
+        "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"
+      },
+      "videos": [
+        "./assets/video/ect5-1.mp4"
+      ]
+    },
+    {
+      "id": "urban-arts-tour",
+      "title": "Urban Arts Tour: Extended Living Room",
+      "date": "November 2025",
+      "description": "Urban Arts Tour — Extended Living Room at Forum/Nieuwe Markt. Showed the rain-stick piece from Instruments for Becoming outdoors as a slow, weather-like kinetic work in public space.",
+      "location": "Groningen, NL",
+      "role": "Kinetic Sculpture",
+      "venue": "Nieuwe Markt/Forum",
+      "images": [
+        "./assets/images/installations/instruments-for-becoming/rain-stick-4.webp",
+        "./assets/images/exhibitions/urban-arts-tour/rain-stick-5.webp",
+        "./assets/images/installations/instruments-for-becoming/rain-stick-6.webp"
+      ],
+      "urls": {
+        "link": "https://forum.nl/nl/agenda/talks-events/urban-arts-tour-extended-living-room"
+      },
+      "videos": [
+        "./assets/video/rain-stick-video-1.mp4"
+      ]
+    },
+    {
+      "id": "lets-get-lyrical-vj-2025",
+      "title": "Let's Get Lyrical met Cissy Joan",
+      "date": "21 October 2025",
+      "description": "VJ performance with Romano Liu and Dara McHugh Murphy at Grand Theatre. (Don't) forget it—between wanting to forget and wanting to remember, the paradox tries to find a balance. How does it feel to be stuck in your head and at the same time want to run away from it as fast as you can? How delicate is the line between uncertainty and greatness? Romano Liu presents an introspective, audiovisual spoken word experience with guitarist Dara McHugh Murphy.",
+      "location": "Groningen, NL",
+      "role": "VJ Performance",
+      "venue": "Grand Theatre Groningen",
+      "images": [],
+      "urls": {
+        "instagram": "https://www.instagram.com/p/DP02M8qCJLl/"
+      }
+    },
+    {
+      "id": "noorderlicht-student-open-call-2025",
+      "title": "Noorderlicht Student Open Call — Machine Entanglements",
+      "date": "12 July – 7 September 2025",
+      "description": "Student Open Call presentation within the Noorderlicht Biennial 2025 at De Proef: a lens-based still from Symmetrical Fictions, shown alongside international student submissions responding to technology, ecology, and heritage.",
+      "location": "Frederiksoord, Drenthe, NL",
+      "role": "Student Open Call (FMI MADtech)",
+      "venue": "De Proef",
+      "images": [
+        "./assets/images/exhibitions/noorderlicht/symmetrical_fictions_export.43.webp",
+        "./assets/images/exhibitions/noorderlicht/NL_studentopencall2025.webp"
+      ],
+      "urls": {
+        "link": "https://noorderlicht.com/updates/student-open-call-2025"
+      },
+      "fullDescription": "Noorderlicht invited students worldwide from photography and lens-based media programmes to submit a single image on Machine Entanglements—the 2025 biennial theme on the intertwined relationship between technology, ecology, and heritage. All submissions were exhibited without selection or competition, presented alphabetically during the biennial.\n\nSubmitted a still from Symmetrical Fictions: mirrored satellite tiles recomposed into speculative, symmetrical terrain—lens-based work at the intersection of surveillance imagery, landscape memory, and machine-mediated vision of the planet. Shown at De Proef, a working landscape and living archive on the grounds of the Netherlands' first horticultural school in Frederiksoord, as part of the biennial's exploration of technocultivation, data-driven care, and the entanglement of memory, progress, and the living landscape."
+    },
+    {
+      "id": "nervous-systems-kel30",
+      "title": "Nervous Systems",
+      "date": "June 2025",
+      "description": "Group show on perception and reactive environments. Rain Reminders (Instruments for Becoming) installed as a motor-driven, audience-responsive kinetic work.",
+      "location": "Haren, NL",
+      "role": "Kinetic Sculpture",
+      "venue": "KEL-30",
+      "images": [
+        "./assets/images/exhibitions/nervous-systems-kel30/nervous-system-1.webp"
+      ],
+      "urls": {
+        "instagram": "https://www.instagram.com/p/DLAl1LYsGLo/"
+      }
+    },
+    {
+      "id": "fever-dream-minerva",
+      "title": "Fever Dream",
+      "date": "May 2025",
+      "description": "Experimental A/V night at Minerva.",
+      "location": "Groningen, NL",
+      "role": "AV Performance",
+      "venue": "Minerva Academy",
+      "images": [
+        "./assets/images/exhibitions/fever-dream-minerva/fever-dream-poster.webp"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=sSkNm3GcGq8"
+      ],
+      "youtubeDate": "20260214",
+      "fullDescription": "Experimental A/V night at Minerva. First public showing of the Gesture-Controlled Performance System (G.C.P.S.S.M.—Gesture-Controlled Performance System for Slow Music): performer movement drives live sound and image—body and patch read as one environment."
+    },
+    {
+      "id": "ddd-error-failure-option-pt3",
+      "title": "Diverse Digital Dimensions: Error – Failure Is an Option, Part Three",
+      "date": "March 2025",
+      "description": "NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) × MADTech (Frank Mohr Institute): four Live Labs on co-making in an open-space model, then a five-day residency at Grand Theatre Groningen (in-person and remote work).",
+      "location": "Groningen, NL",
+      "role": "Residency and Group Presentation",
+      "venue": "Grand Theatre Groningen",
+      "images": [
+        "./assets/images/exhibitions/diverse-digital-dimensions/Screenshot 2026-06-21 171305.webp"
+      ],
+      "urls": {
+        "link": "https://www.grandtheatregroningen.nl/en/programma/archief/diverse-digital-dimensions-error-failure-is-an-option-part-three"
+      },
+      "videos": []
+    },
+    {
+      "id": "contemporary-art-lecture",
+      "title": "On Art and Contemporary Artistic Practice",
+      "date": "February 2025",
+      "description": "Lecture on contemporary practice in the Netherlands and Western Europe—strategies, collaboration, and examples from my own work at the intersection of technology, performance, and public contexts.",
+      "location": "Ajmer, IN",
+      "role": "Lecture/Presentation",
+      "venue": "Government Girls College"
+    },
+    {
+      "id": "october-2024-oost",
+      "title": "October 2024",
+      "date": "October 2024",
+      "description": "October 2024 visual programming for OOST.",
+      "location": "Groningen, NL",
+      "role": "VJ / Visuals",
+      "venue": "OOST",
+      "images": [
+        "./assets/images/exhibitions/october2024-oost/October-2026.webp",
+        "./assets/images/exhibitions/october2024-oost/sketch2.webp"
+      ],
+      "urls": {
+        "link": "https://www.komoost.blog/october-2024-by-dimemesional/"
+      }
+    },
+    {
+      "id": "spaces-groningen",
+      "title": "Spaces @ OOST",
+      "date": "31 August 2024",
+      "description": "Reimagining the arts, the multisensory way. Season opening at OOST: art collective Spaces gets carte blanche in the upstairs Ambient Room.",
+      "location": "Groningen, NL",
+      "role": "VJ Performance",
+      "venue": "OOST",
+      "images": [
+        "./assets/images/exhibitions/spaces-at-oost/oost poster.webp",
+        "./assets/images/performance/spaces-groningen/spaces.webp",
+        "./assets/images/performance/spaces-groningen/spaces-1.webp"
+      ],
+      "fullDescription": "Reimagining the arts, the multisensory way. During our Season Opening this Saturday art collective Spaces gets carte blanche in our upstairs ambient room. In short time and through exhibitions, readings, music events, performances and more, the dedicated crew has fostered an even more dedicated circle of collaborators, friends and followers. All of these meet between 01:00 and 05:00 for a brain tingling cross-pollination of music, poetry and light installations. Taking five has never felt this good.\n\nVJ work at Ambient Room: live ambient sets, poetry, and image in the same room—sound, text, and projection kept deliberately slow and sensory.",
+      "urls": {
+        "instagram": "https://www.instagram.com/komoost/p/C_QapBENIrT/"
+      }
+    },
+    {
+      "id": "virtual-bodies-sonic-space-2023",
+      "title": "'Virtual' Bodies in Sonic Space",
+      "date": "18–21 August 2023",
+      "description": "VR theater by Chantalla Pleiter & Jan Klug at Noorderzon (local program). Production and technical assistance. With a VR headset on your head, your reality suddenly becomes very different—the world takes shape based on what you see. Go on an exploration with others and build your own surprising and magical dimension.",
+      "location": "Groningen, NL",
+      "role": "Production & Technical Assistance",
+      "venue": "VRIJDAG Theater",
+      "images": [],
+      "urls": {
+        "link": "https://www.noorderzon.nl/over/historie/programma-archief/programma-2023-archief/chantalla-pleiter-jan-klug"
+      }
+    }
+  ]
+}

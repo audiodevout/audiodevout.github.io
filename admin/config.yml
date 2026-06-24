@@ -1,0 +1,372 @@
+backend:
+  name: github
+  repo: audiodevout/audiodevout.github.io
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "sound"
+    label: "Sound"
+    files:
+      - name: "sound"
+        label: "Sound Installations"
+        file: "data/sound.json"
+        description: "Asymmetrica audio collection (Bandcamp tracks)."
+        fields:
+          - name: items
+            label: "Tracks"
+            label_singular: "Track"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string, hint: "Unique slug, e.g. asymmetrica-impulse" }
+              - { name: title, label: "Title", widget: string }
+              - { name: category, label: "Category", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+              - { name: description, label: "Short description", widget: text, required: false }
+              - { name: fullDescription, label: "Full description", widget: text, required: false }
+              - { name: medium, label: "Medium", widget: string, required: false }
+              - { name: technology, label: "Technology", widget: string, required: false }
+              - { name: themes, label: "Themes", widget: string, required: false }
+              - name: bandcampTracks
+                label: "Bandcamp tracks"
+                label_singular: "Bandcamp track"
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: "Title", widget: string }
+                  - { name: trackId, label: "Track ID", widget: string }
+                  - { name: url, label: "URL", widget: string }
+
+  - name: "performance"
+    label: "Performance"
+    files:
+      - name: "performance"
+        label: "Performance"
+        file: "data/performance.json"
+        fields:
+          - name: items
+            label: "Performances"
+            label_singular: "Performance"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: category, label: "Category", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+              - { name: description, label: "Short description", widget: text, required: false }
+              - { name: fullDescription, label: "Full description", widget: text, required: false }
+              - { name: medium, label: "Medium", widget: string, required: false }
+              - { name: tags, label: "Tags", widget: string, required: false }
+              - { name: technical, label: "Technical", widget: string, required: false }
+              - { name: themes, label: "Themes", widget: string, required: false }
+              - name: images
+                label: "Images"
+                widget: list
+                required: false
+                field: { name: image, label: "Image", widget: image }
+              - name: videos
+                label: "Videos"
+                widget: list
+                required: false
+                field: { name: video, label: "Video URL or path", widget: string }
+              - name: bandcampTracks
+                label: "Bandcamp tracks"
+                label_singular: "Bandcamp track"
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Link audio releases from this performance (e.g. G.C.P.S.S.M.)."
+                fields:
+                  - { name: title, label: "Title", widget: string }
+                  - { name: trackId, label: "Track ID", widget: string }
+                  - { name: url, label: "URL", widget: string }
+
+  - name: "installations"
+    label: "Installations"
+    files:
+      - name: "installations"
+        label: "Installations"
+        file: "data/installations.json"
+        fields:
+          - name: items
+            label: "Installations"
+            label_singular: "Installation"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: category, label: "Category", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+              - { name: description, label: "Short description", widget: text, required: false }
+              - { name: fullDescription, label: "Full description", widget: text, required: false }
+              - { name: dimensions, label: "Dimensions", widget: string, required: false }
+              - { name: medium, label: "Medium", widget: string, required: false }
+              - { name: technical, label: "Technical", widget: string, required: false }
+              - name: tags
+                label: "Tags"
+                widget: list
+                required: false
+                field: { name: tag, label: "Tag", widget: string }
+              - { name: themes, label: "Themes", widget: string, required: false }
+              - name: images
+                label: "Images"
+                widget: list
+                required: false
+                field: { name: image, label: "Image", widget: image }
+              - name: videos
+                label: "Videos"
+                widget: list
+                required: false
+                field: { name: video, label: "Video URL or path", widget: string }
+              - name: urls
+                label: "Links"
+                widget: object
+                required: false
+                fields:
+                  - { name: link, label: "Link", widget: string, required: false }
+                  - { name: pdf, label: "PDF", widget: string, required: false }
+
+  - name: "visual"
+    label: "Visual & Tutorials"
+    files:
+      - name: "visual"
+        label: "Visual Research & Tutorials"
+        file: "data/visual.json"
+        description: "Visual research sketches and TouchDesigner tutorials (drawings group)."
+        fields:
+          - name: items
+            label: "Items"
+            label_singular: "Item"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: category, label: "Category", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+              - { name: description, label: "Short description", widget: text, required: false }
+              - { name: fullDescription, label: "Full description", widget: text, required: false }
+              - { name: medium, label: "Medium", widget: string, required: false }
+              - { name: youtubeDate, label: "YouTube upload date (YYYYMMDD)", widget: string, required: false }
+              - name: tags
+                label: "Tags"
+                widget: list
+                required: false
+                field: { name: tag, label: "Tag", widget: string }
+              - name: images
+                label: "Images"
+                widget: list
+                required: false
+                field: { name: image, label: "Image", widget: image }
+              - name: videos
+                label: "Videos"
+                widget: list
+                required: false
+                field: { name: video, label: "Video URL or path", widget: string }
+              - name: urls
+                label: "Links"
+                widget: object
+                required: false
+                fields:
+                  - { name: link, label: "Link", widget: string, required: false }
+                  - { name: patreon, label: "Patreon", widget: string, required: false }
+
+  - name: "writing"
+    label: "Writing"
+    files:
+      - name: "writing"
+        label: "Writing & Research"
+        file: "data/writing.json"
+        fields:
+          - name: items
+            label: "Papers"
+            label_singular: "Paper"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: category, label: "Category", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+              - { name: description, label: "Short description", widget: text, required: false }
+              - { name: fullDescription, label: "Full description", widget: text, required: false }
+              - { name: medium, label: "Medium", widget: string, required: false }
+              - name: tags
+                label: "Tags"
+                widget: list
+                required: false
+                field: { name: tag, label: "Tag", widget: string }
+              - { name: themes, label: "Themes", widget: string, required: false }
+              - name: urls
+                label: "Links"
+                widget: object
+                required: false
+                fields:
+                  - { name: pdf, label: "PDF", widget: string, required: false }
+
+  - name: "exhibitions"
+    label: "Exhibitions"
+    files:
+      - name: "exhibitions"
+        label: "Exhibitions"
+        file: "data/exhibitions.json"
+        fields:
+          - name: items
+            label: "Exhibitions"
+            label_singular: "Exhibition"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Title", widget: string }
+              - { name: date, label: "Date", widget: string, hint: "e.g. November 2025" }
+              - { name: description, label: "Description", widget: text, required: false }
+              - { name: location, label: "Location", widget: string, required: false }
+              - { name: role, label: "Role", widget: string, required: false }
+              - { name: venue, label: "Venue", widget: string, required: false }
+              - name: images
+                label: "Images"
+                widget: list
+                required: false
+                field: { name: image, label: "Image", widget: image }
+              - name: videos
+                label: "Videos"
+                widget: list
+                required: false
+                field: { name: video, label: "Video URL or path", widget: string }
+              - name: urls
+                label: "Links"
+                widget: object
+                required: false
+                fields:
+                  - { name: link, label: "Link", widget: string, required: false }
+                  - { name: akerk, label: "Akerk", widget: string, required: false }
+                  - { name: profile, label: "Profile", widget: string, required: false }
+                  - { name: kunstpunt, label: "Kunstpunt", widget: string, required: false }
+                  - { name: pdf, label: "PDF", widget: string, required: false }
+                  - { name: instagram, label: "Instagram", widget: string, required: false }
+
+  - name: "links"
+    label: "Social Links"
+    files:
+      - name: "links"
+        label: "Social Links"
+        file: "data/links.json"
+        fields:
+          - name: items
+            label: "Links"
+            label_singular: "Link"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: "Name", widget: string }
+              - { name: url, label: "URL", widget: string }
+              - { name: icon, label: "Icon", widget: string, required: false }
+              - name: color
+                label: "Accent color"
+                widget: select
+                required: false
+                options: ["glacier", "crimson", "violet", "amber", "cerulean", "electric-lime", "saffron", "neon-magenta", "graphite"]
+
+  - name: "profile"
+    label: "Profile"
+    files:
+      - name: "profile"
+        label: "About, CV & Home"
+        file: "data/profile.json"
+        fields:
+          - name: home
+            label: "Home"
+            widget: object
+            fields:
+              - { name: title, label: "Title", widget: string, required: false }
+              - { name: subtitle, label: "Subtitle", widget: string, required: false }
+          - { name: contactDescription, label: "Contact description", widget: string, required: false }
+          - name: about
+            label: "About"
+            widget: object
+            fields:
+              - { name: title, label: "Title", widget: string, required: false }
+              - { name: description, label: "Description", widget: text, required: false }
+              - name: credentials
+                label: "Credentials"
+                widget: list
+                required: false
+                field: { name: credential, label: "Credential", widget: string }
+              - { name: image, label: "Image", widget: image, required: false }
+          - name: cv
+            label: "CV"
+            widget: object
+            fields:
+              - name: education
+                label: "Education"
+                label_singular: "Entry"
+                widget: list
+                required: false
+                summary: "{{fields.degree}}"
+                fields:
+                  - { name: degree, label: "Degree", widget: string }
+                  - { name: institution, label: "Institution", widget: string, required: false }
+                  - { name: location, label: "Location", widget: string, required: false }
+                  - { name: period, label: "Period", widget: string, required: false }
+              - name: skills
+                label: "Skills"
+                widget: object
+                fields:
+                  - name: general
+                    label: "General"
+                    widget: list
+                    required: false
+                    field: { name: skill, label: "Skill", widget: string }
+                  - name: interests
+                    label: "Interests"
+                    widget: list
+                    required: false
+                    field: { name: interest, label: "Interest", widget: string }
+                  - name: technologies
+                    label: "Technologies"
+                    widget: list
+                    required: false
+                    field: { name: technology, label: "Technology", widget: string }
+              - name: workExperience
+                label: "Work experience"
+                label_singular: "Position"
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: "Title", widget: string }
+                  - { name: company, label: "Company", widget: string, required: false }
+                  - { name: location, label: "Location", widget: string, required: false }
+                  - { name: period, label: "Period", widget: string, required: false }
+                  - name: responsibilities
+                    label: "Responsibilities"
+                    widget: list
+                    required: false
+                    field: { name: responsibility, label: "Responsibility", widget: string }

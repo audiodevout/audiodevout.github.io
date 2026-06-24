@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="6969osc — phone control surface: WebSocket + OSC (UDP) for TouchDesigner. Node.js 18+. Windows and macOS." />
+  <link rel="canonical" href="https://audiodevout.github.io/6969osc/" />
+  <meta property="og:title" content="6969osc" />
+  <meta property="og:description" content="Phone control surface with OSC for TouchDesigner. Run locally; scan QR on the same Wi‑Fi." />
+  <meta property="og:image" content="https://audiodevout.github.io/assets/images/profile/atharva.jpeg" />
+  <meta property="og:url" content="https://audiodevout.github.io/6969osc/" />
+  <meta property="og:type" content="website" />
+  <title>6969osc — Atharva Gupta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital@0;1&family=IBM+Plex+Mono:wght@100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../reset.css" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="../layout.css" />
+  <link rel="stylesheet" href="../components.css" />
+  <link rel="stylesheet" href="../animations.css" />
+  <link rel="stylesheet" href="osc-page.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="../index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="../about.html" class="nav-link">About</a>
+        </nav>
+        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav
+    id="mobile-nav"
+    class="nav-overlay"
+    aria-hidden="true"
+    aria-label="Mobile navigation"
+  >
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../exhibitions.html" class="nav-link">Exhibitions</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+
+  <main class="main osc-page" role="main">
+    <section class="section osc-hero" aria-labelledby="osc-heading">
+      <div class="osc-hero__stage">
+        <p class="osc-hero__eyebrow">TouchDesigner · OSC</p>
+        <h1 id="osc-heading" class="osc-hero-title">6969osc</h1>
+        <p class="osc-hero__download">
+          <a
+            id="download"
+            class="osc-download-btn"
+            href="https://github.com/audiodevout/audiodevout.github.io/releases/latest"
+            rel="noopener noreferrer"
+            target="_blank"
+          >Download latest release</a>
+        </p>
+        <p class="osc-hero__tagline">
+          Phone control surface — WebSocket in, <strong>OSC (UDP)</strong> out.
+        </p>
+      </div>
+      <div class="osc-hero__intro">
+        <p class="osc-lead reveal">
+          A browser-based control surface for your phone — buttons, toggles, XY pads, and a master fader.
+        </p>
+        <p class="osc-p">
+          A <strong>Node.js</strong> server runs on your machine and serves the controller UI to any phone on the same network. Touch input is sent over <strong>WebSocket</strong> and forwarded as <strong>OSC (UDP)</strong> to TouchDesigner (default <code class="osc-code">127.0.0.1:6969</code>) or any OSC-capable receiver.
+        </p>
+      </div>
+    </section>
+
+    <section class="section osc-demo-section" aria-labelledby="demo-heading">
+      <h2 id="demo-heading" class="section-heading reveal">See it work</h2>
+      <p class="osc-p osc-p--tight osc-demo-lead reveal">
+        A live preview of the phone UI — momentary pads, toggles, master fader, and XY controls sending OSC in real time.
+      </p>
+      <div class="osc-demo-wrap reveal">
+        <div class="osc-demo-layout">
+          <div class="osc-demo-phone" role="img" aria-labelledby="demo-heading" aria-describedby="osc-demo-caption">
+            <canvas id="osc-demo-canvas" width="360" height="640" aria-hidden="true"></canvas>
+          </div>
+          <div class="osc-demo-meta">
+            <p class="osc-demo-caption" id="osc-demo-caption">Scan QR · same Wi‑Fi · controller loads in the browser</p>
+            <ul class="osc-demo-legend">
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--momentary"></span>01–08 momentary</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--toggle"></span>09–16 toggle</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--xy"></span>XY · bundled OSC</li>
+              <li><span class="osc-demo-legend__dot osc-demo-legend__dot--master"></span>Master / opacity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ui-heading">
+      <h2 id="ui-heading" class="section-heading reveal">Interface</h2>
+      <p class="osc-p osc-p--tight">
+        The controller runs in the phone browser — no app install. Sixteen pads, master fader, four XY pads, presets, and randomize. The status bar shows connection and the last OSC address.
+      </p>
+      <div class="osc-gallery">
+        <figure class="osc-figure reveal">
+          <img
+            src="6969osc-1.png"
+            alt="6969osc controller: 4×4 pad grid with orange highlights, master opacity slider at 0.65, and four XY pads with orange position dots."
+            width="396"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="osc-figcaption">Phone UI — pads, master, and XY controls</figcaption>
+        </figure>
+        <figure class="osc-figure reveal">
+          <img
+            src="6969osc-2.png"
+            alt="6969osc controller alternate view: dark layout with connection status, highlighted pads, master slider at 0.48, and four XY pads."
+            width="392"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="osc-figcaption">Same surface — different pad and slider states</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="note-heading">
+      <h2 id="note-heading" class="section-heading reveal">How you run it</h2>
+      <p class="osc-p osc-p--muted osc-p--spaced">
+        Start the server on the venue machine, then scan the QR code printed in the terminal. Your phone loads the controller UI directly from <strong>your computer’s LAN IP</strong> — both devices must be on the same Wi‑Fi or hotspot. See <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md" rel="noopener noreferrer" target="_blank">SETUP.md</a> for firewall setup, TouchDesigner OSC In configuration, and troubleshooting steps.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="section-heading reveal">Features</h2>
+      <ul class="osc-list">
+        <li>Momentary pads, toggles, four XY pads, master fader</li>
+        <li>Server-stored presets and one-tap randomize (v1.1)</li>
+        <li>Configurable OSC host, port, and rate limiting via <code class="osc-code">config.json</code></li>
+        <li>QR code for pairing on the local network; no app store install</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="requirements-heading">
+      <h2 id="requirements-heading" class="section-heading reveal">Requirements</h2>
+      <ul class="osc-list osc-list--spaced">
+        <li><strong>Node.js</strong> 18+ (<a class="writing-card__paper-link" href="https://nodejs.org/" rel="noopener noreferrer" target="_blank">nodejs.org</a>)</li>
+        <li><strong>TouchDesigner</strong> (or another OSC receiver) with UDP on the port you configure (default <code class="osc-code">6969</code>)</li>
+        <li>Phone and computer reachable on the <strong>same network</strong> (some venue Wi‑Fi blocks device-to-device traffic — see SETUP.md)</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="quickstart-heading">
+      <h2 id="quickstart-heading" class="section-heading reveal">Quick start</h2>
+      <p class="osc-p osc-p--tight">
+        The app lives at <code class="osc-code">6969osc/6969osc</code> in the repo. On first run, <code class="osc-code">config.json</code> is auto-generated from <code class="osc-code">config.example.json</code> if it doesn't exist.
+      </p>
+
+      <h3 class="osc-subheading">Windows</h3>
+      <ol class="osc-ol">
+        <li>Install Node.js LTS.</li>
+        <li>Double-click <code class="osc-code">START.bat</code>. First time: <strong>Run as administrator</strong> so Windows Firewall can allow inbound TCP on the web port (default <code class="osc-code">3000</code>).</li>
+        <li>Scan the QR code with your phone.</li>
+      </ol>
+
+      <h3 class="osc-subheading">macOS</h3>
+      <ol class="osc-ol">
+        <li>Install Node.js LTS (Apple Silicon or Intel).</li>
+        <li>In Terminal, <code class="osc-code">cd</code> into the app folder, then <code class="osc-code">./start.sh</code> (run <code class="osc-code">chmod +x start.sh</code> once if your clone is not executable).</li>
+        <li>Scan the QR code with your phone.</li>
+      </ol>
+      <p class="osc-p osc-p--muted osc-p--spaced">
+        If the phone can't connect, allow <strong>Node</strong> (or the web port) through the firewall in <strong>System Settings → Network → Firewall</strong>. Full steps are in SETUP.md.
+      </p>
+
+      <p class="osc-p osc-p--tight"><strong>Manual / development</strong></p>
+      <pre class="osc-pre" tabindex="0"><code>npm install
+npm start</code></pre>
+      <p class="osc-p osc-p--spaced">
+        You still need <code class="osc-code">config.json</code> and an open firewall rule for the HTTP port where applicable.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="download-heading">
+      <h2 id="download-heading" class="section-heading reveal">Download</h2>
+      <p class="osc-p osc-p--tight">
+        Packaged zip with the app at <code class="osc-code">6969osc/6969osc</code>:
+      </p>
+      <p class="osc-actions">
+        <a
+          class="writing-card__paper-link"
+          href="https://github.com/audiodevout/audiodevout.github.io/releases/latest"
+          rel="noopener noreferrer"
+          target="_blank"
+        >Latest release →</a>
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="repo-heading">
+      <h2 id="repo-heading" class="section-heading reveal">Repository</h2>
+      <ul class="osc-list">
+        <li>
+          <strong>Source:</strong>
+          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/tree/main/6969osc/6969osc" rel="noopener noreferrer" target="_blank"><code class="osc-code">6969osc/6969osc</code> on GitHub</a>
+        </li>
+        <li>
+          <strong>README:</strong>
+          <a class="writing-card__paper-link" href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/README.md" rel="noopener noreferrer" target="_blank"><code class="osc-code">6969osc/6969osc/README.md</code></a>
+        </li>
+      </ul>
+      <p class="osc-p osc-p--spaced">
+        <a
+          class="writing-card__paper-link"
+          href="https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md"
+          rel="noopener noreferrer"
+          target="_blank"
+        >SETUP.md (TouchDesigner, config, troubleshooting) →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2026</p>
+  </footer>
+
+  <script src="osc-hero.js"></script>
+  <script src="osc-demo.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

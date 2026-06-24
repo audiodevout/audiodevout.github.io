@@ -1,0 +1,651 @@
+/*
+ * Print&Bind (Amsterdam) — interior PDF targets (order spec)
+ * https://www.printenbind.nl/en/book/a5-book
+ *
+ * Trim: 148.5 mm × 210 mm. Expert: bleed 3 mm (PDF/X-1a + FOGRA39L in Acrobat).
+ * Without bleed, Print&Bind auto-enlarges ~1 mm — we supply 3 mm explicitly.
+ * Glued / garenloos: mirrored gutter 15 mm (spine), 5 mm fore-edge + top + bottom.
+ *
+ * Full-bleed pages (partie, ifbPlate, imgFull): margin 0, bleed 3 mm; captions
+ * stay ≥ 5 mm inside trim via --ifb-plate-safe in ifb-plates.css.
+ */
+
+@page {
+  size: 148.5mm 210mm;
+  marks: none;
+  bleed: 3mm;
+  margin: 5mm;
+}
+
+@page:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @bottom-right {
+    content: none;
+  }
+  @right-bottom {
+    content: string(projet);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 100mm;
+    transform: rotate(-90deg);
+  }
+}
+
+@page:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @bottom-left {
+    content: none;
+  }
+  @left-bottom {
+    content: string(partie);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 80mm;
+    transform: rotate(-90deg);
+  }
+}
+
+@page titre {
+  page-break-before: right !important;
+  padding-left: 0;
+  @right-bottom {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+}
+
+@page titre:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page titre:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page garde {
+  @right-bottom {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+}
+
+@page garde:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page garde:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page sommaire {
+  @right-bottom {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+}
+
+@page sommaire:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page sommaire:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page blanc {
+  padding-left: 0;
+  @right-bottom {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right-corner {
+    content: none;
+  }
+}
+
+@page blanc:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page blanc:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page encart {
+  background-color: #fff;
+  @right-bottom {
+    margin-top: 76mm;
+    margin-left: 5mm;
+    color: #000;
+  }
+  @bottom-right {
+    color: #000;
+  }
+}
+
+@page encart:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page encart:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page image:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  background-color: #fff;
+}
+
+@page image:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  background-color: #fff;
+}
+
+@page image {
+  padding-left: 0;
+  background-color: #fff;
+  @bottom-left {
+    color: #000;
+  }
+  @bottom-right {
+    color: #000;
+  }
+  @right-bottom {
+    color: #000;
+  }
+  @left-bottom {
+    color: #000 !important;
+    margin-left: 5mm;
+  }
+}
+
+@page debut:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @bottom-right {
+    content: counter(page);
+    font-family: "Fake Receipt", serif;
+    font-size: 17pt;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: top;
+    text-align: right;
+  }
+  @right-bottom {
+    content: "Instruments for Becoming";
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 100mm;
+    transform: rotate(-90deg);
+  }
+  @top-left {
+    content: "AVANT-PROPOS";
+    font-family: "Fake Receipt", serif;
+    font-size: 7pt;
+    margin-left: 0;
+    text-align: left;
+    width: 105mm;
+  }
+}
+
+@page debut:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @bottom-left {
+    content: counter(page);
+    font-family: "Fake Receipt", serif;
+    font-size: 17pt;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: top;
+    text-align: left;
+  }
+  @left-bottom {
+    content: "Instruments for Becoming";
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 100mm;
+    transform: rotate(-90deg);
+  }
+  @top-right {
+    content: "AVANT-PROPOS";
+    font-family: "Fake Receipt", serif;
+    font-size: 7pt;
+    margin-right: 0;
+    text-align: right;
+    width: 105mm;
+  }
+}
+
+@page partie {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+  margin: 0;
+  padding: 0;
+  @right-bottom {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right-corner {
+    content: none;
+  }
+}
+
+@page ifbPlate {
+  size: 148.5mm 210mm;
+  margin: 0;
+  padding: 0;
+  marks: none;
+  bleed: 3mm;
+  /* Light book: true black wells; dark theme overrides in ifb-print-theme-dark.css */
+  background-color: #000;
+  @right-bottom {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right-corner {
+    content: none;
+  }
+}
+
+@page imgFull {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+  margin: 0;
+  background-color: #fff;
+  @right-bottom {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+  @bottom-left-corner {
+    content: none;
+  }
+  @bottom-right-corner {
+    content: none;
+  }
+}
+
+@page imgTuto {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+  padding-left: 0;
+  @left-bottom {
+    color: #000;
+  }
+  @bottom-left {
+    color: #000;
+  }
+  @right-bottom {
+    margin-top: 72mm;
+    margin-left: 3mm;
+  }
+  @bottom-right {
+  }
+}
+
+@page imgTuto:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page imgTuto:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page circuit:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @left-bottom {
+    content: string(partie);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 46mm;
+    vertical-align: top;
+    width: 80mm;
+    transform: rotate(-90deg);
+    color: #000;
+  }
+  @bottom-left {
+    color: #000;
+  }
+  @left-top {
+    content: "LE CIRCUIT";
+    font-family: "Fake Receipt", serif;
+    font-size: 8pt;
+    transform: rotate(-90deg);
+    color: #000;
+    vertical-align: top;
+    justify-content: flex-end !important;
+    text-align: right;
+    position: absolute;
+    top: 28mm;
+    left: 0;
+  }
+}
+
+@page circuit:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @left-bottom {
+    content: string(partie);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 46mm;
+    vertical-align: top;
+    width: 80mm;
+    transform: rotate(-90deg);
+    color: #000;
+  }
+  @bottom-left {
+    color: #000;
+  }
+  @left-top {
+    content: "LE CIRCUIT";
+    font-family: "Fake Receipt", serif;
+    font-size: 8pt;
+    transform: rotate(-90deg);
+    color: #000;
+    vertical-align: top;
+    justify-content: flex-end !important;
+    text-align: right;
+    position: absolute;
+    top: 28mm;
+    left: 0;
+  }
+}
+
+@page circuitTexte {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+  padding-left: 0;
+  @left-bottom {
+    color: #000;
+  }
+  @bottom-left {
+    color: #000;
+  }
+  @right-bottom {
+    margin-top: 72mm;
+    margin-left: 3mm;
+    color: #000;
+  }
+  @bottom-right {
+    color: #000;
+  }
+}
+
+@page circuitTexte:right {
+  margin: 5mm 5mm 5mm 15mm;
+}
+
+@page circuitTexte:left {
+  margin: 5mm 15mm 5mm 5mm;
+}
+
+@page code:right {
+  margin: 5mm 5mm 5mm 15mm;
+  background-color: #fff;
+  @bottom-left {
+    color: #000;
+    margin-left: 5mm;
+  }
+  @bottom-right {
+    color: #000;
+  }
+  @right-bottom {
+    color: #000;
+  }
+  @left-bottom {
+    color: #000;
+  }
+}
+
+@page code:left {
+  margin: 5mm 15mm 5mm 5mm;
+  background-color: #fff;
+  @bottom-left {
+    color: #000;
+    margin-left: 5mm;
+  }
+  @bottom-right {
+    color: #000;
+  }
+  @right-bottom {
+    color: #000;
+  }
+  @left-bottom {
+    color: #000;
+  }
+}
+
+@page :blank {
+  @right-bottom {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+  @bottom-left-corner {
+    content: none;
+  }
+  @bottom-right-corner {
+    content: none;
+  }
+}
+
+/* IFB: Annex / back matter folios + running string(partie) on both sides — wins over
+   generic @page:right string(projet) for pages with page: annexe. Keep at end of file. */
+@page annexe:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @bottom-right {
+    content: none;
+  }
+  @right-bottom {
+    content: string(partie);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 100mm;
+    transform: rotate(-90deg);
+  }
+  @left-bottom {
+    content: none;
+  }
+}
+
+@page annexe:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @bottom-left {
+    content: none;
+  }
+  @left-bottom {
+    content: string(partie);
+    font-family: "Elaine", serif;
+    font-size: 7pt;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 3mm;
+    margin-top: 72mm;
+    vertical-align: top;
+    width: 80mm;
+    transform: rotate(-90deg);
+  }
+  @right-bottom {
+    content: none;
+  }
+}
+
+/* IFB: About the author — annexe folios, no running string(partie) from references. */
+@page ifb-author:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @bottom-right {
+    content: none;
+  }
+  @right-bottom {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+}
+
+@page ifb-author:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @bottom-left {
+    content: none;
+  }
+  @left-bottom {
+    content: none;
+  }
+  @right-bottom {
+    content: none;
+  }
+}
+
+/*
+ * Authority layer (last in file): wins over livre-print-base.css legacy 155×205 mm
+ * and bleed: 5 mm. Trim 148.5×210 mm, expert bleed 3 mm on all page types.
+ */
+@page partie,
+@page ifbPlate,
+@page imgFull {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+}
+
+@page titre,
+@page garde,
+@page sommaire,
+@page blanc,
+@page encart,
+@page image,
+@page debut,
+@page circuit,
+@page circuitTexte,
+@page code,
+@page imgTuto,
+@page annexe,
+@page ifb-author {
+  size: 148.5mm 210mm;
+  bleed: 3mm;
+  marks: none;
+}
+
+@media print {
+  html.ifb-print-root {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .pagedjs_page,
+  .pagedjs_pagebox,
+  .pagedjs_area,
+  .pagedjs_page_content {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Folios sit in the 5 mm bottom margin — keep inside the safety zone. */
+  @page:right {
+    @bottom-right {
+      padding-bottom: 0;
+    }
+  }
+
+  @page:left {
+    @bottom-left {
+      padding-bottom: 0;
+    }
+  }
+}

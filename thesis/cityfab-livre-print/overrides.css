@@ -1,0 +1,1217 @@
+/* ------------------------------------------------------------------------ */
+/* Instruments for Becoming — overrides on top of livre-print-base.css      */
+/* ------------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "IFB Acidic";
+  src: url("../fonts/Acidic.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Dotrice";
+  src: url("../fonts/dotrice.regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Goal: keep Cityfab's typographic system, but switch off the tutorial-doc */
+/* idioms that don't apply to a thesis (auto bullet on every paragraph,     */
+/* component pictograms, code/circuit pages, etc.).                         */
+/* ------------------------------------------------------------------------ */
+
+/*
+ * Greyscale palette (plan §7): livre-print-base.css replaces former Cityfab
+ * #339966 → #3a3a3a and #ff8080 → #ababab. Tokens below document intent only.
+ */
+:root {
+  --ifb-accent-text: #000;
+  --ifb-accent-fill: #454545;
+  --ifb-muted-rule: #bdbdbd;
+  /* Print&Bind A5 interior: 15 mm gutter + 5 mm fore/top/bottom → 128 mm text block */
+  --ifb-pb-trim-w: 148.5mm;
+  --ifb-pb-gutter: 15mm;
+  --ifb-pb-safe: 5mm;
+  --ifb-pb-content-w: calc(var(--ifb-pb-trim-w) - var(--ifb-pb-gutter) - var(--ifb-pb-safe));
+  /* Same content column for part openers (.partie_droite) and chapter blocks (.projet) */
+  --ifb-opener-column-width: var(--ifb-pb-content-w);
+  /* Wider measure → longer lines → fewer line breaks/pages for fixed wording. */
+  --ifb-body-max-width: 100mm;
+  --ifb-chapter-title-font: "Dotrice", "IFB Acidic", serif;
+  --ifb-chapter-title-size-max: 36pt;
+  --ifb-chapter-title-size-min: 10pt;
+  --ifb-chapter-title-outer: 1.5mm;
+  --ifb-chapter-title-pad-block: 6mm;
+  /* Up to half the trim sheet for the title block (vertical-rl columns). */
+  --ifb-chapter-title-col-max-h: 105mm;
+  --ifb-chapter-title-max-spread: 74mm;
+  --ifb-chapter-fit-scale: 1;
+  /* Gap between body paragraphs (margin-block; collapses between adjacent <p>). */
+  --ifb-paragraph-spacing: 0.9em;
+  /* Body + bibliography line-height (p, .ressource). */
+  --ifb-body-leading: calc(14.72pt + 1px);
+  /* Glossary: single column; one paragraph per definition (nested multicol fought Paged.js preview). */
+  --ifb-glossary-leading: calc(14.72pt + 1px);
+}
+
+/* --- Black-only body & Cityfab components that used charcoal (#3a3a3a) ----- */
+body {
+  color: #000 !important;
+}
+
+h1,
+h2,
+h3,
+h5,
+h6 {
+  color: #000 !important;
+}
+
+p.intro {
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+.type {
+  color: #000 !important;
+}
+
+.fonction {
+  color: #000 !important;
+  background-color: #ddd !important;
+}
+
+.code {
+  background-color: #ececec !important;
+  color: #000 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+figure:nth-child(even) {
+  border-top-color: #000 !important;
+}
+
+@media print {
+  .pagedjs_pages {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-wrap: unset !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    justify-content: unset !important;
+    box-sizing: border-box !important;
+  }
+
+  .pagedjs_first_page {
+    margin-left: 0 !important;
+  }
+
+  .pagedjs_pages
+    > .pagedjs_page:last-child:nth-child(odd):not(.pagedjs_first_page) {
+    margin-right: 0 !important;
+  }
+}
+
+/* --- Body paragraphs: drop the tutorial bullet "‣ " from every <p> ------ */
+/* Cityfab's base CSS adds `p::before { content: "‣ " }` for the manual      */
+/* style. Thesis prose reads better without that.                            */
+p::before {
+  content: none !important;
+}
+
+/* But keep a cleaner reading rhythm: */
+p {
+  text-indent: 0 !important;
+  width: auto !important;
+  max-width: var(--ifb-body-max-width);
+  margin-left: 0 !important;
+  margin-block-start: var(--ifb-paragraph-spacing) !important;
+  margin-block-end: var(--ifb-paragraph-spacing) !important;
+  color: #000 !important;
+  line-height: var(--ifb-body-leading) !important;
+  hyphens: none;
+  -webkit-hyphens: none;
+  orphans: 3;
+  widows: 3;
+  text-align: left;
+}
+
+/* Headings: browser hyphenation off; Hypher must not run on these (see book.html). */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  hyphenate-character: "" !important;
+}
+
+/* Chapter subheads (h4): match body paragraph measure (.projet title box uses its
+   own margin; section h4s sit in the prose flow — same left edge + width as p). */
+h4 {
+  font-family: "Elaine", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  color: #000 !important;
+  width: auto !important;
+  max-width: var(--ifb-body-max-width) !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  margin-top: 5mm !important;
+  margin-bottom: 4mm !important;
+  padding-left: 0 !important;
+}
+
+/* h4 inside chapter opener box — same measure as flow paragraphs */
+.projet h4,
+.projet .bloc1 h4 {
+  width: auto !important;
+  max-width: var(--ifb-body-max-width) !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* --- References: bibliography blocks ------------------------------------ */
+/* Cityfab `.ressource` defaults to monospace on child spans; thesis refs are */
+/* continuous prose blocks — match body typography (Elaine + body size/rhythm). */
+.ressource {
+  margin-left: 5mm !important;
+  text-indent: -5mm !important;
+  margin-bottom: 1.8mm !important;
+  font-family: 'Elaine' !important;
+  font-size: 11pt !important;
+  line-height: var(--ifb-body-leading) !important;
+  hyphens: none;
+  -webkit-hyphens: none;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  orphans: 2;
+  widows: 2;
+  text-align: left;
+}
+
+.ressource a {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+.ressource i,
+.ressource em {
+  font-family: inherit !important;
+}
+
+.ressource > span {
+  font-family: 'Elaine' !important;
+  letter-spacing: normal !important;
+}
+
+.ressource::before {
+  content: "" !important;
+}
+
+/* --- Sub-section headings (h5) inside chapters --------------------------- */
+/* Word sub-sections → h5: Elaine, one step smaller than section h4. */
+h5 {
+  margin-left: 0 !important;
+  text-decoration: none !important;
+  font-family: "Elaine", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14pt !important;
+  letter-spacing: normal !important;
+  text-transform: lowercase;
+  width: auto !important;
+  max-width: var(--ifb-body-max-width) !important;
+  margin-top: 6mm !important;
+  margin-bottom: 2mm !important;
+  page-break-after: avoid;
+}
+
+/* --- Hide tutorial-only artefacts not present in the thesis ------------- */
+/* These selectors only hide things that AREN'T in the thesis source, so it */
+/* is safe; they're listed defensively in case someone pastes Cityfab demo   */
+/* HTML by accident.                                                        */
+.led, .bouton, .resistance, .potentiometre, .piezo, .photoresistance,
+.tilt, .condensateur, .servo, .moteurcc, .l293d, .bmp, .lcd,
+.temperature, .dht, .stepper, .shell, .neopixel, .gps,
+.schema, pre.command, .img_part {
+  display: none !important;
+}
+
+/* --- Covers: centred column, Fake Receipt (.garde), authored casing --------- */
+.garde.garde-cover,
+.garde.garde-back-cover {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 94mm !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 12mm !important;
+  margin-bottom: 2mm !important;
+  padding-left: 4mm !important;
+  padding-right: 4mm !important;
+  text-align: center !important;
+  text-transform: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.garde.garde-cover {
+  page: garde !important;
+  position: relative !important;
+  min-height: 185mm;
+  margin-top: 0 !important;
+}
+
+.garde.garde-cover > .garde-cover-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + 4mm), calc(-50% - 6mm));
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.garde-cover-inner,
+.garde-back-cover-inner {
+  width: 100%;
+  max-width: 88mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.garde-cover-title {
+  font-family: inherit;
+  font-size: 21pt;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  margin: 0 0 7mm;
+}
+
+.garde-cover-subtitle {
+  font-size: 10.5pt;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0 0 9mm;
+}
+
+hr.garde-cover-rule {
+  border: none;
+  border-top: 1px solid #d6d6d6;
+  width: 36%;
+  max-width: 42mm;
+  margin: 0 auto 9mm;
+}
+
+.garde-cover-meta {
+  font-size: 9pt;
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+}
+
+.garde.garde-cover .garde-cover-title,
+.garde.garde-cover .garde-cover-subtitle,
+.garde.garde-cover .garde-cover-meta {
+  text-align: center;
+  width: 100%;
+}
+
+.garde.garde-cover .garde-cover-author {
+  font-size: 16px;
+}
+
+.garde-cover-meta span {
+  display: block;
+}
+
+.garde-cover-meta span + span {
+  margin-top: 1.8mm;
+}
+
+.garde-cover-meta .garde-cover-year {
+  margin-top: 5mm;
+}
+
+.garde-back-cover {
+  page: garde !important;
+}
+
+/* --- TOC (.part): single column, minimal vertical spacing ------------------ */
+.part {
+  column-count: 1 !important;
+  width: 100% !important;
+  max-width: var(--ifb-opener-column-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+.part > span {
+  font-family: "Elaine", sans-serif !important;
+  font-size: 10pt !important;
+  text-transform: uppercase;
+  margin-top: 2.5mm !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.08 !important;
+}
+
+.part > span > a {
+  font-family: "Elaine", sans-serif !important;
+}
+
+/* Page numbers via Cityfab ::before counters */
+.part > span > a::before {
+  font-family: "Fake Receipt", serif !important;
+  font-size: 10pt !important;
+  font-style: normal !important;
+}
+
+.part > span > a {
+  display: block;
+  color: inherit !important;
+  text-decoration: none;
+}
+
+.part > span:first-of-type {
+  margin-top: 0 !important;
+}
+
+.part a.proj {
+  font-family: "Elaine", sans-serif !important;
+  font-size: 8.5pt !important;
+  margin-bottom: 0.7mm !important;
+  margin-left: 0 !important;
+  line-height: 1.08 !important;
+}
+
+.part a.proj::before {
+  font-family: "Fake Receipt", serif !important;
+  font-size: 8.5pt !important;
+  font-style: normal !important;
+}
+
+.part a.proj > span {
+  font-family: "Elaine", sans-serif !important;
+  line-height: inherit !important;
+}
+
+/* TOC heading — top of .part, Fake Receipt (Cityfab #sommaire was vertical “CONTENTS”) */
+#sommaire {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  font-family: "Fake Receipt", serif !important;
+  font-style: normal !important;
+  font-size: 13pt !important;
+  font-weight: normal !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  text-align: center !important;
+  margin: 0 0 5mm !important;
+  padding: 0 !important;
+  color: #000 !important;
+}
+
+/* --- Pre-TOC (roman folios) + prelims (declaration / dedication / …) ----- */
+/* After cover: start at page 1 so first roman folio is i (reset 0 printed as “0” in Paged.js). */
+.ifb-front-roman {
+  counter-reset: page 1;
+}
+
+/* Front-matter blanks: no folio; do not advance `page` so prelims stay i, ii, … (Paged.js honours
+   element `counter-increment: page 0`). Body `.page_blanche` still increments — folio hidden via @page blanc. */
+.page_blanche.ifb-front-blank {
+  page: blanc !important;
+  counter-increment: page 0;
+}
+
+/* @page blanc inherits @page:right / :left folios from printenbind — clear them. */
+@page blanc:right {
+  @bottom-right {
+    content: none !important;
+  }
+}
+
+@page blanc:left {
+  @bottom-left {
+    content: none !important;
+  }
+}
+
+/* Break-before right / other empty leaves: no folio (printenbind :blank omitted bottom boxes). */
+@page :blank {
+  @bottom-right {
+    content: none !important;
+  }
+  @bottom-left {
+    content: none !important;
+  }
+}
+
+/* Own named pages avoid prose running headers; mirrored margins match printenbind-a5. */
+@page preliminary:right {
+  margin: 5mm 5mm 5mm 15mm;
+  padding: 0;
+  @right-bottom { content: none; }
+  @left-bottom { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right {
+    content: counter(page, lower-roman);
+    font-family: "Elaine Sans ExtraLight Italic", ui-sans-serif, sans-serif;
+    font-size: 18pt;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: top;
+    text-align: right;
+  }
+}
+
+@page preliminary:left {
+  margin: 5mm 15mm 5mm 5mm;
+  padding: 0;
+  @right-bottom { content: none; }
+  @left-bottom { content: none; }
+  @bottom-right { content: none; }
+  @bottom-left {
+    content: counter(page, lower-roman);
+    font-family: "Elaine Sans ExtraLight Italic", ui-sans-serif, sans-serif;
+    font-size: 18pt;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: top;
+    text-align: left;
+  }
+}
+
+.preface-page {
+  page: preliminary !important;
+  display: block;
+}
+
+/* Table of contents: no folio (sommaire @page); Arabic count starts at chapter 1. */
+.part.ifb-toc-start {
+  page: sommaire !important;
+  break-before: right;
+  page-break-before: right !important;
+}
+
+.projet:first-of-type {
+  counter-reset: page 1 !important;
+}
+
+/* Prelims: undo body-paragraph measure so full column layouts can apply */
+section.copyright-page p,
+section.acknowledgements-page p {
+  max-width: none !important;
+  width: auto !important;
+}
+
+.preface-title {
+  font-family: 'Fake Receipt';
+  font-size: 13pt;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 4mm;
+  margin-bottom: 6mm;
+  page-break-after: avoid;
+}
+
+.preface-page p {
+  margin-bottom: 3mm !important;
+}
+
+.preface-page p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* --- Copyright: full slab in Fake Receipt, no frame/borders ---------------- */
+section.copyright-page {
+  max-width: var(--ifb-opener-column-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 2mm !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent;
+  box-decoration-break: slice;
+  -webkit-box-decoration-break: slice;
+  /* Front matter: start Copyright on a fresh page (after acknowledgements, etc.) */
+  break-before: page;
+  page-break-before: always;
+}
+
+section.copyright-page .preface-title {
+  font-family: 'Fake Receipt', serif !important;
+  font-size: 15pt !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  margin-top: 0 !important;
+  margin-bottom: 5mm !important;
+  padding: 0 !important;
+  border: none !important;
+  text-align: left;
+  color: var(--ifb-accent-text) !important;
+}
+
+section.copyright-page p {
+  font-family: 'Fake Receipt', serif !important;
+  font-size: 10pt !important;
+  line-height: 1.48 !important;
+  letter-spacing: 0.03em !important;
+  text-align: left !important;
+  color: #000 !important;
+  text-indent: 0 !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  margin-bottom: 3mm !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+section.copyright-page .ifb-copyright-colophon {
+  margin-top: 8mm;
+  padding-top: 4mm;
+  border-top: 0.25pt solid var(--ifb-accent-text, #3a3a3a);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+section.copyright-page .ifb-colophon-title {
+  font-size: 11pt !important;
+  letter-spacing: 0.12em !important;
+  margin-top: 0 !important;
+  margin-bottom: 3.5mm !important;
+}
+
+section.copyright-page .ifb-copyright-colophon p {
+  font-size: 8.5pt !important;
+  line-height: 1.42 !important;
+  margin-bottom: 2.5mm !important;
+}
+
+section.copyright-page .ifb-copyright-colophon p:last-child {
+  margin-bottom: 0 !important;
+}
+
+section.copyright-page .ifb-copyright-colophon a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+section.copyright-page .ifb-copyright-colophon code {
+  font-family: "Elaine Sans ExtraLight Italic", ui-sans-serif, sans-serif;
+  font-size: 0.95em;
+  letter-spacing: 0.02em;
+}
+
+/* --- Acknowledgements: Fake Receipt throughout, no rules or inset boxes --- */
+section.acknowledgements-page,
+#ifb-acknowledgements {
+  break-before: page !important;
+  page-break-before: always !important;
+  max-width: var(--ifb-opener-column-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+section.acknowledgements-page .preface-title {
+  font-family: 'Fake Receipt', serif !important;
+  font-size: 13pt !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  margin-bottom: 4mm !important;
+  margin-top: 1mm !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--ifb-accent-text) !important;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+section.acknowledgements-page p {
+  font-family: 'Fake Receipt', serif !important;
+  font-size: 8.5pt !important;
+  line-height: 1.42 !important;
+  letter-spacing: 0.03em !important;
+  text-align: left !important;
+  color: #000 !important;
+  margin-bottom: 3mm !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  border: none !important;
+  text-indent: 0 !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  orphans: 2;
+  widows: 2;
+  /* Short lines from Word: keep each block from splitting with one dangling line before a page turn */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+section.acknowledgements-page p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* --- Covers: differentiate front vs back -------------------------------- */
+.garde-cover {
+  page-break-after: auto;
+}
+
+.garde-back-cover {
+  page: garde !important;
+}
+
+/* --- Glossary: single column; body starts after the partie spread (not under the h2 panel). --- */
+.glossaire {
+  font-size: 11pt !important;
+  line-height: var(--ifb-glossary-leading) !important;
+  column-count: 1 !important;
+  columns: 1 !important;
+  break-before: page !important;
+  page-break-before: always !important;
+  clear: both !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: var(--ifb-opener-column-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media print {
+  .glossaire {
+    column-count: 1 !important;
+    columns: 1 !important;
+  }
+}
+
+.glossaire .lettre {
+  line-height: 1 !important;
+  margin-top: 1em !important;
+  margin-bottom: 0em !important;
+  margin-left: 0 !important;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.glossaire .lettre:first-of-type {
+  margin-top: 0 !important;
+}
+
+.glossaire .lettre + .entree {
+  break-before: avoid;
+  page-break-before: avoid;
+}
+
+/*
+ * Term pill — Cityfab `.entree > span` does not apply; print: solid strokes ≥ ~0.75pt.
+ */
+.glossaire .ifb-glossary-term {
+  display: block !important;
+  border-radius: 100px !important;
+  border-left: 0.75pt solid #000 !important;
+  border-right: 0.75pt solid #000 !important;
+  margin-left: -2mm !important;
+  margin-bottom: 2mm !important;
+  padding: 1mm 2mm !important;
+  text-align: center !important;
+  width: fit-content !important;
+  max-width: none !important;
+  font-size: 11pt !important;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
+  break-after: avoid !important;
+  page-break-after: avoid !important;
+  -webkit-column-break-after: avoid !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  white-space: nowrap !important;
+}
+
+/* Definition wrapper: full width; avoids nested CSS columns × Paged columnization bugs */
+.glossaire .ifb-glossary-def-columns {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.glossaire .ifb-glossary-def-prose {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  text-indent: 0 !important;
+  text-align: left !important;
+  hyphenate-character: "";
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  font-weight: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  counter-increment: none !important;
+}
+
+/* livre-print-base @media print p { ::before † } + width/margin breaks glossary layout */
+.glossaire .ifb-glossary-def-prose::before {
+  content: none !important;
+}
+
+.glossaire .entree {
+  line-height: var(--ifb-glossary-leading) !important;
+  margin-bottom: var(--ifb-glossary-leading) !important;
+  padding-left: 0 !important;
+  orphans: 2;
+  widows: 2;
+}
+
+.glossaire .entree span.SpellE,
+.glossaire .entree span.GramE {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
+  color: inherit !important;
+}
+
+/* --- Part opener + chapter block: identical outer width (Cityfab spread) --- */
+.partie_droite,
+.projet {
+  box-sizing: border-box !important;
+  width: var(--ifb-opener-column-width) !important;
+  max-width: var(--ifb-opener-column-width) !important;
+  min-width: var(--ifb-opener-column-width) !important;
+  flex: 0 0 var(--ifb-opener-column-width) !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  margin-left: 10mm !important;
+  margin-right: 0 !important;
+}
+
+/* Back matter (references): page name + folios / running headers are defined in
+   printenbind-a5.css (last linked) so @page annexe:* margin boxes win over projet. */
+.ifb-appendix-flow {
+  page: annexe !important;
+}
+
+/* Back matter prelims: Arabic folios (annexe), not roman preliminary folios. */
+.preface-page.acknowledgements-page,
+.preface-page.copyright-page {
+  page: annexe !important;
+}
+
+/* Back matter part openers: same @page partie spread as Parts I–IV (texture + panel heights). */
+.partie_gauche.ifb-backmatter-opener,
+.partie_gauche:has(+ .partie_droite + .glossaire),
+.partie_gauche:has(+ .partie_droite + .ifb-references-flow),
+.partie_gauche:has(+ .partie_droite > h2[id="_Toc230010686"]) {
+  page: partie !important;
+  width: 165mm !important;
+  height: 225mm !important;
+  min-height: 225mm !important;
+  max-height: none !important;
+  page-break-after: always !important;
+}
+
+.partie_droite.ifb-backmatter-opener,
+.partie_droite:has(+ .glossaire),
+.partie_droite:has(+ .ifb-references-flow),
+.partie_droite:has(> h2[id="_Toc230010686"]) {
+  page: partie !important;
+  height: 195mm !important;
+  min-height: 195mm !important;
+  max-height: none !important;
+}
+
+.partie_droite.ifb-backmatter-opener > h2,
+.partie_droite:has(+ .glossaire) > h2,
+.partie_droite:has(+ .ifb-references-flow) > h2,
+.partie_droite:has(> h2[id="_Toc230010686"]) > h2 {
+  page: partie !important;
+}
+
+.partie_droite {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* --- Part spreads & appendix openers (.partie_droite h2): no soft hyphens ---- */
+/* Cityfab h2: 44pt for ~140mm; thesis column is 128mm (~40pt proportional). Use 36pt for
+   safer wrapping; tune 34–40pt. Block + 100% width keeps the box flush with .partie_droite. */
+.partie_droite h2 {
+  display: block !important;
+  padding: 7mm 0 0 10mm !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  font-size: 36pt !important;
+  line-height: 1.06 !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  hyphenate-character: "";
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  text-wrap: balance;
+  letter-spacing: 0.5px !important;
+}
+
+/* --- Chapter opener: centered column (no cadre rail; frameless .projet) ------ */
+.projet .num,
+.projet .num::before {
+  display: none !important;
+  content: none !important;
+}
+
+.projet {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  height: 197mm !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Chapters after the first: force a titre page — avoids stacking the opener under prose/plates from the prior chapter. */
+.projet ~ .projet {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+
+.projet .bloc1 {
+  width: 100% !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  align-self: stretch !important;
+}
+
+/* Optional preview canvas sits under the title inside .bloc1 */
+.projet .bloc1 canvas.chapter-opener-canvas {
+  display: block;
+  margin-top: 3mm;
+  width: auto;
+  max-width: min(118mm, 92%);
+  height: auto;
+}
+
+.projet h3 {
+  font-family: var(--ifb-chapter-title-font) !important;
+  border: none !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  hyphenate-character: "";
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* Chapter opener (titre page): one vertical line on the fore-edge; foot of type outward. */
+.pagedjs_titre_page .projet {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  height: 210mm !important;
+  min-height: 210mm !important;
+  position: relative !important;
+  align-items: unset !important;
+  justify-content: unset !important;
+  flex-direction: unset !important;
+}
+
+.pagedjs_titre_page .projet .bloc1 {
+  display: block !important;
+  width: auto !important;
+  flex: none !important;
+  align-items: unset !important;
+  align-self: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.pagedjs_titre_page .projet h3 {
+  position: absolute !important;
+  top: var(--ifb-chapter-title-pad-block) !important;
+  bottom: var(--ifb-chapter-title-pad-block) !important;
+  margin-block: auto !important;
+  margin-inline: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: var(--ifb-chapter-title-col-max-h) !important;
+  max-width: var(--ifb-chapter-title-max-spread) !important;
+  text-align: start !important;
+  align-self: auto !important;
+  white-space: normal !important;
+  writing-mode: vertical-rl !important;
+  text-orientation: mixed !important;
+  font-size: var(--ifb-chapter-title-size-max) !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.03em !important;
+  text-wrap: wrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  hyphenate-character: "" !important;
+  text-transform: lowercase !important;
+  transform-origin: center center;
+  overflow: visible !important;
+}
+
+.pagedjs_titre_page .projet h3 .ifb-chapter-title-word {
+  white-space: nowrap !important;
+  display: inline !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+.pagedjs_titre_page.pagedjs_right_page .projet h3 {
+  left: var(--ifb-chapter-title-outer) !important;
+  right: auto !important;
+  transform: rotate(180deg) scale(var(--ifb-chapter-fit-scale, 1)) !important;
+}
+
+.pagedjs_titre_page.pagedjs_left_page .projet h3 {
+  right: var(--ifb-chapter-title-outer) !important;
+  left: auto !important;
+  transform: scale(var(--ifb-chapter-fit-scale, 1)) !important;
+}
+
+/* --- Paged.js light preview: flat paper -----------------------------------------
+   livre-print-base @media screen gives .pagedjs_page a repeating baseline gradient
+   (white + hairline via --pagedjs-baseline-color). Chapter titres were flattened,
+   body pages stayed striped — visibly different sheets vs titre + vs inner chrome.
+   Use solid paper everywhere in light preview; exclude partie (fond-parties @page bg).
+   Keep at root (Polisher often drops other sheets’ @media screen). Duplicated in
+   ifb-screen-spread.css (media=screen link). */
+html.ifb-print-root--light .pagedjs_page:not(.pagedjs_partie_page) {
+  --pagedjs-baseline-color: transparent !important;
+  background-color: var(--color-paper, #ffffff) !important;
+  background-image: none !important;
+}
+
+html.ifb-print-root--light
+  .pagedjs_titre_page
+  > .pagedjs_sheet
+  > .pagedjs_pagebox
+  > .pagedjs_area {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.ifb-print-root--light .pagedjs_titre_page .pagedjs_page_content,
+html.ifb-print-root--light .pagedjs_titre_page .pagedjs_page_content > div {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* -- IFB: Paged.js vs Prince page floats (thesis plan E) ------------------ */
+/* Prince: float top unless-fit, snap-block(), float-reference page, inside/outside. */
+/* Paged.js in this repo: treat those as unsupported until a dedicated fragment */
+/* proves otherwise; use plate break rules + side floats for body as fallbacks. */
+
+/* --- Section closing: "Materials:" lines (short endings) -------------------- */
+hr.ifb-closing-rule {
+  border: none;
+  border-top: 0.25pt solid #ccc;
+  margin: 10mm 0 4mm !important;
+  width: 33% !important;
+  max-width: var(--ifb-body-max-width) !important;
+  margin-left: 0 !important;
+  height: 0;
+}
+
+p.ifb-materials-line {
+  margin-top: 0 !important;
+}
+
+/* --- About the author (back matter, @page annexe via .ifb-appendix-flow) -------- */
+section.ifb-author-page .preface-title {
+  font-family: 'Fake Receipt', serif !important;
+  font-size: 13pt !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  margin-bottom: 2.5mm !important;
+  margin-top: 1mm !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--ifb-accent-text) !important;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+section.ifb-author-page {
+  /* Own @page (printenbind-a5.css): folios only — not string(partie) from references h2 */
+  page: ifb-author !important;
+  string-set: partie "";
+  margin-top: 0;
+  padding-top: 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+section.ifb-author-page p.ifb-author-bio {
+  font-family: "Fake Receipt", serif !important;
+  max-width: var(--ifb-body-max-width) !important;
+  width: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  text-align: left !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+.ifb-author-links {
+  display: grid;
+  /* 6 links → 3×2: shorter block so the about page stays one sheet */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 5mm;
+  row-gap: 4mm;
+  margin-top: 5mm;
+  max-width: calc(var(--ifb-body-max-width) + 28mm);
+  width: 100%;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.ifb-author-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.ifb-author-qr {
+  width: 17mm;
+  height: 17mm;
+  margin: 0 0 2mm 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.ifb-author-qr canvas,
+.ifb-author-qr table {
+  display: none !important;
+}
+
+.ifb-author-qr img {
+  display: block !important;
+  width: 17mm !important;
+  height: 17mm !important;
+  max-width: 17mm !important;
+  max-height: 17mm !important;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.ifb-author-link-label {
+  display: block;
+  font-family: "Elaine", sans-serif !important;
+  font-size: 7pt !important;
+  font-weight: 300 !important;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  line-height: 1.2 !important;
+  color: #6a6a6a !important;
+  margin: 0 0 0.6mm 0 !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+.ifb-author-link-url {
+  display: block;
+  font-family: "Elaine", sans-serif !important;
+  font-size: 7pt !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  color: inherit !important;
+  margin: 0 !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  letter-spacing: -0.01em;
+}
+
+/* --- Print: same part texture as screen (Paged preview quirk fallback) ---------- */
+@media print {
+  html.ifb-print-root--light .pagedjs_pages > .pagedjs_page:has(.partie_gauche),
+  html.ifb-print-root--light .pagedjs_pages > .pagedjs_page:has(.partie_droite) {
+    --pagedjs-baseline-color: transparent !important;
+    background-color: var(--color-paper, #ffffff) !important;
+    background-image: url("./fond-parties.png") !important;
+    background-position: 50% 50% !important;
+    background-size: 200mm 200mm !important;
+    background-repeat: repeat !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  html.ifb-print-root--dark .pagedjs_pages > .pagedjs_page:has(.partie_gauche),
+  html.ifb-print-root--dark .pagedjs_pages > .pagedjs_page:has(.partie_droite) {
+    --pagedjs-baseline-color: transparent !important;
+    background-color: var(--ifb-graphite-flood, #1c1c20) !important;
+    background-image: url("./fond-parties.png") !important;
+    background-position: 50% 50% !important;
+    background-size: 200mm 200mm !important;
+    background-repeat: repeat !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

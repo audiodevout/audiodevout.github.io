@@ -1,0 +1,89 @@
+/**
+ * tokens.css — design tokens for Atharva Gupta portfolio
+ * Typography aligned with thesis: Fake Receipt, Elaine, graphite palette.
+ */
+:root {
+  /* Graphite palette — matches thesis dark theme */
+  --color-bg: #17171d;
+  --color-surface: #28282e;
+  --color-border: #3e3e44;
+  --color-text: #e4e4e4;
+  --color-muted: #5c5c64;
+  --color-accent: #ececec;
+  --color-accent-glacier: var(--color-accent);
+  --color-accent-crimson: var(--color-accent);
+  --color-accent-violet: var(--color-accent);
+  --color-accent-amber: var(--color-accent);
+  --color-accent-cerulean: var(--color-accent);
+  --color-accent-lime: var(--color-accent);
+  --color-accent-saffron: var(--color-accent);
+  --color-accent-magenta: var(--color-accent);
+  --color-accent-graphite: var(--color-accent);
+  --color-lightbox-bg: #17171d;
+  --color-on-dark: #ececec;
+
+  --body-bg: #17171d;
+  --overlay-bg: rgba(23, 23, 29, 0.88);
+
+  /* Typography — thesis fonts */
+  --font-display: 'Fake Receipt', serif;
+  --font-body: 'Elaine', sans-serif;
+  --font-mono: 'Elaine Sans ExtraLight Italic', sans-serif;
+  --font-chapter: 'Dotrice', serif;
+  --font-size-xs: clamp(0.65rem, 1vw, 0.75rem);
+  --font-size-sm: clamp(0.8rem, 1.2vw, 0.9rem);
+  --font-size-base: 1rem;
+  --font-size-lg: clamp(1.1rem, 2vw, 1.35rem);
+  --font-size-xl: clamp(1.5rem, 3vw, 2.25rem);
+  --font-size-2xl: clamp(2.25rem, 5vw, 4rem);
+  --font-size-3xl: clamp(3rem, 8vw, 6rem);
+  --line-height-body: 1.75;
+  --line-height-tight: 1.2;
+  --letter-spacing-stamp: 0.18em;
+  --letter-spacing-wide: 0.12em;
+
+  /* Spacing — 4px grid */
+  --space-1: 2px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Marquee — unified speed for all marquees */
+  --marquee-duration: 160s;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Z-index (modal above nav so lightbox is not covered) */
+  --z-base: 10;
+  --z-overlay: 100;
+  --z-nav: 300;
+  --z-modal: 400;
+
+  /* Scrollbar — graphite, minimal */
+  --scrollbar-track: #17171d;
+  --scrollbar-thumb: #3e3e44;
+  --scrollbar-thumb-hover: #5c5c64;
+}
+
+/* Light mode — warm off-white variant */
+[data-theme="light"] {
+  --color-bg: #e8e6e1;
+  --color-surface: #f4f2ed;
+  --color-border: #c8c4bc;
+  --color-text: #1a1a1a;
+  --color-muted: #5c5c64;
+  --color-accent: #404040;
+  --body-bg: #e8e6e1;
+  --overlay-bg: rgba(0, 0, 0, 0.35);
+  --scrollbar-track: #e8e6e1;
+  --scrollbar-thumb: #c8c4bc;
+  --scrollbar-thumb-hover: #5c5c64;
+}
