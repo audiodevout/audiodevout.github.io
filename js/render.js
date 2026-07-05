@@ -39,24 +39,23 @@
     return (Array.isArray(imgs) && imgs.length > 0) ? imgs[0] : null;
   }
 
-  /** Convert any project to the shape lightbox expects */
-  function toLightboxItem(item) {
-    if (!item) return null;
-    return {
-      title: item.title || '',
-      category: item.category || '',
-      fullDescription: item.fullDescription || item.description || '',
-      images: item.images || [],
-      videos: item.videos || [],
-      urls: item.urls || {},
-      medium: item.medium || '',
-      themes: item.themes || '',
-      bandcampTracks: item.bandcampTracks || null
-    };
+  function workHref(item) {
+    var lookup = window.portfolioWorkLookup;
+    if (lookup && typeof lookup.resolveWorkHref === 'function') {
+      return lookup.resolveWorkHref(item);
+    }
+    if (item && item.urls && item.urls.page) return item.urls.page;
+    if (item && item.id) {
+      if (window.location.protocol === 'file:') {
+        return './work/' + encodeURIComponent(item.id) + '/index.html';
+      }
+      return './work/' + encodeURIComponent(item.id) + '/';
+    }
+    return '';
   }
 
-  /** Build a text marquee with clickable titles; each click opens lightbox with that item */
-  function createClickableMarquee(items, openLightbox, options) {
+  /** Build a text marquee with linked titles */
+  function createClickableMarquee(items, options) {
     if (!items || items.length === 0) return null;
     options = options || {};
     var sep = options.separator !== undefined ? options.separator : ' // ';
@@ -66,19 +65,15 @@
     content.className = 'marquee-content marquee-content--clickable';
 
     function addItem(it) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'marquee-item';
-      btn.textContent = it.title || 'Untitled';
+      var link = document.createElement('a');
+      link.className = 'marquee-item';
+      link.href = workHref(it);
+      link.textContent = it.title || 'Untitled';
       var thumb = firstImage(it);
       if (thumb) {
-        btn.setAttribute('data-preview-src', thumb);
+        link.setAttribute('data-preview-src', thumb);
       }
-      var lbItem = toLightboxItem(it);
-      btn.addEventListener('click', function () {
-        if (openLightbox && lbItem) openLightbox(lbItem);
-      });
-      content.appendChild(btn);
+      content.appendChild(link);
       var span = document.createElement('span');
       span.className = 'marquee-sep';
       span.textContent = sep;
@@ -181,7 +176,7 @@
     return sorted;
   }
 
-  function addLabeledMarquee(container, label, items, openLightbox) {
+  function addLabeledMarquee(container, label, items) {
     if (!items || items.length === 0) return;
     var section = document.createElement('div');
     section.className = 'work-marquee-section';
@@ -189,7 +184,7 @@
     heading.className = 'work-subsection__label';
     heading.textContent = label;
     section.appendChild(heading);
-    var marquee = createClickableMarquee(items, openLightbox);
+    var marquee = createClickableMarquee(items);
     if (marquee) section.appendChild(marquee);
     container.appendChild(section);
   }
@@ -199,9 +194,6 @@
     var container = document.getElementById('marquees-content');
     if (!container) return;
 
-    var openLightbox = window.openLightbox;
-    if (typeof openLightbox !== 'function') openLightbox = null;
-
     container.innerHTML = '';
 
     var installations = dedupeById(data.projects.installations || []);
@@ -210,15 +202,15 @@
     var drawings = dedupeById(data.projects.drawings || []);
     var excludeCategories = ['TouchDesigner Tutorials', 'VISUAL RESEARCH'];
 
-    addLabeledMarquee(container, 'Works', worksItems, openLightbox);
+    addLabeledMarquee(container, 'Works', worksItems);
 
     var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     Object.keys(visualGroups).forEach(function (cat) {
-      if (excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat], openLightbox);
+      if (excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat]);
     });
 
     var soundItems = dedupeById(data.projects.soundInstallations || []);
-    if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems, openLightbox);
+    if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems);
 
     var youtubeItems = [];
     [data.projects.installations, data.projects.performance, data.projects.drawings].filter(Boolean).forEach(function (arr) {
@@ -227,7 +219,7 @@
         if (ytUrl) youtubeItems.push(item);
       });
     });
-    addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems), openLightbox);
+    addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems));
   }
 
   var THESIS_ARCHIVE_ITEM = {
@@ -238,31 +230,24 @@
     urls: { page: './thesis/' }
   };
 
-  function createArchiveListItem(item, openLightbox) {
+  function createArchiveListItem(item) {
     if (!item) return null;
 
-    if (item.urls && item.urls.page) {
-      var link = document.createElement('a');
-      link.className = 'work-list__item work-list__item--link';
-      link.href = item.urls.page;
+    var link = document.createElement('a');
+    link.className = 'work-list__item work-list__item--link';
+    link.href = workHref(item);
 
-      var linkTitle = document.createElement('h3');
-      linkTitle.className = 'work-list__title';
-      linkTitle.textContent = item.title || '';
-      link.appendChild(linkTitle);
+    var linkTitle = document.createElement('h3');
+    linkTitle.className = 'work-list__title';
+    linkTitle.textContent = item.title || '';
+    link.appendChild(linkTitle);
 
-      return link;
-    }
-
-    return createListItem(item, openLightbox);
+    return link;
   }
 
   function renderArchiveSection() {
     var container = document.getElementById('archive-content');
     if (!container) return;
-
-    var openLightbox = window.openLightbox;
-    if (typeof openLightbox !== 'function') openLightbox = null;
 
     var writingItems = dedupeById((data.projects && data.projects.writing) ? data.projects.writing : []);
     var archiveItems = [THESIS_ARCHIVE_ITEM].concat(writingItems);
@@ -273,7 +258,7 @@
     listRoot.className = 'work-list';
 
     archiveItems.forEach(function (item) {
-      var row = createArchiveListItem(item, openLightbox);
+      var row = createArchiveListItem(item);
       if (row) listRoot.appendChild(row);
     });
 
@@ -282,41 +267,28 @@
 
   /* ---------- Home list view (minimal rows) ---------- */
 
-  function createListItem(item, openLightbox) {
+  function createListItem(item) {
     if (!item) return null;
 
-    var article = document.createElement('article');
-    article.className = 'work-list__item';
-    article.setAttribute('role', 'button');
-    article.setAttribute('tabindex', '0');
-    article.dataset.id = item.id || '';
+    var link = document.createElement('a');
+    link.className = 'work-list__item';
+    link.href = workHref(item);
+    link.dataset.id = item.id || '';
 
     var title = document.createElement('h3');
     title.className = 'work-list__title';
     title.textContent = item.title || '';
-    article.appendChild(title);
+    link.appendChild(title);
 
     var listThumb = firstImage(item);
     if (listThumb) {
-      article.setAttribute('data-preview-src', listThumb);
+      link.setAttribute('data-preview-src', listThumb);
     }
 
-    function handleActivate(e) {
-      if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-      if (e) e.preventDefault();
-      if (typeof openLightbox === 'function') {
-        var lbItem = toLightboxItem(item);
-        if (lbItem) openLightbox(lbItem);
-      }
-    }
-
-    article.addEventListener('click', handleActivate);
-    article.addEventListener('keydown', handleActivate);
-
-    return article;
+    return link;
   }
 
-  function addListGroup(listRoot, heading, items, openLightbox) {
+  function addListGroup(listRoot, heading, items) {
     if (!listRoot || !items || items.length === 0) return;
     var group = document.createElement('section');
     group.className = 'work-list__group';
@@ -327,7 +299,7 @@
     group.appendChild(h);
 
     items.forEach(function (item) {
-      var row = createListItem(item, openLightbox);
+      var row = createListItem(item);
       if (row) group.appendChild(row);
     });
 
@@ -337,9 +309,6 @@
   function renderListSection() {
     var container = document.getElementById('list-content');
     if (!container) return;
-
-    var openLightbox = window.openLightbox;
-    if (typeof openLightbox !== 'function') openLightbox = null;
 
     container.innerHTML = '';
 
@@ -352,16 +321,16 @@
     var drawings = dedupeById(data.projects.drawings || []);
     var soundItems = dedupeById(data.projects.soundInstallations || []);
 
-    addListGroup(listRoot, 'Works', worksItems, openLightbox);
+    addListGroup(listRoot, 'Works', worksItems);
 
     if (soundItems.length) {
-      addListGroup(listRoot, 'Sound', soundItems, openLightbox);
+      addListGroup(listRoot, 'Sound', soundItems);
     }
 
     var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
     Object.keys(visualGroups).forEach(function (cat) {
       if (cat === 'VISUAL RESEARCH') return;
-      addListGroup(listRoot, cat, visualGroups[cat], openLightbox);
+      addListGroup(listRoot, cat, visualGroups[cat]);
     });
 
     container.appendChild(listRoot);
@@ -455,28 +424,13 @@
   }
 
   /* ---------- Phase 4: Exhibitions, Writing, About, CV ---------- */
-  function exhibitionToLightboxItem(ex) {
-    return {
-      title: ex.title || '',
-      category: ex.role || '',
-      fullDescription: ex.fullDescription || ex.description || '',
-      date: ex.date || '',
-      location: ex.location || '',
-      venue: ex.venue || '',
-      images: ex.images || [],
-      videos: ex.videos || [],
-      urls: ex.urls || {}
-    };
-  }
-
-  function createExhibitionListItem(ex, openLightbox) {
+  function createExhibitionListItem(ex) {
     if (!ex) return null;
 
-    var article = document.createElement('article');
-    article.className = 'work-list__item work-list__item--exhibition';
-    article.setAttribute('role', 'button');
-    article.setAttribute('tabindex', '0');
-    article.dataset.id = ex.id || '';
+    var link = document.createElement('a');
+    link.className = 'work-list__item work-list__item--exhibition';
+    link.href = workHref(ex);
+    link.dataset.id = ex.id || '';
 
     var line = document.createElement('p');
     line.className = 'work-list__line';
@@ -502,28 +456,17 @@
       line.appendChild(span);
     });
 
-    article.appendChild(line);
+    link.appendChild(line);
 
     var listThumb = firstImage(ex);
     if (listThumb) {
-      article.setAttribute('data-preview-src', listThumb);
+      link.setAttribute('data-preview-src', listThumb);
     }
 
-    function handleActivate(e) {
-      if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-      if (e) e.preventDefault();
-      if (typeof openLightbox === 'function') {
-        openLightbox(exhibitionToLightboxItem(ex));
-      }
-    }
-
-    article.addEventListener('click', handleActivate);
-    article.addEventListener('keydown', handleActivate);
-
-    return article;
+    return link;
   }
 
-  function addExhibitionListGroup(listRoot, heading, items, openLightbox) {
+  function addExhibitionListGroup(listRoot, heading, items) {
     if (!listRoot || !items || items.length === 0) return;
 
     var group = document.createElement('section');
@@ -535,7 +478,7 @@
     group.appendChild(h);
 
     items.forEach(function (ex) {
-      var row = createExhibitionListItem(ex, openLightbox);
+      var row = createExhibitionListItem(ex);
       if (row) group.appendChild(row);
     });
 
@@ -561,8 +504,6 @@
 
     var listRoot = document.createElement('div');
     listRoot.className = 'work-list';
-    var openLightbox = window.openLightbox;
-    if (typeof openLightbox !== 'function') openLightbox = null;
 
     var yearBuckets = [];
     var currentBucket = null;
@@ -577,7 +518,7 @@
     });
 
     yearBuckets.forEach(function (bucket) {
-      addExhibitionListGroup(listRoot, bucket.label, bucket.items, openLightbox);
+      addExhibitionListGroup(listRoot, bucket.label, bucket.items);
     });
 
     container.appendChild(listRoot);

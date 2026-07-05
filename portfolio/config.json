@@ -1,0 +1,14 @@
+{
+  "workIds": [
+    "instruments-for-becoming",
+    "symmetrical-fictions",
+    "gesture-performance-system"
+  ],
+  "maxImagesPerWork": 3,
+  "includeSkills": true,
+  "exhibitions": {
+    "showRole": true,
+    "showLocation": true,
+    "maxItems": null
+  }
+}

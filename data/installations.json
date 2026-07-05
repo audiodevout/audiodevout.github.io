@@ -3,15 +3,26 @@
     {
       "id": "instruments-for-becoming",
       "title": "Instruments for Becoming",
-      "category": "KINETIC SCULPTURE • SONIC OBJECTS • MOTOR SYSTEMS",
       "color": "saffron",
-      "description": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
-      "fullDescription": "Two related kinetic installations: Rain Reminders—a 1.8 m rotating rain stick sculpture—and Spinny Sticks—suspended motor-driven drawing and tension instruments.",
+      "description": "Kinetic and sonic sculptures built from exposed mechanisms, salvaged materials, and electronics—each system generating sound and motion from the physical behaviour of its materials.",
+      "fullDescription": "Instruments for Becoming is a body of kinetic and sonic sculptures built from exposed mechanisms, salvaged materials, and electronics. Each system runs its own continuous process, generating sound and motion from the physical behaviour of its materials: the resistance within the system, the torque of a motor, the way a mechanism settles into or strains against its own rhythm.\n\nThis is a practice rooted in jugaad (making do), deep listening and following material logic and visibility—a personal experience with sound: learning to listen not just to music or language, but to the physical world as a site of continuous sonic activity. You can see where the sound comes from and what it costs the object to make it.\n\nStaying in the field of attention of these instruments, the interaction between listener and instrument starts a process of becoming, learning new ways of attention and listening to the sound of the room itself—or diving deeper into the mind and listening to the thoughts within. Each cycle is different depending on who stays and for how long.\n\nMaterials Used\n\nSpinny Sticks: pencils, metal wire, 3D printed discs, wood beam, steel rods, Arduino UNO, 5V 70A power supply, type 130 DC motors, MOSFET PWM controllers, jumper cables, wires, tape, screw hooks, security wire, carabiners.\n\nRain Reminders: black rice, mung beans, PVC pipe, screws, wood beam, steel rods, Arduino Nano, 24V power supply, step-down voltage converter, NEMA 23 stepper motor, 04C gears and chain, pipe clamp, round jute mat.\n\nListening: headphones, audio splitters, wood blocks, AA batteries, battery case, headphone amplifier module.",
       "dimensions": "Rain Reminders: 1.8 m (height). Spinny Sticks: variable installation, individual units approx. 40–80 cm diameter",
-      "medium": "Motorized kinetic sculpture, acoustic rain stick, PVC, wood, steel, grains, exposed electronics; motorized kinetic drawing instruments, pencils, thread, metal rods, weights, motors, power supplies",
-      "technical": "Custom low-RPM motor systems, handmade 80 cm rain stick with internal grain cascade, steel and wood framework, coir matting; low-RPM DC motor systems, custom rotary assemblies, tensioned filament networks, suspended mounting system",
-      "themes": "Tinnitus and acoustic ritual, tension and unstable systems, mechanical fatigue, drawing as duration, meditative noise",
       "images": [
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (1).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (2).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (3).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (4).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (5).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (6).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (7).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (8).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (9).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (1).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (2).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (3).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (4).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (5).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_np3 (6).webp",
         "./assets/images/installations/instruments-for-becoming/rain-stick-1.webp",
         "./assets/images/installations/instruments-for-becoming/rain-stick-2.webp",
         "./assets/images/installations/instruments-for-becoming/rain-stick-4.webp",
@@ -21,24 +32,22 @@
       ],
       "videos": [
         "./assets/video/rain-stick-video-1.mp4",
-        "https://youtu.be/SWMkYxuWrNE"
+        "https://youtu.be/SWMkYxuWrNE",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk_vid.mp4"
       ],
       "youtubeDate": "20260122"
     },
     {
       "id": "symmetrical-fictions",
       "title": "Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1",
-      "category": "INSTALLATION & RESEARCH",
       "color": "cerulean",
-      "description": "A video installation and research project that reimagines satellite imagery as symmetrical, speculative geographies exploring planetary memory and unconscious visual structure.",
-      "fullDescription": "Satellite tiles are mirrored and recomposed into speculative, symmetrical landscapes—coherent yet impossible terrain that sits between rational cartography, fiction, and unconscious visual patterning.",
-      "medium": "Video installation, satellite imagery recomposition, speculative cartography",
+      "description": "A video installation and research project that recombines satellite imagery into speculative, symmetrical geographies—exploring planetary imagination, unconscious structure, and aesthetic resistance to techno-positivist knowledge.",
+      "fullDescription": "Symmetrical Fictions is a video installation and research project that challenges the boundaries between rationality and fiction, technology and unconscious structure, by recomposing satellite imagery into speculative, symmetrical geographies. Drawing from satellite datasets (such as NASA's Earth Imagery), the installation mirrors and tiles planetary surfaces — including deserts, glaciers, post-industrial ruins, and human settlements — creating impossible yet eerily coherent landscapes. These \"symmetrical fictions\" form a visual language that gestures beyond the real, exploring an epistemology situated between perception, memory, and planetary imagination. Using this visual language, the installation invites viewers into a spatial-temporal collapse, exploring what it means to desire order in an entropic world, exploring how the unconscious mind transcends binary and linear reasoning, seeking instead a non-linear approach to understanding reality.\n\nThis project does not seek control over matter, and instead, aims to transmute data into poetic experience. Rather than simply extracting or observing, the work repurposes technologies of surveillance and observation to propose new cartographies of planetary subjectivity. These are not maps for navigation, but spaces for dwelling — visualizations of symmetry not as perfection, but as excess and more-than-rational order.\n\nBy blurring the lines between fiction and matter, narrative and geometry, image and epistemology, Symmetrical Fictions contributes to debates on interdisciplinary practices, epistemic diversity, and the limits of positivist knowledge systems. The project argues that all technologies — no matter how advanced — carry poetic residues and unconscious architectures. The symmetrical images created here are not merely aesthetic ends but tools for reflecting on and feeling through our planetary condition. They suggest that the visual, much like the unconscious, is not governed solely by reason but by associative intensities and formal impossibilities. This installation also reimagines the relationship between human structures and the natural world through the lens of the alchemist archetype. In a similar way that alchemy sought to transform base materials into something greater, the project repurposes planetary data, traditionally used for control or extraction, into speculative visual compositions. By reassembling the chaotic, fragmented textures of our planet into symmetrical, imagined landscapes, the installation challenges conventional understandings of space, order, and nature, proposing new ways of engaging with the planet.\n\nThe project also addresses the mystification of digital systems by reclaiming visual data to present speculative environments that shift our understanding of \"place.\" By using natural and human-made terrains, it reimagines landscapes as speculative environments, at once familiar and otherworldly. These landscapes emerge from the entropy of the Anthropocene — a geological epoch marked by human impact and ecological fragmentation. The installation points at the tension between nature and human infrastructure, using digital tools typically reserved for control and surveillance to explore new forms of visual expression and spatial organization. The symmetrical landscapes created through this process invite reflection on the human desire for coherence in a fragmented world.\n\nUltimately, these images, and the installation as a whole, act as a form of aesthetic resistance to techno-positivist knowledge systems. It uses symmetric fiction as a methodology, merging unconscious structure, planetary data, and speculative art to encourage post-rational transmutation. The installation offers a speculative vision of balance and coherence in a world marked by instability and entropy, suggesting that, even in the face of overwhelming complexity, there may be a way to reclaim and reorganize our fragmented world.",
       "tags": [
         "generative",
         "video",
         "research"
       ],
-      "themes": "Symmetry, planetary imagination, entropy, surveillance subversion, poetic cartography",
       "images": [
         "./assets/images/installations/symmetrical-fictions/6.webp",
         "./assets/images/installations/symmetrical-fictions/39.webp",

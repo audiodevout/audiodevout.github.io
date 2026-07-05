@@ -647,12 +647,15 @@
 
 .lightbox__media {
   --lightbox-media-max-h: 78vh;
+  --lightbox-media-min-h: clamp(240px, 42vw, 520px);
   position: relative;
   background: var(--lightbox-panel-bg);
   display: grid;
   grid-template: 1fr / 1fr;
   overflow: hidden;
+  min-height: var(--lightbox-media-min-h);
   max-height: var(--lightbox-media-max-h);
+  height: clamp(240px, 56vw, var(--lightbox-media-max-h));
   box-shadow: inset 0 0 0 1px var(--lightbox-border);
 }
 
@@ -660,6 +663,7 @@
 .lightbox__media:has(.lightbox__iframe--bandcamp) {
   max-height: none;
   min-height: 472px;
+  height: auto;
 }
 
 .lightbox__media img {
@@ -709,6 +713,8 @@
 .lightbox__slide {
   grid-area: 1 / 1;
   width: 100%;
+  height: 100%;
+  min-height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -932,6 +938,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: color var(--transition-fast);
+  text-decoration: none;
 }
 
 .marquee-item:hover {
@@ -1337,6 +1344,8 @@
   padding: var(--space-1) 0;
   cursor: pointer;
   transition: color var(--transition-fast), transform var(--transition-base);
+  text-decoration: none;
+  color: inherit;
 }
 
 a.work-list__item--link {
@@ -2044,6 +2053,16 @@ a.work-list__item--link {
   max-width: min(80vw, 320px);
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.gallery-tooltip__link {
+  color: inherit;
+  text-decoration: underline;
+  pointer-events: auto;
+}
+
+.gallery-tooltip__link:hover {
+  color: var(--color-accent-lime);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /portfolio/
+
+Sitemap: https://atharvagupta.net/sitemap.xml

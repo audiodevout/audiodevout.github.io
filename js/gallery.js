@@ -591,6 +591,19 @@
     tooltipEl.hidden = false;
     tooltipEl.style.left = (pointer.x + 14) + 'px';
     tooltipEl.style.top = (pointer.y + 14) + 'px';
+
+    if (expandedId === hoveredCluster.id && hoveredCluster.id) {
+      var href = './work/' + encodeURIComponent(hoveredCluster.id) + '/';
+      if (window.portfolioWorkLookup && typeof window.portfolioWorkLookup.workPageUrl === 'function') {
+        href = window.portfolioWorkLookup.workPageUrl(hoveredCluster.id);
+      }
+      tooltipEl.innerHTML = '';
+      var titleLink = document.createElement('a');
+      titleLink.href = href;
+      titleLink.textContent = hoveredCluster.title;
+      titleLink.className = 'gallery-tooltip__link';
+      tooltipEl.appendChild(titleLink);
+    }
   }
 
   function onPointerDown(e) {
@@ -670,13 +683,13 @@
       if (expandedId !== pointer.targetCluster.id) {
         setExpanded(pointer.targetCluster.id);
       } else {
-        var openSingle = window.openLightboxSingle;
-        if (typeof openSingle === 'function') {
-          openSingle({
-            title: pointer.targetCluster.title,
-            src: pointer.targetNode.src,
-            minimal: true
-          });
+        var workId = pointer.targetCluster.id;
+        if (workId) {
+          var href = './work/' + encodeURIComponent(workId) + '/';
+          if (window.portfolioWorkLookup && typeof window.portfolioWorkLookup.workPageUrl === 'function') {
+            href = window.portfolioWorkLookup.workPageUrl(workId);
+          }
+          window.location.href = href;
         }
       }
     } else if (!pointer.moved && pointer.panning && expandedId !== null) {

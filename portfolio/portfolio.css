@@ -1,0 +1,568 @@
+/**
+ * portfolio.css — dark graphite printable portfolio (Paged.js)
+ */
+
+:root {
+  --portfolio-bg: #17171d;
+  --portfolio-text: #ffffff;
+  --portfolio-ink: #ffffff;
+  --portfolio-muted: #ffffff;
+  --portfolio-border: #3e3e44;
+  --portfolio-surface: #28282e;
+  --portfolio-accent: #ffffff;
+  --font-display: 'Fake Receipt', serif;
+  --font-body: 'Elaine', sans-serif;
+  --font-mono: 'Elaine Sans ExtraLight Italic', sans-serif;
+}
+
+/* --- Screen shell --------------------------------------------------------- */
+
+html.portfolio-root {
+  background: #111114;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  line-height: 1.55;
+  color: var(--portfolio-text);
+  background: var(--portfolio-bg);
+}
+
+.portfolio-source,
+.pagedjs_page,
+.pagedjs_page_content {
+  color: var(--portfolio-text);
+}
+
+.portfolio-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: rgba(23, 23, 29, 0.92);
+  border-bottom: 1px solid var(--portfolio-border);
+  backdrop-filter: blur(8px);
+}
+
+.portfolio-print-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid var(--portfolio-border);
+  background: var(--portfolio-surface);
+  color: var(--portfolio-ink);
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.portfolio-print-btn:hover {
+  border-color: var(--portfolio-muted);
+  color: var(--portfolio-accent);
+}
+
+.portfolio-toolbar__status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--portfolio-muted);
+}
+
+.portfolio-source {
+  padding-top: 56px;
+}
+
+.portfolio-source.is-ready {
+  padding-top: 56px;
+}
+
+/* --- Native print mode (file:// — no Paged.js) ----------------------------- */
+
+@media screen {
+  .portfolio-root--native .portfolio-source.is-ready {
+    max-width: 297mm;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 56px 16px 64px;
+  }
+
+  .portfolio-root--native .portfolio-source.is-ready > section {
+    margin-bottom: 24px;
+    padding: 15mm 18mm;
+    background: var(--portfolio-bg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media print {
+  .portfolio-root--native .portfolio-source.is-ready > section {
+    margin-bottom: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+/* --- Paged.js screen preview ---------------------------------------------- */
+
+@media screen {
+  .pagedjs_pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 16px 64px;
+  }
+
+  .pagedjs_page {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+    background: var(--portfolio-bg);
+  }
+
+  .pagedjs_page .pagedjs_area,
+  .pagedjs_page .pagedjs_page_content {
+    background: var(--portfolio-bg) !important;
+    color: var(--portfolio-text) !important;
+  }
+
+  .pagedjs_page,
+  .pagedjs_page * {
+    color: var(--portfolio-text);
+  }
+}
+
+/* --- @page rules ----------------------------------------------------------- */
+
+@page {
+  size: A4 landscape;
+  margin: 15mm 18mm;
+  background: var(--portfolio-bg);
+  color: var(--portfolio-text);
+}
+
+@page:right {
+  @bottom-right {
+    content: counter(page);
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--portfolio-text);
+  }
+}
+
+@page:left {
+  @bottom-left {
+    content: counter(page);
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--portfolio-text);
+  }
+}
+
+/* --- Section typography --------------------------------------------------- */
+
+.portfolio-section {
+  break-inside: avoid;
+  margin-bottom: 1.5em;
+}
+
+.portfolio-section__label {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--portfolio-muted);
+  margin-bottom: 0.75em;
+}
+
+.portfolio-section__title {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  color: var(--portfolio-accent);
+  margin-bottom: 0.35em;
+}
+
+.portfolio-section__subtitle {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--portfolio-muted);
+  margin-bottom: 1em;
+}
+
+/* --- Cover ---------------------------------------------------------------- */
+
+.portfolio-cover {
+  min-height: 168mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  break-after: page;
+  page-break-after: always;
+}
+
+.portfolio-cover__photo {
+  width: 42mm;
+  height: 42mm;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--portfolio-border);
+  margin-bottom: 2em;
+}
+
+.portfolio-cover__name {
+  font-family: var(--font-display);
+  font-size: 28pt;
+  letter-spacing: 0.06em;
+  color: var(--portfolio-accent);
+  margin-bottom: 0.25em;
+}
+
+.portfolio-cover__tagline {
+  font-family: var(--font-body);
+  font-size: 12pt;
+  color: var(--portfolio-ink);
+  margin-bottom: 0.15em;
+}
+
+.portfolio-cover__byline {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--portfolio-muted);
+}
+
+/* --- Bio ------------------------------------------------------------------ */
+
+.portfolio-bio {
+  break-before: page;
+  page-break-before: always;
+}
+
+.portfolio-bio__text {
+  font-size: 10.5pt;
+  line-height: 1.65;
+  margin-bottom: 1.5em;
+  max-width: none;
+  columns: 2;
+  column-gap: 10mm;
+}
+
+.portfolio-bio__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.25em;
+}
+
+.portfolio-bio__link {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.06em;
+  color: var(--portfolio-ink);
+  text-decoration: none;
+}
+
+/* --- CV ------------------------------------------------------------------- */
+
+.portfolio-cv {
+  break-before: page;
+  page-break-before: always;
+}
+
+.portfolio-cv__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+  align-items: start;
+}
+
+.portfolio-cv__block {
+  margin-bottom: 1.75em;
+}
+
+.portfolio-cv__block-title {
+  font-family: var(--font-display);
+  font-size: 11pt;
+  letter-spacing: 0.08em;
+  color: var(--portfolio-accent);
+  margin-bottom: 0.65em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.portfolio-cv__entry {
+  margin-bottom: 0.85em;
+}
+
+.portfolio-cv__entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  margin-bottom: 0.15em;
+}
+
+.portfolio-cv__entry-title {
+  font-size: 9.5pt;
+  color: var(--portfolio-ink);
+}
+
+.portfolio-cv__entry-period {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  color: var(--portfolio-muted);
+  white-space: nowrap;
+}
+
+.portfolio-cv__entry-sub {
+  font-size: 8.5pt;
+  color: var(--portfolio-muted);
+}
+
+.portfolio-cv__skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em 2em;
+}
+
+.portfolio-cv__skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.portfolio-cv__skills-list li {
+  font-size: 8.5pt;
+  color: var(--portfolio-muted);
+  padding: 0.15em 0;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.portfolio-cv__skills-list li::before {
+  content: "· ";
+  color: var(--portfolio-muted);
+}
+
+/* --- Works ---------------------------------------------------------------- */
+
+.portfolio-work {
+  break-before: page;
+  page-break-before: always;
+}
+
+.portfolio-work__category {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--portfolio-muted);
+  margin-bottom: 0.75em;
+}
+
+.portfolio-work__images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3mm;
+  margin-bottom: 1.25em;
+}
+
+.portfolio-work__images--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.portfolio-work__images--single {
+  grid-template-columns: 1fr;
+  max-width: 55%;
+}
+
+.portfolio-work__images img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--portfolio-border);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.portfolio-work__desc {
+  font-size: 9.5pt;
+  line-height: 1.6;
+  margin-bottom: 0.85em;
+  columns: 2;
+  column-gap: 8mm;
+}
+
+.portfolio-work__meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2mm 6mm;
+}
+
+.portfolio-work__meta-row .portfolio-work__meta {
+  margin-bottom: 0;
+}
+
+.portfolio-work__meta {
+  font-size: 8pt;
+  color: var(--portfolio-muted);
+  margin-bottom: 0.35em;
+}
+
+.portfolio-work__meta strong {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--portfolio-muted);
+  font-weight: 400;
+}
+
+.portfolio-work--compact {
+  break-before: auto;
+  page-break-before: auto;
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--portfolio-border);
+}
+
+.portfolio-work--compact.portfolio-work--new-page {
+  break-before: page;
+  page-break-before: always;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* --- Exhibitions ---------------------------------------------------------- */
+
+.portfolio-exhibitions {
+  break-before: page;
+  page-break-before: always;
+}
+
+.portfolio-exhibitions__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 8pt;
+  line-height: 1.45;
+}
+
+.portfolio-exhibitions__table thead th {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: left;
+  color: var(--portfolio-text);
+  padding: 0.35em 0.5em 0.45em 0;
+  border-bottom: 1px solid var(--portfolio-border);
+  vertical-align: bottom;
+}
+
+.portfolio-exhibitions__year-row {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.portfolio-exhibitions__year-row .portfolio-exhibitions__year {
+  font-family: var(--font-display);
+  font-size: 10pt;
+  letter-spacing: 0.08em;
+  color: var(--portfolio-text);
+  padding: 0.85em 0 0.35em;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.portfolio-exhibitions__year-row:first-child .portfolio-exhibitions__year {
+  padding-top: 0.25em;
+}
+
+.portfolio-exhibitions__table tbody tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.portfolio-exhibitions__table tbody td {
+  color: var(--portfolio-text);
+  padding: 0.45em 0.5em 0.45em 0;
+  border-bottom: 1px solid var(--portfolio-border);
+  vertical-align: top;
+}
+
+.portfolio-exhibitions__col-date {
+  width: 14%;
+}
+
+.portfolio-exhibitions__col-title {
+  width: 26%;
+  font-family: var(--font-display);
+  font-size: 8.5pt;
+  letter-spacing: 0.03em;
+}
+
+.portfolio-exhibitions__col-venue {
+  width: 18%;
+}
+
+.portfolio-exhibitions__col-location {
+  width: 16%;
+}
+
+.portfolio-exhibitions__col-role {
+  width: 26%;
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  letter-spacing: 0.04em;
+}
+
+/* --- Print ---------------------------------------------------------------- */
+
+@media print {
+  html.portfolio-root,
+  body {
+    background: var(--portfolio-bg) !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .portfolio-toolbar {
+    display: none !important;
+  }
+
+  .portfolio-source,
+  .portfolio-source.is-ready {
+    padding-top: 0;
+  }
+
+  .pagedjs_page,
+  .pagedjs_area,
+  .pagedjs_page_content,
+  .pagedjs_sheet {
+    background: var(--portfolio-bg) !important;
+    color: var(--portfolio-text) !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .portfolio-source,
+  .portfolio-source * {
+    color: var(--portfolio-text) !important;
+  }
+
+  .portfolio-bio__link {
+    text-decoration: none;
+  }
+}

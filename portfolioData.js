@@ -18,8 +18,21 @@
 (function () {
   "use strict";
 
+  function getSiteRoot() {
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+      var src = scripts[i].src;
+      if (src && src.indexOf("portfolioData.js") !== -1) {
+        return new URL(".", src).href;
+      }
+    }
+    return new URL("./", window.location.href).href;
+  }
+
+  var siteRoot = getSiteRoot();
+
   function dataUrl(filename) {
-    return new URL("data/" + filename, window.location.href).href;
+    return new URL("data/" + filename, siteRoot).href;
   }
 
   var DATA_FILES = {
@@ -74,7 +87,7 @@
         return;
       }
       var script = document.createElement("script");
-      script.src = new URL("js/portfolioData.parts.js", window.location.href).href;
+      script.src = new URL("js/portfolioData.parts.js", siteRoot).href;
       script.onload = function () {
         if (window.__PORTFOLIO_PARTS__) {
           resolve(window.__PORTFOLIO_PARTS__);
@@ -229,8 +242,18 @@
     }
   }
 
-  var loadParts =
-    window.location.protocol === "file:" ? loadPartsFromScript : loadPartsFromFetch;
+  var loadParts = function () {
+    if (window.__PORTFOLIO_PARTS__) {
+      return Promise.resolve(window.__PORTFOLIO_PARTS__);
+    }
+    if (window.location.protocol === "file:") {
+      return loadPartsFromScript();
+    }
+    return loadPartsFromFetch().catch(function (err) {
+      console.warn("Fetch failed, falling back to portfolioData.parts.js:", err);
+      return loadPartsFromScript();
+    });
+  };
 
   loadParts()
     .then(function (parts) {

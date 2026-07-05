@@ -1,0 +1,227 @@
+/**
+ * work-page.css — project detail page (vertical media stack)
+ */
+
+.work-page {
+  width: 100%;
+  max-width: min(94vw, 60rem);
+  margin: 0 auto;
+  padding-left: clamp(var(--space-3), 4vw, var(--space-8));
+  padding-right: clamp(var(--space-3), 4vw, var(--space-8));
+  padding-bottom: var(--space-6);
+}
+
+/* Clear fixed nav, then add breathing room before page content */
+.main.work-page {
+  padding-top: max(
+    calc(52px + env(safe-area-inset-top, 0px) + var(--space-8)),
+    calc(var(--space-12) + var(--space-8))
+  );
+}
+
+.work-page__toolbar {
+  margin-bottom: var(--space-8);
+}
+
+.work-page__back {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.work-page__back:hover {
+  color: var(--color-accent-lime);
+}
+
+.work-page__article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.work-page__header {
+  margin-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.work-page__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-stamp);
+  margin: 0 0 var(--space-2);
+  line-height: 1.05;
+}
+
+.work-page__category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-1);
+}
+
+.work-page__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.work-page__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.work-page__intro .lightbox__description {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--line-height-body, 1.75);
+  color: var(--color-text);
+  white-space: pre-wrap;
+}
+
+.work-page__description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--line-height-body, 1.75);
+  color: var(--color-text);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.work-page__intro .lightbox__pills {
+  margin-top: 0;
+}
+
+.work-page__intro .lightbox__links {
+  margin-top: 0;
+}
+
+/* Vertical media column */
+.work-page__media-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work-page__media-stack:empty {
+  display: none;
+}
+
+.work-page__figure {
+  margin: 0;
+  width: 100%;
+}
+
+.work-page__figure-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.work-page__figure-btn:focus-visible {
+  outline: 2px solid var(--color-accent-lime);
+  outline-offset: 4px;
+}
+
+.work-page__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+.work-page__figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--color-surface);
+}
+
+.work-page__embed {
+  position: relative;
+  width: 100%;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.work-page__embed--youtube {
+  aspect-ratio: 16 / 9;
+}
+
+.work-page__embed--youtube iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.work-page__embed--bandcamp {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3) 0;
+}
+
+.work-page__embed--bandcamp iframe {
+  width: 350px;
+  max-width: 100%;
+  height: 472px;
+  border: 0;
+}
+
+.work-page__notice {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+}
+
+.work-page__not-found {
+  padding: var(--space-6) 0;
+  text-align: center;
+}
+
+.work-page__not-found p {
+  font-family: var(--font-body);
+  color: var(--color-muted);
+  margin: 0 0 var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .work-page {
+    max-width: none;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+}
+
+@media (min-width: 1200px) {
+  .work-page {
+    max-width: min(90vw, 72rem);
+  }
+}

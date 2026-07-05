@@ -6,7 +6,11 @@
     "generate-images": "node scripts/generate-images.js",
     "generate-images:rewrite": "node scripts/generate-images.js --rewrite",
     "generate-gallery-thumbs": "node scripts/generate-gallery-thumbs.js",
-    "build-data": "node scripts/build-portfolio-data.js"
+    "build-data": "node scripts/build-portfolio-data.js",
+    "generate-work-pages": "node scripts/generate-work-pages.js",
+    "build": "npm run build-data && npm run generate-work-pages",
+    "verify-work-pages": "node scripts/verify-work-pages.js && node scripts/verify-work-pages-runtime.js",
+    "dev": "python -m http.server 8080"
   },
   "devDependencies": {
     "sharp": "^0.33.5"

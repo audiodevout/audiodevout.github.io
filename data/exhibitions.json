@@ -8,7 +8,17 @@
       "location": "Akerkhof 2, Groningen, NL",
       "role": "Graduation Show (FMI MADtech)",
       "venue": "Akerk",
-      "images": [],
+      "images": [
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (1).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (2).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (3).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (4).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (5).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (6).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (7).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (8).webp",
+        "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (9).webp"
+      ],
       "urls": {
         "link": "https://www.academieminerva.nl/en/events/2026/06/graduation-show-frank-mohr-institute",
         "akerk": "https://akerk.nl/event/graduation-show-masters-frank-mohr-institute",

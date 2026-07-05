@@ -6,6 +6,27 @@
   'use strict';
 
   window.portfolioUtils = {
+    getSiteRoot: function () {
+      var scripts = document.getElementsByTagName('script');
+      var i;
+      for (i = 0; i < scripts.length; i++) {
+        var src = scripts[i].src;
+        if (src && src.indexOf('portfolioData.js') !== -1) {
+          return new URL('.', src).href;
+        }
+      }
+      return new URL('./', window.location.href).href;
+    },
+
+    resolveAssetSrc: function (src) {
+      if (!src || typeof src !== 'string') return src;
+      if (/^https?:\/\//i.test(src)) return src;
+      var root = window.portfolioUtils.getSiteRoot();
+      if (src.charAt(0) === '/') return new URL(src.slice(1), root).href;
+      if (src.indexOf('./') === 0) return new URL(src.slice(2), root).href;
+      return new URL(src, root).href;
+    },
+
     esc: function (s) {
       if (s == null || s === '') return '';
       var div = document.createElement('div');
@@ -33,12 +54,15 @@
 
     getThumbSrc: function (src) {
       if (!src || typeof src !== 'string') return src;
-      if (src.indexOf('./assets/images/thumbs/') === 0) return src;
-      if (src.indexOf('./assets/images/') !== 0) return src;
-      var rel = src.slice('./assets/images/'.length);
+      var resolved = window.portfolioUtils.resolveAssetSrc(src);
+      if (resolved.indexOf('assets/images/thumbs/') !== -1) return resolved;
+      var marker = 'assets/images/';
+      var idx = resolved.indexOf(marker);
+      if (idx === -1) return resolved;
+      var rel = resolved.slice(idx + marker.length).split('?')[0].split('#')[0];
       var dot = rel.lastIndexOf('.');
       if (dot !== -1) rel = rel.slice(0, dot) + '.webp';
-      return './assets/images/thumbs/' + rel;
+      return window.portfolioUtils.resolveAssetSrc('./assets/images/thumbs/' + rel);
     }
   };
 

@@ -9,6 +9,7 @@
 
   function getPageSection() {
     const path = (window.location.pathname || '').toLowerCase();
+    if (path.indexOf('/work/') !== -1) return null;
     if (path.indexOf('exhibitions') !== -1) return 'exhibitions';
     if (path.indexOf('gallery') !== -1) return 'gallery';
     if (path.indexOf('archive') !== -1 || path.indexOf('thesis') !== -1) return 'archive';
@@ -18,6 +19,13 @@
 
   function setActiveState() {
     const current = getPageSection();
+    if (current === null) {
+      if (siteBrand) siteBrand.classList.remove('is-active');
+      navLinks.forEach(function (link) {
+        link.classList.remove('is-active');
+      });
+      return;
+    }
     if (siteBrand) {
       siteBrand.classList.toggle('is-active', current === 'home');
     }
