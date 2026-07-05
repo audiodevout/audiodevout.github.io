@@ -36,6 +36,16 @@ var PROJECT_KINDS = {
 
 var FALLBACK_OG_IMAGE = "/assets/images/profile/atharva.jpeg";
 var CREATOR_NAME = "Atharva Gupta";
+var HOME_META_DESCRIPTION =
+  "Atharva Gupta — new media artist and sculptor working with sound, technology, and spatial practice.";
+var PERSON_KNOWS_ABOUT = [
+  "New Media Art",
+  "Sculpture",
+  "Sound Art",
+  "Installation Art",
+  "Audiovisual Performance",
+  "TouchDesigner",
+];
 
 function readCnameBase() {
   var cnamePath = path.join(root, "CNAME");
@@ -181,9 +191,7 @@ function pageMeta(entry) {
     url: canonical,
     image: ogImage,
     creator: {
-      "@type": "Person",
-      name: CREATOR_NAME,
-      url: BASE_URL + "/",
+      "@id": BASE_URL + "/#person",
     },
   };
 
@@ -292,6 +300,251 @@ function writeRobots() {
   console.log("Wrote robots.txt");
 }
 
+function dedupeById(list) {
+  var seen = Object.create(null);
+  return (list || []).filter(function (item) {
+    if (!item || !item.id || seen[item.id]) return false;
+    seen[item.id] = true;
+    return true;
+  });
+}
+
+function groupByCategory(list) {
+  var groups = {};
+  (list || []).forEach(function (item) {
+    var cat = item.category || "Other";
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(item);
+  });
+  return groups;
+}
+
+function sortByYoutubeDate(list) {
+  return (list || []).slice().sort(function (a, b) {
+    var dA = a.youtubeDate || "";
+    var dB = b.youtubeDate || "";
+    if (dB !== dA) return dB.localeCompare(dA);
+    return (a.title || "").localeCompare(b.title || "");
+  });
+}
+
+function sortVisualGroupsByYoutubeDate(groups) {
+  var sorted = {};
+  Object.keys(groups).forEach(function (cat) {
+    if (cat === "TouchDesigner Tutorials") {
+      sorted[cat] = sortByYoutubeDate(groups[cat] || []);
+    } else {
+      sorted[cat] = groups[cat] || [];
+    }
+  });
+  return sorted;
+}
+
+function workPageHref(id) {
+  return "./work/" + encodeURIComponent(id) + "/";
+}
+
+function readSameAsUrls() {
+  return items(readJson("links.json"))
+    .map(function (link) {
+      return link && link.url ? String(link.url).trim() : "";
+    })
+    .filter(Boolean);
+}
+
+function buildPersonNode(sameAs) {
+  return {
+    "@type": "Person",
+    "@id": BASE_URL + "/#person",
+    name: CREATOR_NAME,
+    url: BASE_URL + "/",
+    image: BASE_URL + FALLBACK_OG_IMAGE,
+    jobTitle: "New Media Artist",
+    description:
+      "Artist and researcher working with sound, technology, sculpture, and spatial practice.",
+    knowsAbout: PERSON_KNOWS_ABOUT,
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Frank Mohr Institute, Minerva Academy",
+      },
+    ],
+    sameAs: sameAs,
+  };
+}
+
+function buildHomeJsonLd(sameAs) {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": BASE_URL + "/#website",
+        name: CREATOR_NAME,
+        url: BASE_URL + "/",
+        description: "Portfolio of Atharva Gupta, new media artist and sculptor.",
+        author: { "@id": BASE_URL + "/#person" },
+      },
+      buildPersonNode(sameAs),
+    ],
+  });
+}
+
+function buildAboutJsonLd(sameAs) {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": BASE_URL + "/about.html#profilepage",
+        url: BASE_URL + "/about.html",
+        name: "About Atharva Gupta",
+        description: "About Atharva Gupta, new media artist and sculptor.",
+        mainEntity: { "@id": BASE_URL + "/#person" },
+      },
+      buildPersonNode(sameAs),
+    ],
+  });
+}
+
+function buildListSectionHtml(heading, listItems) {
+  if (!listItems || listItems.length === 0) return "";
+  var rows = listItems
+    .map(function (item) {
+      var title = item.title || "Untitled";
+      return (
+        '        <a class="work-list__item" href="' +
+        escapeHtml(workPageHref(item.id)) +
+        '">' +
+        '<h3 class="work-list__title">' +
+        escapeHtml(title) +
+        "</h3></a>"
+      );
+    })
+    .join("\n");
+  return (
+    '      <section class="work-list__group">\n' +
+    '        <h2 class="work-list__group-label">' +
+    escapeHtml(heading) +
+    "</h2>\n" +
+    rows +
+    "\n      </section>"
+  );
+}
+
+function buildHomeListHtml() {
+  var installations = dedupeById(items(readJson(DATA_FILES.installations)));
+  var performance = dedupeById(items(readJson(DATA_FILES.performance)));
+  var visual = dedupeById(items(readJson(DATA_FILES.visual)));
+  var sound = dedupeById(items(readJson(DATA_FILES.sound)));
+
+  var worksItems = installations.concat(performance);
+  var sections = [];
+
+  if (worksItems.length) sections.push(buildListSectionHtml("Works", worksItems));
+  if (sound.length) sections.push(buildListSectionHtml("Sound", sound));
+
+  var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(visual));
+  Object.keys(visualGroups).forEach(function (cat) {
+    if (cat === "VISUAL RESEARCH") return;
+    sections.push(buildListSectionHtml(cat, visualGroups[cat]));
+  });
+
+  if (sections.length === 0) return "";
+  return "    <div class=\"work-list\">\n" + sections.join("\n") + "\n    </div>";
+}
+
+function buildHomeIntroHtml(profile) {
+  var home = (profile && profile.home) || {};
+  var paragraphs = Array.isArray(home.seoIntro) ? home.seoIntro : [];
+  if (paragraphs.length === 0 && profile && profile.about && profile.about.description) {
+    paragraphs = [profile.about.description];
+  }
+  return paragraphs
+    .map(function (text) {
+      return "      <p>" + escapeHtml(String(text || "").trim()) + "</p>";
+    })
+    .join("\n");
+}
+
+function buildAboutContentHtml(profile) {
+  var about = (profile && profile.about) || {};
+  var description = about.description || "";
+  return '        <p class="about__description">' + escapeHtml(description) + "</p>";
+}
+
+function buildFooterHtml() {
+  var links = items(readJson("links.json"));
+  var linkHtml = links
+    .map(function (link) {
+      return (
+        '      <a href="' +
+        escapeHtml(link.url || "#") +
+        '" rel="noopener noreferrer">' +
+        escapeHtml(link.name || "Link") +
+        "</a>"
+      );
+    })
+    .join("\n");
+  return (
+    '  <footer class="site-footer">\n' +
+    '    <p class="site-footer__copy">Atharva Gupta © 2025</p>\n' +
+    '    <nav class="site-footer__links" aria-label="External links">\n' +
+    linkHtml +
+    "\n    </nav>\n" +
+    "  </footer>"
+  );
+}
+
+function patchMarkers(filePath, replacements) {
+  var html = fs.readFileSync(filePath, "utf8");
+  Object.keys(replacements).forEach(function (marker) {
+    var start = "<!-- GENERATE:" + marker + ":start -->";
+    var end = "<!-- GENERATE:" + marker + ":end -->";
+    var pattern = new RegExp(
+      start.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
+        "[\\s\\S]*?" +
+        end.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    );
+    var next =
+      start + "\n" + replacements[marker] + "\n  " + end;
+    if (!pattern.test(html)) {
+      console.warn("Missing marker pair: " + marker + " in " + path.relative(root, filePath));
+      return;
+    }
+    html = html.replace(pattern, next);
+  });
+  fs.writeFileSync(filePath, html, "utf8");
+}
+
+function writeHomePageSeo() {
+  var profile = readJson("profile.json");
+  var sameAs = readSameAsUrls();
+  patchMarkers(path.join(root, "index.html"), {
+    "home-jsonld":
+      '  <script type="application/ld+json">' +
+      buildHomeJsonLd(sameAs) +
+      "</script>",
+    "home-intro": buildHomeIntroHtml(profile),
+    "home-list": buildHomeListHtml(),
+    "home-footer": buildFooterHtml(),
+  });
+  console.log("Updated homepage SEO snapshot in index.html");
+}
+
+function writeAboutPageSeo() {
+  var profile = readJson("profile.json");
+  var sameAs = readSameAsUrls();
+  patchMarkers(path.join(root, "about.html"), {
+    "about-jsonld":
+      '  <script type="application/ld+json">' +
+      buildAboutJsonLd(sameAs) +
+      "</script>",
+    "about-content": buildAboutContentHtml(profile),
+  });
+  console.log("Updated about page SEO snapshot in about.html");
+}
+
 var BASE_URL = readCnameBase();
 
 if (!fs.existsSync(templatePath)) {
@@ -306,3 +559,5 @@ var workIds = writeWorkPages(entries, template);
 console.log("Wrote " + workIds.length + " work pages under work/");
 writeSitemap(workIds);
 writeRobots();
+writeHomePageSeo();
+writeAboutPageSeo();

@@ -1,5 +1,5 @@
 # Decap CMS config for atharvagupta.net
-# After publishing CMS changes, run locally before deploy (or rely on the build-portfolio GitHub Action):
+# After publishing CMS changes, run locally before push/deploy:
 #   npm run build
 # This regenerates js/portfolioData.parts.js, work/<id>/ pages, sitemap.xml, and robots.txt.
 

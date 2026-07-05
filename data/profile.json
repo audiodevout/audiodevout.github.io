@@ -1,12 +1,17 @@
 {
   "home": {
     "title": "Experimental Systems",
-    "subtitle": "by Atharva Gupta"
+    "subtitle": "by Atharva Gupta",
+    "seoIntro": [
+      "Atharva Gupta is a new media artist and sculptor based in Groningen, Netherlands. His practice spans sound art, kinetic sculpture, audiovisual performance, and experimental installations.",
+      "Atharva Gupta builds objects, systems, and situations grounded in personal relationships with technology, working across TouchDesigner, Ableton Live, and custom electronics. His work treats technology as something emotional, erratic, and entangled with both body and politics.",
+      "Atharva Gupta is an artist-researcher at the Frank Mohr Institute, Minerva Academy. This portfolio collects installations, performance works, sound releases, visual research, and TouchDesigner tutorials by Atharva Gupta, a new media artist working at the intersection of sound, sculpture, and spatial practice."
+    ]
   },
   "contactDescription": "I love to talk about stuff!",
   "about": {
     "title": "ABOUT ME",
-    "description": "Atharva Gupta is an artist, researcher, and educator who builds objects, systems, and situations grounded in personal relationships with technology. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, treating technology as something emotional, erratic, and entangled with both body and politics.",
+    "description": "Atharva Gupta is a new media artist, sculptor, and researcher who builds objects, systems, and situations grounded in personal relationships with technology. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, treating technology as something emotional, erratic, and entangled with both body and politics.",
     "credentials": [],
     "image": "./assets/images/profile/atharva.webp"
   },

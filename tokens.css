@@ -3,8 +3,8 @@
  * Typography aligned with thesis: Fake Receipt, Elaine, graphite palette.
  */
 :root {
-  /* Graphite palette — matches thesis dark theme */
-  --color-bg: #17171d;
+  /* Graphite palette — pure black background */
+  --color-bg: #000000;
   --color-surface: #28282e;
   --color-border: #3e3e44;
   --color-text: #e4e4e4;
@@ -19,11 +19,11 @@
   --color-accent-saffron: var(--color-accent);
   --color-accent-magenta: var(--color-accent);
   --color-accent-graphite: var(--color-accent);
-  --color-lightbox-bg: #17171d;
+  --color-lightbox-bg: #000000;
   --color-on-dark: #ececec;
 
-  --body-bg: #17171d;
-  --overlay-bg: rgba(23, 23, 29, 0.88);
+  --body-bg: #000000;
+  --overlay-bg: rgba(0, 0, 0, 0.88);
 
   /* Typography — thesis fonts */
   --font-display: 'Fake Receipt', serif;
@@ -68,7 +68,7 @@
   --z-modal: 400;
 
   /* Scrollbar — graphite, minimal */
-  --scrollbar-track: #17171d;
+  --scrollbar-track: #000000;
   --scrollbar-thumb: #3e3e44;
   --scrollbar-thumb-hover: #5c5c64;
 }

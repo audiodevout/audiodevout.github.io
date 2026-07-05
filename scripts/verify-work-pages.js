@@ -188,6 +188,78 @@ function checkPackageScripts() {
   if (!pkg.scripts["generate-work-pages"]) fail("package.json missing generate-work-pages script");
 }
 
+function checkHomepageSeo() {
+  var html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  if (html.indexOf("<title>Atharva Gupta</title>") === -1) {
+    fail("index.html title must be 'Atharva Gupta'");
+  }
+  if (html.indexOf('rel="canonical" href="https://atharvagupta.net/"') === -1) {
+    fail("index.html missing homepage canonical URL");
+  }
+  if (html.indexOf('property="og:site_name" content="Atharva Gupta"') === -1) {
+    fail("index.html missing og:site_name");
+  }
+  if (html.indexOf('class="site-brand__title"') === -1 || html.indexOf("<h1") === -1) {
+    fail("index.html missing H1 site brand");
+  }
+  if (html.indexOf('"@type":"WebSite"') === -1 || html.indexOf('"@type":"Person"') === -1) {
+    fail("index.html missing WebSite/Person JSON-LD");
+  }
+  if (html.indexOf("https://atharvagupta.net/#person") === -1) {
+    fail("index.html missing Person @id");
+  }
+  if (html.indexOf('class="work-list__group-label"') === -1) {
+    fail("index.html missing generated H2 work list groups");
+  }
+  if (html.indexOf('class="work-list__title"') === -1) {
+    fail("index.html missing generated H3 work list titles");
+  }
+  if (html.indexOf('name="description"') === -1) {
+    fail("index.html missing meta description");
+  }
+  var descMatch = html.match(/name="description" content="([^"]+)"/);
+  if (descMatch) {
+    var desc = descMatch[1];
+    if (desc.indexOf("Atharva Gupta") !== 0) {
+      fail("index.html meta description must start with Atharva Gupta");
+    }
+    if (desc.length < 80 || desc.length > 130) {
+      warn("index.html meta description length is " + desc.length + " chars (target 100-130)");
+    }
+  }
+  if (html.indexOf('class="visually-hidden"') === -1) {
+    fail("index.html missing crawlable intro paragraphs");
+  }
+  if (html.indexOf('aria-label="External links"') === -1) {
+    fail("index.html missing external links footer");
+  }
+}
+
+function checkAboutPageSeo() {
+  var html = fs.readFileSync(path.join(root, "about.html"), "utf8");
+  if (html.indexOf('rel="canonical" href="https://atharvagupta.net/about.html"') === -1) {
+    fail("about.html missing canonical URL");
+  }
+  if (html.indexOf('"@type":"ProfilePage"') === -1) {
+    fail("about.html missing ProfilePage JSON-LD");
+  }
+  if (html.indexOf("https://atharvagupta.net/#person") === -1) {
+    fail("about.html missing Person @id reference");
+  }
+  if (html.indexOf("new media artist") === -1) {
+    fail("about.html missing name-first discipline bio");
+  }
+}
+
+function checkWorkPagePersonReference(expectedIds) {
+  if (expectedIds.length === 0) return;
+  var sampleId = expectedIds[0];
+  var html = fs.readFileSync(path.join(workDir, sampleId, "index.html"), "utf8");
+  if (html.indexOf('"@id":"https://atharvagupta.net/#person"') === -1) {
+    fail("Work pages should reference Person @id in JSON-LD creator");
+  }
+}
+
 var expectedIds = collectExpectedIds();
 console.log("Expected work pages: " + expectedIds.length);
 checkGeneratedPages(expectedIds);
@@ -199,6 +271,9 @@ checkPortfolioDataRootResolution();
 checkUtilsAssetResolution();
 checkWorkDetailUsesResolve();
 checkPackageScripts();
+checkHomepageSeo();
+checkAboutPageSeo();
+checkWorkPagePersonReference(expectedIds);
 
 if (warnings.length) {
   console.log("\nWarnings (" + warnings.length + "):");

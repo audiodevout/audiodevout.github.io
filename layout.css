@@ -3,6 +3,7 @@
  */
 /* Custom scrollbar — monochrome, minimal, matches design tokens */
 html {
+  background: var(--body-bg);
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
 }
