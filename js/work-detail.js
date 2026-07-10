@@ -198,7 +198,7 @@
     if (item.urls.link) {
       appendLink(
         item.urls.link,
-        item.urls.kunstpunt ? 'NP3 ↗' : (item.urls.profile ? 'Show ↗' : 'Link ↗')
+        item.urls.linkLabel || (item.urls.kunstpunt ? 'NP3 ↗' : (item.urls.profile ? 'Show ↗' : 'Link ↗'))
       );
     }
     appendLink(item.urls.akerk, 'Akerk ↗');
