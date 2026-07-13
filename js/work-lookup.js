@@ -11,7 +11,8 @@
     { key: 'performance', kind: 'performance' },
     { key: 'soundInstallations', kind: 'sound' },
     { key: 'drawings', kind: 'visual' },
-    { key: 'writing', kind: 'writing' }
+    { key: 'writing', kind: 'writing' },
+    { key: 'funProjects', kind: 'fun' }
   ];
 
   function getData() {

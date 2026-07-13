@@ -41,6 +41,7 @@
     installations: dataUrl("installations.json"),
     visual: dataUrl("visual.json"),
     writing: dataUrl("writing.json"),
+    funProjects: dataUrl("fun-projects.json"),
     exhibitions: dataUrl("exhibitions.json"),
     links: dataUrl("links.json"),
     profile: dataUrl("profile.json"),
@@ -135,6 +136,7 @@
         installations: items(parts.installations),
         drawings: items(parts.visual),
         writing: items(parts.writing),
+        funProjects: items(parts.funProjects),
       },
       exhibitions: items(parts.exhibitions),
       contact: {
@@ -185,6 +187,7 @@
     pushProjects(portfolioData.projects.soundInstallations, "sound", "major");
     pushProjects(portfolioData.projects.drawings, "visual", "experiment");
     pushProjects(portfolioData.projects.writing, "text", "major");
+    pushProjects(portfolioData.projects.funProjects, "fun", "experiment");
 
     portfolioData.works = works;
 
@@ -216,6 +219,7 @@
         performance: [],
         soundInstallations: [],
         writing: [],
+        funProjects: [],
       },
       exhibitions: [],
       contact: {

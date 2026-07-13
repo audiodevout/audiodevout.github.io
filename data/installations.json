@@ -57,17 +57,6 @@
       "urls": {
         "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"
       }
-    },
-    {
-      "id": "road-paint",
-      "title": "Road Paint",
-      "color": "electric-lime",
-      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
-      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
-      "urls": {
-        "link": "./Road-Paint/",
-        "linkLabel": "Open Road Paint ↗"
-      }
     }
   ]
 }

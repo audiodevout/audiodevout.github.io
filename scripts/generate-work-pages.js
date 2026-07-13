@@ -23,6 +23,7 @@ var DATA_FILES = {
   installations: "installations.json",
   visual: "visual.json",
   writing: "writing.json",
+  funProjects: "fun-projects.json",
   exhibitions: "exhibitions.json",
 };
 
@@ -32,6 +33,7 @@ var PROJECT_KINDS = {
   sound: "sound",
   visual: "visual",
   writing: "writing",
+  funProjects: "fun",
 };
 
 var FALLBACK_OG_IMAGE = "/assets/images/profile/atharva.jpeg";
@@ -437,6 +439,7 @@ function buildHomeListHtml() {
   var performance = dedupeById(items(readJson(DATA_FILES.performance)));
   var visual = dedupeById(items(readJson(DATA_FILES.visual)));
   var sound = dedupeById(items(readJson(DATA_FILES.sound)));
+  var funProjects = dedupeById(items(readJson(DATA_FILES.funProjects)));
 
   var worksItems = installations.concat(performance);
   var sections = [];
@@ -449,6 +452,8 @@ function buildHomeListHtml() {
     if (cat === "VISUAL RESEARCH") return;
     sections.push(buildListSectionHtml(cat, visualGroups[cat]));
   });
+
+  if (funProjects.length) sections.push(buildListSectionHtml("Fun Projects", funProjects));
 
   if (sections.length === 0) return "";
   return "    <div class=\"work-list\">\n" + sections.join("\n") + "\n    </div>";

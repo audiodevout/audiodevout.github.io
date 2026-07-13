@@ -220,6 +220,9 @@
       });
     });
     addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems));
+
+    var funItems = dedupeById(data.projects.funProjects || []);
+    if (funItems.length > 0) addLabeledMarquee(container, 'Fun Projects', funItems);
   }
 
   var THESIS_ARCHIVE_ITEM = {
@@ -332,6 +335,11 @@
       if (cat === 'VISUAL RESEARCH') return;
       addListGroup(listRoot, cat, visualGroups[cat]);
     });
+
+    var funItems = dedupeById(data.projects.funProjects || []);
+    if (funItems.length) {
+      addListGroup(listRoot, 'Fun Projects', funItems);
+    }
 
     container.appendChild(listRoot);
   }

@@ -23,6 +23,12 @@
       manifestLink.rel = "manifest";
       manifestLink.href = "./assets/icons/site.webmanifest";
       document.head.appendChild(manifestLink);
+
+      var gc = document.createElement("script");
+      gc.async = true;
+      gc.src = "https://gc.zgo.at/count.js";
+      gc.setAttribute("data-goatcounter", "https://atharvagupta.goatcounter.com/count");
+      document.head.appendChild(gc);
     }
   </script>
   <link rel="stylesheet" href="./fonts.css" />
@@ -31,8 +37,6 @@
   <link rel="stylesheet" href="./layout.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
-  <script data-goatcounter="https://atharvagupta.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -113,7 +117,6 @@
         <h2 class="work-list__group-label">Works</h2>
         <a class="work-list__item" href="./work/instruments-for-becoming/"><h3 class="work-list__title">Instruments for Becoming</h3></a>
         <a class="work-list__item" href="./work/symmetrical-fictions/"><h3 class="work-list__title">Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1</h3></a>
-        <a class="work-list__item" href="./work/road-paint/"><h3 class="work-list__title">Road Paint</h3></a>
         <a class="work-list__item" href="./work/gesture-performance-system/"><h3 class="work-list__title">Gesture-Controlled Performance System for Slow Music</h3></a>
       </section>
       <section class="work-list__group">
@@ -169,6 +172,11 @@
         <a class="work-list__item" href="./work/audiodevout-audioreactive-doodle-geometry-instancing/"><h3 class="work-list__title">Audioreactive Doodle with Geometry Instancing - Behind The Network</h3></a>
         <a class="work-list__item" href="./work/audiodevout-procedural-crystal-video-effects/"><h3 class="work-list__title">Procedural Crystal-Like Video Effects</h3></a>
         <a class="work-list__item" href="./work/audiodevout-basic-uv-mapping-noise-sculpting/"><h3 class="work-list__title">Basic UV Mapping and Noise Sculpting</h3></a>
+      </section>
+      <section class="work-list__group">
+        <h2 class="work-list__group-label">Fun Projects</h2>
+        <a class="work-list__item" href="./work/road-paint/"><h3 class="work-list__title">Road Paint</h3></a>
+        <a class="work-list__item" href="./work/6969osc/"><h3 class="work-list__title">6969osc</h3></a>
       </section>
     </div>
   <!-- GENERATE:home-list:end -->

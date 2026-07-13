@@ -27,6 +27,7 @@ var files = {
   installations: "installations.json",
   visual: "visual.json",
   writing: "writing.json",
+  funProjects: "fun-projects.json",
   exhibitions: "exhibitions.json",
   links: "links.json",
   profile: "profile.json",

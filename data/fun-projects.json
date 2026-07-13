@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "id": "road-paint",
+      "title": "Road Paint",
+      "color": "electric-lime",
+      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
+      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
+      "urls": {
+        "link": "./roadpaint/",
+        "linkLabel": "Open Road Paint ↗"
+      }
+    },
+    {
+      "id": "6969osc",
+      "title": "6969osc",
+      "color": "amber",
+      "description": "Phone control surface with WebSocket + OSC (UDP) for TouchDesigner. Run locally; scan QR on the same Wi‑Fi.",
+      "fullDescription": "6969osc is a small Node.js server plus a phone controller UI. Run it on the venue machine, scan the QR code in the terminal, and drive TouchDesigner over OSC — no mobile app install required.",
+      "images": [
+        "./6969osc/6969osc-1.png",
+        "./6969osc/6969osc-2.png"
+      ],
+      "urls": {
+        "link": "./6969osc/",
+        "linkLabel": "Open 6969osc ↗"
+      }
+    }
+  ]
+}

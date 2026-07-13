@@ -23,6 +23,12 @@
       manifestLink.rel = "manifest";
       manifestLink.href = "./assets/icons/site.webmanifest";
       document.head.appendChild(manifestLink);
+
+      var gc = document.createElement("script");
+      gc.async = true;
+      gc.src = "https://gc.zgo.at/count.js";
+      gc.setAttribute("data-goatcounter", "https://atharvagupta.goatcounter.com/count");
+      document.head.appendChild(gc);
     }
   </script>
   <link rel="stylesheet" href="./fonts.css" />
@@ -31,8 +37,6 @@
   <link rel="stylesheet" href="./layout.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
-  <script data-goatcounter="https://atharvagupta.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
   <header class="site-header" role="banner">
