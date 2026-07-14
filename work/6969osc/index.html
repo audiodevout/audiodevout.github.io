@@ -17,7 +17,7 @@
   <title>6969osc — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"6969osc","description":"6969osc is a small Node.js server plus a phone controller UI. Run it on the venue machine, scan the QR code in the terminal, and drive TouchDesigner over OSC —…","url":"https://atharvagupta.net/work/6969osc/","image":"https://atharvagupta.net/6969osc/6969osc-1.png","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"6969osc","description":"6969osc is a small Node.js server plus a phone controller UI. Run it on the venue machine, scan the QR code in the terminal, and drive TouchDesigner over OSC —…","url":"https://atharvagupta.net/work/6969osc/","image":"https://atharvagupta.net/6969osc/6969osc-1.png","@type":"CreativeWork","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

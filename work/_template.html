@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

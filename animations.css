@@ -1,11 +1,95 @@
 /**
- * animations.css — hero load, grain, scroll indicator
+ * animations.css — hero load, scroll reveal, page transitions
  */
 
+/* Reduced-motion reset FIRST — separate from layout breakpoints */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Cross-document page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: page-out 0.35s var(--ease-out-expo) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-in 0.45s var(--ease-out-expo) both;
+  }
+
+  ::view-transition-group(site-header) {
+    animation-duration: 0.4s;
+  }
+
+  ::view-transition-old(nav-active-link),
+  ::view-transition-new(nav-active-link) {
+    animation-duration: 0.4s;
+    animation-timing-function: var(--ease-out-expo);
+  }
+}
+
+@keyframes page-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fallback enter when View Transitions API is unavailable */
+@supports not (view-transition-name: none) {
+  @media (prefers-reduced-motion: no-preference) {
+    .main {
+      animation: main-enter 0.55s var(--ease-out-expo) both;
+    }
+  }
+}
+
+@keyframes main-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Hero load: fade in whole section */
-.hero {
-  opacity: 0;
-  animation: hero-load 800ms ease forwards;
+@media (prefers-reduced-motion: no-preference) {
+  .hero {
+    opacity: 0;
+    animation: hero-load 800ms var(--ease-out-expo) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    opacity: 1;
+  }
 }
 
 @keyframes hero-load {
@@ -17,7 +101,6 @@
   z-index: 1;
 }
 
-/* Stagger delays for hero description words (set via JS or nth-child in Phase 1 we can use CSS only with a wrapper) */
 .hero__description .word:nth-child(1) { animation-delay: 200ms; }
 .hero__description .word:nth-child(2) { animation-delay: 280ms; }
 .hero__description .word:nth-child(3) { animation-delay: 360ms; }
@@ -30,31 +113,75 @@
 .hero__description .word:nth-child(10) { animation-delay: 920ms; }
 .hero__description .word:nth-child(n+11) { animation-delay: 1000ms; }
 
-/* ----- Scroll reveal (Phase 5) — IntersectionObserver adds .revealed ----- */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+/* Scroll reveal — IntersectionObserver adds .revealed */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.55s var(--ease-out-expo),
+      transform 0.55s var(--ease-out-expo);
+    transition-delay: calc(min(var(--i, 0), 10) * 45ms);
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal .work-card {
+    transition-delay: calc(min(var(--i, 0), 10) * 60ms);
+  }
+
+  .section-heading.reveal {
+    transform: translateY(16px);
+    transition:
+      opacity 0.55s var(--ease-out-expo) 0.05s,
+      transform 0.55s var(--ease-out-expo) 0.05s;
+  }
+
+  .work-list__group-label.reveal {
+    transform: translateY(12px);
+    transition-delay: 0ms;
+  }
+
+  .work-list__item.reveal {
+    transform: translateY(14px);
+  }
+
+  .gallery-masonry__item.reveal {
+    transform: translateY(18px) scale(0.985);
+    transition:
+      opacity 0.6s var(--ease-out-expo),
+      transform 0.6s var(--ease-spring);
+    transition-delay: calc(min(var(--i, 0), 8) * 50ms);
+  }
+
+  .gallery-masonry__item.reveal.revealed {
+    transform: translateY(0) scale(1);
+  }
+
+  .timeline__entry.reveal {
+    transform: translateX(-16px);
+  }
+
+  .timeline__entry.reveal.revealed {
+    transform: translateX(0);
+  }
 }
 
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 
-.reveal .work-card {
-  transition-delay: calc(var(--i, 0) * 80ms);
-}
+  .nav-overlay .nav-link {
+    opacity: 1;
+    transform: none;
+  }
 
-.section-heading.reveal {
-  transform: translateY(24px);
-  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
-}
-
-.timeline__entry.reveal {
-  transform: translateX(-20px);
-}
-
-.timeline__entry.reveal.revealed {
-  transform: translateX(0);
+  .gallery-masonry__trigger img {
+    opacity: 1;
+  }
 }

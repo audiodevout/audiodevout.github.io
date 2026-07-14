@@ -115,7 +115,7 @@ Profile-specific (`data/profile.json`):
 
 | Page | HTML shell | JS fills | Key DOM ids |
 |---|---|---|---|
-| `index.html` | Header, static SEO, pre-built list | `renderMarqueesSection`, `renderListSection` | `#marquees-content`, `#list-content` |
+| `index.html` | Header, static SEO, pre-built list | `renderListSection` | `#list-content` |
 | `gallery.html` | Empty masonry | `gallery.js` | `#gallery-root` |
 | `exhibitions.html` | H2 heading | `renderExhibitionsSection` | `#exhibitions-content` |
 | `archive.html` | H2 heading | `renderArchiveSection` | `#archive-content` |
@@ -131,7 +131,7 @@ Order mirrors `scripts/generate-work-pages.js` → `buildHomeListHtml`:
 3. **Visual categories** — `drawings` grouped by `category`, excluding `"VISUAL RESEARCH"`
 4. TouchDesigner Tutorials sorted by `youtubeDate` desc
 
-Home has two views toggled by `.view-toggle-button`: **list** (default) and **marquee** (`#marquees-content`).
+Home is **list-only** (`#list-content`). Cross-document view transitions and Speculation Rules prerender are enabled site-wide via shared CSS and `<script type="speculationrules">` in page shells.
 
 ### Gallery (`js/gallery.js`)
 
@@ -196,7 +196,8 @@ Checks work page count, canonical URLs, JSON-LD, script includes, homepage H1/ca
 | `js/router.js` | Active nav link state |
 | `js/nav.js` | Mobile nav toggle |
 | `js/theme.js` | Light/dark mode |
-| `js/marquee-lens.js` | Hover image preview on home list/marquee items |
+| `js/preview-lens.js` | Hover image preview on work list rows |
+| `js/transition-hints.js` | Optional pageswap/pagereveal link continuity |
 | `js/scroll-reveal.js` | Scroll-triggered `.reveal` animations |
 | `js/lightbox.js` | Legacy lightbox — **not** loaded on current listing pages |
 

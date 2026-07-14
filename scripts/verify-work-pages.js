@@ -254,10 +254,32 @@ function checkAboutPageSeo() {
 
 function checkWorkPagePersonReference(expectedIds) {
   if (expectedIds.length === 0) return;
-  var sampleId = expectedIds[0];
-  var html = fs.readFileSync(path.join(workDir, sampleId, "index.html"), "utf8");
-  if (html.indexOf('"@id":"https://atharvagupta.net/#person"') === -1) {
-    fail("Work pages should reference Person @id in JSON-LD creator");
+  var personId = '"@id":"https://atharvagupta.net/#person"';
+  var musicGroupId = '"@id":"https://atharvagupta.net/#asymmetrica"';
+  var hasPersonRef = false;
+  var hasMusicGroupRef = false;
+
+  expectedIds.forEach(function (id) {
+    var html = fs.readFileSync(path.join(workDir, id, "index.html"), "utf8");
+    if (html.indexOf(personId) !== -1) hasPersonRef = true;
+    if (html.indexOf(musicGroupId) !== -1) hasMusicGroupRef = true;
+  });
+
+  if (!hasPersonRef) {
+    fail("Work pages should reference Person @id in JSON-LD");
+  }
+  if (!hasMusicGroupRef) {
+    fail("Sound work pages should reference MusicGroup @id in JSON-LD");
+  }
+}
+
+function checkHomepageJsonLd() {
+  var html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  if (html.indexOf('"@type":"MusicGroup"') === -1) {
+    fail("index.html missing MusicGroup JSON-LD");
+  }
+  if (html.indexOf('"url":"https://atharvagupta.net/about.html"') === -1) {
+    fail("index.html Person JSON-LD should use about.html as canonical url");
   }
 }
 
@@ -273,6 +295,7 @@ checkUtilsAssetResolution();
 checkWorkDetailUsesResolve();
 checkPackageScripts();
 checkHomepageSeo();
+checkHomepageJsonLd();
 checkAboutPageSeo();
 checkWorkPagePersonReference(expectedIds);
 

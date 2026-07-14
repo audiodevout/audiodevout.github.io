@@ -23,10 +23,18 @@
   }
 
   function apply(theme) {
-    if (theme === LIGHT) {
-      document.documentElement.setAttribute('data-theme', 'light');
+    function update() {
+      if (theme === LIGHT) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    }
+
+    if (typeof document.startViewTransition === 'function') {
+      document.startViewTransition(update);
     } else {
-      document.documentElement.removeAttribute('data-theme');
+      update();
     }
   }
 

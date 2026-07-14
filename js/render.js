@@ -54,39 +54,6 @@
     return '';
   }
 
-  /** Build a text marquee with linked titles */
-  function createClickableMarquee(items, options) {
-    if (!items || items.length === 0) return null;
-    options = options || {};
-    var sep = options.separator !== undefined ? options.separator : ' // ';
-    var track = document.createElement('div');
-    track.className = 'marquee-track marquee-track--clickable';
-    var content = document.createElement('div');
-    content.className = 'marquee-content marquee-content--clickable';
-
-    function addItem(it) {
-      var link = document.createElement('a');
-      link.className = 'marquee-item';
-      link.href = workHref(it);
-      link.textContent = it.title || 'Untitled';
-      var thumb = firstImage(it);
-      if (thumb) {
-        link.setAttribute('data-preview-src', thumb);
-      }
-      content.appendChild(link);
-      var span = document.createElement('span');
-      span.className = 'marquee-sep';
-      span.textContent = sep;
-      span.setAttribute('aria-hidden', 'true');
-      content.appendChild(span);
-    }
-    items.forEach(addItem);
-    items.forEach(addItem);
-    items.forEach(addItem);
-    track.appendChild(content);
-    return track;
-  }
-
   function createCard(item, onClick) {
     var src = firstImage(item);
     var card = document.createElement('div');
@@ -176,55 +143,6 @@
     return sorted;
   }
 
-  function addLabeledMarquee(container, label, items) {
-    if (!items || items.length === 0) return;
-    var section = document.createElement('div');
-    section.className = 'work-marquee-section';
-    var heading = document.createElement('h3');
-    heading.className = 'work-subsection__label';
-    heading.textContent = label;
-    section.appendChild(heading);
-    var marquee = createClickableMarquee(items);
-    if (marquee) section.appendChild(marquee);
-    container.appendChild(section);
-  }
-
-  /** Single marquee block: Works, visual groups, Tutorials, Sound (subsection labels in JS). */
-  function renderMarqueesSection() {
-    var container = document.getElementById('marquees-content');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    var installations = dedupeById(data.projects.installations || []);
-    var performance = dedupeById(data.projects.performance || []);
-    var worksItems = installations.concat(performance);
-    var drawings = dedupeById(data.projects.drawings || []);
-    var excludeCategories = ['TouchDesigner Tutorials', 'VISUAL RESEARCH'];
-
-    addLabeledMarquee(container, 'Works', worksItems);
-
-    var visualGroups = sortVisualGroupsByYoutubeDate(groupByCategory(drawings));
-    Object.keys(visualGroups).forEach(function (cat) {
-      if (excludeCategories.indexOf(cat) === -1) addLabeledMarquee(container, cat, visualGroups[cat]);
-    });
-
-    var soundItems = dedupeById(data.projects.soundInstallations || []);
-    if (soundItems.length > 0) addLabeledMarquee(container, 'Sound', soundItems);
-
-    var youtubeItems = [];
-    [data.projects.installations, data.projects.performance, data.projects.drawings].filter(Boolean).forEach(function (arr) {
-      (arr || []).forEach(function (item) {
-        var ytUrl = (item.videos || []).find(function (url) { return url && (url.indexOf('youtube') !== -1 || url.indexOf('youtu.be') !== -1); });
-        if (ytUrl) youtubeItems.push(item);
-      });
-    });
-    addLabeledMarquee(container, 'Tutorials & Showcases', sortByYoutubeDate(youtubeItems));
-
-    var funItems = dedupeById(data.projects.funProjects || []);
-    if (funItems.length > 0) addLabeledMarquee(container, 'Fun Projects', funItems);
-  }
-
   var THESIS_ARCHIVE_ITEM = {
     id: 'thesis-instruments-for-becoming',
     title: 'Instruments for Becoming',
@@ -244,6 +162,7 @@
     linkTitle.className = 'work-list__title';
     linkTitle.textContent = item.title || '';
     link.appendChild(linkTitle);
+    link.classList.add('reveal');
 
     return link;
   }
@@ -260,9 +179,12 @@
     var listRoot = document.createElement('div');
     listRoot.className = 'work-list';
 
-    archiveItems.forEach(function (item) {
+    archiveItems.forEach(function (item, index) {
       var row = createArchiveListItem(item);
-      if (row) listRoot.appendChild(row);
+      if (row) {
+        row.style.setProperty('--i', Math.min(index + 1, 10));
+        listRoot.appendChild(row);
+      }
     });
 
     container.appendChild(listRoot);
@@ -297,13 +219,17 @@
     group.className = 'work-list__group';
 
     var h = document.createElement('h2');
-    h.className = 'work-list__group-label';
+    h.className = 'work-list__group-label reveal';
     h.textContent = heading;
     group.appendChild(h);
 
-    items.forEach(function (item) {
+    items.forEach(function (item, index) {
       var row = createListItem(item);
-      if (row) group.appendChild(row);
+      if (row) {
+        row.classList.add('reveal');
+        row.style.setProperty('--i', Math.min(index + 1, 10));
+        group.appendChild(row);
+      }
     });
 
     listRoot.appendChild(group);
@@ -481,13 +407,17 @@
     group.className = 'work-list__group';
 
     var h = document.createElement('h2');
-    h.className = 'work-list__group-label';
+    h.className = 'work-list__group-label reveal';
     h.textContent = heading;
     group.appendChild(h);
 
-    items.forEach(function (ex) {
+    items.forEach(function (ex, index) {
       var row = createExhibitionListItem(ex);
-      if (row) group.appendChild(row);
+      if (row) {
+        row.classList.add('reveal');
+        row.style.setProperty('--i', Math.min(index + 1, 10));
+        group.appendChild(row);
+      }
     });
 
     listRoot.appendChild(group);
@@ -656,58 +586,6 @@
     }
   }
 
-  /* ---------- Home view toggle (marquee vs list) ---------- */
-
-  function initHomeViewToggle() {
-    var toggleRoot = document.querySelector('.home-view-toggle');
-    if (!toggleRoot) return;
-
-    var marqueeEl = document.getElementById('marquees-content');
-    var listEl = document.getElementById('list-content');
-    var buttons = toggleRoot.querySelectorAll('.view-toggle-button');
-
-    if (!marqueeEl || !listEl || !buttons.length) return;
-
-    var currentView = 'list';
-    try {
-      var stored = sessionStorage.getItem('homeView');
-      if (stored === 'list' || stored === 'marquee') currentView = stored;
-    } catch (e) { /* ignore */ }
-
-    function applyView(view) {
-      currentView = view === 'list' ? 'list' : 'marquee';
-
-      marqueeEl.hidden = currentView !== 'marquee';
-      listEl.hidden = currentView !== 'list';
-
-      buttons.forEach(function (btn) {
-        var viewName = btn.getAttribute('data-view');
-        var isActive = viewName === currentView;
-        btn.classList.toggle('view-toggle-button--active', isActive);
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-
-      try {
-        sessionStorage.setItem('homeView', currentView);
-      } catch (e) { /* ignore */ }
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var viewName = btn.getAttribute('data-view');
-        applyView(viewName);
-      });
-      btn.addEventListener('keydown', function (e) {
-        if (e.key !== 'Enter' && e.key !== ' ') return;
-        e.preventDefault();
-        var viewName = btn.getAttribute('data-view');
-        applyView(viewName);
-      });
-    });
-
-    applyView(currentView);
-  }
-
   var initialized = false;
   function init() {
     data = (typeof window !== 'undefined') ? window.portfolioData : null;
@@ -721,9 +599,7 @@
     if (!data.projects) return;
     if (initialized) return;
     initialized = true;
-    renderMarqueesSection();
     renderListSection();
-    initHomeViewToggle();
 
     if (typeof window.refreshScrollReveal === 'function') {
       window.refreshScrollReveal();

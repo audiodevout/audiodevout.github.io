@@ -1,6 +1,6 @@
 /**
- * marquee-lens.js — cursor-following preview card (first project image).
- * Fine pointer + hover only; touch / coarse pointer: script exits (lightbox only).
+ * preview-lens.js — cursor-following preview on work list rows.
+ * Fine pointer + hover only; touch / coarse pointer: script exits.
  */
 (function () {
   'use strict';
@@ -31,10 +31,14 @@
 
   var lensEl;
   var baseImg;
-  var rafId = 0;
+  var followRaf = 0;
   var pendingX = 0;
   var pendingY = 0;
+  var pos = { x: 0, y: 0 };
+  var target = { x: 0, y: 0 };
   var active = false;
+  var visible = false;
+  var LERP = reduceMotion ? 1 : 0.28;
 
   function ensureLensDOM() {
     if (lensEl) return;
@@ -45,7 +49,7 @@
       svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
       var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
       var filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-      filter.setAttribute('id', 'marqueeLensWarp');
+      filter.setAttribute('id', 'previewLensWarp');
       filter.setAttribute('x', '-20%');
       filter.setAttribute('y', '-20%');
       filter.setAttribute('width', '140%');
@@ -70,19 +74,19 @@
     }
 
     lensEl = document.createElement('div');
-    lensEl.className = 'marquee-lens';
+    lensEl.className = 'preview-lens';
     lensEl.setAttribute('aria-hidden', 'true');
     lensEl.hidden = true;
 
     var innerEl = document.createElement('div');
-    innerEl.className = 'marquee-lens__card';
+    innerEl.className = 'preview-lens__card';
 
     baseImg = document.createElement('img');
-    baseImg.className = 'marquee-lens__base';
+    baseImg.className = 'preview-lens__base';
     baseImg.alt = '';
     baseImg.decoding = 'async';
     if (!reduceMotion) {
-      baseImg.style.filter = 'url(#marqueeLensWarp)';
+      baseImg.style.filter = 'url(#previewLensWarp)';
     }
 
     innerEl.appendChild(baseImg);
@@ -112,8 +116,7 @@
     applyCardSize(dims.w, dims.h);
   }
 
-  function setPosition(clientX, clientY) {
-    if (!lensEl) return;
+  function computePosition(clientX, clientY) {
     var x = clientX + OFFSET_X;
     var y = clientY + OFFSET_Y;
     var maxX = window.innerWidth - cardW - 8;
@@ -122,19 +125,51 @@
     if (y > maxY) y = clientY - cardH - OFFSET_Y;
     if (x < 8) x = 8;
     if (y < 8) y = 8;
+    return { x: x, y: y };
+  }
+
+  function applyPosition(x, y) {
+    if (!lensEl) return;
     lensEl.style.left = x + 'px';
     lensEl.style.top = y + 'px';
+  }
+
+  function followFrame() {
+    followRaf = 0;
+    if (!visible || !lensEl) return;
+
+    target = computePosition(pendingX, pendingY);
+    pos.x += (target.x - pos.x) * LERP;
+    pos.y += (target.y - pos.y) * LERP;
+
+    if (Math.abs(target.x - pos.x) < 0.4) pos.x = target.x;
+    if (Math.abs(target.y - pos.y) < 0.4) pos.y = target.y;
+
+    applyPosition(pos.x, pos.y);
+
+    if (active || Math.abs(target.x - pos.x) > 0.4 || Math.abs(target.y - pos.y) > 0.4) {
+      followRaf = requestAnimationFrame(followFrame);
+    }
+  }
+
+  function startFollow() {
+    if (followRaf) return;
+    followRaf = requestAnimationFrame(followFrame);
+  }
+
+  function snapPosition(clientX, clientY) {
+    var next = computePosition(clientX, clientY);
+    pos.x = next.x;
+    pos.y = next.y;
+    target = next;
+    applyPosition(pos.x, pos.y);
   }
 
   function onMove(e) {
     if (!active || !lensEl || lensEl.hidden) return;
     pendingX = e.clientX;
     pendingY = e.clientY;
-    if (rafId) return;
-    rafId = requestAnimationFrame(function () {
-      rafId = 0;
-      setPosition(pendingX, pendingY);
-    });
+    startFollow();
   }
 
   function show(src, e) {
@@ -143,15 +178,22 @@
     var utils = window.portfolioUtils || {};
     var thumbSrc = typeof utils.getThumbSrc === 'function' ? utils.getThumbSrc(src) : src;
     active = true;
+    visible = true;
     pendingX = e.clientX;
     pendingY = e.clientY;
     lensEl.hidden = false;
+    snapPosition(pendingX, pendingY);
+    requestAnimationFrame(function () {
+      if (lensEl) lensEl.classList.add('is-visible');
+    });
+    startFollow();
     baseImg.onload = null;
     baseImg.onerror = null;
 
     function afterImageReady() {
       syncCardToImage();
-      setPosition(pendingX, pendingY);
+      snapPosition(pendingX, pendingY);
+      startFollow();
     }
 
     if (baseImg.src === thumbSrc && baseImg.complete && baseImg.naturalWidth) {
@@ -164,31 +206,52 @@
       if (thumbSrc !== src) {
         baseImg.onerror = function () {
           applyCardSize(MAX_W, MAX_H);
-          setPosition(pendingX, pendingY);
+          snapPosition(pendingX, pendingY);
+          startFollow();
         };
         baseImg.src = src;
         return;
       }
       applyCardSize(MAX_W, MAX_H);
-      setPosition(pendingX, pendingY);
+      snapPosition(pendingX, pendingY);
+      startFollow();
     };
     baseImg.src = thumbSrc;
 
     if (baseImg.complete && baseImg.naturalWidth) {
       afterImageReady();
-    } else {
-      setPosition(pendingX, pendingY);
     }
   }
 
   function hide() {
     active = false;
-    if (lensEl) lensEl.hidden = true;
-    if (baseImg) {
-      baseImg.onload = null;
-      baseImg.onerror = null;
-      baseImg.removeAttribute('src');
+    if (!lensEl) return;
+
+    lensEl.classList.remove('is-visible');
+    visible = false;
+
+    function finishHide() {
+      if (active || !lensEl) return;
+      lensEl.hidden = true;
+      if (baseImg) {
+        baseImg.onload = null;
+        baseImg.onerror = null;
+        baseImg.removeAttribute('src');
+      }
     }
+
+    if (reduceMotion) {
+      finishHide();
+      return;
+    }
+
+    var onEnd = function (event) {
+      if (event.propertyName !== 'opacity') return;
+      lensEl.removeEventListener('transitionend', onEnd);
+      finishHide();
+    };
+    lensEl.addEventListener('transitionend', onEnd);
+    window.setTimeout(finishHide, 280);
   }
 
   function bindPreviewEl(el) {
@@ -203,28 +266,28 @@
 
   function bindStacks(root) {
     if (!root) return;
-    root.querySelectorAll('.marquee-item[data-preview-src], .work-list__item[data-preview-src]').forEach(bindPreviewEl);
+    root.querySelectorAll('.work-list__item[data-preview-src]').forEach(bindPreviewEl);
   }
 
   function init() {
-    var marqueeRoot = document.getElementById('marquees-content');
     var listRoot = document.getElementById('list-content');
     var exhibitionsRoot = document.getElementById('exhibitions-content');
-    if (!marqueeRoot && !listRoot && !exhibitionsRoot) return;
+    var archiveRoot = document.getElementById('archive-content');
+    if (!listRoot && !exhibitionsRoot && !archiveRoot) return;
 
     function bindAll() {
-      bindStacks(marqueeRoot);
       bindStacks(listRoot);
       bindStacks(exhibitionsRoot);
+      bindStacks(archiveRoot);
     }
     bindAll();
 
     var obs = new MutationObserver(function () {
       bindAll();
     });
-    if (marqueeRoot) obs.observe(marqueeRoot, { childList: true, subtree: true });
     if (listRoot) obs.observe(listRoot, { childList: true, subtree: true });
     if (exhibitionsRoot) obs.observe(exhibitionsRoot, { childList: true, subtree: true });
+    if (archiveRoot) obs.observe(archiveRoot, { childList: true, subtree: true });
     document.addEventListener('scroll', hide, { passive: true, capture: true });
     window.addEventListener('blur', hide);
   }

@@ -13,10 +13,7 @@
 
 /* Clear fixed nav, then add breathing room before page content */
 .main.work-page {
-  padding-top: max(
-    calc(52px + env(safe-area-inset-top, 0px) + var(--space-8)),
-    calc(var(--space-12) + var(--space-8))
-  );
+  padding-top: calc(var(--site-header-height) + var(--space-8));
 }
 
 .work-page__toolbar {
@@ -41,6 +38,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+}
+
+@supports not (view-transition-name: none) {
+  @media (prefers-reduced-motion: no-preference) {
+    .work-page__article {
+      animation: main-enter 0.55s var(--ease-out-expo) both;
+    }
+  }
 }
 
 .work-page__header {

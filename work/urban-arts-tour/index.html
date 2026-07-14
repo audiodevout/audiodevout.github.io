@@ -17,7 +17,7 @@
   <title>Urban Arts Tour: Extended Living Room — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Urban Arts Tour: Extended Living Room","description":"Urban Arts Tour — Extended Living Room at Forum/Nieuwe Markt. Showed the rain-stick piece from Instruments for Becoming outdoors as a slow, weather-like kineti…","url":"https://atharvagupta.net/work/urban-arts-tour/","image":"https://atharvagupta.net/assets/images/installations/instruments-for-becoming/rain-stick-4.webp","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"Urban Arts Tour: Extended Living Room","description":"Urban Arts Tour — Extended Living Room at Forum/Nieuwe Markt. Showed the rain-stick piece from Instruments for Becoming outdoors as a slow, weather-like kineti…","url":"https://atharvagupta.net/work/urban-arts-tour/","image":"https://atharvagupta.net/assets/images/installations/instruments-for-becoming/rain-stick-4.webp","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"Nieuwe Markt/Forum, Groningen, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

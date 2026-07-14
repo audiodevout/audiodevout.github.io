@@ -27,6 +27,21 @@
   <link rel="stylesheet" href="./layout.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -79,6 +94,7 @@
   <script src="./js/utils.js"></script>
   <script src="./js/work-lookup.js"></script>
   <script src="./js/gallery.js"></script>
+  <script src="./js/scroll-reveal.js"></script>
   <script src="./js/router.js"></script>
   <script src="./js/nav.js"></script>
   <script src="./js/theme.js"></script>

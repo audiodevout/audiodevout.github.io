@@ -145,19 +145,29 @@
     updateExpandView();
     expandEl.hidden = false;
     document.body.classList.add('gallery-expand-open');
+    requestAnimationFrame(function () {
+      expandEl.classList.add('is-open');
+    });
     expandClose.focus();
   }
 
   function closeExpand() {
     if (!expandEl || expandEl.hidden) return;
-    expandEl.hidden = true;
-    expandImg.removeAttribute('src');
+    expandEl.classList.remove('is-open');
     document.body.classList.remove('gallery-expand-open');
     expandState = null;
-    if (lastFocused) {
-      try { lastFocused.focus(); } catch (e) { /* noop */ }
-      lastFocused = null;
+
+    function finishClose() {
+      if (expandEl.classList.contains('is-open')) return;
+      expandEl.hidden = true;
+      expandImg.removeAttribute('src');
+      if (lastFocused) {
+        try { lastFocused.focus(); } catch (e) { /* noop */ }
+        lastFocused = null;
+      }
     }
+
+    window.setTimeout(finishClose, 360);
   }
 
   function stepExpand(delta) {
@@ -183,10 +193,15 @@
     return list;
   }
 
+  function markImageLoaded(img) {
+    img.classList.add('is-loaded');
+  }
+
   function createImageFigure(entry, flatIndex) {
     var item = entry.item;
     var figure = document.createElement('figure');
-    figure.className = 'gallery-masonry__item';
+    figure.className = 'gallery-masonry__item reveal';
+    figure.style.setProperty('--i', Math.min(flatIndex % 9, 8));
     figure.style.setProperty('--gallery-accent', resolveAccent(item.color));
 
     var button = document.createElement('button');
@@ -202,8 +217,15 @@
     img.addEventListener('load', function onLoad() {
       if (img.naturalWidth) img.width = img.naturalWidth;
       if (img.naturalHeight) img.height = img.naturalHeight;
+      markImageLoaded(img);
       img.removeEventListener('load', onLoad);
     });
+    img.addEventListener('error', function () {
+      markImageLoaded(img);
+    });
+    if (img.complete && img.naturalWidth) {
+      markImageLoaded(img);
+    }
 
     var caption = document.createElement('span');
     caption.className = 'gallery-masonry__caption';
@@ -245,6 +267,10 @@
     });
 
     if (loadingEl) loadingEl.hidden = true;
+
+    if (typeof window.refreshScrollReveal === 'function') {
+      window.refreshScrollReveal();
+    }
   }
 
   function initFromData(data) {

@@ -13,7 +13,7 @@
   <meta property="og:type" content="profile" />
   <title>About — Atharva Gupta</title>
   <!-- GENERATE:about-jsonld:start -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfilePage","@id":"https://atharvagupta.net/about.html#profilepage","url":"https://atharvagupta.net/about.html","name":"About Atharva Gupta","description":"About Atharva Gupta, new media artist and sculptor.","mainEntity":{"@id":"https://atharvagupta.net/#person"}},{"@type":"Person","@id":"https://atharvagupta.net/#person","name":"Atharva Gupta","url":"https://atharvagupta.net/","image":"https://atharvagupta.net/assets/images/profile/atharva.jpeg","jobTitle":"New Media Artist","description":"Artist and researcher working with sound, technology, sculpture, and spatial practice.","knowsAbout":["New Media Art","Sculpture","Sound Art","Installation Art","Audiovisual Performance","TouchDesigner"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"Frank Mohr Institute, Minerva Academy"}],"sameAs":["https://asymmetrica.bandcamp.com/","https://www.instagram.com/asymmetrica_/","https://www.instagram.com/audiodevout/","https://www.linkedin.com/in/atharva--gupta/","https://www.patreon.com/audiodevout","https://www.youtube.com/@audiodevout"]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfilePage","@id":"https://atharvagupta.net/about.html#profilepage","url":"https://atharvagupta.net/about.html","name":"About Atharva Gupta","description":"About Atharva Gupta, new media artist and sculptor.","mainEntity":{"@id":"https://atharvagupta.net/#person"}},{"@type":"Person","@id":"https://atharvagupta.net/#person","name":"Atharva Gupta","url":"https://atharvagupta.net/about.html","image":"https://atharvagupta.net/assets/images/profile/atharva.jpeg","jobTitle":"New Media Artist","description":"Artist and researcher working with sound, technology, sculpture, and spatial practice.","knowsAbout":["New Media Art","Sculpture","Sound Art","Installation Art","Audiovisual Performance","TouchDesigner"],"homeLocation":{"@type":"Place","name":"Groningen, Netherlands"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"Frank Mohr Institute, Minerva Academy"}],"sameAs":["https://asymmetrica.bandcamp.com/","https://www.instagram.com/asymmetrica_/","https://www.instagram.com/audiodevout/","https://www.linkedin.com/in/atharva--gupta/","https://www.patreon.com/audiodevout","https://www.youtube.com/@audiodevout"]},{"@type":"MusicGroup","@id":"https://atharvagupta.net/#asymmetrica","name":"asymmetrica","genre":["Experimental","Electronic","Sound Art"],"sameAs":["https://asymmetrica.bandcamp.com/","https://www.instagram.com/asymmetrica_/"],"member":{"@id":"https://atharvagupta.net/#person"}}]}</script>
   <!-- GENERATE:about-jsonld:end -->
   <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
@@ -37,6 +37,21 @@
   <link rel="stylesheet" href="./layout.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
 </head>
 <body>
   <header class="site-header" role="banner">

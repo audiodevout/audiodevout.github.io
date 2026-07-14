@@ -17,7 +17,7 @@
   <title>RE:Arrange! #2 — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"RE:Arrange! #2","description":"Second version of RE:Arrange! at NP3 RE:Search:Gallery, RE:Arranged by Sander Jorn Vermeulen (Kunstpunt Groningen — Art in Public Space). NP3 × Frank Mohr Inst…","url":"https://atharvagupta.net/work/rearrange-2/","image":"https://atharvagupta.net/assets/images/exhibitions/rearrange-2/Insta_POST_Rearrange2_jpeg_NP3-768x960.webp","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"RE:Arrange! #2","description":"Second version of RE:Arrange! at NP3 RE:Search:Gallery, RE:Arranged by Sander Jorn Vermeulen (Kunstpunt Groningen — Art in Public Space). NP3 × Frank Mohr Inst…","url":"https://atharvagupta.net/work/rearrange-2/","image":"https://atharvagupta.net/assets/images/exhibitions/rearrange-2/Insta_POST_Rearrange2_jpeg_NP3-768x960.webp","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"NP3 / RE:Search:Gallery, Groningen, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

@@ -17,7 +17,7 @@
   <title>Diverse Digital Dimensions: Error – Failure Is an Opti… — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Diverse Digital Dimensions: Error – Failure Is an Option, Part Three","description":"NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) × MADTech (Frank Mohr Institute): four Live Labs on co-making in an op…","url":"https://atharvagupta.net/work/ddd-error-failure-option-pt3/","image":"https://atharvagupta.net/assets/images/exhibitions/diverse-digital-dimensions/Screenshot 2026-06-21 171305.webp","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"Diverse Digital Dimensions: Error – Failure Is an Option, Part Three","description":"NAIP European Music Masters (Prince Claus Conservatoire, Iceland University of the Arts) × MADTech (Frank Mohr Institute): four Live Labs on co-making in an op…","url":"https://atharvagupta.net/work/ddd-error-failure-option-pt3/","image":"https://atharvagupta.net/assets/images/exhibitions/diverse-digital-dimensions/Screenshot 2026-06-21 171305.webp","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"Grand Theatre Groningen, Groningen, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

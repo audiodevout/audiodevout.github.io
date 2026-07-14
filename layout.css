@@ -6,6 +6,20 @@ html {
   background: var(--body-bg);
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-theme);
+  scroll-padding-top: calc(var(--site-header-height) + var(--space-4));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:target {
+  scroll-margin-top: calc(var(--site-header-height) + var(--space-4));
 }
 html::-webkit-scrollbar {
   width: 10px;
@@ -31,6 +45,9 @@ body {
   background: var(--body-bg);
   background-attachment: fixed;
   overflow-x: hidden;
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme);
 }
 
 /* Global: prevent images from exceeding container width */
@@ -40,7 +57,7 @@ img {
 
 .main {
   min-height: 100vh;
-  padding-top: var(--space-12);
+  padding-top: var(--site-header-height);
 }
 
 /* Section spacing — full display width with edge padding */
@@ -51,29 +68,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-}
-
-/* Full-viewport presence without zoom (avoids blurry text and “small island” feel) */
-.section--marquees {
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-10);
-  padding-left: clamp(var(--space-4), 3vw, var(--space-10));
-  padding-right: clamp(var(--space-4), 3vw, var(--space-10));
-}
-
-.section--marquees:first-of-type {
-  padding-top: max(var(--space-10), calc(52px + env(safe-area-inset-top, 0px)));
-  min-height: min(88vh, 960px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-/* JS toggles hidden; author .section--marquees display:flex must not beat the attribute */
-#marquees-content[hidden],
-#list-content[hidden] {
-  display: none !important;
 }
 
 /* Phase 6c: section stacking for atmosphere overlays */

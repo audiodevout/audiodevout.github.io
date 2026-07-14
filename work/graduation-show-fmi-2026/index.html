@@ -17,7 +17,7 @@
   <title>29 Ways Out — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"29 Ways Out","description":"Graduation Show — Masters Frank Mohr Institute. Group graduation show at the Akerk, Groningen. Instruments for Becoming presented as part of the Media, Art, De…","url":"https://atharvagupta.net/work/graduation-show-fmi-2026/","image":"https://atharvagupta.net/assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (1).webp","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"29 Ways Out","description":"Graduation Show — Masters Frank Mohr Institute. Group graduation show at the Akerk, Groningen. Instruments for Becoming presented as part of the Media, Art, De…","url":"https://atharvagupta.net/work/graduation-show-fmi-2026/","image":"https://atharvagupta.net/assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk (1).webp","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"Akerk, Groningen, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

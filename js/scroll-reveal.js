@@ -33,7 +33,7 @@
         entry.target.classList.add('revealed');
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.15, rootMargin: '0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
     return observer;
   }
 
@@ -43,7 +43,9 @@
     reveals.forEach(function (el, i) {
       if (alreadyObserved(el)) return;
       markObserved(el);
-      el.style.setProperty('--i', i);
+      if (!el.style.getPropertyValue('--i')) {
+        el.style.setProperty('--i', i);
+      }
       if (isInViewport(el)) {
         el.classList.add('revealed');
         return;

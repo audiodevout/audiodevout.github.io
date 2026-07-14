@@ -48,6 +48,9 @@ var PERSON_KNOWS_ABOUT = [
   "Audiovisual Performance",
   "TouchDesigner",
 ];
+var PERSON_HOME_LOCATION = "Groningen, Netherlands";
+var MUSIC_GROUP_NAME = "asymmetrica";
+var MUSIC_GROUP_GENRE = ["Experimental", "Electronic", "Sound Art"];
 
 function readCnameBase() {
   var cnamePath = path.join(root, "CNAME");
@@ -185,17 +188,13 @@ function pageMeta(entry) {
     ? '<p class="work-page__category">' + escapeHtml(category) + "</p>"
     : "";
 
-  var jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: title,
-    description: metaDescription,
-    url: canonical,
-    image: ogImage,
-    creator: {
-      "@id": BASE_URL + "/#person",
-    },
-  };
+  var jsonLd = buildWorkJsonLd(entry, {
+    title: title,
+    metaDescription: metaDescription,
+    canonical: canonical,
+    ogImage: ogImage,
+    category: category,
+  });
 
   return {
     id: item.id,
@@ -354,17 +353,30 @@ function readSameAsUrls() {
     .filter(Boolean);
 }
 
+function readMusicGroupSameAs() {
+  return readSameAsUrls().filter(function (url) {
+    return (
+      url.indexOf("asymmetrica.bandcamp.com") !== -1 ||
+      url.indexOf("instagram.com/asymmetrica_") !== -1
+    );
+  });
+}
+
 function buildPersonNode(sameAs) {
   return {
     "@type": "Person",
     "@id": BASE_URL + "/#person",
     name: CREATOR_NAME,
-    url: BASE_URL + "/",
+    url: BASE_URL + "/about.html",
     image: BASE_URL + FALLBACK_OG_IMAGE,
     jobTitle: "New Media Artist",
     description:
       "Artist and researcher working with sound, technology, sculpture, and spatial practice.",
     knowsAbout: PERSON_KNOWS_ABOUT,
+    homeLocation: {
+      "@type": "Place",
+      name: PERSON_HOME_LOCATION,
+    },
     alumniOf: [
       {
         "@type": "CollegeOrUniversity",
@@ -373,6 +385,73 @@ function buildPersonNode(sameAs) {
     ],
     sameAs: sameAs,
   };
+}
+
+function buildMusicGroupNode() {
+  return {
+    "@type": "MusicGroup",
+    "@id": BASE_URL + "/#asymmetrica",
+    name: MUSIC_GROUP_NAME,
+    genre: MUSIC_GROUP_GENRE,
+    sameAs: readMusicGroupSameAs(),
+    member: { "@id": BASE_URL + "/#person" },
+  };
+}
+
+function buildWorkJsonLd(entry, meta) {
+  var item = entry.item;
+  var kind = entry.kind;
+  var jsonLd = {
+    "@context": "https://schema.org",
+    name: meta.title,
+    description: meta.metaDescription,
+    url: meta.canonical,
+    image: meta.ogImage,
+  };
+
+  if (kind === "exhibition" || kind === "performance") {
+    jsonLd["@type"] = "VisualArtsEvent";
+    jsonLd.performer = { "@id": BASE_URL + "/#person" };
+    var placeName = [item.venue, item.location].filter(Boolean).join(", ");
+    if (placeName) {
+      jsonLd.location = {
+        "@type": "Place",
+        name: placeName,
+      };
+    }
+    return jsonLd;
+  }
+
+  if (kind === "visual" && item.category === "VISUAL RESEARCH") {
+    jsonLd["@type"] = "VisualArtwork";
+    jsonLd.creator = { "@id": BASE_URL + "/#person" };
+    jsonLd.artform = "Digital art";
+    jsonLd.artMedium = "Digital";
+    return jsonLd;
+  }
+
+  if (kind === "installation") {
+    jsonLd["@type"] = "VisualArtwork";
+    jsonLd.creator = { "@id": BASE_URL + "/#person" };
+    jsonLd.artform = "Installation";
+    return jsonLd;
+  }
+
+  if (kind === "sound") {
+    jsonLd["@type"] = "MusicRecording";
+    jsonLd.byArtist = { "@id": BASE_URL + "/#asymmetrica" };
+    return jsonLd;
+  }
+
+  if (kind === "writing") {
+    jsonLd["@type"] = "Article";
+    jsonLd.author = { "@id": BASE_URL + "/#person" };
+    return jsonLd;
+  }
+
+  jsonLd["@type"] = "CreativeWork";
+  jsonLd.creator = { "@id": BASE_URL + "/#person" };
+  return jsonLd;
 }
 
 function buildHomeJsonLd(sameAs) {
@@ -388,6 +467,7 @@ function buildHomeJsonLd(sameAs) {
         author: { "@id": BASE_URL + "/#person" },
       },
       buildPersonNode(sameAs),
+      buildMusicGroupNode(),
     ],
   });
 }
@@ -405,6 +485,7 @@ function buildAboutJsonLd(sameAs) {
         mainEntity: { "@id": BASE_URL + "/#person" },
       },
       buildPersonNode(sameAs),
+      buildMusicGroupNode(),
     ],
   });
 }

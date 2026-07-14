@@ -17,7 +17,7 @@
   <title>Let's Get Lyrical met Cissy Joan — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Let's Get Lyrical met Cissy Joan","description":"VJ performance with Romano Liu and Dara McHugh Murphy at Grand Theatre. (Don't) forget it—between wanting to forget and wanting to remember, the paradox tries…","url":"https://atharvagupta.net/work/lets-get-lyrical-vj-2025/","image":"https://atharvagupta.net/assets/images/profile/atharva.jpeg","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"Let's Get Lyrical met Cissy Joan","description":"VJ performance with Romano Liu and Dara McHugh Murphy at Grand Theatre. (Don't) forget it—between wanting to forget and wanting to remember, the paradox tries…","url":"https://atharvagupta.net/work/lets-get-lyrical-vj-2025/","image":"https://atharvagupta.net/assets/images/profile/atharva.jpeg","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"Grand Theatre Groningen, Groningen, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");

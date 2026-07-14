@@ -17,7 +17,7 @@
   <title>5th European Culture and Technology Lab+ Annual Confer… — Atharva Gupta</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"5th European Culture and Technology Lab+ Annual Conference","description":"Talk at the 5th ECT Lab+ (Baltan Laboratories): Symmetrical Fictions—technology, contemporary art, and speculative research.","url":"https://atharvagupta.net/work/ectlab5-symmetrical-fictions/","image":"https://atharvagupta.net/assets/images/exhibitions/ectlab5-symmetrical-fictions/ect5.webp","creator":{"@id":"https://atharvagupta.net/#person"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"5th European Culture and Technology Lab+ Annual Conference","description":"Talk at the 5th ECT Lab+ (Baltan Laboratories): Symmetrical Fictions—technology, contemporary art, and speculative research.","url":"https://atharvagupta.net/work/ectlab5-symmetrical-fictions/","image":"https://atharvagupta.net/assets/images/exhibitions/ectlab5-symmetrical-fictions/ect5.webp","@type":"VisualArtsEvent","performer":{"@id":"https://atharvagupta.net/#person"},"location":{"@type":"Place","name":"Baltan Laboratories, Eindhoven, NL"}}</script>
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
   <script>
     if (location.protocol !== "file:") {
       var gc = document.createElement("script");
