@@ -603,10 +603,24 @@ function patchMarkers(filePath, replacements) {
   fs.writeFileSync(filePath, html, "utf8");
 }
 
+function patchHomeMetaDescriptions(html) {
+  var escaped = escapeHtml(HOME_META_DESCRIPTION);
+  return html
+    .replace(
+      /(<meta name="description" content=")[^"]*(")/,
+      "$1" + escaped + "$2"
+    )
+    .replace(
+      /(<meta property="og:description" content=")[^"]*(")/,
+      "$1" + escaped + "$2"
+    );
+}
+
 function writeHomePageSeo() {
   var profile = readJson("profile.json");
   var sameAs = readSameAsUrls();
-  patchMarkers(path.join(root, "index.html"), {
+  var indexPath = path.join(root, "index.html");
+  patchMarkers(indexPath, {
     "home-jsonld":
       '  <script type="application/ld+json">' +
       buildHomeJsonLd(sameAs) +
@@ -615,6 +629,8 @@ function writeHomePageSeo() {
     "home-list": buildHomeListHtml(),
     "home-footer": buildFooterHtml(),
   });
+  var html = fs.readFileSync(indexPath, "utf8");
+  fs.writeFileSync(indexPath, patchHomeMetaDescriptions(html), "utf8");
   console.log("Updated homepage SEO snapshot in index.html");
 }
 
