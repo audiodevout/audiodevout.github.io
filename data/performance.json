@@ -12,6 +12,10 @@
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
       "themes": "Embodied computation, glitch aesthetics, slow music, gesture-controlled performance, poetic control systems",
       "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.webp", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.webp"],
+      "videos": [
+        "./assets/video/gesture1 (1).mp4",
+        "./assets/video/gesture1 (2).mp4"
+      ],
       "bandcampTracks": [
         {
           "title": "G.C.P.S.S.M.",

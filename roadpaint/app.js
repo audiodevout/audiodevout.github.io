@@ -4,7 +4,6 @@ import * as THREE from 'three';
 const WORLD = {
   groundY: 0.02,
   roadY: 0.08,
-  mapHalfSize: 100,
 };
 
 const ROAD = {
@@ -1116,6 +1115,15 @@ function updateCameraSize(camera, width, height) {
   camera.updateProjectionMatrix();
 }
 
+function updateGroundSize(ground, camera, width, height) {
+  if (width === 0 || height === 0) return;
+
+  const viewHeight = camera.userData.viewSize;
+  const viewWidth = viewHeight * (width / height);
+  const overscan = 1.02;
+  ground.scale.set(viewWidth * overscan, viewHeight * overscan, 1);
+}
+
 function setupScene() {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(COLORS.sky);
@@ -1143,9 +1151,8 @@ function setupScene() {
 
   scene.add(sunLight);
 
-  const mapSize = WORLD.mapHalfSize * 2;
   const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(mapSize, mapSize),
+    new THREE.PlaneGeometry(1, 1),
     new THREE.MeshLambertMaterial({ color: COLORS.ground })
   );
   ground.rotation.x = -Math.PI / 2;
@@ -1177,6 +1184,7 @@ function setupScene() {
   camera.position.set(0, CAMERA.birdEyeHeight, 0);
   camera.lookAt(0, 0, 0);
   camera.userData.viewSize = CAMERA.birdEyeViewSize;
+  updateGroundSize(ground, camera, window.innerWidth, window.innerHeight);
 
   return { scene, ground, camera, setBackground };
 }
@@ -1198,12 +1206,13 @@ function setupRenderer() {
   return renderer;
 }
 
-function onResize(renderer, camera) {
+function onResize(renderer, camera, ground) {
   const width = window.innerWidth;
   const height = window.innerHeight;
   if (width === 0 || height === 0) return;
 
   updateCameraSize(camera, width, height);
+  updateGroundSize(ground, camera, width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(width, height);
 }
@@ -1390,6 +1399,19 @@ function makeDraggable(panel, handle) {
   let startY = 0;
   let startLeft = 0;
   let startTop = 0;
+  const dockedPhoneQuery = window.matchMedia(
+    '(max-width: 640px) and (orientation: portrait)'
+  );
+
+  function getViewportBounds() {
+    const viewport = window.visualViewport;
+    return {
+      left: viewport?.offsetLeft ?? 0,
+      top: viewport?.offsetTop ?? 0,
+      width: viewport?.width ?? window.innerWidth,
+      height: viewport?.height ?? window.innerHeight,
+    };
+  }
 
   function anchorPanel() {
     const rect = panel.getBoundingClientRect();
@@ -1400,18 +1422,46 @@ function makeDraggable(panel, handle) {
   }
 
   function clampPosition(left, top) {
-    const maxLeft = Math.max(0, window.innerWidth - panel.offsetWidth);
-    const maxTop = Math.max(0, window.innerHeight - panel.offsetHeight);
+    const viewport = getViewportBounds();
+    const maxLeft = Math.max(viewport.left, viewport.left + viewport.width - panel.offsetWidth);
+    const maxTop = Math.max(viewport.top, viewport.top + viewport.height - panel.offsetHeight);
     return {
-      left: Math.max(0, Math.min(left, maxLeft)),
-      top: Math.max(0, Math.min(top, maxTop)),
+      left: clamp(left, viewport.left, maxLeft),
+      top: clamp(top, viewport.top, maxTop),
     };
+  }
+
+  function reflow() {
+    if (dockedPhoneQuery.matches) {
+      panel.style.removeProperty('left');
+      panel.style.removeProperty('right');
+      panel.style.removeProperty('top');
+      panel.style.removeProperty('bottom');
+      return;
+    }
+
+    const rect = panel.getBoundingClientRect();
+    const { left, top } = clampPosition(rect.left, rect.top);
+
+    if (panel.classList.contains('paint-panel-minimized')) {
+      panel.style.right = 'auto';
+      panel.style.left = `${left}px`;
+      panel.style.removeProperty('top');
+      return;
+    }
+
+    if (panel.style.left) {
+      panel.style.right = 'auto';
+      panel.style.left = `${left}px`;
+      panel.style.top = `${top}px`;
+    }
   }
 
   function onPointerDown(event) {
     if (event.button !== 0) return;
     if (event.target.closest('.win-titlebar-buttons')) return;
     if (panel.classList.contains('paint-panel-minimized')) return;
+    if (dockedPhoneQuery.matches) return;
 
     event.preventDefault();
     const pos = anchorPanel();
@@ -1446,6 +1496,11 @@ function makeDraggable(panel, handle) {
   handle.addEventListener('pointermove', onPointerMove);
   handle.addEventListener('pointerup', endDrag);
   handle.addEventListener('pointercancel', endDrag);
+
+  return {
+    isDocked: () => dockedPhoneQuery.matches,
+    reflow,
+  };
 }
 
 function buildToolbar({ onChange, onBackgroundChange, onReset, onToolChange }) {
@@ -1527,21 +1582,27 @@ function buildToolbar({ onChange, onBackgroundChange, onReset, onToolChange }) {
     savedPosition = { left: rect.left, top: rect.top };
 
     panel.style.right = 'auto';
-    const maxLeft = Math.max(0, window.innerWidth - panel.offsetWidth);
-    panel.style.left = `${Math.max(8, Math.min(savedPosition.left, maxLeft))}px`;
+    panel.style.left = `${savedPosition.left}px`;
     panel.style.top = 'auto';
     panel.classList.add('paint-panel-minimized');
+    dragController.reflow();
   }
 
   function restore() {
     if (!panel.classList.contains('paint-panel-minimized')) return;
 
     panel.classList.remove('paint-panel-minimized');
-    if (savedPosition) {
+    if (savedPosition && !dragController.isDocked()) {
       panel.style.left = `${savedPosition.left}px`;
       panel.style.top = `${savedPosition.top}px`;
       panel.style.right = 'auto';
+    } else {
+      panel.style.removeProperty('left');
+      panel.style.removeProperty('right');
+      panel.style.removeProperty('top');
+      panel.style.removeProperty('bottom');
     }
+    dragController.reflow();
   }
 
   minimizeBtn.addEventListener('click', (event) => {
@@ -1555,7 +1616,7 @@ function buildToolbar({ onChange, onBackgroundChange, onReset, onToolChange }) {
     restore();
   });
 
-  makeDraggable(panel, titlebar);
+  const dragController = makeDraggable(panel, titlebar);
 
   const widthInput = panel.querySelector('#brush-width');
   const widthValue = panel.querySelector('#width-value');
@@ -1667,6 +1728,7 @@ function buildToolbar({ onChange, onBackgroundChange, onReset, onToolChange }) {
     getBrush: () => brush,
     getBackground: () => background,
     getTool: () => tool,
+    reflow: () => dragController.reflow(),
   };
 }
 
@@ -1675,6 +1737,10 @@ const MAX_FRAME_DT = 0.033;
 
 let lastFrameTime = performance.now();
 let isVisible = !document.hidden;
+
+// Start the dismissal timer before WebGL setup so the splash cannot remain
+// stuck if initialization is slow or a device fails to create the renderer.
+initSplash();
 
 const renderer = setupRenderer();
 const { scene, ground, camera, setBackground } = setupScene();
@@ -1859,11 +1925,13 @@ try {
 }
 
 function handleResize() {
-  onResize(renderer, camera);
+  onResize(renderer, camera, ground);
+  paintToolbar.reflow();
 }
 
-onResize(renderer, camera);
+onResize(renderer, camera, ground);
 window.addEventListener('resize', handleResize, { passive: true });
+window.visualViewport?.addEventListener('resize', handleResize, { passive: true });
 
 document.addEventListener('visibilitychange', () => {
   isVisible = !document.hidden;
@@ -1908,11 +1976,10 @@ function initSplash() {
   window.addEventListener('keydown', dismiss);
 }
 
-initSplash();
-
 window.addEventListener('beforeunload', () => {
   renderer.setAnimationLoop(null);
   window.removeEventListener('resize', handleResize);
+  window.visualViewport?.removeEventListener('resize', handleResize);
   traffic.dispose();
   resetAll();
   renderer.dispose();

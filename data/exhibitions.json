@@ -192,7 +192,10 @@
       "images": [],
       "urls": {
         "instagram": "https://www.instagram.com/p/DP02M8qCJLl/"
-      }
+      },
+      "videos": [
+        "./assets/video/letsgetlyrical.mp4"
+      ]
     },
     {
       "id": "noorderlicht-student-open-call-2025",

@@ -12,13 +12,17 @@
 html,
 body {
   margin: 0;
+  width: 100%;
   height: 100%;
+  min-height: 100%;
   overflow: hidden;
   background: #008080;
   font-family: 'MS Sans Serif', 'Tahoma', 'Segoe UI', sans-serif;
 }
 
 canvas {
+  position: fixed;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -44,8 +48,8 @@ canvas {
 
 #hint {
   position: fixed;
-  left: 10px;
-  bottom: 10px;
+  left: max(10px, env(safe-area-inset-left));
+  bottom: max(10px, env(safe-area-inset-bottom));
   padding: 4px 8px;
   background: var(--win-face);
   color: var(--win-text);
@@ -61,8 +65,8 @@ canvas {
 
 #error {
   position: fixed;
-  left: 10px;
-  top: 10px;
+  left: max(10px, env(safe-area-inset-left));
+  top: max(10px, env(safe-area-inset-top));
   max-width: min(420px, calc(100vw - 32px));
   padding: 8px 10px;
   background: var(--win-face);
@@ -77,9 +81,12 @@ canvas {
 
 #paint-panel {
   position: fixed;
-  top: 12px;
-  right: 12px;
-  width: 228px;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  width: clamp(228px, 24vw, 280px);
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
   z-index: 10;
   box-sizing: border-box;
   overflow: hidden;
@@ -171,7 +178,13 @@ canvas {
 .win-body {
   padding: 6px;
   box-sizing: border-box;
-  overflow: hidden;
+  max-height: calc(100vh - 46px);
+  max-height: calc(100dvh - 46px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
 }
 
 .win-group {
@@ -582,6 +595,126 @@ input[type='range']::-moz-range-thumb {
 
 @keyframes roadScroll {
   to { background-position: -88px 0; }
+}
+
+/* Tablet and touch layouts */
+@media (max-width: 1024px), (pointer: coarse) {
+  #paint-panel {
+    width: clamp(244px, 32vw, 288px);
+  }
+
+  .win-titlebar {
+    min-height: 28px;
+  }
+
+  .win-tb-btn {
+    width: 26px;
+    height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .tool-btn {
+    min-height: 38px;
+    height: auto;
+    padding: 6px 4px;
+  }
+
+  .win-btn {
+    min-height: 38px;
+    height: auto;
+  }
+
+  .color-input-sm {
+    width: 36px;
+    height: 32px;
+  }
+
+  .swatches {
+    gap: 2px;
+  }
+
+  .swatch {
+    min-height: 26px;
+  }
+
+  input[type='range'] {
+    height: 28px;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 18px;
+    height: 26px;
+    margin-top: -12px;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 16px;
+    height: 24px;
+  }
+}
+
+/* Phones in portrait use a docked, scrollable bottom window. */
+@media (max-width: 640px) and (orientation: portrait) {
+  #paint-panel,
+  #paint-panel.paint-panel-minimized {
+    top: auto !important;
+    right: max(8px, env(safe-area-inset-right)) !important;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    left: max(8px, env(safe-area-inset-left)) !important;
+    width: auto;
+    max-width: none;
+    max-height: min(62vh, 540px);
+    max-height: min(62dvh, 540px);
+  }
+
+  #paint-panel.paint-panel-minimized {
+    width: auto;
+  }
+
+  .win-body {
+    max-height: calc(min(62vh, 540px) - 38px);
+    max-height: calc(min(62dvh, 540px) - 38px);
+  }
+
+  .win-titlebar {
+    cursor: default;
+  }
+
+  #hint {
+    top: max(8px, env(safe-area-inset-top));
+    bottom: auto;
+  }
+}
+
+/* Short landscape phones keep the canvas visible beside the window. */
+@media (max-height: 520px) and (orientation: landscape) {
+  #paint-panel {
+    top: max(6px, env(safe-area-inset-top));
+    right: max(6px, env(safe-area-inset-right));
+    width: min(280px, 42vw);
+    max-height: calc(100vh - 12px);
+    max-height: calc(100dvh - 12px);
+  }
+
+  #paint-panel.paint-panel-minimized {
+    bottom: max(6px, env(safe-area-inset-bottom));
+    width: min(200px, 42vw);
+  }
+
+  .win-body {
+    max-height: calc(100vh - 46px);
+    max-height: calc(100dvh - 46px);
+  }
+
+  .win-group {
+    margin-bottom: 5px;
+    padding-block: 2px 4px;
+  }
+
+  .field-row + .field-row {
+    margin-top: 3px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
