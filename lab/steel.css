@@ -1,0 +1,696 @@
+/**
+ * steel.css — full alternate skin for the portfolio, after
+ * CSS Zen Garden submission 219, 'Steel' by Steffen Knoeller.
+ *
+ * Sandbox only. Loads on lab/steel.html, which shares its markup with
+ * lab/index.html and lab/defiance.html. None of the site's own stylesheets
+ * are loaded here, so everything below starts from bare browser defaults —
+ * the Zen Garden condition.
+ *
+ * Steel shipped 759 KB across ten stylesheets wired together by @import with
+ * media queries. Read in full, its character comes from five devices:
+ *
+ *   1. TEXT FRAMING. Every content block is a steel plate hanging from a
+ *      hook, built as a three-slice frame: the block's own background tiles
+ *      the plate body with `repeat-y`, a ::before sits 600px above it holding
+ *      the hook and the top cap, and an ::after sits below holding the bottom
+ *      cap. Both pseudo-elements are z-index -1. A text box of any height
+ *      renders as a physically framed object.
+ *
+ *   2. 3D UNFOLDING. Containers declare `perspective: 1000px` and their
+ *      panels sit at `rotateY(-30deg)` / `rotateY(40deg)`, swinging flat to
+ *      `rotateY(0) scale(1)` on hover.
+ *
+ *   3. TWO-PHASE TRANSITIONS. Steel wrote `transform 1s ease-out,
+ *      top 1s 1s ease-out` — the second property carries a delay equal to the
+ *      first one's duration, so one hover produces rotate-then-move rather
+ *      than a single blended motion.
+ *
+ *   4. SCATTER. Loose plates sit at `rotate(-5deg) skew(-5deg) scale(0.8)`
+ *      and square up on hover.
+ *
+ *   5. ONE MASTER CLOCK. The autoplaying slideshow runs
+ *      `animation: slider-* 100s infinite linear` on every section and
+ *      paragraph, so the keyframe percentages read directly as seconds: the
+ *      explanation holds 0-19%, participation 19-46%, benefits 45-56%,
+ *      requirements 55-100%, each paragraph nested in its parent's slot.
+ *      Marquees are desynchronised by varying duration and delay per
+ *      :nth-child, and pause on hover via `animation-play-state`.
+ *
+ * All five are reproduced below. Steel's nine SVG and PNG assets are not
+ * ours to ship, so the plates, hooks and brushed grain are rebuilt from
+ * gradients.
+ */
+
+/* ============================================================
+   Reset — Steel opened with exactly this move, zeroing a long
+   explicit element list rather than using a third-party reset.
+   ============================================================ */
+
+html,
+body,
+div,
+section,
+header,
+main,
+nav,
+form,
+h1,
+h2,
+h3,
+p,
+a,
+ul,
+li,
+input,
+label {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: #08090a;
+}
+
+body {
+  min-height: 100vh;
+  padding-bottom: 8rem;
+  background:
+    radial-gradient(ellipse at 50% -10%, #23262b 0%, transparent 60%),
+    #08090a;
+  color: #fff;
+  font: 500 20px/23px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+/* Steel set every heading to the same treatment and let size carry the
+   hierarchy, rather than giving each level its own personality. */
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+p {
+  padding: 15px 15px 0 15px;
+  text-align: center;
+}
+
+/* The switcher belongs to the techniques page. A full redesign gets to
+   decide it is not part of this design. */
+.lab-canvas {
+  display: none;
+}
+
+.lab-switcher {
+  display: none;
+}
+
+/* ============================================================
+   Links as inverted blocks
+   ------------------------------------------------------------
+   Steel's `a` rule in spirit: solid white block, black text, 2px radius,
+   and a deliberately slow 0.5s ease-out on everything, so hovering feels
+   like a mechanism moving rather than a state flipping.
+   ============================================================ */
+
+a {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  line-height: 21px;
+  transition: all 0.5s ease-out;
+}
+
+a:hover,
+a:focus-visible {
+  background-color: #000;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px #fff;
+  outline: none;
+}
+
+/* ============================================================
+   Chrome
+   ============================================================ */
+
+.lab-bar,
+.site-header {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #52565c 0%, #33363b 45%, #1d1f22 100%);
+  border-bottom: 1px solid #0b0c0d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.lab-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  border-left: 1px solid #0b0c0d;
+}
+
+.lab-bar__link {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-header {
+  position: relative;
+  z-index: 30;
+  padding: 3.5rem 1rem 3rem;
+  overflow: hidden;
+}
+
+.header-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.site-brand,
+.site-brand:hover {
+  display: inline-block;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-brand__title {
+  font-size: clamp(2.5rem, 11vw, 6.5rem);
+  letter-spacing: -0.02em;
+  color: #f2f4f6;
+  text-shadow:
+    0 1px 0 #8f959c,
+    0 2px 0 #6d7278,
+    0 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Moving sheen across the plate — the header reads as milled metal catching
+   light rather than as a flat bar. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.11) 50%, transparent 65%);
+  background-size: 300% 100%;
+  animation: steel-sheen 9s linear infinite;
+}
+
+@keyframes steel-sheen {
+  from { background-position: 150% 0; }
+  to { background-position: -150% 0; }
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1.75rem;
+}
+
+/* ============================================================
+   1 — TEXT FRAMING: the hanging plate
+   ------------------------------------------------------------
+   Steel's central construction, and the thing that makes the design read as
+   physical. Reduced to its mechanics:
+
+       .block          background: url(layer-middle.svg) repeat-y center top
+       .block::before  top: -600px; height: 600px;
+                       background: url(hook3.svg)        no-repeat center bottom,
+                                   url(layer-frame.svg)  no-repeat center 567px
+       .block::after   bottom: -33px; height: 33px;
+                       background: url(layer-frame.svg)  no-repeat center bottom
+       both pseudos    z-index: -1
+
+   A tiling middle plus a capped top and bottom is a three-slice frame, so the
+   plate stretches to whatever the text needs while the caps stay crisp. The
+   ::before is deliberately enormous (600px of mostly empty space) because it
+   carries the chain the plate hangs from, anchored at its bottom edge.
+
+   Rebuilt here from gradients: a ring for the hook eye, a bar for the chain,
+   and a lit strip for each cap.
+   ============================================================ */
+
+.work-list__group,
+.visually-hidden p {
+  position: relative;
+  top: 0;
+  /* Three layers, in paint order: a travelling sheen, the brushed grain, and
+     the plate body. Sizes and positions are per-layer so the sheen can be
+     animated on its own without dragging the other two with it. */
+  background-image:
+    linear-gradient(105deg, transparent 34%, rgba(255, 255, 255, 0.1) 50%, transparent 66%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #35383d 0%, #222528 55%, #15171a 100%);
+  background-size: 300% 100%, auto, auto;
+  background-position: 150% 0, 0 0, 0 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Top cap, chain and hook eye. Sits above the block, behind it in paint
+   order, exactly as Steel's did. */
+.work-list__group::before,
+.visually-hidden p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -92px;
+  z-index: -1;
+  height: 92px;
+  background-image:
+    radial-gradient(circle at 50% 11px, transparent 0 5px, #868d95 5px 8px, transparent 8px),
+    linear-gradient(180deg, #6b7178, #4c5158),
+    linear-gradient(180deg, #5c6169 0%, #2b2e33 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 24px, 3px 56px, 100% 22px;
+  background-position: center top, center 16px, center bottom;
+}
+
+/* Bottom cap. */
+.work-list__group::after,
+.visually-hidden p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -22px;
+  z-index: -1;
+  height: 22px;
+  background-image: linear-gradient(180deg, #43474d 0%, #1a1c1f 70%, #0d0e10 100%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.65);
+}
+
+/* ============================================================
+   2 + 3 + 4 — 3D unfolding, two-phase transitions, scatter
+   ------------------------------------------------------------
+   The list is a perspective container; each group is a plate hanging inside
+   it at an angle, swinging flat when you point at it.
+
+   The transition is Steel's two-phase form: `transform` runs immediately,
+   `top` runs for the same duration but starts a full duration later. The
+   plate squares up first, then lifts. One hover, two beats.
+   ============================================================ */
+
+.section--list {
+  padding: 2.5rem 1rem 0;
+}
+
+.work-list {
+  perspective: 1400px;
+  perspective-origin: 50% 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 6.5rem;
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.work-list__group {
+  padding: 2.25rem 1.25rem 2rem;
+  border-radius: 2px;
+  transform-style: preserve-3d;
+  transition:
+    transform 1s ease-out,
+    top 1s 1s ease-out,
+    box-shadow 1s ease-out;
+}
+
+/* Scatter: alternating angles per group, squared up on hover. Steel used
+   nth-child for exactly this kind of per-sibling variation. */
+.work-list__group:nth-of-type(odd) {
+  transform: rotateY(16deg) rotate(-1.2deg) scale(0.965);
+}
+
+.work-list__group:nth-of-type(even) {
+  transform: rotateY(-16deg) rotate(1.2deg) scale(0.965);
+}
+
+.work-list__group:hover,
+.work-list__group:focus-within {
+  top: -14px;
+  transform: rotateY(0) rotate(0) scale(1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 26px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
+   Group nameplates
+   ============================================================ */
+
+.work-list__group-label {
+  margin-bottom: 1.5rem;
+  color: #cfd4d9;
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 4px #000;
+}
+
+/* attr() promoting DOM metadata into visible text — Steel used
+   `footer a::after { content: attr(title) }`. Here the group label states its
+   own size from data-count, and each item shows its data-year. */
+.work-list__group-label[data-count]::after {
+  content: " [" attr(data-count) "]";
+  color: #6b7178;
+  font-size: 0.55em;
+  vertical-align: super;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   Rows
+   ============================================================ */
+
+.work-list__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.75em;
+  max-width: 62rem;
+  margin: 0 auto 6px;
+  padding: 9px 14px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* nowrap plus a clipped box is what makes the marquee below meaningful: long
+   titles are cut off at rest and scroll only while hovered. min-width: 0 lets
+   the flex item actually shrink instead of forcing the row wider. */
+.work-list__title {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+  letter-spacing: 0.06em;
+}
+
+.work-list__item[data-year]::after {
+  content: attr(data-year);
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  opacity: 0.55;
+}
+
+/* ============================================================
+   5 — Marquee
+   ------------------------------------------------------------
+   Steel's keyframe verbatim: text-indent 100% to -200%, with the interesting
+   part at 80% where the text passes through zero. It ran this continuously on
+   the designer names in its sidebar list, desynchronised per row —
+
+       li a.designer-name          animation: marquee 15s infinite linear
+       li:nth-child(2) ...         animation-duration: 9s;  delay .1s
+       li:nth-child(3) ...         animation-duration: 8s;  delay .2s
+       li:nth-child(5) ...         animation-duration: 7s;  delay .4s
+       li a.designer-name:hover    animation-play-state: paused
+
+   so eight rows of scrolling text never marched in step, and hovering froze
+   one so you could read it.
+
+   Two applications here. The band above the list scrolls continuously. The
+   row titles are the honest analogue of the designer names — several of these
+   titles genuinely overflow their slot — but running them all the time would
+   be noise, so the polarity is inverted: they scroll while hovered rather
+   than pausing when hovered.
+   ============================================================ */
+
+@keyframes steel-marquee {
+  0% { text-indent: 100%; }
+  80% { text-indent: 0; }
+  100% { text-indent: -200%; }
+}
+
+.work-list::before {
+  content: "SOUND \00a0/\00a0 SCULPTURE \00a0/\00a0 PERFORMANCE \00a0/\00a0 TOUCHDESIGNER \00a0/\00a0 INSTALLATION";
+  display: block;
+  overflow: hidden;
+  padding: 9px 0;
+  border-top: 1px solid #43464b;
+  border-bottom: 1px solid #43464b;
+  /* Steel gave its marquee slot a gap through the middle with a hard-stop
+     gradient, so the text appears to run through a slit in the metal. */
+  background:
+    linear-gradient(180deg, #111 45%, #111 47%, transparent 47%, transparent 53%, #111 53%, #111 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #2a2d31, #16181a);
+  color: #8d949b;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  white-space: nowrap;
+  text-shadow: 0 0 4px #000;
+  animation: steel-marquee 26s infinite linear;
+}
+
+.work-list:hover::before {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .work-list__item:hover .work-list__title {
+    animation: steel-marquee 9s infinite linear;
+  }
+
+}
+
+/* Desynchronisation, Steel's way: same animation, different duration and
+   delay per sibling, so nothing marches in step. The plates carry it on their
+   travelling sheen, where varying the timing costs no legibility — wired up
+   together with the entrance cue further down, since both animate the same
+   element and a second `animation-name` would otherwise cancel the first.
+
+   Only the first background layer moves; the grain and plate body are pinned
+   at 0 0 in both keyframes so they stay put. */
+@keyframes steel-plate-sheen {
+  from { background-position: 160% 0, 0 0, 0 0; }
+  to { background-position: -160% 0, 0 0, 0 0; }
+}
+
+/* ============================================================
+   Intro copy as scattered plates
+   ------------------------------------------------------------
+   The real site keeps these three paragraphs in the DOM but visually hidden
+   for crawlers. components.css is not loaded here, so .visually-hidden means
+   nothing and the same markup becomes the design's opening statement.
+
+   Steel hung .preamble and .summary as separate loose plates at
+   `rotate(-5deg) skew(-5deg) scale(0.8)` and `rotate(5deg) skew(5deg)
+   scale(0.8)`, squaring both to `scale(1)` on hover. Three paragraphs, three
+   plates, same treatment.
+   ============================================================ */
+
+.visually-hidden {
+  perspective: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5.5rem 2rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 7rem 1rem 5.5rem;
+}
+
+.visually-hidden p {
+  flex: 1 1 17rem;
+  max-width: 22rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: 2px;
+  color: #9aa1a8;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: left;
+  transition:
+    transform 1s ease-out,
+    top 1s 1s ease-out,
+    color 1s ease-out;
+}
+
+.visually-hidden p:nth-child(1) { transform: rotate(-4deg) skew(-4deg) scale(0.9); }
+.visually-hidden p:nth-child(2) { transform: rotate(2deg) skew(2deg) scale(0.94); }
+.visually-hidden p:nth-child(3) { transform: rotate(5deg) skew(4deg) scale(0.9); }
+
+.visually-hidden p:hover {
+  top: -10px;
+  transform: rotate(0) skew(0) scale(1);
+  color: #eef1f4;
+}
+
+/* ============================================================
+   One master clock — entrance sequence
+   ------------------------------------------------------------
+   Steel drove its whole slideshow from `100s infinite linear`, which makes
+   the keyframe percentages read as seconds. The windows below use the same
+   device on a short one-shot duration:
+
+       header    0-10%
+       intro    10-18%
+       group 1  18-28%
+       group 2  28-38%
+       group 3  38-48%
+
+   Held rather than looped, so a portfolio list does not hide itself every
+   hundred seconds the way the original page does.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header,
+  .visually-hidden {
+    animation-duration: 3.2s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
+  }
+
+  .site-header { animation-name: steel-cue-1; }
+  .visually-hidden { animation-name: steel-cue-2; }
+
+  /* Each plate runs two animations at once: the perpetual sheen and its slot
+     in the entrance sequence. Declared per-property so the two timelines stay
+     independent — the sheen loops forever, the cue fires once and holds. */
+  .work-list__group {
+    animation-name: steel-plate-sheen, steel-cue-3;
+    animation-duration: 11s, 3.2s;
+    animation-timing-function: linear, cubic-bezier(0.16, 1, 0.3, 1);
+    animation-iteration-count: infinite, 1;
+    animation-fill-mode: none, both;
+  }
+
+  .work-list__group:nth-of-type(2) {
+    animation-name: steel-plate-sheen, steel-cue-4;
+    animation-duration: 8s, 3.2s;
+    animation-delay: 0.2s, 0s;
+  }
+
+  .work-list__group:nth-of-type(3) {
+    animation-name: steel-plate-sheen, steel-cue-5;
+    animation-duration: 13s, 3.2s;
+    animation-delay: 0.4s, 0s;
+  }
+}
+
+@keyframes steel-cue-1 {
+  0% { opacity: 0; }
+  10%, 100% { opacity: 1; }
+}
+
+@keyframes steel-cue-2 {
+  0%, 10% { opacity: 0; }
+  18%, 100% { opacity: 1; }
+}
+
+@keyframes steel-cue-3 {
+  0%, 18% { opacity: 0; }
+  28%, 100% { opacity: 1; }
+}
+
+@keyframes steel-cue-4 {
+  0%, 28% { opacity: 0; }
+  38%, 100% { opacity: 1; }
+}
+
+@keyframes steel-cue-5 {
+  0%, 38% { opacity: 0; }
+  48%, 100% { opacity: 1; }
+}
+
+/* ============================================================
+   Breakpoint layers
+   ------------------------------------------------------------
+   Steel split these into separate files imported at 400 / 800 / 1367 / 1600,
+   and used the 800px layer to move the hanging frame off the page wrapper and
+   onto every individual block. Same thresholds, one file at this scale.
+   ============================================================ */
+
+@media (max-width: 799px) {
+  /* Narrow screens get Steel's mobile arrangement: one plate, hung straight,
+     no scatter and no 3D. The frame is the only thing that survives. */
+  .work-list {
+    perspective: none;
+    gap: 5rem;
+  }
+
+  .work-list__group:nth-of-type(odd),
+  .work-list__group:nth-of-type(even) {
+    transform: none;
+  }
+
+  .visually-hidden p:nth-child(1),
+  .visually-hidden p:nth-child(2),
+  .visually-hidden p:nth-child(3) {
+    transform: none;
+  }
+}
+
+@media (min-width: 800px) {
+  .work-list__group {
+    padding: 2.75rem 2.5rem 2.5rem;
+  }
+
+  .work-list__item {
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .work-list__title {
+    text-align: left;
+  }
+}
+
+@media (min-width: 1367px) {
+  .site-header {
+    padding: 5rem 1rem 4.5rem;
+  }
+
+  /* Wide enough for the label to sit beside its plate rather than above it. */
+  .work-list__group {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 0 3rem;
+    align-items: start;
+    text-align: left;
+  }
+
+  .work-list__group-label {
+    margin-bottom: 0;
+    text-align: right;
+  }
+
+  .work-list__item {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1600px) {
+  .work-list {
+    max-width: 88rem;
+  }
+}

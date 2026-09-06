@@ -1,0 +1,202 @@
+/**
+ * canvas.css — Defiance collage canvas (fixed bitmap stack + page grain)
+ */
+.site-canvas,
+.site-canvas::before,
+.site-canvas::after {
+  position: fixed;
+  pointer-events: none;
+}
+
+.site-canvas {
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  background-image:
+    url("./assets/images/defiance/noisepyramids.0.webp"),
+    url("./assets/images/defiance/noisepyramids.5.webp"),
+    url("./assets/images/defiance/noisepyramids.1.webp"),
+    url("./assets/images/defiance/particle_trees.0.webp");
+  background-repeat: no-repeat;
+  background-position:
+    48% 42vh,
+    62% 8vh,
+    58% 88vh,
+    50% 26vh;
+  background-size:
+    38vw auto,
+    33vw auto,
+    36vw auto,
+    80vw auto;
+}
+
+.site-canvas__lcp {
+  position: absolute;
+  top: 12vh;
+  left: 70%;
+  width: 51vw;
+  height: auto;
+  transform: translateX(-70%);
+}
+
+.site-canvas::before,
+.site-canvas::after {
+  content: "";
+  z-index: 1;
+}
+
+.site-canvas::before {
+  top: 0;
+  right: 0;
+  width: 36vw;
+  height: 100vh;
+  background-image:
+    url("./assets/images/_archive/diamonddoodles.31.webp"),
+    url("./assets/images/_archive/diamonddoodles.30.webp"),
+    url("./assets/images/_archive/diamonddoodles.11.webp"),
+    url("./assets/images/_archive/diamonddoodles.2.webp"),
+    url("./assets/images/_archive/diamonddoodles.8.webp"),
+    url("./assets/images/_archive/diamonddoodles.0.webp"),
+    url("./assets/images/_archive/diamonddoodles.9.webp"),
+    url("./assets/images/_archive/diamonddoodles.14.webp"),
+    url("./assets/images/_archive/diamonddoodles.12.webp");
+  background-repeat: no-repeat;
+  background-size:
+    36vw auto,
+    36vw auto,
+    24vw auto,
+    29vw auto,
+    24vw auto,
+    22vw auto,
+    27vw auto,
+    31vw auto,
+    36vw auto;
+  background-position:
+    right center,
+    right center,
+    left 58vh,
+    80% 8vh,
+    60% 28vh,
+    90% 48vh,
+    50% 66vh,
+    70% 82vh,
+    40% 100vh;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+}
+
+.site-canvas::after {
+  top: 38vh;
+  left: 28%;
+  width: 31vw;
+  height: 36vh;
+  background: url("./assets/images/_archive/abstract_sculpture_series.11.webp") center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  background-image:
+    url("./assets/images/defiance/islands_of_texture.1.png"),
+    url("./assets/images/defiance/islands_of_texture.2.png"),
+    url("./assets/images/_archive/angryimg_1714828431619.webp"),
+    url("./assets/images/_archive/oostposterexport.0.webp");
+  background-repeat: no-repeat;
+  background-size: 89vw auto, 89vw auto, 44vw auto, 36vw auto;
+  background-position: center, center, 40% 30%, 60% 70%;
+  filter: invert(1);
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+}
+
+.work-list::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: url("./assets/images/_archive/morsecode_exports.9.webp") 50% 40vh / 51vw auto no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 28%;
+  top: 2.5rem;
+  height: 18rem;
+  pointer-events: none;
+  z-index: 0;
+  background: url("./assets/images/defiance/basicuvmappingthumbnail.0.png") center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-canvas,
+  .site-canvas::before,
+  .site-canvas::after,
+  body::after {
+    position: absolute;
+  }
+}
+
+@media (max-width: 1100px) {
+  .site-canvas {
+    background-size:
+      29vw auto,
+      24vw auto,
+      27vw auto,
+      53vw auto;
+  }
+
+  .site-canvas__lcp {
+    width: 38vw;
+  }
+
+  .site-canvas::before {
+    width: 29vw;
+  }
+
+  .work-list::before {
+    background-size: 38vw auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-canvas {
+    background-position: 50% 30vh, 70% 0, 60% 90vh, 50% 18vh;
+    background-size: 20vw auto, 18vw auto, 20vw auto, 27vw auto;
+  }
+
+  .site-canvas__lcp {
+    top: 0;
+    left: 80%;
+    width: 24vw;
+    transform: translateX(-80%);
+  }
+
+  .site-canvas::after,
+  .site-header::before {
+    display: none;
+  }
+
+  .site-canvas::before {
+    width: 9vw;
+    opacity: 0.16;
+  }
+}

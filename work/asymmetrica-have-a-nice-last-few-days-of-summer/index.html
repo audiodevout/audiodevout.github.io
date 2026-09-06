@@ -18,10 +18,12 @@
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
   <script type="application/ld+json">{"@context":"https://schema.org","name":"Have a Nice Last Few Days of Summer","description":"Have a Nice Last Few Days of Summer centers on bell tones and resonant layers. The piece balances clarity and haze, echoing cycles of memory and transition, li…","url":"https://atharvagupta.net/work/asymmetrica-have-a-nice-last-few-days-of-summer/","image":"https://atharvagupta.net/assets/images/profile/atharva.jpeg","@type":"MusicRecording","byArtist":{"@id":"https://atharvagupta.net/#asymmetrica"}}</script>
+  <link rel="preload" as="image" href="../../assets/images/defiance/noisepyramids.6.webp" fetchpriority="high" />
   <link rel="stylesheet" href="../../fonts.css" />
   <link rel="stylesheet" href="../../reset.css" />
   <link rel="stylesheet" href="../../tokens.css" />
   <link rel="stylesheet" href="../../layout.css" />
+  <link rel="stylesheet" href="../../canvas.css" />
   <link rel="stylesheet" href="../../components.css" />
   <link rel="stylesheet" href="../../animations.css" />
   <link rel="stylesheet" href="../../work/work-page.css" />
@@ -50,10 +52,13 @@
     }
   </script>
 </head>
-<body>
+<body class="page-work">
+  <div class="site-canvas" aria-hidden="true">
+    <img class="site-canvas__lcp" src="../../assets/images/defiance/noisepyramids.6.webp" alt="" width="1280" height="1280" fetchpriority="high" decoding="sync" />
+  </div>
   <header class="site-header" role="banner">
     <div class="header-inner">
-      <a href="../../index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <a href="../../index.html" class="site-brand" aria-label="Home"><span class="site-brand__title">Atharva Gupta</span></a>
       <div class="header-right">
         <nav class="main-nav" aria-label="Site navigation">
           <a href="../../index.html" class="nav-link">Home</a>
@@ -62,7 +67,6 @@
           <a href="../../archive.html" class="nav-link">Archive</a>
           <a href="../../about.html" class="nav-link">About</a>
         </nav>
-        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
         <button
           type="button"
           class="nav-toggle"
@@ -126,6 +130,5 @@
   <script src="../../js/work-page.js"></script>
   <script src="../../js/router.js"></script>
   <script src="../../js/nav.js"></script>
-  <script src="../../js/theme.js"></script>
 </body>
 </html>

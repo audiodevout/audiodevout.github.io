@@ -250,7 +250,7 @@
     });
 
     root.innerHTML = '';
-    root.className = 'gallery-masonry gallery-masonry__grid';
+    root.className = 'gallery-masonry';
 
     if (!items.length) {
       flatImages = [];

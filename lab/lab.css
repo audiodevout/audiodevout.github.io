@@ -1,0 +1,302 @@
+/**
+ * lab.css — four techniques borrowed from CSS Zen Garden submissions,
+ * layered on top of the real site CSS. Sandbox only; nothing here is loaded
+ * by the live site.
+ *
+ * Sources:
+ *   Defiance (#107, Angelo Paralos)  — CSS as pasteboard
+ *   Steel    (#219, Steffen Knoeller) — CSS as runtime
+ *
+ * Every rule is scoped behind `body:has(#skin-*:checked)` so exactly one
+ * technique is visible at a time and the baseline stays untouched.
+ */
+
+/* ============================================================
+   Switcher chrome — lab-only, prefixed so it can never collide
+   with site classes.
+   ============================================================ */
+
+.lab-canvas {
+  display: none;
+}
+
+.lab-switcher {
+  position: fixed;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  z-index: calc(var(--z-modal) + 1);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  max-width: min(22rem, calc(100vw - var(--space-8)));
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  accent-color: var(--color-text);
+}
+
+.lab-switcher__legend {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-stamp);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.lab-switcher label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  line-height: 1.3;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.lab-switcher code {
+  font-family: var(--font-mono);
+}
+
+.lab-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: calc(var(--z-modal) + 1);
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-left: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.lab-bar__link {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-stamp);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-muted);
+}
+
+.lab-bar__link:hover {
+  color: var(--color-text);
+}
+
+/* ============================================================
+   1 — DOM metadata as visible text
+   ------------------------------------------------------------
+   Steel does this in its footer:
+
+       footer a::after { content: attr(title); }
+
+   It promotes an HTML attribute into rendered content, so information
+   already sitting in the DOM becomes visible with no JavaScript and no
+   extra markup.
+
+   Here the year comes straight off `data-year`. Because .work-list__item
+   is already `display: inline-flex`, the pseudo-element lands as a flex
+   item after the <h3> without any positioning work. `order` is what puts
+   the ::before separator after the title instead of before it, since flex
+   ordering overrides source order. Styling deliberately mirrors
+   .work-list__detail / .work-list__sep from components.css so it reads as
+   part of the existing system rather than a bolt-on.
+
+   To ship this for real, buildHomeListHtml in
+   scripts/generate-work-pages.js would need to bake data-year onto each
+   item (deriving it from `youtubeDate` / `date`), and renderListSection in
+   js/render.js would need the same, to keep static and runtime in sync.
+   ============================================================ */
+
+body:has(#skin-attr:checked) .work-list__item[data-year]::before {
+  content: "/";
+  flex-shrink: 0;
+  padding: 0 0.5em;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  letter-spacing: var(--letter-spacing-stamp);
+  color: var(--color-border);
+  order: 2;
+}
+
+body:has(#skin-attr:checked) .work-list__item[data-year]::after {
+  content: attr(data-year);
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  letter-spacing: var(--letter-spacing-stamp);
+  color: var(--color-muted);
+  order: 3;
+}
+
+/* Same idea reading a different attribute: the group label announces how
+   many items follow, without anyone counting them by hand. */
+body:has(#skin-attr:checked) .work-list__group-label[data-count]::after {
+  content: " (" attr(data-count) ")";
+  color: var(--color-border);
+}
+
+/* ============================================================
+   2 — Scroll-driven timeline
+   ------------------------------------------------------------
+   Steel builds an autoplaying slideshow with no JavaScript by giving every
+   section and paragraph its own @keyframes on one shared duration, then
+   slicing that single global timeline into percentage windows:
+
+       explanation   0-19%
+       participation 19-46%
+       benefits      45-56%
+       requirements  55-100%   (with -p2 55-64%, -p3 64-73%, ...)
+
+   The modern equivalent of those windows is `animation-range` against a
+   `view()` timeline: the animation is driven by the element's position in
+   the scrollport instead of by elapsed time. Scrubbing rather than firing.
+   The site currently uses none of this — js/scroll-reveal.js adds a
+   .revealed class once via IntersectionObserver and the transition is
+   one-shot, so scrolling back up does not undo it.
+
+   Guarded twice: @supports because the property is not universal, and
+   prefers-reduced-motion because animations.css already forces
+   animation-duration to 0.01ms under `reduce`, which would break a
+   timeline-driven animation rather than merely shorten it.
+   ============================================================ */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body:has(#skin-scroll:checked) .work-list__item {
+      animation: lab-scrub linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+
+    /* A different slice of the same timeline, which is the actual lesson
+       from Steel: one mechanism, offset windows, and the sequencing falls
+       out of the numbers. */
+    body:has(#skin-scroll:checked) .work-list__group-label {
+      animation: lab-rule linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}
+
+@keyframes lab-scrub {
+  from {
+    opacity: 0.06;
+    transform: translateY(1.5rem);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes lab-rule {
+  from {
+    opacity: 0.2;
+    letter-spacing: 0;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: var(--letter-spacing-stamp);
+  }
+}
+
+/* ============================================================
+   3 — Attribute-driven accents
+   ------------------------------------------------------------
+   Steel ships 21 rules of the form
+
+       html[lang="de"] body { background-color: rgba(0,0,30,.1); }
+
+   styling the page from document metadata. The site already has the same
+   mechanism in [data-theme], but only ever uses it for light/dark.
+
+   tokens.css lines 13-21 alias all nine --color-accent-* variables to the
+   single flat --color-accent (#ececec), which means every item's `color`
+   field in data/*.json currently renders identically. The plumbing is
+   complete and switched off: accentVar() in js/render.js already maps
+   `color` to the right variable name.
+
+   This skin gives those nine tokens real values and reads each item's
+   data-color, previewing what the live site looks like with the system on.
+
+   Note the two aliases accentVar() applies: `electric-lime` maps to
+   --color-accent-lime and `neon-magenta` maps to --color-accent-magenta.
+   ============================================================ */
+
+body:has(#skin-chroma:checked) {
+  --color-accent-glacier: #9dc4d8;
+  --color-accent-crimson: #d2455a;
+  --color-accent-violet: #9b7fd4;
+  --color-accent-amber: #e0a13c;
+  --color-accent-cerulean: #3f8fc4;
+  --color-accent-lime: #a8d84a;
+  --color-accent-saffron: #e8c04a;
+  --color-accent-magenta: #e04ba8;
+  --color-accent-graphite: #8a8a94;
+}
+
+body:has(#skin-chroma:checked) .work-list__item[data-color="glacier"] { --item-accent: var(--color-accent-glacier); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="crimson"] { --item-accent: var(--color-accent-crimson); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="violet"] { --item-accent: var(--color-accent-violet); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="amber"] { --item-accent: var(--color-accent-amber); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="cerulean"] { --item-accent: var(--color-accent-cerulean); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="electric-lime"] { --item-accent: var(--color-accent-lime); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="saffron"] { --item-accent: var(--color-accent-saffron); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="neon-magenta"] { --item-accent: var(--color-accent-magenta); }
+body:has(#skin-chroma:checked) .work-list__item[data-color="graphite"] { --item-accent: var(--color-accent-graphite); }
+
+body:has(#skin-chroma:checked) .work-list__item[data-color] {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--item-accent, var(--color-border));
+  transition:
+    border-color var(--transition-base),
+    padding-left var(--transition-base);
+}
+
+body:has(#skin-chroma:checked) .work-list__item[data-color]:hover .work-list__title {
+  color: var(--item-accent, var(--color-text));
+}
+
+/* ============================================================
+   4 — Signature gesture
+   ------------------------------------------------------------
+   Defiance's one repeated idea, applied to every link state it defines:
+
+       a:hover, a:active, a:visited { text-decoration: line-through; }
+
+   Links get crossed out rather than underlined. It is a single declaration
+   carrying the whole concept of the design — negation, defacement — which
+   is what makes it worth stealing.
+
+   The site's current hover is only `transform: translateY(-2px)`
+   (components.css line 1227), which is pleasant and says nothing. This
+   replaces it. Defiance's raw strikethrough on tiny bold Verdana reads as
+   broken; tuning thickness, colour and offset — and transitioning the
+   decoration colour in from transparent so the line draws on rather than
+   snapping — makes the same gesture read as deliberate.
+   ============================================================ */
+
+body:has(#skin-gesture:checked) .work-list__item:hover {
+  transform: none;
+}
+
+body:has(#skin-gesture:checked) .work-list__title {
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0;
+  transition:
+    text-decoration-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+body:has(#skin-gesture:checked) .work-list__item:hover .work-list__title,
+body:has(#skin-gesture:checked) .work-list__item:focus-visible .work-list__title {
+  color: var(--color-muted);
+  text-decoration-color: currentColor;
+}

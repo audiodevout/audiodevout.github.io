@@ -193,9 +193,8 @@ Checks work page count, canonical URLs, JSON-LD, script includes, homepage H1/ca
 | `js/work-detail.js` | Shared media/body/meta rendering for work pages & lightbox |
 | `js/work-page.js` | Work page progressive enhancement |
 | `js/utils.js` | `esc`, `resolveAssetSrc`, `getSiteRoot`, `getThumbSrc`, hero init |
-| `js/router.js` | Active nav link state |
+| `js/router.js` | Active nav link state (`aria-current="page"`) |
 | `js/nav.js` | Mobile nav toggle |
-| `js/theme.js` | Light/dark mode |
 | `js/preview-lens.js` | Hover image preview on work list rows |
 | `js/transition-hints.js` | Optional pageswap/pagereveal link continuity |
 | `js/scroll-reveal.js` | Scroll-triggered `.reveal` animations |
@@ -207,18 +206,31 @@ Checks work page count, canonical URLs, JSON-LD, script includes, homepage H1/ca
 
 ## CSS architecture
 
-Load order on every page: `fonts.css` → `reset.css` → `tokens.css` → `layout.css` → `components.css` → `animations.css` (+ page-specific).
+**Defiance skin** — black / grey / white density palette, Alte Haas Grotesk, strikethrough link gesture, collage canvas. Dark-only (no light theme).
+
+Load order on every page: `fonts.css` → `reset.css` → `tokens.css` → `layout.css` → `canvas.css` → `components.css` → `animations.css` (+ `work/work-page.css` on detail pages).
+
+Every core page shell includes:
+
+- `<body class="page-home|page-about|page-gallery|page-exhibitions|page-archive|page-work">`
+- `.site-canvas` + LCP `<img class="site-canvas__lcp">` (preload `assets/images/defiance/noisepyramids.6.webp`)
+- `.site-brand__title` on all pages (homepage uses `<h1>`, others use `<span>`)
 
 | File | Contains |
 |---|---|
-| `tokens.css` | CSS variables: colors, fonts, spacing, theme |
-| `layout.css` | `.main`, `.section`, hero layout, section spacing |
-| `components.css` | Header, nav, work list, cards, about grid, gallery, footer, `.site-brand__title`, `.visually-hidden` |
-| `animations.css` | Hero animations, scroll reveals |
-| `work/work-page.css` | Work detail page only |
-| `fonts.css` | `@font-face` declarations |
+| `tokens.css` | Density palette, Alte Haas tokens, z-index stack |
+| `layout.css` | `.main`, `.section`, stamp `.section-heading` |
+| `canvas.css` | Fixed bitmap canvas, page grain, masthead plate, morse list ground |
+| `components.css` | Header, nav, work list, about/CV rows, gallery paste-up, overlays |
+| `animations.css` | View transitions, opacity-only `.reveal` |
+| `work/work-page.css` | Work detail collage layout |
+| `fonts.css` | Alte Haas Grotesk + thesis fonts (for `thesis/` subsite) |
 
-Theme tokens live in `:root` / `[data-theme="light"]` in `tokens.css`. Accent colors map via `render.js` → `accentVar()`.
+Canvas assets live in `assets/images/defiance/`. Decorative archive stills reuse `assets/images/_archive/`.
+
+List markup conventions (runtime + `buildListSectionHtml`): `data-count` on `.work-list__group-label`, `data-year` on `.work-list__item` (not exhibition rows). CV uses `.cv-row` / `.cv-skill-cloud` (not tables).
+
+Reference sandbox: `lab/defiance.css` (unchanged; lab-only).
 
 ---
 
@@ -327,6 +339,7 @@ Set `urls.page` on the item (e.g. `"./thesis/"`). Generator skips it; link must 
 
 ```
 index.html              Homepage shell + SEO markers
+canvas.css              Defiance collage canvas layer
 about.html              Entity home + ProfilePage schema
 gallery.html            Visual research gallery
 exhibitions.html        Exhibition list

@@ -39,6 +39,14 @@
     return (Array.isArray(imgs) && imgs.length > 0) ? imgs[0] : null;
   }
 
+  function yearFromItem(item) {
+    if (!item) return '';
+    if (item.youtubeDate) return String(item.youtubeDate).slice(0, 4);
+    if (item.year != null) return String(item.year);
+    var m = String(item.date || '').match(/(\d{4})/);
+    return m ? m[1] : '';
+  }
+
   function workHref(item) {
     var lookup = window.portfolioWorkLookup;
     if (lookup && typeof lookup.resolveWorkHref === 'function') {
@@ -162,6 +170,10 @@
     linkTitle.className = 'work-list__title';
     linkTitle.textContent = item.title || '';
     link.appendChild(linkTitle);
+
+    var year = yearFromItem(item);
+    if (year) link.dataset.year = year;
+
     link.classList.add('reveal');
 
     return link;
@@ -179,14 +191,24 @@
     var listRoot = document.createElement('div');
     listRoot.className = 'work-list';
 
+    var group = document.createElement('section');
+    group.className = 'work-list__group';
+
+    var h = document.createElement('h2');
+    h.className = 'work-list__group-label reveal';
+    h.textContent = 'Archive';
+    h.dataset.count = String(archiveItems.length);
+    group.appendChild(h);
+
     archiveItems.forEach(function (item, index) {
       var row = createArchiveListItem(item);
       if (row) {
         row.style.setProperty('--i', Math.min(index + 1, 10));
-        listRoot.appendChild(row);
+        group.appendChild(row);
       }
     });
 
+    listRoot.appendChild(group);
     container.appendChild(listRoot);
   }
 
@@ -210,6 +232,9 @@
       link.setAttribute('data-preview-src', listThumb);
     }
 
+    var year = yearFromItem(item);
+    if (year) link.dataset.year = year;
+
     return link;
   }
 
@@ -221,6 +246,7 @@
     var h = document.createElement('h2');
     h.className = 'work-list__group-label reveal';
     h.textContent = heading;
+    h.dataset.count = String(items.length);
     group.appendChild(h);
 
     items.forEach(function (item, index) {
@@ -409,6 +435,7 @@
     var h = document.createElement('h2');
     h.className = 'work-list__group-label reveal';
     h.textContent = heading;
+    h.dataset.count = String(items.length);
     group.appendChild(h);
 
     items.forEach(function (ex, index) {
@@ -486,15 +513,19 @@
     grid.appendChild(left);
 
     var right = document.createElement('div');
-    var label = document.createElement('p');
-    label.className = 'about__label';
-    label.textContent = 'ABOUT';
-    right.appendChild(label);
+    right.className = 'about-copy';
     if (about.description) {
-      var desc = document.createElement('div');
+      var desc = document.createElement('p');
       desc.className = 'about__description';
       desc.textContent = about.description;
       right.appendChild(desc);
+    }
+    var intro = (data.pageContent && data.pageContent.home && data.pageContent.home.seoIntro) || [];
+    if (Array.isArray(intro) && intro[2]) {
+      var veil = document.createElement('p');
+      veil.className = 'about__description about__description--veil';
+      veil.textContent = intro[2];
+      right.appendChild(veil);
     }
     if (social.length > 0) {
       var socialWrap = document.createElement('div');
@@ -505,7 +536,6 @@
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.className = 'about__social-link';
-        a.style.color = accentVar(s.color);
         a.textContent = s.name || '';
         socialWrap.appendChild(a);
       });
@@ -520,16 +550,8 @@
     if (!container) return;
 
     var cv = (data.contact && data.contact.cv) ? data.contact.cv : {};
-    var homeDesc = (data.pageContent && data.pageContent.home && data.pageContent.home.description) ? data.pageContent.home.description : '';
 
     container.innerHTML = '';
-
-    if (homeDesc) {
-      var summary = document.createElement('p');
-      summary.className = 'cv-summary';
-      summary.textContent = homeDesc;
-      container.appendChild(summary);
-    }
 
     if (cv.education && cv.education.length > 0) {
       var eduBlock = document.createElement('div');
@@ -537,20 +559,25 @@
       var eduTitle = document.createElement('h3');
       eduTitle.className = 'cv-block__title';
       eduTitle.textContent = 'Education';
+      eduTitle.dataset.count = String(cv.education.length);
       eduBlock.appendChild(eduTitle);
-      var table = document.createElement('table');
-      table.className = 'cv-table';
-      var thead = document.createElement('thead');
-      thead.innerHTML = '<tr><th>Degree</th><th>Institution</th><th>Location</th><th>Period</th></tr>';
-      table.appendChild(thead);
-      var tbody = document.createElement('tbody');
       cv.education.forEach(function (row) {
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + esc(row.degree || '') + '</td><td>' + esc(row.institution || '') + '</td><td>' + esc(row.location || '') + '</td><td>' + esc(row.period || '') + '</td>';
-        tbody.appendChild(tr);
+        var entry = document.createElement('div');
+        entry.className = 'cv-row';
+        var title = document.createElement('p');
+        title.className = 'cv-row__title';
+        title.textContent = row.degree || '';
+        entry.appendChild(title);
+        var meta = document.createElement('p');
+        meta.className = 'cv-row__meta';
+        meta.textContent = (row.institution || '') + (row.location ? ' · ' + row.location : '');
+        entry.appendChild(meta);
+        var period = document.createElement('p');
+        period.className = 'cv-row__period';
+        period.textContent = row.period || '';
+        entry.appendChild(period);
+        eduBlock.appendChild(entry);
       });
-      table.appendChild(tbody);
-      eduBlock.appendChild(table);
       container.appendChild(eduBlock);
     }
 
@@ -559,30 +586,51 @@
       workBlock.className = 'cv-block';
       var workTitle = document.createElement('h3');
       workTitle.className = 'cv-block__title';
-      workTitle.textContent = 'Work Experience';
+      workTitle.textContent = 'Work';
+      workTitle.dataset.count = String(cv.workExperience.length);
       workBlock.appendChild(workTitle);
       cv.workExperience.forEach(function (job) {
         var entry = document.createElement('div');
-        entry.className = 'cv-timeline-entry';
-        var main = document.createElement('div');
-        var title = document.createElement('div');
-        title.className = 'cv-timeline-title';
+        entry.className = 'cv-row';
+        var title = document.createElement('p');
+        title.className = 'cv-row__title';
         title.textContent = (job.title || '') + (job.company ? ' · ' + job.company : '');
-        main.appendChild(title);
+        entry.appendChild(title);
         if (job.location) {
-          var meta = document.createElement('div');
-          meta.className = 'cv-timeline-meta';
+          var meta = document.createElement('p');
+          meta.className = 'cv-row__meta';
           meta.textContent = job.location;
-          main.appendChild(meta);
+          entry.appendChild(meta);
         }
-        entry.appendChild(main);
-        var period = document.createElement('div');
-        period.className = 'cv-timeline-period';
+        var period = document.createElement('p');
+        period.className = 'cv-row__period';
         period.textContent = job.period || '';
         entry.appendChild(period);
         workBlock.appendChild(entry);
       });
       container.appendChild(workBlock);
+    }
+
+    var skills = cv.skills || {};
+    var skillWords = []
+      .concat(skills.general || [], skills.technologies || [], skills.interests || []);
+    if (skillWords.length > 0) {
+      var skillsBlock = document.createElement('div');
+      skillsBlock.className = 'cv-block cv-block--skills';
+      var skillsTitle = document.createElement('h3');
+      skillsTitle.className = 'cv-block__title';
+      skillsTitle.textContent = 'Skills';
+      skillsBlock.appendChild(skillsTitle);
+      var cloud = document.createElement('p');
+      cloud.className = 'cv-skill-cloud';
+      skillWords.forEach(function (word) {
+        var span = document.createElement('span');
+        span.className = 'cv-skill';
+        span.textContent = word;
+        cloud.appendChild(span);
+      });
+      skillsBlock.appendChild(cloud);
+      container.appendChild(skillsBlock);
     }
   }
 

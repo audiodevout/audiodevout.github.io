@@ -5,7 +5,7 @@
   'use strict';
 
   const siteBrand = document.querySelector('.site-brand');
-  const navLinks = document.querySelectorAll('.main-nav .nav-link');
+  const navLinks = document.querySelectorAll('.main-nav .nav-link, .nav-overlay .nav-link');
 
   function getPageSection() {
     const path = (window.location.pathname || '').toLowerCase();
@@ -17,12 +17,29 @@
     return 'home';
   }
 
+  function linkSection(href) {
+    if (href.indexOf('exhibitions') !== -1) return 'exhibitions';
+    if (href.indexOf('gallery') !== -1) return 'gallery';
+    if (href.indexOf('archive') !== -1) return 'archive';
+    if (href.indexOf('about') !== -1) return 'about';
+    if (
+      href === 'index.html' ||
+      href === './index.html' ||
+      href === '/index.html' ||
+      href.endsWith('/')
+    ) {
+      return 'home';
+    }
+    return null;
+  }
+
   function setActiveState() {
     const current = getPageSection();
     if (current === null) {
       if (siteBrand) siteBrand.classList.remove('is-active');
       navLinks.forEach(function (link) {
         link.classList.remove('is-active');
+        link.removeAttribute('aria-current');
       });
       return;
     }
@@ -31,20 +48,14 @@
     }
     navLinks.forEach(function (link) {
       const href = (link.getAttribute('href') || '').trim();
-      let linkSection = null;
-      if (href.indexOf('exhibitions') !== -1) linkSection = 'exhibitions';
-      else if (href.indexOf('gallery') !== -1) linkSection = 'gallery';
-      else if (href.indexOf('archive') !== -1) linkSection = 'archive';
-      else if (href.indexOf('about') !== -1) linkSection = 'about';
-      else if (
-        href === 'index.html' ||
-        href === './index.html' ||
-        href === '/index.html' ||
-        href.endsWith('/')
-      ) {
-        linkSection = 'home';
+      const section = linkSection(href);
+      const isActive = section !== null && section === current;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
       }
-      link.classList.toggle('is-active', linkSection !== null && linkSection === current);
     });
   }
 

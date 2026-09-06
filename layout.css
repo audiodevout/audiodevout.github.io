@@ -1,15 +1,13 @@
 /**
  * layout.css — page structure, sections, containment
  */
-/* Custom scrollbar — monochrome, minimal, matches design tokens */
 html {
   background: var(--body-bg);
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color var(--transition-theme);
-  scroll-padding-top: calc(var(--site-header-height) + var(--space-4));
+  font-size: 16px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -18,9 +16,6 @@ html {
   }
 }
 
-:target {
-  scroll-margin-top: calc(var(--site-header-height) + var(--space-4));
-}
 html::-webkit-scrollbar {
   width: 10px;
 }
@@ -36,111 +31,105 @@ html::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
 }
 
-/* Phase 6b + 7: background from tokens so light theme applies */
 body {
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-list);
   line-height: var(--line-height-body);
   color: var(--color-text);
-  background: var(--body-bg);
-  background-attachment: fixed;
+  background: transparent;
   overflow-x: hidden;
-  transition:
-    background-color var(--transition-theme),
-    color var(--transition-theme);
 }
 
-/* Global: prevent images from exceeding container width */
+p {
+  text-align: justify;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 img {
   max-width: 100%;
 }
 
 .main {
   min-height: 100vh;
-  padding-top: var(--site-header-height);
+  padding-top: 0;
+  position: relative;
+  z-index: 1;
 }
 
-/* Section spacing — full display width with edge padding */
 .section {
-  padding: var(--space-12) clamp(var(--space-6), 5vw, var(--space-12));
+  padding: 0 1.5rem;
   width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
-/* Phase 6c: section stacking for atmosphere overlays */
+.section--list,
+.section--about,
+.section--cv {
+  position: relative;
+}
+
 #exhibitions,
-#about {
+#about,
+#archive {
   position: relative;
 }
 
 #exhibitions .section-heading,
 #exhibitions .exhibitions-section-content,
 #about .section-heading,
-#about .about-section-content {
+#about .about-section-content,
+#archive .section-heading,
+#archive .archive-section-content {
   position: relative;
   z-index: 1;
 }
 
-/* Phase 6c: section atmosphere — subtle radial glows (no animation) */
-#exhibitions::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: none;
-}
-
-#about::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(
-    ellipse 90% 70% at 40% 60%,
-    rgba(255, 255, 255, 0.02) 0%,
-    transparent 60%
-  );
-}
-
-/* Phase 7: section titles = big, light, uppercase (structural) */
 .section-heading {
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 400;
-  letter-spacing: var(--letter-spacing-wide);
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: var(--space-8);
-  line-height: var(--line-height-tight);
+  display: inline-block;
+  margin: 0 0 2.5rem;
+  transform: rotate(-2.5deg);
+  transform-origin: left top;
+  color: var(--color-text);
+  font-size: 3.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.22);
 }
 
-/* Hero fills viewport — full width */
-.hero {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--space-8) clamp(var(--space-6), 5vw, var(--space-12));
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
+@media (min-width: 1200px) {
+  .site-header {
+    padding-left: 4rem;
+  }
+
+  .section--list,
+  .section--about,
+  .section--cv,
+  .work-page,
+  .main--gallery {
+    padding-left: 4rem;
+  }
 }
 
-/* Scroll indicator container */
-.hero__scroll {
-  position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
-  transition: opacity var(--transition-base);
+@media (max-width: 1100px) {
+  .section-heading {
+    font-size: 2.4rem;
+  }
 }
 
-.hero__scroll.is-hidden {
-  opacity: 0;
-  pointer-events: none;
+@media (max-width: 620px) {
+  .section-heading {
+    font-size: 1.5rem;
+  }
 }

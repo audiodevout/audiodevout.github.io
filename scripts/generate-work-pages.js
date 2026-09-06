@@ -75,6 +75,14 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function yearFromItem(item) {
+  if (!item) return "";
+  if (item.youtubeDate) return String(item.youtubeDate).slice(0, 4);
+  if (item.year != null) return String(item.year);
+  var match = String(item.date || "").match(/(\d{4})/);
+  return match ? match[1] : "";
+}
+
 function truncate(text, maxLen) {
   var s = String(text || "").replace(/\s+/g, " ").trim();
   if (s.length <= maxLen) return s;
@@ -495,8 +503,12 @@ function buildListSectionHtml(heading, listItems) {
   var rows = listItems
     .map(function (item) {
       var title = item.title || "Untitled";
+      var year = yearFromItem(item);
+      var yearAttr = year ? ' data-year="' + escapeHtml(year) + '"' : "";
       return (
-        '        <a class="work-list__item" href="' +
+        '        <a class="work-list__item"' +
+        yearAttr +
+        ' href="' +
         escapeHtml(workPageHref(item.id)) +
         '">' +
         '<h3 class="work-list__title">' +
@@ -507,7 +519,9 @@ function buildListSectionHtml(heading, listItems) {
     .join("\n");
   return (
     '      <section class="work-list__group">\n' +
-    '        <h2 class="work-list__group-label">' +
+    '        <h2 class="work-list__group-label" data-count="' +
+    listItems.length +
+    '">' +
     escapeHtml(heading) +
     "</h2>\n" +
     rows +
@@ -555,8 +569,22 @@ function buildHomeIntroHtml(profile) {
 
 function buildAboutContentHtml(profile) {
   var about = (profile && profile.about) || {};
+  var home = (profile && profile.home) || {};
+  var intro = Array.isArray(home.seoIntro) ? home.seoIntro : [];
   var description = about.description || "";
-  return '        <p class="about__description">' + escapeHtml(description) + "</p>";
+  var image = about.image || "./assets/images/profile/atharva.webp";
+  var veil = intro[2] ? '<p class="about__description about__description--veil">' + escapeHtml(intro[2]) + "</p>" : "";
+  return (
+    '        <div class="about-grid">\n' +
+    '          <div class="about-image-wrap">\n' +
+    '            <img src="' + escapeHtml(image) + '" alt="Atharva Gupta" />\n' +
+    "          </div>\n" +
+    '          <div class="about-copy">\n' +
+    '            <p class="about__description">' + escapeHtml(description) + "</p>\n" +
+    (veil ? "            " + veil + "\n" : "") +
+    "          </div>\n" +
+    "        </div>"
+  );
 }
 
 function buildFooterHtml() {

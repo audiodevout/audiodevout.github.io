@@ -1,0 +1,1152 @@
+/**
+ * defiance.css — monochrome restyle of the Defiance skin, using Atharva's
+ * own noise / attractor stills in place of Angelo Paralos's red.
+ *
+ * Sandbox only. Markup is identical to lab/index.html and lab/steel.html.
+ *
+ * ------------------------------------------------------------
+ * What Defiance actually is (keep)
+ * ------------------------------------------------------------
+ * Colour was never the idea. The idea is five structural moves:
+ *
+ *   1. GESTURE. Links are crossed out, not underlined. Negation where the
+ *      convention is emphasis. The strikethrough is the whole concept.
+ *
+ *   2. COLLAGE. Per-child placement via structural selectors. Text sits
+ *      crooked, offsets break out of the parent box, the page reads as
+ *      pasted rather than laid out.
+ *
+ *   3. HIERARCHY AS GRAPHIC. Headings are either hidden or blown up into
+ *      stamps. They are not polite labels.
+ *
+ *   4. ONE CANVAS. The original pinned every block onto a single bitmap
+ *      (`screwoff.gif`) at hardcoded coordinates. Decoration is the image;
+ *      CSS only drops type onto the holes in it.
+ *
+ *   5. THREE VALUES, USED HARD. Original: black / white / #FF0000. No
+ *      midtones, no softness. Restriction is the aesthetic.
+ *
+ * ------------------------------------------------------------
+ * What changes (colour → density)
+ * ------------------------------------------------------------
+ * Red is a hue. Your work already has an accent: brightness. The three
+ * values become black / mid grey / white. Hierarchy is density — how
+ * much signal is in a given patch — which is how the stills themselves
+ * work: filaments are the brightest, particle veils are mid, void is
+ * black.
+ *
+ * Placement from a second luminance pass (mean 0–255, thirds t1/t2/t3,
+ * center vs edge mass). Every still has a job that matches its shape:
+ *
+ *   FIELDS (97% void)     four pyramids stacked as the fixed canvas
+ *   RIGHT COLUMN          .31 dark on t3 (35 vs 75); .30 rides under it
+ *   HORIZON BAND          particle_trees — landscape, mass at the top
+ *                         third (42 vs 9), dark gutters above/below
+ *   RIGHT PANEL           doodles.11 — left half 35, right 74; type
+ *                         stays in the dark half
+ *   SECTION GROUNDS       Morse set, even and 86–91% void, sit UNDER
+ *                         type as grain, not beside it
+ *   MID OBJECT            sculpture.11 — center 34 vs mean 12, a body
+ *                         in the middle of the Sound group
+ *   MASTHEAD GROUND       basicuv — all-over ribbons (mean 92), a
+ *                         plate the name sits on
+ *   PAGE GRAIN            islands + angryimg + oostposter (white-ground,
+ *                         inverted) as a full-page dither
+ *   ATMOSPHERE            bright doodles (.0 .2 .8 .9 .12 .14) as a
+ *                         right-half wash, not stamps
+ *
+ * Screen blend. White-ground stills are inverted first.
+ */
+
+/* Alte Haas Grotesk — Yann Le Coroller, freeware. Helvetica as it
+   would print in an old Müller-Brockmann book. Hosted here so the
+   skin stays one stylesheet. License sits beside the files. */
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url("./fonts/AlteHaasGroteskRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url("./fonts/AlteHaasGroteskBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+
+html,
+body,
+div,
+section,
+header,
+main,
+nav,
+form,
+article,
+figure,
+figcaption,
+footer,
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+input,
+label,
+ul,
+li,
+span,
+iframe,
+video,
+button,
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+iframe,
+video {
+  border: 0;
+  max-width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+  /* Always overflow so every page has the same scrollbar width.
+     Home already scrolls; Archive often did not — that shifted
+     % / vw positions and could trip the 1100px type scale. */
+  min-height: 101vh;
+  background: #000;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 101vh;
+  padding-bottom: 8rem;
+  color: #fff;
+  font-family: "Alte Haas Grotesk", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  background: transparent;
+}
+
+/* Shared on every Defiance page. Not scoped to .page-home.
+   vw sizes so stamps track the layout width, not the root font. */
+.lab-canvas,
+.lab-canvas::before,
+.lab-canvas::after {
+  position: fixed;
+  pointer-events: none;
+}
+
+.lab-canvas {
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  background-image:
+    url("./images/noisepyramids.0.webp"),
+    url("./images/noisepyramids.5.webp"),
+    url("./images/noisepyramids.1.webp"),
+    url("./images/particle_trees.0.webp");
+  background-repeat: no-repeat;
+  background-position:
+    48% 42vh,
+    62% 8vh,
+    58% 88vh,
+    50% 26vh;
+  background-size:
+    38vw auto,
+    33vw auto,
+    36vw auto,
+    80vw auto;
+}
+
+/* LCP stamp lives in markup so the preload scanner can find it.
+   Same 70% / 12vh / 51vw hole the first background used to occupy. */
+.lab-canvas__lcp {
+  position: absolute;
+  top: 12vh;
+  left: 70%;
+  width: 51vw;
+  height: auto;
+  transform: translateX(-70%);
+}
+
+.lab-canvas::before,
+.lab-canvas::after {
+  z-index: 1;
+}
+
+.lab-canvas::before {
+  content: "";
+  top: 0;
+  right: 0;
+  width: 36vw;
+  height: 100vh;
+  background-image:
+    url("../assets/images/_archive/diamonddoodles.31.webp"),
+    url("../assets/images/_archive/diamonddoodles.30.webp"),
+    url("../assets/images/_archive/diamonddoodles.11.webp"),
+    url("../assets/images/_archive/diamonddoodles.2.webp"),
+    url("../assets/images/_archive/diamonddoodles.8.webp"),
+    url("../assets/images/_archive/diamonddoodles.0.webp"),
+    url("../assets/images/_archive/diamonddoodles.9.webp"),
+    url("../assets/images/_archive/diamonddoodles.14.webp"),
+    url("../assets/images/_archive/diamonddoodles.12.webp");
+  background-repeat: no-repeat;
+  background-size:
+    36vw auto,
+    36vw auto,
+    24vw auto,
+    29vw auto,
+    24vw auto,
+    22vw auto,
+    27vw auto,
+    31vw auto,
+    36vw auto;
+  background-position:
+    right center,
+    right center,
+    left 58vh,
+    80% 8vh,
+    60% 28vh,
+    90% 48vh,
+    50% 66vh,
+    70% 82vh,
+    40% 100vh;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+}
+
+.lab-canvas::after {
+  content: "";
+  top: 38vh;
+  left: 28%;
+  width: 31vw;
+  height: 36vh;
+  background: url("../assets/images/_archive/abstract_sculpture_series.11.webp") center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+p {
+  text-align: justify;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Alte Haas Grotesk", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.lab-switcher {
+  display: none;
+}
+
+/* White-ground dithers become the page grain: invert, then screen.
+   islands and angryimg are even (no left/right hole), so they have
+   to be a full-page veil or they read as stickers. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background-image:
+    url("./images/islands_of_texture.1.png"),
+    url("./images/islands_of_texture.2.png"),
+    url("../assets/images/_archive/angryimg_1714828431619.webp"),
+    url("../assets/images/_archive/oostposterexport.0.webp");
+  background-repeat: no-repeat;
+  background-size: 89vw auto, 89vw auto, 44vw auto, 36vw auto;
+  background-position: center, center, 40% 30%, 60% 70%;
+  filter: invert(1);
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+}
+
+/* ============================================================
+   1 — The signature gesture
+   ------------------------------------------------------------
+   Unchanged in kind. Colour of the strike is now white (or mid-grey
+   once visited). The idea was never "red means hover."
+   ============================================================ */
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible,
+a:active {
+  color: #9a9a9a;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  outline: none;
+}
+
+.work-list__item:visited .work-list__title {
+  color: #5a5a5a;
+  text-decoration: line-through;
+}
+
+.main-nav .nav-link[aria-current="page"] {
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* ============================================================
+   Chrome
+   ============================================================ */
+
+.lab-bar {
+  display: none;
+}
+
+.site-header,
+.main,
+.section,
+.section--list,
+.section--about,
+.section--cv,
+.work-list,
+.work-page,
+.gallery-masonry {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+}
+
+.site-header {
+  padding: 5rem 1.5rem 2rem;
+}
+
+/* basicuv is all-over (mean 92, center 107). It is a plate, not an
+   object — the name sits on the ribbons. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 28%;
+  top: 2.5rem;
+  height: 18rem;
+  pointer-events: none;
+  z-index: 0;
+  background: url("./images/basicuvmappingthumbnail.0.png") center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.16;
+}
+
+.site-brand {
+  position: relative;
+  display: block;
+}
+
+/* Masthead still a graphic, still struck through — the bar is now a
+   bright filament rather than a paint swipe. */
+.site-brand__title {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  font-size: 5.5rem;
+  font-weight: bold;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.18);
+}
+
+.site-brand__title::after {
+  content: "";
+  position: absolute;
+  top: 52%;
+  left: 0;
+  width: 100%;
+  height: 0.07em;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
+.site-brand:hover .site-brand__title {
+  color: #7a7a7a;
+}
+
+.site-brand:hover .site-brand__title::after {
+  background: #7a7a7a;
+  box-shadow: none;
+}
+
+.main-nav {
+  margin-top: 2rem;
+}
+
+.main-nav .nav-link {
+  position: relative;
+  display: inline-block;
+  margin-right: 1.35rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.main-nav .nav-link:nth-child(1) { top: 0; }
+.main-nav .nav-link:nth-child(2) { top: 7px; }
+.main-nav .nav-link:nth-child(3) { top: -5px; }
+.main-nav .nav-link:nth-child(4) { top: 9px; }
+.main-nav .nav-link:nth-child(5) { top: -3px; }
+
+/* ============================================================
+   The list
+   ============================================================ */
+
+.section--list {
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+.work-list {
+  position: relative;
+  z-index: 1;
+  max-width: 66rem;
+}
+
+/* Viewport-fixed, not stretched to list height — same crop on a
+   three-group Home and a shorter Exhibitions list. */
+.work-list::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: url("../assets/images/_archive/morsecode_exports.9.webp") 50% 40vh / 51vw auto no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+}
+
+.work-list__group {
+  position: relative;
+  margin-bottom: 5.5rem;
+}
+
+/* Stamps, still knocked off-axis. White, not red — they are the bright
+   nodes in the field. */
+.work-list__group-label {
+  display: inline-block;
+  margin-bottom: 2rem;
+  transform: rotate(-2.5deg);
+  transform-origin: left top;
+  color: #fff;
+  font-size: 3.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.22);
+}
+
+.work-list__group-label[data-count]::after {
+  content: attr(data-count);
+  position: relative;
+  top: -1.4em;
+  left: 0.25em;
+  color: #7a7a7a;
+  font-size: 0.28em;
+  letter-spacing: 0.1em;
+  text-shadow: none;
+}
+
+.work-list__item {
+  position: relative;
+  display: block;
+  max-width: 44rem;
+  padding: 3px 0;
+}
+
+.work-list__item:nth-of-type(5n + 1) { left: 0; }
+.work-list__item:nth-of-type(5n + 2) { left: 1.5rem; }
+.work-list__item:nth-of-type(5n + 3) { left: 0.4rem; }
+.work-list__item:nth-of-type(5n + 4) { left: 2.25rem; }
+.work-list__item:nth-of-type(5n + 5) { left: 0.75rem; }
+
+.work-list__title {
+  display: inline;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* Years sit as dim ticks on the filament — secondary density, not a
+   second hue. */
+.work-list__item[data-year]::after {
+  content: attr(data-year);
+  margin-left: 0.6em;
+  color: #6e6e6e;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.work-list__item--exhibition[data-year]::after {
+  content: none;
+}
+
+.work-list__item:hover::after {
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-canvas,
+  .lab-canvas::before,
+  .lab-canvas::after,
+  body::after {
+    position: absolute;
+  }
+}
+
+/* ============================================================
+   Inner pages — exhibitions, about, archive, gallery, work
+   ------------------------------------------------------------
+   Same five moves. The collage canvas is shared; only type differs.
+   ============================================================ */
+
+.section--about,
+.section--cv,
+.work-page,
+.main--gallery {
+  padding: 0 1.5rem 6rem;
+}
+
+.section-heading {
+  display: inline-block;
+  margin: 0 0 2.5rem;
+  transform: rotate(-2.5deg);
+  transform-origin: left top;
+  color: #fff;
+  font-size: 3.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.22);
+}
+
+.work-list__line {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.work-list__item--exhibition .work-list__title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.work-list__detail {
+  color: #7a7a7a;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.work-list__sep {
+  color: #4a4a4a;
+}
+
+.work-list__item .work-list__detail {
+  display: inline;
+  margin-left: 0.55em;
+}
+
+/* ------------------------------------------------------------
+   About — portrait as a pasted plate, bio as manifesto, CV as
+   stamped rows. No table. Density does the hierarchy.
+   ------------------------------------------------------------ */
+
+.page-about .about-grid {
+  position: relative;
+  z-index: 1;
+  max-width: 66rem;
+  margin-bottom: 5rem;
+}
+
+.page-about .about-image-wrap {
+  position: relative;
+  width: 22rem;
+  margin: 0 0 3rem 2.5rem;
+  overflow: hidden;
+  transform: rotate(-2.75deg);
+}
+
+.page-about .about-image-wrap img {
+  width: 100%;
+  filter: grayscale(1) contrast(1.18);
+}
+
+.page-about .about-image-wrap::after {
+  content: "";
+  position: absolute;
+  top: 46%;
+  left: 0;
+  width: 100%;
+  height: 0.08em;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
+.page-about .about-copy {
+  position: relative;
+  max-width: 38rem;
+}
+
+.page-about .about__description {
+  position: relative;
+  max-width: 24rem;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.page-about .about__description:first-child {
+  left: 2rem;
+  color: #fff;
+  border-left: 2px solid #fff;
+  padding-left: 0.9rem;
+}
+
+.page-about .about__description--veil {
+  left: 8rem;
+  color: #9a9a9a;
+}
+
+.page-about .about__description--orbit {
+  left: 4rem;
+  color: #5c5c5c;
+}
+
+.page-about .about__social {
+  position: relative;
+  left: 2rem;
+  margin-top: 2rem;
+  max-width: 36rem;
+}
+
+.page-about .about__social-link {
+  display: inline-block;
+  margin: 0 1.25rem 0.55rem 0;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.page-about .about__social-link:nth-child(odd) { top: 4px; }
+.page-about .about__social-link:nth-child(even) { top: -3px; }
+
+.page-about .section--cv {
+  position: relative;
+}
+
+.cv-block {
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin-bottom: 4.5rem;
+}
+
+.cv-block__title {
+  display: inline-block;
+  margin-bottom: 1.75rem;
+  transform: rotate(-2deg);
+  transform-origin: left top;
+  color: #fff;
+  font-size: 2.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+.cv-block__title[data-count]::after {
+  content: attr(data-count);
+  position: relative;
+  top: -1.3em;
+  left: 0.25em;
+  color: #7a7a7a;
+  font-size: 0.28em;
+  letter-spacing: 0.1em;
+  text-shadow: none;
+}
+
+.cv-row {
+  position: relative;
+  max-width: 40rem;
+  padding: 0.35rem 0 0.85rem;
+}
+
+.cv-row:nth-of-type(3n + 1) { left: 0; }
+.cv-row:nth-of-type(3n + 2) { left: 2.5rem; }
+.cv-row:nth-of-type(3n + 3) { left: 1rem; }
+
+.cv-row__title {
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cv-row__meta {
+  color: #8a8a8a;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.cv-row__period {
+  color: #6e6e6e;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.cv-skill-cloud {
+  max-width: 36rem;
+}
+
+.cv-skill {
+  display: inline-block;
+  margin: 0 1rem 0.7rem 0;
+  color: #9a9a9a;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cv-skill:nth-child(5n + 1) { transform: rotate(-1.5deg); }
+.cv-skill:nth-child(5n + 2) { transform: rotate(2deg); }
+.cv-skill:nth-child(5n + 3) { transform: rotate(-0.5deg); }
+.cv-skill:nth-child(5n + 4) { transform: rotate(1.25deg); }
+.cv-skill:nth-child(5n + 5) { transform: rotate(-2deg); }
+
+/* ------------------------------------------------------------
+   Work pages — title as stamp, copy as manifesto, media as
+   collage instead of a polite vertical stack.
+   ------------------------------------------------------------ */
+
+.work-page__toolbar {
+  margin-bottom: 2rem;
+}
+
+.work-page__back {
+  color: #8a8a8a;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.work-page__article {
+  position: relative;
+  z-index: 1;
+  max-width: 66rem;
+}
+
+.work-page__header {
+  margin-bottom: 2.5rem;
+}
+
+.work-page__title {
+  display: inline-block;
+  max-width: 18ch;
+  transform: rotate(-1.75deg);
+  transform-origin: left top;
+  font-size: 4.4rem;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.work-page__category,
+.work-page__meta {
+  margin-top: 1rem;
+  color: #7a7a7a;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.work-page__intro {
+  position: relative;
+  max-width: 38rem;
+  margin-bottom: 2rem;
+}
+
+.work-page__description {
+  position: relative;
+  max-width: 24rem;
+  margin-bottom: 1.4rem;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.work-page__intro .work-page__description:first-child {
+  left: 1.5rem;
+  color: #fff;
+  border-left: 2px solid #fff;
+  padding-left: 0.9rem;
+}
+
+.work-page__intro .work-page__description:nth-child(2) {
+  left: 7rem;
+  color: #9a9a9a;
+}
+
+.work-page__intro .work-page__description:nth-child(n + 3) {
+  left: 3.5rem;
+  color: #7a7a7a;
+}
+
+.work-page__subhead {
+  margin: 1.75rem 0 0.75rem 1.5rem;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.work-page__links {
+  position: relative;
+  left: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.work-page__link {
+  display: inline-block;
+  margin-right: 1.1rem;
+  color: #8a8a8a;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.work-page__media-stack {
+  position: relative;
+  max-width: 100%;
+  margin: 1rem 0 4rem;
+  overflow-x: hidden;
+}
+
+.work-page__figure {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.55rem 0.7rem 0.55rem 0;
+}
+
+.work-page__figure img,
+.work-page__figure video {
+  width: 100%;
+  display: block;
+}
+
+.work-page__figure--image img {
+  filter: grayscale(1) contrast(1.12);
+}
+
+.work-page__figure:nth-child(5n + 1) {
+  width: min(58%, 34rem);
+  left: -1%;
+  transform: rotate(-1.4deg);
+}
+
+.work-page__figure:nth-child(5n + 2) {
+  width: min(36%, 22rem);
+  left: 6%;
+  top: 1.25rem;
+  transform: rotate(2.1deg);
+}
+
+.work-page__figure:nth-child(5n + 3) {
+  width: min(48%, 28rem);
+  left: -3%;
+  transform: rotate(-0.8deg);
+}
+
+.work-page__figure:nth-child(5n + 4) {
+  width: min(32%, 18rem);
+  left: 10%;
+  transform: rotate(1.6deg);
+}
+
+.work-page__figure:nth-child(5n + 5) {
+  width: min(54%, 30rem);
+  left: 2%;
+  transform: rotate(-2deg);
+}
+
+.work-page__embed {
+  width: 100%;
+}
+
+.work-page__embed--youtube iframe,
+.work-page__figure--video video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.work-page__figure--youtube,
+.work-page__figure--video {
+  width: min(68%, 38rem);
+}
+
+.work-page__embed--bandcamp iframe {
+  width: 350px;
+  max-width: 100%;
+  height: 472px;
+}
+
+.work-page__figure--bandcamp {
+  width: 350px;
+  max-width: calc(100% - 1rem);
+}
+
+/* ------------------------------------------------------------
+   Gallery — irregular paste-up, not masonry columns
+   ------------------------------------------------------------ */
+
+.gallery-masonry {
+  max-width: 72rem;
+}
+
+.gallery-masonry__item {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.45rem;
+}
+
+.gallery-masonry__item img {
+  width: 100%;
+  filter: grayscale(1) contrast(1.1);
+}
+
+.gallery-masonry__caption {
+  margin-top: 0.35rem;
+  color: #6e6e6e;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.gallery-masonry__item:nth-child(7n + 1) {
+  width: 28%;
+  transform: rotate(-2deg);
+  top: 0.8rem;
+}
+
+.gallery-masonry__item:nth-child(7n + 2) {
+  width: 18%;
+  transform: rotate(1.8deg);
+}
+
+.gallery-masonry__item:nth-child(7n + 3) {
+  width: 34%;
+  transform: rotate(-0.6deg);
+  top: -0.4rem;
+}
+
+.gallery-masonry__item:nth-child(7n + 4) {
+  width: 22%;
+  transform: rotate(2.4deg);
+  top: 1.2rem;
+}
+
+.gallery-masonry__item:nth-child(7n + 5) {
+  width: 26%;
+  transform: rotate(-1.2deg);
+}
+
+.gallery-masonry__item:nth-child(7n + 6) {
+  width: 16%;
+  transform: rotate(0.8deg);
+  top: 0.5rem;
+}
+
+.gallery-masonry__item:nth-child(7n + 7) {
+  width: 30%;
+  transform: rotate(-2.2deg);
+}
+
+@media (max-width: 1100px) {
+  .site-brand__title {
+    font-size: 4rem;
+  }
+
+  .work-list__group-label,
+  .section-heading {
+    font-size: 2.4rem;
+  }
+
+  .work-page__title {
+    font-size: 3rem;
+  }
+
+  .lab-canvas {
+    background-size:
+      29vw auto,
+      24vw auto,
+      27vw auto,
+      53vw auto;
+  }
+
+  .lab-canvas__lcp {
+    width: 38vw;
+  }
+
+  .lab-canvas::before {
+    width: 29vw;
+  }
+
+  .work-list::before {
+    background-size: 38vw auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .lab-canvas {
+    background-position: 50% 30vh, 70% 0, 60% 90vh, 50% 18vh;
+    background-size: 20vw auto, 18vw auto, 20vw auto, 27vw auto;
+  }
+
+  .lab-canvas__lcp {
+    top: 0;
+    left: 80%;
+    width: 24vw;
+    transform: translateX(-80%);
+  }
+
+  .lab-canvas::after,
+  .site-header::before {
+    display: none;
+  }
+
+  .lab-canvas::before {
+    width: 9vw;
+    opacity: 0.16;
+  }
+
+  .work-list__item:nth-of-type(5n + 1),
+  .work-list__item:nth-of-type(5n + 2),
+  .work-list__item:nth-of-type(5n + 3),
+  .work-list__item:nth-of-type(5n + 4),
+  .work-list__item:nth-of-type(5n + 5) {
+    left: 0;
+  }
+
+  .main-nav .nav-link {
+    top: 0;
+  }
+
+  .site-brand__title {
+    font-size: 2.75rem;
+  }
+
+  .work-list__group-label,
+  .section-heading {
+    font-size: 1.5rem;
+  }
+
+  .cv-block__title {
+    font-size: 1.25rem;
+  }
+
+  .work-page__title {
+    font-size: 1.8rem;
+    max-width: none;
+    transform: none;
+  }
+
+  .page-about .about-image-wrap,
+  .page-about .about__description,
+  .page-about .about__description:first-child,
+  .page-about .about__description--veil,
+  .page-about .about__description--orbit,
+  .page-about .about__social,
+  .cv-row,
+  .cv-row:nth-of-type(3n + 1),
+  .cv-row:nth-of-type(3n + 2),
+  .cv-row:nth-of-type(3n + 3),
+  .work-page__intro .work-page__description,
+  .work-page__intro .work-page__description:first-child,
+  .work-page__intro .work-page__description:nth-child(2),
+  .work-page__intro .work-page__description:nth-child(n + 3),
+  .work-page__links,
+  .page-exhibitions .work-list__item--exhibition {
+    left: 0;
+    max-width: none;
+  }
+
+  .page-about .about-image-wrap {
+    width: 78%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .work-page__figure,
+  .work-page__figure:nth-child(n),
+  .gallery-masonry__item,
+  .gallery-masonry__item:nth-child(n) {
+    width: 100%;
+    left: 0;
+    top: 0;
+    transform: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .site-header {
+    padding: 7rem 1.5rem 2rem 4rem;
+  }
+
+  .section--list,
+  .section--about,
+  .section--cv,
+  .work-page,
+  .main--gallery {
+    padding-left: 4rem;
+  }
+}
+

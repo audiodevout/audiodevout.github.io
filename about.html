@@ -31,10 +31,12 @@
       document.head.appendChild(gc);
     }
   </script>
+  <link rel="preload" as="image" href="./assets/images/defiance/noisepyramids.6.webp" fetchpriority="high" />
   <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./reset.css" />
   <link rel="stylesheet" href="./tokens.css" />
   <link rel="stylesheet" href="./layout.css" />
+  <link rel="stylesheet" href="./canvas.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
   <script type="speculationrules">
@@ -53,10 +55,13 @@
 }
   </script>
 </head>
-<body>
+<body class="page-about">
+  <div class="site-canvas" aria-hidden="true">
+    <img class="site-canvas__lcp" src="./assets/images/defiance/noisepyramids.6.webp" alt="" width="1280" height="1280" fetchpriority="high" decoding="sync" />
+  </div>
   <header class="site-header" role="banner">
     <div class="header-inner">
-      <a href="./index.html" class="site-brand" aria-label="Home">ATHARVA GUPTA</a>
+      <a href="./index.html" class="site-brand" aria-label="Home"><span class="site-brand__title">Atharva Gupta</span></a>
       <div class="header-right">
         <nav class="main-nav" aria-label="Site navigation">
           <a href="./index.html" class="nav-link">Home</a>
@@ -65,7 +70,6 @@
           <a href="./archive.html" class="nav-link">Archive</a>
           <a href="./about.html" class="nav-link">About</a>
         </nav>
-        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
         <button
           type="button"
           class="nav-toggle"
@@ -95,15 +99,23 @@
   </nav>
 
   <main class="main" role="main">
-    <section id="about" class="section" aria-labelledby="about-heading">
+    <section id="about" class="section section--about" aria-labelledby="about-heading">
       <h2 id="about-heading" class="section-heading reveal">About</h2>
       <div class="about-section-content" id="about-content">
         <!-- GENERATE:about-content:start -->
-        <p class="about__description">Atharva Gupta (b. 1999, India) is a new media artist, sculptor, and researcher based in Groningen, the Netherlands. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, approaching technology as something emotional, erratic, and entangled with both body and politics. He builds objects, systems, and situations grounded in personal relationships with technology.</p>
+        <div class="about-grid">
+          <div class="about-image-wrap">
+            <img src="./assets/images/profile/atharva.webp" alt="Atharva Gupta" />
+          </div>
+          <div class="about-copy">
+            <p class="about__description">Atharva Gupta (b. 1999, India) is a new media artist, sculptor, and researcher based in Groningen, the Netherlands. His practice moves through sound art, kinetic sculpture, audiovisual performance, and experimental media, approaching technology as something emotional, erratic, and entangled with both body and politics. He builds objects, systems, and situations grounded in personal relationships with technology.</p>
+            <p class="about__description about__description--veil">Atharva Gupta is an artist-researcher at the Frank Mohr Institute, Minerva Academy. This portfolio collects installations, performance works, sound releases, visual research, and TouchDesigner tutorials by Atharva Gupta, a new media artist working at the intersection of sound, sculpture, and spatial practice.</p>
+          </div>
+        </div>
   <!-- GENERATE:about-content:end -->
       </div>
     </section>
-    <section id="cv" class="section" aria-labelledby="cv-heading">
+    <section id="cv" class="section section--cv" aria-labelledby="cv-heading">
       <h2 id="cv-heading" class="section-heading reveal">CV</h2>
       <div class="cv-section-content" id="cv-content"></div>
     </section>
@@ -120,6 +132,5 @@
   <script src="./js/scroll-reveal.js"></script>
   <script src="./js/router.js"></script>
   <script src="./js/nav.js"></script>
-  <script src="./js/theme.js"></script>
 </body>
 </html>

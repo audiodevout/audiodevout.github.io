@@ -1,7 +1,17 @@
 /* reset.css — minimal reset for consistent baseline */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; line-height: 1.5; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  min-height: 101vh;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  line-height: 1.5;
+  min-height: 101vh;
+  padding-bottom: 8rem;
+}
 img, picture, video, canvas, svg { display: block; max-width: 100%; }
 input, button, textarea, select { font: inherit; }
 a { color: inherit; }

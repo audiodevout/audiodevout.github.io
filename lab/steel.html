@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Steel &mdash; Lab Skin</title>
+
+  <!--
+    Sandbox only. noindex above, not linked from the site, not in sitemap.xml.
+
+    The <body> below is identical to index.html and defiance.html, ignoring the
+    explanatory comments index.html carries. The only real difference is this one
+    <link>: none of the site's own stylesheets are loaded, so steel.css is
+    designing from bare browser defaults, exactly as a Zen Garden submission does.
+  -->
+  <link rel="stylesheet" href="./steel.css" />
+</head>
+
+<body class="page-home">
+  <div class="lab-canvas" aria-hidden="true"></div>
+  <form class="lab-switcher" aria-label="Technique switcher">
+    <p class="lab-switcher__legend">Technique</p>
+
+    <input type="radio" name="skin" id="skin-off" checked />
+    <label for="skin-off">0 &middot; Baseline (site as shipped)</label>
+
+    <input type="radio" name="skin" id="skin-attr" />
+    <label for="skin-attr">1 &middot; DOM metadata via <code>attr()</code></label>
+
+    <input type="radio" name="skin" id="skin-scroll" />
+    <label for="skin-scroll">2 &middot; Scroll-driven timeline</label>
+
+    <input type="radio" name="skin" id="skin-chroma" />
+    <label for="skin-chroma">3 &middot; Attribute-driven accents</label>
+
+    <input type="radio" name="skin" id="skin-gesture" />
+    <label for="skin-gesture">4 &middot; Strikethrough gesture</label>
+  </form>
+
+  <nav class="lab-bar" aria-label="Lab skins">
+    <a class="lab-bar__link" href="./index.html">Techniques</a>
+    <a class="lab-bar__link" href="./steel.html">Steel</a>
+    <a class="lab-bar__link" href="./defiance.html">Defiance</a>
+  </nav>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="#" class="site-brand" aria-label="Home">
+        <h1 class="site-brand__title">Atharva Gupta</h1>
+      </a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="#" class="nav-link" aria-current="page">Home</a>
+          <a href="./gallery.html" class="nav-link">Gallery</a>
+          <a href="./exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="./archive.html" class="nav-link">Archive</a>
+          <a href="./about.html" class="nav-link">About</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main" role="main">
+    <div class="visually-hidden" aria-label="About Atharva Gupta">
+      <p>Atharva Gupta is a new media artist and sculptor based in Groningen, Netherlands. His practice spans sound art, kinetic sculpture, audiovisual performance, and experimental installations.</p>
+      <p>Atharva Gupta builds objects, systems, and situations grounded in personal relationships with technology, working across TouchDesigner, Ableton Live, and custom electronics. His work treats technology as something emotional, erratic, and entangled with both body and politics.</p>
+      <p>Atharva Gupta is an artist-researcher at the Frank Mohr Institute, Minerva Academy. This portfolio collects installations, performance works, sound releases, visual research, and TouchDesigner tutorials by Atharva Gupta, a new media artist working at the intersection of sound, sculpture, and spatial practice.</p>
+    </div>
+
+    <section class="section section--list" id="list-content">
+      <div class="work-list">
+        <section class="work-list__group">
+          <h2 class="work-list__group-label" data-count="3">Works</h2>
+          <a class="work-list__item" href="./work/instruments-for-becoming.html" data-color="saffron" data-year="2026"><h3 class="work-list__title">Instruments for Becoming</h3></a>
+          <a class="work-list__item" href="./work/symmetrical-fictions.html" data-color="cerulean" data-year="2025"><h3 class="work-list__title">Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1</h3></a>
+          <a class="work-list__item" href="./work/gesture-performance-system.html" data-color="violet" data-year="2025"><h3 class="work-list__title">Gesture-Controlled Performance System for Slow Music</h3></a>
+        </section>
+
+        <section class="work-list__group">
+          <h2 class="work-list__group-label" data-count="11">Sound</h2>
+          <a class="work-list__item" href="./work/asymmetrica-gcpssm.html" data-color="violet" data-year="2026"><h3 class="work-list__title">G.C.P.S.S.M.</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-recording-tests-akerk.html" data-color="graphite" data-year="2025"><h3 class="work-list__title">recording tests at the akerk, groningen</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-minus-12-c.html" data-color="glacier" data-year="2025"><h3 class="work-list__title">-12&deg; C</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-impulse.html" data-color="crimson" data-year="2025"><h3 class="work-list__title">Impulse</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-sublimatic.html" data-color="violet" data-year="2024"><h3 class="work-list__title">Sublimatic</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-the-sauce.html" data-color="amber" data-year="2024"><h3 class="work-list__title">The Sauce</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-a-reasonable-crashout.html" data-color="cerulean" data-year="2024"><h3 class="work-list__title">A Reasonable Crashout</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-automaton.html" data-color="neon-magenta" data-year="2024"><h3 class="work-list__title">Automaton</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-not-as-i-remember-it.html" data-color="electric-lime" data-year="2023"><h3 class="work-list__title">Not As I Remember It</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-stranded-deep.html" data-color="neon-magenta" data-year="2023"><h3 class="work-list__title">Stranded Deep Series</h3></a>
+          <a class="work-list__item" href="./work/asymmetrica-stretching.html" data-color="saffron" data-year="2023"><h3 class="work-list__title">Stretching</h3></a>
+        </section>
+
+        <section class="work-list__group">
+          <h2 class="work-list__group-label" data-count="5">TouchDesigner Tutorials</h2>
+          <a class="work-list__item" href="./work/audiodevout-video-glitch-tracing-instancing.html" data-color="cerulean" data-year="2026"><h3 class="work-list__title">Video Glitch Effects with Tracing and Instancing</h3></a>
+          <a class="work-list__item" href="./work/audiodevout-contour-experiments.html" data-color="cerulean" data-year="2026"><h3 class="work-list__title">Contour Experiments</h3></a>
+          <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part9.html" data-color="cerulean" data-year="2026"><h3 class="work-list__title">Noise Sculpting (Part 9*) - Bubbles, Waves and Scene Switching</h3></a>
+          <a class="work-list__item" href="./work/audiodevout-generative-soundscapes-data-driven.html" data-color="cerulean" data-year="2025"><h3 class="work-list__title">Generative Soundscapes and Data Driven Signal Processing</h3></a>
+          <a class="work-list__item" href="./work/audiodevout-typewriter-effect.html" data-color="cerulean" data-year="2025"><h3 class="work-list__title">typewriter.tox - Typing Effect - Free TOX FIle</h3></a>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

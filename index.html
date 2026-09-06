@@ -31,10 +31,12 @@
       document.head.appendChild(gc);
     }
   </script>
+  <link rel="preload" as="image" href="./assets/images/defiance/noisepyramids.6.webp" fetchpriority="high" />
   <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./reset.css" />
   <link rel="stylesheet" href="./tokens.css" />
   <link rel="stylesheet" href="./layout.css" />
+  <link rel="stylesheet" href="./canvas.css" />
   <link rel="stylesheet" href="./components.css" />
   <link rel="stylesheet" href="./animations.css" />
   <script type="speculationrules">
@@ -53,7 +55,10 @@
 }
   </script>
 </head>
-<body>
+<body class="page-home">
+  <div class="site-canvas" aria-hidden="true">
+    <img class="site-canvas__lcp" src="./assets/images/defiance/noisepyramids.6.webp" alt="" width="1280" height="1280" fetchpriority="high" decoding="sync" />
+  </div>
   <header class="site-header" role="banner">
     <div class="header-inner">
       <a href="./index.html" class="site-brand" aria-label="Home">
@@ -67,7 +72,6 @@
           <a href="./archive.html" class="nav-link">Archive</a>
           <a href="./about.html" class="nav-link">About</a>
         </nav>
-        <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">⊙</button>
         <button
           type="button"
           class="nav-toggle"
@@ -108,13 +112,13 @@
       <!-- GENERATE:home-list:start -->
     <div class="work-list">
       <section class="work-list__group">
-        <h2 class="work-list__group-label">Works</h2>
-        <a class="work-list__item" href="./work/instruments-for-becoming/"><h3 class="work-list__title">Instruments for Becoming</h3></a>
+        <h2 class="work-list__group-label" data-count="3">Works</h2>
+        <a class="work-list__item" data-year="2026" href="./work/instruments-for-becoming/"><h3 class="work-list__title">Instruments for Becoming</h3></a>
         <a class="work-list__item" href="./work/symmetrical-fictions/"><h3 class="work-list__title">Symmetrical Fictions: On the Ir/Rationality of Symmetry, and the Aesthetics of Reclamation v1</h3></a>
         <a class="work-list__item" href="./work/gesture-performance-system/"><h3 class="work-list__title">Gesture-Controlled Performance System for Slow Music</h3></a>
       </section>
       <section class="work-list__group">
-        <h2 class="work-list__group-label">Sound</h2>
+        <h2 class="work-list__group-label" data-count="18">Sound</h2>
         <a class="work-list__item" href="./work/asymmetrica-gcpssm/"><h3 class="work-list__title">G.C.P.S.S.M.</h3></a>
         <a class="work-list__item" href="./work/asymmetrica-recording-tests-akerk/"><h3 class="work-list__title">recording tests at the akerk, groningen</h3></a>
         <a class="work-list__item" href="./work/asymmetrica-minus-12-c/"><h3 class="work-list__title">-12° C</h3></a>
@@ -135,40 +139,40 @@
         <a class="work-list__item" href="./work/asymmetrica-tiptoe/"><h3 class="work-list__title">Tiptoe</h3></a>
       </section>
       <section class="work-list__group">
-        <h2 class="work-list__group-label">TouchDesigner Tutorials</h2>
-        <a class="work-list__item" href="./work/audiodevout-video-glitch-tracing-instancing/"><h3 class="work-list__title">Video Glitch Effects with Tracing and Instancing</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-contour-experiments/"><h3 class="work-list__title">Contour Experiments</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part9/"><h3 class="work-list__title">Noise Sculpting (Part 9*) - Bubbles, Waves and Scene Switching</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-generative-soundscapes-data-driven/"><h3 class="work-list__title">Generative Soundscapes and Data Driven Signal Processing</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-typewriter-effect/"><h3 class="work-list__title">typewriter.tox - Typing Effect - Free TOX FIle</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-creating-smoky-particle-effects/"><h3 class="work-list__title">Creating Smoky Particle Effects with ParticlesGPU</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-nvidia-flex-touchdesigner/"><h3 class="work-list__title">NVIDIA Flex: Real-Time Soft Body &amp; Fluid Experiments</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-audio-reactive-text-animations/"><h3 class="work-list__title">Audio-Reactive Text Animations</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-video-2/"><h3 class="work-list__title">Noise Sculpting (Part 8) - Abstract Particle Structures</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-video-3/"><h3 class="work-list__title">Noise Sculpting (Part 7) - Ghostly Particles</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-video-4/"><h3 class="work-list__title">Mouse Tracking and Force Fields with ParticlesGPU</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-video-5/"><h3 class="work-list__title">Audioreactive ParticlesGPU (with AudioAnalysis)</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-video-6/"><h3 class="work-list__title">Vibing with ParticlesGPU</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-kaleidoscopic-fractals-particlesgpu/"><h3 class="work-list__title">Kaleidoscopic Fractals with ParticlesGPU</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-audioreactive-text-showcase/"><h3 class="work-list__title">Audioreactive Text - Project Showcase</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part6-radial-lighting/"><h3 class="work-list__title">Radial Lighting</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-controlled-feedback-cache-tops/"><h3 class="work-list__title">Controlled Feedback with Cache TOPs</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-replicator-limit-feedback/"><h3 class="work-list__title">Replicator-Limit-Feedback (Project Overview)</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-particle-structures-mesh-generator/"><h3 class="work-list__title">Particle Structures with Mesh Generator - Noise Sculpting Part 6</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-particlesgpu-noise-sculpting/"><h3 class="work-list__title">Noise Sculpting with ParticlesGPU - Part 5</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-procedural-grid-patterns/"><h3 class="work-list__title">Procedural Grid Patterns</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part4/"><h3 class="work-list__title">Noise Sculpting - Part 4</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-geometric-iterations-behind-network/"><h3 class="work-list__title">Geometric Iterations - Behind the Network</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-instancing-to-midi/"><h3 class="work-list__title">Interactive Instrument - Instancing to MIDI</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part3/"><h3 class="work-list__title">Noise Sculpting - Part 3</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-chop-top-chop-sop/"><h3 class="work-list__title">CHOP-TOP-CHOP-SOP - Simple Multioperator Processing</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-noise-sculpting-part2/"><h3 class="work-list__title">Noise Sculpting - Part 2</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-audioreactive-doodle-geometry-instancing/"><h3 class="work-list__title">Audioreactive Doodle with Geometry Instancing - Behind The Network</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-procedural-crystal-video-effects/"><h3 class="work-list__title">Procedural Crystal-Like Video Effects</h3></a>
-        <a class="work-list__item" href="./work/audiodevout-basic-uv-mapping-noise-sculpting/"><h3 class="work-list__title">Basic UV Mapping and Noise Sculpting</h3></a>
+        <h2 class="work-list__group-label" data-count="30">TouchDesigner Tutorials</h2>
+        <a class="work-list__item" data-year="2026" href="./work/audiodevout-video-glitch-tracing-instancing/"><h3 class="work-list__title">Video Glitch Effects with Tracing and Instancing</h3></a>
+        <a class="work-list__item" data-year="2026" href="./work/audiodevout-contour-experiments/"><h3 class="work-list__title">Contour Experiments</h3></a>
+        <a class="work-list__item" data-year="2026" href="./work/audiodevout-noise-sculpting-part9/"><h3 class="work-list__title">Noise Sculpting (Part 9*) - Bubbles, Waves and Scene Switching</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-generative-soundscapes-data-driven/"><h3 class="work-list__title">Generative Soundscapes and Data Driven Signal Processing</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-typewriter-effect/"><h3 class="work-list__title">typewriter.tox - Typing Effect - Free TOX FIle</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-creating-smoky-particle-effects/"><h3 class="work-list__title">Creating Smoky Particle Effects with ParticlesGPU</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-nvidia-flex-touchdesigner/"><h3 class="work-list__title">NVIDIA Flex: Real-Time Soft Body &amp; Fluid Experiments</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-audio-reactive-text-animations/"><h3 class="work-list__title">Audio-Reactive Text Animations</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-video-2/"><h3 class="work-list__title">Noise Sculpting (Part 8) - Abstract Particle Structures</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-video-3/"><h3 class="work-list__title">Noise Sculpting (Part 7) - Ghostly Particles</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-video-4/"><h3 class="work-list__title">Mouse Tracking and Force Fields with ParticlesGPU</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-video-5/"><h3 class="work-list__title">Audioreactive ParticlesGPU (with AudioAnalysis)</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-video-6/"><h3 class="work-list__title">Vibing with ParticlesGPU</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-kaleidoscopic-fractals-particlesgpu/"><h3 class="work-list__title">Kaleidoscopic Fractals with ParticlesGPU</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-audioreactive-text-showcase/"><h3 class="work-list__title">Audioreactive Text - Project Showcase</h3></a>
+        <a class="work-list__item" data-year="2025" href="./work/audiodevout-noise-sculpting-part6-radial-lighting/"><h3 class="work-list__title">Radial Lighting</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-controlled-feedback-cache-tops/"><h3 class="work-list__title">Controlled Feedback with Cache TOPs</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-replicator-limit-feedback/"><h3 class="work-list__title">Replicator-Limit-Feedback (Project Overview)</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-particle-structures-mesh-generator/"><h3 class="work-list__title">Particle Structures with Mesh Generator - Noise Sculpting Part 6</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-particlesgpu-noise-sculpting/"><h3 class="work-list__title">Noise Sculpting with ParticlesGPU - Part 5</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-procedural-grid-patterns/"><h3 class="work-list__title">Procedural Grid Patterns</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-noise-sculpting-part4/"><h3 class="work-list__title">Noise Sculpting - Part 4</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-geometric-iterations-behind-network/"><h3 class="work-list__title">Geometric Iterations - Behind the Network</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-instancing-to-midi/"><h3 class="work-list__title">Interactive Instrument - Instancing to MIDI</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-noise-sculpting-part3/"><h3 class="work-list__title">Noise Sculpting - Part 3</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-chop-top-chop-sop/"><h3 class="work-list__title">CHOP-TOP-CHOP-SOP - Simple Multioperator Processing</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-noise-sculpting-part2/"><h3 class="work-list__title">Noise Sculpting - Part 2</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-audioreactive-doodle-geometry-instancing/"><h3 class="work-list__title">Audioreactive Doodle with Geometry Instancing - Behind The Network</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-procedural-crystal-video-effects/"><h3 class="work-list__title">Procedural Crystal-Like Video Effects</h3></a>
+        <a class="work-list__item" data-year="2024" href="./work/audiodevout-basic-uv-mapping-noise-sculpting/"><h3 class="work-list__title">Basic UV Mapping and Noise Sculpting</h3></a>
       </section>
       <section class="work-list__group">
-        <h2 class="work-list__group-label">Fun Projects</h2>
+        <h2 class="work-list__group-label" data-count="2">Fun Projects</h2>
         <a class="work-list__item" href="./work/road-paint/"><h3 class="work-list__title">Road Paint</h3></a>
         <a class="work-list__item" href="./work/6969osc/"><h3 class="work-list__title">6969osc</h3></a>
       </section>
@@ -201,6 +205,5 @@
   <script src="./js/scroll-reveal.js"></script>
   <script src="./js/router.js"></script>
   <script src="./js/nav.js"></script>
-  <script src="./js/theme.js"></script>
 </body>
 </html>
