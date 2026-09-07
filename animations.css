@@ -140,4 +140,43 @@
   .gallery-masonry__trigger img {
     opacity: 1;
   }
+
+  .fx-negative::after {
+    animation: none;
+    width: 0;
+  }
+}
+
+/* 30 Negative — inversion bar sweeps the word via mix-blend-mode: difference */
+.fx-negative {
+  position: relative;
+  display: inline-block;
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  padding: 0.18em 0.22em;
+}
+
+.fx-negative::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 34%;
+  background: var(--ink);
+  mix-blend-mode: difference;
+  animation: fx-negative 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes fx-negative {
+  0% {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateX(-100%);
+  }
 }

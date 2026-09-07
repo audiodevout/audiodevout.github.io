@@ -13,8 +13,21 @@
   var esc = utils.esc || function (s) { return (s == null || s === '') ? '' : String(s); };
   var resolveAssetSrc = utils.resolveAssetSrc || function (src) { return src; };
 
-  var BANDCAMP_EMBED = 'https://bandcamp.com/EmbeddedPlayer/track=';
-  var BANDCAMP_OPTS = '/size=large/bgcol=111111/linkcol=b8f400/tracklist=false/artwork=large/transparent=false/';
+  var BANDCAMP_TRACK_EMBED = 'https://bandcamp.com/EmbeddedPlayer/track=';
+  var BANDCAMP_ALBUM_EMBED = 'https://bandcamp.com/EmbeddedPlayer/album=';
+  var BANDCAMP_TRACK_OPTS = '/size=large/bgcol=111111/linkcol=b8f400/tracklist=false/artwork=large/transparent=false/';
+  var BANDCAMP_ALBUM_OPTS = '/size=large/bgcol=111111/linkcol=b8f400/tracklist=false/transparent=true/';
+
+  function bandcampEmbedSrc(entry) {
+    if (entry && entry.albumId) {
+      return BANDCAMP_ALBUM_EMBED + entry.albumId + BANDCAMP_ALBUM_OPTS;
+    }
+    return BANDCAMP_TRACK_EMBED + entry.trackId + BANDCAMP_TRACK_OPTS;
+  }
+
+  function bandcampEmbedHeight(entry) {
+    return entry && entry.albumId ? 470 : 472;
+  }
 
   function getMediaItems(item) {
     var list = [];
@@ -33,7 +46,12 @@
     });
     if (item.bandcampTracks && item.bandcampTracks.length > 0) {
       item.bandcampTracks.forEach(function (t) {
-        list.push({ type: 'bandcamp', trackId: t.trackId, title: t.title || '' });
+        list.push({
+          type: 'bandcamp',
+          trackId: t.trackId,
+          albumId: t.albumId,
+          title: t.title || ''
+        });
       });
     }
     return list;
@@ -60,12 +78,12 @@
       slide.appendChild(yt);
     } else if (mediaItem.type === 'bandcamp') {
       var bc = document.createElement('iframe');
-      bc.src = BANDCAMP_EMBED + mediaItem.trackId + BANDCAMP_OPTS;
-      bc.title = mediaItem.title || 'Bandcamp track';
+      bc.src = bandcampEmbedSrc(mediaItem);
+      bc.title = mediaItem.title || 'Bandcamp';
       bc.className = 'lightbox__iframe--bandcamp';
       bc.style.border = '0';
       bc.width = '350';
-      bc.height = '472';
+      bc.height = String(bandcampEmbedHeight(mediaItem));
       slide.appendChild(bc);
     } else if (mediaItem.type === 'video') {
       var video = document.createElement('video');
@@ -116,10 +134,12 @@
       var bcWrap = document.createElement('div');
       bcWrap.className = 'work-page__embed work-page__embed--bandcamp';
       var bc = document.createElement('iframe');
-      bc.src = BANDCAMP_EMBED + mediaItem.trackId + BANDCAMP_OPTS;
-      bc.title = mediaItem.title || 'Bandcamp track';
+      bc.src = bandcampEmbedSrc(mediaItem);
+      bc.title = mediaItem.title || 'Bandcamp';
       bc.className = 'lightbox__iframe--bandcamp';
       bc.style.border = '0';
+      bc.width = '350';
+      bc.height = String(bandcampEmbedHeight(mediaItem));
       bc.loading = 'lazy';
       bcWrap.appendChild(bc);
       fig.appendChild(bcWrap);
@@ -218,7 +238,7 @@
 
     if (!minimal && item.fullDescription) {
       var desc = document.createElement('p');
-      desc.className = 'lightbox__description';
+      desc.className = 'lightbox__description text-plate';
       desc.textContent = item.fullDescription;
       container.appendChild(desc);
     }

@@ -12,15 +12,20 @@
   --color-hover: #9a9a9a;
   --color-meta: #8a8a8a;
   --color-accent: #ffffff;
-  --color-accent-glacier: var(--color-accent);
-  --color-accent-crimson: var(--color-accent);
-  --color-accent-violet: var(--color-accent);
-  --color-accent-amber: var(--color-accent);
-  --color-accent-cerulean: var(--color-accent);
-  --color-accent-lime: var(--color-accent);
-  --color-accent-saffron: var(--color-accent);
-  --color-accent-magenta: var(--color-accent);
-  --color-accent-graphite: var(--color-accent);
+  --color-accent-glacier: #9dc4d8;
+  --color-accent-crimson: #d2455a;
+  --color-accent-violet: #9b7fd4;
+  --color-accent-amber: #e0a13c;
+  --color-accent-cerulean: #3f8fc4;
+  --color-accent-lime: #a8d84a;
+  --color-accent-saffron: #e8c04a;
+  --color-accent-magenta: #e04ba8;
+  --color-accent-graphite: #8a8a94;
+
+  /* fx-negative text effect colour tokens */
+  --ink: currentColor;
+  --ink-2: #FF4FD8;
+  --ink-3: #4FF8FF;
   --color-lightbox-bg: #000000;
   --color-on-dark: #ffffff;
 
@@ -74,4 +79,12 @@
   --scrollbar-track: #000000;
   --scrollbar-thumb: #4a4a4a;
   --scrollbar-thumb-hover: #7a7a7a;
+
+  --text-plate-bg: #000000;
+  --text-plate-pad-x: 0.45em;
+  --text-plate-pad-y: 0.22em;
+  --text-plate-pad-x-md: 0.5em;
+  --text-plate-pad-y-md: 0.3em;
+  --text-plate-pad-x-lg: 0.55em;
+  --text-plate-pad-y-lg: 0.38em;
 }

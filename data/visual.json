@@ -326,6 +326,75 @@
       ]
     },
     {
+      "id": "audiodevout-textures-instancing",
+      "title": "Textures and Instancing in TouchDesigner (Tutorial)",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "Psychedelic visuals with Phong materials on instanced geometry—noise and ramps for endless variation.",
+      "fullDescription": "Some cool tricks to make psychedelic visuals with texturing. In this video I use a Phong material to give textures to instanced geometry. If you use certain noise and ramps, you can create quite a lot of variations!",
+      "medium": "TouchDesigner, instancing, materials, procedural textures",
+      "tags": [
+        "TouchDesigner",
+        "instancing",
+        "textures",
+        "Phong",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=owC0QyOcs5U"
+      ],
+      "youtubeDate": "20260819",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/167114018"
+      }
+    },
+    {
+      "id": "audiodevout-touchdesigner-daw-part-2",
+      "title": "Making a Synth with Buttons - Using TouchDesigner as a DAW (Part 2)",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "A synth inside TouchDesigner using the replicator, Audio Oscillator CHOP, and many buttons.",
+      "fullDescription": "Another video in this series of using TouchDesigner to make music. In this video we are making a synth inside TouchDesigner using the replicator component, the audiooscillator CHOP and many, many buttons.",
+      "medium": "TouchDesigner, audio synthesis, replicator, live performance",
+      "tags": [
+        "TouchDesigner",
+        "DAW",
+        "synth",
+        "audio",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=XDByG2xAtvU"
+      ],
+      "youtubeDate": "20260711",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/163257664"
+      }
+    },
+    {
+      "id": "audiodevout-touchdesigner-daw",
+      "title": "Using Touchdesigner as a DAW?",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "Live audio generation and manipulation in TouchDesigner with native VST3 support.",
+      "fullDescription": "I have been wanting to make another video about sound generation in TouchDesigner for a while. I am now getting into live audio generation and manipulation and patterns. The VST audio effects are doing a lot of heavy lifting here, and I am very happy that this software has native support for VST3 plugins.",
+      "medium": "TouchDesigner, audio, VST3, live performance",
+      "tags": [
+        "TouchDesigner",
+        "DAW",
+        "VST",
+        "audio",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=iFm0Ci1isjU"
+      ],
+      "youtubeDate": "20260706",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/163041805"
+      }
+    },
+    {
       "id": "audiodevout-video-glitch-tracing-instancing",
       "title": "Video Glitch Effects with Tracing and Instancing",
       "category": "TouchDesigner Tutorials",

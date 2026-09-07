@@ -1,6 +1,7 @@
 /**
- * canvas.css — Defiance collage canvas (fixed bitmap stack + page grain)
+ * canvas.css — Defiance collage canvas (parallax layer stack + page grain)
  */
+
 .site-canvas,
 .site-canvas::before,
 .site-canvas::after {
@@ -14,35 +15,102 @@
   z-index: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: #000;
+  /* Static fallback — corner fields + horizon (reduced-motion / no-JS) */
   background-image:
-    url("./assets/images/defiance/noisepyramids.0.webp"),
+    url("./assets/images/defiance/particle_trees.0.webp"),
     url("./assets/images/defiance/noisepyramids.5.webp"),
-    url("./assets/images/defiance/noisepyramids.1.webp"),
-    url("./assets/images/defiance/particle_trees.0.webp");
+    url("./assets/images/defiance/noisepyramids.0.webp"),
+    url("./assets/images/defiance/noisepyramids.1.webp");
   background-repeat: no-repeat;
   background-position:
-    48% 42vh,
-    62% 8vh,
-    58% 88vh,
-    50% 26vh;
+    50% 14vh,
+    92% 4vh,
+    6% 78vh,
+    94% 86vh;
   background-size:
-    38vw auto,
-    33vw auto,
-    36vw auto,
-    80vw auto;
+    80vw auto,
+    26vw auto,
+    24vw auto,
+    22vw auto;
+}
+
+/* Parallax mode — layers injected by canvas-parallax.js */
+.site-canvas--parallax {
+  background-image: none;
+}
+
+.site-canvas--parallax::before,
+.site-canvas--parallax::after {
+  display: none;
+}
+
+body.site-canvas-parallax::after,
+body.site-canvas-parallax .work-list::before {
+  display: none;
+}
+
+.canvas-layer,
+.canvas-layer__lcp-wrap {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: center center;
+  transform:
+    translateX(var(--centered-x, 0))
+    translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0)
+    scale(var(--parallax-scale, 1));
+}
+
+.canvas-layer__img,
+.site-canvas__lcp {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: none;
+}
+
+.canvas-layer__img--invert {
+  filter: invert(1);
+}
+
+.canvas-layer__glow {
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    var(--layer-glow, transparent) 0%,
+    transparent 62%
+  );
+  opacity: calc(0.03 + var(--layer-depth, 0.2) * 0.08);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.canvas-layer__lcp-wrap {
+  pointer-events: none;
+}
+
+.canvas-layer__lcp-wrap .site-canvas__lcp {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
 }
 
 .site-canvas__lcp {
   position: absolute;
-  top: 12vh;
-  left: 70%;
-  width: 51vw;
+  top: 9vh;
+  left: 82%;
+  width: 38vw;
   height: auto;
-  transform: translateX(-70%);
+  transform: translateX(-82%);
 }
 
+/* Static pseudo-layers (fallback when parallax is off) */
 .site-canvas::before,
 .site-canvas::after {
   content: "";
@@ -52,51 +120,24 @@
 .site-canvas::before {
   top: 0;
   right: 0;
-  width: 36vw;
-  height: 100vh;
-  background-image:
-    url("./assets/images/_archive/diamonddoodles.31.webp"),
-    url("./assets/images/_archive/diamonddoodles.30.webp"),
-    url("./assets/images/_archive/diamonddoodles.11.webp"),
-    url("./assets/images/_archive/diamonddoodles.2.webp"),
-    url("./assets/images/_archive/diamonddoodles.8.webp"),
-    url("./assets/images/_archive/diamonddoodles.0.webp"),
-    url("./assets/images/_archive/diamonddoodles.9.webp"),
-    url("./assets/images/_archive/diamonddoodles.14.webp"),
-    url("./assets/images/_archive/diamonddoodles.12.webp");
-  background-repeat: no-repeat;
-  background-size:
-    36vw auto,
-    36vw auto,
-    24vw auto,
-    29vw auto,
-    24vw auto,
-    22vw auto,
-    27vw auto,
-    31vw auto,
-    36vw auto;
-  background-position:
-    right center,
-    right center,
-    left 58vh,
-    80% 8vh,
-    60% 28vh,
-    90% 48vh,
-    50% 66vh,
-    70% 82vh,
-    40% 100vh;
+  bottom: 0;
+  width: 28vw;
+  height: 100%;
+  background: url("./assets/images/_archive/diamonddoodles.31.webp") right top / 28vw auto repeat-y;
   mix-blend-mode: screen;
-  opacity: 0.22;
+  opacity: 0.16;
 }
 
 .site-canvas::after {
-  top: 38vh;
-  left: 28%;
-  width: 31vw;
-  height: 36vh;
+  top: 52vh;
+  left: 86%;
+  width: 22vw;
+  height: auto;
+  aspect-ratio: 1;
+  transform: translateX(-86%);
   background: url("./assets/images/_archive/abstract_sculpture_series.11.webp") center / contain no-repeat;
   mix-blend-mode: screen;
-  opacity: 0.55;
+  opacity: 0.38;
 }
 
 body::after {
@@ -105,17 +146,10 @@ body::after {
   inset: 0;
   z-index: var(--z-grain);
   pointer-events: none;
-  background-image:
-    url("./assets/images/defiance/islands_of_texture.1.png"),
-    url("./assets/images/defiance/islands_of_texture.2.png"),
-    url("./assets/images/_archive/angryimg_1714828431619.webp"),
-    url("./assets/images/_archive/oostposterexport.0.webp");
-  background-repeat: no-repeat;
-  background-size: 89vw auto, 89vw auto, 44vw auto, 36vw auto;
-  background-position: center, center, 40% 30%, 60% 70%;
+  background: url("./assets/images/defiance/islands_of_texture.1.png") 50% -5vh / 100vw auto no-repeat;
   filter: invert(1);
   mix-blend-mode: overlay;
-  opacity: 0.12;
+  opacity: 0.07;
 }
 
 .work-list::before {
@@ -125,11 +159,12 @@ body::after {
   left: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   z-index: 0;
   pointer-events: none;
-  background: url("./assets/images/_archive/morsecode_exports.9.webp") 50% 40vh / 51vw auto no-repeat;
+  background: url("./assets/images/_archive/morsecode_exports.9.webp") 22% 72vh / 38vw auto no-repeat;
   mix-blend-mode: screen;
-  opacity: 0.18;
+  opacity: 0.11;
 }
 
 .site-header::before {
@@ -147,56 +182,114 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-canvas,
   .site-canvas::before,
   .site-canvas::after,
-  body::after {
-    position: absolute;
+  body::after,
+  .work-list::before,
+  .site-header::before {
+    opacity: 0;
   }
 }
 
 @media (max-width: 1100px) {
   .site-canvas {
     background-size:
-      29vw auto,
-      24vw auto,
-      27vw auto,
-      53vw auto;
+      68vw auto,
+      22vw auto,
+      20vw auto,
+      18vw auto;
   }
 
-  .site-canvas__lcp {
-    width: 38vw;
+  .site-canvas__lcp,
+  .canvas-layer__lcp-wrap .site-canvas__lcp {
+    width: 32vw;
   }
 
-  .site-canvas::before {
-    width: 29vw;
+  .canvas-layer--doodle-column {
+    width: 24vw !important;
   }
 
-  .work-list::before {
-    background-size: 38vw auto;
+  .canvas-layer--horizon-trees {
+    width: 80vw !important;
   }
 }
 
 @media (max-width: 620px) {
   .site-canvas {
-    background-position: 50% 30vh, 70% 0, 60% 90vh, 50% 18vh;
-    background-size: 20vw auto, 18vw auto, 20vw auto, 27vw auto;
+    background-position:
+      50% 12vh,
+      90% 2vh,
+      4% 80vh,
+      92% 88vh;
+    background-size:
+      88vw auto,
+      min(36vw, 9rem) auto,
+      min(32vw, 8rem) auto,
+      min(30vw, 7.5rem) auto;
   }
 
-  .site-canvas__lcp {
-    top: 0;
-    left: 80%;
-    width: 24vw;
-    transform: translateX(-80%);
+  .site-canvas__lcp,
+  .canvas-layer__lcp-wrap {
+    top: 5vh !important;
+    left: 88% !important;
+    width: min(44vw, 11rem) !important;
+    --centered-x: -88% !important;
+  }
+
+  .canvas-layer__lcp-wrap .site-canvas__lcp {
+    width: 100% !important;
   }
 
   .site-canvas::after,
-  .site-header::before {
+  .site-header::before,
+  .canvas-layer--sculpture-right {
     display: none;
   }
 
   .site-canvas::before {
-    width: 9vw;
-    opacity: 0.16;
+    width: 22vw;
+    opacity: 0.1;
+  }
+
+  .canvas-layer--doodle-column {
+    width: 22vw !important;
+    opacity: 0.1 !important;
+  }
+
+  .canvas-layer--horizon-trees {
+    left: 50% !important;
+    --centered-x: -50% !important;
+    top: 10vh !important;
+    width: 80vw !important;
+  }
+
+  .canvas-layer--pyramid-tr {
+    left: 90% !important;
+    top: 2vh !important;
+    width: min(36vw, 9rem) !important;
+  }
+
+  .canvas-layer--pyramid-bl {
+    left: 2% !important;
+    top: 82vh !important;
+    width: min(32vw, 8rem) !important;
+  }
+
+  .canvas-layer--pyramid-br {
+    left: 92% !important;
+    top: 90vh !important;
+    width: min(30vw, 7.5rem) !important;
+  }
+
+  .canvas-layer--morse-floor {
+    left: 18% !important;
+    top: 78vh !important;
+    width: min(52vw, 13rem) !important;
+    opacity: 0.09 !important;
+  }
+
+  .canvas-layer--grain-sky {
+    width: 120vw !important;
+    opacity: 0.05 !important;
   }
 }

@@ -43,6 +43,9 @@
     if (!item) return '';
     if (item.youtubeDate) return String(item.youtubeDate).slice(0, 4);
     if (item.year != null) return String(item.year);
+    var fd = item.fullDescription || item.description || '';
+    var released = fd.match(/Released\s+(?:\w+\s+)?(\d{4})/i);
+    if (released) return released[1];
     var m = String(item.date || '').match(/(\d{4})/);
     return m ? m[1] : '';
   }
@@ -191,24 +194,13 @@
     var listRoot = document.createElement('div');
     listRoot.className = 'work-list';
 
-    var group = document.createElement('section');
-    group.className = 'work-list__group';
-
-    var h = document.createElement('h2');
-    h.className = 'work-list__group-label reveal';
-    h.textContent = 'Archive';
-    h.dataset.count = String(archiveItems.length);
-    group.appendChild(h);
-
     archiveItems.forEach(function (item, index) {
       var row = createArchiveListItem(item);
       if (row) {
         row.style.setProperty('--i', Math.min(index + 1, 10));
-        group.appendChild(row);
+        listRoot.appendChild(row);
       }
     });
-
-    listRoot.appendChild(group);
     container.appendChild(listRoot);
   }
 
@@ -520,13 +512,6 @@
       desc.textContent = about.description;
       right.appendChild(desc);
     }
-    var intro = (data.pageContent && data.pageContent.home && data.pageContent.home.seoIntro) || [];
-    if (Array.isArray(intro) && intro[2]) {
-      var veil = document.createElement('p');
-      veil.className = 'about__description about__description--veil';
-      veil.textContent = intro[2];
-      right.appendChild(veil);
-    }
     if (social.length > 0) {
       var socialWrap = document.createElement('div');
       socialWrap.className = 'about__social';
@@ -609,28 +594,6 @@
         workBlock.appendChild(entry);
       });
       container.appendChild(workBlock);
-    }
-
-    var skills = cv.skills || {};
-    var skillWords = []
-      .concat(skills.general || [], skills.technologies || [], skills.interests || []);
-    if (skillWords.length > 0) {
-      var skillsBlock = document.createElement('div');
-      skillsBlock.className = 'cv-block cv-block--skills';
-      var skillsTitle = document.createElement('h3');
-      skillsTitle.className = 'cv-block__title';
-      skillsTitle.textContent = 'Skills';
-      skillsBlock.appendChild(skillsTitle);
-      var cloud = document.createElement('p');
-      cloud.className = 'cv-skill-cloud';
-      skillWords.forEach(function (word) {
-        var span = document.createElement('span');
-        span.className = 'cv-skill';
-        span.textContent = word;
-        cloud.appendChild(span);
-      });
-      skillsBlock.appendChild(cloud);
-      container.appendChild(skillsBlock);
     }
   }
 

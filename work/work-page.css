@@ -81,19 +81,25 @@
   left: 1.5rem;
   color: var(--color-text);
   border-left: 2px solid var(--color-text);
-  padding-left: 0.9rem;
+  padding-top: 0.75rem;
+  padding-right: 0.85rem;
+  padding-bottom: 0.75rem;
+  padding-left: calc(0.85rem + 0.9rem);
+  background-color: #000;
 }
 
 .work-page__intro .work-page__description:nth-child(2),
 .work-page__intro .lightbox__description:nth-child(2) {
   left: 7rem;
   color: var(--color-hover);
+  background-color: #000;
 }
 
 .work-page__intro .work-page__description:nth-child(n + 3),
 .work-page__intro .lightbox__description:nth-child(n + 3) {
   left: 3.5rem;
   color: var(--color-muted);
+  background-color: #000;
 }
 
 .work-page__subhead {
@@ -158,10 +164,6 @@
   display: block;
 }
 
-.work-page__figure--image img,
-.work-page__figure-btn img {
-  filter: grayscale(1) contrast(1.12);
-}
 
 .work-page__figure:nth-child(5n + 1) {
   width: min(58%, 34rem);
@@ -205,9 +207,14 @@
   background: #000;
 }
 
-.work-page__figure--youtube,
-.work-page__figure--video {
-  width: min(68%, 38rem);
+.work-page__figure.work-page__figure--youtube,
+.work-page__figure.work-page__figure--video {
+  width: min(100%, 56rem);
+  left: 0;
+  top: 0;
+  transform: none;
+  display: block;
+  margin: 1.25rem 0 1.75rem;
 }
 
 .work-page__embed--bandcamp iframe {
@@ -238,6 +245,10 @@
   .work-page__intro .work-page__description:first-child,
   .work-page__intro .work-page__description:nth-child(2),
   .work-page__intro .work-page__description:nth-child(n + 3),
+  .work-page__intro .lightbox__description,
+  .work-page__intro .lightbox__description:first-child,
+  .work-page__intro .lightbox__description:nth-child(2),
+  .work-page__intro .lightbox__description:nth-child(n + 3),
   .work-page__links {
     left: 0;
     max-width: none;
@@ -258,4 +269,15 @@
   .work-page {
     padding-left: 4rem;
   }
+}
+
+/* Body text plates — load last so they win over lightbox defaults */
+.work-page__intro .work-page__description,
+.work-page__intro .lightbox__description {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 24rem;
+  background-color: #000;
+  padding: 0.75rem 0.85rem;
 }

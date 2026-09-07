@@ -79,6 +79,9 @@ function yearFromItem(item) {
   if (!item) return "";
   if (item.youtubeDate) return String(item.youtubeDate).slice(0, 4);
   if (item.year != null) return String(item.year);
+  var fd = item.fullDescription || item.description || "";
+  var released = fd.match(/Released\s+(?:\w+\s+)?(\d{4})/i);
+  if (released) return released[1];
   var match = String(item.date || "").match(/(\d{4})/);
   return match ? match[1] : "";
 }
@@ -569,11 +572,8 @@ function buildHomeIntroHtml(profile) {
 
 function buildAboutContentHtml(profile) {
   var about = (profile && profile.about) || {};
-  var home = (profile && profile.home) || {};
-  var intro = Array.isArray(home.seoIntro) ? home.seoIntro : [];
   var description = about.description || "";
   var image = about.image || "./assets/images/profile/atharva.webp";
-  var veil = intro[2] ? '<p class="about__description about__description--veil">' + escapeHtml(intro[2]) + "</p>" : "";
   return (
     '        <div class="about-grid">\n' +
     '          <div class="about-image-wrap">\n' +
@@ -581,7 +581,6 @@ function buildAboutContentHtml(profile) {
     "          </div>\n" +
     '          <div class="about-copy">\n' +
     '            <p class="about__description">' + escapeHtml(description) + "</p>\n" +
-    (veil ? "            " + veil + "\n" : "") +
     "          </div>\n" +
     "        </div>"
   );
