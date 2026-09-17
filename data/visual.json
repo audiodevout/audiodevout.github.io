@@ -1,6 +1,27 @@
 {
   "items": [
     {
+      "id": "glitches-01",
+      "title": "Glitches",
+      "category": "VISUAL RESEARCH",
+      "color": "electric-lime",
+      "images": [
+        "./assets/images/_archive/glitches.1.png",
+        "./assets/images/_archive/glitches.12.png",
+        "./assets/images/_archive/glitches.17.png",
+        "./assets/images/_archive/glitches.22.png",
+        "./assets/images/_archive/glitches.25.png",
+        "./assets/images/_archive/glitches.28.png",
+        "./assets/images/_archive/glitches.30.png",
+        "./assets/images/_archive/glitches.31.png",
+        "./assets/images/_archive/glitches.34.png",
+        "./assets/images/_archive/glitches.46.png",
+        "./assets/images/_archive/glitches.49.png",
+        "./assets/images/_archive/glitches.51.png",
+        "./assets/images/_archive/glitches.59.png"
+      ]
+    },
+    {
       "id": "digital-sketch-01",
       "title": "Surveillance",
       "category": "VISUAL RESEARCH",

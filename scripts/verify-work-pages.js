@@ -143,7 +143,7 @@ function checkRobots() {
 }
 
 function checkListingPages() {
-  ["index.html", "exhibitions.html", "archive.html"].forEach(function (page) {
+  ["index.html", "exhibitions.html"].forEach(function (page) {
     var html = fs.readFileSync(path.join(root, page), "utf8");
     if (html.indexOf("work-lookup.js") === -1) fail(page + " missing work-lookup.js");
     if (html.indexOf("lightbox.js") !== -1) fail(page + " still includes lightbox.js");
@@ -214,6 +214,12 @@ function checkHomepageSeo() {
   }
   if (html.indexOf('class="work-list__title"') === -1) {
     fail("index.html missing generated H3 work list titles");
+  }
+  var archiveIdx = html.indexOf(">Archive</h2>");
+  var funIdx = html.indexOf(">Fun Projects</h2>");
+  if (archiveIdx === -1) fail("index.html missing Archive home list group");
+  if (funIdx !== -1 && archiveIdx > funIdx) {
+    fail("index.html Archive group should come before Fun Projects");
   }
   if (html.indexOf('name="description"') === -1) {
     fail("index.html missing meta description");

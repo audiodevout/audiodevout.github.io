@@ -120,10 +120,11 @@
     if (!entry) return;
     var item = entry.item;
 
+    var label = entry.label || item.title || 'Untitled';
     expandImg.src = resolveSrc(entry.src);
-    expandImg.alt = (item.title || 'Untitled') + ' — image ' + (entry.imageIndex + 1);
+    expandImg.alt = label;
     expandCaption.innerHTML =
-      '<a href="' + esc(workHref(item.id)) + '">' + esc(item.title || 'Untitled') + '</a>' +
+      '<a href="' + esc(workHref(item.id)) + '">' + esc(label) + '</a>' +
       ' · ' + (expandState.flatIndex + 1) + ' / ' + flatImages.length;
 
     var multi = flatImages.length > 1;
@@ -183,11 +184,34 @@
     if (e.key === 'ArrowRight') stepExpand(1);
   }
 
+  function fileNumberFromSrc(src) {
+    var base = String(src || '').split(/[\\/]/).pop() || '';
+    var stem = base.replace(/\.[^.]+$/, '');
+    var match = stem.match(/(\d+)\s*$/);
+    return match ? match[1] : '';
+  }
+
+  function imageDisplayName(entry, titleCounts) {
+    var title = (entry.item && entry.item.title) || 'Untitled';
+    if ((titleCounts[title] || 0) <= 1) return title;
+    var num = fileNumberFromSrc(entry.src);
+    if (!num) num = String((entry.imageIndex || 0) + 1);
+    return title + ' ' + num;
+  }
+
   function buildFlatImages(items) {
+    var titleCounts = {};
+    items.forEach(function (item) {
+      var title = item.title || 'Untitled';
+      titleCounts[title] = (titleCounts[title] || 0) + (item.images || []).length;
+    });
+
     var list = [];
     items.forEach(function (item) {
       (item.images || []).forEach(function (src, imageIndex) {
-        list.push({ item: item, src: src, imageIndex: imageIndex });
+        var entry = { item: item, src: src, imageIndex: imageIndex };
+        entry.label = imageDisplayName(entry, titleCounts);
+        list.push(entry);
       });
     });
     return list;
@@ -204,14 +228,16 @@
     figure.style.setProperty('--i', Math.min(flatIndex % 9, 8));
     figure.style.setProperty('--gallery-accent', resolveAccent(item.color));
 
+    var label = entry.label || item.title || 'Untitled';
+
     var button = document.createElement('button');
     button.type = 'button';
     button.className = 'gallery-masonry__trigger';
-    button.setAttribute('aria-label', item.title || 'Untitled');
+    button.setAttribute('aria-label', label);
 
     var img = document.createElement('img');
     img.src = resolveSrc(entry.src);
-    img.alt = item.title || 'Untitled';
+    img.alt = label;
     img.loading = flatIndex < 8 ? 'eager' : 'lazy';
     img.decoding = 'async';
     img.addEventListener('load', function onLoad() {
@@ -229,7 +255,7 @@
 
     var caption = document.createElement('span');
     caption.className = 'gallery-masonry__caption';
-    caption.textContent = item.title || 'Untitled';
+    caption.textContent = label;
 
     button.appendChild(img);
     button.appendChild(caption);

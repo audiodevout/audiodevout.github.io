@@ -356,6 +356,24 @@ function workPageHref(id) {
   return "./work/" + encodeURIComponent(id) + "/";
 }
 
+function listItemHref(item) {
+  if (item && item.urls && item.urls.page) return item.urls.page;
+  return workPageHref(item.id);
+}
+
+var THESIS_ARCHIVE_ITEM = {
+  id: "thesis-instruments-for-becoming",
+  title: "Instruments for Becoming",
+  category: "THESIS",
+  description: "A manual for sound practitioners — MADTECH, Frank Mohr Institute, 2026",
+  year: 2026,
+  urls: { page: "./thesis/" },
+};
+
+function getArchiveItems() {
+  return [THESIS_ARCHIVE_ITEM].concat(dedupeById(items(readJson(DATA_FILES.writing))));
+}
+
 function readSameAsUrls() {
   return items(readJson("links.json"))
     .map(function (link) {
@@ -501,8 +519,9 @@ function buildAboutJsonLd(sameAs) {
   });
 }
 
-function buildListSectionHtml(heading, listItems) {
+function buildListSectionHtml(heading, listItems, opts) {
   if (!listItems || listItems.length === 0) return "";
+  opts = opts || {};
   var rows = listItems
     .map(function (item) {
       var title = item.title || "Untitled";
@@ -512,7 +531,7 @@ function buildListSectionHtml(heading, listItems) {
         '        <a class="work-list__item"' +
         yearAttr +
         ' href="' +
-        escapeHtml(workPageHref(item.id)) +
+        escapeHtml(listItemHref(item)) +
         '">' +
         '<h3 class="work-list__title">' +
         escapeHtml(title) +
@@ -520,8 +539,11 @@ function buildListSectionHtml(heading, listItems) {
       );
     })
     .join("\n");
+  var idAttr = opts.id ? ' id="' + escapeHtml(opts.id) + '"' : "";
   return (
-    '      <section class="work-list__group">\n' +
+    '      <section class="work-list__group"' +
+    idAttr +
+    ">\n" +
     '        <h2 class="work-list__group-label" data-count="' +
     listItems.length +
     '">' +
@@ -538,6 +560,7 @@ function buildHomeListHtml() {
   var visual = dedupeById(items(readJson(DATA_FILES.visual)));
   var sound = dedupeById(items(readJson(DATA_FILES.sound)));
   var funProjects = dedupeById(items(readJson(DATA_FILES.funProjects)));
+  var archiveItems = getArchiveItems();
 
   var worksItems = installations.concat(performance);
   var sections = [];
@@ -551,6 +574,7 @@ function buildHomeListHtml() {
     sections.push(buildListSectionHtml(cat, visualGroups[cat]));
   });
 
+  if (archiveItems.length) sections.push(buildListSectionHtml("Archive", archiveItems, { id: "archive" }));
   if (funProjects.length) sections.push(buildListSectionHtml("Fun Projects", funProjects));
 
   if (sections.length === 0) return "";

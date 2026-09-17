@@ -159,48 +159,35 @@
     title: 'Instruments for Becoming',
     category: 'THESIS',
     description: 'A manual for sound practitioners — MADTECH, Frank Mohr Institute, 2026',
+    year: 2026,
     urls: { page: './thesis/' }
   };
 
-  function createArchiveListItem(item) {
-    if (!item) return null;
+  function getArchiveItems() {
+    var writingItems = dedupeById((data.projects && data.projects.writing) ? data.projects.writing : []);
+    return [THESIS_ARCHIVE_ITEM].concat(writingItems);
+  }
 
-    var link = document.createElement('a');
-    link.className = 'work-list__item work-list__item--link';
-    link.href = workHref(item);
-
-    var linkTitle = document.createElement('h3');
-    linkTitle.className = 'work-list__title';
-    linkTitle.textContent = item.title || '';
-    link.appendChild(linkTitle);
-
-    var year = yearFromItem(item);
-    if (year) link.dataset.year = year;
-
-    link.classList.add('reveal');
-
-    return link;
+  function scrollToHash() {
+    var hash = (window.location.hash || '').replace(/^#/, '');
+    if (!hash) return;
+    var el = document.getElementById(hash);
+    if (el && typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView();
+    }
   }
 
   function renderArchiveSection() {
     var container = document.getElementById('archive-content');
     if (!container) return;
 
-    var writingItems = dedupeById((data.projects && data.projects.writing) ? data.projects.writing : []);
-    var archiveItems = [THESIS_ARCHIVE_ITEM].concat(writingItems);
+    var archiveItems = getArchiveItems();
 
     container.innerHTML = '';
 
     var listRoot = document.createElement('div');
     listRoot.className = 'work-list';
-
-    archiveItems.forEach(function (item, index) {
-      var row = createArchiveListItem(item);
-      if (row) {
-        row.style.setProperty('--i', Math.min(index + 1, 10));
-        listRoot.appendChild(row);
-      }
-    });
+    addListGroup(listRoot, 'Archive', archiveItems, { id: 'archive' });
     container.appendChild(listRoot);
   }
 
@@ -230,10 +217,11 @@
     return link;
   }
 
-  function addListGroup(listRoot, heading, items) {
+  function addListGroup(listRoot, heading, items, opts) {
     if (!listRoot || !items || items.length === 0) return;
     var group = document.createElement('section');
     group.className = 'work-list__group';
+    if (opts && opts.id) group.id = opts.id;
 
     var h = document.createElement('h2');
     h.className = 'work-list__group-label reveal';
@@ -280,12 +268,18 @@
       addListGroup(listRoot, cat, visualGroups[cat]);
     });
 
+    var archiveItems = getArchiveItems();
+    if (archiveItems.length) {
+      addListGroup(listRoot, 'Archive', archiveItems, { id: 'archive' });
+    }
+
     var funItems = dedupeById(data.projects.funProjects || []);
     if (funItems.length) {
       addListGroup(listRoot, 'Fun Projects', funItems);
     }
 
     container.appendChild(listRoot);
+    scrollToHash();
   }
 
   /* ---------- Sound section (Phase 3) ---------- */

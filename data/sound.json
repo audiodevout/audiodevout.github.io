@@ -1,6 +1,24 @@
 {
   "items": [
     {
+      "id": "asymmetrica-quite-the-foopah",
+      "title": "quite the foopah",
+      "category": "ASYMMETRICA AUDIO COLLECTION",
+      "color": "amber",
+      "description": "Album by asymmetrica — released on Bandcamp.",
+      "fullDescription": "quite the foopah by asymmetrica — two-sided release on Bandcamp. Released September 2026 on asymmetrica.",
+      "medium": "Digital audio album",
+      "themes": "electronic, experimental, asymmetrica",
+      "bandcampTracks": [
+        {
+          "title": "quite the foopah",
+          "albumId": "2456515122",
+          "url": "https://asymmetrica.bandcamp.com/album/quite-the-foopah"
+        }
+      ],
+      "year": 2026
+    },
+    {
       "id": "asymmetrica-radical",
       "title": "radical",
       "category": "ASYMMETRICA AUDIO COLLECTION",
