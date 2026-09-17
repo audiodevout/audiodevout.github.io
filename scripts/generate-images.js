@@ -145,12 +145,12 @@ async function convertOne(sharp, srcAbs) {
   }
 
   try {
-    var meta = await sharp(srcAbs, { failOnError: false }).metadata();
+    var meta = await sharp(srcAbs, { failOn: "none" }).metadata();
     var ext = path.extname(srcAbs).toLowerCase();
     var q = qualityFor(meta, ext);
 
     await safeWriteFile(webpAbs, function (tmp) {
-      return sharp(srcAbs, { failOnError: false })
+      return sharp(srcAbs, { failOn: "none" })
         .rotate()
         .webp({ quality: q, effort: 4, smartSubsample: true, alphaQuality: 90 })
         .toFile(tmp);
@@ -158,7 +158,7 @@ async function convertOne(sharp, srcAbs) {
 
     if (!skipThumb) {
       await safeWriteFile(thumbAbs, function (tmp) {
-        return sharp(srcAbs, { failOnError: false })
+        return sharp(srcAbs, { failOn: "none" })
           .rotate()
           .resize(THUMB_SIZE, THUMB_SIZE, { fit: "inside", withoutEnlargement: true })
           .webp({ quality: THUMB_QUALITY, effort: 4 })

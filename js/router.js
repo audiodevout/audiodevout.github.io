@@ -9,11 +9,9 @@
 
   function getPageSection() {
     const path = (window.location.pathname || '').toLowerCase();
-    const hash = (window.location.hash || '').toLowerCase();
     if (path.indexOf('/work/') !== -1) return null;
     if (path.indexOf('exhibitions') !== -1) return 'exhibitions';
     if (path.indexOf('gallery') !== -1) return 'gallery';
-    if (hash === '#archive' || path.indexOf('archive') !== -1) return 'archive';
     if (path.indexOf('about') !== -1) return 'about';
     return 'home';
   }
@@ -21,7 +19,6 @@
   function linkSection(href) {
     if (href.indexOf('exhibitions') !== -1) return 'exhibitions';
     if (href.indexOf('gallery') !== -1) return 'gallery';
-    if (href.indexOf('#archive') !== -1 || href.indexOf('archive.html') !== -1) return 'archive';
     if (href.indexOf('about') !== -1) return 'about';
     if (
       href === 'index.html' ||
@@ -61,5 +58,4 @@
   }
 
   setActiveState();
-  window.addEventListener('hashchange', setActiveState);
 })();

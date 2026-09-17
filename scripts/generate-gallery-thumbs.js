@@ -120,7 +120,7 @@ async function convertOne(sharp, srcAbs) {
 
   try {
     await safeWriteFile(thumbAbs, function (tmp) {
-      return sharp(srcAbs, { failOnError: false })
+      return sharp(srcAbs, { failOn: "none" })
         .rotate()
         .resize(THUMB_SIZE, THUMB_SIZE, { fit: "inside", withoutEnlargement: true })
         .webp({ quality: THUMB_QUALITY, effort: 4 })
