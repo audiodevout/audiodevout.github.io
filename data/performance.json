@@ -26,6 +26,30 @@
       ]
     },
     {
+      "id": "hackathon-huba-degraaff",
+      "title": "Hackathon with Huba de Graaff",
+      "category": "HACKATHON • TAPE • SOUNDSOFMUSIC",
+      "color": "amber",
+      "year": 2024,
+      "description": "Hackathon with composer Huba de Graaff during Soundsofmusic 2024. I worked with tape machines and old sound carriers with MADtech, then showed the setup at the Frank Mohr Institute.",
+      "fullDescription": "I took part in a hackathon led by composer Huba de Graaff during Soundsofmusic 2024. With MADtech at the Frank Mohr Institute in Groningen, we worked with reel-to-reel recorders, tape loops, and other old sound carriers, then presented the setup in the festival exhibition.",
+      "medium": "Reel-to-reel tape, hackathon",
+      "technical": "Tape machines, loops, pre-digital sound carriers",
+      "themes": "Collaboration, Soundsofmusic, old sound carriers",
+      "images": [
+        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-02.webp",
+        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-10.webp",
+        "./assets/images/exhibitions/hackathon-huba-degraaff/DC2ifvOtnDw-02.webp",
+        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-07.webp"
+      ],
+      "videos": [
+        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-08.mp4"
+      ],
+      "urls": {
+        "instagram": "https://www.instagram.com/p/DCz8UjHtArc/"
+      }
+    },
+    {
       "id": "gesture-performance-system",
       "title": "Gesture-Controlled Performance System for Slow Music",
       "category": "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
