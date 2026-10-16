@@ -53,6 +53,15 @@
     },
     "workExperience": [
       {
+        "title": "Education and Research Instructor",
+        "company": "Academie Minerva",
+        "location": "Groningen, NL",
+        "period": "Oct. 2026 – Present · Part-time",
+        "responsibilities": [
+          "Instructor for TouchDesigner for 2nd year and 3rd year fine arts students at Academie Minerva"
+        ]
+      },
+      {
         "title": "Workshop Assistant (Electronics and Programming)",
         "company": "Minerva Academy (Hanze University of Applied Sciences)",
         "location": "Groningen, NL",

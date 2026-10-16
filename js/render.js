@@ -585,6 +585,15 @@
         period.className = 'cv-row__period';
         period.textContent = job.period || '';
         entry.appendChild(period);
+        if (job.responsibilities && job.responsibilities.length) {
+          job.responsibilities.forEach(function (line) {
+            if (!line) return;
+            var note = document.createElement('p');
+            note.className = 'cv-row__meta';
+            note.textContent = line;
+            entry.appendChild(note);
+          });
+        }
         workBlock.appendChild(entry);
       });
       container.appendChild(workBlock);

@@ -1,6 +1,30 @@
 {
   "items": [
     {
+      "id": "queer-club-vera",
+      "title": "Queerclub VERA",
+      "date": "2 October 2026",
+      "description": "VJ set at Queerclub VERA’s fourth edition, MASCMAXXING PARTY, Downstage at VERA, Groningen. Live visuals with RileyPeeP, Coco Coquelicot, and Bloemenvaes.",
+      "fullDescription": "Live visuals for the fourth edition of Queerclub VERA at VERA, Groningen. The night, billed MASCMAXXING PARTY, ran Downstage from 22:00 to 03:00. RileyPeeP opened, Coco Coquelicot followed with disco, deep house, and Detroit techno, and Bloemenvaes closed. VJ Atharva played visuals through the night.",
+      "location": "Groningen, NL",
+      "role": "VJ",
+      "venue": "VERA",
+      "images": [
+        "./assets/images/exhibitions/queer-club-vera/771_046-glitches-38-f1179c_f1179c.webp",
+        "./assets/images/exhibitions/queer-club-vera/772_047-glitches-39-1f3fa0_1f3fa0.webp",
+        "./assets/images/exhibitions/queer-club-vera/773_049-glitches-40-d02f2f_d02f2f.webp",
+        "./assets/images/exhibitions/queer-club-vera/774_050-glitches-41-fe35de_fe35de.webp",
+        "./assets/images/exhibitions/queer-club-vera/775_051-glitches-42-934016_934016.webp",
+        "./assets/images/exhibitions/queer-club-vera/776_052-glitches-43-821ea6_821ea6.webp",
+        "./assets/images/exhibitions/queer-club-vera/777_053-glitches-44-b1bdd7_b1bdd7.webp",
+        "./assets/images/exhibitions/queer-club-vera/778_054-glitches-45-d24e45_d24e45.webp"
+      ],
+      "urls": {
+        "link": "https://www.vera-groningen.nl/events/queerclub-vera-oktober-2026/",
+        "linkLabel": "VERA ↗"
+      }
+    },
+    {
       "id": "graduation-show-fmi-2026",
       "title": "29 Ways Out",
       "date": "June 25 – 28, 2026",
