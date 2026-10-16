@@ -1,6 +1,31 @@
 {
   "items": [
     {
+      "id": "my-ego",
+      "title": "myEgo",
+      "category": "COLLABORATION • PERFORMANCE • BODY-WORN SOUND",
+      "color": "violet",
+      "year": 2026,
+      "description": "Collaboration with Maika Sontrop (MADtech, Frank Mohr Institute) on their graduation performance myEgo. I built a microphone system worn on the body. The final performance was with Maika Sontrop and Riley Huang.",
+      "fullDescription": "myEgo is Maika Sontrop’s graduation performance (MADtech, Frank Mohr Institute). I worked on it with Maika and Riley Huang.\n\nI built the microphone system worn on the body: small capsules and cabling running along the arms, torso, and legs, so movement and contact become the sound of the performance.\n\nThe final performance was with Maika Sontrop and Riley Huang.",
+      "medium": "Body-worn microphone system, live performance",
+      "technical": "Wearable microphone capsules and cabling",
+      "themes": "Collaboration, graduation performance, the body as an instrument",
+      "images": [
+        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image 20hh26-10-16 at 15.06.07.webp",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/hhhhh.webp",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/saddassada.webp",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/sadada.webp",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image jj2026-10-16 at 15.02.29.webp",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image 2026-10-16 at 15.02.29.webp"
+      ],
+      "videos": [
+        "./assets/images/exhibitions/my-ego-maika-sontrop/VID-20260509-WA0071.mp4",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/aaa.mp4",
+        "./assets/images/exhibitions/my-ego-maika-sontrop/asda.mp4"
+      ]
+    },
+    {
       "id": "gesture-performance-system",
       "title": "Gesture-Controlled Performance System for Slow Music",
       "category": "GESTURE INTERFACES • LIVE A/V • EMBODIED SYSTEMS",
