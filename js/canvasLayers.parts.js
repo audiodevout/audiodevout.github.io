@@ -11,7 +11,7 @@ window.__CANVAS_LAYERS__ = {
       "y": "-5vh",
       "width": "100vw",
       "blend": "overlay",
-      "opacity": 0.07,
+      "opacity": 0.06,
       "invert": true,
       "z": 1,
       "analysis": {
@@ -37,7 +37,7 @@ window.__CANVAS_LAYERS__ = {
       "y": "14vh",
       "width": "80vw",
       "blend": "normal",
-      "opacity": 1,
+      "opacity": 0.5,
       "z": 4,
       "analysis": {
         "dominant": {
@@ -54,40 +54,15 @@ window.__CANVAS_LAYERS__ = {
       }
     },
     {
-      "id": "morse-floor",
-      "src": "assets/images/_archive/morsecode_exports.9.webp",
-      "depth": 0.11,
-      "speed": 0.08,
-      "x": "22%",
-      "y": "72vh",
-      "width": "38vw",
-      "blend": "screen",
-      "opacity": 0.11,
-      "z": 3,
-      "analysis": {
-        "dominant": {
-          "r": 8,
-          "g": 8,
-          "b": 8
-        },
-        "luminance": {
-          "mean": 10,
-          "t1": true,
-          "t2": false,
-          "t3": false
-        }
-      }
-    },
-    {
       "id": "pyramid-tr",
       "src": "assets/images/defiance/noisepyramids.5.webp",
       "depth": 0.22,
       "speed": 0.14,
       "x": "92%",
       "y": "4vh",
-      "width": "26vw",
+      "width": "24vw",
       "blend": "normal",
-      "opacity": 0.88,
+      "opacity": 0.7,
       "z": 10,
       "analysis": {
         "dominant": {
@@ -109,10 +84,10 @@ window.__CANVAS_LAYERS__ = {
       "depth": 0.24,
       "speed": 0.15,
       "x": "6%",
-      "y": "78vh",
-      "width": "24vw",
+      "y": "80vh",
+      "width": "20vw",
       "blend": "normal",
-      "opacity": 0.82,
+      "opacity": 0.55,
       "z": 11,
       "analysis": {
         "dominant": {
@@ -129,89 +104,13 @@ window.__CANVAS_LAYERS__ = {
       }
     },
     {
-      "id": "pyramid-br",
-      "src": "assets/images/defiance/noisepyramids.1.webp",
-      "depth": 0.2,
-      "speed": 0.13,
-      "x": "94%",
-      "y": "86vh",
-      "width": "22vw",
-      "blend": "normal",
-      "opacity": 0.78,
-      "z": 12,
-      "analysis": {
-        "dominant": {
-          "r": 8,
-          "g": 8,
-          "b": 8
-        },
-        "luminance": {
-          "mean": 27,
-          "t1": true,
-          "t2": false,
-          "t3": false
-        }
-      }
-    },
-    {
-      "id": "doodle-column",
-      "src": "assets/images/_archive/diamonddoodles.31.webp",
-      "depth": 0.32,
-      "speed": 0.2,
-      "x": "100%",
-      "y": "0",
-      "width": "28vw",
-      "blend": "screen",
-      "opacity": 0.16,
-      "anchor": "right top",
-      "z": 18,
-      "analysis": {
-        "dominant": {
-          "r": 24,
-          "g": 24,
-          "b": 24
-        },
-        "luminance": {
-          "mean": 61,
-          "t1": true,
-          "t2": false,
-          "t3": false
-        }
-      }
-    },
-    {
-      "id": "sculpture-right",
-      "src": "assets/images/_archive/abstract_sculpture_series.11.webp",
-      "depth": 0.38,
-      "speed": 0.24,
-      "x": "86%",
-      "y": "52vh",
-      "width": "22vw",
-      "blend": "screen",
-      "opacity": 0.38,
-      "z": 20,
-      "analysis": {
-        "dominant": {
-          "r": 8,
-          "g": 8,
-          "b": 8
-        },
-        "luminance": {
-          "mean": 13,
-          "t1": true,
-          "t2": false,
-          "t3": false
-        }
-      }
-    },
-    {
       "id": "lcp-stamp",
       "src": "assets/images/defiance/noisepyramids.6.webp",
       "depth": 0.55,
       "speed": 0.36,
       "x": "82%",
       "y": "9vh",
-      "width": "38vw",
+      "width": "34vw",
       "blend": "normal",
       "opacity": 1,
       "lcp": true,

@@ -33,7 +33,7 @@ html::-webkit-scrollbar-thumb:hover {
 
 body {
   font-family: var(--font-body);
-  font-size: var(--font-size-list);
+  font-size: var(--text-body);
   line-height: var(--line-height-body);
   color: var(--color-text);
   background: transparent;
@@ -42,8 +42,10 @@ body {
   position: relative;
 }
 
+/* Ragged-right reads better than justified text in narrow columns */
 p {
-  text-align: justify;
+  text-align: left;
+  hyphens: manual;
 }
 
 h1,
@@ -66,7 +68,7 @@ img {
 }
 
 .section {
-  padding: 0 1.5rem;
+  padding: 0 var(--gutter);
   width: 100%;
   max-width: 100%;
   margin-left: auto;
@@ -100,19 +102,19 @@ img {
 
 .section-heading {
   display: inline-block;
-  margin: 0 0 2.5rem;
-  transform: rotate(-2.5deg);
+  margin: 0 0 var(--heading-gap);
+  transform: rotate(var(--heading-tilt));
   transform-origin: left top;
   color: var(--color-text);
-  font-size: 3.25rem;
+  font-size: var(--text-h2);
   letter-spacing: -0.02em;
-  line-height: 1;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.22);
+  line-height: var(--line-height-tight);
+  text-shadow: var(--heading-glow);
 }
 
 @media (min-width: 1200px) {
   .site-header {
-    padding-left: 4rem;
+    padding-left: var(--gutter-wide);
   }
 
   .section--list,
@@ -120,18 +122,6 @@ img {
   .section--cv,
   .work-page,
   .main--gallery {
-    padding-left: 4rem;
-  }
-}
-
-@media (max-width: 1100px) {
-  .section-heading {
-    font-size: 2.4rem;
-  }
-}
-
-@media (max-width: 620px) {
-  .section-heading {
-    font-size: 1.5rem;
+    padding-left: var(--gutter-wide);
   }
 }

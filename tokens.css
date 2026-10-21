@@ -1,16 +1,20 @@
 /**
  * tokens.css — Defiance density palette (black / grey / white)
+ *
+ * Text greys are chosen for WCAG AA on #000 (ratios in comments) with headroom
+ * for the collage showing through behind them.
  */
 :root {
   --color-bg: #000000;
   --color-surface: #1a1a1a;
-  --color-border: #4a4a4a;
-  --color-text: #ffffff;
-  --color-muted: #7a7a7a;
-  --color-muted-dim: #6e6e6e;
-  --color-muted-faint: #5a5a5a;
-  --color-hover: #9a9a9a;
-  --color-meta: #8a8a8a;
+  --color-border: #4a4a4a;          /* decorative rules only, not text */
+  --color-text: #ffffff;            /* 21:1 */
+  --color-text-soft: #d4d4d4;       /* 14:1 — secondary paragraphs */
+  --color-hover: #b0b0b0;           /* 9.6:1 — hover / tertiary text */
+  --color-meta: #a6a6a6;            /* 8.5:1 — back links, CV meta, links */
+  --color-muted: #999999;           /* 7.4:1 — categories, counts */
+  --color-muted-dim: #8c8c8c;       /* 6.3:1 — years, captions */
+  --color-muted-faint: #858585;     /* 5.7:1 — footer */
   --color-accent: #ffffff;
   --color-accent-glacier: #9dc4d8;
   --color-accent-crimson: #d2455a;
@@ -36,19 +40,38 @@
   --font-body: 'Alte Haas Grotesk', Helvetica, Arial, sans-serif;
   --font-mono: 'Alte Haas Grotesk', Helvetica, Arial, sans-serif;
   --font-chapter: 'Dotrice', serif;
-  --font-size-xs: clamp(0.65rem, 1vw, 0.75rem);
-  --font-size-sm: clamp(0.8rem, 1.2vw, 0.9rem);
+
+  /* ----- Type scale (use these; one-off px sizes were folded in here) ----- */
+  --text-meta: 0.75rem;      /* 12px — years, categories, captions, footer, back links */
+  --text-body: 0.9375rem;    /* 15px — list rows, paragraphs, CV rows */
+  --text-nav: 1rem;          /* 16px — nav, social links */
+  --text-h3: 2.25rem;        /* CV block titles */
+  --text-h2: 3.25rem;        /* section headings, home group labels */
+  --text-h1: 4.4rem;         /* work page titles */
+  --text-display: 5.5rem;    /* site brand */
+
+  --line-height-body: 1.6;
+  --line-height-list: 1.5;
+  --line-height-tight: 1;
+  --letter-spacing-stamp: 0.16em;
+  --letter-spacing-wide: 0.1em;
+  --heading-tilt: -2deg;
+  --heading-glow: 0 0 18px rgba(255, 255, 255, 0.2);
+
+  /* Comfortable reading column for running text (~65 characters) */
+  --measure: 36rem;
+
+  /* Legacy aliases — keep older selectors working */
+  --font-size-xs: var(--text-meta);
+  --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
-  --font-size-list: 13px;
+  --font-size-list: var(--text-body);
   --font-size-lg: clamp(1.1rem, 2vw, 1.35rem);
   --font-size-xl: clamp(1.5rem, 3vw, 2.25rem);
   --font-size-2xl: clamp(2.25rem, 5vw, 4rem);
   --font-size-3xl: clamp(3rem, 8vw, 6rem);
-  --line-height-body: 1.5;
-  --line-height-tight: 1.2;
-  --letter-spacing-stamp: 0.18em;
-  --letter-spacing-wide: 0.12em;
 
+  /* ----- Spacing scale ----- */
   --space-1: 2px;
   --space-2: 8px;
   --space-3: 12px;
@@ -58,6 +81,15 @@
   --space-8: 32px;
   --space-10: 40px;
   --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --gutter: 1.5rem;          /* page side padding */
+  --gutter-wide: 4rem;       /* ≥1200px */
+  --heading-gap: 2.5rem;     /* below section headings */
+  --group-gap: 5rem;         /* between list groups / CV blocks */
+  --plate-pad-y: 0.75rem;
+  --plate-pad-x: 0.9rem;
 
   --theme-strip-duration: 160s;
 
@@ -87,4 +119,25 @@
   --text-plate-pad-y-md: 0.3em;
   --text-plate-pad-x-lg: 0.55em;
   --text-plate-pad-y-lg: 0.38em;
+}
+
+/* Responsive heading scale — change sizes here, not per component */
+@media (max-width: 1100px) {
+  :root {
+    --text-h3: 1.85rem;
+    --text-h2: 2.4rem;
+    --text-h1: 3rem;
+    --text-display: 4rem;
+  }
+}
+
+@media (max-width: 620px) {
+  :root {
+    --text-h3: 1.35rem;
+    --text-h2: 1.6rem;
+    --text-h1: 1.9rem;
+    --text-display: 2.75rem;
+    --heading-gap: 1.75rem;
+    --group-gap: 3.5rem;
+  }
 }

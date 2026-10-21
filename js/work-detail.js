@@ -1,6 +1,6 @@
 /**
  * work-detail.js — shared work metadata, body, and media rendering
- * Work pages use a vertical media stack; lightbox uses carousel slides.
+ * Work pages: images in one series strip (js/viewer.js), video/embeds full width below.
  */
 (function () {
   'use strict';
@@ -113,8 +113,8 @@
       img.decoding = 'async';
       btn.appendChild(img);
       btn.addEventListener('click', function () {
-        if (typeof window.openLightbox === 'function') {
-          window.openLightbox(item, { startIndex: index });
+        if (window.portfolioViewer) {
+          window.portfolioViewer.open(seriesFor(item), index);
         }
       });
       fig.appendChild(btn);
@@ -166,11 +166,26 @@
       return { mediaItems: mediaItems };
     }
 
+    var strip = window.portfolioStrip;
+    if (strip && item.images && item.images.length) {
+      container.appendChild(strip.build(seriesFor(item), { variant: 'work', eagerCount: 3 }));
+    }
+
     mediaItems.forEach(function (mediaItem, index) {
+      if (mediaItem.type === 'image' && strip) return;
       container.appendChild(buildMediaFigure(mediaItem, item.title, index, item));
     });
 
     return { mediaItems: mediaItems };
+  }
+
+  /* Series for the shared viewer; caption links back to this work page */
+  function seriesFor(item) {
+    return {
+      title: item.title || '',
+      href: item.id ? window.location.pathname : '',
+      images: (item.images || []).slice()
+    };
   }
 
   function pauseVideosInElement(el) {

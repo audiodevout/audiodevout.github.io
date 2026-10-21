@@ -11,6 +11,7 @@
 
 var fs = require("fs");
 var path = require("path");
+var imageSize = require("./lib/image-size");
 
 var root = path.join(__dirname, "..");
 var dataDir = path.join(root, "data");
@@ -112,24 +113,39 @@ function relativeAssetFromWorkPage(src) {
   return "../../" + normalized;
 }
 
+/* Mirrors portfolioStrip.build() in js/viewer.js — strip of images, hydrated at runtime */
 function buildMediaStackHtml(item, title) {
   var images = Array.isArray(item.images) ? item.images : [];
   if (images.length === 0) return "";
-  return images
+  var label = title || "Untitled";
+  var total = images.length;
+  var items = images
     .map(function (src, index) {
+      var alt = total > 1 ? label + " — image " + (index + 1) + " of " + total : label;
+      var dims = imageSize(path.join(root, normalizeAssetPath(src)));
+      var sizeAttrs = dims ? ' width="' + dims[0] + '" height="' + dims[1] + '"' : "";
       return (
-        '<figure class="work-page__figure work-page__figure--image">' +
-        '<img src="' +
+        '<li class="media-strip__item"><button type="button" class="media-strip__btn" aria-label="Open ' +
+        escapeHtml(alt) +
+        ' fullscreen"><img src="' +
         escapeHtml(relativeAssetFromWorkPage(src)) +
         '" alt="' +
-        escapeHtml(title) +
-        '" loading="' +
-        (index === 0 ? "eager" : "lazy") +
-        '" decoding="async" />' +
-        "</figure>"
+        escapeHtml(alt) +
+        '"' +
+        sizeAttrs +
+        ' loading="' +
+        (index < 3 ? "eager" : "lazy") +
+        '" decoding="async" /></button></li>'
       );
     })
-    .join("\n        ");
+    .join("\n            ");
+  return (
+    '<div class="media-strip media-strip--work" role="region" aria-label="' +
+    escapeHtml(label) +
+    ' images" tabindex="0">\n          <ul class="media-strip__track">\n            ' +
+    items +
+    "\n          </ul>\n        </div>"
+  );
 }
 
 function collectWorkItems() {

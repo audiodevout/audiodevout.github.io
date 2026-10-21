@@ -1,5 +1,9 @@
 /**
  * canvas.css — Defiance collage canvas (parallax layer stack + page grain)
+ *
+ * Five deliberate layers (see scripts/analyze-canvas-images.js):
+ *   grain-sky · horizon-trees (dimmed) · pyramid-tr · pyramid-bl · lcp-stamp
+ * plus a scrim that darkens the text column so the collage stays ground, not figure.
  */
 
 .site-canvas,
@@ -18,23 +22,23 @@
   height: 100dvh;
   overflow: hidden;
   background-color: #000;
-  /* Static fallback — corner fields + horizon (reduced-motion / no-JS) */
+  /* Static fallback — same set as the parallax stack (reduced-motion / no-JS) */
   background-image:
-    url("./assets/images/defiance/particle_trees.0.webp"),
     url("./assets/images/defiance/noisepyramids.5.webp"),
     url("./assets/images/defiance/noisepyramids.0.webp"),
-    url("./assets/images/defiance/noisepyramids.1.webp");
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./assets/images/defiance/particle_trees.0.webp");
   background-repeat: no-repeat;
   background-position:
-    50% 14vh,
     92% 4vh,
-    6% 78vh,
-    94% 86vh;
+    6% 80vh,
+    0 0,
+    50% 14vh;
   background-size:
-    80vw auto,
-    26vw auto,
     24vw auto,
-    22vw auto;
+    20vw auto,
+    100% 100%,
+    80vw auto;
 }
 
 /* Parallax mode — layers injected by canvas-parallax.js */
@@ -42,13 +46,7 @@
   background-image: none;
 }
 
-.site-canvas--parallax::before,
-.site-canvas--parallax::after {
-  display: none;
-}
-
-body.site-canvas-parallax::after,
-body.site-canvas-parallax .work-list::before {
+body.site-canvas-parallax::after {
   display: none;
 }
 
@@ -105,41 +103,55 @@ body.site-canvas-parallax .work-list::before {
   position: absolute;
   top: 9vh;
   left: 82%;
-  width: 38vw;
+  width: 34vw;
   height: auto;
   transform: translateX(-82%);
 }
 
-/* Static pseudo-layers (fallback when parallax is off) */
-.site-canvas::before,
+/* The horizon band runs behind the text column — soften it */
+.canvas-layer--horizon-trees .canvas-layer__img {
+  filter: blur(1.5px);
+}
+
+/* ----- Text-column scrim -------------------------------------------------
+   Sits above every canvas layer (layers use z 1–30) and fades from the left,
+   where text lives, to clear on the right, where the collage reads freely. */
+.site-canvas::before {
+  display: none;
+}
+
 .site-canvas::after {
   content: "";
-  z-index: 1;
+  inset: 0;
+  z-index: 40;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.3) 45%,
+    rgba(0, 0, 0, 0) 75%
+  );
 }
 
-.site-canvas::before {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 28vw;
-  height: 100%;
-  background: url("./assets/images/_archive/diamonddoodles.31.webp") right top / 28vw auto repeat-y;
-  mix-blend-mode: screen;
-  opacity: 0.16;
+/* Text-heavy pages get a calmer ground */
+.page-home .site-canvas::after,
+.page-about .site-canvas::after,
+.page-work .site-canvas::after {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.15) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
-.site-canvas::after {
-  top: 52vh;
-  left: 86%;
-  width: 22vw;
-  height: auto;
-  aspect-ratio: 1;
-  transform: translateX(-86%);
-  background: url("./assets/images/_archive/abstract_sculpture_series.11.webp") center / contain no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.38;
+.page-home .canvas-layer--horizon-trees,
+.page-about .canvas-layer--horizon-trees,
+.page-work .canvas-layer--horizon-trees {
+  opacity: 0.35 !important;
 }
 
+/* Page grain (static fallback; parallax mode uses the grain-sky layer) */
 body::after {
   content: "";
   position: fixed;
@@ -149,44 +161,11 @@ body::after {
   background: url("./assets/images/defiance/islands_of_texture.1.png") 50% -5vh / 100vw auto no-repeat;
   filter: invert(1);
   mix-blend-mode: overlay;
-  opacity: 0.07;
-}
-
-.work-list::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  z-index: 0;
-  pointer-events: none;
-  background: url("./assets/images/_archive/morsecode_exports.9.webp") 22% 72vh / 38vw auto no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.11;
-}
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 28%;
-  top: 2.5rem;
-  height: 18rem;
-  pointer-events: none;
-  z-index: 0;
-  background: url("./assets/images/defiance/basicuvmappingthumbnail.0.png") center / cover no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.16;
+  opacity: 0.06;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-canvas::before,
-  .site-canvas::after,
-  body::after,
-  .work-list::before,
-  .site-header::before {
+  body::after {
     opacity: 0;
   }
 }
@@ -194,19 +173,15 @@ body::after {
 @media (max-width: 1100px) {
   .site-canvas {
     background-size:
-      68vw auto,
       22vw auto,
-      20vw auto,
-      18vw auto;
+      18vw auto,
+      100% 100%,
+      68vw auto;
   }
 
   .site-canvas__lcp,
   .canvas-layer__lcp-wrap .site-canvas__lcp {
-    width: 32vw;
-  }
-
-  .canvas-layer--doodle-column {
-    width: 24vw !important;
+    width: 30vw;
   }
 
   .canvas-layer--horizon-trees {
@@ -217,15 +192,23 @@ body::after {
 @media (max-width: 620px) {
   .site-canvas {
     background-position:
-      50% 12vh,
       90% 2vh,
-      4% 80vh,
-      92% 88vh;
+      4% 82vh,
+      0 0,
+      50% 12vh;
     background-size:
-      88vw auto,
       min(36vw, 9rem) auto,
       min(32vw, 8rem) auto,
-      min(30vw, 7.5rem) auto;
+      100% 100%,
+      88vw auto;
+  }
+
+  /* Text spans the full width on phones — even scrim */
+  .site-canvas::after,
+  .page-home .site-canvas::after,
+  .page-about .site-canvas::after,
+  .page-work .site-canvas::after {
+    background: rgba(0, 0, 0, 0.55);
   }
 
   .site-canvas__lcp,
@@ -238,22 +221,6 @@ body::after {
 
   .canvas-layer__lcp-wrap .site-canvas__lcp {
     width: 100% !important;
-  }
-
-  .site-canvas::after,
-  .site-header::before,
-  .canvas-layer--sculpture-right {
-    display: none;
-  }
-
-  .site-canvas::before {
-    width: 22vw;
-    opacity: 0.1;
-  }
-
-  .canvas-layer--doodle-column {
-    width: 22vw !important;
-    opacity: 0.1 !important;
   }
 
   .canvas-layer--horizon-trees {
@@ -273,19 +240,6 @@ body::after {
     left: 2% !important;
     top: 82vh !important;
     width: min(32vw, 8rem) !important;
-  }
-
-  .canvas-layer--pyramid-br {
-    left: 92% !important;
-    top: 90vh !important;
-    width: min(30vw, 7.5rem) !important;
-  }
-
-  .canvas-layer--morse-floor {
-    left: 18% !important;
-    top: 78vh !important;
-    width: min(52vw, 13rem) !important;
-    opacity: 0.09 !important;
   }
 
   .canvas-layer--grain-sky {

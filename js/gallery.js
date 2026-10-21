@@ -1,41 +1,17 @@
 /**
- * gallery.js — single masonry wall for VISUAL RESEARCH
- * Full-resolution sources; title on hover; click to enlarge.
+ * gallery.js — VISUAL RESEARCH as series strips
+ * One row per project (newest first when a year/date exists, else data order):
+ * header with title, year, link to the work page; below it a horizontal strip.
+ * Strip + fullscreen viewer come from js/viewer.js.
  */
 (function () {
   'use strict';
 
-  var COLOR_MAP = {
-    glacier: 'glacier', crimson: 'crimson', violet: 'violet', amber: 'amber',
-    cerulean: 'cerulean', 'electric-lime': 'lime', saffron: 'saffron',
-    'neon-magenta': 'magenta', graphite: 'graphite'
-  };
+  /* Rows whose images load eagerly; the rest use native lazy-loading */
+  var EAGER_ROWS = 2;
 
   var root;
   var loadingEl;
-  var expandEl;
-  var expandImg;
-  var expandCaption;
-  var expandClose;
-  var expandPrev;
-  var expandNext;
-  var expandState = null;
-  var flatImages = [];
-  var lastFocused = null;
-
-  function esc(text) {
-    var utils = window.portfolioUtils || {};
-    if (typeof utils.esc === 'function') return utils.esc(text);
-    var div = document.createElement('div');
-    div.textContent = text == null ? '' : String(text);
-    return div.innerHTML;
-  }
-
-  function resolveSrc(src) {
-    var utils = window.portfolioUtils || {};
-    if (typeof utils.resolveAssetSrc === 'function') return utils.resolveAssetSrc(src);
-    return src;
-  }
 
   function workHref(id) {
     if (window.portfolioWorkLookup && typeof window.portfolioWorkLookup.workPageUrl === 'function') {
@@ -44,227 +20,66 @@
     return './work/' + encodeURIComponent(id) + '/';
   }
 
-  function resolveAccent(color) {
-    if (!color) return 'var(--color-border)';
-    var key = COLOR_MAP[color] || color;
-    try {
-      var value = getComputedStyle(document.documentElement)
-        .getPropertyValue('--color-accent-' + key)
-        .trim();
-      if (value) return value;
-    } catch (e) { /* noop */ }
-    return 'var(--color-accent)';
-  }
-
-  function buildExpandOverlay() {
-    expandEl = document.createElement('div');
-    expandEl.className = 'gallery-expand';
-    expandEl.id = 'gallery-expand';
-    expandEl.setAttribute('role', 'dialog');
-    expandEl.setAttribute('aria-modal', 'true');
-    expandEl.setAttribute('aria-label', 'Image preview');
-    expandEl.hidden = true;
-
-    var backdrop = document.createElement('button');
-    backdrop.type = 'button';
-    backdrop.className = 'gallery-expand__backdrop';
-    backdrop.setAttribute('aria-label', 'Close preview');
-
-    expandClose = document.createElement('button');
-    expandClose.type = 'button';
-    expandClose.className = 'gallery-expand__close';
-    expandClose.setAttribute('aria-label', 'Close preview');
-    expandClose.textContent = '×';
-
-    expandPrev = document.createElement('button');
-    expandPrev.type = 'button';
-    expandPrev.className = 'gallery-expand__nav gallery-expand__nav--prev';
-    expandPrev.setAttribute('aria-label', 'Previous image');
-    expandPrev.textContent = '‹';
-
-    expandNext = document.createElement('button');
-    expandNext.type = 'button';
-    expandNext.className = 'gallery-expand__nav gallery-expand__nav--next';
-    expandNext.setAttribute('aria-label', 'Next image');
-    expandNext.textContent = '›';
-
-    var frame = document.createElement('div');
-    frame.className = 'gallery-expand__frame';
-
-    expandImg = document.createElement('img');
-    expandImg.className = 'gallery-expand__img';
-    expandImg.alt = '';
-
-    expandCaption = document.createElement('p');
-    expandCaption.className = 'gallery-expand__caption';
-
-    frame.appendChild(expandImg);
-    expandEl.appendChild(backdrop);
-    expandEl.appendChild(expandClose);
-    expandEl.appendChild(expandPrev);
-    expandEl.appendChild(expandNext);
-    expandEl.appendChild(frame);
-    expandEl.appendChild(expandCaption);
-    document.body.appendChild(expandEl);
-
-    backdrop.addEventListener('click', closeExpand);
-    expandClose.addEventListener('click', closeExpand);
-    expandPrev.addEventListener('click', function () { stepExpand(-1); });
-    expandNext.addEventListener('click', function () { stepExpand(1); });
-    document.addEventListener('keydown', onExpandKeydown);
-  }
-
-  function updateExpandView() {
-    if (!expandState || !flatImages.length) return;
-    var entry = flatImages[expandState.flatIndex];
-    if (!entry) return;
-    var item = entry.item;
-
-    var label = entry.label || item.title || 'Untitled';
-    expandImg.src = resolveSrc(entry.src);
-    expandImg.alt = label;
-    expandCaption.innerHTML =
-      '<a href="' + esc(workHref(item.id)) + '">' + esc(label) + '</a>' +
-      ' · ' + (expandState.flatIndex + 1) + ' / ' + flatImages.length;
-
-    var multi = flatImages.length > 1;
-    expandPrev.hidden = !multi;
-    expandNext.hidden = !multi;
-    expandPrev.disabled = !multi;
-    expandNext.disabled = !multi;
-  }
-
-  function openExpand(flatIndex) {
-    if (!expandEl) buildExpandOverlay();
-    if (!flatImages.length) return;
-
-    lastFocused = document.activeElement;
-    expandState = {
-      flatIndex: Math.max(0, Math.min(flatIndex, flatImages.length - 1))
-    };
-
-    updateExpandView();
-    expandEl.hidden = false;
-    document.body.classList.add('gallery-expand-open');
-    requestAnimationFrame(function () {
-      expandEl.classList.add('is-open');
-    });
-    expandClose.focus();
-  }
-
-  function closeExpand() {
-    if (!expandEl || expandEl.hidden) return;
-    expandEl.classList.remove('is-open');
-    document.body.classList.remove('gallery-expand-open');
-    expandState = null;
-
-    function finishClose() {
-      if (expandEl.classList.contains('is-open')) return;
-      expandEl.hidden = true;
-      expandImg.removeAttribute('src');
-      if (lastFocused) {
-        try { lastFocused.focus(); } catch (e) { /* noop */ }
-        lastFocused = null;
-      }
-    }
-
-    window.setTimeout(finishClose, 360);
-  }
-
-  function stepExpand(delta) {
-    if (!expandState || !flatImages.length) return;
-    expandState.flatIndex = (expandState.flatIndex + delta + flatImages.length) % flatImages.length;
-    updateExpandView();
-  }
-
-  function onExpandKeydown(e) {
-    if (!expandEl || expandEl.hidden) return;
-    if (e.key === 'Escape') closeExpand();
-    if (e.key === 'ArrowLeft') stepExpand(-1);
-    if (e.key === 'ArrowRight') stepExpand(1);
-  }
-
-  function fileNumberFromSrc(src) {
-    var base = String(src || '').split(/[\\/]/).pop() || '';
-    var stem = base.replace(/\.[^.]+$/, '');
-    var match = stem.match(/(\d+)\s*$/);
+  /* Mirrors yearFromItem() in scripts/generate-work-pages.js */
+  function yearFromItem(item) {
+    if (item.year != null && item.year !== '') return String(item.year);
+    var match = String(item.date || item.youtubeDate || '').match(/(\d{4})/);
     return match ? match[1] : '';
   }
 
-  function imageDisplayName(entry, titleCounts) {
-    var title = (entry.item && entry.item.title) || 'Untitled';
-    if ((titleCounts[title] || 0) <= 1) return title;
-    var num = fileNumberFromSrc(entry.src);
-    if (!num) num = String((entry.imageIndex || 0) + 1);
-    return title + ' ' + num;
+  function sortNewestFirst(items) {
+    return items
+      .map(function (item, index) {
+        return { item: item, index: index, year: parseInt(yearFromItem(item), 10) || 0 };
+      })
+      .sort(function (a, b) {
+        return (b.year - a.year) || (a.index - b.index);
+      })
+      .map(function (entry) { return entry.item; });
   }
 
-  function buildFlatImages(items) {
-    var titleCounts = {};
-    items.forEach(function (item) {
-      var title = item.title || 'Untitled';
-      titleCounts[title] = (titleCounts[title] || 0) + (item.images || []).length;
-    });
+  function buildRow(item, rowIndex) {
+    var title = item.title || 'Untitled';
+    var href = workHref(item.id);
+    var year = yearFromItem(item);
+    var headingId = 'series-' + item.id;
 
-    var list = [];
-    items.forEach(function (item) {
-      (item.images || []).forEach(function (src, imageIndex) {
-        var entry = { item: item, src: src, imageIndex: imageIndex };
-        entry.label = imageDisplayName(entry, titleCounts);
-        list.push(entry);
-      });
-    });
-    return list;
-  }
+    var section = document.createElement('section');
+    section.className = 'gallery-series reveal';
+    section.style.setProperty('--i', Math.min(rowIndex, 8));
+    section.setAttribute('aria-labelledby', headingId);
 
-  function markImageLoaded(img) {
-    img.classList.add('is-loaded');
-  }
+    var head = document.createElement('header');
+    head.className = 'gallery-series__head';
 
-  function createImageFigure(entry, flatIndex) {
-    var item = entry.item;
-    var figure = document.createElement('figure');
-    figure.className = 'gallery-masonry__item reveal';
-    figure.style.setProperty('--i', Math.min(flatIndex % 9, 8));
-    figure.style.setProperty('--gallery-accent', resolveAccent(item.color));
+    var h2 = document.createElement('h2');
+    h2.className = 'gallery-series__title';
+    h2.id = headingId;
+    h2.textContent = title;
+    head.appendChild(h2);
 
-    var label = entry.label || item.title || 'Untitled';
+    var meta = document.createElement('span');
+    meta.className = 'gallery-series__meta';
+    var count = item.images.length;
+    meta.textContent = [year, count + (count === 1 ? ' image' : ' images')].filter(Boolean).join(' · ');
+    head.appendChild(meta);
 
-    var button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'gallery-masonry__trigger';
-    button.setAttribute('aria-label', label);
+    var link = document.createElement('a');
+    link.className = 'gallery-series__link';
+    link.href = href;
+    link.textContent = 'view work →';
+    link.setAttribute('aria-label', 'View work: ' + title);
+    head.appendChild(link);
 
-    var img = document.createElement('img');
-    img.src = resolveSrc(entry.src);
-    img.alt = label;
-    img.loading = flatIndex < 8 ? 'eager' : 'lazy';
-    img.decoding = 'async';
-    img.addEventListener('load', function onLoad() {
-      if (img.naturalWidth) img.width = img.naturalWidth;
-      if (img.naturalHeight) img.height = img.naturalHeight;
-      markImageLoaded(img);
-      img.removeEventListener('load', onLoad);
-    });
-    img.addEventListener('error', function () {
-      markImageLoaded(img);
-    });
-    if (img.complete && img.naturalWidth) {
-      markImageLoaded(img);
-    }
+    section.appendChild(head);
 
-    var caption = document.createElement('span');
-    caption.className = 'gallery-masonry__caption';
-    caption.textContent = label;
+    var series = { title: title, href: href, images: item.images.slice() };
+    section.appendChild(window.portfolioStrip.build(series, {
+      variant: 'gallery',
+      eagerCount: rowIndex < EAGER_ROWS ? 6 : 0
+    }));
 
-    button.appendChild(img);
-    button.appendChild(caption);
-    button.addEventListener('click', function () {
-      openExpand(flatIndex);
-    });
-
-    figure.appendChild(button);
-    return figure;
+    return section;
   }
 
   function render(data) {
@@ -276,10 +91,8 @@
     });
 
     root.innerHTML = '';
-    root.className = 'gallery-masonry';
 
-    if (!items.length) {
-      flatImages = [];
+    if (!items.length || !window.portfolioStrip) {
       if (loadingEl) {
         loadingEl.textContent = 'No visual research items found.';
         loadingEl.hidden = false;
@@ -287,9 +100,8 @@
       return;
     }
 
-    flatImages = buildFlatImages(items);
-    flatImages.forEach(function (entry, flatIndex) {
-      root.appendChild(createImageFigure(entry, flatIndex));
+    sortNewestFirst(items).forEach(function (item, rowIndex) {
+      root.appendChild(buildRow(item, rowIndex));
     });
 
     if (loadingEl) loadingEl.hidden = true;
@@ -299,20 +111,16 @@
     }
   }
 
-  function initFromData(data) {
-    render(data);
-  }
-
   function init() {
     root = document.getElementById('gallery-root');
     loadingEl = document.getElementById('gallery-loading');
     if (!root) return;
 
     if (window.portfolioData) {
-      initFromData(window.portfolioData);
+      render(window.portfolioData);
     } else {
       document.addEventListener('portfolio:ready', function () {
-        initFromData(window.portfolioData);
+        render(window.portfolioData);
       });
     }
   }

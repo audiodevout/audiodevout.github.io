@@ -136,10 +136,6 @@
     opacity: 1;
     transform: none;
   }
-
-  .gallery-masonry__trigger img {
-    opacity: 1;
-  }
 }
 
 .fx-negative {

@@ -1,12 +1,14 @@
 /**
  * work-page.css — Defiance collage work detail
+ * Single source for .work-page__* styles (components.css no longer duplicates them).
+ * Sizes, colours and spacing come from tokens.css.
  */
 
 .work-page {
   width: 100%;
   max-width: 66rem;
-  margin: 0 auto;
-  padding: 0 1.5rem 6rem;
+  margin: 0;  /* left-aligned with the header, like every other page */
+  padding: 0 var(--gutter) 6rem;
   position: relative;
   z-index: 1;
 }
@@ -16,13 +18,13 @@
 }
 
 .work-page__toolbar {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 .work-page__back {
   color: var(--color-meta);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: var(--text-meta);
+  letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -34,7 +36,7 @@
 }
 
 .work-page__header {
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--heading-gap);
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -42,89 +44,82 @@
 .work-page__title {
   display: inline-block;
   max-width: 18ch;
-  transform: rotate(-1.75deg);
+  transform: rotate(var(--heading-tilt));
   transform-origin: left top;
-  font-size: 4.4rem;
-  line-height: 0.88;
+  font-size: var(--text-h1);
+  line-height: 0.9;
   letter-spacing: -0.03em;
   color: var(--color-text);
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  text-shadow: var(--heading-glow);
   margin: 0;
 }
 
 .work-page__category,
 .work-page__meta {
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   color: var(--color-muted);
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: var(--text-meta);
+  letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
 }
 
 .work-page__intro {
   position: relative;
-  max-width: 38rem;
-  margin-bottom: 2rem;
+  max-width: calc(var(--measure) + 1.5rem);
+  margin-bottom: var(--space-8);
 }
 
+/* Body paragraphs: one aligned, readable column on a solid plate */
 .work-page__description,
 .lightbox__description {
   position: relative;
-  max-width: 24rem;
-  margin-bottom: 1.4rem;
-  font-size: var(--font-size-list);
-  line-height: 1.65;
+  max-width: var(--measure);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+}
+
+.work-page__intro .work-page__description,
+.work-page__intro .lightbox__description {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  left: 1.5rem;
+  max-width: var(--measure);
+  color: var(--color-text-soft);
+  background-color: var(--text-plate-bg);
+  padding: var(--plate-pad-y) var(--plate-pad-x) var(--plate-pad-y) calc(var(--plate-pad-x) * 2);
 }
 
 .work-page__intro .work-page__description:first-child,
 .work-page__intro .lightbox__description:first-child {
-  left: 1.5rem;
   color: var(--color-text);
   border-left: 2px solid var(--color-text);
-  padding-top: 0.75rem;
-  padding-right: 0.85rem;
-  padding-bottom: 0.75rem;
-  padding-left: calc(0.85rem + 0.9rem);
-  background-color: #000;
-}
-
-.work-page__intro .work-page__description:nth-child(2),
-.work-page__intro .lightbox__description:nth-child(2) {
-  left: 7rem;
-  color: var(--color-hover);
-  background-color: #000;
-}
-
-.work-page__intro .work-page__description:nth-child(n + 3),
-.work-page__intro .lightbox__description:nth-child(n + 3) {
-  left: 3.5rem;
-  color: var(--color-muted);
-  background-color: #000;
 }
 
 .work-page__subhead {
-  margin: 1.75rem 0 0.75rem 1.5rem;
+  margin: var(--space-8) 0 var(--space-3) 1.5rem;
   color: var(--color-text);
-  font-size: var(--font-size-list);
-  letter-spacing: 0.16em;
+  font-size: var(--text-body);
+  letter-spacing: var(--letter-spacing-stamp);
 }
 
 .work-page__links,
 .lightbox__links {
   position: relative;
   left: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--heading-gap);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.1rem;
+  gap: var(--space-3) var(--space-5);
 }
 
 .work-page__link,
 .lightbox__paper-link {
   display: inline-block;
   color: var(--color-meta);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-size: var(--text-meta);
+  letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -132,68 +127,26 @@
 .work-page__media-stack {
   position: relative;
   max-width: 100%;
-  margin: 1rem 0 4rem;
-  overflow-x: hidden;
+  margin: var(--space-4) 0 var(--space-16);
+}
+
+/* Images sit in .media-strip (components.css); figures below hold video / embeds */
+.media-strip--work {
+  margin-bottom: var(--space-8);
 }
 
 .work-page__figure {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0.55rem 0.7rem 0.55rem 0;
+  display: block;
+  margin: var(--space-2) 0;
   border: 0;
   padding: 0;
   background: transparent;
 }
 
-.work-page__figure-btn {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: zoom-in;
-  text-align: left;
-}
-
-.work-page__figure img,
-.work-page__figure video,
-.work-page__figure-btn img {
+.work-page__figure video {
   width: 100%;
   display: block;
-}
-
-
-.work-page__figure:nth-child(5n + 1) {
-  width: min(58%, 34rem);
-  left: -1%;
-  transform: rotate(-1.4deg);
-}
-
-.work-page__figure:nth-child(5n + 2) {
-  width: min(36%, 22rem);
-  left: 6%;
-  top: 1.25rem;
-  transform: rotate(2.1deg);
-}
-
-.work-page__figure:nth-child(5n + 3) {
-  width: min(48%, 28rem);
-  left: -3%;
-  transform: rotate(-0.8deg);
-}
-
-.work-page__figure:nth-child(5n + 4) {
-  width: min(32%, 18rem);
-  left: 10%;
-  transform: rotate(1.6deg);
-}
-
-.work-page__figure:nth-child(5n + 5) {
-  width: min(54%, 30rem);
-  left: 2%;
-  transform: rotate(-2deg);
 }
 
 .work-page__embed {
@@ -204,7 +157,7 @@
 .work-page__figure--video video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: var(--color-bg);
 }
 
 .work-page__figure.work-page__figure--youtube,
@@ -214,7 +167,7 @@
   top: 0;
   transform: none;
   display: block;
-  margin: 1.25rem 0 1.75rem;
+  margin: var(--space-5) 0 var(--space-8);
 }
 
 .work-page__embed--bandcamp iframe {
@@ -228,56 +181,28 @@
   max-width: calc(100% - 1rem);
 }
 
-@media (max-width: 1100px) {
-  .work-page__title {
-    font-size: 3rem;
-  }
-}
-
 @media (max-width: 620px) {
   .work-page__title {
-    font-size: 1.8rem;
     max-width: none;
     transform: none;
   }
 
   .work-page__intro .work-page__description,
-  .work-page__intro .work-page__description:first-child,
-  .work-page__intro .work-page__description:nth-child(2),
-  .work-page__intro .work-page__description:nth-child(n + 3),
   .work-page__intro .lightbox__description,
-  .work-page__intro .lightbox__description:first-child,
-  .work-page__intro .lightbox__description:nth-child(2),
-  .work-page__intro .lightbox__description:nth-child(n + 3),
+  .work-page__subhead,
   .work-page__links {
     left: 0;
+    margin-left: 0;
     max-width: none;
   }
 
-  .work-page__figure,
-  .work-page__figure:nth-child(n) {
+  .work-page__figure {
     width: 100%;
-    left: 0;
-    top: 0;
-    transform: none;
-    margin-left: 0;
-    margin-right: 0;
   }
 }
 
 @media (min-width: 1200px) {
   .work-page {
-    padding-left: 4rem;
+    padding-left: var(--gutter-wide);
   }
-}
-
-/* Body text plates — load last so they win over lightbox defaults */
-.work-page__intro .work-page__description,
-.work-page__intro .lightbox__description {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 24rem;
-  background-color: #000;
-  padding: 0.75rem 0.85rem;
 }

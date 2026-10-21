@@ -3,11 +3,11 @@
  * Run: node scripts/analyze-canvas-images.js
  * Output: js/canvasLayers.parts.js
  *
- * Collage zones (avoid stacking in the text column):
- *   far   — full-bleed grain + horizon band
- *   mid   — pyramids anchored to corners
- *   near  — right-edge doodle column + sculpture accent
+ * Collage zones (a deliberate five-layer set; avoid stacking in the text column):
+ *   far   — full-bleed grain + dimmed horizon band
+ *   mid   — two pyramids anchored to opposite corners
  *   front — LCP stamp upper-right
+ * A scrim in canvas.css calms the text column on list/about/work pages.
  */
 "use strict";
 
@@ -29,11 +29,12 @@ var LAYER_DEFS = [
     y: "-5vh",
     width: "100vw",
     blend: "overlay",
-    opacity: 0.07,
+    opacity: 0.06,
     invert: true,
     z: 1,
   },
   {
+    /* Sits behind the text column — kept dim so it reads as ground, not figure */
     id: "horizon-trees",
     src: "assets/images/defiance/particle_trees.0.webp",
     depth: 0.14,
@@ -42,23 +43,11 @@ var LAYER_DEFS = [
     y: "14vh",
     width: "80vw",
     blend: "normal",
-    opacity: 1,
+    opacity: 0.5,
     z: 4,
   },
-  {
-    id: "morse-floor",
-    src: "assets/images/_archive/morsecode_exports.9.webp",
-    depth: 0.11,
-    speed: 0.08,
-    x: "22%",
-    y: "72vh",
-    width: "38vw",
-    blend: "screen",
-    opacity: 0.11,
-    z: 3,
-  },
 
-  /* ── mid: corner fields (keep centre-left clear for list text) ── */
+  /* ── mid: two corner fields (centre-left stays clear for text) ── */
   {
     id: "pyramid-tr",
     src: "assets/images/defiance/noisepyramids.5.webp",
@@ -66,9 +55,9 @@ var LAYER_DEFS = [
     speed: 0.14,
     x: "92%",
     y: "4vh",
-    width: "26vw",
+    width: "24vw",
     blend: "normal",
-    opacity: 0.88,
+    opacity: 0.7,
     z: 10,
   },
   {
@@ -77,50 +66,11 @@ var LAYER_DEFS = [
     depth: 0.24,
     speed: 0.15,
     x: "6%",
-    y: "78vh",
-    width: "24vw",
+    y: "80vh",
+    width: "20vw",
     blend: "normal",
-    opacity: 0.82,
+    opacity: 0.55,
     z: 11,
-  },
-  {
-    id: "pyramid-br",
-    src: "assets/images/defiance/noisepyramids.1.webp",
-    depth: 0.2,
-    speed: 0.13,
-    x: "94%",
-    y: "86vh",
-    width: "22vw",
-    blend: "normal",
-    opacity: 0.78,
-    z: 12,
-  },
-
-  /* ── near: right-edge atmosphere ── */
-  {
-    id: "doodle-column",
-    src: "assets/images/_archive/diamonddoodles.31.webp",
-    depth: 0.32,
-    speed: 0.2,
-    x: "100%",
-    y: "0",
-    width: "28vw",
-    blend: "screen",
-    opacity: 0.16,
-    anchor: "right top",
-    z: 18,
-  },
-  {
-    id: "sculpture-right",
-    src: "assets/images/_archive/abstract_sculpture_series.11.webp",
-    depth: 0.38,
-    speed: 0.24,
-    x: "86%",
-    y: "52vh",
-    width: "22vw",
-    blend: "screen",
-    opacity: 0.38,
-    z: 20,
   },
 
   /* ── front: hero stamp ── */
@@ -131,7 +81,7 @@ var LAYER_DEFS = [
     speed: 0.36,
     x: "82%",
     y: "9vh",
-    width: "38vw",
+    width: "34vw",
     blend: "normal",
     opacity: 1,
     lcp: true,

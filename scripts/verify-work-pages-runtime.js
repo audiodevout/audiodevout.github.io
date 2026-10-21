@@ -75,10 +75,13 @@ if (render.indexOf("urls: { page: './thesis/' }") === -1) {
   fail("Thesis archive item missing custom page URL");
 }
 
-// Lightbox startIndex support
-var lightbox = fs.readFileSync(path.join(root, "js", "lightbox.js"), "utf8");
-if (lightbox.indexOf("startIndex") === -1) {
-  fail("lightbox.js missing startIndex support for expand button");
+// Shared strip viewer: series-scoped open(series, index) used by gallery + work pages
+var viewer = fs.readFileSync(path.join(root, "js", "viewer.js"), "utf8");
+if (viewer.indexOf("portfolioViewer") === -1 || viewer.indexOf("portfolioStrip") === -1) {
+  fail("viewer.js missing portfolioViewer / portfolioStrip exports");
+}
+if (fs.existsSync(path.join(root, "js", "lightbox.js"))) {
+  fail("js/lightbox.js should be removed (replaced by js/viewer.js)");
 }
 
 // work-detail script order on template: utils before work-detail
