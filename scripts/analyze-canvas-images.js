@@ -1,156 +1,65 @@
 /**
- * analyze-canvas-images.js — luminance + dominant colour pass for canvas layers.
+ * analyze-canvas-images.js — writes the collage layer config for canvas-parallax.js.
  * Run: node scripts/analyze-canvas-images.js
  * Output: js/canvasLayers.parts.js
  *
- * Collage zones (a deliberate five-layer set; avoid stacking in the text column):
- *   far   — full-bleed grain + dimmed horizon band
- *   mid   — two pyramids anchored to opposite corners
- *   front — LCP stamp upper-right
- * A scrim in canvas.css calms the text column on list/about/work pages.
+ * "Difference" composition: two scenes, each a large sculpture cut-out
+ * (assets from scripts/make-collage-cutouts.js) blended with mix-blend-mode:
+ * difference over a greyscale texture. Black and white only.
+ *
+ * Fields:
+ *   f   — position down the page, 0..1
+ *   top — vh offset, used only when f is 0
+ *   x   — centre, % of viewport width
+ *   w   — width in vw (mw = width in vw on phones <=620px)
+ *   s   — parallax speed (1 = scrolls with the page)
+ *   o   — opacity · z — z-index · r — rotation (deg) · b — blend mode
  */
 "use strict";
 
 var fs = require("fs");
 var path = require("path");
-var sharp = require("sharp");
 
 var root = path.join(__dirname, "..");
 var outFile = path.join(root, "js", "canvasLayers.parts.js");
 
 var LAYER_DEFS = [
-  /* ── far: atmospheric bed ── */
+  /* ── scene 1: top of page ── */
+  { id: "strands", src: "assets/images/collage/strands.webp", f: 0, top: -5, x: 62, w: 130, mw: 220, s: 0.2, o: 0.65, z: 2, r: -8 },
   {
-    id: "grain-sky",
-    src: "assets/images/defiance/islands_of_texture.1.png",
-    depth: 0.07,
-    speed: 0.05,
-    x: "50%",
-    y: "-5vh",
-    width: "100vw",
-    blend: "overlay",
-    opacity: 0.06,
-    invert: true,
-    z: 1,
-  },
-  {
-    /* Sits behind the text column — kept dim so it reads as ground, not figure */
-    id: "horizon-trees",
-    src: "assets/images/defiance/particle_trees.0.webp",
-    depth: 0.14,
-    speed: 0.1,
-    x: "50%",
-    y: "14vh",
-    width: "80vw",
-    blend: "normal",
-    opacity: 0.5,
-    z: 4,
+    id: "sculpt1", src: "assets/images/collage/sculpt1.webp", f: 0, top: -8, x: 70, w: 78, mw: 150, s: 0.45, o: 1, z: 10, b: "difference",
+    /* per-page sculpture, keyed by body class page-XXX; src is the fallback */
+    byPage: {
+      home: "assets/images/collage/sculpt1.webp",
+      exhibitions: "assets/images/collage/sculpt4.webp",
+      about: "assets/images/collage/sculpt9.webp",
+      gallery: "assets/images/collage/sculpt7.webp",
+    },
   },
 
-  /* ── mid: two corner fields (centre-left stays clear for text) ── */
-  {
-    id: "pyramid-tr",
-    src: "assets/images/defiance/noisepyramids.5.webp",
-    depth: 0.22,
-    speed: 0.14,
-    x: "92%",
-    y: "4vh",
-    width: "24vw",
-    blend: "normal",
-    opacity: 0.7,
-    z: 10,
-  },
-  {
-    id: "pyramid-bl",
-    src: "assets/images/defiance/noisepyramids.0.webp",
-    depth: 0.24,
-    speed: 0.15,
-    x: "6%",
-    y: "80vh",
-    width: "20vw",
-    blend: "normal",
-    opacity: 0.55,
-    z: 11,
-  },
-
-  /* ── front: hero stamp ── */
-  {
-    id: "lcp-stamp",
-    src: "assets/images/defiance/noisepyramids.6.webp",
-    depth: 0.55,
-    speed: 0.36,
-    x: "82%",
-    y: "9vh",
-    width: "34vw",
-    blend: "normal",
-    opacity: 1,
-    lcp: true,
-    z: 30,
-  },
+  /* ── scene 2: halfway down ── */
+  { id: "webs", src: "assets/images/collage/webs.webp", f: 0.5, x: 58, w: 120, mw: 220, s: 0.3, o: 0.65, z: 2 },
+  { id: "sculpt6", src: "assets/images/collage/sculpt6.webp", f: 0.5, x: 68, w: 85, mw: 160, s: 0.5, o: 1, z: 10, r: -6, b: "difference" },
 ];
 
-function luminanceThirds(stats) {
-  var channels = stats.channels || [];
-  var r = channels[0] && channels[0].mean ? channels[0].mean : 0;
-  var g = channels[1] && channels[1].mean ? channels[1].mean : r;
-  var b = channels[2] && channels[2].mean ? channels[2].mean : r;
-  var mean = (r + g + b) / 3;
-  return {
-    mean: Math.round(mean),
-    t1: mean < 85,
-    t2: mean >= 85 && mean < 170,
-    t3: mean >= 170,
-  };
-}
-
-function analyzeImage(relSrc) {
-  var abs = path.join(root, relSrc.replace(/\//g, path.sep));
-  if (!fs.existsSync(abs)) {
-    return Promise.resolve({ missing: true });
-  }
-  return sharp(abs)
-    .stats()
-    .then(function (stats) {
-      var dom = stats.dominant || { r: 128, g: 128, b: 128 };
-      var lum = luminanceThirds(stats);
-      return {
-        dominant: {
-          r: Math.round(dom.r),
-          g: Math.round(dom.g),
-          b: Math.round(dom.b),
-        },
-        luminance: lum,
-      };
-    });
-}
-
 function main() {
-  var tasks = LAYER_DEFS.map(function (layer) {
-    return analyzeImage(layer.src).then(function (analysis) {
-      var copy = Object.assign({}, layer);
-      copy.analysis = analysis.missing ? null : analysis;
-      return copy;
+  LAYER_DEFS.forEach(function (layer) {
+    var srcs = [layer.src].concat(layer.byPage ? Object.keys(layer.byPage).map(function (k) { return layer.byPage[k]; }) : []);
+    srcs.forEach(function (src) {
+      if (!fs.existsSync(path.join(root, src))) {
+        console.warn("Missing " + src + " — run node scripts/make-collage-cutouts.js");
+      }
     });
   });
 
-  Promise.all(tasks)
-    .then(function (layers) {
-      var payload = {
-        version: 2,
-        layers: layers,
-      };
-      var js =
-        "/** Generated by scripts/analyze-canvas-images.js — do not edit by hand */\n" +
-        "window.__CANVAS_LAYERS__ = " +
-        JSON.stringify(payload, null, 2) +
-        ";\n";
-      fs.writeFileSync(outFile, js, "utf8");
-      console.log("Wrote " + path.relative(root, outFile) + " (" + layers.length + " layers)");
-    })
-    .catch(function (err) {
-      console.error(err);
-      process.exit(1);
-    });
+  var payload = { version: 3, layers: LAYER_DEFS };
+  var js =
+    "/** Generated by scripts/analyze-canvas-images.js — do not edit by hand */\n" +
+    "window.__CANVAS_LAYERS__ = " +
+    JSON.stringify(payload, null, 2) +
+    ";\n";
+  fs.writeFileSync(outFile, js, "utf8");
+  console.log("Wrote " + path.relative(root, outFile) + " (" + LAYER_DEFS.length + " layers)");
 }
 
 main();

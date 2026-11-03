@@ -215,7 +215,7 @@ Load order on every page: `fonts.css` → `reset.css` → `tokens.css` → `layo
 Every core page shell includes:
 
 - `<body class="page-home|page-about|page-gallery|page-exhibitions|page-archive|page-work">`
-- `.site-canvas` + LCP `<img class="site-canvas__lcp">` (preload `assets/images/defiance/noisepyramids.6.webp`)
+- `.site-canvas` (empty; `js/canvas-parallax.js` injects the collage layers) + `<link rel="preload">` for `assets/images/collage/sculpt1.webp`
 - `.site-brand__title` on all pages (homepage uses `<h1>`, others use `<span>`)
 
 | File | Contains |

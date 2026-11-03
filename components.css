@@ -331,7 +331,7 @@ a:focus-visible {
 .work-list__item {
   position: relative;
   display: block;
-  max-width: 44rem;
+  max-width: calc(100% - 1.5rem);
   width: fit-content;
   text-decoration: none;
   color: var(--color-text);
@@ -347,6 +347,23 @@ a:focus-visible {
 .work-list__item:nth-of-type(5n + 3) { left: 0.25rem; }
 .work-list__item:nth-of-type(5n + 4) { left: 1.5rem; }
 .work-list__item:nth-of-type(5n + 5) { left: 0.5rem; }
+
+/* One line per title; overflow truncates instead of wrapping */
+.work-list__item:not(.work-list__item--exhibition) {
+  display: flex;
+  align-items: baseline;
+}
+
+.work-list__item:not(.work-list__item--exhibition) .work-list__title {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-list__item[data-year]::after {
+  flex-shrink: 0;
+}
 
 .work-list__title {
   display: inline;

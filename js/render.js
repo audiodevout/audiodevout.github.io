@@ -252,7 +252,7 @@
 
     var installations = dedupeById(data.projects.installations || []);
     var performance = dedupeById(data.projects.performance || []);
-    var worksItems = installations.concat(performance);
+    var worksItems = installations.concat(performance).filter(function (item) { return !item.hideFromHome; });
     var drawings = dedupeById(data.projects.drawings || []);
     var soundItems = dedupeById(data.projects.soundInstallations || []);
 

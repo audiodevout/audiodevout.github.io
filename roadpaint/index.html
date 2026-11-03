@@ -1597,7 +1597,7 @@ input[type='range']::-moz-range-thumb {
   user-select: none;
 }
 
-.osm-tiles img {
+.osm-tiles .osm-tile {
   position: absolute;
   width: 256px;
   height: 256px;
@@ -1684,6 +1684,12 @@ input[type='range']::-moz-range-thumb {
   margin: 6px 0;
 }
 
+.osm-readout {
+  min-height: 14px;
+  margin: 0 0 4px;
+  color: #000080;
+}
+
 .osm-status {
   min-height: 18px;
   padding: 2px 4px;
@@ -1696,6 +1702,113 @@ input[type='range']::-moz-range-thumb {
 
 .osm-busy .osm-map {
   cursor: progress;
+}
+
+/* Map import progress: a Win98 copy-files window */
+.imp-window .win-dialog-body {
+  padding-top: 6px;
+}
+
+.imp-anim {
+  position: relative;
+  height: 28px;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.imp-paper {
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 26px;
+  height: 22px;
+  background: #fffef4;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0 #808080;
+}
+
+.imp-pencil {
+  position: absolute;
+  top: 2px;
+  left: 40px;
+  width: 6px;
+  height: 22px;
+  background: linear-gradient(#ffd400 0 70%, #e8b090 70% 85%, #303030 85%);
+  border: 1px solid #000;
+  transform: rotate(35deg);
+}
+
+.imp-working .imp-pencil {
+  animation: imp-scribble 1.6s steps(16) infinite;
+}
+
+@keyframes imp-scribble {
+  0% { left: 40px; top: 2px; }
+  25% { left: 140px; top: 6px; }
+  50% { left: 240px; top: 2px; }
+  75% { left: 140px; top: 0; }
+  100% { left: 40px; top: 2px; }
+}
+
+.imp-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  column-gap: 8px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.imp-steps li {
+  display: flex;
+  gap: 6px;
+  line-height: 17px;
+  color: #808080;
+}
+
+.imp-steps li b {
+  width: 12px;
+  text-align: center;
+  color: #000;
+}
+
+.imp-steps li.imp-play,
+.imp-steps li.imp-done,
+.imp-steps li.imp-ready {
+  color: #000;
+}
+
+.imp-steps li.imp-play {
+  font-weight: bold;
+}
+
+.imp-steps li.imp-failed b {
+  color: #c00000;
+}
+
+.imp-bar {
+  height: 18px;
+  padding: 2px;
+  background: #fff;
+}
+
+.imp-fill {
+  width: 0;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #000080 0 9px, transparent 9px 11px);
+  transition: width 0.2s steps(4);
+}
+
+.imp-status {
+  min-height: 15px;
+  margin-top: 5px;
+}
+
+.imp-counts {
+  min-height: 15px;
+  color: #000080;
 }
 
   </style>
@@ -2360,15 +2473,33 @@ const RETRO_UNIFORMS = {
   uHatchScale: { value: 1 },
   uAffine: { value: 1 },
   uSunDir: { value: new THREE.Vector3(-0.45, 0.8, 0.4).normalize() },
-  uSunColor: { value: new THREE.Color(0.74, 0.68, 0.54) },
-  uSkyAmb: { value: new THREE.Color(0.44, 0.49, 0.6) },
-  uGroundAmb: { value: new THREE.Color(0.24, 0.23, 0.2) },
+  // Light is added up in linear space (colours are converted from and back
+  // to display values in the shader), so these are linear intensities:
+  // a warm sun, a cool sky fill and a soft bounce off the ground.
+  uSunColor: { value: new THREE.Color(0.92, 0.84, 0.68) },
+  uSkyAmb: { value: new THREE.Color(0.38, 0.43, 0.54) },
+  uGroundAmb: { value: new THREE.Color(0.27, 0.24, 0.18) },
   uFogColor: { value: new THREE.Color(SKY.horizon) },
   uFogNear: { value: 300 },
   uFogFar: { value: 1100 },
   uFogOn: { value: 1 },
   uNight: { value: 0 },
+  // Build-up radii per reveal group (see REVEAL_GROUPS). Huge = all shown.
+  uReveal: { value: [1e7, 1e7, 1e7, 1e7, 1e7, 1e7] },
 };
+
+// While a map import plays, each layer of the world grows out from the
+// centre: the ground starts as sketchbook paper, roads are pencilled in,
+// parks flood in like Paint's bucket, buildings rise and props pop up.
+const REVEAL_GROUPS = {
+  ground: { index: 0, band: 10, paper: true },
+  roads: { index: 1, band: 14 },
+  rails: { index: 2, band: 14 },
+  land: { index: 3, band: 36, dither: true },
+  buildings: { index: 4, band: 45, rise: true },
+  props: { index: 5, band: 16, rise: true },
+};
+const REVEAL_ALL = 1e7;
 
 const BAYER_GLSL = /* glsl */ `
   float bayer4(vec2 p) {
@@ -2396,6 +2527,10 @@ const RETRO_VERTEX = /* glsl */ `
   uniform float uFogNear;
   uniform float uFogFar;
   uniform float uFogOn;
+  #ifdef REVEAL_GROUP
+    uniform float uReveal[6];
+    varying float vRev;
+  #endif
 
   varying vec4 vCol;
   varying vec3 vLight;
@@ -2424,6 +2559,23 @@ const RETRO_VERTEX = /* glsl */ `
 
     vec4 wp = m * vec4(position, 1.0);
     vec3 n = normalize(mat3(m) * normal);
+
+    #ifdef REVEAL_GROUP
+      vec3 rOrigin = wp.xyz;
+      #ifdef USE_INSTANCING
+        rOrigin = (m * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+      #endif
+      vRev = uReveal[REVEAL_GROUP] - length(rOrigin.xz);
+      #ifdef REVEAL_RISE
+        float grow = smoothstep(0.0, REVEAL_BAND, vRev);
+        #ifdef USE_INSTANCING
+          // Props pop up with a little overshoot.
+          wp.xyz = rOrigin + (wp.xyz - rOrigin) * grow * (1.0 + 0.3 * sin(grow * 3.14159));
+        #else
+          wp.y *= grow;
+        #endif
+      #endif
+    #endif
 
     vWorld = wp.xyz;
     vNdotL = dot(n, uSunDir);
@@ -2484,6 +2636,9 @@ const RETRO_FRAGMENT = /* glsl */ `
   varying vec3 vAffine;
   varying vec3 vWorld;
   varying float vNdotL;
+  #ifdef REVEAL_GROUP
+    varying float vRev;
+  #endif
 
   ${BAYER_GLSL}
 
@@ -2514,8 +2669,9 @@ const RETRO_FRAGMENT = /* glsl */ `
     float ink = step(l1, 1.0 + grain * 0.6);
     ink = max(ink, step(l2, 0.9) * step(0.75, shade));
 
-    vec3 paper = c * mix(1.0, 0.8, shade);
-    vec3 graphite = c * 0.38 + vec3(0.05, 0.05, 0.08);
+    // Shade is cool, like a blue-grey pencil over the colour.
+    vec3 paper = c * mix(vec3(1.0), vec3(0.8, 0.83, 0.95), shade);
+    vec3 graphite = c * vec3(0.36, 0.38, 0.47) + vec3(0.04, 0.04, 0.09);
     return mix(paper, graphite, ink * shade * 0.9);
   }
 
@@ -2550,7 +2706,8 @@ const RETRO_FRAGMENT = /* glsl */ `
 
     if (uAlpha < 0.999 && uAlpha <= bayer4(gl_FragCoord.xy)) discard;
 
-    vec3 c = base * vLight;
+    // Light in linear space, then back to display colour.
+    vec3 c = pow(pow(max(base, vec3(0.0)), vec3(2.2)) * vLight, vec3(1.0 / 2.2));
     #ifndef UNLIT
       if (uShadowOn > 0.5) c = hatchShadow(c);
     #endif
@@ -2564,6 +2721,31 @@ const RETRO_FRAGMENT = /* glsl */ `
       vec2 cell = floor(vWorld.xz / 3.0) + floor(vWorld.y / 3.2) * 17.0;
       float lit = step(0.42, fract(sin(dot(cell, vec2(12.9898, 78.233))) * 43758.5453));
       c = mix(c, vec3(1.0, 0.84, 0.46), glass * lit * uNight);
+    #endif
+    #ifdef REVEAL_GROUP
+      float revFront = 1.0 - clamp(vRev / REVEAL_BAND, 0.0, 1.0);
+      float scribble = fract(sin(dot(floor(vWorld.xz * 1.7) + floor(uBoil), vec2(12.9898, 78.233))) * 43758.5453);
+      #ifdef REVEAL_PAPER
+        if (vRev < 0.0) {
+          // Not painted yet: sketchbook paper with faint pencil squares.
+          vec2 g = abs(fract(vWorld.xz / 25.0 + 0.5) - 0.5) * 25.0;
+          float line = 1.0 - step(0.3, min(g.x, g.y));
+          c = mix(vec3(0.95, 0.93, 0.86), vec3(0.7, 0.75, 0.85), line * 0.7);
+          c = mix(c, vec3(0.22, 0.22, 0.28), step(-REVEAL_BAND, vRev) * step(0.5, scribble));
+        } else {
+          c = mix(c, vec3(0.22, 0.22, 0.28), step(0.75, revFront) * step(0.6, scribble) * 0.8);
+        }
+      #else
+        if (vRev <= 0.0) discard;
+        #ifdef REVEAL_DITHER
+          // Paint-bucket flood: the fill dithers in at its front.
+          if (revFront > bayer4(gl_FragCoord.xy) + 0.02) discard;
+        #else
+          // The pencil goes first, then the colour.
+          vec3 graphite = vec3(0.16, 0.16, 0.2) + c * 0.12;
+          c = mix(c, graphite, smoothstep(0.35, 0.9, revFront) * (0.75 + 0.25 * scribble));
+        #endif
+      #endif
     #endif
     c = mix(c, uTint, uTintAmt);
     c = mix(c, uFogColor, vFog);
@@ -2589,8 +2771,17 @@ function createRetroMaterial({
   alpha = 1,
   depthWrite = true,
   polygonOffset = 0,
+  reveal = null,
 } = {}) {
   const defines = {};
+  if (reveal) {
+    const group = REVEAL_GROUPS[reveal];
+    defines.REVEAL_GROUP = String(group.index);
+    defines.REVEAL_BAND = group.band.toFixed(1);
+    if (group.paper) defines.REVEAL_PAPER = '';
+    if (group.rise) defines.REVEAL_RISE = '';
+    if (group.dither) defines.REVEAL_DITHER = '';
+  }
   if (map) defines.USE_MAP = '';
   if (roadMask) defines.ROAD_MASK = '';
   if (paintVertex) defines.PAINT_VERTEX = '';
@@ -2686,7 +2877,9 @@ function createPalettePass() {
         if (uMode == 0) {
           c = nearest16(clamp(c + t * 0.42, 0.0, 1.0));
         } else if (uMode == 1) {
-          c = floor(clamp(c, 0.0, 1.0) * 5.0 + 0.5 + t) / 5.0;
+          // 6 x 7 x 6 = 252 colours: one extra step of green for grass and trees.
+          vec3 levels = vec3(5.0, 6.0, 5.0);
+          c = floor(clamp(c, 0.0, 1.0) * levels + 0.5 + t) / levels;
         } else if (uMode == 2) {
           vec3 levels = vec3(31.0, 63.0, 31.0);
           c = floor(clamp(c, 0.0, 1.0) * levels + 0.5 + t) / levels;
@@ -2895,11 +3088,11 @@ function makeAsphaltTexture() {
 function makeGrassTexture() {
   const rand = mulberry32(11);
   const shades = [
-    [78, 132, 52],
-    [82, 138, 54],
-    [74, 126, 50],
-    [90, 144, 58],
-    [68, 118, 46],
+    [100, 162, 62],
+    [106, 168, 66],
+    [94, 154, 58],
+    [116, 178, 72],
+    [86, 144, 54],
   ];
   return makeCanvasTexture(32, 32, (data, w, h) => {
     for (let y = 0; y < h; y++) {
@@ -3095,15 +3288,25 @@ function prismRoof(length, depth, height) {
 }
 
 // Depth-only pass for the sun's shadow map (handles instanced meshes too).
+// During a map import, shadows grow with the buildings and props.
 function createShadowDepthMaterial() {
   return new THREE.ShaderMaterial({
+    uniforms: { uReveal: RETRO_UNIFORMS.uReveal },
     vertexShader: /* glsl */ `
+      uniform float uReveal[6];
       void main() {
         mat4 m = modelMatrix;
         #ifdef USE_INSTANCING
           m = m * instanceMatrix;
         #endif
-        gl_Position = projectionMatrix * viewMatrix * m * vec4(position, 1.0);
+        vec4 wp = m * vec4(position, 1.0);
+        #ifdef USE_INSTANCING
+          vec3 o = (m * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+          wp.xyz = o + (wp.xyz - o) * smoothstep(0.0, 16.0, uReveal[5] - length(o.xz));
+        #else
+          wp.y *= smoothstep(0.0, 45.0, uReveal[4] - length(wp.xz));
+        #endif
+        gl_Position = projectionMatrix * viewMatrix * wp;
       }
     `,
     fragmentShader: /* glsl */ `
@@ -3399,7 +3602,7 @@ function buildGround() {
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   // Tunnel cuttings punch stencil holes through the meadow.
-  const material = respectHoles(createRetroMaterial({ map: TEXTURES.grass, vertexColors: true }));
+  const material = respectHoles(createRetroMaterial({ map: TEXTURES.grass, vertexColors: true, reveal: 'ground' }));
   const mesh = noShadow(new THREE.Mesh(geometry, material));
   mesh.name = 'ground';
   return mesh;
@@ -3418,7 +3621,7 @@ function buildPlayAreaBorder() {
   const parts = points.filter(([x, z]) => !nearHighway(x, z, ROAD_TYPES.highway.roadHalf + 3)).map(([x, z]) =>
     modelPart(box(0.4, 1.2, 0.4), 0x6b4f2a, { position: [x, 0.6, z] })
   );
-  const mesh = new THREE.Mesh(mergeModel(parts), createRetroMaterial({ vertexColors: true }));
+  const mesh = new THREE.Mesh(mergeModel(parts), createRetroMaterial({ vertexColors: true, reveal: 'props' }));
   return mesh;
 }
 
@@ -3541,6 +3744,7 @@ function createScenery(scene) {
     alpha: 0.5,
     depthWrite: false,
     polygonOffset: -1,
+    reveal: 'props',
   });
   const shadowGeometry = new THREE.PlaneGeometry(1, 1);
   shadowGeometry.rotateX(-Math.PI / 2);
@@ -3553,7 +3757,7 @@ function createScenery(scene) {
       const list = byModel[index];
       if (list.length === 0) return;
 
-      const material = createRetroMaterial({ vertexColors: true });
+      const material = createRetroMaterial({ vertexColors: true, reveal: 'props' });
       const mesh = new THREE.InstancedMesh(model.geometry, material, list.length);
       const shadow = new THREE.InstancedMesh(shadowGeometry, shadowMaterial, list.length);
       const m = new THREE.Matrix4();
@@ -3668,7 +3872,7 @@ function createScenery(scene) {
   addGroup(trees, treePlacements);
 
   // Distant hills ring the horizon.
-  const hills = new THREE.InstancedMesh(hillModel(), createRetroMaterial({ vertexColors: true }), 46);
+  const hills = new THREE.InstancedMesh(hillModel(), createRetroMaterial({ vertexColors: true, reveal: 'ground' }), 46);
   {
     const m = new THREE.Matrix4();
     const q = new THREE.Quaternion();
@@ -4055,7 +4259,7 @@ function roadPartKind(kind) {
   if (group === 'surf') {
     const type = ROAD_TYPES[key];
     if (type.kind === 'rail') {
-      def = { material: createRetroMaterial({ map: TEXTURES.rail, side: THREE.DoubleSide, polygonOffset: -4 }) };
+      def = { material: createRetroMaterial({ map: TEXTURES.rail, side: THREE.DoubleSide, polygonOffset: -4, reveal: 'rails' }) };
     } else {
       const map = flag ? TEXTURES.roadOneway[key] : TEXTURES.road[key];
       def = {
@@ -4066,32 +4270,33 @@ function roadPartKind(kind) {
           vertexColors: true,
           side: THREE.DoubleSide,
           polygonOffset: -2,
+          reveal: 'roads',
         }),
       };
     }
   } else if (group === 'asphalt') {
-    def = { material: createRetroMaterial({ map: TEXTURES.asphalt, roadMask: true, side: THREE.DoubleSide, polygonOffset: -1 }) };
+    def = { material: createRetroMaterial({ map: TEXTURES.asphalt, roadMask: true, side: THREE.DoubleSide, polygonOffset: -1, reveal: 'roads' }) };
   } else if (group === 'walk') {
-    def = { material: createRetroMaterial({ map: TEXTURES.concrete, vertexColors: true, side: THREE.DoubleSide }) };
+    def = { material: createRetroMaterial({ map: TEXTURES.concrete, vertexColors: true, side: THREE.DoubleSide, reveal: 'roads' }) };
   } else if (group === 'zebra') {
     def = {
-      material: createRetroMaterial({ map: TEXTURES.zebra, alphaTest: true, side: THREE.DoubleSide, polygonOffset: -3 }),
+      material: createRetroMaterial({ map: TEXTURES.zebra, alphaTest: true, side: THREE.DoubleSide, polygonOffset: -3, reveal: 'roads' }),
     };
   } else if (group === 'struct') {
-    def = { material: createRetroMaterial({ map: TEXTURES.concrete, vertexColors: true, side: THREE.DoubleSide }), cast: true };
+    def = { material: createRetroMaterial({ map: TEXTURES.concrete, vertexColors: true, side: THREE.DoubleSide, reveal: 'roads' }), cast: true };
   } else if (group === 'bank') {
-    def = { material: createRetroMaterial({ map: TEXTURES.grass, vertexColors: true, side: THREE.DoubleSide }), cast: true };
+    def = { material: createRetroMaterial({ map: TEXTURES.grass, vertexColors: true, side: THREE.DoubleSide, reveal: 'roads' }), cast: true };
   } else if (group === 'grass') {
-    def = { material: createRetroMaterial({ map: TEXTURES.grass, vertexColors: true, side: THREE.DoubleSide, polygonOffset: -2 }) };
+    def = { material: createRetroMaterial({ map: TEXTURES.grass, vertexColors: true, side: THREE.DoubleSide, polygonOffset: -2, reveal: 'roads' }) };
   } else if (group === 'ballast') {
-    def = { material: createRetroMaterial({ map: TEXTURES.gravel, side: THREE.DoubleSide, polygonOffset: -1 }) };
+    def = { material: createRetroMaterial({ map: TEXTURES.gravel, side: THREE.DoubleSide, polygonOffset: -1, reveal: 'rails' }) };
   } else if (group === 'hole') {
     def = { material: makeHoleMaterial(), renderOrder: -10 };
   } else if (group === 'mouth') {
-    def = { material: createRetroMaterial({ color: 0x080808, unlit: true, side: THREE.DoubleSide }) };
+    def = { material: createRetroMaterial({ color: 0x080808, unlit: true, side: THREE.DoubleSide, reveal: 'roads' }) };
   } else if (group === 'under') {
     def = {
-      material: createRetroMaterial({ vertexColors: true, unlit: true, alpha: 0.6, side: THREE.DoubleSide, polygonOffset: -1 }),
+      material: createRetroMaterial({ vertexColors: true, unlit: true, alpha: 0.6, side: THREE.DoubleSide, polygonOffset: -1, reveal: 'roads' }),
     };
   } else {
     throw new Error(`unknown road part ${kind}`);
@@ -5719,7 +5924,9 @@ function createTraffic(scene, network, scenery, events) {
 
   const meshes = {};
   for (const key of modelKeys) {
-    const mesh = new THREE.InstancedMesh(models[key].geometry, createRetroMaterial({ vertexColors: true }), capacity);
+    // Cars keep their blob shadows; leaving them out of the sun's shadow
+    // map lets it be redrawn less often.
+    const mesh = noShadow(new THREE.InstancedMesh(models[key].geometry, createRetroMaterial({ vertexColors: true }), capacity));
     mesh.count = 0;
     mesh.frustumCulled = false;
     const white = new THREE.Color(0xffffff);
@@ -6276,6 +6483,12 @@ function createTraffic(scene, network, scenery, events) {
 
     for (const car of Array.from(cars)) {
       if (!cars.has(car)) continue;
+      // Where the car was at the last tick, so frames between ticks can
+      // draw it part of the way along (smooth on 120 and 144 Hz screens).
+      car.px = car.x;
+      car.py = car.y;
+      car.pz = car.z;
+      car.pyaw = car.yaw;
       car.age += dt;
       if (car.dying) {
         car.grow -= dt * 3;
@@ -6305,7 +6518,8 @@ function createTraffic(scene, network, scenery, events) {
   const up = new THREE.Vector3(0, 1, 0);
   const counts = {};
 
-  function render() {
+  // `alpha` is how far the clock is between the last tick and the next.
+  function render(alpha = 1) {
     for (const key of modelKeys) counts[key] = 0;
     let shadowCount = 0;
     for (const car of cars) {
@@ -6313,13 +6527,24 @@ function createTraffic(scene, network, scenery, events) {
       const index = counts[car.model]++;
       if (index >= capacity) continue;
       const g = clamp(car.grow, 0, 1);
-      _q.setFromAxisAngle(up, car.yaw);
-      _m.compose(_v.set(car.x, WORLD.roadY + car.y, car.z), _q, _s.set(g, g, g));
+      if (car.px === undefined || Math.abs(car.x - car.px) + Math.abs(car.z - car.pz) > 8) {
+        car.rx = car.x;
+        car.ry = car.y;
+        car.rz = car.z;
+        car.ryaw = car.yaw;
+      } else {
+        car.rx = lerp(car.px, car.x, alpha);
+        car.ry = lerp(car.py, car.y, alpha);
+        car.rz = lerp(car.pz, car.z, alpha);
+        car.ryaw = car.pyaw + angleDiff(car.pyaw, car.yaw) * alpha;
+      }
+      _q.setFromAxisAngle(up, car.ryaw);
+      _m.compose(_v.set(car.rx, WORLD.roadY + car.ry, car.rz), _q, _s.set(g, g, g));
       mesh.setMatrixAt(index, _m);
       mesh.setColorAt(index, car.color);
 
       const model = models[car.model];
-      _m.compose(_v.set(car.x, WORLD.roadY + car.y + 0.03, car.z), _q, _s.set(model.width * 1.35 * g, 1, model.length * 1.12 * g));
+      _m.compose(_v.set(car.rx, WORLD.roadY + car.ry + 0.03, car.rz), _q, _s.set(model.width * 1.35 * g, 1, model.length * 1.12 * g));
       shadows.setMatrixAt(shadowCount++, _m);
     }
 
@@ -7189,13 +7414,13 @@ function buildTownSign(town) {
       modelPart(box(0.3, 5.6, 0.3), 0x8a8a8a, { position: [3.4, 2.8, 0] }),
       modelPart(box(9.2, 3.6, 0.12), 0x1e6b3a, { position: [0, 4.2, 0] }),
     ]),
-    createRetroMaterial({ vertexColors: true }),
+    createRetroMaterial({ vertexColors: true, reveal: 'props' }),
   );
   group.add(posts);
 
-  const front = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.4), createRetroMaterial({ map: signTexture([town.name, `${town.km} km`]), unlit: true }));
+  const front = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.4), createRetroMaterial({ map: signTexture([town.name, `${town.km} km`]), unlit: true, reveal: 'props' }));
   front.position.set(0, 4.2, 0.07);
-  const back = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.4), createRetroMaterial({ map: signTexture(['Welcome to', 'Road Paint City']), unlit: true }));
+  const back = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.4), createRetroMaterial({ map: signTexture(['Welcome to', 'Road Paint City']), unlit: true, reveal: 'props' }));
   back.position.set(0, 4.2, -0.07);
   back.rotation.y = Math.PI;
   group.add(noShadow(front), noShadow(back));
@@ -7230,7 +7455,7 @@ function formatClock(time) {
 }
 
 // Name plates for shops, landmarks and streets, drawn into one atlas.
-function createSignAtlas(rows = 64) {
+function createSignAtlas(rows = 64, reveal = 'props') {
   const atlas = {
     cellW: 256,
     cellH: 32,
@@ -7293,7 +7518,7 @@ function createSignAtlas(rows = 64) {
     },
   };
   atlas.init();
-  atlas.material = createRetroMaterial({ map: atlas.texture, unlit: true, polygonOffset: -2 });
+  atlas.material = createRetroMaterial({ map: atlas.texture, unlit: true, polygonOffset: -2, reveal });
   return atlas;
 }
 
@@ -7302,8 +7527,8 @@ const CITY_PART_KINDS = new Map();
 function cityPartKind(kind) {
   let def = CITY_PART_KINDS.get(kind);
   if (!def) {
-    if (kind === 'facade') def = { material: createRetroMaterial({ map: TEXTURES.facade, vertexColors: true, glow: true }), cast: true };
-    else def = { material: createRetroMaterial({ vertexColors: true, glow: true }), cast: true };
+    if (kind === 'facade') def = { material: createRetroMaterial({ map: TEXTURES.facade, vertexColors: true, glow: true, reveal: 'buildings' }), cast: true };
+    else def = { material: createRetroMaterial({ vertexColors: true, glow: true, reveal: 'buildings' }), cast: true };
     CITY_PART_KINDS.set(kind, def);
   }
   return def;
@@ -7537,7 +7762,7 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
   // ----- markers: warnings, demand pins and driveways --------------------------
 
   const markerCap = CITY.maxBuildings + 8;
-  const warnings = noShadow(new THREE.InstancedMesh(new THREE.OctahedronGeometry(1.3, 0), createRetroMaterial({ color: 0xffd400, unlit: true }), markerCap));
+  const warnings = noShadow(new THREE.InstancedMesh(new THREE.OctahedronGeometry(1.3, 0), createRetroMaterial({ color: 0xffd400, unlit: true, reveal: 'props' }), markerCap));
   warnings.frustumCulled = false;
   warnings.count = 0;
 
@@ -7545,7 +7770,7 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
     modelPart(new THREE.ConeGeometry(0.45, 1.4, 5), 0xffffff, { position: [0, 0.7, 0], rotation: [Math.PI, 0, 0], paint: 1 }),
     modelPart(new THREE.IcosahedronGeometry(0.75, 0), 0xffffff, { position: [0, 1.75, 0], paint: 1 }),
   ]);
-  const pins = noShadow(new THREE.InstancedMesh(pinGeometry, createRetroMaterial({ vertexColors: true }), markerCap * 2));
+  const pins = noShadow(new THREE.InstancedMesh(pinGeometry, createRetroMaterial({ vertexColors: true, reveal: 'props' }), markerCap * 2));
   pins.frustumCulled = false;
   pins.count = 0;
   pins.setColorAt(0, new THREE.Color(0xffffff));
@@ -7553,7 +7778,7 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
   const drivewayGeometry = new THREE.BoxGeometry(1, 1, 1);
   drivewayGeometry.translate(0, 0.5, 0);
   const driveways = noShadow(
-    new THREE.InstancedMesh(drivewayGeometry, createRetroMaterial({ map: TEXTURES.concrete, color: 0xd0ccc0, polygonOffset: -1 }), markerCap),
+    new THREE.InstancedMesh(drivewayGeometry, createRetroMaterial({ map: TEXTURES.concrete, color: 0xd0ccc0, polygonOffset: -1, reveal: 'roads' }), markerCap),
   );
   driveways.frustumCulled = false;
   driveways.count = 0;
@@ -8672,6 +8897,13 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
     if (townDefs) setTowns(townDefs);
     refreshComponents();
     markNetworkSeen();
+    state.importDropped = 0;
+    addImported(list);
+  }
+
+  // Imported buildings can arrive after the roads (the map builds up in
+  // layers), so they are added on top of whatever is already there.
+  function addImported(list) {
     let dropped = 0;
     for (const record of list) {
       const b = addBuilding({ color: -1, seed: Math.floor(rand() * 1e9), ...record }, { animate: false });
@@ -8692,7 +8924,7 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
         dropped++;
       }
     }
-    state.importDropped = dropped;
+    state.importDropped += dropped;
     // Milestones only unlock colors here; landmarks come from the map.
     state.pendingCivic = [];
     checkMilestones(true);
@@ -8894,6 +9126,7 @@ function createCity({ scene, network, rails = null, traffic, scenery, events }) 
     reset,
     stats,
     importMap,
+    addImported,
     markNetworkSeen,
     setTowns,
     buildingAt,
@@ -9017,7 +9250,7 @@ function createTrains(scene, rails, events) {
   const meshes = {};
   const cap = 80;
   for (const [key, model] of Object.entries(models)) {
-    const mesh = new THREE.InstancedMesh(model.geometry, material, cap);
+    const mesh = noShadow(new THREE.InstancedMesh(model.geometry, material, cap));
     mesh.frustumCulled = false;
     mesh.count = 0;
     meshes[key] = mesh;
@@ -9025,8 +9258,8 @@ function createTrains(scene, rails, events) {
   }
   const stationRoot = new THREE.Group();
   scene.add(stationRoot);
-  const atlas = createSignAtlas(16);
-  const stationMaterial = createRetroMaterial({ vertexColors: true });
+  const atlas = createSignAtlas(16, 'rails');
+  const stationMaterial = createRetroMaterial({ vertexColors: true, reveal: 'rails' });
 
   const trains = [];
   const reserved = new Map();
@@ -10369,6 +10602,16 @@ function createSound() {
       tone(990, 0.08, { type: 'triangle', delay: 0.05 });
     },
     error: () => tone(196, 0.16, { volume: 0.6 }),
+    // Map import: pencil on paper, Paint's bucket, buildings landing.
+    scribble: () => noise(0.05 + Math.random() * 0.05, { volume: 0.35, cutoff: 2600 + Math.random() * 1800 }),
+    glug: () => {
+      tone(320, 0.18, { type: 'sine', slide: 0.45, volume: 0.6 });
+      tone(240, 0.16, { type: 'sine', slide: 0.5, delay: 0.12, volume: 0.45 });
+    },
+    thunk: () => {
+      tone(150 + Math.random() * 60, 0.12, { type: 'triangle', slide: 0.5, volume: 0.55 });
+      noise(0.06, { volume: 0.4, cutoff: 500 });
+    },
     pop: (volume = 1) => tone(880, 0.05, { type: 'triangle', volume: volume * 0.45, slide: 1.5 }),
     chime: () => {
       tone(659, 0.12, { type: 'triangle', volume: 0.6 });
@@ -10995,6 +11238,7 @@ function displayPropertiesBody(settings) {
           ${check('fog', 'Distance fog')}
           ${check('stretch', 'Stretch to screen')}
           ${check('sound', 'Sound effects')}
+          ${check('autoQuality', 'Lower quality when slow')}
         </div>
       </fieldset>
     </div>
@@ -11036,7 +11280,8 @@ const CONTROLS_HTML = `
     <p><b>Real places</b></p>
     <ul>
       <li><b>File, Import Map</b> (Ctrl+M) opens a map of the world. Search for a place, or paste coordinates (52.373, 4.892) or an openstreetmap.org / Google Maps link. Drag the square over the part you want, drag its corners to resize it (up to about 2 km), and press Import.</li>
-      <li>Downloading can take up to a minute for big or busy areas; the status line shows progress. If one map server is slow, another is tried.</li>
+      <li>After Import, the window closes and the city builds itself in front of you: roads first, then parks and water, then buildings and trees. Big or busy areas can take a minute to download. If one map server is slow, another is tried.</li>
+      <li>The building window shows each step. Skip finishes at once, Hide tucks it away, and Retry fetches a part that did not come through. You can move the camera while it builds.</li>
       <li>Imported cities don't grow on their own unless you tick <b>Keep growing</b>. Importing replaces your current city (save first with Ctrl+S).</li>
       <li>Roads, railways, metro lines, bridges, tunnels, buildings, landmarks, parks and water come from OpenStreetMap. Big roads at the edge become highways to the real towns nearby.</li>
       <li>Offline, or the download keeps failing? Save a .osm file from openstreetmap.org (Export) and use Open File.</li>
@@ -11059,7 +11304,7 @@ const ABOUT_HTML = `
     <p><b>Created by Atharva Gupta</b></p>
     <p>Paint roads, rails and flyovers. Watch a little city come alive, or bring in a real one.<br>Low-poly city building in glorious 256 colors.</p>
     <hr>
-    <p class="about-small">Map data &copy; OpenStreetMap contributors (ODbL). Map tiles &copy; CARTO. Place search by Nominatim and Photon. 3D by three.js.</p>
+    <p class="about-small">Map data &copy; OpenStreetMap contributors (ODbL). Preview map: OpenFreeMap &copy; OpenMapTiles. Place search by Nominatim and Photon, map data by Overpass. 3D by three.js.</p>
     <p class="about-small">Physical memory available to Road Paint: plenty</p>
   </div>
   <div class="dlg-buttons"><button type="button" class="win-btn" data-close-btn>OK</button></div>
@@ -11505,13 +11750,19 @@ function createInspector({ city, traffic, tooltip, pickRoad, onFollow }) {
 // ---------------------------------------------------------------------------
 
 const OSM = {
-  overpass: ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'],
+  // Public servers, often busy. kumi.systems and private.coffee are one machine.
+  overpass: ['https://overpass-api.de/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'],
   nominatim: 'https://nominatim.openstreetmap.org/search',
   photon: 'https://photon.komoot.io/api/',
-  tiles: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_4qxv_1_69ef03ca1b6264055a0b5006',
-  // Used if the keyed tiles fail to load.
+  // Free vector tiles, no key, commercial use allowed. The TileJSON names
+  // the current weekly build, so it is read first.
+  vectorTiles: 'https://tiles.openfreemap.org/planet',
+  vectorMaxZoom: 14,
+  // Raster backup. OSM's tile servers turn away pages opened from disk
+  // (no Referer), so it is only tried when the game is served over http(s).
   tilesFallback: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-  attribution: '© OpenStreetMap contributors © CARTO',
+  attribution: 'OpenFreeMap © OpenMapTiles Data from OpenStreetMap',
+  rasterAttribution: '© OpenStreetMap contributors',
   start: { lat: 52.3731, lon: 4.8925, zoom: 14, size: 1200 },
   minSize: 200,
   maxSize: WORLD.half * 2 - 40,
@@ -11531,51 +11782,70 @@ function selectionBounds(sel, pad = 1) {
   return { south: sel.lat - dLat, north: sel.lat + dLat, west: sel.lon - dLon, east: sel.lon + dLon };
 }
 
-function overpassQuery(sel) {
+// The download comes in three parts so the world can start building as
+// soon as the roads arrive: roads and rails first (small and quick), then
+// parks and water, then buildings with the shops that name them.
+const OSM_PARTS = ['roads', 'land', 'buildings'];
+
+function overpassQuery(sel, part = 'all') {
   const b = selectionBounds(sel, 1.04);
   const box = `(${b.south.toFixed(6)},${b.west.toFixed(6)},${b.north.toFixed(6)},${b.east.toFixed(6)})`;
   const roads =
     'motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|service|road|motorway_link|trunk_link|primary_link|secondary_link|tertiary_link';
+  const lines = {
+    roads: [
+      `way["highway"~"^(${roads})$"]${box};`,
+      `way["railway"~"^(rail|subway|light_rail|narrow_gauge|monorail)$"]${box};`,
+      `node["railway"~"^(station|halt|subway_entrance)$"]${box};`,
+      `node["public_transport"="station"]${box};`,
+      `node["place"~"^(city|town)$"](${(b.south - 0.4).toFixed(4)},${(b.west - 0.6).toFixed(4)},${(b.north + 0.4).toFixed(4)},${(b.east + 0.6).toFixed(4)});`,
+    ],
+    land: [
+      `way["landuse"]${box};`,
+      `way["leisure"]${box};`,
+      `way["natural"]${box};`,
+      `way["waterway"]${box};`,
+      `way["amenity"="parking"]${box};`,
+      `way["place"="square"]${box};`,
+      `relation["type"="multipolygon"]["natural"]${box};`,
+      `relation["type"="multipolygon"]["landuse"]${box};`,
+      `relation["type"="multipolygon"]["leisure"]${box};`,
+      `relation["waterway"="riverbank"]${box};`,
+      `node["natural"="tree"]${box};`,
+    ],
+    buildings: [
+      `way["building"]${box};`,
+      `relation["building"]${box};`,
+      `node["name"]["shop"]${box};`,
+      `node["name"]["amenity"]${box};`,
+      `node["name"]["tourism"]${box};`,
+      `node["name"]["office"]${box};`,
+    ],
+  };
+  const body = part === 'all' ? OSM_PARTS.flatMap((p) => lines[p]) : lines[part];
   return `[out:json][timeout:120][maxsize:536870912];
 (
-  way["highway"~"^(${roads})$"]${box};
-  way["railway"~"^(rail|subway|light_rail|narrow_gauge|monorail)$"]${box};
-  way["building"]${box};
-  relation["building"]${box};
-  way["landuse"]${box};
-  way["leisure"]${box};
-  way["natural"]${box};
-  way["waterway"]${box};
-  way["amenity"="parking"]${box};
-  way["place"="square"]${box};
-  relation["type"="multipolygon"]["natural"]${box};
-  relation["type"="multipolygon"]["landuse"]${box};
-  relation["type"="multipolygon"]["leisure"]${box};
-  relation["waterway"="riverbank"]${box};
-  node["natural"="tree"]${box};
-  node["name"]["shop"]${box};
-  node["name"]["amenity"]${box};
-  node["name"]["tourism"]${box};
-  node["name"]["office"]${box};
-  node["railway"~"^(station|halt|subway_entrance)$"]${box};
-  node["public_transport"="station"]${box};
-  node["place"~"^(city|town)$"](${(b.south - 0.4).toFixed(4)},${(b.west - 0.6).toFixed(4)},${(b.north + 0.4).toFixed(4)},${(b.east + 0.6).toFixed(4)});
+  ${body.join('\n  ')}
 );
 out body geom qt;`;
 }
 
 // Overpass can take a while to prepare a big area. Ask the first server,
 // bring in the next one if it stays quiet, and keep whichever answers.
-async function fetchOsm(sel, onStatus) {
-  const body = `data=${encodeURIComponent(overpassQuery(sel))}`;
+// The server that answered last time is asked first next time.
+let overpassFavourite = null;
+
+async function fetchOsm(sel, onStatus, part = 'all', { patience = 180000 } = {}) {
+  const body = `data=${encodeURIComponent(overpassQuery(sel, part))}`;
+  const servers = OSM.overpass.slice().sort((a, b) => (b === overpassFavourite) - (a === overpassFavourite));
   const started = performance.now();
   const seconds = () => Math.round((performance.now() - started) / 1000);
   const errors = [];
   const controllers = [];
   let progress = { host: null, bytes: 0, phase: 'waiting' };
   const timer = setInterval(() => {
-    if (progress.phase === 'waiting') onStatus?.(`Waiting for ${progress.host} to gather the map data... ${seconds()} s (big or busy areas can take a minute)`);
-    else onStatus?.(`Downloading from ${progress.host}: ${(progress.bytes / 1048576).toFixed(1)} MB... ${seconds()} s`);
+    if (progress.phase === 'waiting') onStatus?.(`Waiting for ${progress.host} to gather the map data... ${seconds()} s (big or busy areas can take a minute)`, progress);
+    else onStatus?.(`Downloading from ${progress.host}: ${(progress.bytes / 1048576).toFixed(1)} MB... ${seconds()} s`, progress);
   }, 500);
 
   async function attempt(url) {
@@ -11595,11 +11865,22 @@ async function fetchOsm(sel, onStatus) {
     for (const other of controllers) if (other !== controller) other.abort();
     const reader = response.body.getReader();
     const chunks = [];
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      chunks.push(value);
-      progress.bytes += value.length;
+    // A download that stops sending for 25 s is given up on.
+    let stall = setTimeout(() => controller.abort(), 25000);
+    try {
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        progress.bytes += value.length;
+        clearTimeout(stall);
+        stall = setTimeout(() => controller.abort(), 25000);
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') throw new Error(`${host} stopped sending`);
+      throw error;
+    } finally {
+      clearTimeout(stall);
     }
     const text = await new Blob(chunks).text();
     const data = JSON.parse(text);
@@ -11614,13 +11895,14 @@ async function fetchOsm(sel, onStatus) {
       let next = 0;
       let finished = false;
       const launch = () => {
-        if (finished || next >= OSM.overpass.length) return;
-        const url = OSM.overpass[next++];
+        if (finished || next >= servers.length) return;
+        const url = servers[next++];
         pending++;
         attempt(url).then(
           (data) => {
             if (finished) return;
             finished = true;
+            overpassFavourite = url;
             resolve(data);
           },
           (error) => {
@@ -11630,7 +11912,7 @@ async function fetchOsm(sel, onStatus) {
               errors.push(error.message);
             }
             if (finished) return;
-            if (next < OSM.overpass.length) launch();
+            if (next < servers.length) launch();
             else if (pending === 0) {
               finished = true;
               reject(new Error(errors.join('; ') || 'No map server answered'));
@@ -11639,15 +11921,15 @@ async function fetchOsm(sel, onStatus) {
         );
       };
       launch();
-      // A quiet server gets company after 20 and 45 seconds.
-      setTimeout(() => progress.phase === 'waiting' && launch(), 20000);
-      setTimeout(() => progress.phase === 'waiting' && launch(), 45000);
+      // A quiet server gets company after 8 and 16 seconds.
+      setTimeout(() => progress.phase === 'waiting' && launch(), 8000);
+      setTimeout(() => progress.phase === 'waiting' && launch(), 16000);
       setTimeout(() => {
         if (finished || progress.phase !== 'waiting') return;
         finished = true;
         for (const c of controllers) c.abort();
-        reject(new Error(`no server answered in 3 minutes${errors.length ? ` (${errors.join('; ')})` : ''}. Try a smaller square`));
-      }, 180000);
+        reject(new Error(`no server answered in ${Math.round(patience / 1000)} s${errors.length ? ` (${errors.join('; ')})` : ''}`));
+      }, patience);
     });
   } finally {
     clearInterval(timer);
@@ -11920,9 +12202,9 @@ function osmBuilding(tags, id, area) {
   else if (variant === 'factory') wall = pickFrom(r, [0xb0b0a8, 0x9a9a92, 0xc0b8a0, 0x8a96a0]);
   else if (kind === 'civic') wall = pickFrom(r, [0xe8e0cc, 0xd8c8a8, 0xc8b8a0, 0xb8a890, 0xa8583a]);
   else if (kind === 'business') wall = pickFrom(r, [0xf0e8d8, 0xe8d0b0, 0xd8d8e0, 0xc8b8a8]);
-  else wall = pickFrom(r, [0xb0a898, 0xa09888, 0xc0b8a8]);
+  else wall = pickFrom(r, [0xd8c8a8, 0xe0d0b8, 0xc8b8a0, 0xe8dcc8, 0xd0b898, 0xc4ccd0]);
   wall = cssColor(tags['building:colour'], wall);
-  const roofDefault = roofShape === 'gable' ? pickFrom(r, ROOF_COLORS) : pickFrom(r, [0x8a8a8a, 0x7a7a7a, 0x9a9690, 0x6a6a70]);
+  const roofDefault = roofShape === 'gable' ? pickFrom(r, ROOF_COLORS) : pickFrom(r, [0x9a9088, 0x8a8c94, 0xa89a84, 0x7e868e, 0xa87458]);
   const roof = cssColor(tags['roof:colour'], roofDefault);
 
   const name = tags.name ?? null;
@@ -11931,10 +12213,10 @@ function osmBuilding(tags, id, area) {
 
 const AREA_KINDS = ['water', 'park', 'pitch', 'wood', 'parking', 'plaza', 'farm', 'sand'];
 const AREA_STYLE = {
-  water: { color: 0x3c6cc0, y: 0.02 },
-  park: { color: 0x58b048, y: 0.025 },
-  pitch: { color: 0x48a848, y: 0.03 },
-  wood: { color: 0x2e7a34, y: 0.025 },
+  water: { color: 0x3f7fd6, y: 0.02 },
+  park: { color: 0x6cc455, y: 0.025 },
+  pitch: { color: 0x52b24c, y: 0.03 },
+  wood: { color: 0x2f8a3a, y: 0.025 },
   parking: { color: 0x8a8a8a, y: 0.035 },
   plaza: { color: 0xc8c0b0, y: 0.035 },
   farm: { color: 0xb8b060, y: 0.022 },
@@ -12511,9 +12793,9 @@ function createMapLayer(scene, scenery) {
   const root = new THREE.Group();
   root.name = 'map-layer';
   scene.add(root);
-  const material = respectHoles(createRetroMaterial({ vertexColors: true, polygonOffset: -1 }));
+  const material = respectHoles(createRetroMaterial({ vertexColors: true, polygonOffset: -1, reveal: 'land' }));
   const signAtlas = createSignAtlas(32);
-  const postMaterial = createRetroMaterial({ vertexColors: true });
+  const postMaterial = createRetroMaterial({ vertexColors: true, reveal: 'props' });
   let data = null;
 
   function clear() {
@@ -12590,10 +12872,19 @@ function createMapLayer(scene, scenery) {
 
   function build(mapData, network) {
     clear();
-    data = mapData;
-    buildAreas(mapData.areas ?? []);
-    if (mapData.trees?.length) scenery.plantTrees(mapData.trees);
+    data = { ...mapData, areas: mapData.areas ?? [], trees: mapData.trees ?? [] };
+    buildAreas(data.areas);
+    if (data.trees.length) scenery.plantTrees(data.trees);
     buildStreetSigns(network);
+  }
+
+  // Parks, water and trees that arrive after the roads.
+  function extend({ areas = [], trees = [] }) {
+    if (!data) return;
+    data.areas.push(...areas);
+    data.trees.push(...trees);
+    buildAreas(areas);
+    if (trees.length) scenery.plantTrees(trees);
   }
 
   function serialize() {
@@ -12628,6 +12919,7 @@ function createMapLayer(scene, scenery) {
 
   return {
     build,
+    extend,
     clear,
     serialize,
     load,
@@ -12669,27 +12961,46 @@ async function fetchJson(url) {
   return response.json();
 }
 
-// Place search: Nominatim first, Photon if Nominatim refuses (it often
-// turns away pages opened from disk, which send no Referer).
+// Place search. Nominatim turns away pages opened from disk (they send no
+// Referer), so from disk Photon goes first; served pages ask Nominatim first.
+let lastGeocode = 0;
+
 async function geocode(q) {
+  // Both services ask for no more than about one search a second.
+  const wait = lastGeocode + 1100 - performance.now();
+  if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
+  lastGeocode = performance.now();
+  const services = [
+    {
+      name: 'Nominatim',
+      async run() {
+        const list = await fetchJson(`${OSM.nominatim}?format=json&limit=6&q=${encodeURIComponent(q)}`);
+        return (Array.isArray(list) ? list : []).map((r) => ({ name: r.display_name, lat: Number(r.lat), lon: Number(r.lon) }));
+      },
+    },
+    {
+      name: 'Photon',
+      async run() {
+        const data = await fetchJson(`${OSM.photon}?limit=6&q=${encodeURIComponent(q)}`);
+        return (data.features ?? []).map((f) => {
+          const p = f.properties ?? {};
+          const name = [p.name, p.street, p.city, p.state, p.country].filter((v, i, all) => v && all.indexOf(v) === i).join(', ');
+          return { name: name || q, lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
+        });
+      },
+    },
+  ];
+  if (location.protocol === 'file:') services.reverse();
   const errors = [];
-  try {
-    const list = await fetchJson(`${OSM.nominatim}?format=json&limit=6&q=${encodeURIComponent(q)}`);
-    if (Array.isArray(list) && list.length) return list.map((r) => ({ name: r.display_name, lat: Number(r.lat), lon: Number(r.lon) }));
-  } catch (error) {
-    errors.push(`Nominatim: ${error.message}`);
+  for (const service of services) {
+    try {
+      const list = await service.run();
+      if (list.length) return list;
+    } catch (error) {
+      errors.push(`${service.name}: ${error.message}`);
+    }
   }
-  try {
-    const data = await fetchJson(`${OSM.photon}?limit=6&q=${encodeURIComponent(q)}`);
-    return (data.features ?? []).map((f) => {
-      const p = f.properties ?? {};
-      const name = [p.name, p.street, p.city, p.state, p.country].filter((v, i, all) => v && all.indexOf(v) === i).join(', ');
-      return { name: name || q, lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
-    });
-  } catch (error) {
-    errors.push(`Photon: ${error.message}`);
-  }
-  if (errors.length === 2) throw new Error(errors.join('; '));
+  if (errors.length === services.length) throw new Error(errors.join('; '));
   return [];
 }
 
@@ -12713,6 +13024,700 @@ function pxToLat(y, z) {
 
 function metersPerPixel(lat, z) {
   return (156543.03392 * Math.cos((lat * Math.PI) / 180)) / 2 ** z;
+}
+
+// ----- preview map: free vector tiles painted in the game's own colours -----
+
+// Just enough protobuf to read Mapbox Vector Tiles.
+function createPbf(buf) {
+  let pos = 0;
+  const pbf = {
+    get pos() {
+      return pos;
+    },
+    end: buf.length,
+    varint() {
+      let value = 0;
+      let shift = 1;
+      let b;
+      do {
+        b = buf[pos++];
+        value += (b & 0x7f) * shift;
+        shift *= 128;
+      } while (b >= 0x80);
+      return value;
+    },
+    svarint() {
+      const v = pbf.varint();
+      return v % 2 === 1 ? (v + 1) / -2 : v / 2;
+    },
+    bytes() {
+      const len = pbf.varint();
+      const start = pos;
+      pos += len;
+      return buf.subarray(start, pos);
+    },
+    string() {
+      return PBF_TEXT.decode(pbf.bytes());
+    },
+    float() {
+      const v = new DataView(buf.buffer, buf.byteOffset + pos, 4).getFloat32(0, true);
+      pos += 4;
+      return v;
+    },
+    double() {
+      const v = new DataView(buf.buffer, buf.byteOffset + pos, 8).getFloat64(0, true);
+      pos += 8;
+      return v;
+    },
+    skip(wire) {
+      if (wire === 0) pbf.varint();
+      else if (wire === 1) pos += 8;
+      else if (wire === 2) pos += pbf.varint();
+      else if (wire === 5) pos += 4;
+      else throw new Error(`bad protobuf wire type ${wire}`);
+    },
+  };
+  return pbf;
+}
+
+const PBF_TEXT = new TextDecoder();
+const MVT_LAYERS = new Set(['water', 'waterway', 'landcover', 'landuse', 'park', 'aeroway', 'building', 'transportation', 'transportation_name', 'place', 'poi']);
+
+function decodeMvt(buffer) {
+  const layers = {};
+  const tile = createPbf(new Uint8Array(buffer));
+  while (tile.pos < tile.end) {
+    const key = tile.varint();
+    if (key >> 3 !== 3) {
+      tile.skip(key & 7);
+      continue;
+    }
+    const layer = createPbf(tile.bytes());
+    let name = '';
+    let extent = 4096;
+    const keys = [];
+    const values = [];
+    const raw = [];
+    while (layer.pos < layer.end) {
+      const k = layer.varint();
+      const field = k >> 3;
+      if (field === 1) name = layer.string();
+      else if (field === 2) raw.push(layer.bytes());
+      else if (field === 3) keys.push(layer.string());
+      else if (field === 4) {
+        const v = createPbf(layer.bytes());
+        let value = null;
+        while (v.pos < v.end) {
+          const vk = v.varint();
+          const f = vk >> 3;
+          if (f === 1) value = v.string();
+          else if (f === 2) value = v.float();
+          else if (f === 3) value = v.double();
+          else if (f === 4 || f === 5) value = v.varint();
+          else if (f === 6) value = v.svarint();
+          else if (f === 7) value = v.varint() === 1;
+          else v.skip(vk & 7);
+        }
+        values.push(value);
+      } else if (field === 5) extent = layer.varint();
+      else layer.skip(k & 7);
+    }
+    if (!MVT_LAYERS.has(name)) continue;
+    const features = [];
+    for (const bytes of raw) {
+      const f = createPbf(bytes);
+      const props = {};
+      let type = 0;
+      let geometry = null;
+      while (f.pos < f.end) {
+        const fk = f.varint();
+        const field = fk >> 3;
+        if (field === 2) {
+          const tags = createPbf(f.bytes());
+          while (tags.pos < tags.end) {
+            const ki = tags.varint();
+            const vi = tags.varint();
+            props[keys[ki]] = values[vi];
+          }
+        } else if (field === 3) type = f.varint();
+        else if (field === 4) geometry = f.bytes();
+        else f.skip(fk & 7);
+      }
+      if (geometry) features.push({ type, props, rings: mvtGeometry(geometry) });
+    }
+    layers[name] = { extent, features };
+  }
+  return layers;
+}
+
+// Command stream to rings of [x, y] in tile units.
+function mvtGeometry(bytes) {
+  const g = createPbf(bytes);
+  const rings = [];
+  let ring = null;
+  let x = 0;
+  let y = 0;
+  while (g.pos < g.end) {
+    const cmd = g.varint();
+    const id = cmd & 7;
+    const count = cmd >> 3;
+    if (id === 7) {
+      if (ring && ring.length) ring.closed = true;
+      continue;
+    }
+    for (let i = 0; i < count; i++) {
+      x += g.svarint();
+      y += g.svarint();
+      if (id === 1) {
+        ring = [];
+        rings.push(ring);
+      }
+      ring.push(x, y);
+    }
+  }
+  return rings;
+}
+
+// Colours lifted from the game so the preview looks like the world you get.
+const PREVIEW_STYLE = {
+  land: '#a9c97c',
+  urban: '#d9d2bf',
+  industrial: '#cfc3cf',
+  commercial: '#e4cdb8',
+  park: '#7fb85a',
+  wood: '#4f8a41',
+  farm: '#c8d68c',
+  sand: '#e6d79a',
+  water: '#3f7fd6',
+  waterLine: '#2c62b4',
+  building: '#c49a74',
+  buildingEdge: '#6a4a33',
+  casing: '#202020',
+  road: '#f4f4f4',
+  minor: '#e0e0e0',
+  big: '#ffd400',
+  rail: '#404040',
+  label: '#000000',
+};
+
+const ROAD_STYLE = {
+  motorway: { w: 4.5, color: 'big', rank: 9 },
+  trunk: { w: 4, color: 'big', rank: 8 },
+  primary: { w: 3.4, color: 'road', rank: 7 },
+  secondary: { w: 3, color: 'road', rank: 6 },
+  tertiary: { w: 2.6, color: 'road', rank: 5 },
+  minor: { w: 2, color: 'minor', rank: 4 },
+  service: { w: 1.2, color: 'minor', rank: 3 },
+  track: { w: 0.8, color: 'minor', rank: 1 },
+};
+
+function createPreviewTiles() {
+  let template = null;
+  let failed = false;
+  const cache = new Map();
+
+  async function tileTemplate() {
+    if (!template) {
+      template = fetchJson(OSM.vectorTiles).then((tj) => {
+        const url = tj.tiles?.[0];
+        if (!url) throw new Error('no tile address in TileJSON');
+        return url;
+      });
+      template.catch(() => {
+        failed = true;
+      });
+    }
+    return template;
+  }
+
+  // Decoded data for one tile, shared by every zoom that draws from it.
+  function load(z, x, y) {
+    const key = `${z}/${x}/${y}`;
+    let entry = cache.get(key);
+    if (!entry) {
+      entry = tileTemplate()
+        .then((url) => fetch(url.replace('{z}', z).replace('{x}', x).replace('{y}', y)))
+        .then((response) => {
+          if (response.status === 204 || response.status === 404) return new ArrayBuffer(0);
+          if (!response.ok) throw new Error(`tiles said ${response.status}`);
+          return response.arrayBuffer();
+        })
+        .then(decodeMvt);
+      entry.catch(() => cache.delete(key));
+      cache.set(key, entry);
+      if (cache.size > 400) cache.delete(cache.keys().next().value);
+    }
+    return entry;
+  }
+
+  function path(ctx, rings, s, ox, oy, close) {
+    ctx.beginPath();
+    for (const ring of rings) {
+      for (let i = 0; i < ring.length; i += 2) {
+        const px = ring[i] * s - ox;
+        const py = ring[i + 1] * s - oy;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      if (close) ctx.closePath();
+    }
+  }
+
+  function areaColor(layer, p) {
+    const c = p.class;
+    if (layer === 'water') return PREVIEW_STYLE.water;
+    if (layer === 'park') return PREVIEW_STYLE.park;
+    if (layer === 'aeroway') return PREVIEW_STYLE.industrial;
+    if (layer === 'landcover') {
+      if (c === 'wood' || c === 'forest') return PREVIEW_STYLE.wood;
+      if (c === 'grass' || c === 'wetland') return PREVIEW_STYLE.park;
+      if (c === 'farmland') return PREVIEW_STYLE.farm;
+      if (c === 'sand' || c === 'rock') return PREVIEW_STYLE.sand;
+      return null;
+    }
+    if (c === 'residential' || c === 'suburb' || c === 'neighbourhood') return PREVIEW_STYLE.urban;
+    if (c === 'industrial' || c === 'railway' || c === 'garages') return PREVIEW_STYLE.industrial;
+    if (c === 'commercial' || c === 'retail') return PREVIEW_STYLE.commercial;
+    if (c === 'cemetery' || c === 'pitch' || c === 'playground' || c === 'stadium') return PREVIEW_STYLE.park;
+    if (c === 'school' || c === 'university' || c === 'college' || c === 'hospital') return PREVIEW_STYLE.commercial;
+    return null;
+  }
+
+  // Paints tile (z, x, y) onto a 256px canvas; past zoom 14 it zooms into
+  // the matching part of a zoom-14 tile.
+  function draw(canvas, z, x, y) {
+    const dz = Math.max(0, z - OSM.vectorMaxZoom);
+    const tz = z - dz;
+    const tx = x >> dz;
+    const ty = y >> dz;
+    return load(tz, tx, ty).then((layers) => {
+      const ctx = canvas.getContext('2d');
+      const span = 1 << dz;
+      const size = 256 * span;
+      const ox = (x - tx * span) * 256;
+      const oy = (y - ty * span) * 256;
+      ctx.fillStyle = PREVIEW_STYLE.land;
+      ctx.fillRect(0, 0, 256, 256);
+      const scaleOf = (layer) => size / (layers[layer]?.extent ?? 4096);
+      const zoomWidth = 2 ** (z - 15);
+
+      for (const name of ['landcover', 'landuse', 'park', 'aeroway', 'water']) {
+        const layer = layers[name];
+        if (!layer) continue;
+        const s = scaleOf(name);
+        for (const f of layer.features) {
+          if (f.type !== 3) continue;
+          const color = areaColor(name, f.props);
+          if (!color) continue;
+          ctx.fillStyle = color;
+          path(ctx, f.rings, s, ox, oy, true);
+          ctx.fill('evenodd');
+        }
+      }
+      if (layers.waterway) {
+        const s = scaleOf('waterway');
+        ctx.strokeStyle = PREVIEW_STYLE.waterLine;
+        ctx.lineCap = 'round';
+        for (const f of layers.waterway.features) {
+          ctx.lineWidth = Math.max(1, (f.props.class === 'river' ? 6 : 2) * zoomWidth);
+          path(ctx, f.rings, s, ox, oy, false);
+          ctx.stroke();
+        }
+      }
+      if (layers.building && z >= 14) {
+        const s = scaleOf('building');
+        ctx.fillStyle = PREVIEW_STYLE.building;
+        ctx.strokeStyle = PREVIEW_STYLE.buildingEdge;
+        ctx.lineWidth = 1;
+        for (const f of layers.building.features) {
+          path(ctx, f.rings, s, ox, oy, true);
+          ctx.fill('evenodd');
+          if (z >= 16) ctx.stroke();
+        }
+      }
+      if (layers.transportation) {
+        const s = scaleOf('transportation');
+        const roads = [];
+        const rails = [];
+        for (const f of layers.transportation.features) {
+          if (f.type !== 2) continue;
+          const c = f.props.class;
+          if (c === 'rail' || c === 'transit') rails.push(f);
+          else if (ROAD_STYLE[c] && f.props.brunnel !== 'tunnel') roads.push(f);
+        }
+        roads.sort((a, b) => ROAD_STYLE[a.props.class].rank - ROAD_STYLE[b.props.class].rank);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        const widthOf = (f) => Math.max(z >= 15 ? 1.5 : 0.8, ROAD_STYLE[f.props.class].w * 2 * zoomWidth);
+        // Black outlines first, like Paint's line tool with a border.
+        ctx.strokeStyle = PREVIEW_STYLE.casing;
+        for (const f of roads) {
+          if (z < 13 && ROAD_STYLE[f.props.class].rank < 5) continue;
+          ctx.lineWidth = widthOf(f) + 2;
+          path(ctx, f.rings, s, ox, oy, false);
+          ctx.stroke();
+        }
+        for (const f of roads) {
+          if (z < 13 && ROAD_STYLE[f.props.class].rank < 5) continue;
+          ctx.strokeStyle = PREVIEW_STYLE[ROAD_STYLE[f.props.class].color];
+          ctx.lineWidth = widthOf(f);
+          path(ctx, f.rings, s, ox, oy, false);
+          ctx.stroke();
+        }
+        ctx.strokeStyle = PREVIEW_STYLE.rail;
+        ctx.lineWidth = Math.max(1, 2 * zoomWidth);
+        ctx.setLineDash([4, 3]);
+        for (const f of rails) {
+          path(ctx, f.rings, s, ox, oy, false);
+          ctx.stroke();
+        }
+        ctx.setLineDash([]);
+      }
+      if (layers.place && z <= 15) {
+        const s = scaleOf('place');
+        ctx.font = 'bold 11px "MS Sans Serif", Tahoma, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        for (const f of layers.place.features) {
+          const p = f.props;
+          const name = p['name:latin'] ?? p.name;
+          if (!name || f.type !== 1) continue;
+          const big = p.class === 'city' || p.class === 'town';
+          if (!big && !(z >= 13 && (p.class === 'village' || p.class === 'suburb'))) continue;
+          const px = f.rings[0][0] * s - ox;
+          const py = f.rings[0][1] * s - oy;
+          if (px < -40 || px > 296 || py < -10 || py > 266) continue;
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = '#ffffff';
+          ctx.strokeText(name, px, py);
+          ctx.fillStyle = PREVIEW_STYLE.label;
+          ctx.fillText(name, px, py);
+        }
+      }
+    });
+  }
+
+  // Rough contents of a square (for the "about 1,200 buildings" readout),
+  // counted from the zoom-14 tiles under it.
+  async function survey(sel) {
+    const z = OSM.vectorMaxZoom;
+    const b = selectionBounds(sel);
+    const n = 2 ** z;
+    const x0 = Math.floor(lonToPx(b.west, z) / 256);
+    const x1 = Math.floor(lonToPx(b.east, z) / 256);
+    const y0 = Math.floor(latToPx(b.north, z) / 256);
+    const y1 = Math.floor(latToPx(b.south, z) / 256);
+    if ((x1 - x0 + 1) * (y1 - y0 + 1) > 9) return null;
+    let buildings = 0;
+    let roadM = 0;
+    let railM = 0;
+    let water = false;
+    for (let ty = y0; ty <= y1; ty++) {
+      for (let tx = x0; tx <= x1; tx++) {
+        const layers = await load(z, ((tx % n) + n) % n, ty);
+        const toWorld = (layer, gx, gy) => {
+          const e = layers[layer]?.extent ?? 4096;
+          const px = (tx + gx / e) * 256;
+          const py = (ty + gy / e) * 256;
+          return { lon: pxToLon(px, z), lat: pxToLat(py, z) };
+        };
+        const inside = (p) => p.lat >= b.south && p.lat <= b.north && p.lon >= b.west && p.lon <= b.east;
+        for (const f of layers.building?.features ?? []) {
+          if (inside(toWorld('building', f.rings[0][0], f.rings[0][1]))) buildings++;
+        }
+        for (const f of layers.water?.features ?? []) {
+          if (!water && f.rings.some((r) => inside(toWorld('water', r[0], r[1])))) water = true;
+        }
+        const mx = metersPerDegLon(sel.lat);
+        const local = (p) => ({ x: (p.lon - sel.lon) * mx, z: -(p.lat - sel.lat) * M_PER_DEG_LAT });
+        for (const f of layers.transportation?.features ?? []) {
+          if (f.type !== 2) continue;
+          const rail = f.props.class === 'rail' || f.props.class === 'transit';
+          if (!rail && !ROAD_STYLE[f.props.class]) continue;
+          for (const ring of f.rings) {
+            for (let i = 2; i < ring.length; i += 2) {
+              const a = local(toWorld('transportation', ring[i - 2], ring[i - 1]));
+              const c = local(toWorld('transportation', ring[i], ring[i + 1]));
+              const clip = clipToSquare(a, c, sel.size / 2);
+              if (!clip) continue;
+              const d = Math.hypot(c.x - a.x, c.z - a.z) * (clip[1] - clip[0]);
+              if (rail) railM += d;
+              else roadM += d;
+            }
+          }
+        }
+      }
+    }
+    return { buildings, roadKm: roadM / 1000, railKm: railM / 1000, water };
+  }
+
+  return {
+    draw,
+    survey,
+    load,
+    tileTemplate,
+    get failed() {
+      return failed;
+    },
+  };
+}
+
+let previewTiles = null;
+
+function mapTiles() {
+  previewTiles ??= createPreviewTiles();
+  return previewTiles;
+}
+
+// ----- map data from the vector tiles ---------------------------------------------
+// The same free tiles that draw the preview also carry roads, railways,
+// buildings, parks and water. They come from a fast CDN, so they are the
+// main source; Overpass only adds extra detail when asked (and when its
+// busy public servers answer). The tiles are turned into Overpass-style
+// elements so the usual converter builds the city from them.
+
+const TILE_ROAD = { motorway: 'motorway', trunk: 'trunk', primary: 'primary', secondary: 'secondary', tertiary: 'tertiary', minor: 'residential', service: 'service' };
+const TILE_RAIL = { rail: 'rail', light_rail: 'light_rail', subway: 'subway', narrow_gauge: 'narrow_gauge', monorail: 'monorail' };
+const TILE_AMENITY = /^(restaurant|cafe|bar|pub|fast_food|bank|pharmacy|cinema|hospital|school|college|university|police|fire_station|townhall|library|post_office|place_of_worship|theatre)$/;
+
+async function fetchTileOsm(sel, part, onStatus) {
+  const tiles = mapTiles();
+  const z = OSM.vectorMaxZoom;
+  const b = selectionBounds(sel, 1.06);
+  const n = 2 ** z;
+  const x0 = Math.floor(lonToPx(b.west, z) / 256);
+  const x1 = Math.floor(lonToPx(b.east, z) / 256);
+  const y0 = Math.floor(latToPx(b.north, z) / 256);
+  const y1 = Math.floor(latToPx(b.south, z) / 256);
+  const list = [];
+  for (let ty = y0; ty <= y1; ty++) for (let tx = x0; tx <= x1; tx++) list.push([((tx % n) + n) % n, ty]);
+  let done = 0;
+  onStatus?.(`Reading map tiles: 0/${list.length}`);
+  const loaded = await Promise.all(
+    list.map(([tx, ty]) =>
+      tiles.load(z, tx, ty).then((layers) => {
+        onStatus?.(`Reading map tiles: ${++done}/${list.length}`);
+        return { tx, ty, layers };
+      })
+    )
+  );
+
+  const elements = [];
+  let nextId = 1;
+  for (const { tx, ty, layers } of loaded) {
+    const global = (layer) => {
+      const e = layers[layer]?.extent ?? 4096;
+      return {
+        e,
+        ll: (gx, gy) => ({ lat: pxToLat((ty + gy / e) * 256, z), lon: pxToLon((tx + gx / e) * 256, z) }),
+        // Vertices at the same spot share an id, so roads join up.
+        id: (gx, gy) => `t${Math.round((tx + gx / e) * 8192)}:${Math.round((ty + gy / e) * 8192)}`,
+      };
+    };
+    const way = (g, tags, pts, closed) => {
+      const nodes = [];
+      const geometry = [];
+      for (let i = 0; i < pts.length; i += 2) {
+        nodes.push(g.id(pts[i], pts[i + 1]));
+        geometry.push(g.ll(pts[i], pts[i + 1]));
+      }
+      if (closed) {
+        nodes.push(nodes[0]);
+        geometry.push(geometry[0]);
+      }
+      elements.push({ type: 'way', id: nextId++, nodes, geometry, tags });
+    };
+    const node = (g, tags, gx, gy) => elements.push({ type: 'node', id: nextId++, ...g.ll(gx, gy), tags });
+    // Lines are cut at the tile edge so neighbouring tiles don't overlap.
+    const clipLine = (ring, e) => {
+      const pieces = [];
+      let cur = null;
+      for (let i = 2; i < ring.length; i += 2) {
+        const p = { x: ring[i - 2] - e / 2, z: ring[i - 1] - e / 2 };
+        const q = { x: ring[i] - e / 2, z: ring[i + 1] - e / 2 };
+        const c = clipToSquare(p, q, e / 2);
+        if (!c) {
+          cur = null;
+          continue;
+        }
+        const ax = p.x + (q.x - p.x) * c[0] + e / 2;
+        const az = p.z + (q.z - p.z) * c[0] + e / 2;
+        const bx = p.x + (q.x - p.x) * c[1] + e / 2;
+        const bz = p.z + (q.z - p.z) * c[1] + e / 2;
+        if (!cur || c[0] > 0) {
+          cur = [ax, az];
+          pieces.push(cur);
+        }
+        cur.push(bx, bz);
+        if (c[1] < 1) cur = null;
+      }
+      return pieces.filter((piece) => piece.length >= 4);
+    };
+    const exterior = (ring) => {
+      let a = 0;
+      for (let i = 0; i < ring.length; i += 2) {
+        const j = (i + 2) % ring.length;
+        a += ring[i] * ring[j + 1] - ring[j] * ring[i + 1];
+      }
+      return a > 0;
+    };
+
+    if (part === 'roads') {
+      const g = global('transportation');
+      // Street names live on their own lines; give each road the nearest.
+      const names = [];
+      const ng = global('transportation_name');
+      for (const f of layers.transportation_name?.features ?? []) {
+        const name = f.props['name:latin'] ?? f.props.name;
+        if (!name) continue;
+        for (const ring of f.rings) for (let i = 0; i < ring.length; i += 2) names.push({ x: (ring[i] / ng.e) * g.e, y: (ring[i + 1] / ng.e) * g.e, name });
+      }
+      const nameNear = (x, y) => {
+        let best = null;
+        let bestD = (g.e / 4096) * 14;
+        for (const c of names) {
+          const d = Math.abs(c.x - x) + Math.abs(c.y - y);
+          if (d < bestD) {
+            bestD = d;
+            best = c.name;
+          }
+        }
+        return best;
+      };
+      for (const f of layers.transportation?.features ?? []) {
+        if (f.type !== 2) continue;
+        const p = f.props;
+        const tags = {};
+        if (p.class === 'rail' || p.class === 'transit') {
+          const kind = TILE_RAIL[p.subclass] ?? (p.class === 'rail' ? 'rail' : null);
+          if (!kind) continue;
+          tags.railway = kind;
+          if (p.service) tags.service = p.service;
+        } else if (TILE_ROAD[p.class]) {
+          tags.highway = p.ramp === 1 && p.class !== 'minor' && p.class !== 'service' ? `${TILE_ROAD[p.class]}_link` : TILE_ROAD[p.class];
+          if (p.oneway === 1) tags.oneway = 'yes';
+          else if (p.oneway === -1) tags.oneway = '-1';
+          if (p.service === 'parking_aisle' || p.service === 'driveway') continue;
+        } else continue;
+        if (p.brunnel === 'bridge') tags.bridge = 'yes';
+        if (p.brunnel === 'tunnel') tags.tunnel = 'yes';
+        if (p.layer) tags.layer = String(p.layer);
+        for (const ring of f.rings) {
+          for (const piece of clipLine(ring, g.e)) {
+            const t = { ...tags };
+            if (t.highway) {
+              const mid = Math.floor(piece.length / 4) * 2;
+              const name = nameNear(piece[mid], piece[mid + 1]);
+              if (name) t.name = name;
+            }
+            way(g, t, piece, false);
+          }
+        }
+      }
+      const pg = global('poi');
+      for (const f of layers.poi?.features ?? []) {
+        const p = f.props;
+        if (f.type !== 1 || p.class !== 'railway' || !/^(station|halt)$/.test(p.subclass ?? '')) continue;
+        node(pg, { railway: 'station', name: p['name:latin'] ?? p.name, station: p.subclass === 'subway' ? 'subway' : undefined }, f.rings[0][0], f.rings[0][1]);
+      }
+    } else if (part === 'land') {
+      const polys = (layer, tagsOf) => {
+        const g = global(layer);
+        for (const f of layers[layer]?.features ?? []) {
+          if (f.type !== 3) continue;
+          const tags = tagsOf(f.props);
+          if (!tags) continue;
+          for (const ring of f.rings) if (ring.length >= 6 && exterior(ring)) way(g, tags, ring, true);
+        }
+      };
+      polys('water', () => ({ natural: 'water' }));
+      polys('park', () => ({ leisure: 'park' }));
+      polys('landcover', (p) => {
+        if (p.class === 'wood' || p.class === 'forest') return { natural: 'wood' };
+        if (p.class === 'grass') return { landuse: 'grass' };
+        if (p.class === 'farmland') return { landuse: 'farmland' };
+        if (p.class === 'sand') return { natural: 'sand' };
+        return null;
+      });
+      polys('landuse', (p) => {
+        if (p.class === 'cemetery') return { landuse: 'cemetery' };
+        if (p.class === 'pitch' || p.class === 'stadium') return { leisure: 'pitch' };
+        if (p.class === 'playground') return { leisure: 'playground' };
+        return null;
+      });
+      const wg = global('waterway');
+      for (const f of layers.waterway?.features ?? []) {
+        if (f.type !== 2 || f.props.brunnel === 'tunnel' || !WATERWAY_WIDTH[f.props.class]) continue;
+        for (const ring of f.rings) for (const piece of clipLine(ring, wg.e)) way(wg, { waterway: f.props.class }, piece, false);
+      }
+    } else if (part === 'buildings') {
+      const g = global('building');
+      for (const f of layers.building?.features ?? []) {
+        if (f.type !== 3 || f.props.hide_3d) continue;
+        for (const ring of f.rings) {
+          if (ring.length < 6 || !exterior(ring)) continue;
+          // A building near a tile edge is in both tiles; keep the copy
+          // whose middle is in this one.
+          let cx = 0;
+          let cy = 0;
+          for (let i = 0; i < ring.length; i += 2) {
+            cx += ring[i];
+            cy += ring[i + 1];
+          }
+          cx /= ring.length / 2;
+          cy /= ring.length / 2;
+          if (cx < 0 || cy < 0 || cx >= g.e || cy >= g.e) continue;
+          const tags = { building: 'yes' };
+          // 5 m is the tiles' stand-in for "unknown"; the game guesses better.
+          if (f.props.render_height > 5) tags.height = String(f.props.render_height - (f.props.render_min_height ?? 0));
+          way(g, tags, ring, true);
+        }
+      }
+      const pg = global('poi');
+      for (const f of layers.poi?.features ?? []) {
+        const p = f.props;
+        const name = p['name:latin'] ?? p.name;
+        if (f.type !== 1 || !name) continue;
+        const tags = { name };
+        const sub = p.subclass ?? p.class;
+        if (TILE_AMENITY.test(sub)) tags.amenity = sub;
+        else if (p.class === 'lodging') tags.tourism = 'hotel';
+        else if (p.class === 'museum' || p.class === 'attraction') tags.tourism = p.class;
+        else if (/shop|grocery|clothing|store|bakery|butcher|mall|alcohol|books|fashion/.test(`${p.class} ${sub}`)) tags.shop = sub;
+        else continue;
+        node(pg, tags, f.rings[0][0], f.rings[0][1]);
+      }
+    }
+  }
+
+  // Towns beyond the edge name the roads out of town: they come from a
+  // zoomed-out tile around the square.
+  if (part === 'roads') {
+    const zt = 9;
+    const nt = 2 ** zt;
+    const cx = Math.floor(lonToPx(sel.lon, zt) / 256);
+    const cy = Math.floor(latToPx(sel.lat, zt) / 256);
+    const around = [];
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) around.push([((cx + dx) % nt + nt) % nt, cy + dy]);
+    const results = await Promise.allSettled(around.map(([x, y]) => tiles.load(zt, x, y).then((layers) => ({ x, y, layers }))));
+    for (const r of results) {
+      if (r.status !== 'fulfilled') continue;
+      const { x, y, layers } = r.value;
+      const e = layers.place?.extent ?? 4096;
+      for (const f of layers.place?.features ?? []) {
+        const p = f.props;
+        if (f.type !== 1 || (p.class !== 'city' && p.class !== 'town')) continue;
+        const name = p['name:latin'] ?? p.name;
+        if (!name) continue;
+        const gx = f.rings[0][0];
+        const gy = f.rings[0][1];
+        if (gx < 0 || gy < 0 || gx >= e || gy >= e) continue;
+        elements.push({ type: 'node', id: nextId++, lat: pxToLat((y + gy / e) * 256, zt), lon: pxToLon((x + gx / e) * 256, zt), tags: { place: p.class, name } });
+      }
+    }
+  }
+  return { elements };
 }
 
 function openOsmWindow({ onImport, initial = null }) {
@@ -12749,7 +13754,9 @@ function openOsmWindow({ onImport, initial = null }) {
         <label class="win-check"><input type="checkbox" id="osm-rails" checked><span>Railways and metro</span></label>
         <label class="win-check"><input type="checkbox" id="osm-nature" checked><span>Parks, water and trees</span></label>
         <label class="win-check"><input type="checkbox" id="osm-grow"><span>Keep growing</span></label>
+        <label class="win-check" title="Shop names, single trees and more, from the public Overpass servers. Slower, and they are often busy."><input type="checkbox" id="osm-detail"><span>Extra detail (Overpass, slower)</span></label>
       </div>
+      <div class="osm-readout" id="osm-readout"></div>
       <div class="osm-status bevel-in" id="osm-status">Drag the square over the area you want. Drag its corners to resize it.</div>
       <div class="dlg-buttons">
         <button type="button" class="win-btn" data-osm="file">Open File...</button>
@@ -12769,9 +13776,95 @@ function openOsmWindow({ onImport, initial = null }) {
   const results = el.querySelector('#osm-results');
   const tiles = new Map();
 
+  const credit = el.querySelector('.osm-credit');
+  const readout = el.querySelector('#osm-readout');
+  mapTiles();
+  const served = /^https?:$/.test(location.protocol);
+
   const setStatus = (text) => {
     status.textContent = text;
   };
+
+  // Sketchbook squares with the coordinates, for when no map can be had.
+  function drawGrid(canvas, z, x, y) {
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#f4f1e6';
+    ctx.fillRect(0, 0, 256, 256);
+    ctx.strokeStyle = '#b8c4d8';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 256; i += 32) {
+      ctx.beginPath();
+      ctx.moveTo(i + 0.5, 0);
+      ctx.lineTo(i + 0.5, 256);
+      ctx.moveTo(0, i + 0.5);
+      ctx.lineTo(256, i + 0.5);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#7a8498';
+    ctx.font = '10px "MS Sans Serif", Tahoma, sans-serif';
+    ctx.fillText(`${pxToLat(y * 256, z).toFixed(3)}, ${pxToLon(x * 256, z).toFixed(3)}`, 4, 12);
+  }
+
+  // Vector tiles first; the OSM raster tiles over http(s); then the grid.
+  function makeTile(z, x, y) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    canvas.className = 'osm-tile';
+    previewTiles.draw(canvas, z, x, y).catch((error) => {
+      if (!canvas.isConnected && !tiles.has(`${z}/${x}/${y}`)) return;
+      console.warn('Road Paint preview tile:', error.message);
+      if (served) {
+        const img = document.createElement('img');
+        img.alt = '';
+        img.draggable = false;
+        img.className = 'osm-tile';
+        img.style.left = canvas.style.left;
+        img.style.top = canvas.style.top;
+        img.onerror = () => {
+          drawGrid(canvas, z, x, y);
+          img.replaceWith(canvas);
+          tiles.set(`${z}/${x}/${y}`, canvas);
+        };
+        img.src = OSM.tilesFallback.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+        canvas.replaceWith(img);
+        tiles.set(`${z}/${x}/${y}`, img);
+        credit.textContent = OSM.rasterAttribution;
+      } else {
+        drawGrid(canvas, z, x, y);
+        if (previewTiles.failed) credit.textContent = 'No preview map (offline?) - search and import still work';
+      }
+    });
+    return canvas;
+  }
+
+  // "About 1,240 buildings, 18 km of road" for the current square.
+  let surveyTimer = 0;
+  let surveyId = 0;
+  function surveyLater() {
+    clearTimeout(surveyTimer);
+    const id = ++surveyId;
+    surveyTimer = setTimeout(async () => {
+      readout.textContent = 'Looking inside the square...';
+      let info = null;
+      try {
+        info = await previewTiles.survey({ ...sel });
+      } catch {
+        info = null;
+      }
+      if (id !== surveyId || !el.isConnected) return;
+      if (!info) {
+        readout.textContent = '';
+        return;
+      }
+      const n = Math.round(info.buildings / 10) * 10;
+      const size = n > 6000 ? 'Huge' : n > 2500 ? 'Big' : n > 600 ? 'Medium' : 'Small';
+      const parts = [`About ${n.toLocaleString()} buildings`, `${info.roadKm.toFixed(0)} km of road`];
+      if (info.railKm > 0.3) parts.push(`${info.railKm.toFixed(1)} km of track`);
+      if (info.water) parts.push('water');
+      readout.textContent = `${size} city: ${parts.join(', ')}`;
+    }, 450);
+  }
 
   function size() {
     return { w: map.clientWidth, h: map.clientHeight };
@@ -12794,20 +13887,7 @@ function openOsmWindow({ onImport, initial = null }) {
         keep.add(key);
         let img = tiles.get(key);
         if (!img) {
-          img = document.createElement('img');
-          img.alt = '';
-          img.draggable = false;
-          img.onerror = () => {
-            if (!img.dataset.fallback) {
-              img.dataset.fallback = '1';
-              img.src = OSM.tilesFallback.replace('{z}', z).replace('{x}', wx).replace('{y}', ty);
-            } else img.style.visibility = 'hidden';
-          };
-          img.src = OSM.tiles
-            .replace('{s}', 'abcd'[(wx + ty) % 4])
-            .replace('{z}', z)
-            .replace('{x}', wx)
-            .replace('{y}', ty);
+          img = makeTile(z, wx, ty);
           tiles.set(key, img);
           tilesEl.appendChild(img);
         }
@@ -12832,7 +13912,13 @@ function openOsmWindow({ onImport, initial = null }) {
     shade.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${sx - side / 2}px ${sy - side / 2}px, ${sx - side / 2}px ${sy + side / 2}px, ${sx + side / 2}px ${sy + side / 2}px, ${sx + side / 2}px ${sy - side / 2}px, ${sx - side / 2}px ${sy - side / 2}px)`;
     const km = (sel.size / 1000).toFixed(2);
     label.textContent = `${km} x ${km} km`;
+    const selKey = `${sel.lat.toFixed(5)},${sel.lon.toFixed(5)},${Math.round(sel.size)}`;
+    if (selKey !== lastSurvey) {
+      lastSurvey = selKey;
+      surveyLater();
+    }
   }
+  let lastSurvey = '';
 
   function zoomBy(delta, ax, ay) {
     const z0 = view.zoom;
@@ -12972,6 +14058,7 @@ function openOsmWindow({ onImport, initial = null }) {
       rails: el.querySelector('#osm-rails').checked,
       nature: el.querySelector('#osm-nature').checked,
       grow: el.querySelector('#osm-grow').checked,
+      detail: el.querySelector('#osm-detail').checked,
     };
   }
 
@@ -12981,45 +14068,13 @@ function openOsmWindow({ onImport, initial = null }) {
     el.classList.toggle('osm-busy', value);
   }
 
-  async function finish(data, area, placeName) {
-    // Cancelled while downloading.
-    if (!el.isConnected) return;
-    setStatus('Building the city...');
-    await new Promise((resolve) => setTimeout(resolve, 30));
-    const opts = options();
-    const result = convertOsm(data, area, opts);
-    result.name = placeName;
-    result.grow = opts.grow;
-    const count = result.roads.segs.length + result.buildings.length;
-    if (count === 0) {
-      setStatus('No roads or buildings in that square. Try somewhere else.');
-      setBusy(false);
-      return;
-    }
-    setStatus(`Placing ${result.roads.segs.length} roads, ${result.rails.segs.length} tracks and ${result.buildings.length} buildings...`);
-    await new Promise((resolve) => setTimeout(resolve, 30));
-    try {
-      onImport(result);
-      dialog.close();
-    } catch (error) {
-      console.error(error);
-      setStatus(`Import failed: ${error.message}`);
-      setBusy(false);
-    }
-  }
-
-  async function runImport() {
+  // The game takes over from here: the window closes and the world builds
+  // itself while the map downloads.
+  function runImport() {
     if (busy) return;
-    setBusy(true);
-    try {
-      const area = { ...sel };
-      const data = await fetchOsm(area, setStatus);
-      const q = el.querySelector('#osm-q').value.trim();
-      await finish(data, area, q ? q.split(',')[0] : null);
-    } catch (error) {
-      setStatus(`Download failed (${error.message}). You can also load a .osm file saved from openstreetmap.org.`);
-      setBusy(false);
-    }
+    const q = el.querySelector('#osm-q').value.trim();
+    onImport({ sel: { ...sel }, opts: options(), name: q ? q.split(',')[0] : null });
+    dialog.close();
   }
 
   const fileInput = el.querySelector('#osm-file');
@@ -13040,7 +14095,8 @@ function openOsmWindow({ onImport, initial = null }) {
       }
       area = area ?? dataSelection(data);
       if (!area) throw new Error('No map data in that file');
-      await finish(data, area, file.name.replace(/\.[^.]+$/, ''));
+      onImport({ sel: area, opts: options(), name: file.name.replace(/\.[^.]+$/, ''), data });
+      dialog.close();
     } catch (error) {
       setStatus(`Could not read that file: ${error.message}`);
       setBusy(false);
@@ -13082,6 +14138,7 @@ const DEFAULT_SETTINGS = {
   stretch: true,
   sound: true,
   dayNight: true,
+  autoQuality: true,
 };
 
 function loadSettings() {
@@ -13159,14 +14216,29 @@ function createSunShadows(renderer, scene) {
   const matrix = new THREE.Matrix4();
 
   RETRO_UNIFORMS.uShadowMap.value = depthTexture;
+  let lastKey = '';
+  let age = 0;
 
   return {
-    render(view, time) {
-      const half = clamp(view.dist * 1.25, 70, 700);
+    // The shadow map only holds buildings, roads and scenery (cars use
+    // blobs), so it is redrawn when the view or the sun moves, and
+    // otherwise only a few times a second for things that grow.
+    render(view, time, force = false) {
+      // Whole-number steps so a still camera gives the same key every frame.
+      const half = clamp(Math.round((view.dist * 1.25) / 10) * 10, 70, 700);
       const texel = (half * 2) / size;
-      const tx = Math.round(view.x / texel) * texel;
-      const tz = Math.round(view.z / texel) * texel;
+      // Coarse steps: panning a little reuses the map (its edge fades out).
+      const step = texel * 16;
+      const tx = Math.round(view.x / step) * step;
+      const tz = Math.round(view.z / step) * step;
       const sun = RETRO_UNIFORMS.uSunDir.value;
+      // Redraw the hatching about six times a second.
+      RETRO_UNIFORMS.uBoil.value = Math.floor(time * 6) % 64;
+      const key = `${half},${tx},${tz},${sun.x.toFixed(3)},${sun.y.toFixed(3)},${sun.z.toFixed(3)}`;
+      age++;
+      if (!force && key === lastKey && age < 6) return;
+      lastKey = key;
+      age = 0;
       camera.left = -half;
       camera.right = half;
       camera.top = half;
@@ -13186,8 +14258,6 @@ function createSunShadows(renderer, scene) {
 
       matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
       RETRO_UNIFORMS.uShadowMatrix.value.copy(matrix);
-      // Redraw the hatching about six times a second.
-      RETRO_UNIFORMS.uBoil.value = Math.floor(time * 6) % 64;
     },
   };
 }
@@ -13454,7 +14524,16 @@ function start() {
 
   function followCar(car, chase = rig.chase) {
     followed = car;
-    rig.setFollow(() => (traffic.cars.has(car) ? car : null), { chase });
+    // Follow where the car is drawn, not where the last tick left it.
+    const view = { x: 0, y: 0, z: 0, yaw: 0 };
+    rig.setFollow(() => {
+      if (!traffic.cars.has(car)) return null;
+      view.x = car.rx ?? car.x;
+      view.y = car.ry ?? car.y;
+      view.z = car.rz ?? car.z;
+      view.yaw = car.ryaw ?? car.yaw;
+      return view;
+    }, { chase });
     vehicleCard.show(car, city.describeTrip(car.trip), rig.chase);
     statusBar.setHelp('Following a car. Tab: next car, V: chase cam, Esc or drag the map to stop.');
   }
@@ -13520,10 +14599,10 @@ function start() {
     sun: RETRO_UNIFORMS.uSunColor.value.clone(),
     sky: RETRO_UNIFORMS.uSkyAmb.value.clone(),
     ground: RETRO_UNIFORMS.uGroundAmb.value.clone(),
-    moon: new THREE.Color(0.16, 0.18, 0.3),
-    nightSky: new THREE.Color(0.13, 0.15, 0.26),
-    nightGround: new THREE.Color(0.06, 0.06, 0.09),
-    dusk: new THREE.Color(0.95, 0.52, 0.3),
+    moon: new THREE.Color(0.06, 0.08, 0.18),
+    nightSky: new THREE.Color(0.05, 0.06, 0.13),
+    nightGround: new THREE.Color(0.02, 0.02, 0.035),
+    dusk: new THREE.Color(1.0, 0.56, 0.3),
     nightTop: new THREE.Color(0x0a0e2a),
     nightHorizon: new THREE.Color(0x1c2448),
     duskHorizon: new THREE.Color(0xf09060),
@@ -13627,6 +14706,7 @@ function start() {
     switch (action) {
       case 'new':
       case 'clear':
+        importShow.skipAll();
         tools.cancel();
         traffic.clear();
         network.clear();
@@ -13639,7 +14719,7 @@ function start() {
         break;
       case 'osm':
         tools.cancel();
-        openOsmWindow({ onImport: importMap, initial: mapLayer.data?.sel ?? null });
+        openOsmWindow({ onImport: (job) => importShow.begin(job), initial: mapLayer.data?.sel ?? null });
         break;
       case 'open': {
         const saved = safeStorageGet(STORAGE.city);
@@ -13775,6 +14855,38 @@ function start() {
   // ----- display settings ---------------------------------------------------
 
   const dockedQuery = window.matchMedia('(max-width: 640px) and (orientation: portrait)');
+  // Steps below the chosen quality that auto quality has taken off.
+  let autoDrop = 0;
+  let slowFor = 0;
+  let fastFor = 0;
+
+  // Drops the resolution a step when the frame rate sags, and climbs back
+  // when there is room again. Never goes above what you picked.
+  function autoQuality(dt) {
+    if (!settings.autoQuality || importShow.building || document.hidden) {
+      slowFor = 0;
+      fastFor = 0;
+      if (!settings.autoQuality && autoDrop) {
+        autoDrop = 0;
+        layout();
+      }
+      return;
+    }
+    if (fps < 38) slowFor += dt;
+    else slowFor = 0;
+    if (fps > 57) fastFor += dt;
+    else fastFor = 0;
+    if (slowFor > 3 && settings.res - autoDrop > 0) {
+      autoDrop++;
+      slowFor = 0;
+      fastFor = -10;
+      layout();
+    } else if (fastFor > 12 && autoDrop > 0) {
+      autoDrop--;
+      fastFor = 0;
+      layout();
+    }
+  }
 
   function layout() {
     const docked = dockedQuery.matches;
@@ -13782,7 +14894,7 @@ function start() {
     let availH = Math.max(1, window.innerHeight - statusBar.el.offsetHeight);
     // Phones keep the game above the docked Paint window and fill the space.
     if (docked) availH = Math.max(120, paintWindow.el.getBoundingClientRect().top - 4);
-    const res = RENDER_SIZES[settings.res] ?? RENDER_SIZES[2];
+    const res = RENDER_SIZES[Math.max(0, settings.res - autoDrop)] ?? RENDER_SIZES[2];
     const h = res.h;
     const w = settings.stretch || docked ? Math.max(1, Math.round((h * availW) / availH)) : Math.round((h * 4) / 3);
 
@@ -13820,7 +14932,8 @@ function start() {
     if (!SHADOW_MODES.some((mode) => mode.key === settings.shadows)) settings.shadows = 'hand';
     RETRO_UNIFORMS.uShadowOn.value = settings.shadows === 'hand' ? 1 : 0;
     scenery.setBlobsVisible(settings.shadows === 'blob');
-    traffic.setBlobsVisible(settings.shadows === 'blob');
+    // Cars are not in the pencil shadow map, so they keep a blob either way.
+    traffic.setBlobsVisible(settings.shadows !== 'off');
     cityPanel.el.classList.toggle('city-hidden', !settings.cityWindow);
     sound.enabled = settings.sound;
     layout();
@@ -13889,13 +15002,17 @@ function start() {
   statusBar.setHelp(tools.current.hint);
 
   // A fresh city from OpenStreetMap data (see convertOsm).
-  function importMap(result) {
+  // ----- map import -------------------------------------------------------------
+
+  // Clears the world and lays down the roads, rails and outside towns.
+  function placeRoads(result) {
     tools.cancel();
     stopFollowing();
     traffic.clear();
     network.clear();
     rails.clear();
     mapLayer.clear();
+    trains.reset([]);
     scenery.restore();
     scenery.clearSquare(result.sel.size / 2 + 10);
     const graph = (g) => ({
@@ -13906,28 +15023,559 @@ function start() {
     network.importGraph({ ...graph(result.roads), islands: result.islands }, { clearScenery: false });
     rails.importGraph(graph(result.rails), { clearScenery: false });
     city.importMap({
-      buildings: result.buildings,
+      buildings: [],
       towns: result.towns.length ? result.towns : OUTSIDE_TOWNS,
       spawning: !!result.grow,
       name: result.name,
     });
-    mapLayer.build(
-      { sel: result.sel, areas: result.areas, trees: result.trees, stations: result.stations },
-      network
-    );
-    trains.reset(result.stations);
+    mapLayer.build({ sel: result.sel, areas: [], trees: [], stations: result.stations }, network);
+  }
+
+  function placeLand(result) {
+    mapLayer.extend({ areas: result.areas, trees: result.trees });
+  }
+
+  function placeBuildings(result) {
+    city.addImported(result.buildings);
+  }
+
+  function placeFinish(stations, name, counts) {
+    trains.reset(stations);
     history.stack = [];
     history.index = -1;
     commit();
     saveCity();
-    rig.reset();
+    statusBar.setHelp(
+      `Imported ${name ?? 'the map'}: ${counts.roads} roads, ${counts.buildings} buildings, ${counts.towns} roads out of town.`
+    );
+  }
+
+  // Instant import with no show (tests and scripts).
+  function importMap(result) {
+    importShow.skipAll();
+    placeRoads(result);
+    placeLand(result);
+    placeBuildings(result);
+    placeFinish(result.stations, result.name, { roads: result.roads.segs.length, buildings: result.buildings.length, towns: result.towns.length });
     rig.goal.x = 0;
     rig.goal.z = 0;
     rig.goal.dist = Math.min(CAMERA.maxDist, result.sel.size * 0.45);
     rig.goal.pitch = 0.75;
-    statusBar.setHelp(
-      `Imported ${result.name ?? 'the map'}: ${result.roads.segs.length} roads, ${result.buildings.length} buildings, ${result.towns.length} roads out of town.`
-    );
+  }
+
+  const importShow = createImportShow();
+
+  // The world builds itself in front of you: the old city is rubbed out,
+  // then the land is sketched, roads pencilled in, parks flooded with
+  // colour, buildings raised and trees planted, each layer growing out
+  // from the middle while the next part of the map downloads.
+  function createImportShow() {
+    const LAYERS = [
+      { key: 'ground', label: 'Sketch the land', group: 'ground', time: 1.4 },
+      { key: 'roads', label: 'Draw the roads', group: 'roads', time: 3.2 },
+      { key: 'rails', label: 'Lay the railways', group: 'rails', time: 1.8 },
+      { key: 'land', label: 'Fill in parks and water', group: 'land', time: 2.2 },
+      { key: 'buildings', label: 'Raise the buildings', group: 'buildings', time: 3.8 },
+      { key: 'props', label: 'Plant trees and signs', group: 'props', time: 1.8 },
+      { key: 'life', label: 'Bring it to life', group: null, time: 1.2 },
+    ];
+    const PART_LABEL = { roads: 'roads and railways', land: 'parks and water', buildings: 'buildings' };
+    const R_MAX = 5200;
+    const ERASE_TIME = 0.9;
+    const reveal = RETRO_UNIFORMS.uReveal.value;
+
+    let job = null;
+    let win = null;
+    let soundClock = 0;
+
+    function setAll(r) {
+      for (let i = 0; i < reveal.length; i++) reveal[i] = r;
+    }
+
+    function layer(key) {
+      return job?.layers.find((l) => l.key === key);
+    }
+
+    // Radius of a layer's front at progress p: crosses the city, then
+    // sweeps quickly out over the countryside.
+    function radiusAt(p) {
+      const rCity = job.sel.size * 0.75 + 30;
+      if (p < 0.85) return rCity * (1 - (1 - p / 0.85) ** 2);
+      const q = (p - 0.85) / 0.15;
+      return rCity + (R_MAX - rCity) * q * q;
+    }
+
+    function begin({ sel, opts, name, data = null }) {
+      if (job) finishNow();
+      job = {
+        sel,
+        opts,
+        name,
+        phase: 'download',
+        eraseT: 0,
+        cleared: null,
+        skip: false,
+        camera: { user: false, last: null, yaw: rig.goal.yaw },
+        counts: { roads: 0, rails: 0, buildings: 0, trees: 0, areas: 0, towns: 0, stations: 0 },
+        stations: [],
+        downloads: [],
+        status: '',
+        layers: LAYERS.map((l) => ({ ...l, state: 'wait', t: 0 })),
+        done: false,
+      };
+      let clearedResolve;
+      job.cleared = new Promise((resolve) => (clearedResolve = resolve));
+      job.clearedResolve = clearedResolve;
+      openWindow();
+      // Rise up for a bird's-eye view while the map downloads.
+      rig.goal.x = 0;
+      rig.goal.z = 0;
+      rig.goal.dist = clamp(sel.size * 1.1, 320, CAMERA.maxDist);
+      rig.goal.pitch = 1.05;
+      job.camera.last = { ...rig.goal };
+
+      const current = job;
+      if (data) runFile(current, data);
+      else runDownloads(current);
+    }
+
+    async function runFile(current, data) {
+      current.downloads = [{ part: 'file', state: 'done' }];
+      let result;
+      try {
+        result = convertOsm(data, current.sel, current.opts);
+      } catch (error) {
+        fail(current, `Could not read the map: ${error.message}`);
+        return;
+      }
+      result.name = current.name;
+      result.grow = current.opts.grow;
+      arriveRoads(current, result);
+      await current.cleared;
+      if (current !== job) return;
+      arriveLand(current, result);
+      arriveBuildings(current, result);
+    }
+
+    // Map tiles first (fast); Overpass when extra detail is wanted, or as a
+    // backup if the tiles can't be had. Whichever fails hands over quickly.
+    async function download(current, part) {
+      const entry = current.downloads.find((d) => d.part === part);
+      entry.state = 'busy';
+      entry.error = null;
+      refreshWindow();
+      const say = (text, progress) => {
+        if (current !== job) return;
+        entry.bytes = progress?.bytes ?? 0;
+        current.status = `Downloading ${PART_LABEL[part]}: ${text}`;
+        refreshWindow();
+      };
+      const sources = current.opts.detail ? ['overpass', 'tiles'] : ['tiles', 'overpass'];
+      const errors = [];
+      for (const source of sources) {
+        try {
+          const data =
+            source === 'tiles'
+              ? await fetchTileOsm(current.sel, part, say)
+              : await fetchOsm(current.sel, say, part, { patience: current.opts.detail ? 30000 : 45000 });
+          if (current !== job) return null;
+          entry.state = 'done';
+          entry.source = source;
+          return data;
+        } catch (error) {
+          if (current !== job) return null;
+          console.error('Road Paint download:', part, source, error);
+          errors.push(`${source === 'tiles' ? 'map tiles' : 'Overpass'}: ${error.message}`);
+          if (source !== sources[sources.length - 1]) say(source === 'overpass' ? 'Overpass is busy, using the map tiles instead...' : 'Map tiles failed, trying Overpass...');
+        }
+      }
+      entry.state = 'failed';
+      entry.error = errors.join('; ');
+      refreshWindow();
+      return null;
+    }
+
+    async function runDownloads(current) {
+      const { opts, sel } = current;
+      current.downloads = [{ part: 'roads', state: 'wait' }];
+      if (opts.nature) current.downloads.push({ part: 'land', state: 'wait' });
+      if (opts.buildings) current.downloads.push({ part: 'buildings', state: 'wait' });
+      if (!opts.nature) layer('land').state = 'skip';
+      if (!opts.buildings) layer('buildings').state = 'skip';
+      refreshWindow();
+
+      const roadsData = await download(current, 'roads');
+      if (current !== job) return;
+      if (!roadsData) {
+        fail(current, `The map servers did not answer (${current.downloads[0].error}). Your city is untouched.`);
+        return;
+      }
+      const roads = convertOsm(roadsData, sel, { buildings: false, nature: false, rails: opts.rails });
+      roads.name = current.name;
+      roads.grow = opts.grow;
+      arriveRoads(current, roads);
+      for (const part of ['land', 'buildings']) {
+        if (!current.downloads.some((d) => d.part === part)) continue;
+        await fetchPart(current, part);
+        if (current !== job) return;
+      }
+    }
+
+    async function fetchPart(current, part) {
+      const data = await download(current, part);
+      if (current !== job) return;
+      await current.cleared;
+      if (current !== job) return;
+      if (!data) {
+        // Keep going without it; the window offers a retry.
+        const l = layer(part);
+        if (l.state === 'wait') l.state = 'failed';
+        refreshWindow();
+        return;
+      }
+      const { opts, sel } = current;
+      const result = convertOsm(data, sel, {
+        buildings: part === 'buildings',
+        nature: part === 'land',
+        rails: false,
+      });
+      if (part === 'land') arriveLand(current, result);
+      else arriveBuildings(current, result);
+    }
+
+    function arriveRoads(current, result) {
+      current.roads = result;
+      current.counts.roads = result.roads.segs.length;
+      current.counts.rails = result.rails.segs.length;
+      current.counts.towns = result.towns.length;
+      current.counts.stations = result.stations.filter((st) => !st.entrance).length;
+      current.stations = result.stations;
+      current.phase = 'erase';
+      current.eraseT = 0;
+      sound.bulldoze();
+      refreshWindow();
+    }
+
+    function arriveLand(current, result) {
+      placeLand(result);
+      current.counts.areas = result.areas.length;
+      current.counts.trees += result.trees.length;
+      layer('land').state = result.areas.length ? 'ready' : 'skip';
+      if (result.areas.length) reveal[REVEAL_GROUPS.land.index] = 0;
+      // Trees planted on a retry pop in with the land.
+      if (current.finishedOnce && result.trees.length) reveal[REVEAL_GROUPS.props.index] = REVEAL_ALL;
+      refreshWindow();
+    }
+
+    function arriveBuildings(current, result) {
+      placeBuildings(result);
+      current.counts.buildings = result.buildings.length;
+      layer('buildings').state = result.buildings.length ? 'ready' : 'skip';
+      if (result.buildings.length) reveal[REVEAL_GROUPS.buildings.index] = 0;
+      refreshWindow();
+    }
+
+    // The old city has been rubbed out: put the new roads in (still hidden).
+    function afterErase() {
+      setAll(0);
+      placeRoads(job.roads);
+      layer('ground').state = 'ready';
+      layer('roads').state = job.counts.roads ? 'ready' : 'skip';
+      layer('rails').state = job.counts.rails ? 'ready' : 'skip';
+      job.phase = 'build';
+      job.clearedResolve();
+    }
+
+    function fail(current, text) {
+      current.status = text;
+      current.failed = true;
+      sound.error();
+      refreshWindow();
+      if (current.phase === 'download') {
+        // Nothing changed in the world; put the camera back down.
+        rig.goal.dist = Math.min(rig.goal.dist, 420);
+        rig.goal.pitch = 0.75;
+      }
+    }
+
+    function retry() {
+      if (!job) return;
+      const current = job;
+      const failedRoads = current.downloads[0]?.part === 'roads' && current.downloads[0].state === 'failed';
+      current.failed = false;
+      if (failedRoads) {
+        current.status = '';
+        runDownloadsAgain(current);
+        return;
+      }
+      for (const d of current.downloads) {
+        if (d.state !== 'failed') continue;
+        const l = layer(d.part);
+        if (l.state === 'failed') l.state = 'wait';
+        if (current.done) {
+          // Bring the show back for the missing layer.
+          current.done = false;
+          for (const name of ['props', 'life']) layer(name).state = 'done';
+        }
+        fetchPart(current, d.part);
+      }
+      refreshWindow();
+    }
+
+    async function runDownloadsAgain(current) {
+      current.downloads = [];
+      runDownloads(current);
+    }
+
+    // Is this layer allowed to start? It waits for the one before it to be
+    // well under way, so the layers overlap a little.
+    function canStart(index) {
+      for (let i = index - 1; i >= 0; i--) {
+        const prev = job.layers[i];
+        if (prev.state === 'skip' || prev.state === 'done' || prev.state === 'failed') continue;
+        if (prev.state === 'play' && prev.t >= prev.time * 0.6 && i === index - 1) continue;
+        return false;
+      }
+      return true;
+    }
+
+    function update(dt) {
+      if (!job) return;
+      watchCamera(dt);
+      if (job.phase === 'erase') {
+        job.eraseT += dt;
+        const p = Math.min(1, job.eraseT / ERASE_TIME);
+        setAll(R_MAX * (1 - p) ** 2);
+        if (p >= 1 || job.skip) afterErase();
+        refreshWindow();
+        return;
+      }
+      if (job.phase !== 'build') return;
+
+      // Props wait for everything that brings props; life waits for all.
+      const props = layer('props');
+      if (props.state === 'wait' && ['land', 'buildings'].every((k) => layer(k).state !== 'wait')) props.state = 'ready';
+      const life = layer('life');
+      if (life.state === 'wait' && job.layers.slice(0, -1).every((l) => l.state === 'done' || l.state === 'skip' || l.state === 'failed')) life.state = 'ready';
+
+      job.layers.forEach((l, i) => {
+        if (l.state === 'ready' && (job.skip || canStart(i))) {
+          l.state = 'play';
+          l.t = 0;
+          startSound(l.key);
+        }
+        if (l.state === 'play') {
+          l.t += dt;
+          if (job.skip) l.t = l.time;
+          const p = Math.min(1, l.t / l.time);
+          if (l.group) reveal[REVEAL_GROUPS[l.group].index] = p >= 1 ? REVEAL_ALL : radiusAt(p);
+          if (p >= 1) l.state = 'done';
+        } else if (l.group && (l.state === 'done' || l.state === 'skip' || l.state === 'failed')) {
+          reveal[REVEAL_GROUPS[l.group].index] = REVEAL_ALL;
+        }
+      });
+      if (!job.done && job.layers.every((l) => l.state === 'done' || l.state === 'skip' || l.state === 'failed')) finish();
+      if (!job) return;
+      playSounds(dt);
+      refreshWindow();
+    }
+
+    function finish() {
+      if (!job || job.done) return;
+      job.done = true;
+      const c = job.counts;
+      if (!job.finishedOnce) {
+        job.finishedOnce = true;
+        placeFinish(job.stations, job.name, c);
+        sound.chime();
+        if (!job.camera.user) {
+          rig.goal.dist = Math.min(CAMERA.maxDist, job.sel.size * 0.45);
+          rig.goal.pitch = 0.75;
+        }
+        if (c.roads + c.buildings === 0) job.status = 'There were no roads or buildings in that square. Try somewhere else.';
+        else job.status = `Welcome to ${job.name ?? 'your new city'}!`;
+      } else {
+        // A layer that arrived on a retry.
+        commit();
+        saveCity();
+        job.status = 'All done.';
+      }
+      refreshWindow();
+      const finished = job;
+      setTimeout(() => {
+        if (job === finished && finished.done && !job.downloads.some((d) => d.state === 'failed')) {
+          closeWindow();
+          job = null;
+        }
+      }, 3500);
+    }
+
+    // Hands everything over at once (Skip, or a new import over this one).
+    function finishNow() {
+      if (!job) return;
+      job.skip = true;
+      for (let i = 0; i < 4 && !job.done; i++) update(0);
+      setAll(REVEAL_ALL);
+    }
+
+    function skipAll() {
+      if (!job) {
+        setAll(REVEAL_ALL);
+        return;
+      }
+      finishNow();
+      closeWindow();
+      job = null;
+    }
+
+    // A slow orbit while the world builds, unless you take the camera.
+    function watchCamera(dt) {
+      const cam = job.camera;
+      const g = rig.goal;
+      if (cam.user || !cam.last) return;
+      const moved = ['x', 'z', 'dist', 'pitch'].some((k) => Math.abs(g[k] - cam.last[k]) > 1e-6) || Math.abs(g.yaw - cam.last.yaw) > 1e-6;
+      if (moved) {
+        cam.user = true;
+        return;
+      }
+      if (job.phase === 'build' && !job.done) g.yaw += dt * 0.07;
+      cam.last = { ...g };
+    }
+
+    function startSound(key) {
+      if (key === 'land') sound.glug();
+      else if (key === 'life') sound.honk(0.6);
+      soundClock = 0;
+    }
+
+    function playSounds(dt) {
+      if (job.skip) return;
+      soundClock -= dt;
+      if (soundClock > 0) return;
+      const playing = job.layers.filter((l) => l.state === 'play').map((l) => l.key);
+      if (playing.includes('buildings')) {
+        sound.thunk();
+        soundClock = 0.32;
+      } else if (playing.includes('props')) {
+        sound.pop(0.6);
+        soundClock = 0.14;
+      } else if (playing.includes('roads') || playing.includes('rails') || playing.includes('ground')) {
+        sound.scribble();
+        soundClock = 0.09 + Math.random() * 0.08;
+      } else if (playing.includes('land')) {
+        soundClock = 0.5;
+        if (Math.random() < 0.4) sound.glug();
+      }
+    }
+
+    // ----- the progress window -----
+
+    function openWindow() {
+      closeWindow();
+      win = openDialog({
+        id: 'import-window',
+        title: `Building ${job.name ?? 'the map'}...`,
+        width: 360,
+        onClose: () => {
+          win = null;
+        },
+        body: `
+          <div class="imp-anim" aria-hidden="true"><span class="imp-paper"></span><span class="imp-pencil"></span></div>
+          <ul class="imp-steps" id="imp-steps"></ul>
+          <div class="imp-bar bevel-in"><div class="imp-fill" id="imp-fill"></div></div>
+          <div class="imp-status" id="imp-status"></div>
+          <div class="imp-counts" id="imp-counts"></div>
+          <div class="dlg-buttons">
+            <button type="button" class="win-btn" data-imp="retry" hidden>Retry</button>
+            <span class="osm-spacer"></span>
+            <button type="button" class="win-btn" data-imp="skip">Skip</button>
+            <button type="button" class="win-btn" data-imp="hide">Hide</button>
+          </div>`,
+      });
+      win.el.classList.add('imp-window');
+      win.el.querySelector('.win-titlebar').addEventListener('pointerdown', () => {
+        win.dragged = true;
+      });
+      win.el.addEventListener('click', (event) => {
+        const action = event.target.closest('[data-imp]')?.dataset.imp;
+        if (!action) return;
+        sound.click();
+        if (action === 'skip') {
+          if (job && !job.done && !(job.failed && job.phase === 'download')) job.skip = true;
+          else closeWindow();
+        } else if (action === 'hide') closeWindow();
+        else if (action === 'retry') retry();
+      });
+      win.lastText = '';
+      refreshWindow(true);
+    }
+
+    function closeWindow() {
+      if (win) {
+        const w = win;
+        win = null;
+        w.close();
+      }
+    }
+
+    function refreshWindow(force = false) {
+      if (!win || !job) return;
+      const mark = { wait: '', ready: '', play: '»', done: '✓', skip: '-', failed: '×', busy: '»' };
+      const rows = [];
+      const dl = job.downloads;
+      const dlState = dl.some((d) => d.state === 'failed') ? 'failed' : dl.length && dl.every((d) => d.state === 'done') ? 'done' : dl.some((d) => d.state === 'busy') ? 'play' : 'wait';
+      rows.push(`<li class="imp-${dlState}"><b>${mark[dlState]}</b>Download the map${dl.length > 1 ? ` (${dl.filter((d) => d.state === 'done').length}/${dl.length})` : ''}</li>`);
+      if (job.phase !== 'download') rows.push(`<li class="imp-${job.phase === 'erase' ? 'play' : 'done'}"><b>${job.phase === 'erase' ? mark.play : mark.done}</b>Rub out the old city</li>`);
+      for (const l of job.layers) rows.push(`<li class="imp-${l.state}"><b>${mark[l.state]}</b>${l.label}</li>`);
+      // Overall progress: downloads count a third, the layers the rest.
+      const dlDone = dl.length ? dl.filter((d) => d.state === 'done' || d.state === 'failed').length / dl.length : 0;
+      let layersDone = 0;
+      for (const l of job.layers) {
+        if (l.state === 'done' || l.state === 'skip' || l.state === 'failed') layersDone += 1;
+        else if (l.state === 'play') layersDone += Math.min(1, l.t / l.time);
+      }
+      const progress = dlDone * 0.3 + (layersDone / job.layers.length) * 0.7;
+      const c = job.counts;
+      const counts = [];
+      if (c.roads) counts.push(`${c.roads.toLocaleString()} roads`);
+      if (c.rails) counts.push(`${c.rails.toLocaleString()} tracks`);
+      if (c.buildings) counts.push(`${c.buildings.toLocaleString()} buildings`);
+      if (c.trees) counts.push(`${c.trees.toLocaleString()} trees`);
+      if (c.stations) counts.push(`${c.stations} stations`);
+      const failedPart = dl.find((d) => d.state === 'failed');
+      let status = job.status;
+      if (failedPart && !job.failed) status = `The ${PART_LABEL[failedPart.part]} did not come through (${failedPart.error}). The rest is built without them.`;
+      else if (job.phase === 'build' && dl.every((d) => d.state === 'done') && !job.done) status = 'Building...';
+      const text = rows.join('') + '|' + progress.toFixed(3) + '|' + status + '|' + counts.join();
+      if (!force && text === win.lastText) return;
+      win.lastText = text;
+      win.el.querySelector('#imp-steps').innerHTML = rows.join('');
+      win.el.querySelector('#imp-fill').style.width = `${(progress * 100).toFixed(1)}%`;
+      win.el.querySelector('#imp-status').textContent = status;
+      win.el.querySelector('#imp-counts').textContent = counts.join(' · ');
+      win.el.querySelector('[data-imp="retry"]').hidden = !(job.failed || failedPart);
+      const stopped = job.done || (job.failed && job.phase === 'download');
+      win.el.querySelector('[data-imp="skip"]').textContent = stopped ? 'Close' : 'Skip';
+      win.el.classList.toggle('imp-working', !stopped);
+      // Sits in the bottom-left corner, out of the way, until dragged.
+      if (!win.dragged) {
+        win.el.style.left = '8px';
+        win.el.style.top = `${Math.max(8, window.innerHeight - win.el.offsetHeight - 30)}px`;
+      }
+    }
+
+    return {
+      begin,
+      update,
+      skipAll,
+      get active() {
+        return !!job && !job.done;
+      },
+      // The first build of a map pauses the simulation; retries don't.
+      get building() {
+        return !!job && (job.phase === 'erase' || job.phase === 'build') && !job.finishedOnce;
+      },
+    };
   }
 
   // ----- loop -----------------------------------------------------------------
@@ -13965,6 +15613,7 @@ function start() {
     lastTime = now;
 
     input.update(dt);
+    importShow.update(dt);
     rig.update(dt);
     sky.mesh.position.copy(camera.position);
     RETRO_UNIFORMS.uFogNear.value = rig.state.dist * 1.4 + 220;
@@ -13974,7 +15623,8 @@ function start() {
 
     // Fixed-rate simulation so game rules behave the same at any frame rate.
     const simStart = performance.now();
-    tickAccumulator += dt * speed;
+    // The simulation waits while an imported map is building itself.
+    tickAccumulator += importShow.building ? 0 : dt * speed;
     let ticks = 0;
     const maxTicks = speed * 4 + 2;
     while (tickAccumulator >= TICK && ticks < maxTicks) {
@@ -13987,14 +15637,15 @@ function start() {
     if (ticks >= maxTicks) tickAccumulator = 0;
     tickMs = lerp(tickMs, performance.now() - simStart, 0.1);
     fps = lerp(fps, 1 / Math.max(dt, 1e-3), 0.05);
+    autoQuality(dt);
 
-    traffic.render();
+    traffic.render(tickAccumulator / TICK);
     trains.render();
     city.update(dt, now / 1000);
     applyDaylight();
 
     renderer.info.reset();
-    if (settings.shadows === 'hand') shadows.render(rig.state, now / 1000);
+    if (settings.shadows === 'hand') shadows.render(rig.state, now / 1000, importShow.building);
 
     renderer.setRenderTarget(target);
     renderer.render(scene, camera);
@@ -14007,7 +15658,7 @@ function start() {
       savePicture();
     }
 
-    saveClock += dt;
+    saveClock += importShow.building ? 0 : dt;
     if (saveClock > 20) {
       saveClock = 0;
       saveCity();

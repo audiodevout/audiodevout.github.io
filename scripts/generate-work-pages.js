@@ -578,7 +578,9 @@ function buildHomeListHtml() {
   var funProjects = dedupeById(items(readJson(DATA_FILES.funProjects)));
   var archiveItems = getArchiveItems();
 
-  var worksItems = installations.concat(performance);
+  var worksItems = installations.concat(performance).filter(function (item) {
+    return !item.hideFromHome;
+  });
   var sections = [];
 
   if (worksItems.length) sections.push(buildListSectionHtml("Works", worksItems));
