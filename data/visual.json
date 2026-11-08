@@ -27,7 +27,11 @@
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/surveillance/sketch1.webp"
+        "./assets/images/visual/surveillance/surveillance-01.webp",
+        "./assets/images/visual/surveillance/surveillance-02.webp",
+        "./assets/images/visual/surveillance/surveillance-03.webp",
+        "./assets/images/visual/surveillance/surveillance-04.webp",
+        "./assets/images/visual/surveillance/surveillance-05.webp"
       ]
     },
     {
