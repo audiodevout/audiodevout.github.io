@@ -50,6 +50,16 @@
     return m ? m[1] : '';
   }
 
+  /* Newest year first; items in the same year (or undated) keep their data-file order */
+  function sortNewestFirst(items) {
+    return (items || [])
+      .map(function (item, index) {
+        return { item: item, index: index, year: parseInt(yearFromItem(item), 10) || 0 };
+      })
+      .sort(function (a, b) { return (b.year - a.year) || (a.index - b.index); })
+      .map(function (entry) { return entry.item; });
+  }
+
   function workHref(item) {
     var lookup = window.portfolioWorkLookup;
     if (lookup && typeof lookup.resolveWorkHref === 'function') {
@@ -148,7 +158,7 @@
       if (cat === 'TouchDesigner Tutorials') {
         sorted[cat] = sortByYoutubeDate(list);
       } else {
-        sorted[cat] = list;
+        sorted[cat] = sortNewestFirst(list);
       }
     });
     return sorted;
@@ -252,9 +262,9 @@
 
     var installations = dedupeById(data.projects.installations || []);
     var performance = dedupeById(data.projects.performance || []);
-    var worksItems = installations.concat(performance).filter(function (item) { return !item.hideFromHome; });
+    var worksItems = sortNewestFirst(installations.concat(performance).filter(function (item) { return !item.hideFromHome; }));
     var drawings = dedupeById(data.projects.drawings || []);
-    var soundItems = dedupeById(data.projects.soundInstallations || []);
+    var soundItems = sortNewestFirst(dedupeById(data.projects.soundInstallations || []));
 
     addListGroup(listRoot, 'Works', worksItems);
 
@@ -268,12 +278,12 @@
       addListGroup(listRoot, cat, visualGroups[cat]);
     });
 
-    var archiveItems = getArchiveItems();
+    var archiveItems = sortNewestFirst(getArchiveItems());
     if (archiveItems.length) {
       addListGroup(listRoot, 'Archive', archiveItems, { id: 'archive' });
     }
 
-    var funItems = dedupeById(data.projects.funProjects || []);
+    var funItems = sortNewestFirst(dedupeById(data.projects.funProjects || []));
     if (funItems.length) {
       addListGroup(listRoot, 'Fun Projects', funItems);
     }

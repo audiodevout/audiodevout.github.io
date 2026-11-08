@@ -140,8 +140,8 @@ a:focus-visible {
 }
 
 .site-brand:hover .site-brand__title {
-  color: var(--color-muted);
-  --ink: var(--color-muted);
+  color: #999999;
+  --ink: #999999;
 }
 
 .main-nav {
@@ -323,6 +323,7 @@ a:focus-visible {
   top: -1.4em;
   left: 0.25em;
   color: var(--color-muted);
+  font-style: italic;
   font-size: max(0.28em, var(--text-meta));
   letter-spacing: var(--letter-spacing-wide);
   text-shadow: none;
@@ -383,6 +384,7 @@ a:focus-visible {
   content: attr(data-year);
   margin-left: 0.6em;
   color: var(--color-muted-dim);
+  font-style: italic;
   font-size: var(--text-meta);
   letter-spacing: var(--letter-spacing-wide);
 }
@@ -408,6 +410,7 @@ a:focus-visible {
 
 .work-list__detail {
   color: var(--color-muted);
+  font-style: italic;
   font-size: var(--text-meta);
   letter-spacing: 0.06em;
 }
@@ -538,6 +541,7 @@ a:focus-visible {
   top: -1.3em;
   left: 0.25em;
   color: var(--color-muted);
+  font-style: italic;
   font-size: max(0.28em, var(--text-meta));
   letter-spacing: var(--letter-spacing-wide);
   text-shadow: none;
@@ -562,12 +566,14 @@ a:focus-visible {
 
 .cv-row__meta {
   color: var(--color-meta);
+  font-style: italic;
   font-size: var(--text-meta);
   line-height: var(--line-height-list);
 }
 
 .cv-row__period {
   color: var(--color-muted-dim);
+  font-style: italic;
   font-size: var(--text-meta);
   letter-spacing: var(--letter-spacing-wide);
 }
@@ -609,6 +615,7 @@ a:focus-visible {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-muted-faint);
+  font-style: italic;
   margin: 0 0 var(--space-2);
 }
 
@@ -617,6 +624,7 @@ a:focus-visible {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-muted-faint);
+  font-style: italic;
   margin: 0;
 }
 
@@ -633,6 +641,7 @@ a:focus-visible {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-muted-faint);
+  font-style: italic;
 }
 
 /* ============================================================
@@ -670,6 +679,7 @@ body.viewer-open {
 
 .gallery-series__meta {
   color: var(--color-muted-dim);
+  font-style: italic;
   font-size: var(--text-meta);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
@@ -678,6 +688,7 @@ body.viewer-open {
 .gallery-series__link {
   margin-left: auto;
   color: var(--color-meta);
+  font-style: italic;
   font-size: var(--text-meta);
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
@@ -760,6 +771,103 @@ body.viewer-open {
   outline-offset: -1px;
 }
 
+/* ============================================================
+   Work-page image grid (js/viewer.js variant 'work')
+   Hero image, then balanced rows grouped by shape (wide, square,
+   tall). Items grow by aspect ratio (--ar), so each row shares one
+   height and fills the width; --sum caps a short row's height.
+   ============================================================ */
+
+.media-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.media-grid__group {
+  --row-h: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.media-grid__group--portrait {
+  --row-h: 460px;
+}
+
+.media-grid__group--hero {
+  --row-h: 72vh;
+}
+
+.media-grid__row {
+  display: flex;
+  gap: var(--space-2);
+  width: min(100%, calc(var(--sum, 3) * var(--row-h)));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-grid__item {
+  --ar: 1.5;
+  flex: var(--ar) 1 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.media-grid__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--color-surface);
+  cursor: zoom-in;
+  line-height: 0;
+}
+
+.media-grid__btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar);
+  object-fit: cover;
+  transition: opacity var(--transition-fast);
+}
+
+.media-grid__btn:hover img {
+  opacity: 0.82;
+}
+
+.media-grid__btn:focus-visible {
+  outline: 1px solid var(--color-text);
+  outline-offset: -1px;
+}
+
+/* Phones: wide images one per line, square and tall two per line */
+@media (max-width: 768px) {
+  .media-grid {
+    gap: var(--space-6);
+  }
+
+  .media-grid__group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .media-grid__row {
+    display: contents;
+  }
+
+  .media-grid__item {
+    flex: 0 0 calc(50% - var(--space-2) / 2);
+  }
+
+  .media-grid__group--hero .media-grid__item,
+  .media-grid__group--landscape .media-grid__item {
+    flex-basis: 100%;
+  }
+}
+
 .gallery-loading {
   position: fixed;
   left: 50%;
@@ -770,6 +878,7 @@ body.viewer-open {
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   color: var(--color-muted);
+  font-style: italic;
   pointer-events: none;
 }
 
@@ -898,6 +1007,7 @@ body.viewer-open {
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   color: var(--color-muted);
+  font-style: italic;
   text-align: center;
 }
 
@@ -1090,6 +1200,7 @@ body.viewer-open {
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   color: var(--lightbox-muted);
+  font-style: italic;
   margin: 0;
   max-width: 42ch;
 }
@@ -1101,6 +1212,7 @@ body.viewer-open {
   letter-spacing: var(--letter-spacing-stamp);
   text-transform: uppercase;
   color: var(--lightbox-muted);
+  font-style: italic;
   margin: var(--space-1) 0 0;
   max-width: 42ch;
 }

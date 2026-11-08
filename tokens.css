@@ -9,12 +9,12 @@
   --color-surface: #1a1a1a;
   --color-border: #4a4a4a;          /* decorative rules only, not text */
   --color-text: #ffffff;            /* 21:1 */
-  --color-text-soft: #d4d4d4;       /* 14:1 — secondary paragraphs */
+  --color-text-soft: #ffffff;       /* 14:1 — secondary paragraphs */
   --color-hover: #b0b0b0;           /* 9.6:1 — hover / tertiary text */
-  --color-meta: #a6a6a6;            /* 8.5:1 — back links, CV meta, links */
-  --color-muted: #999999;           /* 7.4:1 — categories, counts */
-  --color-muted-dim: #8c8c8c;       /* 6.3:1 — years, captions */
-  --color-muted-faint: #858585;     /* 5.7:1 — footer */
+  --color-meta: #ffffff;            /* 8.5:1 — back links, CV meta, links */
+  --color-muted: #ffffff;           /* 7.4:1 — categories, counts */
+  --color-muted-dim: #ffffff;       /* 6.3:1 — years, captions */
+  --color-muted-faint: #ffffff;     /* 5.7:1 — footer */
   --color-accent: #ffffff;
   --color-accent-glacier: #9dc4d8;
   --color-accent-crimson: #d2455a;

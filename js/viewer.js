@@ -2,6 +2,7 @@
  * viewer.js — series strips + shared fullscreen image viewer
  *
  * portfolioStrip.build(series, opts)  → horizontal scroll-snap strip of images
+ *   (variant 'work' → grouped grid: hero image, then wide / square / tall rows)
  * portfolioViewer.open(series, index) → fullscreen viewer stepping through one series
  *
  * series = { title, href, images: [src, ...] }
@@ -30,10 +31,110 @@
     return total > 1 ? title + ' — image ' + (index + 1) + ' of ' + total : title;
   }
 
+  /* ---------- Work-page grid ---------- */
+  /* First image leads as a hero; the rest are grouped by shape (wide, square,
+     tall) so similar frames sit together. Data order is kept inside each group.
+     Mirrored in scripts/generate-work-pages.js groupWorkImages(). */
+  function shapeOf(src) {
+    var d = sizeFor(src);
+    if (!d || !d[1]) return 'landscape';
+    var ar = d[0] / d[1];
+    if (ar > 1.15) return 'landscape';
+    if (ar < 0.87) return 'portrait';
+    return 'square';
+  }
+
+  function groupWorkImages(images) {
+    images = images || [];
+    if (images.length === 0) return [];
+    var groups = [{ kind: 'hero', items: [images[0]] }];
+    var rest = images.slice(1);
+    ['landscape', 'square', 'portrait'].forEach(function (kind) {
+      var items = rest.filter(function (src) { return shapeOf(src) === kind; });
+      if (items.length) groups.push({ kind: kind, items: items });
+    });
+    return groups;
+  }
+
+  /* Images per row by shape; rows are balanced (11 wide → 3,3,3,2) */
+  var ROW_MAX = { hero: 1, landscape: 3, square: 3, portrait: 4 };
+
+  function splitRows(items, max) {
+    var n = items.length;
+    var rowCount = Math.ceil(n / (max || 3));
+    var rows = [];
+    var start = 0;
+    for (var r = 0; r < rowCount; r++) {
+      var count = Math.floor(n / rowCount) + (r < n % rowCount ? 1 : 0);
+      rows.push(items.slice(start, start + count));
+      start += count;
+    }
+    return rows;
+  }
+
+  function orderWorkImages(images) {
+    var out = [];
+    groupWorkImages(images).forEach(function (g) { out = out.concat(g.items); });
+    return out;
+  }
+
+  function buildWorkGrid(series, opts) {
+    var eagerCount = typeof opts.eagerCount === 'number' ? opts.eagerCount : 3;
+    var groups = groupWorkImages(series.images);
+    var ordered = { title: series.title, href: series.href, images: orderWorkImages(series.images) };
+
+    var grid = document.createElement('div');
+    grid.className = 'media-grid';
+    grid.setAttribute('role', 'region');
+    grid.setAttribute('aria-label', (series.title || 'Untitled') + ' images');
+
+    var index = 0;
+    groups.forEach(function (group) {
+      var groupEl = document.createElement('div');
+      groupEl.className = 'media-grid__group media-grid__group--' + group.kind;
+      splitRows(group.items, ROW_MAX[group.kind]).forEach(function (row) {
+        var ul = document.createElement('ul');
+        ul.className = 'media-grid__row';
+        var sum = 0;
+        row.forEach(function (src) {
+          var i = index++;
+          var dims = sizeFor(src);
+          var ar = dims ? dims[0] / dims[1] : 1.5;
+          sum += ar;
+          var li = document.createElement('li');
+          li.className = 'media-grid__item';
+          li.style.setProperty('--ar', ar.toFixed(4));
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'media-grid__btn';
+          btn.setAttribute('aria-label', 'Open ' + imageLabel(ordered, i) + ' fullscreen');
+
+          var img = document.createElement('img');
+          img.alt = imageLabel(ordered, i);
+          if (dims) { img.width = dims[0]; img.height = dims[1]; }
+          img.loading = i < eagerCount ? 'eager' : 'lazy';
+          img.decoding = 'async';
+          img.src = resolveSrc(src);
+
+          btn.appendChild(img);
+          btn.addEventListener('click', function () { openViewer(ordered, i); });
+          li.appendChild(btn);
+          ul.appendChild(li);
+        });
+        ul.style.setProperty('--sum', sum.toFixed(4));
+        groupEl.appendChild(ul);
+      });
+      grid.appendChild(groupEl);
+    });
+    return grid;
+  }
+
   /* ---------- Strip ---------- */
 
   function buildStrip(series, opts) {
     opts = opts || {};
+    if (opts.variant === 'work') return buildWorkGrid(series, opts);
     var images = series.images || [];
     var eagerCount = typeof opts.eagerCount === 'number' ? opts.eagerCount : 2;
 
@@ -81,7 +182,8 @@
   /** Wire click handlers onto a strip baked at build time (work pages). */
   function hydrateStrip(strip, series) {
     if (!strip) return;
-    strip.querySelectorAll('.media-strip__btn').forEach(function (btn, index) {
+    if (strip.classList.contains('media-grid')) series = { title: series.title, href: series.href, images: orderWorkImages(series.images) };
+    strip.querySelectorAll('.media-strip__btn, .media-grid__btn').forEach(function (btn, index) {
       btn.addEventListener('click', function () {
         openViewer(series, index);
       });
@@ -284,7 +386,8 @@
   window.portfolioStrip = {
     build: buildStrip,
     hydrate: hydrateStrip,
-    sizeFor: sizeFor
+    sizeFor: sizeFor,
+    orderWorkImages: orderWorkImages
   };
 
   window.portfolioViewer = {

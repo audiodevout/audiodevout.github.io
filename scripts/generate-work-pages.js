@@ -87,6 +87,21 @@ function yearFromItem(item) {
   return match ? match[1] : "";
 }
 
+/* Newest year first; items in the same year (or undated) keep their data-file order.
+   Mirrored in js/render.js sortNewestFirst(). */
+function sortNewestFirst(list) {
+  return (list || [])
+    .map(function (item, index) {
+      return { item: item, index: index, year: parseInt(yearFromItem(item), 10) || 0 };
+    })
+    .sort(function (a, b) {
+      return b.year - a.year || a.index - b.index;
+    })
+    .map(function (entry) {
+      return entry.item;
+    });
+}
+
 function truncate(text, maxLen) {
   var s = String(text || "").replace(/\s+/g, " ").trim();
   if (s.length <= maxLen) return s;
@@ -114,37 +129,105 @@ function relativeAssetFromWorkPage(src) {
 }
 
 /* Mirrors portfolioStrip.build() in js/viewer.js — strip of images, hydrated at runtime */
+/* Hero first, then wide / square / tall groups (data order kept inside each).
+   Mirrored in js/viewer.js groupWorkImages(). */
+function groupWorkImages(images) {
+  if (images.length === 0) return [];
+  function shapeOf(src) {
+    var d = imageSize(path.join(root, normalizeAssetPath(src)));
+    if (!d || !d[1]) return "landscape";
+    var ar = d[0] / d[1];
+    if (ar > 1.15) return "landscape";
+    if (ar < 0.87) return "portrait";
+    return "square";
+  }
+  var groups = [{ kind: "hero", items: [images[0]] }];
+  var rest = images.slice(1);
+  ["landscape", "square", "portrait"].forEach(function (kind) {
+    var list = rest.filter(function (src) {
+      return shapeOf(src) === kind;
+    });
+    if (list.length) groups.push({ kind: kind, items: list });
+  });
+  return groups;
+}
+
+var ROW_MAX = { hero: 1, landscape: 3, square: 3, portrait: 4 };
+
+/* Balanced rows: 11 wide images at 3 per row → 3,3,3,2 */
+function splitRows(list, max) {
+  var n = list.length;
+  var rowCount = Math.ceil(n / (max || 3));
+  var rows = [];
+  var start = 0;
+  for (var r = 0; r < rowCount; r++) {
+    var count = Math.floor(n / rowCount) + (r < n % rowCount ? 1 : 0);
+    rows.push(list.slice(start, start + count));
+    start += count;
+  }
+  return rows;
+}
+
 function buildMediaStackHtml(item, title) {
   var images = Array.isArray(item.images) ? item.images : [];
   if (images.length === 0) return "";
   var label = title || "Untitled";
   var total = images.length;
-  var items = images
-    .map(function (src, index) {
-      var alt = total > 1 ? label + " — image " + (index + 1) + " of " + total : label;
-      var dims = imageSize(path.join(root, normalizeAssetPath(src)));
-      var sizeAttrs = dims ? ' width="' + dims[0] + '" height="' + dims[1] + '"' : "";
+  var index = 0;
+  var groupsHtml = groupWorkImages(images)
+    .map(function (group) {
+      var rowsHtml = splitRows(group.items, ROW_MAX[group.kind])
+        .map(function (row) {
+          var sum = 0;
+          var lis = row
+            .map(function (src) {
+              var i = index++;
+              var alt = total > 1 ? label + " — image " + (i + 1) + " of " + total : label;
+              var dims = imageSize(path.join(root, normalizeAssetPath(src)));
+              var ar = dims ? dims[0] / dims[1] : 1.5;
+              sum += ar;
+              var sizeAttrs = dims ? ' width="' + dims[0] + '" height="' + dims[1] + '"' : "";
+              return (
+                '<li class="media-grid__item" style="--ar: ' +
+                ar.toFixed(4) +
+                '"><button type="button" class="media-grid__btn" aria-label="Open ' +
+                escapeHtml(alt) +
+                ' fullscreen"><img src="' +
+                escapeHtml(relativeAssetFromWorkPage(src)) +
+                '" alt="' +
+                escapeHtml(alt) +
+                '"' +
+                sizeAttrs +
+                ' loading="' +
+                (i < 3 ? "eager" : "lazy") +
+                '" decoding="async" /></button></li>'
+              );
+            })
+            .join("\n              ");
+          return (
+            '<ul class="media-grid__row" style="--sum: ' +
+            sum.toFixed(4) +
+            '">\n              ' +
+            lis +
+            "\n            </ul>"
+          );
+        })
+        .join("\n            ");
       return (
-        '<li class="media-strip__item"><button type="button" class="media-strip__btn" aria-label="Open ' +
-        escapeHtml(alt) +
-        ' fullscreen"><img src="' +
-        escapeHtml(relativeAssetFromWorkPage(src)) +
-        '" alt="' +
-        escapeHtml(alt) +
-        '"' +
-        sizeAttrs +
-        ' loading="' +
-        (index < 3 ? "eager" : "lazy") +
-        '" decoding="async" /></button></li>'
+        '<div class="media-grid__group media-grid__group--' +
+        group.kind +
+        '">\n            ' +
+        rowsHtml +
+        "\n          </div>"
       );
     })
-    .join("\n            ");
+    .join("\n          ");
   return (
-    '<div class="media-strip media-strip--work" role="region" aria-label="' +
+    '<div class="media-grid" role="region" aria-label="' +
     escapeHtml(label) +
-    ' images" tabindex="0">\n          <ul class="media-strip__track">\n            ' +
-    items +
-    "\n          </ul>\n        </div>"
+    ' images">\n          ' +
+    groupsHtml +
+    "\n        </div>"
   );
 }
 
@@ -362,7 +445,7 @@ function sortVisualGroupsByYoutubeDate(groups) {
     if (cat === "TouchDesigner Tutorials") {
       sorted[cat] = sortByYoutubeDate(groups[cat] || []);
     } else {
-      sorted[cat] = groups[cat] || [];
+      sorted[cat] = sortNewestFirst(groups[cat] || []);
     }
   });
   return sorted;
@@ -574,13 +657,15 @@ function buildHomeListHtml() {
   var installations = dedupeById(items(readJson(DATA_FILES.installations)));
   var performance = dedupeById(items(readJson(DATA_FILES.performance)));
   var visual = dedupeById(items(readJson(DATA_FILES.visual)));
-  var sound = dedupeById(items(readJson(DATA_FILES.sound)));
-  var funProjects = dedupeById(items(readJson(DATA_FILES.funProjects)));
-  var archiveItems = getArchiveItems();
+  var sound = sortNewestFirst(dedupeById(items(readJson(DATA_FILES.sound))));
+  var funProjects = sortNewestFirst(dedupeById(items(readJson(DATA_FILES.funProjects))));
+  var archiveItems = sortNewestFirst(getArchiveItems());
 
-  var worksItems = installations.concat(performance).filter(function (item) {
-    return !item.hideFromHome;
-  });
+  var worksItems = sortNewestFirst(
+    installations.concat(performance).filter(function (item) {
+      return !item.hideFromHome;
+    })
+  );
   var sections = [];
 
   if (worksItems.length) sections.push(buildListSectionHtml("Works", worksItems));
