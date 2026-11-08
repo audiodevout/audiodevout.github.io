@@ -39,6 +39,61 @@
       }
     },
     {
+      "id": "road-paint",
+      "title": "Road Paint",
+      "category": "INTERACTIVE BROWSER WORK",
+      "color": "electric-lime",
+      "year": "2026",
+      "date": "October 2026",
+      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
+      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
+      "urls": {
+        "link": "./roadpaint/",
+        "linkLabel": "Open Road Paint ↗"
+      }
+    },
+    {
+      "id": "efforts-in-displacement",
+      "title": "Efforts in Displacement",
+      "category": "VJ • FOUND FOOTAGE • LIVE VISUALS",
+      "color": "electric-lime",
+      "year": "2026",
+      "date": "2 October 2026",
+      "description": "A VJ project built from found footage and media.",
+      "fullDescription": "Efforts in Displacement is a VJ project built from found footage and media.",
+      "medium": "Live visuals, found footage, media",
+      "images": [
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-01.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-02.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-03.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-04.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-05.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-06.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-07.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-08.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-09.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-10.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-11.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-12.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-13.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-14.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-15.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-16.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-17.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-18.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-19.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-20.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-21.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-22.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-23.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-24.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-25.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-26.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-27.webp",
+        "./assets/images/installations/efforts-in-displacement/efforts-in-displacement-28.webp"
+      ]
+    },
+    {
       "id": "small-cuts",
       "title": "Rendered in Light; Small Cuts",
       "category": "LIGHT INSTALLATION",
@@ -74,20 +129,6 @@
         "./assets/video/rendered-in-light-small-cuts-1.mp4",
         "./assets/video/rendered-in-light-small-cuts-2.mp4"
       ]
-    },
-    {
-      "id": "road-paint",
-      "title": "Road Paint",
-      "category": "INTERACTIVE BROWSER WORK",
-      "color": "electric-lime",
-      "year": "2026",
-      "date": "October 2026",
-      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
-      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
-      "urls": {
-        "link": "./roadpaint/",
-        "linkLabel": "Open Road Paint ↗"
-      }
     },
     {
       "id": "instruments-for-becoming",
