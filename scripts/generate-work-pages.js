@@ -131,7 +131,7 @@ function relativeAssetFromWorkPage(src) {
 /* Mirrors portfolioStrip.build() in js/viewer.js — strip of images, hydrated at runtime */
 /* Wide / square / tall groups, no hero (data order kept inside each).
    Mirrored in js/viewer.js groupWorkImages(). */
-function groupWorkImages(images) {
+function groupWorkImages(images, shapeOrder) {
   if (images.length === 0) return [];
   function shapeOf(src) {
     var d = imageSize(path.join(root, normalizeAssetPath(src)));
@@ -143,7 +143,7 @@ function groupWorkImages(images) {
   }
   var groups = [];
   var rest = images;
-  ["landscape", "square", "portrait"].forEach(function (kind) {
+  (shapeOrder || ["landscape", "square", "portrait"]).forEach(function (kind) {
     var list = rest.filter(function (src) {
       return shapeOf(src) === kind;
     });
@@ -174,7 +174,7 @@ function buildMediaStackHtml(item, title) {
   var label = title || "Untitled";
   var total = images.length;
   var index = 0;
-  var groupsHtml = groupWorkImages(images)
+  var groupsHtml = groupWorkImages(images, item.shapeOrder)
     .map(function (group) {
       var rowsHtml = splitRows(group.items, ROW_MAX[group.kind])
         .map(function (row) {

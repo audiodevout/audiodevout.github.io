@@ -184,7 +184,8 @@
     return {
       title: item.title || '',
       href: item.id ? window.location.pathname : '',
-      images: (item.images || []).slice()
+      images: (item.images || []).slice(),
+      shapeOrder: item.shapeOrder
     };
   }
 

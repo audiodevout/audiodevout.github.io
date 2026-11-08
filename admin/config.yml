@@ -125,6 +125,7 @@ collections:
               - { name: description, label: "Short description", widget: text, required: false }
               - { name: fullDescription, label: "Full description", widget: text, required: false }
               - { name: dimensions, label: "Dimensions", widget: string, required: false }
+              - { name: shapeOrder, label: "Image group order (default: landscape, square, portrait)", widget: select, multiple: true, required: false, options: ["landscape", "square", "portrait"] }
               - { name: medium, label: "Medium", widget: string, required: false }
               - { name: technical, label: "Technical", widget: string, required: false }
               - name: tags

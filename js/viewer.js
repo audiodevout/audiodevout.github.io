@@ -44,12 +44,12 @@
     return 'square';
   }
 
-  function groupWorkImages(images) {
+  function groupWorkImages(images, shapeOrder) {
     images = images || [];
     if (images.length === 0) return [];
     var groups = [];
     var rest = images;
-    ['landscape', 'square', 'portrait'].forEach(function (kind) {
+    (shapeOrder || ['landscape', 'square', 'portrait']).forEach(function (kind) {
       var items = rest.filter(function (src) { return shapeOf(src) === kind; });
       if (items.length) groups.push({ kind: kind, items: items });
     });
@@ -72,16 +72,16 @@
     return rows;
   }
 
-  function orderWorkImages(images) {
+  function orderWorkImages(images, shapeOrder) {
     var out = [];
-    groupWorkImages(images).forEach(function (g) { out = out.concat(g.items); });
+    groupWorkImages(images, shapeOrder).forEach(function (g) { out = out.concat(g.items); });
     return out;
   }
 
   function buildWorkGrid(series, opts) {
     var eagerCount = typeof opts.eagerCount === 'number' ? opts.eagerCount : 3;
-    var groups = groupWorkImages(series.images);
-    var ordered = { title: series.title, href: series.href, images: orderWorkImages(series.images) };
+    var groups = groupWorkImages(series.images, series.shapeOrder);
+    var ordered = { title: series.title, href: series.href, images: orderWorkImages(series.images, series.shapeOrder) };
 
     var grid = document.createElement('div');
     grid.className = 'media-grid';
@@ -182,7 +182,7 @@
   /** Wire click handlers onto a strip baked at build time (work pages). */
   function hydrateStrip(strip, series) {
     if (!strip) return;
-    if (strip.classList.contains('media-grid')) series = { title: series.title, href: series.href, images: orderWorkImages(series.images) };
+    if (strip.classList.contains('media-grid')) series = { title: series.title, href: series.href, images: orderWorkImages(series.images, series.shapeOrder) };
     strip.querySelectorAll('.media-strip__btn, .media-grid__btn').forEach(function (btn, index) {
       btn.addEventListener('click', function () {
         openViewer(series, index);
