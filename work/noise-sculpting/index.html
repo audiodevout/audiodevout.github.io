@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Nois…" />
+  <link rel="canonical" href="https://atharvagupta.net/work/noise-sculpting/" />
+  <meta property="og:title" content="Noise Sculpting" />
+  <meta property="og:description" content="Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Nois…" />
+  <meta property="og:image" content="https://atharvagupta.net/assets/images/installations/noise-sculpting/noise-sculpting-01.webp" />
+  <meta property="og:url" content="https://atharvagupta.net/work/noise-sculpting/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Noise Sculpting" />
+  <meta name="twitter:description" content="Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Nois…" />
+  <meta name="twitter:image" content="https://atharvagupta.net/assets/images/installations/noise-sculpting/noise-sculpting-01.webp" />
+  <title>Noise Sculpting — Atharva Gupta</title>
+  <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="../../assets/icons/apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","name":"Noise Sculpting","description":"Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Nois…","url":"https://atharvagupta.net/work/noise-sculpting/","image":"https://atharvagupta.net/assets/images/installations/noise-sculpting/noise-sculpting-01.webp","@type":"VisualArtwork","creator":{"@id":"https://atharvagupta.net/#person"},"artform":"Installation"}</script>
+  <link rel="preload" as="image" href="../../assets/images/collage/sculpt1.webp" type="image/webp" fetchpriority="high" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../reset.css" />
+  <link rel="stylesheet" href="../../tokens.css" />
+  <link rel="stylesheet" href="../../layout.css" />
+  <link rel="stylesheet" href="../../canvas.css" />
+  <link rel="stylesheet" href="../../components.css" />
+  <link rel="stylesheet" href="../../animations.css" />
+  <link rel="stylesheet" href="../../work/work-page.css" />
+  <script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "and": [
+        { "href_matches": "/*" },
+        { "not": { "href_matches": "/admin/*" } },
+        { "not": { "href_matches": "/thesis/*" } },
+        { "not": { "selector_matches": "[target=_blank]" } }
+      ]
+    },
+    "eagerness": "moderate"
+  }]
+}
+  </script>
+  <script>
+    if (location.protocol !== "file:") {
+      var gc = document.createElement("script");
+      gc.async = true;
+      gc.src = "https://gc.zgo.at/count.js";
+      gc.setAttribute("data-goatcounter", "https://atharvagupta.goatcounter.com/count");
+      document.head.appendChild(gc);
+    }
+  </script>
+</head>
+<body class="page-work">
+  <div class="site-canvas" aria-hidden="true">
+  </div>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="../../index.html" class="site-brand" aria-label="Home"><span class="site-brand__title"><span class="fx-negative">Atharva Gupta</span></span></a>
+      <div class="header-right">
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="../../index.html" class="nav-link">Home</a>
+          <a href="../../gallery.html" class="nav-link">Gallery</a>
+          <a href="../../exhibitions.html" class="nav-link">Exhibitions</a>
+          <a href="../../about.html" class="nav-link">About</a>
+        </nav>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav
+    id="mobile-nav"
+    class="nav-overlay"
+    aria-hidden="true"
+    aria-label="Mobile navigation"
+  >
+    <a href="../../index.html" class="nav-link">Home</a>
+    <a href="../../gallery.html" class="nav-link">Gallery</a>
+    <a href="../../exhibitions.html" class="nav-link">Exhibitions</a>
+    <a href="../../about.html" class="nav-link">About</a>
+  </nav>
+
+  <main class="main work-page" id="work-page" data-work-id="noise-sculpting" role="main">
+    <div class="work-page__toolbar">
+      <a class="work-page__back" href="../../index.html">← Back</a>
+    </div>
+
+    <article class="work-page__article">
+      <header class="work-page__header">
+        <h1 class="work-page__title">Noise Sculpting</h1>
+        <p class="work-page__category">TOUCHDESIGNER SERIES</p>
+        
+      </header>
+
+      <div class="work-page__intro" data-work-body-host>
+        <p class="work-page__description text-plate">Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Noise TOPs drive geometry instancing, and compositing, feedback and displacement turn simple patterns into dense, abstract forms.
+
+The series began with UV mapping through ramp TOPs as a base for 3D instancing, a technique picked up from elekktronaut and pppanik007, and then moved to building geometry straight from the Noise TOP. Later parts bring in pattern CHOPs, a link between a structure's shape and its colour that makes it oscillate, positional instancing with ParticlesGPU, spiral structures from the Mesh Generator, and light and shadow from circular ramps.
+
+The most recent parts turn to texture and rendering: ghostly, spider-web surfaces from the Slope and Displace TOPs, particle positions quantised with a Limit and rendered through a depth-driven luma blur and RGB delay, and a return to basics with bubbles, waves and scene switching.
+
+The images are stills from the series, and the videos below are the tutorials, from the first part to the latest. Project files for each one are on Patreon. Tweak the values in every TOP and SOP and the results will always be different.</p>
+      </div>
+
+      <div class="work-page__media-stack" data-work-media-host>
+        <div class="media-grid" role="region" aria-label="Noise Sculpting images">
+          <div class="media-grid__group media-grid__group--landscape">
+            <ul class="media-grid__row" style="--sum: 4.2286">
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 1 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-02.webp" alt="Noise Sculpting — image 1 of 18" width="2960" height="2100" loading="eager" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 2 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-03.webp" alt="Noise Sculpting — image 2 of 18" width="2960" height="2100" loading="eager" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 3 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-04.webp" alt="Noise Sculpting — image 3 of 18" width="2960" height="2100" loading="eager" decoding="async" /></button></li>
+            </ul>
+            <ul class="media-grid__row" style="--sum: 4.2286">
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 4 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-05.webp" alt="Noise Sculpting — image 4 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 5 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-06.webp" alt="Noise Sculpting — image 5 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 6 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-07.webp" alt="Noise Sculpting — image 6 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+            </ul>
+            <ul class="media-grid__row" style="--sum: 4.2286">
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 7 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-08.webp" alt="Noise Sculpting — image 7 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 8 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-09.webp" alt="Noise Sculpting — image 8 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 9 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-10.webp" alt="Noise Sculpting — image 9 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+            </ul>
+            <ul class="media-grid__row" style="--sum: 2.8190">
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 10 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-11.webp" alt="Noise Sculpting — image 10 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.4095"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 11 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-12.webp" alt="Noise Sculpting — image 11 of 18" width="2960" height="2100" loading="lazy" decoding="async" /></button></li>
+            </ul>
+          </div>
+          <div class="media-grid__group media-grid__group--square">
+            <ul class="media-grid__row" style="--sum: 3.0000">
+              <li class="media-grid__item" style="--ar: 1.0000"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 12 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-01.webp" alt="Noise Sculpting — image 12 of 18" width="2000" height="2000" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.0000"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 13 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-17.webp" alt="Noise Sculpting — image 13 of 18" width="1500" height="1500" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 1.0000"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 14 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-18.webp" alt="Noise Sculpting — image 14 of 18" width="2048" height="2048" loading="lazy" decoding="async" /></button></li>
+            </ul>
+          </div>
+          <div class="media-grid__group media-grid__group--portrait">
+            <ul class="media-grid__row" style="--sum: 1.4095">
+              <li class="media-grid__item" style="--ar: 0.3524"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 15 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-13.webp" alt="Noise Sculpting — image 15 of 18" width="740" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 0.3524"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 16 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-14.webp" alt="Noise Sculpting — image 16 of 18" width="740" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 0.3524"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 17 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-15.webp" alt="Noise Sculpting — image 17 of 18" width="740" height="2100" loading="lazy" decoding="async" /></button></li>
+              <li class="media-grid__item" style="--ar: 0.3524"><button type="button" class="media-grid__btn" aria-label="Open Noise Sculpting — image 18 of 18 fullscreen"><img src="../../assets/images/installations/noise-sculpting/noise-sculpting-16.webp" alt="Noise Sculpting — image 18 of 18" width="740" height="2100" loading="lazy" decoding="async" /></button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">Atharva Gupta © 2026</p>
+  </footer>
+
+  <script src="../../js/canvasLayers.parts.js"></script>
+  <script src="../../js/canvas-parallax.js"></script>
+  <script src="../../js/portfolioData.parts.js"></script>
+  <script src="../../portfolioData.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/work-lookup.js"></script>
+  <script src="../../js/imageSizes.parts.js"></script>
+  <script src="../../js/viewer.js"></script>
+  <script src="../../js/work-detail.js"></script>
+  <script src="../../js/work-page.js"></script>
+  <script src="../../js/router.js"></script>
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

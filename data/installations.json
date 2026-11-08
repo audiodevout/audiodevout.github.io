@@ -90,6 +90,60 @@
       }
     },
     {
+      "id": "noise-sculpting",
+      "title": "Noise Sculpting",
+      "category": "TOUCHDESIGNER SERIES",
+      "color": "electric-lime",
+      "year": "2026",
+      "date": "2024–2026",
+      "description": "An ongoing series of TouchDesigner experiments and tutorials that carve three-dimensional structures out of noise, using instancing, feedback and compositing.",
+      "fullDescription": "Noise Sculpting is an ongoing series of TouchDesigner experiments and tutorials, started in 2024, about carving three-dimensional structures out of noise. Noise TOPs drive geometry instancing, and compositing, feedback and displacement turn simple patterns into dense, abstract forms.\n\nThe series began with UV mapping through ramp TOPs as a base for 3D instancing, a technique picked up from elekktronaut and pppanik007, and then moved to building geometry straight from the Noise TOP. Later parts bring in pattern CHOPs, a link between a structure's shape and its colour that makes it oscillate, positional instancing with ParticlesGPU, spiral structures from the Mesh Generator, and light and shadow from circular ramps.\n\nThe most recent parts turn to texture and rendering: ghostly, spider-web surfaces from the Slope and Displace TOPs, particle positions quantised with a Limit and rendered through a depth-driven luma blur and RGB delay, and a return to basics with bubbles, waves and scene switching.\n\nThe images are stills from the series, and the videos below are the tutorials, from the first part to the latest. Project files for each one are on Patreon. Tweak the values in every TOP and SOP and the results will always be different.",
+      "medium": "TouchDesigner, noise sculpting, procedural geometry, generative visuals",
+      "technical": "Noise TOP, geometry instancing, ParticlesGPU, Mesh Generator, compositing and feedback",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "instancing",
+        "generative art",
+        "tutorial"
+      ],
+      "images": [
+        "./assets/images/installations/noise-sculpting/noise-sculpting-01.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-02.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-03.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-04.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-05.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-06.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-07.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-08.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-09.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-10.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-11.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-12.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-13.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-14.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-15.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-16.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-17.webp",
+        "./assets/images/installations/noise-sculpting/noise-sculpting-18.webp"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=4rm5dcoQHBc",
+        "https://www.youtube.com/watch?v=p9TwiixKvXQ",
+        "https://www.youtube.com/watch?v=Mu1TpRVujuY",
+        "https://www.youtube.com/watch?v=s8ea30HlTHE",
+        "https://www.youtube.com/watch?v=kcZH2zcHANc",
+        "https://www.youtube.com/watch?v=XHGeICkx9lU",
+        "https://www.youtube.com/watch?v=mkVa8D8_FIw",
+        "https://www.youtube.com/watch?v=4GkBT_fUNOM",
+        "https://www.youtube.com/watch?v=uSVB-EnoRkk",
+        "https://www.youtube.com/watch?v=nQIwwmKPSqs"
+      ],
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
       "id": "instruments-for-becoming",
       "title": "Instruments for Becoming",
       "color": "saffron",
