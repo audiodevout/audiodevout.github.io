@@ -39,18 +39,41 @@
       }
     },
     {
-      "id": "road-paint",
-      "title": "Road Paint",
-      "category": "INTERACTIVE BROWSER WORK",
-      "color": "electric-lime",
+      "id": "small-cuts",
+      "title": "Rendered in Light; Small Cuts",
+      "category": "LIGHT INSTALLATION",
+      "color": "amber",
       "year": "2026",
-      "date": "October 2026",
-      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
-      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
-      "urls": {
-        "link": "./roadpaint/",
-        "linkLabel": "Open Road Paint ↗"
-      }
+      "description": "A play with magic lanterns: laser-cut acrylic slides carrying TouchDesigner artwork, thrown as light and shadow through a Kodak Carousel S-AV 2000 slide projector.",
+      "fullDescription": "Small Cuts is a light installation that writes with shadow, and the first version of an ongoing series, Rendered in Light. It returns to the magic lantern, one of the oldest machines for projecting images, and feeds it artwork that began on a screen.\n\nGenerative drawings made in TouchDesigner are laser-cut and etched into acrylic, turning pixels into physical slides. Loaded into a Kodak Carousel S-AV 2000 slide projector, the slides send the patterns back out as light: enlarged, softened by the lens, and cast across walls, bodies and the room.\n\nThe work sits between the digital and the analogue. A process that lives in real time on a computer is fixed into a material object, and then released again by the oldest kind of projection, where light simply passes through a cut surface and the image appears in its shadow.\n\nCredits\n\nThanks to Maximilian Lana and Marinus Paul for the laser-cutting and slide-making techniques.",
+      "medium": "Laser-cut acrylic slides, slide projection, light",
+      "technical": "TouchDesigner, laser cutting and etching, Kodak Carousel S-AV 2000",
+      "themes": "Magic lanterns, shadow, light, digital to analogue",
+      "images": [
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_slide.0.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_setup.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.0.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.1.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155359499.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155403827.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155406512.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114227305.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114244075.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114247361.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114249783.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114345872.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114352884.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114355570.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114422196.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/WhatsApp Image 2026-11-04 at 11.00.48.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (29).webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (30).webp"
+      ],
+      "videos": [
+        "./assets/video/rendered-in-light-small-cuts-1.mp4",
+        "./assets/video/rendered-in-light-small-cuts-2.mp4"
+      ]
     },
     {
       "id": "efforts-in-displacement",
@@ -99,41 +122,18 @@
       ]
     },
     {
-      "id": "small-cuts",
-      "title": "Rendered in Light; Small Cuts",
-      "category": "LIGHT INSTALLATION",
-      "color": "amber",
+      "id": "road-paint",
+      "title": "Road Paint",
+      "category": "INTERACTIVE BROWSER WORK",
+      "color": "electric-lime",
       "year": "2026",
-      "description": "A play with magic lanterns: laser-cut acrylic slides carrying TouchDesigner artwork, thrown as light and shadow through a Kodak Carousel S-AV 2000 slide projector.",
-      "fullDescription": "Small Cuts is a light installation that writes with shadow, and the first version of an ongoing series, Rendered in Light. It returns to the magic lantern, one of the oldest machines for projecting images, and feeds it artwork that began on a screen.\n\nGenerative drawings made in TouchDesigner are laser-cut and etched into acrylic, turning pixels into physical slides. Loaded into a Kodak Carousel S-AV 2000 slide projector, the slides send the patterns back out as light: enlarged, softened by the lens, and cast across walls, bodies and the room.\n\nThe work sits between the digital and the analogue. A process that lives in real time on a computer is fixed into a material object, and then released again by the oldest kind of projection, where light simply passes through a cut surface and the image appears in its shadow.\n\nCredits\n\nThanks to Maximilian Lana and Marinus Paul for the laser-cutting and slide-making techniques.",
-      "medium": "Laser-cut acrylic slides, slide projection, light",
-      "technical": "TouchDesigner, laser cutting and etching, Kodak Carousel S-AV 2000",
-      "themes": "Magic lanterns, shadow, light, digital to analogue",
-      "images": [
-        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_slide.0.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_setup.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.0.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.1.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155359499.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155403827.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155406512.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114227305.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114244075.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114247361.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114249783.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114345872.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114352884.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114355570.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114422196.MP.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/WhatsApp Image 2026-11-04 at 11.00.48.webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (29).webp",
-        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (30).webp"
-      ],
-      "videos": [
-        "./assets/video/rendered-in-light-small-cuts-1.mp4",
-        "./assets/video/rendered-in-light-small-cuts-2.mp4"
-      ]
+      "date": "October 2026",
+      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
+      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
+      "urls": {
+        "link": "./roadpaint/",
+        "linkLabel": "Open Road Paint ↗"
+      }
     },
     {
       "id": "instruments-for-becoming",
