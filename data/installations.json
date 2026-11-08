@@ -148,7 +148,11 @@
         "./assets/images/installations/spherepacker/spherepacker-10.webp",
         "./assets/images/installations/spherepacker/spherepacker-11.webp",
         "./assets/images/installations/spherepacker/spherepacker-12.webp"
-      ]
+      ],
+      "urls": {
+        "link": "./assets/documents/SPHEREPACKER.tox",
+        "linkLabel": "Download .tox ↗"
+      }
     },
     {
       "id": "symmetrical-fictions",
