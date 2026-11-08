@@ -31,8 +31,8 @@
       "videos": [
         "./assets/video/nosignal-1.mp4",
         "./assets/video/nosignal-2.mp4",
-        "./assets/video/nosignal_monitor_preview_beatrice_final.mp4",
-        "./assets/video/nosignal_tv_final.mp4"
+        "./assets/video/nosignal-3.mp4",
+        "./assets/video/nosignal-4.mp4"
       ],
       "urls": {
         "link": "https://forum.nl/en/whats-on/film/urban-arts-tour-work-in-progress"
@@ -50,29 +50,29 @@
       "technical": "TouchDesigner, laser cutting and etching, Kodak Carousel S-AV 2000",
       "themes": "Magic lanterns, shadow, light, digital to analogue",
       "images": [
-        "./assets/images/installations/skiagraph/rendered_in_light_slide.0.webp",
-        "./assets/images/installations/skiagraph/rendered_in_light.webp",
-        "./assets/images/installations/skiagraph/rendered_in_light_setup.webp",
-        "./assets/images/installations/skiagraph/smallcuts1.0.webp",
-        "./assets/images/installations/skiagraph/smallcuts1.1.webp",
-        "./assets/images/installations/skiagraph/PXL_20261027_155359499.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261027_155403827.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261027_155406512.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114227305.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114244075.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114247361.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114249783.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114345872.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114352884.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114355570.MP.webp",
-        "./assets/images/installations/skiagraph/PXL_20261102_114422196.MP.webp",
-        "./assets/images/installations/skiagraph/WhatsApp Image 2026-11-04 at 11.00.48.webp",
-        "./assets/images/installations/skiagraph/lasercut (29).webp",
-        "./assets/images/installations/skiagraph/lasercut (30).webp"
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_slide.0.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/rendered_in_light_setup.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.0.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/smallcuts1.1.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155359499.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155403827.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261027_155406512.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114227305.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114244075.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114247361.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114249783.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114345872.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114352884.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114355570.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/PXL_20261102_114422196.MP.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/WhatsApp Image 2026-11-04 at 11.00.48.webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (29).webp",
+        "./assets/images/installations/rendered-in-light-small-cuts/lasercut (30).webp"
       ],
       "videos": [
-        "./assets/video/skiagraph-1.mp4",
-        "./assets/video/skiagraph-2.mp4"
+        "./assets/video/rendered-in-light-small-cuts-1.mp4",
+        "./assets/video/rendered-in-light-small-cuts-2.mp4"
       ]
     },
     {
@@ -106,7 +106,7 @@
         "./assets/images/installations/instruments-for-becoming/spinny-sticks-2.webp"
       ],
       "videos": [
-        "./assets/video/rain-stick-video-1.mp4",
+        "./assets/video/instruments-for-becoming-1.mp4",
         "https://youtu.be/SWMkYxuWrNE",
         "./assets/images/installations/instruments-for-becoming/instrumentsforbecoming_akerk_vid.mp4"
       ],
@@ -129,13 +129,13 @@
         "./assets/images/installations/symmetrical-fictions/39.webp",
         "./assets/images/installations/symmetrical-fictions/72.webp",
         "./assets/images/installations/symmetrical-fictions/73.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect5.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect1.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect2.webp"
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect5.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect1.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect2.webp"
       ],
       "videos": [
-        "./assets/video/ect5-1.mp4"
+        "./assets/video/symmetrical-fictions-1.mp4"
       ],
       "urls": {
         "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"

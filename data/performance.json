@@ -12,17 +12,17 @@
       "technical": "Wearable microphone capsules and cabling",
       "themes": "Collaboration, graduation performance, the body as an instrument",
       "images": [
-        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image 20hh26-10-16 at 15.06.07.webp",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/hhhhh.webp",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/saddassada.webp",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/sadada.webp",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image jj2026-10-16 at 15.02.29.webp",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/WhatsApp Image 2026-10-16 at 15.02.29.webp"
+        "./assets/images/exhibitions/myego/WhatsApp Image 20hh26-10-16 at 15.06.07.webp",
+        "./assets/images/exhibitions/myego/hhhhh.webp",
+        "./assets/images/exhibitions/myego/saddassada.webp",
+        "./assets/images/exhibitions/myego/sadada.webp",
+        "./assets/images/exhibitions/myego/WhatsApp Image jj2026-10-16 at 15.02.29.webp",
+        "./assets/images/exhibitions/myego/WhatsApp Image 2026-10-16 at 15.02.29.webp"
       ],
       "videos": [
-        "./assets/images/exhibitions/my-ego-maika-sontrop/VID-20260509-WA0071.mp4",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/aaa.mp4",
-        "./assets/images/exhibitions/my-ego-maika-sontrop/asda.mp4"
+        "./assets/images/exhibitions/myego/VID-20260509-WA0071.mp4",
+        "./assets/images/exhibitions/myego/aaa.mp4",
+        "./assets/images/exhibitions/myego/asda.mp4"
       ]
     },
     {
@@ -38,13 +38,13 @@
       "technical": "Tape machines, loops, pre-digital sound carriers",
       "themes": "Collaboration, Soundsofmusic, old sound carriers",
       "images": [
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-02.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-10.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC2ifvOtnDw-02.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-07.webp"
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC63XozgFob-02.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC63XozgFob-10.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC2ifvOtnDw-02.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DCz8UjHtArc-07.webp"
       ],
       "videos": [
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-08.mp4"
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DCz8UjHtArc-08.mp4"
       ],
       "urls": {
         "instagram": "https://www.instagram.com/p/DCz8UjHtArc/"
@@ -62,10 +62,10 @@
       "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • G.C.P.S.S.M. • REAL-TIME",
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
       "themes": "Embodied computation, glitch aesthetics, slow music, gesture-controlled performance, poetic control systems",
-      "images": ["./assets/images/performance/gesture-performance-system/fever-dream-performance.webp", "./assets/images/performance/gesture-performance-system/fever-dream-performance-1.webp"],
+      "images": ["./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance.webp", "./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance-1.webp"],
       "videos": [
-        "./assets/video/gesture1 (1).mp4",
-        "./assets/video/gesture1 (2).mp4"
+        "./assets/video/gesture-controlled-performance-system-1.mp4",
+        "./assets/video/gesture-controlled-performance-system-2.mp4"
       ],
       "bandcampTracks": [
         {

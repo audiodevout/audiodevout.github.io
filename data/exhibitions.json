@@ -32,14 +32,14 @@
       "role": "VJ",
       "venue": "VERA",
       "images": [
-        "./assets/images/exhibitions/queer-club-vera/771_046-glitches-38-f1179c_f1179c.webp",
-        "./assets/images/exhibitions/queer-club-vera/772_047-glitches-39-1f3fa0_1f3fa0.webp",
-        "./assets/images/exhibitions/queer-club-vera/773_049-glitches-40-d02f2f_d02f2f.webp",
-        "./assets/images/exhibitions/queer-club-vera/774_050-glitches-41-fe35de_fe35de.webp",
-        "./assets/images/exhibitions/queer-club-vera/775_051-glitches-42-934016_934016.webp",
-        "./assets/images/exhibitions/queer-club-vera/776_052-glitches-43-821ea6_821ea6.webp",
-        "./assets/images/exhibitions/queer-club-vera/777_053-glitches-44-b1bdd7_b1bdd7.webp",
-        "./assets/images/exhibitions/queer-club-vera/778_054-glitches-45-d24e45_d24e45.webp"
+        "./assets/images/exhibitions/queerclub-vera/771_046-glitches-38-f1179c_f1179c.webp",
+        "./assets/images/exhibitions/queerclub-vera/772_047-glitches-39-1f3fa0_1f3fa0.webp",
+        "./assets/images/exhibitions/queerclub-vera/773_049-glitches-40-d02f2f_d02f2f.webp",
+        "./assets/images/exhibitions/queerclub-vera/774_050-glitches-41-fe35de_fe35de.webp",
+        "./assets/images/exhibitions/queerclub-vera/775_051-glitches-42-934016_934016.webp",
+        "./assets/images/exhibitions/queerclub-vera/776_052-glitches-43-821ea6_821ea6.webp",
+        "./assets/images/exhibitions/queerclub-vera/777_053-glitches-44-b1bdd7_b1bdd7.webp",
+        "./assets/images/exhibitions/queerclub-vera/778_054-glitches-45-d24e45_d24e45.webp"
       ],
       "urls": {
         "link": "https://www.vera-groningen.nl/events/queerclub-vera-oktober-2026/",
@@ -194,17 +194,17 @@
       "role": "Talk/Presentation",
       "venue": "Baltan Laboratories",
       "images": [
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect5.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect1.webp",
-        "./assets/images/exhibitions/ectlab5-symmetrical-fictions/ect2.webp"
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect5.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect1.webp",
+        "./assets/images/exhibitions/5th-european-culture-and-technology-lab/ect2.webp"
       ],
       "urls": {
         "link": "https://www.baltanlaboratories.org/events/5th-european-culture-and-technology-lab-annual-conference",
         "pdf": "./assets/documents/symmetrical-fictions-paper.pdf"
       },
       "videos": [
-        "./assets/video/ect5-1.mp4"
+        "./assets/video/symmetrical-fictions-1.mp4"
       ]
     },
     {
@@ -217,14 +217,14 @@
       "venue": "Nieuwe Markt/Forum",
       "images": [
         "./assets/images/installations/instruments-for-becoming/rain-stick-4.webp",
-        "./assets/images/exhibitions/urban-arts-tour/rain-stick-5.webp",
+        "./assets/images/exhibitions/urban-arts-tour-extended-living-room/rain-stick-5.webp",
         "./assets/images/installations/instruments-for-becoming/rain-stick-6.webp"
       ],
       "urls": {
         "link": "https://forum.nl/nl/agenda/talks-events/urban-arts-tour-extended-living-room"
       },
       "videos": [
-        "./assets/video/rain-stick-video-1.mp4"
+        "./assets/video/instruments-for-becoming-1.mp4"
       ]
     },
     {
@@ -252,8 +252,8 @@
       "role": "Student Open Call (FMI MADtech)",
       "venue": "De Proef",
       "images": [
-        "./assets/images/exhibitions/noorderlicht/symmetrical_fictions_export.43.webp",
-        "./assets/images/exhibitions/noorderlicht/NL_studentopencall2025.webp"
+        "./assets/images/exhibitions/noorderlicht-student-open-call/symmetrical_fictions_export.43.webp",
+        "./assets/images/exhibitions/noorderlicht-student-open-call/NL_studentopencall2025.webp"
       ],
       "urls": {
         "link": "https://noorderlicht.com/updates/student-open-call-2025"
@@ -269,7 +269,7 @@
       "role": "Kinetic Sculpture",
       "venue": "KEL-30",
       "images": [
-        "./assets/images/exhibitions/nervous-systems-kel30/nervous-system-1.webp"
+        "./assets/images/exhibitions/nervous-systems/nervous-system-1.webp"
       ],
       "urls": {
         "instagram": "https://www.instagram.com/p/DLAl1LYsGLo/"
@@ -284,7 +284,7 @@
       "role": "AV Performance",
       "venue": "Minerva Academy",
       "images": [
-        "./assets/images/exhibitions/fever-dream-minerva/fever-dream-poster.webp"
+        "./assets/images/exhibitions/fever-dream/fever-dream-poster.webp"
       ],
       "videos": [
         "https://www.youtube.com/watch?v=sSkNm3GcGq8"
@@ -327,13 +327,13 @@
       "role": "Hackathon",
       "venue": "Frank Mohr Institute",
       "images": [
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-02.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC63XozgFob-10.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DC2ifvOtnDw-02.webp",
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-07.webp"
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC63XozgFob-02.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC63XozgFob-10.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DC2ifvOtnDw-02.webp",
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DCz8UjHtArc-07.webp"
       ],
       "videos": [
-        "./assets/images/exhibitions/hackathon-huba-degraaff/DCz8UjHtArc-08.mp4"
+        "./assets/images/exhibitions/hackathon-with-huba-de-graaff/DCz8UjHtArc-08.mp4"
       ],
       "urls": {
         "instagram": "https://www.instagram.com/p/DCz8UjHtArc/"
@@ -348,8 +348,8 @@
       "role": "VJ / Visuals",
       "venue": "OOST",
       "images": [
-        "./assets/images/exhibitions/october2024-oost/October-2026.webp",
-        "./assets/images/exhibitions/october2024-oost/sketch2.webp"
+        "./assets/images/exhibitions/october-2024/October-2026.webp",
+        "./assets/images/exhibitions/october-2024/sketch2.webp"
       ],
       "urls": {
         "link": "https://www.komoost.blog/october-2024-by-dimemesional/"
@@ -365,8 +365,8 @@
       "venue": "OOST",
       "images": [
         "./assets/images/exhibitions/spaces-at-oost/oost poster.webp",
-        "./assets/images/performance/spaces-groningen/spaces.webp",
-        "./assets/images/performance/spaces-groningen/spaces-1.webp"
+        "./assets/images/performance/spaces-at-oost/spaces.webp",
+        "./assets/images/performance/spaces-at-oost/spaces-1.webp"
       ],
       "fullDescription": "Reimagining the arts, the multisensory way. During our Season Opening this Saturday art collective Spaces gets carte blanche in our upstairs ambient room. In short time and through exhibitions, readings, music events, performances and more, the dedicated crew has fostered an even more dedicated circle of collaborators, friends and followers. All of these meet between 01:00 and 05:00 for a brain tingling cross-pollination of music, poetry and light installations. Taking five has never felt this good.\n\nVJ work at Ambient Room: live ambient sets, poetry, and image in the same room—sound, text, and projection kept deliberately slow and sensory.",
       "urls": {
