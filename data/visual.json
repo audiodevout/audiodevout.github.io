@@ -203,26 +203,6 @@
       ]
     },
     {
-      "id": "noisepattern-01",
-      "title": "noisepattern",
-      "category": "VISUAL RESEARCH",
-      "color": "saffron",
-      "images": [
-        "./assets/images/visual/noisepattern/noisepattern.0.webp",
-        "./assets/images/visual/noisepattern/noisepattern.1.webp",
-        "./assets/images/visual/noisepattern/noisepattern.2.webp",
-        "./assets/images/visual/noisepattern/noisepattern.3.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.0.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.1.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.2.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.3.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.4.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.5.webp",
-        "./assets/images/visual/noisepattern/noisepatternexp.6.webp",
-        "./assets/images/visual/noisepattern/noisepattexrnexp.5.webp"
-      ]
-    },
-    {
       "id": "old-drawings-01",
       "title": "old drawings",
       "category": "VISUAL RESEARCH",
@@ -259,21 +239,6 @@
         "./assets/images/visual/plotterframes/plotterframes.0.webp",
         "./assets/images/visual/plotterframes/plotterframes.1.webp",
         "./assets/images/visual/plotterframes/plotterframes.2.webp"
-      ]
-    },
-    {
-      "id": "structural-variations-01",
-      "title": "structural variations",
-      "category": "VISUAL RESEARCH",
-      "color": "saffron",
-      "images": [
-        "./assets/images/visual/structural-variations/structural variations.0.webp",
-        "./assets/images/visual/structural-variations/structural variations.1.webp",
-        "./assets/images/visual/structural-variations/structural variations.2.webp",
-        "./assets/images/visual/structural-variations/structural variations.3.webp",
-        "./assets/images/visual/structural-variations/structural variations.4.webp",
-        "./assets/images/visual/structural-variations/structural variations.5.webp",
-        "./assets/images/visual/structural-variations/structural variations.6.webp"
       ]
     },
     {

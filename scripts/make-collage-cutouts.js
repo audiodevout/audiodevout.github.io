@@ -25,7 +25,7 @@ var JOBS = [
   { out: "sculpt7", src: "assets/images/visual/abstract-sculpture-series/abstract_sculpture_series.7", cutout: true },
   { out: "sculpt9", src: "assets/images/visual/abstract-sculpture-series/abstract_sculpture_series.9", cutout: true },
   { out: "strands", src: "assets/images/installations/noise-sculpting/noise-sculpting-07" },
-  { out: "webs", src: "assets/images/visual/noisepattern/noisepatternexp.3", q: 70 },
+  { out: "webs", src: "assets/images/installations/noise-sculpting/noise-sculpting-26", q: 70 },
 ];
 
 function findSource(base) {
