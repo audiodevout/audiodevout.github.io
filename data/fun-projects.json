@@ -1,40 +1,6 @@
 {
   "items": [
     {
-      "id": "spherepacker",
-      "title": "SpherePacker",
-      "color": "saffron",
-      "year": "2025",
-      "date": "November 2025",
-      "description": "A TouchDesigner .tox component that simulates packing algorithms.",
-      "technical": "TouchDesigner (.tox component)",
-      "images": [
-        "./assets/images/fun-projects/spherepacker/spherepacker-01.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-02.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-03.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-04.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-05.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-06.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-07.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-08.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-09.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-10.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-11.webp",
-        "./assets/images/fun-projects/spherepacker/spherepacker-12.webp"
-      ]
-    },
-    {
-      "id": "road-paint",
-      "title": "Road Paint",
-      "color": "electric-lime",
-      "description": "An interactive browser sketch — drag to paint roads that unfurl across a low-poly landscape, rendered in real time with Three.js.",
-      "fullDescription": "Road Paint is a playful, interactive browser toy. Dragging across the screen lays down ribbons of road that wind through a bright, low-poly world rendered live in the browser with WebGL (Three.js).\n\nIt began as a study in gesture and generative form: the road is authored by the movement of the hand, and the landscape assembles itself around the marks you leave. There is no goal and no score — only the pleasure of drawing space into being and watching it hold together.\n\nOpen the interactive version below and drag to draw.",
-      "urls": {
-        "link": "./roadpaint/",
-        "linkLabel": "Open Road Paint ↗"
-      }
-    },
-    {
       "id": "6969osc",
       "title": "6969osc",
       "color": "amber",
