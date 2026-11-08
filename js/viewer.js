@@ -2,7 +2,7 @@
  * viewer.js — series strips + shared fullscreen image viewer
  *
  * portfolioStrip.build(series, opts)  → horizontal scroll-snap strip of images
- *   (variant 'work' → grouped grid: hero image, then wide / square / tall rows)
+ *   (variant 'work' → grouped grid: wide / square / tall rows, no hero)
  * portfolioViewer.open(series, index) → fullscreen viewer stepping through one series
  *
  * series = { title, href, images: [src, ...] }
@@ -32,7 +32,7 @@
   }
 
   /* ---------- Work-page grid ---------- */
-  /* First image leads as a hero; the rest are grouped by shape (wide, square,
+  /* Images are grouped by shape (wide, square,
      tall) so similar frames sit together. Data order is kept inside each group.
      Mirrored in scripts/generate-work-pages.js groupWorkImages(). */
   function shapeOf(src) {
@@ -47,8 +47,8 @@
   function groupWorkImages(images) {
     images = images || [];
     if (images.length === 0) return [];
-    var groups = [{ kind: 'hero', items: [images[0]] }];
-    var rest = images.slice(1);
+    var groups = [];
+    var rest = images;
     ['landscape', 'square', 'portrait'].forEach(function (kind) {
       var items = rest.filter(function (src) { return shapeOf(src) === kind; });
       if (items.length) groups.push({ kind: kind, items: items });
@@ -57,7 +57,7 @@
   }
 
   /* Images per row by shape; rows are balanced (11 wide → 3,3,3,2) */
-  var ROW_MAX = { hero: 1, landscape: 3, square: 3, portrait: 4 };
+  var ROW_MAX = { landscape: 3, square: 3, portrait: 4 };
 
   function splitRows(items, max) {
     var n = items.length;

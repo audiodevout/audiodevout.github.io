@@ -129,7 +129,7 @@ function relativeAssetFromWorkPage(src) {
 }
 
 /* Mirrors portfolioStrip.build() in js/viewer.js — strip of images, hydrated at runtime */
-/* Hero first, then wide / square / tall groups (data order kept inside each).
+/* Wide / square / tall groups, no hero (data order kept inside each).
    Mirrored in js/viewer.js groupWorkImages(). */
 function groupWorkImages(images) {
   if (images.length === 0) return [];
@@ -141,8 +141,8 @@ function groupWorkImages(images) {
     if (ar < 0.87) return "portrait";
     return "square";
   }
-  var groups = [{ kind: "hero", items: [images[0]] }];
-  var rest = images.slice(1);
+  var groups = [];
+  var rest = images;
   ["landscape", "square", "portrait"].forEach(function (kind) {
     var list = rest.filter(function (src) {
       return shapeOf(src) === kind;
@@ -152,7 +152,7 @@ function groupWorkImages(images) {
   return groups;
 }
 
-var ROW_MAX = { hero: 1, landscape: 3, square: 3, portrait: 4 };
+var ROW_MAX = { landscape: 3, square: 3, portrait: 4 };
 
 /* Balanced rows: 11 wide images at 3 per row → 3,3,3,2 */
 function splitRows(list, max) {
