@@ -67,7 +67,8 @@
         venue: item.venue || '',
         images: item.images || [],
         videos: item.videos || [],
-        urls: item.urls || {}
+        urls: item.urls || {},
+        shapeOrder: item.shapeOrder || null
       };
     }
 
@@ -82,7 +83,8 @@
       medium: item.medium || '',
       themes: item.themes || '',
       technical: item.technical || '',
-      bandcampTracks: item.bandcampTracks || null
+      bandcampTracks: item.bandcampTracks || null,
+      shapeOrder: item.shapeOrder || null
     };
   }
 
