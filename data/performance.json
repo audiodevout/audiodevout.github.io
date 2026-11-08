@@ -26,6 +26,47 @@
       ]
     },
     {
+      "id": "efforts-in-displacement",
+      "title": "Efforts in Displacement",
+      "category": "VJ • FOUND FOOTAGE • LIVE VISUALS",
+      "color": "electric-lime",
+      "year": 2026,
+      "date": "2 October 2026",
+      "description": "A VJ project built from found footage and media.",
+      "fullDescription": "Efforts in Displacement is a VJ project built from found footage and media.",
+      "medium": "Live visuals, found footage, media",
+      "images": [
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-01.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-02.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-03.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-04.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-05.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-06.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-07.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-08.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-09.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-10.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-11.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-12.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-13.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-14.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-15.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-16.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-17.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-18.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-19.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-20.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-21.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-22.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-23.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-24.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-25.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-26.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-27.webp",
+        "./assets/images/performance/efforts-in-displacement/efforts-in-displacement-28.webp"
+      ]
+    },
+    {
       "id": "hackathon-huba-degraaff",
       "title": "Hackathon with Huba de Graaff",
       "hideFromHome": true,
@@ -62,7 +103,10 @@
       "tags": "INTERACTIVE • GESTURE • AUDIOVISUAL • G.C.P.S.S.M. • REAL-TIME",
       "technical": "MediaPipe, TouchDesigner, Python, real-time audio synthesis, custom control pipelines",
       "themes": "Embodied computation, glitch aesthetics, slow music, gesture-controlled performance, poetic control systems",
-      "images": ["./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance.webp", "./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance-1.webp"],
+      "images": [
+        "./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance.webp",
+        "./assets/images/performance/gesture-controlled-performance-system/fever-dream-performance-1.webp"
+      ],
       "videos": [
         "./assets/video/gesture-controlled-performance-system-1.mp4",
         "./assets/video/gesture-controlled-performance-system-2.mp4"

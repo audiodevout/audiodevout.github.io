@@ -1,27 +1,6 @@
 {
   "items": [
     {
-      "id": "glitches-01",
-      "title": "Efforts in Displacement",
-      "category": "VISUAL RESEARCH",
-      "color": "electric-lime",
-      "images": [
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-01.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-02.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-03.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-04.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-05.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-06.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-07.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-08.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-09.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-10.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-11.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-12.png",
-        "./assets/images/visual/efforts-in-displacement/efforts-in-displacement-13.png"
-      ]
-    },
-    {
       "id": "digital-sketch-01",
       "title": "Surveillance",
       "category": "VISUAL RESEARCH",
