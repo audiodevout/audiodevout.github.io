@@ -87,7 +87,8 @@
 
     var drawings = (data.projects && data.projects.drawings) || [];
     var items = drawings.filter(function (item) {
-      return item.category === 'VISUAL RESEARCH' && item.images && item.images.length > 0;
+      return item.category === 'VISUAL RESEARCH' && item.showInGallery !== false &&
+        item.images && item.images.length > 0;
     });
 
     root.innerHTML = '';

@@ -148,7 +148,8 @@
         "./assets/images/visual/moire-play/moire play.1.webp",
         "./assets/images/visual/moire-play/moire play.2.webp",
         "./assets/images/visual/moire-play/moire play.3.webp"
-      ]
+      ],
+      "showInGallery": false
     },
     {
       "id": "myceliumaudio-01",
@@ -169,7 +170,8 @@
         "./assets/images/visual/myceliumaudio/myceliumaudio.10.webp",
         "./assets/images/visual/myceliumaudio/myceliumaudio.11.webp",
         "./assets/images/visual/myceliumaudio/myceliumaudio.12.webp"
-      ]
+      ],
+      "showInGallery": false
     },
     {
       "id": "noise-between-the-lines-01",
@@ -183,7 +185,8 @@
         "./assets/images/visual/noise-between-the-lines/noise between the lines.3.webp",
         "./assets/images/visual/noise-between-the-lines/noise between the lines.4.webp",
         "./assets/images/visual/noise-between-the-lines/noise between the lines.5.webp"
-      ]
+      ],
+      "showInGallery": false
     },
     {
       "id": "old-drawings-01",
@@ -196,21 +199,22 @@
         "./assets/images/visual/old-drawings/old drawing (3).webp",
         "./assets/images/visual/old-drawings/old drawing (4).webp",
         "./assets/images/visual/old-drawings/old drawing (6).webp"
-      ]
+      ],
+      "showInGallery": false
     },
     {
       "id": "patreon-waves-01",
-      "title": "wallpaper_waves",
+      "title": "Freakquency",
       "category": "VISUAL RESEARCH",
       "color": "saffron",
       "images": [
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.0.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.1.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.2.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.3.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.4.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.5.webp",
-        "./assets/images/visual/wallpaper-waves/patreon_wallpaper_waves.6.webp"
+        "./assets/images/visual/freakquency/freakquency-01.webp",
+        "./assets/images/visual/freakquency/freakquency-02.webp",
+        "./assets/images/visual/freakquency/freakquency-03.webp",
+        "./assets/images/visual/freakquency/freakquency-04.webp",
+        "./assets/images/visual/freakquency/freakquency-05.webp",
+        "./assets/images/visual/freakquency/freakquency-06.webp",
+        "./assets/images/visual/freakquency/freakquency-07.webp"
       ]
     },
     {
@@ -222,7 +226,8 @@
         "./assets/images/visual/plotterframes/plotterframes.0.webp",
         "./assets/images/visual/plotterframes/plotterframes.1.webp",
         "./assets/images/visual/plotterframes/plotterframes.2.webp"
-      ]
+      ],
+      "showInGallery": false
     },
     {
       "id": "audiodevout-textures-instancing",
