@@ -110,26 +110,6 @@
       ]
     },
     {
-      "id": "riso-mono-test-01",
-      "title": "Packing Tests",
-      "category": "VISUAL RESEARCH",
-      "color": "saffron",
-      "images": [
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.0.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.1.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.2.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.3.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.4.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.5.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.6.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.7.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.102.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.103.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.104.webp",
-        "./assets/images/visual/packing-tests/riso mono export test - 1 -.105.webp"
-      ]
-    },
-    {
       "id": "feedback-worms-02",
       "title": "Feedback Worms",
       "category": "VISUAL RESEARCH",

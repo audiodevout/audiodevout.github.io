@@ -1,6 +1,29 @@
 {
   "items": [
     {
+      "id": "spherepacker",
+      "title": "SpherePacker",
+      "color": "saffron",
+      "year": "2025",
+      "date": "November 2025",
+      "description": "A TouchDesigner .tox component that simulates packing algorithms.",
+      "technical": "TouchDesigner (.tox component)",
+      "images": [
+        "./assets/images/fun-projects/spherepacker/spherepacker-01.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-02.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-03.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-04.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-05.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-06.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-07.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-08.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-09.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-10.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-11.webp",
+        "./assets/images/fun-projects/spherepacker/spherepacker-12.webp"
+      ]
+    },
+    {
       "id": "road-paint",
       "title": "Road Paint",
       "color": "electric-lime",
