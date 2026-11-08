@@ -391,6 +391,29 @@
       }
     },
     {
+      "id": "audiodevout-noise-sculpting-part9",
+      "title": "Noise Sculpting (Part 9*) - Bubbles, Waves and Scene Switching",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "We are going back to basics with this one!",
+      "fullDescription": "We are going back to basics with this one! In this video I am working with some position instancing techniques that use compositing and feedback for some cool structures.",
+      "medium": "TouchDesigner, noise sculpting, procedural visuals",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "bubbles",
+        "waves",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=nQIwwmKPSqs"
+      ],
+      "youtubeDate": "20260124",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/149004106"
+      }
+    },
+    {
       "id": "audiodevout-generative-soundscapes-data-driven",
       "title": "Generative Soundscapes and Data Driven Signal Processing",
       "category": "TouchDesigner Tutorials",
@@ -506,6 +529,38 @@
       }
     },
     {
+      "id": "audiodevout-video-2",
+      "title": "Noise Sculpting (Part 8) - Abstract Particle Structures",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "I used similar instancing technique as the previous video here, but with some additions.",
+      "fullDescription": "I used similar instancing technique as the previous video here, but with some additions. For the position data, I used a limit to quantize the positions of the particles; and for rendering I used a lumablur that is controlled by the depth TOP (which takes its depth data from the render TOP) and a RGB Delay. All of these in combination create quite beautiful structures. As always, you're encouraged to tweak all the relevant values in all the different TOPs and SOPs and the results will always be different.",
+      "medium": "TouchDesigner, generative visuals",
+      "videos": [
+        "https://www.youtube.com/watch?v=uSVB-EnoRkk"
+      ],
+      "youtubeDate": "20251003",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-video-3",
+      "title": "Noise Sculpting (Part 7) - Ghostly Particles",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial.",
+      "fullDescription": "I'm sharing a cool little trick I found using the slope TOP and the displace TOP that I am sharing in this tutorial. I love the little ghostly/spider web textures that come out of this technique.",
+      "medium": "TouchDesigner, generative visuals",
+      "videos": [
+        "https://www.youtube.com/watch?v=4GkBT_fUNOM"
+      ],
+      "youtubeDate": "20250927",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-139875793"
+      }
+    },
+    {
       "id": "audiodevout-video-4",
       "title": "Mouse Tracking and Force Fields with ParticlesGPU",
       "category": "TouchDesigner Tutorials",
@@ -600,6 +655,29 @@
       }
     },
     {
+      "id": "audiodevout-noise-sculpting-part6-radial-lighting",
+      "title": "Radial Lighting",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top.",
+      "fullDescription": "I am sharing a way to make an abstract structure using geo instancing and introducing light and shadows using a circular ramp top and math top. By changing the compositing modes, you will find that you can introduce some exciting changes to the structures. You can play with the parameters of the noise TOPs and displace to get some really crazy results.",
+      "medium": "TouchDesigner, 3D geometry, lighting",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "instancing",
+        "lighting",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=mkVa8D8_FIw"
+      ],
+      "youtubeDate": "20250105",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
       "id": "audiodevout-controlled-feedback-cache-tops",
       "title": "Controlled Feedback with Cache TOPs",
       "category": "TouchDesigner Tutorials",
@@ -645,6 +723,51 @@
       }
     },
     {
+      "id": "audiodevout-particle-structures-mesh-generator",
+      "title": "Particle Structures with Mesh Generator - Noise Sculpting Part 6",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
+      "fullDescription": "In this project I used the Mesh Generator tool and some operator trickery to create some cool spiral structures!",
+      "medium": "TouchDesigner, mesh generation, particle systems",
+      "tags": [
+        "TouchDesigner",
+        "Mesh Generator",
+        "particles",
+        "spiral",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=XHGeICkx9lU"
+      ],
+      "youtubeDate": "20240720",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
+      "id": "audiodevout-particlesgpu-noise-sculpting",
+      "title": "Noise Sculpting with ParticlesGPU - Part 5",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns!",
+      "fullDescription": "In this project I used positional instancing through the particlesGPU tool, and used the default lookups to manipulate values and create some customisable 3d patterns! These are just some simple tricks to get you started with the particlesGPU tool which seemed very complicated to me in the beginning. Remember that TouchDesigner is extremely versatile so you can add all sorts of stuff in here and manipulate it as you wish!",
+      "medium": "TouchDesigner, particle systems",
+      "tags": [
+        "ParticlesGPU",
+        "noise sculpting",
+        "generative visuals",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=kcZH2zcHANc"
+      ],
+      "youtubeDate": "20240707",
+      "urls": {
+        "patreon": "https://www.patreon.com/audiodevout"
+      }
+    },
+    {
       "id": "audiodevout-procedural-grid-patterns",
       "title": "Procedural Grid Patterns",
       "category": "TouchDesigner Tutorials",
@@ -665,6 +788,28 @@
       "youtubeDate": "20240617",
       "urls": {
         "patreon": "https://www.patreon.com/posts/simple-grid-with-106357613"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part4",
+      "title": "Noise Sculpting - Part 4",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
+      "fullDescription": "Here's a cool new trick I found to connect the structure and colour of the structure that makes it have sort of an oscillating pattern.",
+      "medium": "TouchDesigner, procedural geometry",
+      "tags": [
+        "noise sculpting",
+        "geometry",
+        "TouchDesigner",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=s8ea30HlTHE"
+      ],
+      "youtubeDate": "20240513",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-104148759"
       }
     },
     {
@@ -714,6 +859,28 @@
       }
     },
     {
+      "id": "audiodevout-noise-sculpting-part3",
+      "title": "Noise Sculpting - Part 3",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "This is another noise sculpting doodle I made for you guys today!",
+      "fullDescription": "This is another noise sculpting doodle I made for you guys today! We are using pattern chops and compositing techniques to generate structures in 3d instancing.",
+      "medium": "TouchDesigner, generative visuals",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "tutorial",
+        "generative art"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Mu1TpRVujuY"
+      ],
+      "youtubeDate": "20240419",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-102644244"
+      }
+    },
+    {
       "id": "audiodevout-chop-top-chop-sop",
       "title": "CHOP-TOP-CHOP-SOP - Simple Multioperator Processing",
       "category": "TouchDesigner Tutorials",
@@ -734,6 +901,28 @@
       "youtubeDate": "20240415",
       "urls": {
         "patreon": "https://www.patreon.com/posts/chop-top-chop-on-102374891"
+      }
+    },
+    {
+      "id": "audiodevout-noise-sculpting-part2",
+      "title": "Noise Sculpting - Part 2",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "In this video, I'm presenting a fresh take on our previous tutorial.",
+      "fullDescription": "In this video, I'm presenting a fresh take on our previous tutorial. This time, I'm diving into the world of 3D geometry creation using the Noise TOP in TouchDesigner and using instancing to craft diverse patterns.",
+      "medium": "TouchDesigner, noise sculpting, procedural geometry",
+      "tags": [
+        "TouchDesigner",
+        "noise sculpting",
+        "tutorial",
+        "generative art"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=p9TwiixKvXQ"
+      ],
+      "youtubeDate": "20240405",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/noise-sculpting-101751158"
       }
     },
     {
@@ -779,6 +968,28 @@
       "youtubeDate": "20240322",
       "urls": {
         "patreon": "https://www.patreon.com/posts/embossed-glass-100911024"
+      }
+    },
+    {
+      "id": "audiodevout-basic-uv-mapping-noise-sculpting",
+      "title": "Basic UV Mapping and Noise Sculpting",
+      "category": "TouchDesigner Tutorials",
+      "color": "cerulean",
+      "description": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007.",
+      "fullDescription": "In this tutorial, I'll be sharing a nifty technique I picked up from the amazing @elekktronaut and @pppanik007. We'll be diving into the world of UV mapping with ramp tops and using it as a foundation for 3D geometry instancing. This demonstration is really basic but can create really beautiful structures.",
+      "medium": "TouchDesigner, UV mapping, procedural geometry",
+      "tags": [
+        "TouchDesigner",
+        "UV mapping",
+        "noise sculpting",
+        "tutorial"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=4rm5dcoQHBc"
+      ],
+      "youtubeDate": "20240315",
+      "urls": {
+        "patreon": "https://www.patreon.com/posts/project-files-uv-100412204"
       }
     }
   ]
