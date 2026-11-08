@@ -6,8 +6,8 @@
       "category": "INSTALLATION",
       "color": "cerulean",
       "year": "2026",
-      "description": "Five old monitors piled among bricks and metal rods, some still showing No Signal: an installation on the resources extracted to build our technology, and how long they outlast our use of it. Made with Beatrice Fini for the Let's Gro Festival 2026 Urban Arts Tour.",
-      "fullDescription": "NoSignal is an installation made in collaboration with 3D artist and environment designer Beatrice Fini, for the Urban Arts Tour of Let's Gro Festival 2026 at Forum Groningen, around the theme Under Construction / Work in Progress.\n\nFive old monitors lie piled and propped among bricks and metal rods, the leftovers of building. Some are switched on with nothing plugged in, showing only their own standby messages: No Signal, Check signal cable, Searching for input. Others are dark, or turned around to show the bare casing behind the screen.\n\nThe work looks at how we treat technology, and at the extraction and forgetting of the resources it is built from. Any piece of tech, a monitor or a keyboard, is made of elements pulled from the earth in many different places and brought together to work for us for a while.\n\nFor the consumer, the end of a product's life is the end of their interaction with it. Its existence carries on. Materials taken from all over the world stay bound together inside a plastic shell that was used for a few years and then forgotten. In a thousand, a hundred thousand or a million years, those elements may still sit together, only because we decided to use them for a decade.\n\nShown at Forum Groningen on 7 November 2026.\n\nCredits\n\nMade with Beatrice Fini.",
+      "description": "Five old monitors piled among bricks and metal rods, some still showing No Signal: an installation on the resources extracted to build our technology, and how long they outlast our use of it. Made with Beatrice Fini for Urban Arts Tour: Work in Progress at Let's Gro Festival 2026.",
+      "fullDescription": "NoSignal is an installation made in collaboration with 3D artist and environment designer Beatrice Fini, for Urban Arts Tour: Work in Progress, part of Let's Gro Festival 2026 at Forum Groningen.\n\nFive old monitors lie piled and propped among bricks and metal rods, the leftovers of building. Some are switched on with nothing plugged in, showing only their own standby messages: No Signal, Check signal cable, Searching for input. Others are dark, or turned around to show the bare casing behind the screen.\n\nThe work looks at how we treat technology, and at the extraction and forgetting of the resources it is built from. Any piece of tech, a monitor or a keyboard, is made of elements pulled from the earth in many different places and brought together to work for us for a while.\n\nFor the consumer, the end of a product's life is the end of their interaction with it. Its existence carries on. Materials taken from all over the world stay bound together inside a plastic shell that was used for a few years and then forgotten. In a thousand, a hundred thousand or a million years, those elements may still sit together, only because we decided to use them for a decade.\n\nShown at Forum Groningen on 7 November 2026.\n\nCredits\n\nMade with Beatrice Fini.",
       "medium": "Screens, found construction materials (metal rods, bricks)",
       "themes": "Extraction, e-waste, material afterlives, work in progress",
       "images": [
@@ -30,9 +30,13 @@
       ],
       "videos": [
         "./assets/video/nosignal-1.mp4",
+        "./assets/video/nosignal-2.mp4",
         "./assets/video/nosignal_monitor_preview_beatrice_final.mp4",
         "./assets/video/nosignal_tv_final.mp4"
-      ]
+      ],
+      "urls": {
+        "link": "https://forum.nl/en/whats-on/film/urban-arts-tour-work-in-progress"
+      }
     },
     {
       "id": "small-cuts",

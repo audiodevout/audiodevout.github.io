@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "urban-arts-tour-2026",
+      "title": "Urban Arts Tour: Work in Progress",
+      "date": "7 November 2026",
+      "description": "Urban Arts Tour at Let's Gro Festival 2026: a walk through Groningen city centre past site-specific urban interventions in and around the Forum, on the theme Work in Progress. Showed NoSignal, an installation made with Beatrice Fini.",
+      "location": "Groningen, NL",
+      "role": "Installation (with Beatrice Fini)",
+      "venue": "Forum Groningen",
+      "images": [
+        "./assets/images/installations/nosignal/nosignal (5).webp",
+        "./assets/images/installations/nosignal/nosignal (1).webp",
+        "./assets/images/installations/nosignal/nosignal (2).webp"
+      ],
+      "videos": [
+        "./assets/video/nosignal-1.mp4"
+      ],
+      "fullDescription": "The Urban Arts Tour: Work in Progress is a walk through Groningen city centre, past playful works of art in public spaces by a collective of artists from Groningen reflecting on the meaning of urban life. At public locations around and within the Forum, the theme Work in Progress was temporarily brought to life through visual art and other art forms: what looks from a distance like a cordoned-off road maintenance area turns out, up close, to hold more secrets.\n\nI showed NoSignal, made with Beatrice Fini: five old monitors piled among bricks and metal rods, some still showing No Signal, about the resources extracted to build our technology and how long they outlast our use of it.\n\nWith work by Atharva Gupta, Beatrice Fini, Bouke Mekel, Liza de Jong, Mahsa Hosseini and Reynaert Vosveld.",
+      "urls": {
+        "link": "https://forum.nl/en/whats-on/film/urban-arts-tour-work-in-progress",
+        "linkLabel": "Forum ↗"
+      }
+    },
+    {
       "id": "queer-club-vera",
       "title": "Queerclub VERA",
       "date": "2 October 2026",
