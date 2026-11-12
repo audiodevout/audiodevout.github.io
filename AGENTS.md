@@ -79,7 +79,7 @@ Common fields across project types:
 | `videos` | YouTube URLs or local `./assets/video/...` paths |
 | `youtubeDate` | `YYYYMMDD` — sorts TouchDesigner Tutorials newest first |
 | `urls.page` | If set, item **skips** auto work-page generation (external page, e.g. `./thesis/`) |
-| `urls.pdf`, `urls.link`, etc. | Extra links rendered on work detail |
+| `urls.pdf`, `urls.link`, etc. | Extra links rendered on work detail; `urls.links` = `[{ url, label }]` for any number of extra links |
 | `bandcampTracks` | `[{ title, trackId, url }]` — embeds on work pages |
 | `showInGallery` | Default true; set false to exclude from gallery masonry |
 | `num_images_maingallery` | Limit images per item in gallery |
@@ -289,7 +289,7 @@ Image paths in JSON use `./assets/...` relative form. Build scripts normalize to
 |---|---|
 | `thesis/` | Separate thesis microsite (`Instruments for Becoming`) |
 | `portfolio/` | Print portfolio data bundle |
-| `6969osc/` | TouchDesigner OSC tool subsite |
+| `6969osc/` | TouchDesigner OSC tool: app in `6969osc/6969osc`, release zip, screenshots; `index.html` redirects to `work/6969osc/` |
 | `admin/` | Decap CMS |
 | `scripts/*.py` | YouTube metadata utilities — optional maintenance |
 

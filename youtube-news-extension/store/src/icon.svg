@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Chrome Web Store spec: 96x96 artwork centred in a 128x128 canvas. -->
+  <rect x="16" y="16" width="96" height="96" rx="24" fill="#ff0033"/>
+  <!-- Newspaper: page + side column, headline and text lines cut out. -->
+  <path d="M35 38h40a4 4 0 0 1 4 4v48H40a5 5 0 0 1-5-5z" fill="#fff"/>
+  <rect x="83" y="50" width="10" height="40" rx="4" fill="#fff"/>
+  <g fill="#ff0033">
+    <rect x="42" y="46" width="30" height="10" rx="2"/>
+    <rect x="42" y="63" width="30" height="5" rx="2.5"/>
+    <rect x="42" y="72" width="30" height="5" rx="2.5"/>
+    <rect x="42" y="81" width="20" height="5" rx="2.5"/>
+  </g>
+</svg>

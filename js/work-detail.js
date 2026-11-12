@@ -243,6 +243,11 @@
     appendLink(item.urls.instagram, 'Instagram ↗');
     appendLink(item.urls.patreon, 'Patreon ↗');
     appendLink(item.urls.pdf, 'Read Paper ↗');
+    if (Array.isArray(item.urls.links)) {
+      item.urls.links.forEach(function (entry) {
+        if (entry && entry.url) appendLink(entry.url, entry.label || 'Link ↗');
+      });
+    }
 
     if (hasLinks) container.appendChild(linksWrap);
   }

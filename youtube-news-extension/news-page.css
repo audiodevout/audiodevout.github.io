@@ -1,0 +1,137 @@
+/**
+ * News Button for YouTube: landing page layout (loads after site CSS).
+ * Text and headings use the site's own formatting (layout.css /
+ * components.css); this file only adds layout, buttons and screenshots.
+ * YouTube red is the button accent.
+ */
+
+.nb-page {
+  --nb-accent: #ff0033;
+  --nb-accent-hover: #ff3355;
+  --nb-measure: 40rem;
+}
+
+.nb-page .nb-section {
+  max-width: calc(var(--nb-measure) + 2 * var(--gutter));
+  padding: var(--space-12) var(--gutter) 0;
+}
+
+/* ----- Intro ----- */
+.nb-hero {
+  max-width: calc(52rem + 2 * var(--gutter));
+  padding: var(--space-12) var(--gutter) 0;
+}
+
+.nb-hero__icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 0 var(--space-6);
+}
+
+.nb-hero__tagline {
+  max-width: 32rem;
+}
+
+.nb-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.nb-hero__meta {
+  margin-top: var(--space-4);
+}
+
+.nb-shot {
+  margin: var(--space-12) 0 0;
+}
+
+.nb-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+}
+
+/* ----- Buttons ----- */
+.nb-page .nb-btn {
+  display: inline-block;
+  padding: 0.6em 1.4em;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.nb-page .nb-btn--primary {
+  background: var(--nb-accent);
+  color: #ffffff;
+  border: 1px solid var(--nb-accent);
+}
+
+.nb-page .nb-btn--primary:hover {
+  background: var(--nb-accent-hover);
+  border-color: var(--nb-accent-hover);
+  color: #ffffff;
+}
+
+.nb-page .nb-btn--ghost {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.nb-page .nb-btn--ghost:hover {
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.nb-page .nb-btn:hover { text-decoration: none; }
+
+/* ----- Prose spacing (type comes from the site) ----- */
+.nb-page p + p,
+.nb-page p + ul,
+.nb-page p + ol,
+.nb-page ul + p,
+.nb-page ol + p,
+.nb-page p + table,
+.nb-page table + p { margin-top: var(--space-4); }
+
+.nb-page ul,
+.nb-page ol { padding-left: 1.25em; }
+.nb-page ul { list-style: disc; }
+.nb-page ol { list-style: decimal; }
+.nb-page li + li { margin-top: var(--space-2); }
+
+.nb-page kbd,
+.nb-page code {
+  padding: 0 0.3em;
+  border: 1px solid var(--color-border);
+}
+
+.nb-meta {
+  font-size: var(--text-meta);
+  color: var(--color-muted);
+}
+
+.nb-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nb-page th,
+.nb-page td {
+  padding: var(--space-2) var(--space-4) var(--space-2) 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nb-disclaimer {
+  padding-bottom: var(--space-20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nb-page .nb-btn { transition: none; }
+}

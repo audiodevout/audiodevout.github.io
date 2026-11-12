@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Simplified newspaper for the 16/32px toolbar sizes: fewer, thicker lines. -->
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#ff0033"/>
+  <path d="M6 7h14a1 1 0 0 1 1 1v17H8a2 2 0 0 1-2-2z" fill="#fff"/>
+  <rect x="22.5" y="11" width="3.5" height="14" rx="1.5" fill="#fff"/>
+  <g fill="#ff0033">
+    <rect x="8.5" y="9.5" width="10" height="4.5" rx="1"/>
+    <rect x="8.5" y="16" width="10" height="2.5" rx="1.25"/>
+    <rect x="8.5" y="20.5" width="6.5" height="2.5" rx="1.25"/>
+  </g>
+</svg>

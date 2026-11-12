@@ -206,6 +206,13 @@ collections:
                   - { name: linkLabel, label: "Link label", widget: string, required: false }
                   - { name: page, label: "External page (skips work page)", widget: string, required: false }
                   - { name: pdf, label: "PDF", widget: string, required: false }
+                  - name: links
+                    label: "Extra links"
+                    widget: list
+                    required: false
+                    fields:
+                      - { name: url, label: "URL", widget: string }
+                      - { name: label, label: "Label", widget: string, required: false }
 
   - name: "visual"
     label: "Visual & Tutorials"

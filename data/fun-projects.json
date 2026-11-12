@@ -5,14 +5,37 @@
       "title": "6969osc",
       "color": "amber",
       "description": "Phone control surface with WebSocket + OSC (UDP) for TouchDesigner. Run locally; scan QR on the same Wi‑Fi.",
-      "fullDescription": "6969osc is a small Node.js server plus a phone controller UI. Run it on the venue machine, scan the QR code in the terminal, and drive TouchDesigner over OSC — no mobile app install required.",
+      "fullDescription": "6969osc is a browser-based control surface for your phone: sixteen pads (momentary and toggle), a master fader, four XY pads, presets and randomize. A small Node.js server runs on your machine and serves the controller to any phone on the same network; touch input goes over WebSocket and is forwarded as OSC (UDP) to TouchDesigner (default 127.0.0.1:6969) or any OSC receiver. No app install. To run it, install Node.js 18+, start START.bat on Windows (run as administrator the first time so the firewall allows port 3000) or ./start.sh on macOS, then scan the QR code in the terminal with your phone on the same Wi‑Fi. SETUP.md covers TouchDesigner OSC In, config.json and troubleshooting.",
       "images": [
         "./6969osc/6969osc-1.png",
         "./6969osc/6969osc-2.png"
       ],
       "urls": {
-        "link": "./6969osc/",
-        "linkLabel": "Open 6969osc ↗"
+        "link": "https://github.com/audiodevout/audiodevout.github.io/releases/latest",
+        "linkLabel": "Download latest release ↗",
+        "links": [
+          {
+            "url": "https://github.com/audiodevout/audiodevout.github.io/blob/main/6969osc/6969osc/SETUP.md",
+            "label": "Setup guide ↗"
+          },
+          {
+            "url": "https://github.com/audiodevout/audiodevout.github.io/tree/main/6969osc/6969osc",
+            "label": "Source ↗"
+          }
+        ]
+      }
+    },
+    {
+      "id": "news-button-for-youtube",
+      "title": "News Button for YouTube",
+      "year": "2026",
+      "color": "crimson",
+      "description": "YouTube removed the News button but the page still works. This Chrome extension brings it back and lets you open other countries' News too.",
+      "images": [
+        "./youtube-news-extension/store/screenshot-1-1280x800.png"
+      ],
+      "urls": {
+        "page": "./youtube-news-extension/"
       }
     }
   ]

@@ -1,0 +1,54 @@
+/* A sidebar section styled like YouTube's own (You, Explore, ...).
+   Colours are set explicitly: YouTube's --yt-spec-* variables aren't defined
+   at this spot in the page, so they fell back to black-on-black in dark mode.
+   YouTube marks dark mode with a "dark" attribute on <html>. */
+#ytnews-section {
+  padding: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+html[dark] #ytnews-section {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.ytnews-title {
+  margin: 0;
+  padding: 6px 12px 4px;
+  color: #0f0f0f;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 2.2rem;
+}
+
+.ytnews-entry {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: #0f0f0f;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.ytnews-entry:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+html[dark] .ytnews-title,
+html[dark] .ytnews-entry {
+  color: #f1f1f1;
+}
+
+html[dark] .ytnews-entry:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ytnews-entry svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
